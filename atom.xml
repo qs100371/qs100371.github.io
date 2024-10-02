@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://github.com/qs100371/qs100371.github.io</id>
+    <id>https://qs100371.github.io</id>
     <title>Gridea</title>
-    <updated>2024-10-02T14:25:55.912Z</updated>
+    <updated>2024-10-02T14:31:33.229Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://github.com/qs100371/qs100371.github.io"/>
-    <link rel="self" href="https://github.com/qs100371/qs100371.github.io/atom.xml"/>
+    <link rel="alternate" href="https://qs100371.github.io"/>
+    <link rel="self" href="https://qs100371.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://github.com/qs100371/qs100371.github.io/images/avatar.png</logo>
-    <icon>https://github.com/qs100371/qs100371.github.io/favicon.ico</icon>
+    <logo>https://qs100371.github.io/images/avatar.png</logo>
+    <icon>https://qs100371.github.io/favicon.ico</icon>
     <rights>All rights reserved 2024, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[hello]]></title>
-        <id>https://github.com/qs100371/qs100371.github.io/post/hello/</id>
-        <link href="https://github.com/qs100371/qs100371.github.io/post/hello/">
+        <id>https://qs100371.github.io/post/hello/</id>
+        <link href="https://qs100371.github.io/post/hello/">
         </link>
         <updated>2024-10-02T14:13:43.000Z</updated>
         <content type="html"><![CDATA[<p>just a test</p>
@@ -21,8 +21,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://github.com/qs100371/qs100371.github.io/post/hello-gridea/</id>
-        <link href="https://github.com/qs100371/qs100371.github.io/post/hello-gridea/">
+        <id>https://qs100371.github.io/post/hello-gridea/</id>
+        <link href="https://qs100371.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
