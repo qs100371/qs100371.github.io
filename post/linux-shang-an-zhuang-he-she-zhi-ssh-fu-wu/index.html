@@ -1,0 +1,182 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>linux上安装和设置SSH服务 | qs的blog</title>
+
+<link rel="shortcut icon" href="https://qs100371.github.io/favicon.ico?v=1728528995096">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://qs100371.github.io/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            qs的blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1728528995096" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    linux上安装和设置SSH服务
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2024-10-07 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>安装OpenSSH服务器软件包：</p>
+<pre><code>sudo apt update
+sudo apt install openssh-server
+</code></pre>
+<p>安装完成后，SSH服务将自动启动。可以使用以下命令检查SSH服务的状态：</p>
+<pre><code>sudo systemctl status ssh
+</code></pre>
+<p>如果SSH服务没有启动，可以使用以下命令启动它：</p>
+<pre><code>sudo systemctl start ssh
+</code></pre>
+<p>为了确保SSH服务在系统启动时自动启动，可以使用以下命令：</p>
+<pre><code>sudo systemctl enable ssh
+</code></pre>
+<p>默认情况下，SSH服务将使用端口22监听连接。<br>
+可以通过编辑/etc/ssh/sshd_config文件来更改配置，例如更改端口或设置访问权限。<br>
+更改配置后，需要重启SSH服务以应用更改：</p>
+<pre><code>sudo systemctl restart ssh
+</code></pre>
+<p>如果在防火墙上工作，确保允许SSH端口通过。<br>
+例如，允许端口22（或选择的任何端口）：</p>
+<pre><code>sudo ufw allow ssh
+</code></pre>
+<p>或者，如果更改了端口：</p>
+<pre><code>sudo ufw allow 22/tcp
+</code></pre>
+<p>可以使用SSH客户端从远程计算机连接到服务器。</p>
+<pre><code>ssh username@serverip
+</code></pre>
+<p>通过SSH使用图形用户界面</p>
+<pre><code>ssh -X username@serverip
+</code></pre>
+<p>可能需要更新ssh_config文件来启用它。</p>
+<p>在~/.ssh/config文件中添加以下内容：</p>
+<pre><code>Host *
+    ForwardX11 yes
+    ForwardX11Trusted yes
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://qs100371.github.io/post/linux-tian-jia-zi-ti/" class="post-title gt-a-link">
+                    linux添加字体
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">随便写写</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by Gridea
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
