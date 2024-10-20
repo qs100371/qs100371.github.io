@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>qs的学习日志</title>
+<title>linux上安装和设置SSH服务 | qs的学习日志</title>
 
 <link rel="shortcut icon" href="https://qs100371.github.io/favicon.ico?v=1729409772806">
 
@@ -25,11 +25,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -77,104 +77,80 @@
     </div>
 </nav>
 
-        <div class="post-container">
-            <div class="post-detail gt-bg-theme-color-first">
-                <article class="gt-post-content">
-                    <h2 class="post-title">归档</h2>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    linux上安装和设置SSH服务
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2024-10-07 ·
+                    </time>
+                    
+                        <a href="https://qs100371.github.io/tag/Chg8nNuo6h/" class="post-tags">
+                            # linux
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>安装OpenSSH服务器软件包：</p>
+<pre><code>sudo apt install openssh-server
+</code></pre>
+<!-- more -->
+<p>安装完成后，SSH服务将自动启动。可以使用以下命令检查SSH服务的状态：</p>
+<pre><code>sudo systemctl status ssh
+</code></pre>
+<p>如果SSH服务没有启动，可以使用以下命令启动它：</p>
+<pre><code>sudo systemctl start ssh
+</code></pre>
+<p>为了确保SSH服务在系统启动时自动启动，可以使用以下命令：</p>
+<pre><code>sudo systemctl enable ssh
+</code></pre>
+<p>默认情况下，SSH服务将使用端口22监听连接。<br>
+可以通过编辑/etc/ssh/sshd_config文件来更改配置，例如更改端口或设置访问权限。<br>
+更改配置后，需要重启SSH服务以应用更改：</p>
+<pre><code>sudo systemctl restart ssh
+</code></pre>
+<p>如果在防火墙上工作，确保允许SSH端口通过。<br>
+例如，允许端口22（或选择的任何端口）：</p>
+<pre><code>sudo ufw allow ssh
+</code></pre>
+<p>或者，如果更改了端口：</p>
+<pre><code>sudo ufw allow 22/tcp
+</code></pre>
+<p>可以使用SSH客户端从远程计算机连接到服务器。</p>
+<pre><code>ssh username@serverip
+</code></pre>
+<p>通过SSH使用图形用户界面</p>
+<pre><code>ssh -X username@serverip
+</code></pre>
+<p>可能需要更新ssh_config文件来启用它。</p>
+<p>在~/.ssh/config文件中添加以下内容：</p>
+<pre><code>Host *
+    ForwardX11 yes
+    ForwardX11Trusted yes
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://qs100371.github.io/post/linux-cangku/" class="post-title gt-a-link">
+                    linux仓库
+                </a>
+            </div>
         
 
-<div class="archives-container">
-    
-        <h2 class="year gt-c-cotent-color-first">2024</h2>
         
-            
-                <article class="post">
-                    <a href="https://qs100371.github.io/post/an-zhuang-ftp-fu-wu/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2024-10-14&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            安装ftp服务
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qs100371.github.io/post/nginx-chong-ding-xiang/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2024-10-12&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            nginx重定向
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qs100371.github.io/post/grub4dos-qi-dong-fang-shi-de-menulst/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2024-10-11&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            grub4dos启动方式的menu.lst
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qs100371.github.io/post/linux-chang-yong-ming-ling/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2024-10-11&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            linux常用命令
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qs100371.github.io/post/linux-shang-an-zhuang-he-she-zhi-ssh-fu-wu/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2024-10-07&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            linux上安装和设置SSH服务
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qs100371.github.io/post/linux-cangku/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2024-10-07&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            linux仓库
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qs100371.github.io/post/hello/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2024-10-07&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            hello
-                        </div>
-                    </a>
-                </article>
-            
-        
-    
-</div>
 
-        <div class="pagination-container">
-    
-    
-</div>
+        
 
-    </article>
-</div>
-</div>
+        
+
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">随便写写</div>
     <div class="social-container">
