@@ -1,324 +1,318 @@
-<html>
+
+<!DOCTYPE HTML>
+<!--
+	Lens by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="zh-cn">
 <head>
-    <meta charset="utf-8"/>
-<meta name="description" content=""/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>qs的学习日志</title>
+<meta name="keywords" content="" />
+<meta name="description" content="随便写写" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<base href="https://qs100371.github.io/">
+<link rel="shortcut icon" href="favicon.ico" />
 
-<title>qs的学习日志</title>
-
-<link rel="shortcut icon" href="https://qs100371.github.io/favicon.ico?v=1729409772806">
-
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://qs100371.github.io/styles/main.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
-<!-- DEMO JS -->
-<!--<script src="media/scripts/index.js"></script>-->
+<link rel="stylesheet" href="media/css/main-lens.css" />
+<noscript><link rel="stylesheet" href="media/css/noscript-lens.css" /></noscript>
 
 
 
 </head>
-<body>
-<div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
-    <div class="navbar-brand">
-        <img class="user-avatar" src="/images/avatar.png" alt="头像">
-        <div class="site-name gt-c-content-color-first">
-            qs的学习日志
-        </div>
-    </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto" style="text-align: center">
-            
-                <div class="nav-item">
-                    
-                        <a href="/" class="menu gt-a-link">
-                            首页
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="/archives" class="menu gt-a-link">
-                            归档
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="/tags" class="menu gt-a-link">
-                            标签
-                        </a>
-                    
-                </div>
-            
-        </div>
-        <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1729409772806" action="/search/index.html">
-                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
-                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
-            </form>
-        </div>
-    </div>
-</nav>
+<body class="is-preload-0 is-preload-1 is-preload-2">
 
+<!-- 外封 -->
+<div id="main">
 
-        <div class="post-list-container">
-    <div class="post-inner">
+    <!-- 页眉 -->
+    <header id="header">
+    
+    <h1>qs的学习日志</h1>
+    <p>随便写写</p>
+    <ul class="icons">
         
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qs100371.github.io/post/an-zhuang-ftp-fu-wu/">
-                            <span class="post-title gt-c-content-color-first">安装ftp服务</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>安装vsftpd：<br>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </ul>
+    
+</header>
+
+    <!-- 主要内容 -->
+    
+<section id="thumbnails">
+    
+        <article>
+        
+        <h2>安装ftp服务</h2>
+        <p>安装vsftpd：<br>
 sudo apt install vsftpd<br>
 检测是否安装：<br>
 vsftpd -version</p>
+<!-- more -->
+<h1 id="匿名用户模式">匿名用户模式</h1>
+<p>在vsftpd.conf文件中添加匿名用户相关配置：</p>
+<pre><code>#监听ipv4，启用独立模式
+listen=YES
+#启用匿名用户模式 
+anonymous_enable=YES
+#允许写操作
+write_enable=YES
+#允许匿名用户上传文件
+anon_upload_enable=YES
+#允许匿名用户创建目录
+anon_mkdir_write_enable=YES
+#允许匿名用户修改或删除目录
+anon_other_write_enable=YES
+#表示上传下载文件的掩码
+anon_umask=077
+#设置用户的家目录，登录之后自动切换到各自用户的家目录
+local_root=/srv/ftp/upload
+#全部用户被限制在主目录
+chroot_local_user=YES
+​
+#开启被动模式。
+pasv_enable=YES
+#设置被动模式下，建立数据传输可使用的端口范围的最小值。
+#建议您把端口范围设置在一段比较高的范围内，例如50000~50010，有助于提高访问FTP服务器的安全性。
+pasv_min_port=50000
+#设置被动模式下，建立数据传输可使用的端口范围的最大值。
+pasv_max_port=50010
+</code></pre>
+<p>在/srv/ftp目录下创建upload目录并完成赋权操作：</p>
+<pre><code>sudo mkdir /srv/ftp/upload
+sudo chown -R :ftp /srv/ftp/upload
+</code></pre>
+<p>设置upload目录的权限为775<br>
+sudo chmod 775 /srv/ftp/upload<br>
+重启服务<br>
+sudo systemctl restart vsftpd<br>
+查看服务状态<br>
+sudo systemctl  status  vsftpd</p>
 
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2024-10-14 ·
-                        </time>
-                        
-                            <a href="https://qs100371.github.io/tag/Chg8nNuo6h/" class="post-tag">
-                                # linux
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
+    </article>
+    
+        <article>
         
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qs100371.github.io/post/nginx-chong-ding-xiang/">
-                            <span class="post-title gt-c-content-color-first">nginx重定向</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>修改/etc/nginx/sites-available/default</p>
+        <h2>nginx重定向</h2>
+        <p>修改/etc/nginx/sites-available/default</p>
 <pre><code>server {
        listen 80;
        server_name example1.com;
        return 301 https://example2.com$request_uri;
          }
 </code></pre>
+<!-- more -->
+<pre><code>sudo  nginx -s reload
+</code></pre>
 
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2024-10-12 ·
-                        </time>
-                        
-                            <a href="https://qs100371.github.io/tag/Chg8nNuo6h/" class="post-tag">
-                                # linux
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
+    </article>
+    
+        <article>
         
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qs100371.github.io/post/grub4dos-qi-dong-fang-shi-de-menulst/">
-                            <span class="post-title gt-c-content-color-first">grub4dos启动方式的menu.lst</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <pre><code>timeout 10
+        <h2>grub4dos启动方式的menu.lst</h2>
+        <pre><code>timeout 10
 title ubuntu
 find --set-root --ignore-floppies --ignore-cd /boot/grub/i386-pc/core.img
 kernel /boot/grub/i386-pc/core.img
 </code></pre>
+<!-- more -->
+<pre><code>title deepin
+kernel (hd0,6)/boot/grub/i386-pc/core.img
 
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2024-10-11 ·
-                        </time>
-                        
-                            <a href="https://qs100371.github.io/tag/Chg8nNuo6h/" class="post-tag">
-                                # linux
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
+#title winxp
+#chainloader (hd0,0)/ntldr
+
+title find and boot.ISO
+find --set-root /boot64.iso
+map /boot64.iso (0xff) || map --mem /boot64.iso (0xff)
+map --hook
+chainloader (0xff)
+
+title install ubuntu
+find --set-root /ubuntu.iso
+kernel /vmlinuz boot=casper iso-scan/filename=/ubuntu.iso locale=zh_CN.UTF-8
+initrd /initrd
+</code></pre>
+
+    </article>
+    
+        <article>
         
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qs100371.github.io/post/linux-chang-yong-ming-ling/">
-                            <span class="post-title gt-c-content-color-first">linux常用命令</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <h1 id="常用命令">常用命令</h1>
+        <h2>linux常用命令</h2>
+        <h1 id="常用命令">常用命令</h1>
 <ul>
 <li>fastfetch 或 neofetch 系统信息</li>
 <li>df -h     磁盘占用空间</li>
 <li>du -sh   目录占用空间</li>
-<li>ifconfig  设置网络</li>
+<li>ifconfig  设置网络<!-- more -->
+</li>
+<li>pwd 显示当前目录路径</li>
+<li>ls -al  显示目录文件</li>
+<li>cp -r  复制目录</li>
+<li>head  查看文件头十行内容<br>
+tail</li>
+<li>zip -r 1.zip a 压缩a目录<br>
+unzip -d 1.zip a 解压到a目录</li>
+<li>tar -zcvf 1.tar.gz  a  打包并压缩<br>
+tar -zxvf 1.tar.gz  解包</li>
 </ul>
+<hr>
+<h1 id="命令分类">命令分类</h1>
+<p>文件管理<br>
+pwd-查看当前工作目录<br>
+cd-更改当前工作目录<br>
+touch-创建文件<br>
+mkdir-创建目录<br>
+cp-复制文件<br>
+mv-移动文件<br>
+rm-删除文件<br>
+tar-打包和压缩</p>
+<p>查看文件内容<br>
+tree-查看目录结构及其子分支<br>
+vi-修改文件内容<br>
+find-查找文件<br>
+locate-文件查找<br>
+ln-软链接</p>
+<p>用户管理<br>
+id-显示用户信息<br>
+useradd-创建用户<br>
+passwd-设置或更改用户密码<br>
+userdel-删除用户<br>
+修改登录SHELL<br>
+su-切换用户</p>
+<p>用户组管理<br>
+groupadd-创建组<br>
+groupdel-删除组<br>
+usermod-添加用户到组<br>
+gpasswd-添加用户到组<br>
+gpasswd-从组中删除用户</p>
+<p>文件权限管理<br>
+chmod-设置权限：<br>
+chgrp-修改属组:</p>
+<p>进程管理<br>
+ps-静态查看进程<br>
+top-动态查看进程<br>
+kill-杀死进程<br>
+nice-进程优先级<br>
+jobs-作业控制</p>
+<p>网络管理<br>
+nmtui-简易图形配置网络连接<br>
+ss-端口查看<br>
+netstat-端口查看</p>
+<p>其他常用命令<br>
+which-命令查找<br>
+whereis-命令查找<br>
+ssh-远程登陆<br>
+scp-远程拷贝<br>
+ssh-免密登录</p>
 
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2024-10-11 ·
-                        </time>
-                        
-                            <a href="https://qs100371.github.io/tag/Chg8nNuo6h/" class="post-tag">
-                                # linux
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
+    </article>
+    
+        <article>
         
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qs100371.github.io/post/linux-shang-an-zhuang-he-she-zhi-ssh-fu-wu/">
-                            <span class="post-title gt-c-content-color-first">linux上安装和设置SSH服务</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>安装OpenSSH服务器软件包：</p>
+        <h2>linux上安装和设置SSH服务</h2>
+        <p>安装OpenSSH服务器软件包：</p>
 <pre><code>sudo apt install openssh-server
 </code></pre>
+<!-- more -->
+<p>安装完成后，SSH服务将自动启动。可以使用以下命令检查SSH服务的状态：</p>
+<pre><code>sudo systemctl status ssh
+</code></pre>
+<p>如果SSH服务没有启动，可以使用以下命令启动它：</p>
+<pre><code>sudo systemctl start ssh
+</code></pre>
+<p>为了确保SSH服务在系统启动时自动启动，可以使用以下命令：</p>
+<pre><code>sudo systemctl enable ssh
+</code></pre>
+<p>默认情况下，SSH服务将使用端口22监听连接。<br>
+可以通过编辑/etc/ssh/sshd_config文件来更改配置，例如更改端口或设置访问权限。<br>
+更改配置后，需要重启SSH服务以应用更改：</p>
+<pre><code>sudo systemctl restart ssh
+</code></pre>
+<p>如果在防火墙上工作，确保允许SSH端口通过。<br>
+例如，允许端口22（或选择的任何端口）：</p>
+<pre><code>sudo ufw allow ssh
+</code></pre>
+<p>或者，如果更改了端口：</p>
+<pre><code>sudo ufw allow 22/tcp
+</code></pre>
+<p>可以使用SSH客户端从远程计算机连接到服务器。</p>
+<pre><code>ssh username@serverip
+</code></pre>
+<p>通过SSH使用图形用户界面</p>
+<pre><code>ssh -X username@serverip
+</code></pre>
+<p>可能需要更新ssh_config文件来启用它。</p>
+<p>在~/.ssh/config文件中添加以下内容：</p>
+<pre><code>Host *
+    ForwardX11 yes
+    ForwardX11Trusted yes
+</code></pre>
 
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2024-10-07 ·
-                        </time>
-                        
-                            <a href="https://qs100371.github.io/tag/Chg8nNuo6h/" class="post-tag">
-                                # linux
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qs100371.github.io/post/linux-cangku/">
-                            <span class="post-title gt-c-content-color-first">linux仓库</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>wps缺少的字体：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EfLPwyQyOxNOtLICKMCz11IBM9YKRT9Bs2FDu3FWjtOcFA?e=7cPUyY">下载</a></p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2024-10-07 ·
-                        </time>
-                        
-                            <a href="https://qs100371.github.io/tag/Chg8nNuo6h/" class="post-tag">
-                                # linux
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qs100371.github.io/post/hello/">
-                            <span class="post-title gt-c-content-color-first">hello</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>just a test</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2024-10-07 ·
-                        </time>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-    </div>
-</div>
-
-        <div class="pagination-container">
+    </article>
     
+        <article>
+        
+        <h2>linux仓库</h2>
+        <p>wps缺少的字体：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EfLPwyQyOxNOtLICKMCz11IBM9YKRT9Bs2FDu3FWjtOcFA?e=7cPUyY">下载</a></p>
+<!-- more -->
+<p>win字体：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/ES4_jCu_FLhHsifUgX4bmXYBjmUoyOHK4VWnaEZ9qFaMKw?e=DcRi1O">下载</a><br>
+将字体文件复制到字体目录中</p>
+<pre><code>sudo cp fontfile.ttf  /usr/share/fonts/
+</code></pre>
+<p>更新字体缓存</p>
+<pre><code>sudo fc-cache -fv
+</code></pre>
+<p>adblock：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EUVlkGECvs5JqxAaMGKiMcIBK5-95n0p6j4QiOB8p6qljQ?e=mAPSbJ">下载</a></p>
+
+    </article>
     
+        <article>
+        
+        <h2>hello</h2>
+        <p>just a test</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><a href="/post/shu-dong/"><img src="https://qs100371.github.io/post-images/1728649961843.jpg" alt="" loading="lazy"></a></figure>
+
+    </article>
+    
+</section>
+
+
+    <!-- 页脚 -->
+    
+<footer id="footer" >
+    
+    <ul class="icons">
+        
+        
+    </ul>
+    <ul class="copyright">
+        <li>qs的学习日志</li><li> 由 <a href="https://html5up.net">HTML5 UP</a> 设计样式。</li>
+    </ul>
+    
+</footer>
+
 </div>
 
 
-        <div class="site-footer gt-c-content-color-first">
-    <div class="slogan gt-c-content-color-first">随便写写</div>
-    <div class="social-container">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    </div>
-    <div class="footer-info">
-        Powered by Gridea
-    </div>
-    <div>
-        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>
-    </div>
-</div>
+<!-- 脚本 -->
 
-<script>
-  hljs.initHighlightingOnLoad()
-</script>
+<script src="media/scripts/jquery.min.js"></script>
+<script src="media/scripts/browser.min.js"></script>
+<script src="media/scripts/breakpoints.min.js"></script>
+<script src="media/scripts/main-lens.js"></script>
 
-    </div>
-</div>
+
 </body>
 </html>
