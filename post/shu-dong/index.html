@@ -5,18 +5,18 @@
   <meta charset="UTF-8" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="keywords" content="">
+<meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="随便写写">
-<meta name="theme-color" content="">
+<meta name="theme-color" content="#000">
 <title>树洞 | qs的学习日志</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1729410520061">
+<link rel="shortcut icon" href="/favicon.ico?v=1729410652203">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
   href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
   rel="stylesheet" type="text/css">
 
-<link href="/media/hljs/styles/github.css"
+<link href="/media/hljs/styles/default.css"
   rel="stylesheet">
 
 <link rel="stylesheet" href="/styles/main.css">
@@ -68,11 +68,15 @@
           
         </div>
         
+          <p class="subtitle">精于心，简于形</p>
+        
       </div>
       <nav class="site-nav" id="site_nav">
         <ul id="nav_ul">
           
             
+            
+              
             
             <li class="nav-item ">
               
@@ -85,6 +89,8 @@
           
             
             
+              
+            
             <li class="nav-item ">
               
               
@@ -96,6 +102,8 @@
           
             
             
+              
+            
             <li class="nav-item ">
               
               
@@ -106,6 +114,22 @@
             </li>
           
           
+            
+              <li class="nav-item ">
+                <a href="/friends/" target="_self">
+                  
+                    <i class="fa fa-address-book"></i> 友链
+                  
+                </a>
+              </li>
+            
+          
+          
+            <li id="fa_search" class="nav-item">
+              <a href="javascript:void(0);">
+                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
+              </a>
+            </li>
           
         </ul>
       </nav>
@@ -146,7 +170,47 @@
   
     <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
       
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
       <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name">我是谁</p>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">7</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+  
+  
+
+
+
+</div>
+          
         
       </div>
     </div>
@@ -273,12 +337,16 @@
 
             </div>
             
+              <div class="reward-btn">
+                <div class="reward-btn-text">赞赏</div>
+              </div>
+            
             
               <div class="post-footer">
   <ul class="post-copyright">
     <li class="post-copyright-author">
       <strong class="language" data-lan="author">本文作者：</strong>
-      
+      我是谁
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
@@ -351,14 +419,8 @@
             
         </div>
         
-          
-            
-                
                   
                         
-                          
-
-                            
 </div>
 <script>
   let sideBarOpen = "sidebar-open";
@@ -504,7 +566,7 @@
   }
 
   // 链接跳转
-  let newWindow = "";
+  let newWindow = "false";
   if (newWindow === "true") {
     let links = document.querySelectorAll(".post-body a");
     links.forEach((item) => {
@@ -568,8 +630,8 @@
           
         </div>
       </div>
-      <p class="reward-word"></p>
-      <p class="reward-tip"></p>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip"> </p>
     </div>
     <div class="bottom">
       
@@ -775,6 +837,380 @@
 
   </div>
 </body>
+
+  <div class="search-mask" id="search_mask" style="display: none;">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
+      </div>
+      <i id="close" class="fa fa-times-circle"></i>
+    </div>
+    <div class="stat-box">
+      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
+      <hr>
+    </div>
+    <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/an-zhuang-ftp-fu-wu/"" data-c="
+          &lt;p&gt;安装vsftpd：&lt;br&gt;
+sudo apt install vsftpd&lt;br&gt;
+检测是否安装：&lt;br&gt;
+vsftpd -version&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h1 id=&#34;匿名用户模式&#34;&gt;匿名用户模式&lt;/h1&gt;
+&lt;p&gt;在vsftpd.conf文件中添加匿名用户相关配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#监听ipv4，启用独立模式
+listen=YES
+#启用匿名用户模式 
+anonymous_enable=YES
+#允许写操作
+write_enable=YES
+#允许匿名用户上传文件
+anon_upload_enable=YES
+#允许匿名用户创建目录
+anon_mkdir_write_enable=YES
+#允许匿名用户修改或删除目录
+anon_other_write_enable=YES
+#表示上传下载文件的掩码
+anon_umask=077
+#设置用户的家目录，登录之后自动切换到各自用户的家目录
+local_root=/srv/ftp/upload
+#全部用户被限制在主目录
+chroot_local_user=YES
+​
+#开启被动模式。
+pasv_enable=YES
+#设置被动模式下，建立数据传输可使用的端口范围的最小值。
+#建议您把端口范围设置在一段比较高的范围内，例如50000~50010，有助于提高访问FTP服务器的安全性。
+pasv_min_port=50000
+#设置被动模式下，建立数据传输可使用的端口范围的最大值。
+pasv_max_port=50010
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在/srv/ftp目录下创建upload目录并完成赋权操作：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo mkdir /srv/ftp/upload
+sudo chown -R :ftp /srv/ftp/upload
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;设置upload目录的权限为775&lt;br&gt;
+sudo chmod 775 /srv/ftp/upload&lt;br&gt;
+重启服务&lt;br&gt;
+sudo systemctl restart vsftpd&lt;br&gt;
+查看服务状态&lt;br&gt;
+sudo systemctl  status  vsftpd&lt;/p&gt;
+">安装ftp服务</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/nginx-chong-ding-xiang/"" data-c="
+          &lt;p&gt;修改/etc/nginx/sites-available/default&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server {
+       listen 80;
+       server_name example1.com;
+       return 301 https://example2.com$request_uri;
+         }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- more --&gt;
+&lt;pre&gt;&lt;code&gt;sudo  nginx -s reload
+&lt;/code&gt;&lt;/pre&gt;
+">nginx重定向</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/grub4dos-qi-dong-fang-shi-de-menulst/"" data-c="
+          &lt;pre&gt;&lt;code&gt;timeout 10
+title ubuntu
+find --set-root --ignore-floppies --ignore-cd /boot/grub/i386-pc/core.img
+kernel /boot/grub/i386-pc/core.img
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- more --&gt;
+&lt;pre&gt;&lt;code&gt;title deepin
+kernel (hd0,6)/boot/grub/i386-pc/core.img
+
+#title winxp
+#chainloader (hd0,0)/ntldr
+
+title find and boot.ISO
+find --set-root /boot64.iso
+map /boot64.iso (0xff) || map --mem /boot64.iso (0xff)
+map --hook
+chainloader (0xff)
+
+title install ubuntu
+find --set-root /ubuntu.iso
+kernel /vmlinuz boot=casper iso-scan/filename=/ubuntu.iso locale=zh_CN.UTF-8
+initrd /initrd
+&lt;/code&gt;&lt;/pre&gt;
+">grub4dos启动方式的menu.lst</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/linux-chang-yong-ming-ling/"" data-c="
+          &lt;h1 id=&#34;常用命令&#34;&gt;常用命令&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;fastfetch 或 neofetch 系统信息&lt;/li&gt;
+&lt;li&gt;df -h     磁盘占用空间&lt;/li&gt;
+&lt;li&gt;du -sh   目录占用空间&lt;/li&gt;
+&lt;li&gt;ifconfig  设置网络&lt;!-- more --&gt;
+&lt;/li&gt;
+&lt;li&gt;pwd 显示当前目录路径&lt;/li&gt;
+&lt;li&gt;ls -al  显示目录文件&lt;/li&gt;
+&lt;li&gt;cp -r  复制目录&lt;/li&gt;
+&lt;li&gt;head  查看文件头十行内容&lt;br&gt;
+tail&lt;/li&gt;
+&lt;li&gt;zip -r 1.zip a 压缩a目录&lt;br&gt;
+unzip -d 1.zip a 解压到a目录&lt;/li&gt;
+&lt;li&gt;tar -zcvf 1.tar.gz  a  打包并压缩&lt;br&gt;
+tar -zxvf 1.tar.gz  解包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;命令分类&#34;&gt;命令分类&lt;/h1&gt;
+&lt;p&gt;文件管理&lt;br&gt;
+pwd-查看当前工作目录&lt;br&gt;
+cd-更改当前工作目录&lt;br&gt;
+touch-创建文件&lt;br&gt;
+mkdir-创建目录&lt;br&gt;
+cp-复制文件&lt;br&gt;
+mv-移动文件&lt;br&gt;
+rm-删除文件&lt;br&gt;
+tar-打包和压缩&lt;/p&gt;
+&lt;p&gt;查看文件内容&lt;br&gt;
+tree-查看目录结构及其子分支&lt;br&gt;
+vi-修改文件内容&lt;br&gt;
+find-查找文件&lt;br&gt;
+locate-文件查找&lt;br&gt;
+ln-软链接&lt;/p&gt;
+&lt;p&gt;用户管理&lt;br&gt;
+id-显示用户信息&lt;br&gt;
+useradd-创建用户&lt;br&gt;
+passwd-设置或更改用户密码&lt;br&gt;
+userdel-删除用户&lt;br&gt;
+修改登录SHELL&lt;br&gt;
+su-切换用户&lt;/p&gt;
+&lt;p&gt;用户组管理&lt;br&gt;
+groupadd-创建组&lt;br&gt;
+groupdel-删除组&lt;br&gt;
+usermod-添加用户到组&lt;br&gt;
+gpasswd-添加用户到组&lt;br&gt;
+gpasswd-从组中删除用户&lt;/p&gt;
+&lt;p&gt;文件权限管理&lt;br&gt;
+chmod-设置权限：&lt;br&gt;
+chgrp-修改属组:&lt;/p&gt;
+&lt;p&gt;进程管理&lt;br&gt;
+ps-静态查看进程&lt;br&gt;
+top-动态查看进程&lt;br&gt;
+kill-杀死进程&lt;br&gt;
+nice-进程优先级&lt;br&gt;
+jobs-作业控制&lt;/p&gt;
+&lt;p&gt;网络管理&lt;br&gt;
+nmtui-简易图形配置网络连接&lt;br&gt;
+ss-端口查看&lt;br&gt;
+netstat-端口查看&lt;/p&gt;
+&lt;p&gt;其他常用命令&lt;br&gt;
+which-命令查找&lt;br&gt;
+whereis-命令查找&lt;br&gt;
+ssh-远程登陆&lt;br&gt;
+scp-远程拷贝&lt;br&gt;
+ssh-免密登录&lt;/p&gt;
+">linux常用命令</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/linux-shang-an-zhuang-he-she-zhi-ssh-fu-wu/"" data-c="
+          &lt;p&gt;安装OpenSSH服务器软件包：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt install openssh-server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;安装完成后，SSH服务将自动启动。可以使用以下命令检查SSH服务的状态：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl status ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果SSH服务没有启动，可以使用以下命令启动它：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl start ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;为了确保SSH服务在系统启动时自动启动，可以使用以下命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl enable ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;默认情况下，SSH服务将使用端口22监听连接。&lt;br&gt;
+可以通过编辑/etc/ssh/sshd_config文件来更改配置，例如更改端口或设置访问权限。&lt;br&gt;
+更改配置后，需要重启SSH服务以应用更改：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl restart ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果在防火墙上工作，确保允许SSH端口通过。&lt;br&gt;
+例如，允许端口22（或选择的任何端口）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo ufw allow ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或者，如果更改了端口：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo ufw allow 22/tcp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以使用SSH客户端从远程计算机连接到服务器。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ssh username@serverip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过SSH使用图形用户界面&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ssh -X username@serverip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可能需要更新ssh_config文件来启用它。&lt;/p&gt;
+&lt;p&gt;在~/.ssh/config文件中添加以下内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Host *
+    ForwardX11 yes
+    ForwardX11Trusted yes
+&lt;/code&gt;&lt;/pre&gt;
+">linux上安装和设置SSH服务</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/linux-cangku/"" data-c="
+          &lt;p&gt;wps缺少的字体：&lt;a href=&#34;https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EfLPwyQyOxNOtLICKMCz11IBM9YKRT9Bs2FDu3FWjtOcFA?e=7cPUyY&#34;&gt;下载&lt;/a&gt;&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;win字体：&lt;a href=&#34;https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/ES4_jCu_FLhHsifUgX4bmXYBjmUoyOHK4VWnaEZ9qFaMKw?e=DcRi1O&#34;&gt;下载&lt;/a&gt;&lt;br&gt;
+将字体文件复制到字体目录中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo cp fontfile.ttf  /usr/share/fonts/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更新字体缓存&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo fc-cache -fv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;adblock：&lt;a href=&#34;https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EUVlkGECvs5JqxAaMGKiMcIBK5-95n0p6j4QiOB8p6qljQ?e=mAPSbJ&#34;&gt;下载&lt;/a&gt;&lt;/p&gt;
+">linux仓库</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/hello/"" data-c="
+          &lt;p&gt;just a test&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;a href=&#34;/post/shu-dong/&#34;&gt;&lt;img src=&#34;https://qs100371.github.io/post-images/1728649961843.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/a&gt;&lt;/figure&gt;
+">hello</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qs100371.github.io/post/shu-dong/"" data-c="
+          &lt;blockquote&gt;
+&lt;p&gt;发点牢骚&lt;a href=&#34;https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EfvSUzRmQLJHisCu-rB5pIcB4z5a1axYXbjcpdhOKfB20w?e=edL4ux&#34;&gt;.&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现在是什么也不让说，什么也不能上网。&lt;/p&gt;
+">树洞</a>
+      </div>
+      
+    </div>
+    <div class="page">
+      <div id="page_ul"></div>
+    </div>
+  </div>
+</div>
+<script>
+  !function () {
+    let searchMask = document.querySelector('#search_mask');
+    let result = document.querySelector('#result');
+    let items = document.querySelectorAll('.item');
+    let searchBox = document.querySelector('#search');
+    let statCount = document.querySelector('#stat_count');
+    let statTimes = document.querySelector('#stat_times');
+    let pageUl = document.querySelector('#page_ul');
+    let close = document.querySelector('#close');
+    
+    close.addEventListener('click', function() {
+      searchMask.style = 'display: none;'
+    })
+
+    let finds = [];
+    let contents = [];
+    let pageSize = 10;
+    items.forEach(item => {
+      let a = item.querySelector('a');
+      contents.push({
+        title: a.innerText,
+        details: a.dataset.c,
+        link: a.href
+      })
+      item.remove();
+    })
+
+    function insertStr(soure, start, count) {
+      let newStr = soure.substr(start, count);
+      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
+    }
+
+    pageUl.addEventListener('click', function(event) {
+      let target = event.target;
+      if (target.__proto__ === HTMLSpanElement.prototype) {
+        appendResults(parseInt(target.dataset.i));
+      }
+    })
+
+    function appendResults(index) {
+      let htmlResult = '';
+      let start = index || 0;
+      let end = Math.min(start + pageSize, finds.length);
+      for (let i = start; i < end; i++) {
+        const current = finds[i];
+        let html = current.title;
+        let sum = 0;
+        let positions = current.positions;
+        positions.forEach(position => {
+          html = insertStr(html, position.start + sum, position.count);
+          sum += 9;
+        })
+        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
+      }
+      result.innerHTML = htmlResult;
+      pageUl.innerHTML = '';
+      let count = finds.length / pageSize;
+      let lis = '';
+      if (start !== 0) {
+        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
+      }
+      for (let i = 0; i < count; i++) {
+        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
+      }
+      if (start+1 < count) {
+        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
+      }
+      pageUl.innerHTML = lis;
+    }
+
+    function search(delay) {
+      let timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          let start = Date.now();
+          let segments = searchBox.value.split(' ').filter(c => c != '');
+          if (segments.length <= 0) {
+            return;
+          }
+          finds = [];
+          let htmlResult = '';
+          contents.forEach(content => {
+            let title = content.title;
+            let positions = [];
+            let find = false;
+            segments.forEach((segment) => {
+              if (content.title.includes(segment)) {
+                find = true;
+                positions.push({
+                  start: content.title.indexOf(segment),
+                  count: segment.length
+                })
+              } else if (content.details.includes(segment)) {
+                find = true;
+              }
+            });
+            if (find) {
+              finds.push({
+                title: content.title,
+                link: content.link,
+                positions
+              });
+            }
+          })
+          appendResults(0);
+          statCount.textContent = finds.length;
+          statTimes.textContent = Date.now() - start;
+        }, delay)
+      }
+    }
+    searchBox.addEventListener('input', search(200));
+  }()
+</script>
 
 <input hidden id="copy" />
 <script>
