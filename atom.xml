@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qs100371.github.io</id>
     <title>qs的学习日志</title>
-    <updated>2024-10-20T10:37:02.230Z</updated>
+    <updated>2024-10-20T10:40:28.255Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qs100371.github.io"/>
     <link rel="self" href="https://qs100371.github.io/atom.xml"/>
@@ -329,7 +329,7 @@ ssh-免密登录</p>
         <id>https://qs100371.github.io/post/hello/</id>
         <link href="https://qs100371.github.io/post/hello/">
         </link>
-        <updated>2024-10-07T02:04:12.000Z</updated>
+        <updated>2023-10-07T02:04:12.000Z</updated>
         <summary type="html"><![CDATA[<p>just a test</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>just a test</p>
