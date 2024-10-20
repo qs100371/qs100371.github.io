@@ -1,318 +1,195 @@
-
-<!DOCTYPE HTML>
-<!--
-	Lens by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html lang="zh-cn">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <title>qs的学习日志</title>
-<meta name="keywords" content="" />
-<meta name="description" content="随便写写" />
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<base href="https://qs100371.github.io/">
-<link rel="shortcut icon" href="favicon.ico" />
-
-<link rel="stylesheet" href="media/css/main-lens.css" />
-<noscript><link rel="stylesheet" href="media/css/noscript-lens.css" /></noscript>
-
-
-
+<!-- 必要参数 -->
+<meta charset="utf-8"/>
+<title>qs的学习日志</title>
+<meta name="keywords" content="关键词"/>
+<meta name="description" content="简述"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable:no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<link rel="shortcut icon" href="favicon.ico">
+<!-- CSS -->
+<link rel="stylesheet" href="https://qs100371.github.io/media/css/mdui.min.css">
+<link rel="stylesheet" href="https://qs100371.github.io/media/css/modify.css">
 </head>
-<body class="is-preload-0 is-preload-1 is-preload-2">
-
-<!-- 外封 -->
-<div id="main">
-
-    <!-- 页眉 -->
-    <header id="header">
-    
-    <h1>qs的学习日志</h1>
-    <p>随便写写</p>
-    <ul class="icons">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    </ul>
-    
+<body id="index" class="mdui-appbar-with-toolbar mdui-theme-primary-blue-grey mdui-theme-accent-blue mdui-theme-layout-dark">
+<header role="banner">
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-shadow-0">
+        <div class="mdui-toolbar">
+            <button class="mdui-btn mdui-btn-icon" id="menu" mdui-drawer="{target:'#drawer',overlay:true,swipe:true}"><i class="mdui-icon material-icons">menu</i></button>
+            <a href="https://qs100371.github.io" class="mdui-typo-headline">qs的学习日志</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <button class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '深色样式切换', position: 'left'}" id="DarkStyle"><i class="mdui-icon material-icons">brightness_4</i></button>
+        </div>
+    </div>
 </header>
 
-    <!-- 主要内容 -->
-    
-<section id="thumbnails">
-    
-        <article>
+<nav id="drawer" class="mdui-drawer mdui-drawer-full-height mdui-drawer-close">
+    <ul class="mdui-list">
+        <a href="/" class="menu"><li class="mdui-list-item mdui-ripple">首页</li></a>
+        <a href="/archives" class="menu"><li class="mdui-list-item mdui-ripple">归档</li></a>
+        <a href="/tags" class="menu"><li class="mdui-list-item mdui-ripple">标签</li></a>
         
-        <h2>安装ftp服务</h2>
-        <p>安装vsftpd：<br>
-sudo apt install vsftpd<br>
-检测是否安装：<br>
-vsftpd -version</p>
-<!-- more -->
-<h1 id="匿名用户模式">匿名用户模式</h1>
-<p>在vsftpd.conf文件中添加匿名用户相关配置：</p>
-<pre><code>#监听ipv4，启用独立模式
-listen=YES
-#启用匿名用户模式 
-anonymous_enable=YES
-#允许写操作
-write_enable=YES
-#允许匿名用户上传文件
-anon_upload_enable=YES
-#允许匿名用户创建目录
-anon_mkdir_write_enable=YES
-#允许匿名用户修改或删除目录
-anon_other_write_enable=YES
-#表示上传下载文件的掩码
-anon_umask=077
-#设置用户的家目录，登录之后自动切换到各自用户的家目录
-local_root=/srv/ftp/upload
-#全部用户被限制在主目录
-chroot_local_user=YES
-​
-#开启被动模式。
-pasv_enable=YES
-#设置被动模式下，建立数据传输可使用的端口范围的最小值。
-#建议您把端口范围设置在一段比较高的范围内，例如50000~50010，有助于提高访问FTP服务器的安全性。
-pasv_min_port=50000
-#设置被动模式下，建立数据传输可使用的端口范围的最大值。
-pasv_max_port=50010
-</code></pre>
-<p>在/srv/ftp目录下创建upload目录并完成赋权操作：</p>
-<pre><code>sudo mkdir /srv/ftp/upload
-sudo chown -R :ftp /srv/ftp/upload
-</code></pre>
-<p>设置upload目录的权限为775<br>
-sudo chmod 775 /srv/ftp/upload<br>
-重启服务<br>
-sudo systemctl restart vsftpd<br>
-查看服务状态<br>
-sudo systemctl  status  vsftpd</p>
+        <a href="https://github.com/CPlayer-CN/gridea-theme-cplayer-material" class="spread"><li class="mdui-list-item mdui-ripple">主题主页</li></a>
+    </ul>
+</nav>
 
-    </article>
+
+<main class="mdui-m-a-2 mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-xl-4 mdui-typo mdui-m-t-2">
     
-        <article>
-        
-        <h2>nginx重定向</h2>
-        <p>修改/etc/nginx/sites-available/default</p>
-<pre><code>server {
+    <section class="mdui-col mdui-m-b-2">
+        <div class="mdui-card">
+            
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title"><a href="https://qs100371.github.io/post/an-zhuang-ftp-fu-wu/">安装ftp服务</a></div>
+                <div class="mdui-card-primary-subtitle">2024-10-14</div>
+            </div>
+            <div class="mdui-card-content">安装vsftpd：
+sudo apt install vsftpd
+检测是否安装：
+vsftpd -version
+
+匿名用户模式
+在vsftpd.conf文件中添加匿名用户相关配置：
+#监听ipv4，启用独立模式
+listen=YES
+#...</div>
+        </div>
+    </section>
+
+    <section class="mdui-col mdui-m-b-2">
+        <div class="mdui-card">
+            
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title"><a href="https://qs100371.github.io/post/nginx-chong-ding-xiang/">nginx重定向</a></div>
+                <div class="mdui-card-primary-subtitle">2024-10-12</div>
+            </div>
+            <div class="mdui-card-content">修改/etc/nginx/sites-available/default
+server {
        listen 80;
        server_name example1.com;
-       return 301 https://example2.com$request_uri;
-         }
-</code></pre>
-<!-- more -->
-<pre><code>sudo  nginx -s reload
-</code></pre>
+       return 301 https...</div>
+        </div>
+    </section>
 
-    </article>
-    
-        <article>
-        
-        <h2>grub4dos启动方式的menu.lst</h2>
-        <pre><code>timeout 10
+    <section class="mdui-col mdui-m-b-2">
+        <div class="mdui-card">
+            
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title"><a href="https://qs100371.github.io/post/grub4dos-qi-dong-fang-shi-de-menulst/">grub4dos启动方式的menu.lst</a></div>
+                <div class="mdui-card-primary-subtitle">2024-10-11</div>
+            </div>
+            <div class="mdui-card-content">timeout 10
 title ubuntu
 find --set-root --ignore-floppies --ignore-cd /boot/grub/i386-pc/core.img
-kernel /boot/grub/i386-pc/core.img
-</code></pre>
-<!-- more -->
-<pre><code>title deepin
-kernel (hd0,6)/boot/grub/i386-pc/core.img
+kernel /boot/grub/i386...</div>
+        </div>
+    </section>
 
-#title winxp
-#chainloader (hd0,0)/ntldr
+    <section class="mdui-col mdui-m-b-2">
+        <div class="mdui-card">
+            
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title"><a href="https://qs100371.github.io/post/linux-chang-yong-ming-ling/">linux常用命令</a></div>
+                <div class="mdui-card-primary-subtitle">2024-10-11</div>
+            </div>
+            <div class="mdui-card-content">常用命令
 
-title find and boot.ISO
-find --set-root /boot64.iso
-map /boot64.iso (0xff) || map --mem /boot64.iso (0xff)
-map --hook
-chainloader (0xff)
+fastfetch 或 neofetch 系统信息
+df -h     磁盘占用空间
+du -sh   目录占用空间
+ifconfig  设置网络
 
-title install ubuntu
-find --set-root /ubuntu.iso
-kernel /vmlinuz boot=casper iso-scan/filename=/ubuntu.iso locale=zh_CN.UTF-8
-initrd /initrd
-</code></pre>
+pwd 显示当前目录路径
+ls -al  显示目录文件
+cp -r  复制目录...</div>
+        </div>
+    </section>
 
-    </article>
+    <section class="mdui-col mdui-m-b-2">
+        <div class="mdui-card">
+            
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title"><a href="https://qs100371.github.io/post/linux-shang-an-zhuang-he-she-zhi-ssh-fu-wu/">linux上安装和设置SSH服务</a></div>
+                <div class="mdui-card-primary-subtitle">2024-10-07</div>
+            </div>
+            <div class="mdui-card-content">安装OpenSSH服务器软件包：
+sudo apt install openssh-server
+
+
+安装完成后，SSH服务将自动启动。可以使用以下命令检查SSH服务的状态：
+sudo systemctl status ssh
+
+如果SSH...</div>
+        </div>
+    </section>
+
+    <section class="mdui-col mdui-m-b-2">
+        <div class="mdui-card">
+            
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title"><a href="https://qs100371.github.io/post/linux-cangku/">linux仓库</a></div>
+                <div class="mdui-card-primary-subtitle">2024-10-07</div>
+            </div>
+            <div class="mdui-card-content">wps缺少的字体：下载
+
+win字体：下载
+将字体文件复制到字体目录中
+sudo cp fontfile.ttf  /usr/share/fonts/
+
+更新字体缓存
+sudo fc-cache -fv
+
+adblock：下载
+...</div>
+        </div>
+    </section>
+
+    <section class="mdui-col mdui-m-b-2">
+        <div class="mdui-card">
+            
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title"><a href="https://qs100371.github.io/post/hello/">hello</a></div>
+                <div class="mdui-card-primary-subtitle">2024-10-07</div>
+            </div>
+            <div class="mdui-card-content">just a test
+
+
+...</div>
+        </div>
+    </section>
+
+</main>
+
+<nav class="mdui-container mdui-m-t-2 mdui-m-b-2">
     
-        <article>
-        
-        <h2>linux常用命令</h2>
-        <h1 id="常用命令">常用命令</h1>
-<ul>
-<li>fastfetch 或 neofetch 系统信息</li>
-<li>df -h     磁盘占用空间</li>
-<li>du -sh   目录占用空间</li>
-<li>ifconfig  设置网络<!-- more -->
-</li>
-<li>pwd 显示当前目录路径</li>
-<li>ls -al  显示目录文件</li>
-<li>cp -r  复制目录</li>
-<li>head  查看文件头十行内容<br>
-tail</li>
-<li>zip -r 1.zip a 压缩a目录<br>
-unzip -d 1.zip a 解压到a目录</li>
-<li>tar -zcvf 1.tar.gz  a  打包并压缩<br>
-tar -zxvf 1.tar.gz  解包</li>
-</ul>
-<hr>
-<h1 id="命令分类">命令分类</h1>
-<p>文件管理<br>
-pwd-查看当前工作目录<br>
-cd-更改当前工作目录<br>
-touch-创建文件<br>
-mkdir-创建目录<br>
-cp-复制文件<br>
-mv-移动文件<br>
-rm-删除文件<br>
-tar-打包和压缩</p>
-<p>查看文件内容<br>
-tree-查看目录结构及其子分支<br>
-vi-修改文件内容<br>
-find-查找文件<br>
-locate-文件查找<br>
-ln-软链接</p>
-<p>用户管理<br>
-id-显示用户信息<br>
-useradd-创建用户<br>
-passwd-设置或更改用户密码<br>
-userdel-删除用户<br>
-修改登录SHELL<br>
-su-切换用户</p>
-<p>用户组管理<br>
-groupadd-创建组<br>
-groupdel-删除组<br>
-usermod-添加用户到组<br>
-gpasswd-添加用户到组<br>
-gpasswd-从组中删除用户</p>
-<p>文件权限管理<br>
-chmod-设置权限：<br>
-chgrp-修改属组:</p>
-<p>进程管理<br>
-ps-静态查看进程<br>
-top-动态查看进程<br>
-kill-杀死进程<br>
-nice-进程优先级<br>
-jobs-作业控制</p>
-<p>网络管理<br>
-nmtui-简易图形配置网络连接<br>
-ss-端口查看<br>
-netstat-端口查看</p>
-<p>其他常用命令<br>
-which-命令查找<br>
-whereis-命令查找<br>
-ssh-远程登陆<br>
-scp-远程拷贝<br>
-ssh-免密登录</p>
-
-    </article>
     
-        <article>
-        
-        <h2>linux上安装和设置SSH服务</h2>
-        <p>安装OpenSSH服务器软件包：</p>
-<pre><code>sudo apt install openssh-server
-</code></pre>
-<!-- more -->
-<p>安装完成后，SSH服务将自动启动。可以使用以下命令检查SSH服务的状态：</p>
-<pre><code>sudo systemctl status ssh
-</code></pre>
-<p>如果SSH服务没有启动，可以使用以下命令启动它：</p>
-<pre><code>sudo systemctl start ssh
-</code></pre>
-<p>为了确保SSH服务在系统启动时自动启动，可以使用以下命令：</p>
-<pre><code>sudo systemctl enable ssh
-</code></pre>
-<p>默认情况下，SSH服务将使用端口22监听连接。<br>
-可以通过编辑/etc/ssh/sshd_config文件来更改配置，例如更改端口或设置访问权限。<br>
-更改配置后，需要重启SSH服务以应用更改：</p>
-<pre><code>sudo systemctl restart ssh
-</code></pre>
-<p>如果在防火墙上工作，确保允许SSH端口通过。<br>
-例如，允许端口22（或选择的任何端口）：</p>
-<pre><code>sudo ufw allow ssh
-</code></pre>
-<p>或者，如果更改了端口：</p>
-<pre><code>sudo ufw allow 22/tcp
-</code></pre>
-<p>可以使用SSH客户端从远程计算机连接到服务器。</p>
-<pre><code>ssh username@serverip
-</code></pre>
-<p>通过SSH使用图形用户界面</p>
-<pre><code>ssh -X username@serverip
-</code></pre>
-<p>可能需要更新ssh_config文件来启用它。</p>
-<p>在~/.ssh/config文件中添加以下内容：</p>
-<pre><code>Host *
-    ForwardX11 yes
-    ForwardX11Trusted yes
-</code></pre>
+</nav>
 
-    </article>
-    
-        <article>
-        
-        <h2>linux仓库</h2>
-        <p>wps缺少的字体：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EfLPwyQyOxNOtLICKMCz11IBM9YKRT9Bs2FDu3FWjtOcFA?e=7cPUyY">下载</a></p>
-<!-- more -->
-<p>win字体：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/ES4_jCu_FLhHsifUgX4bmXYBjmUoyOHK4VWnaEZ9qFaMKw?e=DcRi1O">下载</a><br>
-将字体文件复制到字体目录中</p>
-<pre><code>sudo cp fontfile.ttf  /usr/share/fonts/
-</code></pre>
-<p>更新字体缓存</p>
-<pre><code>sudo fc-cache -fv
-</code></pre>
-<p>adblock：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EUVlkGECvs5JqxAaMGKiMcIBK5-95n0p6j4QiOB8p6qljQ?e=mAPSbJ">下载</a></p>
-
-    </article>
-    
-        <article>
-        
-        <h2>hello</h2>
-        <p>just a test</p>
-<!-- more -->
-<figure data-type="image" tabindex="1"><a href="/post/shu-dong/"><img src="https://qs100371.github.io/post-images/1728649961843.jpg" alt="" loading="lazy"></a></figure>
-
-    </article>
-    
-</section>
-
-
-    <!-- 页脚 -->
-    
-<footer id="footer" >
-    
-    <ul class="icons">
-        
-        
-    </ul>
-    <ul class="copyright">
-        <li>qs的学习日志</li><li> 由 <a href="https://html5up.net">HTML5 UP</a> 设计样式。</li>
-    </ul>
-    
-</footer>
-
+<div class="mdui-m-t-2 mdui-text-center mdui-typo">
+    Powered by Gridea
 </div>
 
-
-<!-- 脚本 -->
-
-<script src="media/scripts/jquery.min.js"></script>
-<script src="media/scripts/browser.min.js"></script>
-<script src="media/scripts/breakpoints.min.js"></script>
-<script src="media/scripts/main-lens.js"></script>
-
+<script src="https://qs100371.github.io/media/js/jquery.min.js"></script>
+<script src="https://qs100371.github.io/media/js/mdui.min.js"></script>
+<script src="https://qs100371.github.io/media/js/modify.js"></script>
+<script src="https://qs100371.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://qs100371.github.io/media/js/imagesloaded.pkgd.min.js"></script>
+<script>
+// 初始化-文章列表页面瀑布流。
+function masonry() {
+    // 初始化 masonry
+    $('.mdui-row-xs-1').masonry({
+        itemSelector: '.mdui-col',
+        horizontalOrder: true
+    });
+}
+masonry()
+$('.mdui-col').imagesLoaded( function() {
+    masonry()
+});
+</script>
 
 </body>
 </html>
