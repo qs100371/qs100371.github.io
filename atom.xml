@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qs100371.github.io</id>
     <title>qs的学习日志</title>
-    <updated>2024-10-20T10:40:28.255Z</updated>
+    <updated>2024-10-21T04:53:10.473Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qs100371.github.io"/>
     <link rel="self" href="https://qs100371.github.io/atom.xml"/>
@@ -25,8 +25,8 @@ myiptv源<br>
 <code>https://mirror.ghproxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/ipv6.m3u</code></p>
 <!-- more -->
 <p>视频网站：<br>
-<a href="https://www.btjiaweb.cc/">BT之家</a>   <code>https://www.btjiaweb.cc/</code><br>
-<a href="https://www.dyttcn.com/">电影天堂</a> <code>https://www.dyttcn.com/</code></p>
+BT之家  <a href="https://www.btjiaweb.cc"><code>https://www.btjiaweb.cc</code></a><br>
+电影天堂  <a href="https://www.dyttcn.com"><code>https://www.dyttcn.com</code></a></p>
 ]]></content>
     </entry>
     <entry>
@@ -36,7 +36,7 @@ myiptv源<br>
         </link>
         <updated>2024-10-20T10:16:51.000Z</updated>
         <summary type="html"><![CDATA[<p>打开终端，输入:<br>
-<code>sudo gedit /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy</code><br>
+<code>sudo xed /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy</code><br>
 找到这个段：<br>
 <code>&lt;action id=&quot;org.freedesktop.udisks.filesystem-mount-system&quot;&gt;</code><br>
 在这个段里找到下面这一行:<br>
@@ -44,7 +44,7 @@ auth_admin_keep 替换成： yes<br>
 以后想挂载windows下的分区就不会要求输入密码了。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>打开终端，输入:<br>
-<code>sudo gedit /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy</code><br>
+<code>sudo xed /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy</code><br>
 找到这个段：<br>
 <code>&lt;action id=&quot;org.freedesktop.udisks.filesystem-mount-system&quot;&gt;</code><br>
 在这个段里找到下面这一行:<br>

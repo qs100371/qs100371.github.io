@@ -6,7 +6,7 @@
 
 <title>linuxmint挂载分区不需密码 | qs的学习日志</title>
 
-<link rel="shortcut icon" href="https://qs100371.github.io/favicon.ico?v=1729420814336">
+<link rel="shortcut icon" href="https://qs100371.github.io/favicon.ico?v=1729486367729">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://qs100371.github.io/styles/main.css">
@@ -69,7 +69,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1729420814336" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1729486367729" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="post-content">
                     <p>打开终端，输入:<br>
-<code>sudo gedit /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy</code><br>
+<code>sudo xed /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy</code><br>
 找到这个段：<br>
 <code>&lt;action id=&quot;org.freedesktop.udisks.filesystem-mount-system&quot;&gt;</code><br>
 在这个段里找到下面这一行:<br>
