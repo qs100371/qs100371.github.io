@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://qs100371.vip</id>
+    <title>qs的学习笔记</title>
+    <updated>2024-12-24T23:36:56.898Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://qs100371.vip"/>
+    <link rel="self" href="https://qs100371.vip/atom.xml"/>
+    <subtitle>生命在于折腾。</subtitle>
+    <logo>https://qs100371.vip/images/avatar.png</logo>
+    <icon>https://qs100371.vip/favicon.ico</icon>
+    <rights>All rights reserved 2024, qs的学习笔记</rights>
+    <entry>
+        <title type="html"><![CDATA[cloudflare tunnel内网穿透]]></title>
+        <id>https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/</id>
+        <link href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/">
+        </link>
+        <updated>2024-12-20T13:55:45.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>登录cloudflare</p>
+</blockquote>
+<blockquote>
+<p>打开zero trust</p>
+</blockquote>
+<p>输入团队名字，选择免费套餐，不点下一步，地址栏改成<code>https://dash.cloudflare.com</code>，确定。</p>
+<blockquote>
+<p>打开tunnel</p>
+</blockquote>
+<p>打开networks-tunnels-add tunnel-select cloudflare-输入tunnel名称，保存进入下一步。</p>
+<blockquote>
+<p>安装守护程序</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>登录cloudflare</p>
+</blockquote>
+<blockquote>
+<p>打开zero trust</p>
+</blockquote>
+<p>输入团队名字，选择免费套餐，不点下一步，地址栏改成<code>https://dash.cloudflare.com</code>，确定。</p>
+<blockquote>
+<p>打开tunnel</p>
+</blockquote>
+<p>打开networks-tunnels-add tunnel-select cloudflare-输入tunnel名称，保存进入下一步。</p>
+<blockquote>
+<p>安装守护程序</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker命令行和compose文件相互转化]]></title>
+        <id>https://qs100371.vip/post/docker-ming-ling-hang-he-compose-wen-jian-xiang-hu-zhuan-hua/</id>
+        <link href="https://qs100371.vip/post/docker-ming-ling-hang-he-compose-wen-jian-xiang-hu-zhuan-hua/">
+        </link>
+        <updated>2024-12-18T13:49:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker可以直接用命令行建立容器，命令一般比较长，参数多，容易出错，compose方法使用yml文件就简单多了。<br>
+通过docker-compose.yml文件用<code>docker-compose up -d</code>来建立并运行容器。<br>
+cli和yml相互转化工具：<a href="https://www.mklab.cn/utils/docker">https://www.mklab.cn/utils/docker</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker可以直接用命令行建立容器，命令一般比较长，参数多，容易出错，compose方法使用yml文件就简单多了。<br>
+通过docker-compose.yml文件用<code>docker-compose up -d</code>来建立并运行容器。<br>
+cli和yml相互转化工具：<a href="https://www.mklab.cn/utils/docker">https://www.mklab.cn/utils/docker</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker内外数据交流]]></title>
+        <id>https://qs100371.vip/post/docker-nei-wai-shu-ju-jiao-liu/</id>
+        <link href="https://qs100371.vip/post/docker-nei-wai-shu-ju-jiao-liu/">
+        </link>
+        <updated>2024-12-18T07:12:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>在Docker中，容器数据共享与持久化是两个关键的概念，它们确保了数据的安全性和应用的连续性。本文探讨Docker如何实现内外路径打通，从而轻松实现容器数据共享与持久化。</p>
+<ul>
+<li>docker cp命令</li>
+<li>docker数据卷</li>
+<li>docker exec</li>
+</ul>
+]]></summary>
+        <content type="html"><![CDATA[<p>在Docker中，容器数据共享与持久化是两个关键的概念，它们确保了数据的安全性和应用的连续性。本文探讨Docker如何实现内外路径打通，从而轻松实现容器数据共享与持久化。</p>
+<ul>
+<li>docker cp命令</li>
+<li>docker数据卷</li>
+<li>docker exec</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用cloudflare实现自定义域名邮箱]]></title>
+        <id>https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/</id>
+        <link href="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/">
+        </link>
+        <updated>2024-12-17T13:43:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。</p>
+<ul>
+<li>Cloudflare注册并迁入域名</li>
+<li>启用电子邮件路由功能</li>
+</ul>
+]]></summary>
+        <content type="html"><![CDATA[<p>Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。</p>
+<ul>
+<li>Cloudflare注册并迁入域名</li>
+<li>启用电子邮件路由功能</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[证件照制作HivisionIDPhoto]]></title>
+        <id>https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/</id>
+        <link href="https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/">
+        </link>
+        <updated>2024-12-13T23:36:07.000Z</updated>
+        <summary type="html"><![CDATA[<p>HivisionIDPhoto 是一个轻量级的 AI 证件照制作算法。利用一套完善的 AI 模型工作流程，实现对多种用户拍照场景的识别、抠图与证件照生成。可解决证件照应急制作问题。<br>
+示例：<a href="https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo">https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>HivisionIDPhoto 是一个轻量级的 AI 证件照制作算法。利用一套完善的 AI 模型工作流程，实现对多种用户拍照场景的识别、抠图与证件照生成。可解决证件照应急制作问题。<br>
+示例：<a href="https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo">https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署网盘cloudreve]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/">
+        </link>
+        <updated>2024-12-13T12:32:58.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>建立相关文件及路径</p>
+</blockquote>
+<pre><code>mkdir -vp /data/cloudreve/{uploads,avatar} \
+&amp;&amp; touch /data/cloudreve/conf.ini \
+&amp;&amp; touch /data/cloudreve/cloudreve.db
+</code></pre>
+<blockquote>
+<p>运行 docker container：</p>
+</blockquote>
+<pre><code>docker run -d --name cloudreve \
+-p 5212:5212 --restart unless-stopped \
+--mount type=bind,source=/data/cloudreve/conf.ini,target=/cloudreve/conf.ini \
+--mount type=bind,source=/data/cloudreve/cloudreve.db,target=/cloudreve/cloudreve.db \
+-v /data/cloudreve/uploads&gt;:/cloudreve/uploads \
+-v /data/cloudreve/avatar&gt;:/cloudreve/avatar \
+cloudreve/cloudreve:latest
+</code></pre>
+<blockquote>
+<p>访问http://IP:5212进入 Cloudreve。</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>建立相关文件及路径</p>
+</blockquote>
+<pre><code>mkdir -vp /data/cloudreve/{uploads,avatar} \
+&amp;&amp; touch /data/cloudreve/conf.ini \
+&amp;&amp; touch /data/cloudreve/cloudreve.db
+</code></pre>
+<blockquote>
+<p>运行 docker container：</p>
+</blockquote>
+<pre><code>docker run -d --name cloudreve \
+-p 5212:5212 --restart unless-stopped \
+--mount type=bind,source=/data/cloudreve/conf.ini,target=/cloudreve/conf.ini \
+--mount type=bind,source=/data/cloudreve/cloudreve.db,target=/cloudreve/cloudreve.db \
+-v /data/cloudreve/uploads&gt;:/cloudreve/uploads \
+-v /data/cloudreve/avatar&gt;:/cloudreve/avatar \
+cloudreve/cloudreve:latest
+</code></pre>
+<blockquote>
+<p>访问http://IP:5212进入 Cloudreve。</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[用lucky加cloudflare实现域名访问内网]]></title>
+        <id>https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/</id>
+        <link href="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/">
+        </link>
+        <updated>2024-12-11T12:23:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb/s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb/s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker安装lucky]]></title>
+        <id>https://qs100371.vip/post/docker-an-zhuang-lucky/</id>
+        <link href="https://qs100371.vip/post/docker-an-zhuang-lucky/">
+        </link>
+        <updated>2024-12-10T12:12:53.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>安装</p>
+</blockquote>
+<p>host模式, 同时支持IPv4/IPv6, Liunx系统推荐<br>
+<code>docker run -d --name lucky --restart=always --net=host gdy666/lucky</code><br>
+挂载主机目录, 删除容器后配置不会丢失。可替换 /root/luckyconf 为主机目录, 配置文件为lucky.conf<br>
+<code>docker run -d --name lucky --restart=always --net=host -v /root/luckyconf:/goodluck gdy666/lucky</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>安装</p>
+</blockquote>
+<p>host模式, 同时支持IPv4/IPv6, Liunx系统推荐<br>
+<code>docker run -d --name lucky --restart=always --net=host gdy666/lucky</code><br>
+挂载主机目录, 删除容器后配置不会丢失。可替换 /root/luckyconf 为主机目录, 配置文件为lucky.conf<br>
+<code>docker run -d --name lucky --restart=always --net=host -v /root/luckyconf:/goodluck gdy666/lucky</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装微力同步verysync]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/">
+        </link>
+        <updated>2024-12-06T05:09:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>微力同步是一个简单易用的多平台文件同步软件。</p>
+<blockquote>
+<p>docker安装</p>
+</blockquote>
+<p><code>mkdir -p /data/downloads</code><br>
+<code>docker run --name verysync -d -v /data/downloads:/data -p 8886:8886 jonnyan404/verysync</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>微力同步是一个简单易用的多平台文件同步软件。</p>
+<blockquote>
+<p>docker安装</p>
+</blockquote>
+<p><code>mkdir -p /data/downloads</code><br>
+<code>docker run --name verysync -d -v /data/downloads:/data -p 8886:8886 jonnyan404/verysync</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装Jellyfin]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-jellyfin/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-jellyfin/">
+        </link>
+        <updated>2024-12-05T13:06:23.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>脚本安装</p>
+</blockquote>
+<p><code>curl -s https://repo.jellyfin.org/install-debuntu.sh | bash</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>脚本安装</p>
+</blockquote>
+<p><code>curl -s https://repo.jellyfin.org/install-debuntu.sh | bash</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署talebook]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-talebook/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-talebook/">
+        </link>
+        <updated>2024-12-04T11:55:32.000Z</updated>
+        <summary type="html"><![CDATA[<p>talebook是一个个人图书管理系统。</p>
+<blockquote>
+<p>部署</p>
+</blockquote>
+<pre><code>docker run -d --name talebook \
+-p 8484:80 -v /data/talebook:/data \
+ talebook/talebook
+</code></pre>
+]]></summary>
+        <content type="html"><![CDATA[<p>talebook是一个个人图书管理系统。</p>
+<blockquote>
+<p>部署</p>
+</blockquote>
+<pre><code>docker run -d --name talebook \
+-p 8484:80 -v /data/talebook:/data \
+ talebook/talebook
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装casaos]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-casaos/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-casaos/">
+        </link>
+        <updated>2024-12-04T09:57:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>casaos是基于社区的开源软件，专注于围绕 Docker 生态系统提供简单的个人云体验。</p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<p><code>curl -fsSL https://get.casaos.io | sudo bash</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>casaos是基于社区的开源软件，专注于围绕 Docker 生态系统提供简单的个人云体验。</p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<p><code>curl -fsSL https://get.casaos.io | sudo bash</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[通过GitHub工作流下载Docker镜像]]></title>
+        <id>https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/</id>
+        <link href="https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/">
+        </link>
+        <updated>2024-12-03T08:22:11.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>注册/登录GitHub账户</p>
+</blockquote>
+<blockquote>
+<p>Fork项目https://github.com/wukongdaily/DockerTarBuilder</p>
+</blockquote>
+<p>点击Actions选项卡，进入GitHub Actions界面</p>
+<blockquote>
+<p>运行工作流</p>
+</blockquote>
+<p>找到名为“Run workflow”的选项，点击之后，将看到一个界面，输入需要拉取的Docker镜像名称。然后点击Run workflow按钮。<br>
+GitHub后台将自动开始拉取指定的Docker镜像。这是GitHub Actions自动化的一部分，后台会根据工作流的定义从Docker Hub或其他镜像库中拉取镜像。</p>
+<blockquote>
+<p>查看拉取进度并下载镜像</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>注册/登录GitHub账户</p>
+</blockquote>
+<blockquote>
+<p>Fork项目https://github.com/wukongdaily/DockerTarBuilder</p>
+</blockquote>
+<p>点击Actions选项卡，进入GitHub Actions界面</p>
+<blockquote>
+<p>运行工作流</p>
+</blockquote>
+<p>找到名为“Run workflow”的选项，点击之后，将看到一个界面，输入需要拉取的Docker镜像名称。然后点击Run workflow按钮。<br>
+GitHub后台将自动开始拉取指定的Docker镜像。这是GitHub Actions自动化的一部分，后台会根据工作流的定义从Docker Hub或其他镜像库中拉取镜像。</p>
+<blockquote>
+<p>查看拉取进度并下载镜像</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker部署IPTV]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-iptv/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-iptv/">
+        </link>
+        <updated>2024-12-03T07:40:28.000Z</updated>
+        <summary type="html"><![CDATA[<p>Docker部署IPTV，200多电视节目，4K.8K秒切台</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Docker部署IPTV，200多电视节目，4K.8K秒切台</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker 命令大全]]></title>
+        <id>https://qs100371.vip/post/docker-ming-ling-da-quan/</id>
+        <link href="https://qs100371.vip/post/docker-ming-ling-da-quan/">
+        </link>
+        <updated>2024-12-02T13:08:39.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>容器生命周期管理</p>
+</blockquote>
+<p>run - 创建并启动一个新的容器。<br>
+start/stop/restart - 这些命令主要用于启动、停止和重启容器。<br>
+kill - 立即终止一个或多个正在运行的容器<br>
+rm - 删除一个或多个已经停止的容器。<br>
+pause/unpause - 暂停和恢复容器中的所有进程。<br>
+create - 创建一个新的容器，但不会启动它。<br>
+exec - 在运行中的容器内执行一个新的命令。<br>
+rename - 重命名容器。</p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>容器生命周期管理</p>
+</blockquote>
+<p>run - 创建并启动一个新的容器。<br>
+start/stop/restart - 这些命令主要用于启动、停止和重启容器。<br>
+kill - 立即终止一个或多个正在运行的容器<br>
+rm - 删除一个或多个已经停止的容器。<br>
+pause/unpause - 暂停和恢复容器中的所有进程。<br>
+create - 创建一个新的容器，但不会启动它。<br>
+exec - 在运行中的容器内执行一个新的命令。<br>
+rename - 重命名容器。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker 安装 Ubuntu]]></title>
+        <id>https://qs100371.vip/post/docker-an-zhuang-ubuntu/</id>
+        <link href="https://qs100371.vip/post/docker-an-zhuang-ubuntu/">
+        </link>
+        <updated>2024-12-02T12:51:59.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>查看可用的 Ubuntu 版本</p>
+</blockquote>
+<p>访问 Ubuntu 镜像库地址： https://hub.docker.com/_/ubuntu?tab=tags&amp;page=1。<br>
+默认是最新版本 ubuntu:latest 。<br>
+或<br>
+<code>docker search ubuntu</code></p>
+<blockquote>
+<p>拉取最新版的 Ubuntu 镜像</p>
+</blockquote>
+<p><code>docker pull ubuntu</code>或<br>
+<code>docker pull ubuntu:latest</code></p>
+<blockquote>
+<p>运行容器</p>
+</blockquote>
+<p><code>docker run -itd --name ubuntu-test ubuntu</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>查看可用的 Ubuntu 版本</p>
+</blockquote>
+<p>访问 Ubuntu 镜像库地址： https://hub.docker.com/_/ubuntu?tab=tags&amp;page=1。<br>
+默认是最新版本 ubuntu:latest 。<br>
+或<br>
+<code>docker search ubuntu</code></p>
+<blockquote>
+<p>拉取最新版的 Ubuntu 镜像</p>
+</blockquote>
+<p><code>docker pull ubuntu</code>或<br>
+<code>docker pull ubuntu:latest</code></p>
+<blockquote>
+<p>运行容器</p>
+</blockquote>
+<p><code>docker run -itd --name ubuntu-test ubuntu</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker镜像的导出、导入]]></title>
+        <id>https://qs100371.vip/post/docker-jing-xiang-de-dao-chu-dao-ru/</id>
+        <link href="https://qs100371.vip/post/docker-jing-xiang-de-dao-chu-dao-ru/">
+        </link>
+        <updated>2024-12-02T11:54:45.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>export和import</p>
+</blockquote>
+<p>从容器导出到文件：<br>
+<code>docker export 容器ID或名称 &gt; file.tar</code><br>
+从文件导入镜像：<br>
+<code>docker import -  新镜像名 &lt; file.tar</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>export和import</p>
+</blockquote>
+<p>从容器导出到文件：<br>
+<code>docker export 容器ID或名称 &gt; file.tar</code><br>
+从文件导入镜像：<br>
+<code>docker import -  新镜像名 &lt; file.tar</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker部署思源笔记siyuan]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-si-yuan-bi-ji-siyuan/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-si-yuan-bi-ji-siyuan/">
+        </link>
+        <updated>2024-11-30T02:06:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>思源笔记是一款隐私优先的个人知识管理系统，支持细粒度块级引用和 Markdown 所见即所得。<br>
+只可以使用网页进行访问。leanote和为知笔记都可以用官方客户端选择私有存贮进行访问。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>思源笔记是一款隐私优先的个人知识管理系统，支持细粒度块级引用和 Markdown 所见即所得。<br>
+只可以使用网页进行访问。leanote和为知笔记都可以用官方客户端选择私有存贮进行访问。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker部署searxng搜索引擎]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-searxng-sou-suo-yin-qing/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-searxng-sou-suo-yin-qing/">
+        </link>
+        <updated>2024-11-29T13:22:12.000Z</updated>
+        <summary type="html"><![CDATA[<p><a href="https://github.com/searxng/searxng-docker">searxng-docker</a>，使用 Docker 创建SearXNG 实例。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><a href="https://github.com/searxng/searxng-docker">searxng-docker</a>，使用 Docker 创建SearXNG 实例。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker部署今日热榜dailyhot失败]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-jin-ri-re-bang-dailyhot-shi-bai/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-jin-ri-re-bang-dailyhot-shi-bai/">
+        </link>
+        <updated>2024-11-28T12:59:28.000Z</updated>
+        <summary type="html"><![CDATA[<p>dailyhot今日热榜整合了互联网上各个领域的热门话题，涵盖新闻、娱乐、科技、社会等多个方面，可以提供最新、最热门的信息，尽览各大平台热点，轻松掌握时事动态。<br>
+rehiy/dailyhot-docker：合并前端和后端到一个容器。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>dailyhot今日热榜整合了互联网上各个领域的热门话题，涵盖新闻、娱乐、科技、社会等多个方面，可以提供最新、最热门的信息，尽览各大平台热点，轻松掌握时事动态。<br>
+rehiy/dailyhot-docker：合并前端和后端到一个容器。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker搭建为知笔记wiznote]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/">
+        </link>
+        <updated>2024-11-27T15:43:08.000Z</updated>
+        <summary type="html"><![CDATA[<p>为知笔记定位于高效率工作笔记，主打工作笔记的移动应用，是国内一款“工作笔记”的云笔记类产品。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>为知笔记定位于高效率工作笔记，主打工作笔记的移动应用，是国内一款“工作笔记”的云笔记类产品。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ffmpeg合并多个MP4视频]]></title>
+        <id>https://qs100371.vip/post/ffmpeg-he-bing-duo-ge-mp4-shi-pin/</id>
+        <link href="https://qs100371.vip/post/ffmpeg-he-bing-duo-ge-mp4-shi-pin/">
+        </link>
+        <updated>2024-11-27T08:09:30.000Z</updated>
+        <summary type="html"><![CDATA[<p>FFmpeg 是一个强大的多媒体框架，可以处理音频和视频文件。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>FFmpeg 是一个强大的多媒体框架，可以处理音频和视频文件。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker安装导航面板sun-panel]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/">
+        </link>
+        <updated>2024-11-26T12:13:41.000Z</updated>
+        <summary type="html"><![CDATA[<p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云Docker搭建私有笔记服务Trilium]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-da-jian-si-you-bi-ji-fu-wu-trilium/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-si-you-bi-ji-fu-wu-trilium/">
+        </link>
+        <updated>2024-11-25T14:21:40.000Z</updated>
+        <summary type="html"><![CDATA[<p>Trilium，是一个基于 electron、跨平台的分层级笔记应用，主要使用场景是建立个人知识库</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Trilium，是一个基于 electron、跨平台的分层级笔记应用，主要使用场景是建立个人知识库</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker安装leanote失败]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-leanote-shi-bai/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-leanote-shi-bai/">
+        </link>
+        <updated>2024-11-24T13:19:57.000Z</updated>
+        <summary type="html"><![CDATA[<p>蚂蚁笔记 = 笔记 + 博客 + 协作 + 私有云</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>蚂蚁笔记 = 笔记 + 博客 + 协作 + 私有云</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker安装qbittorrent失败]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/">
+        </link>
+        <updated>2024-11-22T02:33:58.000Z</updated>
+        <summary type="html"><![CDATA[<p>qBittorrent 是一款开源免费的种子和磁力链接下载工具，支持 Windows、Mac 和 Linux</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>qBittorrent 是一款开源免费的种子和磁力链接下载工具，支持 Windows、Mac 和 Linux</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker安装Aria2 Pro和AriaNg]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/">
+        </link>
+        <updated>2024-11-22T02:07:52.000Z</updated>
+        <summary type="html"><![CDATA[<p>Aria2是一个命令行下载器</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Aria2是一个命令行下载器</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云2024-11-20]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-2024-11-20/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-2024-11-20/">
+        </link>
+        <updated>2024-11-20T09:55:26.000Z</updated>
+        <summary type="html"><![CDATA[<p>v24.8.4 for OneCloud running Armbian Linux 6.10.11-edge-meson<br>
+Packages:     Debian stable (bookworm)<br>
+IP addresses: (LAN) 172.17.0.1 192.168.0.2 (WAN) 183.197.217.187<br>
+Performance:<br>
+Load:         8%           	Up time:       2 days 10:37	<br>
+Memory usage: 25% of 987M   	Zram usage:    16% of 493M   	<br>
+CPU temp:     50°C           	Usage of /:    45% of 6.9G   	<br>
+RX today:     1 GiB</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>v24.8.4 for OneCloud running Armbian Linux 6.10.11-edge-meson<br>
+Packages:     Debian stable (bookworm)<br>
+IP addresses: (LAN) 172.17.0.1 192.168.0.2 (WAN) 183.197.217.187<br>
+Performance:<br>
+Load:         8%           	Up time:       2 days 10:37	<br>
+Memory usage: 25% of 987M   	Zram usage:    16% of 493M   	<br>
+CPU temp:     50°C           	Usage of /:    45% of 6.9G   	<br>
+RX today:     1 GiB</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linux设置代理]]></title>
+        <id>https://qs100371.vip/post/linux-she-zhi-dai-li/</id>
+        <link href="https://qs100371.vip/post/linux-she-zhi-dai-li/">
+        </link>
+        <updated>2024-11-20T04:12:37.000Z</updated>
+        <summary type="html"><![CDATA[<p>临时代理设置<br>
+<code>export HTTP_PROXY=http://192.168.0.74:10809/</code><br>
+<code>export HTTPS_PROXY=https://192.168.0.74:10809/</code><br>
+取消<br>
+<code>unset HTTP_PROXY</code><br>
+<code>unset HTTP_PROXY</code><br>
+查看代理：<br>
+<code>env | grep xxx</code><br>
+要使代理服务器永久生效，可以修改 /etc/profile文件 ，在profile 中添加或者删除。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>临时代理设置<br>
+<code>export HTTP_PROXY=http://192.168.0.74:10809/</code><br>
+<code>export HTTPS_PROXY=https://192.168.0.74:10809/</code><br>
+取消<br>
+<code>unset HTTP_PROXY</code><br>
+<code>unset HTTP_PROXY</code><br>
+查看代理：<br>
+<code>env | grep xxx</code><br>
+要使代理服务器永久生效，可以修改 /etc/profile文件 ，在profile 中添加或者删除。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给docker pull设置代理]]></title>
+        <id>https://qs100371.vip/post/gei-docker-pull-she-zhi-dai-li/</id>
+        <link href="https://qs100371.vip/post/gei-docker-pull-she-zhi-dai-li/">
+        </link>
+        <updated>2024-11-20T01:55:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker一个最大的问题就是拉取不到镜像，因此需要给加上代理。</p>
+<p>在执行docker pull时，是由守护进程dockerd来执行。因此，代理需要配在dockerd的环境中。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker一个最大的问题就是拉取不到镜像，因此需要给加上代理。</p>
+<p>在执行docker pull时，是由守护进程dockerd来执行。因此，代理需要配在dockerd的环境中。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[删除docker多余的网络接口]]></title>
+        <id>https://qs100371.vip/post/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/</id>
+        <link href="https://qs100371.vip/post/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/">
+        </link>
+        <updated>2024-11-19T14:39:00.000Z</updated>
+        <summary type="html"><![CDATA[<p><code>docker network</code><br>
+输出<br>
+Usage:  docker network COMMAND<br>
+Manage networks<br>
+Commands:<br>
+connect     Connect a container to a network<br>
+create      Create a network<br>
+disconnect  Disconnect a container from a network<br>
+inspect     Display detailed information on one or more networks<br>
+ls          List networks<br>
+prune       Remove all unused networks<br>
+rm          Remove one or more networks<br>
+Run 'docker network COMMAND --help' for more information on a command.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><code>docker network</code><br>
+输出<br>
+Usage:  docker network COMMAND<br>
+Manage networks<br>
+Commands:<br>
+connect     Connect a container to a network<br>
+create      Create a network<br>
+disconnect  Disconnect a container from a network<br>
+inspect     Display detailed information on one or more networks<br>
+ls          List networks<br>
+prune       Remove all unused networks<br>
+rm          Remove one or more networks<br>
+Run 'docker network COMMAND --help' for more information on a command.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker安装音乐服务navidrome]]></title>
+        <id>https://qs100371.vip/post/docker-an-zhuang-yin-yue-fu-wu-navidrome/</id>
+        <link href="https://qs100371.vip/post/docker-an-zhuang-yin-yue-fu-wu-navidrome/">
+        </link>
+        <updated>2024-11-18T06:52:58.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>Navidrome</p>
+</blockquote>
+<p>docker架设本地服务</p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>Navidrome</p>
+</blockquote>
+<p>docker架设本地服务</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[如何修复无法获取锁定 /var/lib/dpkg/lock 错误]]></title>
+        <id>https://qs100371.vip/post/ru-he-xiu-fu-wu-fa-huo-qu-suo-ding-varlibdpkglock-cuo-wu/</id>
+        <link href="https://qs100371.vip/post/ru-he-xiu-fu-wu-fa-huo-qu-suo-ding-varlibdpkglock-cuo-wu/">
+        </link>
+        <updated>2024-11-17T02:35:02.000Z</updated>
+        <summary type="html"><![CDATA[<p><code>E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)</code><br>
+在使用 apt 执行任何命令行操作时，由于某些原因（例如无法从服务器检索某些软件包，或者互联网连接中途中断或由于其他一些问题），如果 apt 进程突然结束，那么系统可能会遇到上述错误。这意味着 apt 进程无法完成，现在除非修复它，否则将无法使用任何其他 apt 命令。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><code>E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)</code><br>
+在使用 apt 执行任何命令行操作时，由于某些原因（例如无法从服务器检索某些软件包，或者互联网连接中途中断或由于其他一些问题），如果 apt 进程突然结束，那么系统可能会遇到上述错误。这意味着 apt 进程无法完成，现在除非修复它，否则将无法使用任何其他 apt 命令。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker 部署 FreshRSS]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-freshrss/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-freshrss/">
+        </link>
+        <updated>2024-11-16T04:38:50.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装<br>
+以下是官方的 Docker 脚本，需要做适当修改</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装<br>
+以下是官方的 Docker 脚本，需要做适当修改</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Script defer async 区别]]></title>
+        <id>https://qs100371.vip/post/script-defer-async-qu-bie/</id>
+        <link href="https://qs100371.vip/post/script-defer-async-qu-bie/">
+        </link>
+        <updated>2024-11-16T01:13:30.000Z</updated>
+        <summary type="html"><![CDATA[<p>script defer async的区别：<br>
+当script中有defer属性时，脚本的加载过程和文档加载是异步发生的，等到文档解析完(DOMContentLoaded事件发生)脚本才开始执行。<br>
+当script有async属性时，脚本的加载过程和文档加载也是异步发生的。但脚本下载完成后会停止HTML解析，执行脚本，脚本解析完继续HTML解析。<br>
+当script同时有async和defer属性时，执行效果和async一致。<br>
+async属性表示应该立即开始下载脚本，但不能阻止其他页面动作，只对外部脚本文件有效。defer属性表示脚本可以延迟到文档完全被解析和显示之后再执行。<br>
+defer属性规定当页面已完成加载后，才会执行脚本。async属性一旦脚本可用，则会异步执行。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>script defer async的区别：<br>
+当script中有defer属性时，脚本的加载过程和文档加载是异步发生的，等到文档解析完(DOMContentLoaded事件发生)脚本才开始执行。<br>
+当script有async属性时，脚本的加载过程和文档加载也是异步发生的。但脚本下载完成后会停止HTML解析，执行脚本，脚本解析完继续HTML解析。<br>
+当script同时有async和defer属性时，执行效果和async一致。<br>
+async属性表示应该立即开始下载脚本，但不能阻止其他页面动作，只对外部脚本文件有效。defer属性表示脚本可以延迟到文档完全被解析和显示之后再执行。<br>
+defer属性规定当页面已完成加载后，才会执行脚本。async属性一旦脚本可用，则会异步执行。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[修复dpkg返回错误代码1的问题]]></title>
+        <id>https://qs100371.vip/post/xiu-fu-dpkg-fan-hui-cuo-wu-dai-ma-1-de-wen-ti/</id>
+        <link href="https://qs100371.vip/post/xiu-fu-dpkg-fan-hui-cuo-wu-dai-ma-1-de-wen-ti/">
+        </link>
+        <updated>2024-11-15T14:31:56.000Z</updated>
+        <summary type="html"><![CDATA[<p>apt安装中断后出现<code>Sub-process /usr/bin/dpkg returned an error code (1) </code><br>
+之后无论用apt install -f 或apt autoremove 都不行。<br>
+<code>sudo dpkg --configure -a</code><br>
+<code>sudo apt install -f</code><br>
+<code>sudo apt remove --purge package_name</code><br>
+<code>sudo apt autoremove</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>apt安装中断后出现<code>Sub-process /usr/bin/dpkg returned an error code (1) </code><br>
+之后无论用apt install -f 或apt autoremove 都不行。<br>
+<code>sudo dpkg --configure -a</code><br>
+<code>sudo apt install -f</code><br>
+<code>sudo apt remove --purge package_name</code><br>
+<code>sudo apt autoremove</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[grub2修改启动项]]></title>
+        <id>https://qs100371.vip/post/grub2-xiu-gai-qi-dong-xiang/</id>
+        <link href="https://qs100371.vip/post/grub2-xiu-gai-qi-dong-xiang/">
+        </link>
+        <updated>2024-11-14T00:54:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>要修改GRUB2的默认启动项，可以编辑<code>/etc/default/grub</code>文件<br>
+<code>GRUB_DEFAULT</code>        修改默认项<br>
+<code>GRUB_TIMEOUT</code>       修改等待时间<br>
+修改GRUB2启动项的背景和主题，可以将背景图片复制到<code>/boot/grub</code>目录下，并替换原有的背景图片。可以通过编辑<code>/etc/default/grub</code>文件来设置背景图片的路径<br>
+<code>GRUB_BACKGROUND</code><br>
+添加自定义的启动项，可以通过编辑<code>/etc/grub.d/40_custom</code>文件来实现，添加新的<code>menuentry</code>条目</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>要修改GRUB2的默认启动项，可以编辑<code>/etc/default/grub</code>文件<br>
+<code>GRUB_DEFAULT</code>        修改默认项<br>
+<code>GRUB_TIMEOUT</code>       修改等待时间<br>
+修改GRUB2启动项的背景和主题，可以将背景图片复制到<code>/boot/grub</code>目录下，并替换原有的背景图片。可以通过编辑<code>/etc/default/grub</code>文件来设置背景图片的路径<br>
+<code>GRUB_BACKGROUND</code><br>
+添加自定义的启动项，可以通过编辑<code>/etc/grub.d/40_custom</code>文件来实现，添加新的<code>menuentry</code>条目</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[arch一日体验]]></title>
+        <id>https://qs100371.vip/post/arch-yi-ri-you/</id>
+        <link href="https://qs100371.vip/post/arch-yi-ri-you/">
+        </link>
+        <updated>2024-11-13T12:25:14.000Z</updated>
+        <summary type="html"><![CDATA[<p>下载了iso，虚拟机一启动，直接就是命令行界面<br>
+自带安装脚本archinstall<br>
+运行之后，先选中文源，(不能选中文语言，否则是乱码，没有中文字体)，<br>
+分区，建立用户，声卡不能选，下一步安装，顺利的话，最后chroot到新系统</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>下载了iso，虚拟机一启动，直接就是命令行界面<br>
+自带安装脚本archinstall<br>
+运行之后，先选中文源，(不能选中文语言，否则是乱码，没有中文字体)，<br>
+分区，建立用户，声卡不能选，下一步安装，顺利的话，最后chroot到新系统</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ai换脸facefusion]]></title>
+        <id>https://qs100371.vip/post/ai-huan-lian-facefusion/</id>
+        <link href="https://qs100371.vip/post/ai-huan-lian-facefusion/">
+        </link>
+        <updated>2024-11-12T10:27:35.000Z</updated>
+        <summary type="html"><![CDATA[<p>克隆仓库<br>
+<code>git clone https://github.com/facefusion/facefusion-docker.git</code><br>
+进入目录facefusion<br>
+<code>sudo docker compose -f docker-compose.cpu.yml up</code><br>
+完成之后，浏览器打开<br>
+<code>http://localhost:7865</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>克隆仓库<br>
+<code>git clone https://github.com/facefusion/facefusion-docker.git</code><br>
+进入目录facefusion<br>
+<code>sudo docker compose -f docker-compose.cpu.yml up</code><br>
+完成之后，浏览器打开<br>
+<code>http://localhost:7865</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker-ce安装]]></title>
+        <id>https://qs100371.vip/post/docker-ce-an-zhuang/</id>
+        <link href="https://qs100371.vip/post/docker-ce-an-zhuang/">
+        </link>
+        <updated>2024-11-12T10:18:54.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>手动安装</p>
+</blockquote>
+<p>如果过去安装过 docker，先删掉：<br>
+<code>for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>手动安装</p>
+</blockquote>
+<p>如果过去安装过 docker，先删掉：<br>
+<code>for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker更换存储位置]]></title>
+        <id>https://qs100371.vip/post/docker-geng-huan-cun-chu-wei-zhi/</id>
+        <link href="https://qs100371.vip/post/docker-geng-huan-cun-chu-wei-zhi/">
+        </link>
+        <updated>2024-11-11T11:19:46.000Z</updated>
+        <summary type="html"><![CDATA[<p><code>docker info | grep &quot;Docker Root Dir&quot;</code><br>
+默认在/var/lib/docker<br>
+<code>systemctl stop docker</code><br>
+<code>mv /var/lib/docker /data/docker</code><br>
+<code>ln -sf /data/docker /var/lib/docker</code><br>
+重启docker<br>
+<code>systemctl start docker</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><code>docker info | grep &quot;Docker Root Dir&quot;</code><br>
+默认在/var/lib/docker<br>
+<code>systemctl stop docker</code><br>
+<code>mv /var/lib/docker /data/docker</code><br>
+<code>ln -sf /data/docker /var/lib/docker</code><br>
+重启docker<br>
+<code>systemctl start docker</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[armbian从bullseye升到bookworm]]></title>
+        <id>https://qs100371.vip/post/armbian-cong-bullseye-sheng-dao-bookworm/</id>
+        <link href="https://qs100371.vip/post/armbian-cong-bullseye-sheng-dao-bookworm/">
+        </link>
+        <updated>2024-11-11T05:53:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>11升级到12的步骤：<br>
+升级系统到最新<br>
+安装pgp key<br>
+<code>touch /usr/share/keyrings/armbian.gpg</code><br>
+<code>chmod 644 /usr/share/keyrings/armbian.gpg</code><br>
+<code>wget https://apt.armbian.com/armbian.key -O - | gpg --dearmor &gt;/usr/share/keyrings/armbian.gpg</code><br>
+修改apt源<br>
+/etc/apt/sources.list，/etc/apt/sources.list.d/armbian.list，/etc/apt/sources.list.d/docker.list，把bullseye替换成bookworm<br>
+更新<br>
+<code>apt update</code><br>
+<code>apt upgrade --no-new-pkgs</code><br>
+<code>apt full-upgrade</code><br>
+<code>apt dist-upgrade</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>11升级到12的步骤：<br>
+升级系统到最新<br>
+安装pgp key<br>
+<code>touch /usr/share/keyrings/armbian.gpg</code><br>
+<code>chmod 644 /usr/share/keyrings/armbian.gpg</code><br>
+<code>wget https://apt.armbian.com/armbian.key -O - | gpg --dearmor &gt;/usr/share/keyrings/armbian.gpg</code><br>
+修改apt源<br>
+/etc/apt/sources.list，/etc/apt/sources.list.d/armbian.list，/etc/apt/sources.list.d/docker.list，把bullseye替换成bookworm<br>
+更新<br>
+<code>apt update</code><br>
+<code>apt upgrade --no-new-pkgs</code><br>
+<code>apt full-upgrade</code><br>
+<code>apt dist-upgrade</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装qbittorrent]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-qbittorrent/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-qbittorrent/">
+        </link>
+        <updated>2024-11-11T02:42:16.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装软件<br>
+<code>apt install qbittorrent-nox</code><br>
+创建qBittorrent服务<br>
+<code>nano /etc/systemd/system/qbittorrent.service</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装软件<br>
+<code>apt install qbittorrent-nox</code><br>
+创建qBittorrent服务<br>
+<code>nano /etc/systemd/system/qbittorrent.service</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[openwrt passwall2]]></title>
+        <id>https://qs100371.vip/post/openwrt-passwall/</id>
+        <link href="https://qs100371.vip/post/openwrt-passwall/">
+        </link>
+        <updated>2024-11-10T10:20:31.000Z</updated>
+        <summary type="html"><![CDATA[<p>成功搭了个梯子。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>成功搭了个梯子。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[armbian安装桌面和xrdp]]></title>
+        <id>https://qs100371.vip/post/armbian-an-zhuang-yuan-cheng-zhuo-mian/</id>
+        <link href="https://qs100371.vip/post/armbian-an-zhuang-yuan-cheng-zhuo-mian/">
+        </link>
+        <updated>2024-11-08T01:32:28.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装桌面<br>
+<code>apt install lxde</code><br>
+安装xrdp<br>
+<code>apt install xrdp xorg xorgxrdp</code><br>
+<code>systemctl enable xrdp</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装桌面<br>
+<code>apt install lxde</code><br>
+安装xrdp<br>
+<code>apt install xrdp xorg xorgxrdp</code><br>
+<code>systemctl enable xrdp</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[openwrt旁路由]]></title>
+        <id>https://qs100371.vip/post/openwrt-pang-lu-you/</id>
+        <link href="https://qs100371.vip/post/openwrt-pang-lu-you/">
+        </link>
+        <updated>2024-11-07T13:26:52.000Z</updated>
+        <summary type="html"><![CDATA[<p>打开网卡混杂模式<br>
+<code>ip link set eth0 promisc on</code><br>
+创建OpenWrt网络<br>
+<code>docker network create -d macvlan --subnet=192.168.0.0/24 --gateway=192.168.0.1 -o parent=eth0 openwrt</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>打开网卡混杂模式<br>
+<code>ip link set eth0 promisc on</code><br>
+创建OpenWrt网络<br>
+<code>docker network create -d macvlan --subnet=192.168.0.0/24 --gateway=192.168.0.1 -o parent=eth0 openwrt</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker管理]]></title>
+        <id>https://qs100371.vip/post/docker-guan-li/</id>
+        <link href="https://qs100371.vip/post/docker-guan-li/">
+        </link>
+        <updated>2024-11-07T10:37:56.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装dock.io<br>
+启动服务<br>
+<code>systemctl enable docker</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装dock.io<br>
+启动服务<br>
+<code>systemctl enable docker</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[samba匿名共享]]></title>
+        <id>https://qs100371.vip/post/samba-gong-xiang/</id>
+        <link href="https://qs100371.vip/post/samba-gong-xiang/">
+        </link>
+        <updated>2024-11-07T10:29:56.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装samba<br>
+修改/etc/samba/smb.conf</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装samba<br>
+修改/etc/samba/smb.conf</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linux挂载内存卡]]></title>
+        <id>https://qs100371.vip/post/linux-gua-zai-ying-pan/</id>
+        <link href="https://qs100371.vip/post/linux-gua-zai-ying-pan/">
+        </link>
+        <updated>2024-11-07T10:16:28.000Z</updated>
+        <summary type="html"><![CDATA[<p>玩客云加了一个内存卡<br>
+<code>sudo lsblk</code><br>
+内存卡名<br>
+<code>NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT</code><br>
+<code>mmcblk0      179:0    0  14.6G  0 disk</code><br>
+<code>└─mmcblk0p1  179:1    0  14.6G  0 part </code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>玩客云加了一个内存卡<br>
+<code>sudo lsblk</code><br>
+内存卡名<br>
+<code>NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT</code><br>
+<code>mmcblk0      179:0    0  14.6G  0 disk</code><br>
+<code>└─mmcblk0p1  179:1    0  14.6G  0 part </code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[win系统ssh上传下载文件]]></title>
+        <id>https://qs100371.vip/post/windows-ssh-ke-hu-duan-shang-chuan-wen-jian/</id>
+        <link href="https://qs100371.vip/post/windows-ssh-ke-hu-duan-shang-chuan-wen-jian/">
+        </link>
+        <updated>2024-11-06T03:04:31.000Z</updated>
+        <summary type="html"><![CDATA[<p>使用Windows自带的ssh命令传输文件<br>
+<code>ssh username@remote_host</code><br>
+<s>登录后，可以使用如下命令复制文件到远程服务器：<br>
+<code> scp C:\path\to\local\file.txt username@remote_host:/path/to/remote/directory/</code><br>
+从远程服务器复制文件到本地：<br>
+<code> scp username@remote_host:/path/to/remote/file.txt C:\path\to\local\direct</code></s></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>使用Windows自带的ssh命令传输文件<br>
+<code>ssh username@remote_host</code><br>
+<s>登录后，可以使用如下命令复制文件到远程服务器：<br>
+<code> scp C:\path\to\local\file.txt username@remote_host:/path/to/remote/directory/</code><br>
+从远程服务器复制文件到本地：<br>
+<code> scp username@remote_host:/path/to/remote/file.txt C:\path\to\local\direct</code></s></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[用玩客云刷armbian]]></title>
+        <id>https://qs100371.vip/post/yong-wan-ke-yun-shua-armbian/</id>
+        <link href="https://qs100371.vip/post/yong-wan-ke-yun-shua-armbian/">
+        </link>
+        <updated>2024-11-06T00:32:08.000Z</updated>
+        <summary type="html"><![CDATA[<p>拆机顺利，短接的时候把电脑弄熄火了。最后成功刷入了armbian_23.02.0-trunk_Onecloud_bullseye_edge_6.19，变成了一台小主机。</p>
+<p>ssh进入，初始用户名root，密码1234，第一次进入要求改密码。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>拆机顺利，短接的时候把电脑弄熄火了。最后成功刷入了armbian_23.02.0-trunk_Onecloud_bullseye_edge_6.19，变成了一台小主机。</p>
+<p>ssh进入，初始用户名root，密码1234，第一次进入要求改密码。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[小皮面板]]></title>
+        <id>https://qs100371.vip/post/xiao-pi-mian-ban/</id>
+        <link href="https://qs100371.vip/post/xiao-pi-mian-ban/">
+        </link>
+        <updated>2024-11-04T11:40:55.000Z</updated>
+        <summary type="html"><![CDATA[<p><a href="https://www.xp.cn">https://www.xp.cn</a><br>
+Debian安装脚本<br>
+<code>sudo wget -O install.sh https://dl.xp.cn/dl/xp/install.sh &amp;&amp; sudo bash install.sh</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><a href="https://www.xp.cn">https://www.xp.cn</a><br>
+Debian安装脚本<br>
+<code>sudo wget -O install.sh https://dl.xp.cn/dl/xp/install.sh &amp;&amp; sudo bash install.sh</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[nginx反向代理设置]]></title>
+        <id>https://qs100371.vip/post/nginx-fan-xiang-dai-li-she-zhi/</id>
+        <link href="https://qs100371.vip/post/nginx-fan-xiang-dai-li-she-zhi/">
+        </link>
+        <updated>2024-11-02T03:33:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>/etc/nginx/sites-available/default内容如下：</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>/etc/nginx/sites-available/default内容如下：</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装nextcloud]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-nextcloud/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-nextcloud/">
+        </link>
+        <updated>2024-11-01T01:06:46.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装<br>
+<code>sudo apt install snapd</code><br>
+<code>sudo snap install nextcloud</code><br>
+<code>snap changs nextcloud</code><br>
+<code>sudo snap start nextcloud</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装<br>
+<code>sudo apt install snapd</code><br>
+<code>sudo snap install nextcloud</code><br>
+<code>snap changs nextcloud</code><br>
+<code>sudo snap start nextcloud</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[云笔记leanote搭建]]></title>
+        <id>https://qs100371.vip/post/yun-bi-ji-da-jian/</id>
+        <link href="https://qs100371.vip/post/yun-bi-ji-da-jian/">
+        </link>
+        <updated>2024-10-31T12:13:43.000Z</updated>
+        <summary type="html"><![CDATA[<p>依赖<br>
+- MongoDB数据库<br>
+- supervisor进程守护<br>
+- wkhtmltopdf</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>依赖<br>
+- MongoDB数据库<br>
+- supervisor进程守护<br>
+- wkhtmltopdf</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vi编辑器]]></title>
+        <id>https://qs100371.vip/post/vi-bian-ji-qi/</id>
+        <link href="https://qs100371.vip/post/vi-bian-ji-qi/">
+        </link>
+        <updated>2024-10-29T12:03:17.000Z</updated>
+        <summary type="html"><![CDATA[<p>vi编辑器是Linux和Unix系统中广泛使用的文本编辑器，它具有三种模式：命令模式、插入模式和末行模式。‌ 在命令模式下，用户可以执行各种编辑命令，如移动光标、删除文本等；在插入模式下，用户可以输入文本；末行模式则用于保存文件、退出编辑器等操作。‌</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>vi编辑器是Linux和Unix系统中广泛使用的文本编辑器，它具有三种模式：命令模式、插入模式和末行模式。‌ 在命令模式下，用户可以执行各种编辑命令，如移动光标、删除文本等；在插入模式下，用户可以输入文本；末行模式则用于保存文件、退出编辑器等操作。‌</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装wordpress]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-wordpress/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-wordpress/">
+        </link>
+        <updated>2024-10-28T14:00:26.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装 Nginx<br>
+sudo apt install nginx<br>
+sudo systemctl enable nginx<br>
+sudo systemctl start nginx<br>
+sudo systemctl status nginx</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装 Nginx<br>
+sudo apt install nginx<br>
+sudo systemctl enable nginx<br>
+sudo systemctl start nginx<br>
+sudo systemctl status nginx</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cpolar内网穿透]]></title>
+        <id>https://qs100371.vip/post/cpolar-nei-wang-chuan-tou/</id>
+        <link href="https://qs100371.vip/post/cpolar-nei-wang-chuan-tou/">
+        </link>
+        <updated>2024-10-22T03:19:22.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装<br>
+下载：<br>
+<code>curl -L https://www.cpolar.com/static/downloads/install-release-cpolar.sh | sudo bash</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装<br>
+下载：<br>
+<code>curl -L https://www.cpolar.com/static/downloads/install-release-cpolar.sh | sudo bash</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[电视直播软件和iptv源]]></title>
+        <id>https://qs100371.vip/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/</id>
+        <link href="https://qs100371.vip/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/">
+        </link>
+        <updated>2024-10-20T10:20:02.000Z</updated>
+        <summary type="html"><![CDATA[<p>软件：<br>
+Hypnopix<br>
+yuki-iptv<br>
+freetuxtv</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>软件：<br>
+Hypnopix<br>
+yuki-iptv<br>
+freetuxtv</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linuxmint挂载分区不需密码]]></title>
+        <id>https://qs100371.vip/post/linuxmint-gua-zai-fen-qu-bu-xu-mi-ma/</id>
+        <link href="https://qs100371.vip/post/linuxmint-gua-zai-fen-qu-bu-xu-mi-ma/">
+        </link>
+        <updated>2024-10-20T10:16:51.000Z</updated>
+        <summary type="html"><![CDATA[<p>打开终端，输入:<br>
+<code>sudo xed /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy </code><br>
+找到：<br>
+<code>&lt;action id=&quot;org.freedesktop.udisks.filesystem-mount-system&quot;&gt; </code><br>
+auth_admin_keep 替换成： yes<br>
+以后想挂载windows下的分区就不会要求输入密码了。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>打开终端，输入:<br>
+<code>sudo xed /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy </code><br>
+找到：<br>
+<code>&lt;action id=&quot;org.freedesktop.udisks.filesystem-mount-system&quot;&gt; </code><br>
+auth_admin_keep 替换成： yes<br>
+以后想挂载windows下的分区就不会要求输入密码了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装ftp服务]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-ftp-fu-wu/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-ftp-fu-wu/">
+        </link>
+        <updated>2024-10-14T13:17:20.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装vsftpd：<br>
+sudo apt install vsftpd<br>
+检测是否安装：<br>
+vsftpd -version</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装vsftpd：<br>
+sudo apt install vsftpd<br>
+检测是否安装：<br>
+vsftpd -version</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[nginx重定向]]></title>
+        <id>https://qs100371.vip/post/nginx-chong-ding-xiang/</id>
+        <link href="https://qs100371.vip/post/nginx-chong-ding-xiang/">
+        </link>
+        <updated>2024-10-12T13:52:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>修改/etc/nginx/sites-available/default</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>修改/etc/nginx/sites-available/default</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[grub4dos启动方式的menu.lst]]></title>
+        <id>https://qs100371.vip/post/grub4dos-qi-dong-fang-shi-de-menulst/</id>
+        <link href="https://qs100371.vip/post/grub4dos-qi-dong-fang-shi-de-menulst/">
+        </link>
+        <updated>2024-10-11T11:59:21.000Z</updated>
+        <summary type="html"><![CDATA[<p><code>timeout 10</code><br>
+<code>title ubuntu</code><br>
+<code>find --set-root --ignore-floppies --ignore-cd /boot/grub/i386-pc/core.img</code><br>
+<code>kernel /boot/grub/i386-pc/core.img</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><code>timeout 10</code><br>
+<code>title ubuntu</code><br>
+<code>find --set-root --ignore-floppies --ignore-cd /boot/grub/i386-pc/core.img</code><br>
+<code>kernel /boot/grub/i386-pc/core.img</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linux常用命令]]></title>
+        <id>https://qs100371.vip/post/linux-chang-yong-ming-ling/</id>
+        <link href="https://qs100371.vip/post/linux-chang-yong-ming-ling/">
+        </link>
+        <updated>2024-10-11T03:08:18.000Z</updated>
+        <summary type="html"><![CDATA[<p>常用命令<br>
+fastfetch 或 neofetch 系统信息<br>
+df -h     磁盘占用空间<br>
+du -sh   目录占用空间<br>
+ifconfig  设置网络</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>常用命令<br>
+fastfetch 或 neofetch 系统信息<br>
+df -h     磁盘占用空间<br>
+du -sh   目录占用空间<br>
+ifconfig  设置网络</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linux上安装和设置SSH服务]]></title>
+        <id>https://qs100371.vip/post/linux-shang-an-zhuang-he-she-zhi-ssh-fu-wu/</id>
+        <link href="https://qs100371.vip/post/linux-shang-an-zhuang-he-she-zhi-ssh-fu-wu/">
+        </link>
+        <updated>2024-10-07T02:20:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>安装OpenSSH服务器软件包：<br>
+<code>sudo apt install openssh-server</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>安装OpenSSH服务器软件包：<br>
+<code>sudo apt install openssh-server</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linux仓库]]></title>
+        <id>https://qs100371.vip/post/linux-cangku/</id>
+        <link href="https://qs100371.vip/post/linux-cangku/">
+        </link>
+        <updated>2024-10-07T02:04:34.000Z</updated>
+        <summary type="html"><![CDATA[<p>wps缺少的字体：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EfLPwyQyOxNOtLICKMCz11IBM9YKRT9Bs2FDu3FWjtOcFA?e=7cPUyY">下载</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>wps缺少的字体：<a href="https://ysueducn-my.sharepoint.com/:u:/g/personal/easelee_ysu_edu_cn/EfLPwyQyOxNOtLICKMCz11IBM9YKRT9Bs2FDu3FWjtOcFA?e=7cPUyY">下载</a></p>
+]]></content>
+    </entry>
+</feed>
