@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta name="referrer" content="never">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kveln">
+  <title>qs的学习笔记</title>
+  
+  <link href="/media/css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="/media/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" title="qs的学习笔记 » Feed" href="/atom.xml">
+  
+  <link href="/media/css/main.css" rel="stylesheet">
+  <script src="/media/scripts/jquery.min.js"></script>
+  <script src="/media/scripts/highlight.min.js"></script>
+ 
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  </head>
+  <body>
+     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://qs100371.vip">qs的学习笔记</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/">首页</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/archives">归档</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/tags">标签</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://t.qs100371.vip" target="_blank">笔记</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://w.qs100371.vip" target="_blank">memos</a>
+              
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <header class="masthead" style="background-image: url('https://api.haibara.cn/fengjing/index.php')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>qs的学习笔记</h1>
+            <span class="subheading"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+      <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+       
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/CYp_dObYRn/">
+            <h2 class="post-title">
+              Docker 部署 FreshRSS
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p>安装<br>
+以下是官方的 Docker 脚本，需要做适当修改</p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-16</span>
+             <span>,</span>
+             <span class="post-stats">1 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/UO0y__HBag/">
+            <h2 class="post-title">
+              Script defer async 区别
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p>script defer async的区别：<br>
+当script中有defer属性时，脚本的加载过程和文档加载是异步发生的，等到文档解析完(DOMContentLoaded事件发生)脚本才开始执行。<br>
+当script有async属性时，脚本的加载过程和文档加载也是异步发生的。但脚本下载完成后会停止HTML解析，执行脚本，脚本解析完继续HTML解析。<br>
+当script同时有async和defer属性时，执行效果和async一致。<br>
+async属性表示应该立即开始下载脚本，但不能阻止其他页面动作，只对外部脚本文件有效。defer属性表示脚本可以延迟到文档完全被解析和显示之后再执行。<br>
+defer属性规定当页面已完成加载后，才会执行脚本。async属性一旦脚本可用，则会异步执行。</p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-16</span>
+             <span>,</span>
+             <span class="post-stats">1 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/KbGhDGCX1b/">
+            <h2 class="post-title">
+              修复dpkg返回错误代码1的问题
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p>apt安装中断后出现<code>Sub-process /usr/bin/dpkg returned an error code (1) </code><br>
+之后无论用apt install -f 或apt autoremove 都不行。<br>
+<code>sudo dpkg --configure -a</code><br>
+<code>sudo apt install -f</code><br>
+<code>sudo apt remove --purge package_name</code><br>
+<code>sudo apt autoremove</code></p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-15</span>
+             <span>,</span>
+             <span class="post-stats">1 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/k05Oz6RxHC/">
+            <h2 class="post-title">
+              grub2修改启动项
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p>要修改GRUB2的默认启动项，可以编辑<code>/etc/default/grub</code>文件<br>
+<code>GRUB_DEFAULT</code>        修改默认项<br>
+<code>GRUB_TIMEOUT</code>       修改等待时间<br>
+修改GRUB2启动项的背景和主题，可以将背景图片复制到<code>/boot/grub</code>目录下，并替换原有的背景图片。可以通过编辑<code>/etc/default/grub</code>文件来设置背景图片的路径<br>
+<code>GRUB_BACKGROUND</code><br>
+添加自定义的启动项，可以通过编辑<code>/etc/grub.d/40_custom</code>文件来实现，添加新的<code>menuentry</code>条目</p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-14</span>
+             <span>,</span>
+             <span class="post-stats">1 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/nj_SZ458-t/">
+            <h2 class="post-title">
+              arch一日体验
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p>下载了iso，虚拟机一启动，直接就是命令行界面<br>
+自带安装脚本archinstall<br>
+运行之后，先选中文源，(不能选中文语言，否则是乱码，没有中文字体)，<br>
+分区，建立用户，声卡不能选，下一步安装，顺利的话，最后chroot到新系统</p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-13</span>
+             <span>,</span>
+             <span class="post-stats">2 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/hS15lU1URJ/">
+            <h2 class="post-title">
+              ai换脸facefusion
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p>克隆仓库<br>
+<code>git clone https://github.com/facefusion/facefusion-docker.git</code><br>
+进入目录facefusion<br>
+<code>sudo docker compose -f docker-compose.cpu.yml up</code><br>
+完成之后，浏览器打开<br>
+<code>http://localhost:7865</code></p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-12</span>
+             <span>,</span>
+             <span class="post-stats">1 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/gp5Dc0_EQi/">
+            <h2 class="post-title">
+              docker-ce安装
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p>docker-ce是linux装机必备。</p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-12</span>
+             <span>,</span>
+             <span class="post-stats">2 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        <div class="post-preview">
+          <a href="https://qs100371.vip/post/hKNuC4Wi-j/">
+            <h2 class="post-title">
+              docker更换存储位置
+            </h2>
+            </a>
+            <h3 class="post-subtitle">
+              <p><code>docker info | grep &quot;Docker Root Dir&quot;</code><br>
+默认在/var/lib/docker<br>
+<code>systemctl stop docker</code><br>
+<code>mv /var/lib/docker /data/docker</code><br>
+<code>ln -sf /data/docker /var/lib/docker</code><br>
+重启docker<br>
+<code>systemctl start docker</code></p>
+
+            </h3>
+          <p class="post-meta">
+             <span class="time">2024-11-11</span>
+             <span>,</span>
+             <span class="post-stats">1 min read</span>
+            </p>
+        </div>
+        <hr>
+        <div class="clearfix">
+        </div>
+        
+        
+        <a class="btn btn-primary float-left" href="https://qs100371.vip/page/5/">&larr; 上一页</a>
+        
+        
+        <a class="btn btn-primary float-right" href="https://qs100371.vip/page/7/">下一页 &rarr;</a>
+        
+      </div>
+    </div>
+  </div>
+
+  
+    <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+           
+             
+              <li>
+                <p class="copyright text-muted">
+            
+                  <span >本站已运行<span id="days" style="font-weight:800; "> </span>天 <img src="/media/images/heart.gif" width="24"></span>
+                  ©2024   <a href="mailto:admin@qs100371.vip">qs100371</a><br><span id="jinrishici-sentence">正在加载今日诗词....</span>
+                  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" async></script>
+               
+                
+                <script>
+                  let s1 = '2024-10-2';  //设置为你的建站时间
+                  s1 = new Date(s1.replace(/-/g, "/"));
+                  s2 = new Date();
+                  let days = s2.getTime() - s1.getTime();
+                  let number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+                  document.getElementById('days').innerHTML = number_of_days;
+                </script>
+               
+              </p>
+              </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+   </footer>
+   <script src="https://myhkw.cn/api/player/173442375015" id="myhk" key="173442375015" m="1"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  </body>
+</html>

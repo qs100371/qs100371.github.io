@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta name="referrer" content="never">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kveln">
+  <title>玩客云docker安装导航面板sun-panel | qs的学习笔记</title>
+  
+  <link href="/media/css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="/media/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" title="玩客云docker安装导航面板sun-panel | qs的学习笔记 » Feed" href="/atom.xml">
+  
+  <link href="/media/css/main.css" rel="stylesheet">
+  <script src="/media/scripts/jquery.min.js"></script>
+  <script src="/media/scripts/highlight.min.js"></script>
+ 
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+    <meta property="og:description" content="玩客云docker安装导航面板sun-panel"/>
+    <meta property="og:url" content="https://qs100371.vip/post/tx9VSeUQXk/"/>
+    <meta property="og:locale" content="zh-CN"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="qs的学习笔记"/>
+  </head>
+  <body>
+  	<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://qs100371.vip">qs的学习笔记</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/">首页</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/archives">归档</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/tags">标签</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://t.qs100371.vip" target="_blank">笔记</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://w.qs100371.vip" target="_blank">memos</a>
+              
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://api.haibara.cn/fengjing/index.php')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+          	<span class="tags">
+          	 
+            <a href="https://qs100371.vip/tag/onecloud/" class="tag">onecloud</a>
+            
+            <a href="https://qs100371.vip/tag/web/" class="tag">web</a>
+            
+        </span>
+            <h1>玩客云docker安装导航面板sun-panel</h1>
+            <span class="meta">
+            	Posted on
+              2024-11-26，1 min read
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p>
+<!-- more -->
+<blockquote>
+<p>安装</p>
+</blockquote>
+<pre><code>mkdir -p /data/sun-panel
+docker pull hslr/sun-panel:latest
+docker run -d --restart=always -p 8000:3002 \
+-v /data/sun-panel/conf:/app/conf \
+-v /var/run/docker.sock:/var/run/docker.sock \
+--name sun-panel \
+hslr/sun-panel:latest
+</code></pre>
+<blockquote>
+<p>打开<a href="http://192.168.0.2:8000">192.168.0.2:8000</a>端口访问</p>
+</blockquote>
+<p>默认账号密码<br>
+账号：admin@sun.cc<br>
+密码：12345678</p>
+<p><img src="https://qs100371.vip/post-images/1732624370260.jpg" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1732623522998.jpg" alt="" loading="lazy"></p>
+<blockquote>
+<p>重置密码</p>
+</blockquote>
+<p><code>docker exec -it sun-panel bash</code><br>
+<code>./sun-panel -password-reset</code><br>
+输出<br>
+The password has been successfully reset. Here is the account information<br>
+Username  admin@sun.cc<br>
+Password  12345678</p>
+
+          
+          <p class="next-post">下一篇：
+            <a href="https://qs100371.vip/post/iOzx-u9pNe/">
+              <span class="post-title">
+                玩客云Docker搭建私有笔记服务Trilium&rarr;
+              </span>
+            </a>
+          </p>
+        
+        <div class="comment">
+          
+        </div>
+      </div>
+    </div>
+  </article>
+ <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+           
+             
+              <li>
+                <p class="copyright text-muted">
+            
+                  <span >本站已运行<span id="days" style="font-weight:800; "> </span>天 <img src="/media/images/heart.gif" width="24"></span>
+                  ©2024   <a href="mailto:admin@qs100371.vip">qs100371</a><br><span id="jinrishici-sentence">正在加载今日诗词....</span>
+                  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" async></script>
+               
+                
+                <script>
+                  let s1 = '2024-10-2';  //设置为你的建站时间
+                  s1 = new Date(s1.replace(/-/g, "/"));
+                  s2 = new Date();
+                  let days = s2.getTime() - s1.getTime();
+                  let number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+                  document.getElementById('days').innerHTML = number_of_days;
+                </script>
+               
+              </p>
+              </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+   </footer>
+   <script src="https://myhkw.cn/api/player/173442375015" id="myhk" key="173442375015" m="1"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  </body>
+</html>
+

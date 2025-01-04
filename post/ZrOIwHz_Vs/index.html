@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta name="referrer" content="never">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kveln">
+  <title>使用Cloudflare Worker代理Google搜索 | qs的学习笔记</title>
+  
+  <link href="/media/css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="/media/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" title="使用Cloudflare Worker代理Google搜索 | qs的学习笔记 » Feed" href="/atom.xml">
+  
+  <link href="/media/css/main.css" rel="stylesheet">
+  <script src="/media/scripts/jquery.min.js"></script>
+  <script src="/media/scripts/highlight.min.js"></script>
+ 
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+    <meta property="og:description" content="使用Cloudflare Worker代理Google搜索"/>
+    <meta property="og:url" content="https://qs100371.vip/post/ZrOIwHz_Vs/"/>
+    <meta property="og:locale" content="zh-CN"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="qs的学习笔记"/>
+  </head>
+  <body>
+  	<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://qs100371.vip">qs的学习笔记</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/">首页</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/archives">归档</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/tags">标签</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://t.qs100371.vip" target="_blank">笔记</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://w.qs100371.vip" target="_blank">memos</a>
+              
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://api.haibara.cn/fengjing/index.php')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+          	<span class="tags">
+          	 
+            <a href="https://qs100371.vip/tag/web/" class="tag">web</a>
+            
+        </span>
+            <h1>使用Cloudflare Worker代理Google搜索</h1>
+            <span class="meta">
+            	Posted on
+              2025-01-03，4 min read
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p>使用 Cloudflare Worker 代理 Google 站点，间接访问google。</p>
+<!-- more -->
+<p>方法类似于代理docker.com</p>
+<h1 id="建立workers">建立workers</h1>
+<h1 id="部署代码">部署代码</h1>
+<pre><code>// 反代目标网站
+const upstream = 'ipv6.google.com.hk'
+const upstream_v4 = 'www.google.com.hk'
+
+// 访问区域黑名单（按需设置）.
+const blocked_region = ['TK']
+
+//资源重定向
+const replace_dict = {
+  $upstream: '$custom_domain',
+  'www.google.com/': 'g.qs100371.vip/', //填入你的子域名
+  'gstatic.com': 'gstatic.cn',
+  'ajax.googleapis.com': 'ajax.lug.ustc.edu.cn',
+  'fonts.googleapis.com': 'fonts.googleapis.cn',
+  'themes.googleusercontent.com': 'google-themes.lug.ustc.edu.cn',
+  'www.gravatar.com/avatar': 'dn-qiniu-avatar.qbox.me/avatar',
+  'www.google.co.jp': '$custom_domain',
+  'www.google.com.sg': '$custom_domain',
+  'books.google.com.hk': '$custom_domain',
+  'books.google.co.jp': '$custom_domain',
+  'books.google.com.sg': '$custom_domain',
+  'maps.google.com.hk': '$custom_domain',
+  'maps.google.co.jp': '$custom_domain',
+  'maps.google.com.sg': '$custom_domain',
+  'maps.google.com': '$custom_domain',
+  'books.google.com': '$custom_domain',
+}
+
+addEventListener('fetch', (event) =&gt; {
+  event.respondWith(fetchAndApply(event.request))
+})
+
+async function fetchAndApply(request) {
+  const region = request.headers.get('cf-ipcountry').toUpperCase()
+//   const ip_address = request.headers.get('cf-connecting-ip')
+//   const user_agent = request.headers.get('user-agent')
+
+  let response = null
+  let url = new URL(request.url)
+  let url_host = url.host
+
+  if (url.protocol == 'http:') {
+    url.protocol = 'https:'
+    response = Response.redirect(url.href)
+    return response
+  }
+
+  //检查是否为图片搜索
+  var key = url.href
+  var ikey1 = 'tbm=isch'
+  var ikey2 = '/img'
+  if ((key.search(ikey1) == -1) &amp;&amp; (key.search(ikey2) == -1)) {
+    var upstream_domain = upstream
+  } else {
+    var upstream_domain = upstream_v4
+  }
+
+  url.host = upstream_domain
+
+  if (blocked_region.includes(region)) {
+    response = new Response(
+      'Access denied: WorkersProxy is not available in your region yet.',
+      {
+        status: 403,
+      }
+    )
+  } else {
+    let method = request.method
+    let request_headers = request.headers
+    let new_request_headers = new Headers(request_headers)
+
+    new_request_headers.set('Host', upstream_domain)
+    new_request_headers.set('Referer', url.href)
+
+    let original_response = await fetch(url.href, {
+      method: method,
+      headers: new_request_headers,
+    })
+
+    let original_response_clone = original_response.clone()
+    let original_text = null
+    let response_headers = original_response.headers
+    let new_response_headers = new Headers(response_headers)
+    let status = original_response.status
+
+    new_response_headers.set('cache-control', 'public, max-age=14400')
+    new_response_headers.set('access-control-allow-origin', '*')
+    new_response_headers.set('access-control-allow-credentials', true)
+    new_response_headers.delete('content-security-policy')
+    new_response_headers.delete('content-security-policy-report-only')
+    new_response_headers.delete('clear-site-data')
+
+    const content_type = new_response_headers.get('content-type')
+    if (content_type.includes('text/html') &amp;&amp; content_type.includes('UTF-8')) {
+      // &amp;&amp; content_type.includes('UTF-8')
+      original_text = await replace_response_text(
+        original_response_clone,
+        upstream_domain,
+        url_host
+      )
+    } else {
+      original_text = original_response_clone.body
+    }
+
+    response = new Response(original_text, {
+      status,
+      headers: new_response_headers,
+    })
+  }
+  return response
+}
+
+async function replace_response_text(response, upstream_domain, host_name) {
+  let text = await response.text()
+
+  var i, j
+  for (i in replace_dict) {
+    j = replace_dict[i]
+    if (i == '$upstream') {
+      i = upstream_domain
+    } else if (i == '$custom_domain') {
+      i = host_name
+    }
+
+    if (j == '$upstream') {
+      j = upstream_domain
+    } else if (j == '$custom_domain') {
+      j = host_name
+    }
+
+    let re = new RegExp(i, 'g')
+    text = text.replace(re, j)
+  }
+
+  return text
+}
+</code></pre>
+<p>cloudflare的在线代码编辑器会提示没有权限不能使用右键粘贴代码，直接用ctrl+v。<br>
+第三行g.XXX是自定义域名。</p>
+<h1 id="给worker设置上面的自定义域名">给worker设置上面的自定义域名</h1>
+<blockquote>
+<p>用浏览器打开自定义域名，会出现google搜索。有时候会出错误提示，无解。<br>
+<img src="https://qs100371.vip/post-images/1735889047800.png" alt="" loading="lazy"></p>
+</blockquote>
+<hr>
+<p>参考：<br>
+<a href="https://voxsay.com/posts/using-cloudflare-worker-proxy-google/"><em>https://voxsay.com/posts/using-cloudflare-worker-proxy-google</em>/</a></p>
+
+          
+          <p class="next-post">下一篇：
+            <a href="https://qs100371.vip/post/cF1yCOpaVY/">
+              <span class="post-title">
+                Cloudflare Workers设立Docker镜像加速代理&rarr;
+              </span>
+            </a>
+          </p>
+        
+        <div class="comment">
+          
+        </div>
+      </div>
+    </div>
+  </article>
+ <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+           
+             
+              <li>
+                <p class="copyright text-muted">
+            
+                  <span >本站已运行<span id="days" style="font-weight:800; "> </span>天 <img src="/media/images/heart.gif" width="24"></span>
+                  ©2024   <a href="mailto:admin@qs100371.vip">qs100371</a><br><span id="jinrishici-sentence">正在加载今日诗词....</span>
+                  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" async></script>
+               
+                
+                <script>
+                  let s1 = '2024-10-2';  //设置为你的建站时间
+                  s1 = new Date(s1.replace(/-/g, "/"));
+                  s2 = new Date();
+                  let days = s2.getTime() - s1.getTime();
+                  let number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+                  document.getElementById('days').innerHTML = number_of_days;
+                </script>
+               
+              </p>
+              </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+   </footer>
+   <script src="https://myhkw.cn/api/player/173442375015" id="myhk" key="173442375015" m="1"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  </body>
+</html>
+

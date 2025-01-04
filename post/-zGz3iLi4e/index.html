@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta name="referrer" content="never">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kveln">
+  <title>安装ftp服务 | qs的学习笔记</title>
+  
+  <link href="/media/css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="/media/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" title="安装ftp服务 | qs的学习笔记 » Feed" href="/atom.xml">
+  
+  <link href="/media/css/main.css" rel="stylesheet">
+  <script src="/media/scripts/jquery.min.js"></script>
+  <script src="/media/scripts/highlight.min.js"></script>
+ 
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+    <meta property="og:description" content="安装ftp服务"/>
+    <meta property="og:url" content="https://qs100371.vip/post/-zGz3iLi4e/"/>
+    <meta property="og:locale" content="zh-CN"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="qs的学习笔记"/>
+  </head>
+  <body>
+  	<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://qs100371.vip">qs的学习笔记</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/">首页</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/archives">归档</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/tags">标签</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://t.qs100371.vip" target="_blank">笔记</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://w.qs100371.vip" target="_blank">memos</a>
+              
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://api.haibara.cn/fengjing/index.php')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+          	<span class="tags">
+          	 
+            <a href="https://qs100371.vip/tag/web/" class="tag">web</a>
+            
+        </span>
+            <h1>安装ftp服务</h1>
+            <span class="meta">
+            	Posted on
+              2024-10-14，2 min read
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p>安装vsftpd：<br>
+sudo apt install vsftpd<br>
+检测是否安装：<br>
+vsftpd -version</p>
+<!-- more -->
+<p>匿名用户模式<br>
+在vsftpd.conf文件中添加匿名用户相关配置：</p>
+<pre><code>#监听ipv4，启用独立模式
+listen=YES
+#启用匿名用户模式 
+anonymous_enable=YES
+#允许写操作
+write_enable=YES
+#允许匿名用户上传文件
+anon_upload_enable=YES
+#允许匿名用户创建目录
+anon_mkdir_write_enable=YES
+#允许匿名用户修改或删除目录
+anon_other_write_enable=YES
+#表示上传下载文件的掩码
+anon_umask=077
+#设置用户的家目录，登录之后自动切换到各自用户的家目录
+local_root=/srv/ftp/upload
+#全部用户被限制在主目录
+chroot_local_user=YES
+​
+#开启被动模式。
+pasv_enable=YES
+#设置被动模式下，建立数据传输可使用的端口范围的最小值。
+#建议您把端口范围设置在一段比较高的范围内，例如50000~50010，有助于提高访问FTP服务器的安全性。
+pasv_min_port=50000
+#设置被动模式下，建立数据传输可使用的端口范围的最大值。
+pasv_max_port=50010
+</code></pre>
+<p>在/srv/ftp目录下创建upload目录并完成赋权操作：</p>
+<pre><code>sudo mkdir /srv/ftp/upload
+sudo chown -R :ftp /srv/ftp/upload
+</code></pre>
+<p>设置upload目录的权限为775<br>
+sudo chmod 775 /srv/ftp/upload<br>
+重启服务<br>
+sudo systemctl restart vsftpd<br>
+查看服务状态<br>
+sudo systemctl  status  vsftpd</p>
+
+          
+          <p class="next-post">下一篇：
+            <a href="https://qs100371.vip/post/ZAiN_eOs-c/">
+              <span class="post-title">
+                nginx重定向&rarr;
+              </span>
+            </a>
+          </p>
+        
+        <div class="comment">
+          
+        </div>
+      </div>
+    </div>
+  </article>
+ <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+           
+             
+              <li>
+                <p class="copyright text-muted">
+            
+                  <span >本站已运行<span id="days" style="font-weight:800; "> </span>天 <img src="/media/images/heart.gif" width="24"></span>
+                  ©2024   <a href="mailto:admin@qs100371.vip">qs100371</a><br><span id="jinrishici-sentence">正在加载今日诗词....</span>
+                  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" async></script>
+               
+                
+                <script>
+                  let s1 = '2024-10-2';  //设置为你的建站时间
+                  s1 = new Date(s1.replace(/-/g, "/"));
+                  s2 = new Date();
+                  let days = s2.getTime() - s1.getTime();
+                  let number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+                  document.getElementById('days').innerHTML = number_of_days;
+                </script>
+               
+              </p>
+              </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+   </footer>
+   <script src="https://myhkw.cn/api/player/173442375015" id="myhk" key="173442375015" m="1"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  </body>
+</html>
+

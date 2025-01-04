@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta name="referrer" content="never">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kveln">
+  <title>网页头部滚动展示最近的memos | qs的学习笔记</title>
+  
+  <link href="/media/css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="/media/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" title="网页头部滚动展示最近的memos | qs的学习笔记 » Feed" href="/atom.xml">
+  
+  <link href="/media/css/main.css" rel="stylesheet">
+  <script src="/media/scripts/jquery.min.js"></script>
+  <script src="/media/scripts/highlight.min.js"></script>
+ 
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+    <meta property="og:description" content="网页头部滚动展示最近的memos"/>
+    <meta property="og:url" content="https://qs100371.vip/post/RIURpusHwj/"/>
+    <meta property="og:locale" content="zh-CN"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="qs的学习笔记"/>
+  </head>
+  <body>
+  	<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://qs100371.vip">qs的学习笔记</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/">首页</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/archives">归档</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/tags">标签</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://t.qs100371.vip" target="_blank">笔记</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="https://w.qs100371.vip" target="_blank">memos</a>
+              
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://api.haibara.cn/fengjing/index.php')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+          	<span class="tags">
+          	 
+            <a href="https://qs100371.vip/tag/web/" class="tag">web</a>
+            
+        </span>
+            <h1>网页头部滚动展示最近的memos</h1>
+            <span class="meta">
+            	Posted on
+              2025-01-02，4 min read
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p>在网页部署代码，把memos最近几条滚动展示在网页最上方。</p>
+<!-- more -->
+<h1 id="api">API</h1>
+<p>使用了最新的memos v0.22.2<br>
+<code>https://m.qs100371.vip/api/v1/memos?pageSize=5&amp;filter=visibilities==['PUBLIC']&amp;creator=='users/2'</code><br>
+其中<br>
+pageSize为查询的memo个数，<br>
+users/2为查询的用户UID。</p>
+<h1 id="部署代码">部署代码</h1>
+<p>粘贴到网页<code>&lt;body&gt;</code>之后</p>
+<pre><code>&lt;!--add memos--&gt;
+    &lt;div id=&quot;bber-talk&quot;&gt;&lt;/div&gt;
+    &lt;script&gt;
+    document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+        var e = document.querySelector(&quot;#bber-talk&quot;);
+        e &amp;&amp; (fetchAndRenderMemos(), moment.locale(&quot;zh-CN&quot;));
+    
+        function fetchAndRenderMemos() {
+            var url = &quot;https://m.qs100371.vip/api/v1/memos?pageSize=5&amp;filter=visibilities==['PUBLIC']&amp;creator=='users/2'&quot;;
+            fetch(url)
+                .then(response =&gt; response.json())
+                .then(data =&gt; {
+                    var memosList = data.memos;
+                    var contentHTML = memosList.map(memo =&gt; {
+                        var createTime = memo.createTime;
+                        var timeFromNow = moment(createTime).fromNow();
+                        var content = memo.content;
+                        var uid = memo.uid;
+    
+                        // Process content strings
+                        var processedContent = content.replace(/!\[.*?\]\((.*?)\)/g, function(match, imageUrl) {
+                            var cleanUrl = imageUrl.split(/[?#]/)[0];
+                            return `&lt;a href=&quot;${cleanUrl}&quot; target=&quot;_blank&quot;&gt;🌅&lt;/a&gt;`;
+                        }).replace(/\[(.*?)\]\((.*?)\)/g, function(match, linkText, url) {
+                            var extension = url.split('.').pop().split(/[?#]/)[0];
+                            var cleanUrl = url.split(/[?#]/)[0];
+                            return /(jpg|jpeg|png|gif|bmp|webp|svg)/i.test(extension)
+                                ? `&lt;a href=&quot;${cleanUrl}&quot; target=&quot;_blank&quot;&gt;🌅&lt;/a&gt;`
+                                : `&lt;a href=&quot;${url}&quot; target=&quot;_blank&quot;&gt;${linkText} 🔗&lt;/a&gt;`;
+                        });
+    
+                        // Add externalLink from resources if it's an image
+                        if (memo.resources) {
+                            memo.resources.forEach(resource =&gt; {
+                                if (resource.externalLink) {
+                                    var cleanExternalLink = resource.externalLink.split(/[?#]/)[0];
+                                    if (/(jpg|jpeg|png|gif|bmp|webp|svg)/i.test(cleanExternalLink.split('.').pop())) {
+                                        processedContent += ` &lt;a href=&quot;${cleanExternalLink}&quot; target=&quot;_blank&quot;&gt;🌅&lt;/a&gt;`;
+                                    }
+                                }
+                            });
+                        }
+    
+                        return `&lt;li class=&quot;item&quot;&gt;💬 &lt;a href=&quot;https://m.qs100371.vip/m/${uid}&quot; target=&quot;_blank&quot;&gt;&lt;span class=&quot;datetime&quot;&gt;${timeFromNow}&lt;/span&gt;：${processedContent}&lt;/a&gt;&lt;/li&gt;`;
+                    }).join('');
+    
+                    var finalHTML = `&lt;div class=&quot;talk-wrap&quot;&gt;&lt;ul class=&quot;talk-list&quot;&gt;${contentHTML}&lt;/ul&gt;&lt;/div&gt;`;
+                    e &amp;&amp; (e.innerHTML = finalHTML);
+    
+                    // Regularly move the first item to the end
+                    setInterval(function() {
+                        var itemList = document.querySelector(&quot;.talk-list&quot;);
+                        if (itemList) {
+                            var items = itemList.querySelectorAll(&quot;.item&quot;);
+                            if (items.length &gt; 0) {
+                                itemList.appendChild(items[0]);
+                            }
+                        }
+                    }, 2000);
+                })
+                .catch(error =&gt; console.error('Error fetching memos:', error));
+        }
+    });
+    &lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;.talk-list .item{display:none}.talk-list .item:nth-child(1){display:block}&lt;/style&gt;
+    &lt;script src=&quot;https://momentjs.cn/downloads/moment-with-locales.js&quot;&gt;&lt;/script&gt; 
+&lt;!-- add memos--&gt;
+</code></pre>
+<p>删掉💬后面的a标签可以去掉链接进入功能。</p>
+<hr>
+<p>参考：<br>
+<a href="https://blog.memos.ee/archives/211.html"><em>博客头部滚动展示 最近的memos 基于memos v0.22.2</em></a></p>
+
+          
+          <p class="next-post">下一篇：
+            <a href="https://qs100371.vip/post/zblQE9-Vl0/">
+              <span class="post-title">
+                curl使用示例&rarr;
+              </span>
+            </a>
+          </p>
+        
+        <div class="comment">
+          
+        </div>
+      </div>
+    </div>
+  </article>
+ <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+           
+             
+              <li>
+                <p class="copyright text-muted">
+            
+                  <span >本站已运行<span id="days" style="font-weight:800; "> </span>天 <img src="/media/images/heart.gif" width="24"></span>
+                  ©2024   <a href="mailto:admin@qs100371.vip">qs100371</a><br><span id="jinrishici-sentence">正在加载今日诗词....</span>
+                  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" async></script>
+               
+                
+                <script>
+                  let s1 = '2024-10-2';  //设置为你的建站时间
+                  s1 = new Date(s1.replace(/-/g, "/"));
+                  s2 = new Date();
+                  let days = s2.getTime() - s1.getTime();
+                  let number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+                  document.getElementById('days').innerHTML = number_of_days;
+                </script>
+               
+              </p>
+              </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+   </footer>
+   <script src="https://myhkw.cn/api/player/173442375015" id="myhk" key="173442375015" m="1"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/media/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://qs100371.vip/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  </body>
+</html>
+
