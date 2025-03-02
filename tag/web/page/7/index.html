@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<meta name="description" content="It&#39;s just a note, not a guide.">
+<meta name="theme-color" content="#000">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/media/css/pisces.css">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link
+  href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/default.css"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/main.css">
+
+<script src="/media/js/jquery.js" ></script>
+<script src="/media/hljs/highlight.js" ></script>
+<script src="/media/scripts/velocity.min.js" ></script>
+<script src="/media/scripts/velocity.ui.min.js" ></script>
+<link rel="stylesheet" href="/media/scripts/katex.min.css" 
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+
+<script defer src="/media/scripts/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous" ></script>
+<script defer src="/media/scripts/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" 
+  onload="renderMathInElement(document.body);"></script>
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<!--
+<script defer type="text/javascript" src="/media/js/console-text.js"></script>-->
+</head>
+
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
+    
+<div class="pisces">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>The blog of qs</span>
+            </a>  
+          
+        </div>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-globe"></i> 首页
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-globe"></i> 归档
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-globe"></i> 标签
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="https://t.qs100371.vip" target="_blank">
+                  <i class="fa fa-globe"></i> 笔记
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="https://m.qs100371.vip/u/guest" target="_blank">
+                  <i class="fa fa-globe"></i> memos
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="https://w1.qs100371.vip" target="_self">
+                  <i class="fa fa-globe"></i> 文字版
+                </a>
+              
+            </li>
+          
+          
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout  pisces">
+      <div class="section-layout-wrapper">
+        <div id="sidebarMeta" class="sidebar">
+
+  
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name"></p>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">126</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item">
+        <span class="site-item-rss">
+            <i class="fa fa-rss"></i>
+            <a href="https://qs100371.vip/atom.xml" target="_blank">RSS</a>
+        </span>
+      </div>
+    
+  
+  
+
+  
+
+
+
+</div>
+    
+</div>
+
+<script>
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = 'pisces';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
+      }
+    });
+  }
+  </script>
+
+        <div class="section-box tag-line box-shadow-wrapper">
+          <section class="section tags-section posts-expand bg-color">
+            <div class="padding-wrapper">
+  <div class="tag-timeline-box">
+    <div class="tag-timeline-wrapper">
+      <div class="tag-timeline-title">
+        <h2>
+          web
+          <small class="language" data-lan="tag">标签</small>
+        </h2>
+      </div>
+      
+      
+      
+      <a href="https://qs100371.vip/post/ben-di-bu-shu-deepseek/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              03-02
+              <small>本地部署deepseek</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/zai-xian-yin-le-hai-bao-sheng-cheng-qi-musiccard/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-27
+              <small>在线音乐海报生成器musiccard</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/zai-xian-ban-gong-tao-jian-onlyoffice/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-27
+              <small>在线办公套件onlyoffice</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-ge-kai-yuan-hu-lian-wang-cao-zuo-xi-tong-puter/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-24
+              <small>一个开源互联网操作系统puter</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-23
+              <small>docker 部署 Draw.io 在线流程图系统 </small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/zai-xian-wen-dang-guan-li-xi-tong-mrdoc/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-19
+              <small>在线文档管理系统mrdoc</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/xiao-xi-fa-song-fu-wu-gotify/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-12
+              <small>消息发送服务gotify</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-11
+              <small>armbian发送邮件：s-nail</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-kuan-kai-yuan-de-si-you-yun-pan-xiang-mu-file-browser/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-11
+              <small>一款开源的私有云盘项目：File Browser</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-10
+              <small>dkTurbo，docker 镜像加速器自动切换</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-ge-web-fu-wu-qi-zi-dong-bei-fen-jiao-ben/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-07
+              <small>一个WEB 服务器自动备份脚本</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yong-cloudflare-da-jian-jing-xiang-zhan/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-06
+              <small>用CloudFlare搭建镜像站</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/gei-ubuntu-server-da-ge-ti-zi/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-02
+              <small>给ubuntu server搭个梯子</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/nginxphp-an-zhuang-he-pei-zhi/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-28
+              <small>nginx+php安装和配置</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-28
+              <small>github图床和cdn加速的实现</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/da-jian-sui-ji-tu-pian-api/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-27
+              <small>搭建随机图片API</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-ge-chao-ji-jian-dan-de-tu-chuang-easyimage/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-26
+              <small>一个超级简单的图床：easyImage</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-26
+              <small>如何给网站添加中英文切换</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-ge-kai-yuan-de-zai-xian-ni-ming-fen-xiang-fu-wu-privatebin/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-26
+              <small>一个开源的在线匿名分享服务privatebin</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-25
+              <small>一个即时聊天应用vocechat</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-da-jian-liu-yan-ban-sayhello/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-25
+              <small>docker 搭建留言板 sayhello</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-24
+              <small>一个非常棒的自托管仪表板：glance</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-24
+              <small>一个仿微信朋友圈的项目moments</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-16
+              <small>apache2开启地址重写功能</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-bu-shu-wordpress/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-12
+              <small>docker部署wordpress</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/termux-xia-de-nginx/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-10
+              <small>termux下的nginx</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-bu-shu-typecho/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-10
+              <small>docker部署typecho</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/alpine-term-zhong-an-zhuang-docker/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-06
+              <small>alpine term中安装docker</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/termux-zhong-an-zhuang-alpinealpine-li-an-zhuang-docker/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-06
+              <small>termux中安装alpine，alpine里安装docker</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/an-zhuo-shou-ji-shang-de-linux-mo-ni-qi-termux/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-06
+              <small>安卓手机上的linux模拟器termux</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/gei-clean-zhu-ti-tian-jia-sou-suo-gong-neng/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-04
+              <small>给clean主题添加搜索功能</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/shi-yong-cloudflare-worker-dai-li-google-sou-suo/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-03
+              <small>使用Cloudflare Worker代理Google搜索</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/cloudflare-workers-she-li-docker-jing-xiang-jia-su-dai-li/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-02
+              <small>Cloudflare Workers设立Docker镜像加速代理</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/wang-ye-tou-bu-gun-dong-zhan-shi-zui-jin-de-memos/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              01-02
+              <small>网页头部滚动展示最近的memos</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/curl-shi-yong-shi-li/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-30
+              <small>curl使用示例</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-28
+              <small>cloudflare tunnels 和 lucky stun穿透的比较</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-pull-shi-yong-dai-li-shi-xiao-de-jie-jue-fang-fa/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-26
+              <small>docker pull使用代理失效的解决方法</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-20
+              <small>cloudflare tunnel内网穿透</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-17
+              <small>使用cloudflare实现自定义域名邮箱</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-13
+              <small>docker部署网盘cloudreve</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-11
+              <small>用lucky加cloudflare实现域名访问内网</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-an-zhuang-lucky/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-10
+              <small>docker安装lucky</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-06
+              <small>安装微力同步verysync</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/an-zhuang-jellyfin/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-05
+              <small>安装Jellyfin</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-03
+              <small>通过GitHub工作流下载Docker镜像</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-bu-shu-iptv/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-03
+              <small>Docker部署IPTV</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-si-yuan-bi-ji-siyuan/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-30
+              <small>玩客云docker部署思源笔记siyuan</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-searxng-sou-suo-yin-qing/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-29
+              <small>玩客云docker部署searxng搜索引擎</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-jin-ri-re-bang-dailyhot-shi-bai/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-28
+              <small>玩客云docker部署今日热榜dailyhot失败</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/ffmpeg-he-bing-duo-ge-mp4-shi-pin/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-27
+              <small>ffmpeg合并多个MP4视频</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-26
+              <small>玩客云docker安装导航面板sun-panel</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/linux-she-zhi-dai-li/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-20
+              <small>linux设置代理</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/docker-bu-shu-freshrss/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-16
+              <small>Docker 部署 FreshRSS</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/script-defer-async-qu-bie/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-16
+              <small>Script defer async 区别</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/an-zhuang-qbittorrent/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-11
+              <small>安装qbittorrent</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/openwrt-passwall2/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-10
+              <small>openwrt passwall2</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-06
+              <small>win系统ssh上传下载文件</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/xiao-pi-mian-ban/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-04
+              <small>小皮面板</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/nginx-fan-xiang-dai-li-she-zhi/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-02
+              <small>nginx反向代理设置</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/an-zhuang-nextcloud/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              11-01
+              <small>安装nextcloud</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/yun-bi-ji-leanote-da-jian/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              10-31
+              <small>云笔记leanote搭建</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/an-zhuang-wordpress/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              10-28
+              <small>安装wordpress</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/cpolar-nei-wang-chuan-tou/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              10-22
+              <small>cpolar内网穿透</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              10-20
+              <small>电视直播软件和iptv源</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/an-zhuang-ftp-fu-wu/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              10-14
+              <small>安装ftp服务</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://qs100371.vip/post/nginx-chong-ding-xiang/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              10-12
+              <small>nginx重定向</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box">
+  <footer class="footer">
+    
+
+    <div class="poweredby">
+      <span >本站已运行<span id="days" style="font-weight:800; "> </span>天 <img src="/media/images/heart.gif" width="24"></span>
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a><br><span id="jinrishici-sentence">正在加载今日诗词....</span>
+      <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" async></script>
+    </div>
+    
+    <script>
+      let s1 = '2024-10-2';  //设置为建站时间
+      s1 = new Date(s1.replace(/-/g, "/"));
+      s2 = new Date();
+      let days = s2.getTime() - s1.getTime();
+      let number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+      document.getElementById('days').innerHTML = number_of_days;
+    </script>
+<!--播放器
+<script type="text/javascript" id="myhk" src="https://myhkw.cn/api/player/173442375015" key="173442375015" m="1"></script>
+-->
+ <!--   翻译
+<script src="/media/js/translate.js"></script>
+<script>
+translate.language.setLocal('chinese_simplified'); 
+translate.selectLanguageTag.languages = 'english,chinese_simplified,korean,french,japanese';
+translate.service.use('client.edge'); 
+translate.execute(); 
+
+</script>
+-->
+</footer>
+  
+  
+    
+        <div class="pisces back-to-top" id="back_to_top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span class="scrollpercent"> <span id="back_to_top_text">0</span>% </span>
+            
+        </div>
+        
+          
+            
+              <div class="bg-img">
+                <img src="https://img.qs100371.vip/api2.php" />
+              </div>
+              
+                
+                 
+</div>
+<script>
+
+let faSearch = document.querySelector("#fa_search");
+  faSearch &&
+    faSearch.addEventListener("click", function () {
+      document.querySelector("#search_mask").style = "";
+    });
+ // 代码高亮
+ hljs.initHighlightingOnLoad();
+</script>
+ 
+<script>
+  let sideBarOpen = "sidebar-open";
+  let body = document.body;
+  let back2Top = document.querySelector("#back_to_top"),
+    back2TopText = document.querySelector("#back_to_top_text"),
+    drawerBox = document.querySelector("#drawer_box"),
+    rightSideBar = document.querySelector(".sidebar"),
+    viewport = document.querySelector("body");
+
+  function scrollAnimation(currentY, targetY) {
+    let needScrollTop = targetY - currentY;
+    let _currentY = currentY;
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10);
+      _currentY += dist;
+      window.scrollTo(_currentY, currentY);
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY);
+      } else {
+        window.scrollTo(_currentY, targetY);
+      }
+    }, 1);
+  }
+
+  back2Top.addEventListener("click", function (e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+
+  window.addEventListener("scroll", function (e) {
+    let percent =
+      (document.scrollingElement.scrollTop /
+        (document.scrollingElement.scrollHeight -
+          document.scrollingElement.clientHeight)) *
+      100;
+    if (percent > 1 && !back2Top.classList.contains("back-top-active")) {
+      back2Top.classList.add("back-top-active");
+    }
+    if (percent == 0) {
+      back2Top.classList.remove("back-top-active");
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  let hasCacu = false;
+  window.addEventListener("resize", function (e) {
+    calcuHeight();
+  });
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (
+      (!hasCacu && back2Top.classList.contains("pisces")) ||
+      back2Top.classList.contains("gemini")
+    ) {
+      let sideBar = document.querySelector(".sidebar");
+      let navUl = document.querySelector("#site_nav");
+      sideBar.style =
+        "margin-top:" + (navUl.offsetHeight + navUl.offsetTop + 15) + "px;";
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+
+  let open = false,
+    MOTION_TIME = 300,
+    RIGHT_MOVE_DIS = "320px";
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll(".right-motion");
+    let right = drawerBox.classList.contains("right");
+
+    let transitionDir = right
+      ? "transition.slideRightIn"
+      : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingRight: "0px",
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingLeft: "0px",
+      };
+    }
+
+    drawerBox.onclick = function () {
+      open = !open;
+      jQuery.Velocity(rightSideBar, "stop");
+      jQuery.Velocity(viewport, "stop");
+      jQuery.Velocity(rightMotions, "stop");
+      if (open) {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: RIGHT_MOVE_DIS,
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, transitionDir, {});
+            },
+          }
+        );
+        jQuery.Velocity(viewport, openProp, {
+          duration: MOTION_TIME,
+        });
+      } else {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: "0px",
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, {
+                opacity: 0,
+              });
+            },
+          }
+        );
+        jQuery.Velocity(viewport, closeProp, {
+          duration: MOTION_TIME,
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle("muse-line");
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    };
+  }
+
+  // 链接跳转
+  let newWindow = "false";
+  if (newWindow === "true") {
+    let links = document.querySelectorAll(".post-body a");
+    links.forEach((item) => {
+      if (!item.classList.contains("btn")) {
+        item.setAttribute("target", "_blank");
+      }
+    });
+  }
+
+ 
+
+
+
+ 
+// 离开当前页title变化
+  var leaveTitle = "";
+  var normal_title = document.title;
+  if (leaveTitle) {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState == "hidden") {
+        normal_title = document.title;
+        document.title = leaveTitle;
+      } else {
+        document.title = normal_title;
+      }
+    });
+  }
+  
+</script>
+
+<link rel="stylesheet" href="/media/css/jquery.fancybox.css" />
+<script src="/media/js/jquery.fancybox.js"></script>
+ 
+<script>
+ 
+ let images = document.querySelectorAll(".section img");
+  images.forEach((image) => {
+    var parent = image.parentElement;
+    var next = image.nextElementSibling;
+    parent.removeChild(image);
+    var aelem = document.createElement("a");
+    aelem.href = image.src;
+    aelem.dataset["fancybox"] = "images";
+    aelem.dataset["rel"] = "fancybox-button";
+    aelem.classList.add("fancybox");
+    aelem.appendChild(image);
+    parent.insertBefore(aelem, next);
+  }); 
+</script> 
+
+  </div>
+</body>
+
+<input hidden id="copy" />
+<script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
+  let language = '';
+  if (language !== '') {
+    let map = new Map();
+    if (language === 'en') {
+      map.set('search', 'Search');
+      map.set('category', 'Categories');
+      map.set('article', 'Articles');
+      map.set('tag', 'Tags');
+      map.set('top', 'Top');
+      map.set('publish', 'published');
+      map.set('minute', ' minutes');
+      map.set('read-more', 'Read More');
+      map.set('view', 'View');
+      map.set('words', ' words');
+      map.set('category-in', 'category in');
+      map.set('preview', 'Meta');
+      map.set('index', 'Toc');
+      map.set('no-archives', "You haven't created yet");
+      map.set('archives', " articles in total");
+      map.set('cloud-tags', " tags in total");
+      map.set('copyright', "Copyright: ");
+      map.set('author', "Author: ");
+      map.set('link', "Link: ");
+      map.set('leave-message', "Leave a message");
+      map.set('format', "Links Format");
+      map.set('site-name', "Name: ");
+      map.set('site-link', "Link: ");
+      map.set('site-desc', "Desc: ");
+      map.set('stat', " related results, taking ");
+      map.set('stat-time', " ms");
+      map.set('site-img', "Image: ");
+    }
+
+    if (map.size > 0) {
+      let lanElems = document.querySelectorAll('.language');
+      lanElems.forEach(elem => {
+        let lan = elem.dataset.lan, text = map.get(lan);
+        if (elem.__proto__ === HTMLInputElement.prototype) {
+          elem.placeholder = text
+        } else {
+          if (elem.dataset.count) {
+            text = elem.dataset.count + text;
+          }
+          elem.textContent = text;
+        }
+      })
+    }
+  }
+
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+
+</script>
+<script src="/media/js/motion.js"></script>
+
+
+
+
+
+
+
+
+</html>

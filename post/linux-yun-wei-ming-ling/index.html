@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<meta name="description" content="It&#39;s just a note, not a guide.">
+<meta name="theme-color" content="#000">
+<title>Linux 运维命令 | The blog of qs</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/media/css/pisces.css">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link
+  href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/default.css"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/main.css">
+
+<script src="/media/js/jquery.js" ></script>
+<script src="/media/hljs/highlight.js" ></script>
+<script src="/media/scripts/velocity.min.js" ></script>
+<script src="/media/scripts/velocity.ui.min.js" ></script>
+<link rel="stylesheet" href="/media/scripts/katex.min.css" 
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+
+<script defer src="/media/scripts/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous" ></script>
+<script defer src="/media/scripts/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" 
+  onload="renderMathInElement(document.body);"></script>
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<!--
+<script defer type="text/javascript" src="/media/js/console-text.js"></script>-->
+  <meta name="description" content="Linux 运维命令" />
+  <meta name="keywords" content="linux" />
+</head>
+
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
+    
+<div class="pisces">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>The blog of qs</span>
+            </a>  
+          
+        </div>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-globe"></i> 首页
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-globe"></i> 归档
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-globe"></i> 标签
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="https://t.qs100371.vip" target="_blank">
+                  <i class="fa fa-globe"></i> 笔记
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="https://m.qs100371.vip/u/guest" target="_blank">
+                  <i class="fa fa-globe"></i> memos
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="https://w1.qs100371.vip" target="_self">
+                  <i class="fa fa-globe"></i> 文字版
+                </a>
+              
+            </li>
+          
+          
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout pisces ">
+      <div class="section-layout-wrapper">
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name"></p>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">126</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item">
+        <span class="site-item-rss">
+            <i class="fa fa-rss"></i>
+            <a href="https://qs100371.vip/atom.xml" target="_blank">RSS</a>
+        </span>
+      </div>
+    
+  
+  
+
+  
+
+
+
+</div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4">基本命令</a></li>
+<li><a href="#%E5%85%B3%E6%9C%BA">关机</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95">文件和目录</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2">文件搜索</a></li>
+<li><a href="#%E6%8C%82%E8%BD%BD%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">挂载一个文件系统</a></li>
+<li><a href="#%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4">磁盘空间</a></li>
+<li><a href="#%E6%89%93%E5%8C%85%E5%92%8C%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6">打包和压缩文件</a></li>
+<li><a href="#deb-%E5%8C%85">DEB 包</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9">查看文件内容</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86">文本处理</a></li>
+<li><a href="#%E5%A4%87%E4%BB%BD">备份</a></li>
+<li><a href="#%E5%85%89%E7%9B%98">光盘</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C">网络</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E7%B1%BB%E5%9E%8B">查看文件的类型</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    jQuery.Velocity(hideElement, 'stop');
+    jQuery.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        jQuery.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://qs100371.vip/post/linux-yun-wei-ming-ling/"> Linux 运维命令 </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2025-01-20 09:14:49">2025-01-20</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">标签:</span>
+       
+      <a href="https://qs100371.vip/tag/linux/">
+        <span>linux</span>
+      </a>
+       
+    </span>
+    <!---->
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span
+        >170<span class="language" data-lan="minute"
+          >分钟</span
+        ></span
+      >
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span
+        >3662<span class="pc-show language" data-lan="words"
+          >字</span
+        ></span
+      >
+    </span>
+      
+    
+    <span
+      id="/post/linux-yun-wei-ming-ling/"
+      data-flag-title="Linux 运维命令"
+      class="meta-item pc-show leancloud_visitors"
+    >
+    <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span>
+        <span class="language" data-lan="view">浏览量:</span><span
+          class="leancloud-visitors-count">
+          </span>
+        </span>
+    </span>
+    
+  </div>
+</section>
+
+            <div class="post-body next-md-body" id="post_body">
+              <p>能用到“退休”的 Linux 命令，可以解决日常99%的问题。</p>
+<!-- more -->
+<h1 id="基本命令">基本命令</h1>
+<ul>
+<li>uname -m 显示机器的处理器架构</li>
+<li>uname -r 显示正在使用的内核版本</li>
+<li>dmidecode -q 显示硬件系统部件</li>
+<li>hdparm -tT /dev/sda 在磁盘上执行测试性读取操作系统信息</li>
+<li>arch 显示机器的处理器架构</li>
+<li>uname -m 显示机器的处理器架构</li>
+<li>uname -r 显示正在使用的内核版本</li>
+<li>dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)</li>
+<li>hdparm -i /dev/hda 罗列一个磁盘的架构特性</li>
+<li>hdparm -tT /dev/sda 在磁盘上执行测试性读取操作</li>
+<li>cat /proc/cpuinfo 显示CPU info的信息</li>
+<li>cat /proc/interrupts 显示中断</li>
+<li>cat /proc/meminfo 校验内存使用</li>
+<li>cat /proc/swaps 显示哪些swap被使用</li>
+<li>cat /proc/version 显示内核的版本</li>
+<li>cat /proc/net/dev 显示网络适配器及统计</li>
+<li>cat /proc/mounts 显示已加载的文件系统</li>
+<li>lspci -tv 罗列 PCI 设备</li>
+<li>lsusb -tv 显示 USB 设备</li>
+<li>date 显示系统日期</li>
+<li>cal 2007 显示2007年的日历表</li>
+<li>date 041217002007.00 设置日期和时间 - 月日时分年.秒</li>
+<li>clock -w 将时间修改保存到 BIOS</li>
+</ul>
+<h1 id="关机">关机</h1>
+<ul>
+<li>shutdown -h now 关闭系统(1)</li>
+<li>init 0 关闭系统(2)</li>
+<li>telinit 0 关闭系统(3)</li>
+<li>shutdown -h hours:minutes &amp; 按预定时间关闭系统</li>
+<li>shutdown -c 取消按预定时间关闭系统</li>
+<li>shutdown -r now 重启(1)</li>
+<li>reboot 重启(2)</li>
+<li>logout 注销</li>
+</ul>
+<h1 id="文件和目录">文件和目录</h1>
+<ul>
+<li>ls <em>[0-9]</em> 显示包含数字的文件名和目录名</li>
+<li>tree 显示文件和目录由根目录开始的树形结构(1)</li>
+<li>lstree 显示文件和目录由根目录开始的树形结构(2)</li>
+<li>mkdir dir1 dir2 同时创建两个目录</li>
+<li>mkdir -p /tmp/dir1/dir2 创建一个目录树</li>
+<li>rm -f file1 删除一个叫做 'file1' 的文件'</li>
+<li>rmdir dir1 删除一个叫做 'dir1' 的目录'</li>
+<li>rm -rf dir1 删除一个叫做 'dir1' 的目录并同时删除其内容</li>
+<li>rm -rf dir1 dir2 同时删除两个目录及它们的内容</li>
+<li>mv dir1 new_dir 重命名/移动 一个目录</li>
+<li>cp file1 file2 复制一个文件</li>
+<li>cp dir/* . 复制一个目录下的所有文件到当前工作目录</li>
+<li>cp -a /tmp/dir1 . 复制一个目录到当前工作目录</li>
+<li>cp -a dir1 dir2 复制一个目录</li>
+<li>ln -s file1 lnk1 创建一个指向文件或目录的软链接</li>
+<li>ln file1 lnk1 创建一个指向文件或目录的物理链接</li>
+<li>touch -t 0712250000 file1 修改一个文件或目录的时间戳 - (YYMMDDhhmm)</li>
+<li>file file1 outputs the mime type of the file as text</li>
+<li>iconv -l 列出已知的编码</li>
+<li>iconv -f fromEncoding -t toEncoding inputFile &gt; outputFile creates a new from the given input file by assuming it is encoded in fromEncoding and converting it to toEncoding.</li>
+</ul>
+<h1 id="文件搜索">文件搜索</h1>
+<ul>
+<li>find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录</li>
+<li>find / -user user1 搜索属于用户 'user1' 的文件和目录</li>
+<li>find /home/user1 -name *.bin 在目录 '/ home/user1' 中搜索带有'.bin' 结尾的文件</li>
+<li>find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件</li>
+<li>find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件</li>
+<li>find / -name *.rpm -exec chmod 755 '{}' ; 搜索以 '.rpm' 结尾的文件并定义其权限</li>
+<li>find / -xdev -name *.rpm 搜索以 '.rpm' 结尾的文件，忽略光驱、捷盘等可移动设备</li>
+<li>locate *.ps 寻找以 '.ps' 结尾的文件 - 先运行 'updatedb' 命令</li>
+<li>whereis halt 显示一个二进制文件、源码或man的位置</li>
+<li>which halt 显示一个二进制文件或可执行文件的完整路径</li>
+</ul>
+<h1 id="挂载一个文件系统">挂载一个文件系统</h1>
+<ul>
+<li>mount /dev/hda2 /mnt/hda2 挂载一个叫做hda2的盘 - 确定目录 '/ mnt/hda2' 已经存在</li>
+<li>umount /dev/hda2 卸载一个叫做hda2的盘 - 先从挂载点 '/ mnt/hda2' 退出</li>
+<li>fuser -km /mnt/hda2 当设备繁忙时强制卸载</li>
+<li>umount -n /mnt/hda2 运行卸载操作而不写入 /etc/mtab 文件- 当文件为只读或当磁盘写满时非常有用</li>
+<li>mount /dev/fd0 /mnt/floppy 挂载一个软盘</li>
+<li>mount /dev/cdrom /mnt/cdrom 挂载一个cdrom或dvdrom</li>
+<li>mount /dev/hdc /mnt/cdrecorder 挂载一个cdrw或dvdrom</li>
+<li>mount /dev/hdb /mnt/cdrecorder 挂载一个cdrw或dvdrom</li>
+<li>mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件</li>
+<li>mount -t vfat /dev/hda5 /mnt/hda5 挂载一个Windows FAT32文件系统</li>
+<li>mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备</li>
+<li>mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享</li>
+</ul>
+<h1 id="磁盘空间">磁盘空间</h1>
+<ul>
+<li>df -h 显示已经挂载的分区列表</li>
+<li>ls -lSr |more 以尺寸大小排列文件和目录</li>
+<li>du -sh dir1 估算目录 'dir1' 已经使用的磁盘空间'</li>
+<li>du -sk * | sort -rn 以容量大小为依据依次显示文件和目录的大小</li>
+<li>dpkg-query -W -f='<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi>I</mi><mi>n</mi><mi>s</mi><mi>t</mi><mi>a</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>d</mi><mo>−</mo><mi>S</mi><mi>i</mi><mi>z</mi><mi>e</mi><mo separator="true">;</mo><mn>10</mn></mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">{Installed-Size;10}t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span></span><span class="mord mathdefault">t</span></span></span></span>{Package}n' | sort -k1,1n 以大小为依据显示已安装的deb包所使用的空间</li>
+</ul>
+<h1 id="打包和压缩文件">打包和压缩文件</h1>
+<ul>
+<li>bunzip2 file1.bz2 解压一个叫做 'file1.bz2'的文件</li>
+<li>bzip2 file1 压缩一个叫做 'file1' 的文件</li>
+<li>gunzip file1.gz 解压一个叫做 'file1.gz'的文件</li>
+<li>gzip file1 压缩一个叫做 'file1'的文件</li>
+<li>gzip -9 file1 最大程度压缩</li>
+<li>rar a file1.rar test_file 创建一个叫做 'file1.rar' 的包</li>
+<li>rar a file1.rar file1 file2 dir1 同时压缩 'file1', 'file2' 以及目录 'dir1'</li>
+<li>rar x file1.rar 解压rar包</li>
+<li>unrar x file1.rar 解压rar包</li>
+<li>tar -cvf archive.tar file1 创建一个非压缩的 tarball</li>
+<li>tar -cvf archive.tar file1 file2 dir1 创建一个包含了 'file1', 'file2' 以及 'dir1'的档案文件</li>
+<li>tar -tf archive.tar 显示一个包中的内容</li>
+<li>tar -xvf archive.tar 释放一个包</li>
+<li>tar -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下</li>
+<li>tar -cvfj archive.tar.bz2 dir1 创建一个bzip2格式的压缩包</li>
+<li>tar -xvfj archive.tar.bz2 解压一个bzip2格式的压缩包</li>
+<li>tar -cvfz archive.tar.gz dir1 创建一个gzip格式的压缩包</li>
+<li>tar -xvfz archive.tar.gz 解压一个gzip格式的压缩包</li>
+<li>zip file1.zip file1 创建一个zip格式的压缩包</li>
+<li>zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包</li>
+<li>unzip file1.zip 解压一个zip格式压缩包</li>
+</ul>
+<h1 id="deb-包">DEB 包</h1>
+<ul>
+<li>dpkg -i package.deb 安装/更新一个 deb 包</li>
+<li>dpkg -r package_name 从系统删除一个 deb 包</li>
+<li>dpkg -l 显示系统中所有已经安装的 deb 包</li>
+<li>dpkg -l | grep httpd 显示所有名称中包含 &quot;httpd&quot; 字样的deb包</li>
+<li>dpkg -s package_name 获得已经安装在系统中一个特殊包的信息</li>
+<li>dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表</li>
+<li>dpkg --contents package.deb 显示尚未安装的一个包所提供的文件列表</li>
+<li>dpkg -S /bin/ping 确认所给的文件由哪个deb包提供</li>
+<li>APT 软件工具 (Debian, Ubuntu 以及类似系统)</li>
+<li>apt-get install package_name 安装/更新一个 deb 包</li>
+<li>apt-cdrom install package_name 从光盘安装/更新一个 deb 包</li>
+<li>apt-get update 升级列表中的软件包</li>
+<li>apt-get upgrade 升级所有已安装的软件</li>
+<li>apt-get remove package_name 从系统删除一个deb包</li>
+<li>apt-get check 确认依赖的软件仓库正确</li>
+<li>apt-get clean 从下载的软件包中清理缓存</li>
+<li>apt-cache search searched-package 返回包含所要搜索字符串的软件包名称</li>
+</ul>
+<h1 id="查看文件内容">查看文件内容</h1>
+<ul>
+<li>cat file1 从第一个字节开始正向查看文件的内容</li>
+<li>tac file1 从最后一行开始反向查看一个文件的内容</li>
+<li>more file1 查看一个长文件的内容</li>
+<li>less file1 类似于 'more' 命令，但是它允许在文件中和正向操作一样的反向操作</li>
+<li>head -2 file1 查看一个文件的前两行</li>
+<li>tail -2 file1 查看一个文件的最后两行</li>
+<li>tail -f /var/log/messages 实时查看被添加到一个文件中的内容</li>
+</ul>
+<h1 id="文本处理">文本处理</h1>
+<ul>
+<li>cat file1 file2 ... | command &lt;&gt; file1_in.txt_or_file1_out.txt general syntax for text manipulation using PIPE, STDIN and STDOUT</li>
+<li>cat file1 | command( sed, grep, awk, grep, etc...) &gt; result.txt 合并一个文件的详细说明文本，并将简介写入一个新文件中</li>
+<li>cat file1 | command( sed, grep, awk, grep, etc...) &gt;&gt; result.txt 合并一个文件的详细说明文本，并将简介写入一个已有的文件中</li>
+<li>grep Aug /var/log/messages 在文件 '/var/log/messages'中查找关键词&quot;Aug&quot;</li>
+<li>grep ^Aug /var/log/messages 在文件 '/var/log/messages'中查找以&quot;Aug&quot;开始的词汇</li>
+<li>grep [0-9] /var/log/messages 选择 '/var/log/messages' 文件中所有包含数字的行</li>
+<li>grep Aug -R /var/log/* 在目录 '/var/log' 及随后的目录中搜索字符串&quot;Aug&quot;</li>
+<li>sed 's/stringa1/stringa2/g' example.txt 将example.txt文件中的 &quot;string1&quot; 替换成 &quot;string2&quot;</li>
+<li>sed '/^$/d' example.txt 从example.txt文件中删除所有空白行</li>
+<li>sed '/ *#/d; /^$/d' example.txt 从example.txt文件中删除所有注释和空白行</li>
+<li>echo 'esempio' | tr '[:lower:]' '[:upper:]' 合并上下单元格内容</li>
+<li>sed -e '1d' result.txt 从文件example.txt 中排除第一行</li>
+<li>sed -n '/stringa1/p' 查看只包含词汇 &quot;string1&quot;的行</li>
+<li>sed -e 's/ *$//' example.txt 删除每一行最后的空白字符</li>
+<li>sed -e 's/stringa1//g' example.txt 从文档中只删除词汇 &quot;string1&quot; 并保留剩余全部</li>
+<li>sed -n '1,5p;5q' example.txt 查看从第一行到第5行内容</li>
+<li>sed -n '5p;5q' example.txt 查看第5行</li>
+<li>sed -e 's/00*/0/g' example.txt 用单个零替换多个零</li>
+<li>cat -n file1 标示文件的行数</li>
+<li>cat example.txt | awk 'NR%2==1' 删除example.txt文件中的所有偶数行</li>
+<li>echo a b c | awk '{print $1}' 查看一行第一栏</li>
+<li>echo a b c | awk '{print $1,$3}' 查看一行的第一和第三栏</li>
+<li>paste file1 file2 合并两个文件或两栏的内容</li>
+<li>paste -d '+' file1 file2 合并两个文件或两栏的内容，中间用&quot;+&quot;区分</li>
+<li>sort file1 file2 排序两个文件的内容</li>
+<li>sort file1 file2 | uniq 取出两个文件的并集(重复的行只保留一份)</li>
+<li>sort file1 file2 | uniq -u 删除交集，留下其他的行</li>
+<li>sort file1 file2 | uniq -d 取出两个文件的交集(只留下同时存在于两个文件中的文件)</li>
+<li>comm -1 file1 file2 比较两个文件的内容只删除 'file1' 所包含的内容</li>
+<li>comm -2 file1 file2 比较两个文件的内容只删除 'file2' 所包含的内容</li>
+<li>comm -3 file1 file2 比较两个文件的内容只删除两个文件共有的部分<br>
+#初始化一个文件系统</li>
+<li>mkfs /dev/hda1 在hda1分区创建一个文件系统</li>
+<li>mke2fs /dev/hda1 在hda1分区创建一个linux ext2的文件系统</li>
+<li>mke2fs -j /dev/hda1 在hda1分区创建一个linux ext3(日志型)的文件系统</li>
+<li>mkfs -t vfat 32 -F /dev/hda1 创建一个 FAT32 文件系统</li>
+<li>fdformat -n /dev/fd0 格式化一个软盘</li>
+<li>mkswap /dev/hda3 创建一个swap文件系统</li>
+</ul>
+<h1 id="备份">备份</h1>
+<ul>
+<li>dump -0aj -f /tmp/home0.bak /home 制作一个 '/home' 目录的完整备份</li>
+<li>dump -1aj -f /tmp/home0.bak /home 制作一个 '/home' 目录的交互式备份</li>
+<li>restore -if /tmp/home0.bak 还原一个交互式备份</li>
+<li>rsync -rogpav --delete /home /tmp 同步两边的目录</li>
+<li>rsync -rogpav -e ssh --delete /home ip_address:/tmp 通过SSH通道rsync</li>
+<li>rsync -az -e ssh --delete ip_addr:/home/public /home/local 通过ssh和压缩将一个远程目录同步到本地目录</li>
+<li>rsync -az -e ssh --delete /home/local ip_addr:/home/public 通过ssh和压缩将本地目录同步到远程目录</li>
+<li>dd bs=1M if=/dev/hda | gzip | ssh user@ip_addr 'dd of=hda.gz' 通过ssh在远程主机上执行一次备份本地磁盘的操作</li>
+<li>dd if=/dev/sda of=/tmp/file1 备份磁盘内容到一个文件</li>
+<li>tar -Puf backup.tar /home/user 执行一次对 '/home/user' 目录的交互式备份操作</li>
+<li>( cd /tmp/local/ &amp;&amp; tar c . ) | ssh -C user@ip_addr 'cd /home/share/ &amp;&amp; tar x -p' 通过ssh在远程目录中复制一个目录内容</li>
+<li>( tar c /home ) | ssh -C user@ip_addr 'cd /home/backup-home &amp;&amp; tar x -p' 通过ssh在远程目录中复制一个本地目录</li>
+<li>tar cf - . | (cd /tmp/backup ; tar xf - ) 本地将一个目录复制到另一个地方，保留原有权限及链接</li>
+<li>find /home/user1 -name '*.txt' | xargs cp -av --target-directory=/home/backup/ --parents 从一个目录查找并复制所有以 '.txt' 结尾的文件到另一个目录</li>
+<li>find /var/log -name '*.log' | tar cv --files-from=- | bzip2 &gt; log.tar.bz2 查找所有以 '.log' 结尾的文件并做成一个bzip包</li>
+<li>dd if=/dev/hda of=/dev/fd0 bs=512 count=1 做一个将 MBR (Master Boot Record)内容复制到软盘的动作</li>
+<li>dd if=/dev/fd0 of=/dev/hda bs=512 count=1 从已经保存到软盘的备份中恢复MBR内容</li>
+</ul>
+<h1 id="光盘">光盘</h1>
+<ul>
+<li>cdrecord -v gracetime=2 dev=/dev/cdrom -eject blank=fast -force 清空一个可复写的光盘内容</li>
+<li>mkisofs /dev/cdrom &gt; cd.iso 在磁盘上创建一个光盘的iso镜像文件</li>
+<li>mkisofs /dev/cdrom | gzip &gt; cd_iso.gz 在磁盘上创建一个压缩了的光盘iso镜像文件</li>
+<li>mkisofs -J -allow-leading-dots -R -V &quot;Label CD&quot; -iso-level 4 -o ./cd.iso data_cd 创建一个目录的iso镜像文件</li>
+<li>cdrecord -v dev=/dev/cdrom cd.iso 刻录一个ISO镜像文件</li>
+<li>gzip -dc cd_iso.gz | cdrecord dev=/dev/cdrom - 刻录一个压缩了的ISO镜像文件</li>
+<li>mount -o loop cd.iso /mnt/iso 挂载一个ISO镜像文件</li>
+<li>cd-paranoia -B 从一个CD光盘转录音轨到 wav 文件中</li>
+<li>cd-paranoia -- &quot;-3&quot; 从一个CD光盘转录音轨到 wav 文件中（参数-3）</li>
+<li>cdrecord --scanbus 扫描总线以识别scsi通道</li>
+<li>dd if=/dev/hdc | md5sum 校验一个设备的md5sum编码，例如一张 CD</li>
+</ul>
+<h1 id="网络">网络</h1>
+<ul>
+<li>ifconfig eth0 显示一个以太网卡的配置</li>
+<li>ifup eth0 启用一个 'eth0' 网络设备</li>
+<li>ifdown eth0 禁用一个 'eth0' 网络设备</li>
+<li>ifconfig eth0 192.168.1.1 netmask 255.255.255.0 设置IP地址</li>
+<li>ifconfig eth0 promisc 设置 'eth0' 成混杂模式以嗅探数据包 (sniffing)</li>
+<li>dhclient eth0 以dhcp模式启用 'eth0'</li>
+<li>route -n show routing table</li>
+<li>route add -net 0/0 gw IP_Gateway configura default gateway</li>
+<li>route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.1.1 configure static route to reach network '192.168.0.0/16'</li>
+<li>route del 0/0 gw IP_gateway remove static route</li>
+<li>echo &quot;1&quot; &gt; /proc/sys/net/ipv4/ip_forward activate ip routing</li>
+<li>hostname show hostname of system</li>
+<li>host www.example.com lookup hostname to resolve name to ip address and viceversa(1)</li>
+<li>nslookup www.example.com lookup hostname to resolve name to ip address and viceversa(2)</li>
+<li>ip link show show link status of all interfaces</li>
+<li>mii-tool eth0 show link status of 'eth0'</li>
+<li>ethtool eth0 show statistics of network card 'eth0'</li>
+<li>netstat -tup show all active network connections and their PID</li>
+<li>netstat -tupl show all network services listening on the system and their PID</li>
+<li>tcpdump tcp port 80 show all HTTP traffic</li>
+<li>iwlist scan show wireless networks</li>
+<li>iwconfig eth1 show configuration of a wireless network card</li>
+<li>hostname show hostname</li>
+<li>host www.example.com lookup hostname to resolve name to ip address and viceversa</li>
+<li>nslookup www.example.com lookup hostname to resolve name to ip address and viceversa</li>
+<li>whois www.example.com lookup on Whois database</li>
+</ul>
+<h1 id="查看文件的类型">查看文件的类型</h1>
+<ul>
+<li>file:查看文件的类型</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://qs100371.vip/post/linux-yun-wei-ming-ling/" title="Linux 运维命令">https://qs100371.vip/post/linux-yun-wei-ming-ling/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li> 
+  </ul>
+  <div class="tags">
+    
+      <a href="https://qs100371.vip/tag/linux/"># linux</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="Ubuntu上修改系统时区的方法" href="https://qs100371.vip/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/">Ubuntu上修改系统时区的方法</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Ubuntu上修改系统时区的方法" href="https://qs100371.vip/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="apache2开启地址重写功能" href="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/">apache2开启地址重写功能</a>
+        <a class="nav-mobile-next" title="apache2开启地址重写功能" href="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+            
+            
+  <script src="/media/scripts/Valine.min.js" ></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: '',
+    
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box">
+  <footer class="footer">
+    
+
+    <div class="poweredby">
+      <span >本站已运行<span id="days" style="font-weight:800; "> </span>天 <img src="/media/images/heart.gif" width="24"></span>
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a><br><span id="jinrishici-sentence">正在加载今日诗词....</span>
+      <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" async></script>
+    </div>
+    
+    <script>
+      let s1 = '2024-10-2';  //设置为建站时间
+      s1 = new Date(s1.replace(/-/g, "/"));
+      s2 = new Date();
+      let days = s2.getTime() - s1.getTime();
+      let number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+      document.getElementById('days').innerHTML = number_of_days;
+    </script>
+<!--播放器
+<script type="text/javascript" id="myhk" src="https://myhkw.cn/api/player/173442375015" key="173442375015" m="1"></script>
+-->
+ <!--   翻译
+<script src="/media/js/translate.js"></script>
+<script>
+translate.language.setLocal('chinese_simplified'); 
+translate.selectLanguageTag.languages = 'english,chinese_simplified,korean,french,japanese';
+translate.service.use('client.edge'); 
+translate.execute(); 
+
+</script>
+-->
+</footer>
+  
+  
+    
+        <div class="pisces back-to-top" id="back_to_top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span class="scrollpercent"> <span id="back_to_top_text">0</span>% </span>
+            
+        </div>
+        
+          
+            
+              <div class="bg-img">
+                <img src="https://img.qs100371.vip/api2.php" />
+              </div>
+              
+                
+                 
+</div>
+<script>
+
+let faSearch = document.querySelector("#fa_search");
+  faSearch &&
+    faSearch.addEventListener("click", function () {
+      document.querySelector("#search_mask").style = "";
+    });
+ // 代码高亮
+ hljs.initHighlightingOnLoad();
+</script>
+ 
+<script>
+  let sideBarOpen = "sidebar-open";
+  let body = document.body;
+  let back2Top = document.querySelector("#back_to_top"),
+    back2TopText = document.querySelector("#back_to_top_text"),
+    drawerBox = document.querySelector("#drawer_box"),
+    rightSideBar = document.querySelector(".sidebar"),
+    viewport = document.querySelector("body");
+
+  function scrollAnimation(currentY, targetY) {
+    let needScrollTop = targetY - currentY;
+    let _currentY = currentY;
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10);
+      _currentY += dist;
+      window.scrollTo(_currentY, currentY);
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY);
+      } else {
+        window.scrollTo(_currentY, targetY);
+      }
+    }, 1);
+  }
+
+  back2Top.addEventListener("click", function (e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+
+  window.addEventListener("scroll", function (e) {
+    let percent =
+      (document.scrollingElement.scrollTop /
+        (document.scrollingElement.scrollHeight -
+          document.scrollingElement.clientHeight)) *
+      100;
+    if (percent > 1 && !back2Top.classList.contains("back-top-active")) {
+      back2Top.classList.add("back-top-active");
+    }
+    if (percent == 0) {
+      back2Top.classList.remove("back-top-active");
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  let hasCacu = false;
+  window.addEventListener("resize", function (e) {
+    calcuHeight();
+  });
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (
+      (!hasCacu && back2Top.classList.contains("pisces")) ||
+      back2Top.classList.contains("gemini")
+    ) {
+      let sideBar = document.querySelector(".sidebar");
+      let navUl = document.querySelector("#site_nav");
+      sideBar.style =
+        "margin-top:" + (navUl.offsetHeight + navUl.offsetTop + 15) + "px;";
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+
+  let open = false,
+    MOTION_TIME = 300,
+    RIGHT_MOVE_DIS = "320px";
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll(".right-motion");
+    let right = drawerBox.classList.contains("right");
+
+    let transitionDir = right
+      ? "transition.slideRightIn"
+      : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingRight: "0px",
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingLeft: "0px",
+      };
+    }
+
+    drawerBox.onclick = function () {
+      open = !open;
+      jQuery.Velocity(rightSideBar, "stop");
+      jQuery.Velocity(viewport, "stop");
+      jQuery.Velocity(rightMotions, "stop");
+      if (open) {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: RIGHT_MOVE_DIS,
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, transitionDir, {});
+            },
+          }
+        );
+        jQuery.Velocity(viewport, openProp, {
+          duration: MOTION_TIME,
+        });
+      } else {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: "0px",
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, {
+                opacity: 0,
+              });
+            },
+          }
+        );
+        jQuery.Velocity(viewport, closeProp, {
+          duration: MOTION_TIME,
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle("muse-line");
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    };
+  }
+
+  // 链接跳转
+  let newWindow = "false";
+  if (newWindow === "true") {
+    let links = document.querySelectorAll(".post-body a");
+    links.forEach((item) => {
+      if (!item.classList.contains("btn")) {
+        item.setAttribute("target", "_blank");
+      }
+    });
+  }
+
+ 
+
+
+
+ 
+// 离开当前页title变化
+  var leaveTitle = "";
+  var normal_title = document.title;
+  if (leaveTitle) {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState == "hidden") {
+        normal_title = document.title;
+        document.title = leaveTitle;
+      } else {
+        document.title = normal_title;
+      }
+    });
+  }
+  
+</script>
+
+<link rel="stylesheet" href="/media/css/jquery.fancybox.css" />
+<script src="/media/js/jquery.fancybox.js"></script>
+ 
+<script>
+ 
+ let images = document.querySelectorAll(".section img");
+  images.forEach((image) => {
+    var parent = image.parentElement;
+    var next = image.nextElementSibling;
+    parent.removeChild(image);
+    var aelem = document.createElement("a");
+    aelem.href = image.src;
+    aelem.dataset["fancybox"] = "images";
+    aelem.dataset["rel"] = "fancybox-button";
+    aelem.classList.add("fancybox");
+    aelem.appendChild(image);
+    parent.insertBefore(aelem, next);
+  }); 
+</script> 
+
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+            <img id="zfb" class="reward-img" src="/media/images/zfb.jpg" alt="赞赏码">
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip"> </p>
+    </div>
+    <div class="bottom">
+      
+      <div id="zfbBtn" class="pay-text">
+        支付宝
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        jQuery.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        jQuery.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        jQuery.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        jQuery.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      jQuery.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      jQuery.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
+  </div>
+</body>
+
+<input hidden id="copy" />
+<script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
+  let language = '';
+  if (language !== '') {
+    let map = new Map();
+    if (language === 'en') {
+      map.set('search', 'Search');
+      map.set('category', 'Categories');
+      map.set('article', 'Articles');
+      map.set('tag', 'Tags');
+      map.set('top', 'Top');
+      map.set('publish', 'published');
+      map.set('minute', ' minutes');
+      map.set('read-more', 'Read More');
+      map.set('view', 'View');
+      map.set('words', ' words');
+      map.set('category-in', 'category in');
+      map.set('preview', 'Meta');
+      map.set('index', 'Toc');
+      map.set('no-archives', "You haven't created yet");
+      map.set('archives', " articles in total");
+      map.set('cloud-tags', " tags in total");
+      map.set('copyright', "Copyright: ");
+      map.set('author', "Author: ");
+      map.set('link', "Link: ");
+      map.set('leave-message', "Leave a message");
+      map.set('format', "Links Format");
+      map.set('site-name', "Name: ");
+      map.set('site-link', "Link: ");
+      map.set('site-desc', "Desc: ");
+      map.set('stat', " related results, taking ");
+      map.set('stat-time', " ms");
+      map.set('site-img', "Image: ");
+    }
+
+    if (map.size > 0) {
+      let lanElems = document.querySelectorAll('.language');
+      lanElems.forEach(elem => {
+        let lan = elem.dataset.lan, text = map.get(lan);
+        if (elem.__proto__ === HTMLInputElement.prototype) {
+          elem.placeholder = text
+        } else {
+          if (elem.dataset.count) {
+            text = elem.dataset.count + text;
+          }
+          elem.textContent = text;
+        }
+      })
+    }
+  }
+
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+
+</script>
+<script src="/media/js/motion.js"></script>
+
+
+
+
+
+
+
+</html>
