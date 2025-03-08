@@ -1,0 +1,326 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      memos
+    </a>
+    
+    <a
+      href="https://w1.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div class="max-w-4xl w-full mx-auto pt-32">
+        <h1 class="text-2xl font-bold pb-8 flex justify-center items-center">
+          <i class="ri-hashtag"></i>
+          onecloud
+        </h1>
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-leanote-shi-bai/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker安装leanote失败
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-24</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>蚂蚁笔记 = 笔记 + 博客 + 协作 + 私有云</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-leanote-shi-bai/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker安装qbittorrent失败
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-22</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>qBittorrent 是一款开源免费的种子和磁力链接下载工具，支持 Windows、Mac 和 Linux。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker安装Aria2 Pro和AriaNg
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-22</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>Aria2是一个命令行下载器。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-2024-11-20-ji-lu/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云2024-11-20记录
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-20</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>v24.8.4 for OneCloud running Armbian Linux 6.10.11-edge-meson<br>
+Packages:     Debian stable (bookworm)<br>
+IP addresses: (LAN) 172.17.0.1 192.168.0.2 (WAN) 183.197.217.187<br>
+Performance:<br>
+Load:         8%           	Up time:       2 days 10:37	<br>
+Memory usage: 25% of 987M   	Zram usage:    16% of 493M   	<br>
+CPU temp:     50°C           	Usage of /:    45% of 6.9G   	<br>
+RX today:     1 GiB</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-2024-11-20-ji-lu/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/armbian-cong-bullseye-sheng-dao-bookworm/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        armbian从bullseye升到bookworm
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-11</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>armbian11升级到12的步骤。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/armbian-cong-bullseye-sheng-dao-bookworm/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/openwrt-passwall2/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        openwrt passwall2
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-10</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>成功搭了个梯子。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/openwrt-passwall2/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/armbian-an-zhuang-zhuo-mian-he-xrdp/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        armbian安装桌面和xrdp
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-08</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>安装桌面<br>
+<code>apt install lxde</code><br>
+安装xrdp<br>
+<code>apt install xrdp xorg xorgxrdp</code><br>
+<code>systemctl enable xrdp</code></p>
+
+    </div>
+    <a href="https://qs100371.vip/post/armbian-an-zhuang-zhuo-mian-he-xrdp/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/openwrt-pang-lu-you/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        openwrt旁路由
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-07</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>打开网卡混杂模式<br>
+<code>ip link set eth0 promisc on</code><br>
+创建OpenWrt网络<br>
+<code>docker network create -d macvlan --subnet=192.168.0.0/24 --gateway=192.168.0.1 -o parent=eth0 openwrt</code></p>
+
+    </div>
+    <a href="https://qs100371.vip/post/openwrt-pang-lu-you/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+  
+  <a href="https://qs100371.vip/tag/onecloud" class="btn btn-white">
+    <i class="ri-arrow-left-line mr-4"></i>
+    上一页
+  </a>
+   
+  <a href="https://qs100371.vip/tag/onecloud/page/3/" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+</html>

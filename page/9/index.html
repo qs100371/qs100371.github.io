@@ -1,0 +1,314 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      memos
+    </a>
+    
+    <a
+      href="https://w1.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div
+        class="max-w-4xl w-full mx-auto pt-32">
+        
+
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        cloudflare tunnel内网穿透
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-20</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>使用cloudflare建立tunnel，在主机上安装守护程序cloudflared，绑定内网服务到tunnel上，实现直接用二级域名访问内网服务。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-ming-ling-xing-he-compose-wen-jian-xiang-hu-zhuan-hua/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker命令行和compose文件相互转化
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-18</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>docker可以直接用命令行建立容器，命令一般比较长，参数多，容易出错，compose方法使用yml文件就简单多了。<br>
+通过docker-compose.yml文件用<code>docker-compose up -d</code>来建立并运行容器。<br>
+cli和yml相互转化工具：<a href="https://www.mklab.cn/utils/docker">https://www.mklab.cn/utils/docker</a></p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-ming-ling-xing-he-compose-wen-jian-xiang-hu-zhuan-hua/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-nei-wai-shu-ju-jiao-liu/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker内外数据交流
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-18</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>在Docker中，容器数据共享与持久化是两个关键的概念，它们确保了数据的安全性和应用的连续性。本文探讨Docker如何实现内外路径打通，从而轻松实现容器数据共享与持久化。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-nei-wai-shu-ju-jiao-liu/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        使用cloudflare实现自定义域名邮箱
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-17</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        证件照制作HivisionIDPhoto
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-14</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>HivisionIDPhoto 是一个轻量级的 AI 证件照制作算法。利用一套完善的 AI 模型工作流程，实现对多种用户拍照场景的识别、抠图与证件照生成。可解决证件照应急制作问题。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker部署网盘cloudreve
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-13</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>cloudreve是一个轻便的网盘系统，可以用docker部署。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        用lucky加cloudflare实现域名访问内网
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-11</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb/s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-an-zhuang-lucky/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker安装lucky
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-10</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>lucky是一个内网工具，功能很多。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-an-zhuang-lucky/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+  
+  <a href="https://qs100371.vip/page/8/" class="btn btn-white">
+    <i class="ri-arrow-left-line mr-4"></i>
+    上一页
+  </a>
+   
+  <a href="https://qs100371.vip/page/10/" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+  
+</html>

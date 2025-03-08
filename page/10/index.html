@@ -1,0 +1,312 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      memos
+    </a>
+    
+    <a
+      href="https://w1.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div
+        class="max-w-4xl w-full mx-auto pt-32">
+        
+
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        安装微力同步verysync
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-06</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>微力同步是一个简单易用的多平台文件同步软件。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/an-zhuang-jellyfin/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        安装Jellyfin
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-05</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>Jellyfin是一个多媒体管理系统。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/an-zhuang-jellyfin/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-bu-shu-talebook/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker部署talebook
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-04</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>talebook是一个个人图书管理系统。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-bu-shu-talebook/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/an-zhuang-casaos/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        安装casaos
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-04</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>casaos是基于社区的开源软件，专注于围绕 Docker 生态系统提供简单的个人云体验。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/an-zhuang-casaos/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        通过GitHub工作流下载Docker镜像
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-03</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>docker pull失败怎么办？可以试试github工作流的方法来下载。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-bu-shu-iptv/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        Docker部署IPTV
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-03</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>Docker部署IPTV，200多电视节目，4K.8K秒切台</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-bu-shu-iptv/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-ming-ling-da-quan/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        Docker 命令大全
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-02</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>分类展示docker命令列表。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-ming-ling-da-quan/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-an-zhuang-ubuntu/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        Docker 安装 Ubuntu
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-02</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>docker拉取ubuntu最新镜像。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-an-zhuang-ubuntu/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+  
+  <a href="https://qs100371.vip/page/9/" class="btn btn-white">
+    <i class="ri-arrow-left-line mr-4"></i>
+    上一页
+  </a>
+   
+  <a href="https://qs100371.vip/page/11/" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+  
+</html>

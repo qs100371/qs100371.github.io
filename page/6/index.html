@@ -1,0 +1,312 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      memos
+    </a>
+    
+    <a
+      href="https://w1.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div
+        class="max-w-4xl w-full mx-auto pt-32">
+        
+
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        一个仿微信朋友圈的项目moments
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-24</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>moments是一个仿微信朋友圈的项目，适合记录生活。本文记录了部署方法。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        Ubuntu上修改系统时区的方法
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-24</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>正确的时区设置对于确保准确的时间和日期非常重要，本文介绍两种常用的方法来修改Ubuntu系统的时区设置：使用timedatectl命令和直接编辑/etc/timezone文件。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/linux-yun-wei-ming-ling/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        Linux 运维命令
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-20</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>能用到“退休”的 Linux 命令，可以解决日常99%的问题。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/linux-yun-wei-ming-ling/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        apache2开启地址重写功能
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-16</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>typecho缺省网页地址是<code>/index.php/archives/{slug}.html</code>的形式，在设置-永久链接设置里，启用地址重写功能，就能变成<code>/archives/{cid}/</code>或<code>/archives/{slug}.html</code>，让链接看上去完全是静态地址。这需要服务器打开rewrite功能。本文记录了打开过程。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-bu-shu-photoprismshi-bai/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker部署photoprism:失败
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-13</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>PhotoPrism 是一个开源的 AI 驱动照片管理工具，使用 Go 语言开发，提供了强大的照片组织和浏览功能。本文记录了部署过程，成功了，但也是失败了。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-bu-shu-photoprismshi-bai/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-bu-shu-wordpress/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker部署wordpress
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-12</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>WordPress是一个以PHP和MySQL为平台的自由开源的博客软件和内容管理系统。WordPress具有插件架构和模板系统，是目前因特网上最流行的博客系统。本文用docker部署wordpress。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-bu-shu-wordpress/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/termux-xia-de-nginx/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        termux下的nginx
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-10</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>手机也可以做为一个小服务器。termux+nginx</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/termux-xia-de-nginx/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-bu-shu-typecho/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker部署typecho
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-01-10</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>Typecho是一款轻量级的PHP博客程序，支持多种数据库和扩展。本文记录了部署和配置Typecho过程。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-bu-shu-typecho/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+  
+  <a href="https://qs100371.vip/page/5/" class="btn btn-white">
+    <i class="ri-arrow-left-line mr-4"></i>
+    上一页
+  </a>
+   
+  <a href="https://qs100371.vip/page/7/" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+  
+</html>

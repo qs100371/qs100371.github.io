@@ -1,0 +1,500 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>使用Cloudflare Worker代理Google搜索 -
+    The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="使用Cloudflare Worker代理Google搜索 -
+    The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+    <meta name="description" content="使用 Cloudflare Worker 代理 Google 站点，间接访问google。
+
+方法类似于代理docker.com
+建立workers
+部署代码
+// 反代目标网站
+const upstream = &#39;ipv6.google...." />
+    <meta
+      property="og:title"
+      content="使用Cloudflare Worker代理Google搜索 - The blog of qs" />
+    <meta property="og:description" content="使用 Cloudflare Worker 代理 Google 站点，间接访问google。
+
+方法类似于代理docker.com
+建立workers
+部署代码
+// 反代目标网站
+const upstream = &#39;ipv6.google...." />
+    <meta property="og:type" content="articles" />
+    <meta property="og:url" content="https://qs100371.vip/post/shi-yong-cloudflare-worker-dai-li-google-sou-suo/" />
+    <meta
+      property="og:image"
+      content="https://qs100371.vip/images/avatar.png" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="1200" />
+    <meta
+      name="twitter:title"
+      content="使用Cloudflare Worker代理Google搜索 - The blog of qs" />
+    <meta name="twitter:description" content="使用 Cloudflare Worker 代理 Google 站点，间接访问google。
+
+方法类似于代理docker.com
+建立workers
+部署代码
+// 反代目标网站
+const upstream = &#39;ipv6.google...." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://qs100371.vip/post/shi-yong-cloudflare-worker-dai-li-google-sou-suo/" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/photoswipe@4.1.3/dist/photoswipe.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/photoswipe@4.1.3/dist/default-skin/default-skin.css" />
+
+    
+    <link
+      rel="stylesheet"
+      href="https://qs100371.vip/media/css/prism-synthwave84.css" />
+     
+  </head>
+
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <a
+        href="https://qs100371.vip"
+        class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+        The blog of qs
+      </a>
+      <div class="max-w-4xl w-full mx-auto">
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+          <h1
+            class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+            使用Cloudflare Worker代理Google搜索
+          </h1>
+          
+          <div class="mb-8 flex flex-wrap">
+            <div class="text-gray-400 text-sm mr-4">
+              2025-01-03 · 4 min read
+            </div>
+            
+            <a
+              href="https://qs100371.vip/tag/web/"
+              class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              web
+            </a>
+            
+          </div>
+          <div class="markdown mb-8" v-pre><p>使用 Cloudflare Worker 代理 Google 站点，间接访问google。</p>
+<!-- more -->
+<p>方法类似于代理docker.com</p>
+<h1 id="建立workers">建立workers</h1>
+<h1 id="部署代码">部署代码</h1>
+<pre><code>// 反代目标网站
+const upstream = 'ipv6.google.com.hk'
+const upstream_v4 = 'www.google.com.hk'
+
+// 访问区域黑名单（按需设置）.
+const blocked_region = ['TK']
+
+//资源重定向
+const replace_dict = {
+  $upstream: '$custom_domain',
+  'www.google.com/': 'g.qs100371.vip/', //填入你的子域名
+  'gstatic.com': 'gstatic.cn',
+  'ajax.googleapis.com': 'ajax.lug.ustc.edu.cn',
+  'fonts.googleapis.com': 'fonts.googleapis.cn',
+  'themes.googleusercontent.com': 'google-themes.lug.ustc.edu.cn',
+  'www.gravatar.com/avatar': 'dn-qiniu-avatar.qbox.me/avatar',
+  'www.google.co.jp': '$custom_domain',
+  'www.google.com.sg': '$custom_domain',
+  'books.google.com.hk': '$custom_domain',
+  'books.google.co.jp': '$custom_domain',
+  'books.google.com.sg': '$custom_domain',
+  'maps.google.com.hk': '$custom_domain',
+  'maps.google.co.jp': '$custom_domain',
+  'maps.google.com.sg': '$custom_domain',
+  'maps.google.com': '$custom_domain',
+  'books.google.com': '$custom_domain',
+}
+
+addEventListener('fetch', (event) =&gt; {
+  event.respondWith(fetchAndApply(event.request))
+})
+
+async function fetchAndApply(request) {
+  const region = request.headers.get('cf-ipcountry').toUpperCase()
+//   const ip_address = request.headers.get('cf-connecting-ip')
+//   const user_agent = request.headers.get('user-agent')
+
+  let response = null
+  let url = new URL(request.url)
+  let url_host = url.host
+
+  if (url.protocol == 'http:') {
+    url.protocol = 'https:'
+    response = Response.redirect(url.href)
+    return response
+  }
+
+  //检查是否为图片搜索
+  var key = url.href
+  var ikey1 = 'tbm=isch'
+  var ikey2 = '/img'
+  if ((key.search(ikey1) == -1) &amp;&amp; (key.search(ikey2) == -1)) {
+    var upstream_domain = upstream
+  } else {
+    var upstream_domain = upstream_v4
+  }
+
+  url.host = upstream_domain
+
+  if (blocked_region.includes(region)) {
+    response = new Response(
+      'Access denied: WorkersProxy is not available in your region yet.',
+      {
+        status: 403,
+      }
+    )
+  } else {
+    let method = request.method
+    let request_headers = request.headers
+    let new_request_headers = new Headers(request_headers)
+
+    new_request_headers.set('Host', upstream_domain)
+    new_request_headers.set('Referer', url.href)
+
+    let original_response = await fetch(url.href, {
+      method: method,
+      headers: new_request_headers,
+    })
+
+    let original_response_clone = original_response.clone()
+    let original_text = null
+    let response_headers = original_response.headers
+    let new_response_headers = new Headers(response_headers)
+    let status = original_response.status
+
+    new_response_headers.set('cache-control', 'public, max-age=14400')
+    new_response_headers.set('access-control-allow-origin', '*')
+    new_response_headers.set('access-control-allow-credentials', true)
+    new_response_headers.delete('content-security-policy')
+    new_response_headers.delete('content-security-policy-report-only')
+    new_response_headers.delete('clear-site-data')
+
+    const content_type = new_response_headers.get('content-type')
+    if (content_type.includes('text/html') &amp;&amp; content_type.includes('UTF-8')) {
+      // &amp;&amp; content_type.includes('UTF-8')
+      original_text = await replace_response_text(
+        original_response_clone,
+        upstream_domain,
+        url_host
+      )
+    } else {
+      original_text = original_response_clone.body
+    }
+
+    response = new Response(original_text, {
+      status,
+      headers: new_response_headers,
+    })
+  }
+  return response
+}
+
+async function replace_response_text(response, upstream_domain, host_name) {
+  let text = await response.text()
+
+  var i, j
+  for (i in replace_dict) {
+    j = replace_dict[i]
+    if (i == '$upstream') {
+      i = upstream_domain
+    } else if (i == '$custom_domain') {
+      i = host_name
+    }
+
+    if (j == '$upstream') {
+      j = upstream_domain
+    } else if (j == '$custom_domain') {
+      j = host_name
+    }
+
+    let re = new RegExp(i, 'g')
+    text = text.replace(re, j)
+  }
+
+  return text
+}
+</code></pre>
+<p>cloudflare的在线代码编辑器会提示没有权限不能使用右键粘贴代码，直接用ctrl+v。<br>
+第三行g.XXX是自定义域名。</p>
+<h1 id="给worker设置上面的自定义域名">给worker设置上面的自定义域名</h1>
+<blockquote>
+<p>用浏览器打开自定义域名，会出现google搜索。有时候会出错误提示，无解。<br>
+<img src="https://qs100371.vip/post-images/1735889047800.webp" alt="" loading="lazy"></p>
+</blockquote>
+<hr>
+<p>参考：<br>
+<a href="https://voxsay.com/posts/using-cloudflare-worker-proxy-google/"><em>https://voxsay.com/posts/using-cloudflare-worker-proxy-google</em>/</a></p>
+</div>
+          <!-- Share to Twitter, Weibo, Telegram -->
+          <div class="flex items-center">
+            <div class="mr-4 flex items-center">
+              <i class="ri-share-forward-line text-gray-500"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToTwitter">
+              <i class="ri-twitter-line"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToWeibo">
+              <i class="ri-weibo-line"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToTelegram">
+              <i class="ri-telegram-line"></i>
+            </div>
+          </div>
+        </div>
+
+         
+        <div id="vlaine-comment"></div>
+         <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+
+      <!-- TOC Container -->
+      <div
+        class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight"
+        @click="showToc = true">
+        <i class="ri-file-list-line"></i>
+      </div>
+
+      <div
+        class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast"
+        :class="{ '-mr-64': !showToc }">
+        <div class="flex mb-4 justify-end">
+          <div
+            class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast"
+            @click="showToc = false">
+            <i class="ri-close-line text-lg"></i>
+          </div>
+        </div>
+        <div class="post-toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E5%BB%BA%E7%AB%8Bworkers">建立workers</a></li>
+<li><a href="#%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">部署代码</a></li>
+<li><a href="#%E7%BB%99worker%E8%AE%BE%E7%BD%AE%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D">给worker设置上面的自定义域名</a></li>
+</ul>
+</div>
+      </div>
+
+      <!-- Back to top -->
+      <div
+        class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200"
+        @click="backToUp"
+        v-show="scrolled">
+        <i class="ri-arrow-up-line"></i>
+      </div>
+    </div>
+
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe.
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter"></div>
+        <button
+          class="pswp__button pswp__button--close"
+          title="Close (Esc)"></button>
+        <button
+          class="pswp__button pswp__button--fs"
+          title="Toggle fullscreen"></button>
+        <button
+          class="pswp__button pswp__button--zoom"
+          title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+      <button
+        class="pswp__button pswp__button--arrow--left"
+        title="Previous (arrow left)"></button>
+      <button
+        class="pswp__button pswp__button--arrow--right"
+        title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+
+    <!-- Code Highlight -->
+    
+    <script src="https://qs100371.vip/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+    
+
+    <script src="https://unpkg.com/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+    <script src="https://unpkg.com/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+    <script>
+      //拿到预览框架，也就是上面的html代码
+      var pswpElement = document.querySelectorAll('.pswp')[0]
+      //定义图片数组变量
+      var imgitems
+      /**
+       * 用于显示预览界面
+       * @param index 图片数组下标
+       */
+      function viewImg(index) {
+        //其它选项这里不做过多阐述，详情见官网
+        var pswpoptions = {
+          index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+          bgOpacity: 0.7, // 背景透明度，0-1
+          maxSpreadZoom: 3, // 缩放级别，不要太大
+        }
+        //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+        var gallery = new PhotoSwipe(
+          pswpElement,
+          PhotoSwipeUI_Default,
+          imgitems,
+          pswpoptions
+        )
+        gallery.init()
+      }
+      /**
+       * 用于添加图片点击事件
+       * @param img 图片元素
+       * @param index 所属下标（在imgitems中的位置）
+       */
+      function addImgClick(img, index) {
+        img.onclick = function () {
+          viewImg(index)
+        }
+      }
+      /**
+       * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+       * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+       * 异步加载图片可在图片元素创建完成后调用此方法
+       */
+      function initImg() {
+        //重置图片数组
+        imgitems = []
+        //查找class:markdown 下的所有img元素并遍历
+        var imgs = document.querySelectorAll('.markdown img')
+        for (var i = 0; i < imgs.length; i++) {
+          var img = imgs[i]
+          //本站相册初始为loading图片，真实图片放在data-src
+          var ds = img.getAttribute('data-src')
+          //创建image对象，用于获取图片宽高
+          var imgtemp = new Image()
+          //判断是否存在data-src
+          if (ds != null && ds.length > 0) {
+            imgtemp.src = ds
+          } else {
+            imgtemp.src = img.src
+          }
+          //判断是否存在缓存
+          if (imgtemp.complete) {
+            var imgobj = {
+              src: imgtemp.src,
+              w: imgtemp.width,
+              h: imgtemp.height,
+            }
+            imgitems[i] = imgobj
+            addImgClick(img, i)
+          } else {
+            console.log('进来了2')
+            imgtemp.index = i
+            imgtemp.img = img
+            imgtemp.onload = function () {
+              var imgobj = {
+                src: this.src,
+                w: this.width,
+                h: this.height,
+              }
+              //不要使用push，因为onload前后顺序会不同
+              imgitems[this.index] = imgobj
+              //添加点击事件
+              addImgClick(this.img, this.index)
+            }
+          }
+        }
+      }
+      //初始化
+      initImg()
+    </script>
+     <script type="application/javascript" src="https://unpkg.com/valine"></script>
+<script type="application/javascript">
+  new Valine({
+    el: '#vlaine-comment',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    pageSize: '10',
+    notify: 'false',
+    avatar: 'mp',
+    verify: 'false',
+    placeholder: '来都来了，不妨评论一下',
+    visitor: 'true',
+    highlight: 'false',
+    recordIP: 'false',
+  })
+</script>
+  
+  </body>
+</html>
