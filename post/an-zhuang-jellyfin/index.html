@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>安装Jellyfin | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/an-zhuang-jellyfin/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="Jellyfin是一个多媒体管理系统。
+
+
+脚本安装
+
+curl -s https://repo.jellyfin.org/install-debuntu.sh | bash
+
+Determining optimal repository ..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            安装Jellyfin
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2024-12-05
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+          <a href="https://qs100371.vip/tag/linux/" class="post-tags">
+            # linux
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>Jellyfin是一个多媒体管理系统。</p>
+<!-- more -->
+<blockquote>
+<p>脚本安装</p>
+</blockquote>
+<p><code>curl -s https://repo.jellyfin.org/install-debuntu.sh | bash</code></p>
+<blockquote>
+<p>Determining optimal repository settings.</p>
+</blockquote>
+<p>Found the following details from '/etc/os-release':<br>
+Real OS:            debian<br>
+Repository OS:      debian<br>
+Repository Release: bookworm<br>
+CPU Architecture:   armhf<br>
+If this looks correct, press <Enter> now to continue installing Jellyfin.</p>
+<blockquote>
+<p>Fetching repository signing key.</p>
+</blockquote>
+<blockquote>
+<p>Installing Jellyfin repository into APT.</p>
+</blockquote>
+<p>Types: deb<br>
+URIs: https://repo.jellyfin.org/debian<br>
+Suites: bookworm<br>
+Components: main<br>
+Architectures: armhf<br>
+Signed-By: /etc/apt/keyrings/jellyfin.gpg<br>
+.<br>
+.<br>
+.</p>
+<p>You should see the service as 'active (running)' above. If not, use https://jellyfin.org/contact to find us for troubleshooting.</p>
+<p>You can access your new instance now at http://192.168.0.2:8096 in your web browser to finish setting up Jellyfin.</p>
+<p>Thank you for installing Jellyfin, and happy watching!</p>
+<blockquote>
+<p>从http://192.168.0.2:8096访问</p>
+</blockquote>
+<p><img src="https://qs100371.vip/post-images/1733404168656.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1733404175190.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1733404181813.webp" alt="" loading="lazy"></p>
+<p>电视源就是之前在本地建立的。</p>
+<blockquote>
+<p>docker安装</p>
+</blockquote>
+<pre><code>docker pull jellyfin/jellyfin:latest  # or docker pull ghcr.io/jellyfin/jellyfin:latest
+mkdir -p /data/jellyfin/{config,cache}
+mkdir /data/media
+docker run -d -v /data/jellyfin/config:/config \
+-v /data/jellyfin/cache:/cache -v /data/media:/media \
+--net=host jellyfin/jellyfin:latest 
+</code></pre>
+<p>同样是从8096端口访问。<br>
+<img src="https://qs100371.vip/post-images/1733405630235.webp" alt="" loading="lazy"><br>
+docker上的jellyfin占的内存太多，玩客云抗不住重启了。</p>
+
+          </div>
+          <div class="toc-container">
+            
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-bu-shu-talebook/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

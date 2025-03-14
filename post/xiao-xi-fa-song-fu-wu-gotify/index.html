@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>消息发送服务gotify | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/xiao-xi-fa-song-fu-wu-gotify/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="Gotify 是一个可以自己搭建的用于发送和接受通知的服务。可以用客户端或命令行等方式发送消息。
+
+部署服务
+docker run -d --name gotify --restart unless-stopped -p 81:80 -v ..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            消息发送服务gotify
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-02-12
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>Gotify 是一个可以自己搭建的用于发送和接受通知的服务。可以用客户端或命令行等方式发送消息。</p>
+<!-- more -->
+<h1 id="部署服务">部署服务</h1>
+<p><code>docker run -d --name gotify --restart unless-stopped -p 81:80 -v /data/gotify:/app/data ghcr.io/gotify/server</code><br>
+从IP:81访问。缺省帐号密码是admin:admin。<br>
+<img src="https://qs100371.vip/post-images/1739356693021.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739356731662.webp" alt="" loading="lazy"></p>
+<h1 id="创建应用">创建应用</h1>
+<p><img src="https://qs100371.vip/post-images/1739356738655.webp" alt="" loading="lazy"><br>
+应用像是一个分类的功能，拿聊天软件类比的话，有点儿像频道。创建一个应用就会生成一个单独的 Token，可以用Token 作为凭证来发送消息。</p>
+<h1 id="推送消息">推送消息</h1>
+<ul>
+<li>推送消息就是一个简单的 POST 方法的 HTTP 请求。</li>
+</ul>
+<pre><code>curl &quot;https://gotify.qs100371.vip/message?token=AGeYVop***nXOiV&quot; -F &quot;title=my title&quot; -F &quot;message=my message&quot; -F &quot;priority=5&quot;
+</code></pre>
+<p>显示：</p>
+<pre><code>{&quot;id&quot;:2,&quot;appid&quot;:1,&quot;message&quot;:&quot;my message&quot;,&quot;title&quot;:&quot;my title&quot;,&quot;priority&quot;:5,&quot;date&quot;:&quot;2025-02-12T10:01:41.58719347Z&quot;}
+</code></pre>
+<p>这里的token就是应用的token。如果token错误，显示是：</p>
+<pre><code>{&quot;error&quot;:&quot;Unauthorized&quot;,&quot;errorCode&quot;:401,&quot;errorDescription&quot;:&quot;you need to provide a valid access token or user credentials to access this api&quot;}
+</code></pre>
+<ul>
+<li>安卓客户端<br>
+<a href="https://github.com/gotify/android/releases/tag/v2.8.1">gotify/android</a><br>
+把gotify的地址穿透之后可以用域名访问。</li>
+<li>gotify cli<br>
+<a href="https://github.com/gotify/cli/releases">gotify/cli</a></li>
+</ul>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1">部署服务</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8">创建应用</a></li>
+<li><a href="#%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF">推送消息</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-bu-shu-qing-liang-ji-linux-xi-tong-instantbox/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

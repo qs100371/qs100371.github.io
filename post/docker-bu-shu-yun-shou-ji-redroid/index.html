@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>docker部署云手机：redroid | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/docker-bu-shu-yun-shou-ji-redroid/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="Redroid （Remote anDroid） 是一种 GPU 加速的 AIC （Android In Cloud） 解决方案。可以在 Linux 主机（Docker、podman、k8s 等）中启动许多实例。Redroid 支持 arm..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            docker部署云手机：redroid
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-30
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>Redroid （Remote anDroid） 是一种 GPU 加速的 AIC （Android In Cloud） 解决方案。可以在 Linux 主机（Docker、podman、k8s 等）中启动许多实例。Redroid 支持 arm64 和 amd64 架构，适用于云游戏、虚拟化手机、自动化测试等。本文记录了部署过程。</p>
+<!-- more -->
+<h1 id="拉取镜像">拉取镜像</h1>
+<p><code>docker pull redroid/redroid:11.0.0-latest</code><br>
+这里拉取了android11镜像。800M左右。</p>
+<h1 id="启动容器">启动容器</h1>
+<pre><code>## install required kernel modules
+apt install linux-modules-extra-`uname -r`
+modprobe binder_linux devices=&quot;binder,hwbinder,vndbinder&quot;
+modprobe ashmem_linux
+mkdir /data/redroid
+docker run -itd --name redroid11 --rm --privileged \
+    -v /data/redroid:/data \
+    -p 5555:5555 \
+    redroid/redroid:11.0.0-latest
+</code></pre>
+<p>主机是ubuntu server 22.04.5，命令前省掉了sudo。</p>
+<blockquote>
+<p>此处有坑：两句modprobe每次重启主机后必须重新运行，这个容器在停止后会自动删除。</p>
+</blockquote>
+<h1 id="连接云手机">连接云手机</h1>
+<ul>
+<li>安装adb<br>
+下载：https://developer.android.com/tools/releases/platform-tools?hl=zh-cn</li>
+<li>安装scrcpy<br>
+下载：https://github.com/Genymobile/scrcpy/blob/master/README.md#get-the-app</li>
+</ul>
+<blockquote>
+<p>scrcpy win版里包含了adb工具。</p>
+</blockquote>
+<pre><code>adb connect ip:5555
+adb install via.apk     #安装via浏览器，原装的浏览器不好用。
+scrcpy -s ip:5555
+</code></pre>
+<p>会打开一个新窗口，显示android界面。<br>
+<img src="https://qs100371.vip/post-images/1738237876613.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1738237881951.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1738237887353.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>可能是主机不够强大，android11很卡。</p>
+</blockquote>
+<p>参考：<br>
+<a href="https://hub.docker.com/r/redroid/redroid"><em>github项目redroid/redroid</em></a></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F">拉取镜像</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8">启动容器</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E4%BA%91%E6%89%8B%E6%9C%BA">连接云手机</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/nginxphp-an-zhuang-he-pei-zhi/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-yun-shou-ji-fang-an-budtmodocker-android/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

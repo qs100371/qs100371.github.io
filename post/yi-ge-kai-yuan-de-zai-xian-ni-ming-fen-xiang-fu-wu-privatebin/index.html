@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>一个开源的在线匿名分享服务privatebin | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/yi-ge-kai-yuan-de-zai-xian-ni-ming-fen-xiang-fu-wu-privatebin/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="PrivateBin是一个开源的在线匿名分享服务，有阅后即焚的方便功能。
+
+PrivateBin的作用很简单，就是在无需实名和注册的情况下，通过PrivateBin可粘贴内容/上传文件并生成一个链接。对于接收文件的人来说，这是一个有限制的链..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            一个开源的在线匿名分享服务privatebin
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-26
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>PrivateBin是一个开源的在线匿名分享服务，有阅后即焚的方便功能。</p>
+<!-- more -->
+<p>PrivateBin的作用很简单，就是在无需实名和注册的情况下，通过PrivateBin可粘贴内容/上传文件并生成一个链接。对于接收文件的人来说，这是一个有限制的链接。比如，如果在密码栏里输入一个密码，那么有密码的人才可以查阅链接内容；或者是有效期很短，甚至是只可以打开1次（所谓的阅后即焚）。对于某些想临时传送文件或内容的小伙伴来说，简直就是神器！</p>
+<h1 id="拉取镜像">拉取镜像</h1>
+<p><code>docker pull privatebin/nginx-fpm-alpine:latest</code><br>
+本地拉取镜像太费劲，还是用github的action拉取之后用sftp传到主机上。</p>
+<h1 id="启动容器">启动容器</h1>
+<p><code>docker run -d --name privatebin --restart unless-stopped --read-only -p 5000:8080  privatebin/nginx-fpm-alpine</code></p>
+<h1 id="使用">使用</h1>
+<p>从ip:5000访问时，会提示：</p>
+<p>PrivateBin 需要在现代浏览器上工作。<br>
+您的浏览器可能需要 HTTPS 连接才能支持 WebCrypto API。 尝试切换到 HTTPS。</p>
+<figure data-type="image" tabindex="1"><img src="https://qs100371.vip/post-images/1737822379114.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>用cloudflare建立一个隧道指向内网服务器，获得一个https地址再访问，比如<br>
+<a href="https://p.qs100371.vip">https://p.qs100371.vip</a>。再次访问，成功了。这个网址在公网是可用的，如果cf的隧道不出问题的话。</p>
+</blockquote>
+<figure data-type="image" tabindex="2"><img src="https://qs100371.vip/post-images/1737822407447.webp" alt="" loading="lazy"></figure>
+<p>试一试，粘贴一句话，点创建，生成一个url:<br>
+https://p.qs100371.vip/?28e969e23e724ce7#2fzcB11SiHpfLCFZ2Quk1iXsDmJDmUkvZAq9mouHxsGP，<br>
+把url发送给别人，点击链接，就会看到这句话。<br>
+<img src="https://qs100371.vip/post-images/1737822635283.webp" alt="" loading="lazy"></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F">拉取镜像</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8">启动容器</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

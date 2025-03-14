@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>docker里的群晖Virtual DSM | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/docker-li-de-qun-hui-virtual-dsm/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="我们对于群晖的认知还停留在通过安装群晖系统的方式来安装，目前在Github已经支持使用Docker来运行群晖dsm系统。本文记录了安装过程。
+
+项目地址：vdsm/virtual-dsm
+部署方法
+docker-compose.yml内容：..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            docker里的群晖Virtual DSM
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-02-16
+          </time>
+          <span class="read-times">
+            1 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+          <a href="https://qs100371.vip/tag/linux/" class="post-tags">
+            # linux
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>我们对于群晖的认知还停留在通过安装群晖系统的方式来安装，目前在Github已经支持使用Docker来运行群晖dsm系统。本文记录了安装过程。</p>
+<!-- more -->
+<p>项目地址：<a href="https://github.com/vdsm/virtual-dsm">vdsm/virtual-dsm</a></p>
+<h1 id="部署方法">部署方法</h1>
+<p>docker-compose.yml内容：</p>
+<pre><code>services:
+ dsm:
+   container_name: dsm
+   image: vdsm/virtual-dsm:7.23
+   environment:
+     RAM_SIZE: &quot;2G&quot;
+     CPU_CORES: &quot;2&quot;
+   devices:
+     - /dev/kvm
+     - /dev/net/tun
+   cap_add:
+     - NET_ADMIN
+   ports:
+     - 5000:5000
+   volumes:
+     - /data/dsm:/storage
+   restart: unless-stopped
+   stop_grace_period: 2m
+</code></pre>
+<h1 id="启动">启动</h1>
+<p><code>docker-compose up</code>   #可以看到启动过程，这里一个在docker里启动qemu，再启动dsm的过程，具体过程可以查看<code>docker logs dsm</code>。<br>
+<img src="https://qs100371.vip/post-images/1739668872516.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739668878192.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739668886213.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739668968823.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739668975612.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739668986043.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739668990873.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739668995920.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739669001414.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739669006358.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>在BIOS里没有打开vt-x的情况下，不支持kvm，启动要很久，打开之后只要一分钟就启动完毕了。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95">部署方法</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8">启动</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-bu-shu-linux-wan-zheng-zhuo-mian-xi-tong-webtop/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-li-de-fei-niu-os/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

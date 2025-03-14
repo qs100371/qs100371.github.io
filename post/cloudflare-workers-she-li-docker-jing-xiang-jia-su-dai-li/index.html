@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>Cloudflare Workers设立Docker镜像加速代理 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/cloudflare-workers-she-li-docker-jing-xiang-jia-su-dai-li/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="利用cloudflare workers部署代码并绑定自定义域名，修改/etc/docker/daemon.json使用此地址作为加速服务器。
+
+新建Workers
+部署之后编辑代码：
+let hub_host = &#39;registry-1...." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            Cloudflare Workers设立Docker镜像加速代理
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-02
+          </time>
+          <span class="read-times">
+            8 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>利用cloudflare workers部署代码并绑定自定义域名，修改/etc/docker/daemon.json使用此地址作为加速服务器。</p>
+<!-- more -->
+<h1 id="新建workers">新建Workers</h1>
+<p>部署之后编辑代码：</p>
+<pre><code>let hub_host = 'registry-1.docker.io'
+const auth_url = 'https://auth.docker.io'
+let workers_url = 'https://docker.qs100371.vip'
+let UA = ['netcraft'];
+function routeByHosts(host) {
+    const routes = {
+        &quot;quay&quot;: &quot;quay.io&quot;,
+        &quot;gcr&quot;: &quot;gcr.io&quot;,
+        &quot;k8s-gcr&quot;: &quot;k8s.gcr.io&quot;,
+        &quot;k8s&quot;: &quot;registry.k8s.io&quot;,
+        &quot;ghcr&quot;: &quot;ghcr.io&quot;,
+        &quot;cloudsmith&quot;: &quot;docker.cloudsmith.io&quot;,
+        &quot;test&quot;: &quot;registry-1.docker.io&quot;,
+    };
+    if (host in routes) return [ routes[host], false ];
+    else return [ hub_host, true ];
+}
+const PREFLIGHT_INIT = {
+    headers: new Headers({
+        'access-control-allow-origin': '*',
+        'access-control-allow-methods': 'GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS',
+        'access-control-max-age': '1728000',
+    }),
+}
+function makeRes(body, status = 200, headers = {}) {
+    headers['access-control-allow-origin'] = '*'
+    return new Response(body, { status, headers })
+}
+function newUrl(urlStr) {
+    try {
+        return new URL(urlStr)
+    } catch (err) {
+        return null
+    }
+}
+function isUUID(uuid) {
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    return uuidRegex.test(uuid);
+}
+async function nginx() {
+    const text = `
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+    &lt;title&gt;Welcome to nginx!&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            width: 35em;
+            margin: 0 auto;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+    &lt;p&gt;If you see this page, the nginx web server is successfully installed and
+    working. Further configuration is required.&lt;/p&gt;
+    &lt;p&gt;For online documentation and support please refer to
+    &lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+    Commercial support is available at
+    &lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    `
+    return text ;
+}
+export default {
+    async fetch(request, env, ctx) {
+        const getReqHeader = (key) =&gt; request.headers.get(key);
+        let url = new URL(request.url);
+        const userAgentHeader = request.headers.get('User-Agent');
+        const userAgent = userAgentHeader ? userAgentHeader.toLowerCase() : &quot;null&quot;;
+        if (env.UA) UA = UA.concat(await ADD(env.UA));
+        workers_url = `https://${url.hostname}`;
+        const pathname = url.pathname;
+        const hostname = url.searchParams.get('hubhost') || url.hostname; 
+        const hostTop = hostname.split('.')[0];
+        const checkHost = routeByHosts(hostTop);
+        hub_host = checkHost[0];
+        const fakePage = checkHost[1];
+        console.log(`域名头部: ${hostTop}\n反代地址: ${hub_host}\n伪装首页: ${fakePage}`);
+        const isUuid = isUUID(pathname.split('/')[1].split('/')[0]);
+        if (UA.some(fxxk =&gt; userAgent.includes(fxxk)) &amp;&amp; UA.length &gt; 0){
+            return new Response(await nginx(), {
+                headers: {
+                    'Content-Type': 'text/html; charset=UTF-8',
+                },
+            });
+        }
+        const conditions = [
+            isUuid,
+            pathname.includes('/_'),
+            pathname.includes('/r'),
+            pathname.includes('/v2/user'),
+            pathname.includes('/v2/orgs'),
+            pathname.includes('/v2/_catalog'),
+            pathname.includes('/v2/categories'),
+            pathname.includes('/v2/feature-flags'),
+            pathname.includes('search'),
+            pathname.includes('source'),
+            pathname === '/',
+            pathname === '/favicon.ico',
+            pathname === '/auth/profile',
+        ];
+        if (conditions.some(condition =&gt; condition) &amp;&amp; (fakePage === true || hostTop == 'docker')) {
+            if (env.URL302){
+                return Response.redirect(env.URL302, 302);
+            } else if (env.URL){
+                if (env.URL.toLowerCase() == 'nginx'){
+                    return new Response(await nginx(), {
+                        headers: {
+                            'Content-Type': 'text/html; charset=UTF-8',
+                        },
+                    });
+                } else return fetch(new Request(env.URL, request));
+            }
+            const newUrl = new URL(&quot;https://registry.hub.docker.com&quot; + pathname + url.search);
+            const headers = new Headers(request.headers);
+            headers.set('Host', 'registry.hub.docker.com');
+            const newRequest = new Request(newUrl, {
+                    method: request.method,
+                    headers: headers,
+                    body: request.method !== 'GET' &amp;&amp; request.method !== 'HEAD' ? await request.blob() : null,
+                    redirect: 'follow'
+            });
+            return fetch(newRequest);
+        }
+        if (!/%2F/.test(url.search) &amp;&amp; /%3A/.test(url.toString())) {
+            let modifiedUrl = url.toString().replace(/%3A(?=.*?&amp;)/, '%3Alibrary%2F');
+            url = new URL(modifiedUrl);
+            console.log(`handle_url: ${url}`)
+        }
+        if (url.pathname.includes('/token')) {
+            let token_parameter = {
+                headers: {
+                    'Host': 'auth.docker.io',
+                    'User-Agent': getReqHeader(&quot;User-Agent&quot;),
+                    'Accept': getReqHeader(&quot;Accept&quot;),
+                    'Accept-Language': getReqHeader(&quot;Accept-Language&quot;),
+                    'Accept-Encoding': getReqHeader(&quot;Accept-Encoding&quot;),
+                    'Connection': 'keep-alive',
+                    'Cache-Control': 'max-age=0'
+                }
+            };
+            let token_url = auth_url + url.pathname + url.search
+            return fetch(new Request(token_url, request), token_parameter)
+        }
+        if (/^\/v2\/[^/]+\/[^/]+\/[^/]+$/.test(url.pathname) &amp;&amp; !/^\/v2\/library/.test(url.pathname)) {
+            url.pathname = url.pathname.replace(/\/v2\//, '/v2/library/');
+            console.log(`modified_url: ${url.pathname}`)
+        }
+        url.hostname = hub_host;
+        let parameter = {
+            headers: {
+                'Host': hub_host,
+                'User-Agent': getReqHeader(&quot;User-Agent&quot;),
+                'Accept': getReqHeader(&quot;Accept&quot;),
+                'Accept-Language': getReqHeader(&quot;Accept-Language&quot;),
+                'Accept-Encoding': getReqHeader(&quot;Accept-Encoding&quot;),
+                'Connection': 'keep-alive',
+                'Cache-Control': 'max-age=0'
+            },
+            cacheTtl: 3600
+        };
+        if (request.headers.has(&quot;Authorization&quot;)) {
+            parameter.headers.Authorization = getReqHeader(&quot;Authorization&quot;);
+        }
+        let original_response = await fetch(new Request(url, request), parameter)
+        let original_response_clone = original_response.clone();
+        let original_text = original_response_clone.body;
+        let response_headers = original_response.headers;
+        let new_response_headers = new Headers(response_headers);
+        let status = original_response.status;
+        if (new_response_headers.get(&quot;Www-Authenticate&quot;)) {
+            let auth = new_response_headers.get(&quot;Www-Authenticate&quot;);
+            let re = new RegExp(auth_url, 'g');
+            new_response_headers.set(&quot;Www-Authenticate&quot;, response_headers.get(&quot;Www-Authenticate&quot;).replace(re, workers_url));
+        }
+        if (new_response_headers.get(&quot;Location&quot;)) {
+            return httpHandler(request, new_response_headers.get(&quot;Location&quot;))
+        }
+        let response = new Response(original_text, {
+            status,
+            headers: new_response_headers
+        })
+        return response;
+    }
+};
+function httpHandler(req, pathname) {
+    const reqHdrRaw = req.headers
+    if (req.method === 'OPTIONS' &amp;&amp;
+        reqHdrRaw.has('access-control-request-headers')
+    ) {
+        return new Response(null, PREFLIGHT_INIT)
+    }
+    let rawLen = ''
+    const reqHdrNew = new Headers(reqHdrRaw)
+    const refer = reqHdrNew.get('referer')
+    let urlStr = pathname
+    const urlObj = newUrl(urlStr)
+    const reqInit = {
+        method: req.method,
+        headers: reqHdrNew,
+        redirect: 'follow',
+        body: req.body
+    }
+    return proxy(urlObj, reqInit, rawLen)
+}
+async function proxy(urlObj, reqInit, rawLen) {
+    const res = await fetch(urlObj.href, reqInit)
+    const resHdrOld = res.headers
+    const resHdrNew = new Headers(resHdrOld)
+    if (rawLen) {
+        const newLen = resHdrOld.get('content-length') || ''
+        const badLen = (rawLen !== newLen)
+        if (badLen) {
+            return makeRes(res.body, 400, {
+                '--error': `bad len: ${newLen}, except: ${rawLen}`,
+                'access-control-expose-headers': '--error',
+            })
+        }
+    }
+    const status = res.status
+    resHdrNew.set('access-control-expose-headers', '*')
+    resHdrNew.set('access-control-allow-origin', '*')
+    resHdrNew.set('Cache-Control', 'max-age=1500')
+    resHdrNew.delete('content-security-policy')
+    resHdrNew.delete('content-security-policy-report-only')
+    resHdrNew.delete('clear-site-data')
+    return new Response(res.body, {
+        status,
+        headers: resHdrNew
+    })
+}
+async function ADD(envadd) {
+    var addtext = envadd.replace(/[     |&quot;'\r\n]+/g, ',').replace(/,+/g, ',');
+    //console.log(addtext);
+    if (addtext.charAt(0) == ',') addtext = addtext.slice(1);
+    if (addtext.charAt(addtext.length -1) == ',') addtext = addtext.slice(0, addtext.length - 1);
+    const add = addtext.split(',');
+    //console.log(add);
+    return add ;
+}
+</code></pre>
+<p>第三行的url是自定义二级域名。</p>
+<h1 id="为workers绑定二级域名url">为workers绑定二级域名url。</h1>
+<figure data-type="image" tabindex="1"><img src="https://qs100371.vip/post-images/1735813488883.webp" alt="" loading="lazy"></figure>
+<h1 id="使用方法">使用方法</h1>
+<p>修改/etc/docker/daemon.json</p>
+<pre><code>{
+    &quot;registry-mirrors&quot;: [
+        &quot;https://docker.qs100371.vip&quot;
+    ]
+}
+</code></pre>
+<blockquote>
+<p>经测试，速度不很快，但也能用。</p>
+</blockquote>
+<hr>
+<p>参考：<br>
+<a href="https://wangyunzi.com/posts/147/"><em>docker代理问题</em></a></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E6%96%B0%E5%BB%BAworkers">新建Workers</a></li>
+<li><a href="#%E4%B8%BAworkers%E7%BB%91%E5%AE%9A%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8Durl">为workers绑定二级域名url。</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/wang-ye-tou-bu-gun-dong-zhan-shi-zui-jin-de-memos/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/shi-yong-cloudflare-worker-dai-li-google-sou-suo/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

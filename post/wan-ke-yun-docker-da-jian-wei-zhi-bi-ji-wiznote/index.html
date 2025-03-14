@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>玩客云docker搭建为知笔记wiznote | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="为知笔记定位于高效率工作笔记，主打工作笔记的移动应用，是国内一款“工作笔记”的云笔记类产品。
+
+
+拉取镜像
+
+docker pull wiznote/wizserver
+Using default tag: latest
+latest: P..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            玩客云docker搭建为知笔记wiznote
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2024-11-27
+          </time>
+          <span class="read-times">
+            1 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/onecloud/" class="post-tags">
+            # onecloud
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>为知笔记定位于高效率工作笔记，主打工作笔记的移动应用，是国内一款“工作笔记”的云笔记类产品。</p>
+<!-- more -->
+<blockquote>
+<p>拉取镜像</p>
+</blockquote>
+<p><code>docker pull wiznote/wizserver</code><br>
+Using default tag: latest<br>
+latest: Pulling from wiznote/wizserver<br>
+03ca5b55b2bd: Pull complete<br>
+54ceac5bc6bf: Pull complete<br>
+91ee8f4f23c6: Pull complete<br>
+f6b746826172: Pull complete<br>
+8f4c62907409: Pull complete<br>
+17b1b64e30bd: Pull complete<br>
+Digest: sha256:f30fba6818bfead0b781430dcdc3558066cd8a8813ebaa4a2058c3b9d70db2a1<br>
+Status: Downloaded newer image for wiznote/wizserver:latest<br>
+docker.io/wiznote/wizserver:latest</p>
+<blockquote>
+<p>创建运行 WizNote 容器</p>
+</blockquote>
+<pre><code>mkdir -p /data/wiznote/data
+docker run --name wiznote --restart=always -it -d \
+-v  /data/wiznote/data:/wiz/storage \
+ -v  /etc/localtime:/etc/localtime \
+ -p 8383:80 \
+ -p 9269:9269/udp  \
+ wiznote/wizserver
+</code></pre>
+<p><code>docker images</code><br>
+wiznote/wizserver   latest    322c4d3daf9b   2 years ago    1.39GB</p>
+<blockquote>
+<p>安装成功之后通过 ip:8383 访问网页版</p>
+</blockquote>
+<p>默认管理员账号：admin@wiz.cn<br>
+密码：123456<br>
+<img src="https://qs100371.vip/post-images/1732942414217.webp" alt="" loading="lazy"></p>
+
+          </div>
+          <div class="toc-container">
+            
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/ffmpeg-he-bing-duo-ge-mp4-shi-pin/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-jin-ri-re-bang-dailyhot-shi-bai/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

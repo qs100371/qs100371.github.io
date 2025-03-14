@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>docker里的windows | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/docker-li-de-windows/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="dockur/windows是一个windows容器，自动下载iso，kvm加速，web ui。和前文的macOS一样，对硬件要求要低一些，可以跑起来。
+
+项目地址：https://github.com/dockur/windows
+doc..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            docker里的windows
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-02-19
+          </time>
+          <span class="read-times">
+            1 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>dockur/windows是一个windows容器，自动下载iso，kvm加速，web ui。和前文的macOS一样，对硬件要求要低一些，可以跑起来。</p>
+<!-- more -->
+<p>项目地址：<a href="https://github.com/dockur/windows">https://github.com/dockur/windows</a></p>
+<h1 id="docker-composeyml">docker-compose.yml</h1>
+<pre><code>services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: &quot;8e&quot;
+      RAM_SIZE: &quot;2G&quot;
+      CPU_CORES: &quot;2&quot;
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 5900:5900/tcp
+      - 5900:5900/udp
+    restart: unless-stopped
+    stop_grace_period: 2m
+</code></pre>
+<h1 id="启动容器">启动容器</h1>
+<p><code>docker-compose up -d</code><br>
+VERSION值代表windows版本。<br>
+VERSION=11l，windows11LTSC。<br>
+<img src="https://qs100371.vip/post-images/1740218193158.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740218199757.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740218205343.webp" alt="" loading="lazy"><br>
+VERSION=8e，启动一个win8。<br>
+<img src="https://qs100371.vip/post-images/1739960334145.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739960380499.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739960388526.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739960396989.webp" alt="" loading="lazy"><br>
+VERSION=xp，启动一个winXP。<br>
+<img src="https://qs100371.vip/post-images/1739960422020.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739960426844.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739960431634.webp" alt="" loading="lazy"><br>
+VERSION=2003，启动一个windows server 2003。<br>
+<img src="https://qs100371.vip/post-images/1740040200750.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740040206515.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740040212268.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740040217982.webp" alt="" loading="lazy"><br>
+VERSION=ve，启动一个vista。<br>
+<img src="https://qs100371.vip/post-images/1740043923139.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740043929122.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740043934873.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740043941391.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1740043947527.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>主机本身安装了一个win7-64位，启动挺快的，在qemu里就慢多了，只能用2G内存，2个内核，毕竟隔了一个虚拟机，性能差多了。说起来还是docker更好，更方便。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#docker-composeyml">docker-compose.yml</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8">启动容器</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-li-de-macos/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/zai-xian-wen-dang-guan-li-xi-tong-mrdoc/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

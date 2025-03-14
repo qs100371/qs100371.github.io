@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>搭建随机图片API | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/da-jian-sui-ji-tu-pian-api/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="之前一直用网上找的随机图片api以实现网站的随机背景图，这里自己搭建一个api。
+
+api实现需要php环境，玩客云本机上没有，但docker里有，这里直接借用easyimage的php环境。
+docker exec -it easyima..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            搭建随机图片API
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-27
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+          <a href="https://qs100371.vip/tag/linux/" class="post-tags">
+            # linux
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>之前一直用网上找的随机图片api以实现网站的随机背景图，这里自己搭建一个api。</p>
+<!-- more -->
+<p>api实现需要php环境，玩客云本机上没有，但docker里有，这里直接借用easyimage的php环境。<br>
+<code>docker exec -it easyimage bash</code><br>
+进入容器。<br>
+查找php文件所在路径，<br>
+<code>find / -name &quot;*.php&quot;</code><br>
+发现文件位于/app/web，这里就是<code>https://img.qs100371.vip</code>的根目录了。<br>
+把api.php就放在此路径。</p>
+<h1 id="本地随机图片">本地随机图片</h1>
+<p>图片位于photos/目录下，<br>
+api.php内容：</p>
+<pre><code>&lt;?php
+$img_array = glob(&quot;photos/*.{gif.webp.webp}&quot;,GLOB_BRACE); 
+$img = array_rand($img_array); 
+$dz = $img_array[$img];
+header(&quot;Location:&quot;.$dz);
+?&gt; 
+</code></pre>
+<h1 id="外链随机图片">外链随机图片</h1>
+<p>photos.txt文档内放图片外链地址 (一行一个) ，在api.php加入下列代码，</p>
+<pre><code>&lt;?php
+$arr=file('photos.txt');
+$n=count($arr)-1;
+for ($i=1;$i&lt;=1;$i++){
+$x=rand(0,$n);header(&quot;Location:&quot;.$arr[$x],&quot;\n&quot;);}
+?&gt; 
+</code></pre>
+<p>从域名/api.php访问。<br>
+参考：<br>
+<a href="https://cloud.tencent.com/developer/article/1922169"><em>搭建随机图片API</em></a></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E6%9C%AC%E5%9C%B0%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87">本地随机图片</a></li>
+<li><a href="#%E5%A4%96%E9%93%BE%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87">外链随机图片</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/yi-ge-chao-ji-jian-dan-de-tu-chuang-easyimage/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

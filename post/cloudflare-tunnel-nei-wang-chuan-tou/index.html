@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>cloudflare tunnel内网穿透 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="使用cloudflare建立tunnel，在主机上安装守护程序cloudflared，绑定内网服务到tunnel上，实现直接用二级域名访问内网服务。
+
+
+登录cloudflare
+
+
+打开zero trust
+
+输入团队名字，选择免费套餐，..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            cloudflare tunnel内网穿透
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2024-12-20
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/onecloud/" class="post-tags">
+            # onecloud
+          </a>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>使用cloudflare建立tunnel，在主机上安装守护程序cloudflared，绑定内网服务到tunnel上，实现直接用二级域名访问内网服务。</p>
+<!-- more -->
+<blockquote>
+<p>登录cloudflare</p>
+</blockquote>
+<blockquote>
+<p>打开zero trust</p>
+</blockquote>
+<p>输入团队名字，选择免费套餐，不点下一步，地址栏改成<code>https://dash.cloudflare.com</code>，确定。</p>
+<blockquote>
+<p>打开tunnel</p>
+</blockquote>
+<p>打开networks-tunnels-add tunnel-select cloudflare-输入tunnel名称，保存进入下一步。</p>
+<blockquote>
+<p>安装守护程序</p>
+</blockquote>
+<p>有docker方式和程序方式。由于玩客云主机是arm32，无法使用docker方式安装。<br>
+网站上的debian方式提供的arm32程序也不能用，要在<code>https://github.com/cloudflare/cloudflared/releases</code>网站上自行下载XXX-armhf.deb，上传到主机上安装。<br>
+执行<code>cloudflared service install eyJhIjoiNzg5Mj***JjNzAyNDA3ZVdVdyJ9</code>，后面是令牌。网站上会有连接显示。</p>
+<blockquote>
+<p>配置别名和要穿透的服务</p>
+</blockquote>
+<p>点下一步，输入子域，域（自己的域名），类型，选http，url为要穿透的内网地址和端口，保存。会在dns配置里给子域名加一个cname。完成之后就可以通过子域名.域名方式访问内网服务。<br>
+<img src="https://qs100371.vip/post-images/1734704203628.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1734704208999.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1734704214236.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1734704220102.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1734704225269.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1734704230040.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>经粗略测试，这种方式带宽和lucky STUN穿透差不多，下载速度有5~6M，差不多是宽带的上行速率了，还是比较快的。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-ming-ling-xing-he-compose-wen-jian-xiang-hu-zhuan-hua/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-pull-shi-yong-dai-li-shi-xiao-de-jie-jue-fang-fa/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>docker pull使用代理失效的解决方法 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/docker-pull-shi-yong-dai-li-shi-xiao-de-jie-jue-fang-fa/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="docker在拉取镜像的时候需要用到梯子，在使用lucky的stun穿透之后，原先在systemd上给docker服务加上代理的方式不行了，一直是重试然后失败。
+原来根源在于dmz。
+
+本地环境为玩客云（arm32设备）上运行lucky，d..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            docker pull使用代理失效的解决方法
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2024-12-26
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/onecloud/" class="post-tags">
+            # onecloud
+          </a>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>docker在拉取镜像的时候需要用到梯子，在使用lucky的stun穿透之后，原先在systemd上给docker服务加上代理的方式不行了，一直是重试然后失败。<br>
+原来根源在于dmz。</p>
+<!-- more -->
+<p>本地环境为玩客云（arm32设备）上运行lucky，docker，docker上运行openwrt。openwrt主要运行passwall2和微力同步。玩客云（IP:192.168.0.2）由于不能和openwrt（IP:192.168.0.20）使用同一网络，不能使用openwrt的梯子，所以用手机另外给玩客云提供代理服务。<br>
+lucky所在玩客云主机需要设置dmz，之后同一主机在需要梯子pull镜像时，一直提示连接超时。于是找到用github action来拉取arm32镜像，再下载到本地，上传到主机load导入的方法（github上的DockerTarBuilder项目）。github上的文件无法直接在主机上用wget或cul命令行下载（命令行参数有问题？搞不懂）。今天才发现是dmz设置导致这一问题。查看了lucky的说明书，进行stun穿透时需要有个监听端口，如果设置为0，每次会随机一个端口，所以需要把lucky主机设成dmz以实现nat1。</p>
+<p>因此，玩客云上的docker pull要能正常使用代理有两个方法：</p>
+<ul>
+<li>在拉取镜像时，暂时在路由器上关闭玩客云的dmz设置。</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://qs100371.vip/post-images/1735185158062.webp" alt="" loading="lazy"></figure>
+<ul>
+<li>在路由器上设置端口映射，把stun穿透时的固定监听端口暴露出去。<br>
+<img src="https://qs100371.vip/post-images/1735185127966.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1735185043075.webp" alt="" loading="lazy"></li>
+</ul>
+<blockquote>
+<p>经测试，使用代理拉取镜像正常。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/qing-liang-ji-bi-ji-fu-wu-memos/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

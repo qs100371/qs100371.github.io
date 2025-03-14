@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>给clean主题添加搜索功能 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/gei-clean-zhu-ti-tian-jia-sou-suo-gong-neng/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="clean主题简洁明了，唯独缺少搜索功能，于是从pure主题里搬了过来，这是一个全文搜索。
+
+文件搬运：
+templates/search.ejs
+templates/api-content.ejs
+templates/api-info.e..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            给clean主题添加搜索功能
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-04
+          </time>
+          <span class="read-times">
+            1 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>clean主题简洁明了，唯独缺少搜索功能，于是从pure主题里搬了过来，这是一个全文搜索。</p>
+<!-- more -->
+<h1 id="文件搬运">文件搬运：</h1>
+<p>templates/search.ejs<br>
+templates/api-content.ejs<br>
+templates/api-info.ejs<br>
+assets/media/gridea-search/gridea-search.js<br>
+assets/media/gridea-search/result-template.ejs<br>
+assets/media/scripts/ejs.min.js<br>
+assets/media/scripts/fuse.min.js</p>
+<h1 id="修改searchejs">修改search.ejs</h1>
+<figure data-type="image" tabindex="1"><img src="https://qs100371.vip/post-images/1736002074083.webp" alt="" loading="lazy"></figure>
+<h1 id="修改templatesincludesheaderejs">修改templates/includes/header.ejs</h1>
+<figure data-type="image" tabindex="2"><img src="https://qs100371.vip/post-images/1736002213601.webp" alt="" loading="lazy"></figure>
+<h1 id="修改assetsmediagridea-searchresult-templateejs">修改assets/media/gridea-search/result-template.ejs</h1>
+<p>第一行改为<br>
+<code>&lt;div class=&quot;container&quot;&gt;</code></p>
+<blockquote>
+<p>api-content.ejs和api-info.ejs在gridea-search.js中被引用了，比较隐蔽。最初缺少这两个文件，在搜索的时候显示第一次使用，要进行索引，等候很久也没回应。</p>
+</blockquote>
+<p>效果图：<br>
+<img src="https://qs100371.vip/post-images/1736002521342.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>next主题里的搜索思路则不同，把atom.xml加到网页内容的最后，直接搜索atom部分。在网站数据增加的时候，这个搜索会导致网站的数据大大增加，因为每个网页上都带有一个索引，至少250k。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E6%96%87%E4%BB%B6%E6%90%AC%E8%BF%90">文件搬运：</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9searchejs">修改search.ejs</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9templatesincludesheaderejs">修改templates/includes/header.ejs</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9assetsmediagridea-searchresult-templateejs">修改assets/media/gridea-search/result-template.ejs</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/shi-yong-cloudflare-worker-dai-li-google-sou-suo/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/an-zhuo-shou-ji-shang-de-linux-mo-ni-qi-termux/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

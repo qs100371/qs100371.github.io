@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>网页头部滚动展示最近的memos | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/wang-ye-tou-bu-gun-dong-zhan-shi-zui-jin-de-memos/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="在网页部署代码，把memos最近几条滚动展示在网页最上方。
+
+API
+使用了最新的memos v0.22.2
+https://m.qs100371.vip/api/v1/memos?pageSize=5&amp;amp;filter=visibil..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            网页头部滚动展示最近的memos
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-02
+          </time>
+          <span class="read-times">
+            4 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>在网页部署代码，把memos最近几条滚动展示在网页最上方。</p>
+<!-- more -->
+<h1 id="api">API</h1>
+<p>使用了最新的memos v0.22.2<br>
+<code>https://m.qs100371.vip/api/v1/memos?pageSize=5&amp;filter=visibilities==['PUBLIC']&amp;creator=='users/2'</code><br>
+其中<br>
+pageSize为查询的memo个数，<br>
+users/2为查询的用户UID。</p>
+<h1 id="部署代码">部署代码</h1>
+<p>粘贴到网页<code>&lt;body&gt;</code>之后</p>
+<pre><code>&lt;!--add memos--&gt;
+    &lt;div id=&quot;bber-talk&quot;&gt;&lt;/div&gt;
+    &lt;script&gt;
+    document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+        var e = document.querySelector(&quot;#bber-talk&quot;);
+        e &amp;&amp; (fetchAndRenderMemos(), moment.locale(&quot;zh-CN&quot;));
+    
+        function fetchAndRenderMemos() {
+            var url = &quot;https://m.qs100371.vip/api/v1/memos?pageSize=5&amp;filter=visibilities==['PUBLIC']&amp;creator=='users/2'&quot;;
+            fetch(url)
+                .then(response =&gt; response.json())
+                .then(data =&gt; {
+                    var memosList = data.memos;
+                    var contentHTML = memosList.map(memo =&gt; {
+                        var createTime = memo.createTime;
+                        var timeFromNow = moment(createTime).fromNow();
+                        var content = memo.content;
+                        var uid = memo.uid;
+    
+                        // Process content strings
+                        var processedContent = content.replace(/!\[.*?\]\((.*?)\)/g, function(match, imageUrl) {
+                            var cleanUrl = imageUrl.split(/[?#]/)[0];
+                            return `&lt;a href=&quot;${cleanUrl}&quot; target=&quot;_blank&quot;&gt;🌅&lt;/a&gt;`;
+                        }).replace(/\[(.*?)\]\((.*?)\)/g, function(match, linkText, url) {
+                            var extension = url.split('.').pop().split(/[?#]/)[0];
+                            var cleanUrl = url.split(/[?#]/)[0];
+                            return /.webp|jpeg.webp|gif|bmp|webp|svg)/i.test(extension)
+                                ? `&lt;a href=&quot;${cleanUrl}&quot; target=&quot;_blank&quot;&gt;🌅&lt;/a&gt;`
+                                : `&lt;a href=&quot;${url}&quot; target=&quot;_blank&quot;&gt;${linkText} 🔗&lt;/a&gt;`;
+                        });
+    
+                        // Add externalLink from resources if it's an image
+                        if (memo.resources) {
+                            memo.resources.forEach(resource =&gt; {
+                                if (resource.externalLink) {
+                                    var cleanExternalLink = resource.externalLink.split(/[?#]/)[0];
+                                    if (/.webp|jpeg.webp|gif|bmp|webp|svg)/i.test(cleanExternalLink.split('.').pop())) {
+                                        processedContent += ` &lt;a href=&quot;${cleanExternalLink}&quot; target=&quot;_blank&quot;&gt;🌅&lt;/a&gt;`;
+                                    }
+                                }
+                            });
+                        }
+    
+                        return `&lt;li class=&quot;item&quot;&gt;💬 &lt;a href=&quot;https://m.qs100371.vip/m/${uid}&quot; target=&quot;_blank&quot;&gt;&lt;span class=&quot;datetime&quot;&gt;${timeFromNow}&lt;/span&gt;：${processedContent}&lt;/a&gt;&lt;/li&gt;`;
+                    }).join('');
+    
+                    var finalHTML = `&lt;div class=&quot;talk-wrap&quot;&gt;&lt;ul class=&quot;talk-list&quot;&gt;${contentHTML}&lt;/ul&gt;&lt;/div&gt;`;
+                    e &amp;&amp; (e.innerHTML = finalHTML);
+    
+                    // Regularly move the first item to the end
+                    setInterval(function() {
+                        var itemList = document.querySelector(&quot;.talk-list&quot;);
+                        if (itemList) {
+                            var items = itemList.querySelectorAll(&quot;.item&quot;);
+                            if (items.length &gt; 0) {
+                                itemList.appendChild(items[0]);
+                            }
+                        }
+                    }, 2000);
+                })
+                .catch(error =&gt; console.error('Error fetching memos:', error));
+        }
+    });
+    &lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;.talk-list .item{display:none}.talk-list .item:nth-child(1){display:block}&lt;/style&gt;
+    &lt;script src=&quot;https://momentjs.cn/downloads/moment-with-locales.js&quot;&gt;&lt;/script&gt; 
+&lt;!-- add memos--&gt;
+</code></pre>
+<p>删掉💬后面的a标签可以去掉链接进入功能。</p>
+<hr>
+<p>参考：<br>
+<a href="https://blog.memos.ee/archives/211.html"><em>博客头部滚动展示 最近的memos 基于memos v0.22.2</em></a></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#api">API</a></li>
+<li><a href="#%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">部署代码</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/curl-shi-yong-shi-li/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/cloudflare-workers-she-li-docker-jing-xiang-jia-su-dai-li/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

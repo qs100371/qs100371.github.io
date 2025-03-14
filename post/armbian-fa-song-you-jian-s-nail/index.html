@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>armbian发送邮件：s-nail | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  <link rel="canonical" href="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。
+
+安装s-nail
+apt install s-nail
+设置
+nano /etc/s-nail.rc
+在文件最后加上：
+set from=user@163.com
+set ..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+    
+  
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w1.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            armbian发送邮件：s-nail
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-02-11
+          </time>
+          <span class="read-times">
+            3 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+          <a href="https://qs100371.vip/tag/linux/" class="post-tags">
+            # linux
+          </a>
+          
+          <a href="https://qs100371.vip/tag/armbian/" class="post-tags">
+            # armbian
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。</p>
+<!-- more -->
+<h1 id="安装s-nail">安装s-nail</h1>
+<p><code>apt install s-nail</code></p>
+<h1 id="设置">设置</h1>
+<p><code>nano /etc/s-nail.rc</code><br>
+在文件最后加上：</p>
+<pre><code>set from=user@163.com
+set smtp=smtps://smtp.163.com:465    
+set smtp-auth=login
+set smtp-auth-user=user@163.com
+set smtp-auth-password=此处不是邮箱密码，而是smtp服务提供的授权码！！！
+</code></pre>
+<h1 id="发送测试邮件">发送测试邮件</h1>
+<p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>
+往xxxxxxxx@qq.com发送一个标题为hello?，正文是Successful。<br>
+输出：</p>
+<pre><code>root@onecloud:/etc# echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; ease_lee@qq.com
+s-nail: Warning: variable superseded or obsoleted: smtp
+s-nail: Warning: variable superseded or obsoleted: smtp-auth-user
+s-nail: Warning: variable superseded or obsoleted: smtp-auth-password
+s-nail: The empty (default) command is ignored here, but has arguments: 1
+s-nail: Obsoletion warning: please do not use *smtp*, instead assign a smtp:// URL to *mta*!
+s-nail: Obsoletion warning: Use of old-style credentials, which will vanish in v15!
+s-nail:   Please read the manual section &quot;On URL syntax and credential lookup&quot;
+</code></pre>
+<p>添加附件<br>
+<code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p>
+<blockquote>
+<p>虽然有警告，邮件还是发送出去了。</p>
+</blockquote>
+<h1 id="新设置">新设置</h1>
+<p><code>nano /etc/s-nail.rc</code><br>
+在文件最后加上：</p>
+<pre><code>set from=&quot;user@163.com&quot;
+set smtp-auth=login
+set mta=smtps://user:password@smtp.163.com:465   #smtp服务器端口是465
+set v15-compat  #必须要
+</code></pre>
+<p>输出：<br>
+s-nail: The empty (default) command is ignored here, but has arguments: 1</p>
+<blockquote>
+<p>邮件能正常发送。附件较大的邮件只能发送到163邮箱，发到QQ邮箱会被退信。163邮箱和QQ邮箱做为smtp服务器都需要授权码。<br>
+在WebServerAutoBackup的备份脚本中第294行加上以下代码就可以把每天的备份包以附件的形式发送到163邮箱（附件较大，只能发到这里）：</p>
+</blockquote>
+<pre><code>echo &quot;[$(date +&quot;%Y-%m-%d %H:%M:%S&quot;)] Backup Successful&quot; | s-nail -s &quot;[$(date +&quot;%Y-%m-%d %H:%M:%S&quot;)]服务器备份文件&quot; -a ${SAVE_DIR}/backup.$NOW.zip user@163.com
+</code></pre>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E5%AE%89%E8%A3%85s-nail">安装s-nail</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE">设置</a></li>
+<li><a href="#%E5%8F%91%E9%80%81%E6%B5%8B%E8%AF%95%E9%82%AE%E4%BB%B6">发送测试邮件</a></li>
+<li><a href="#%E6%96%B0%E8%AE%BE%E7%BD%AE">新设置</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        <div class="page-count">
+          
+
+          
+        </div>
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/yi-kuan-kai-yuan-de-si-you-yun-pan-xiang-mu-file-browser/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/xiao-xi-fa-song-fu-wu-gotify/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <div class="post-comment inner">
+      <div class="post-comment">
+        
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>
