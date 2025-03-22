@@ -1,0 +1,449 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>找到并杀掉 Linux 系统中的僵尸进程 -
+    The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="找到并杀掉 Linux 系统中的僵尸进程 -
+    The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+    <meta name="description" content="大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。
+
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux ..." />
+    <meta
+      property="og:title"
+      content="找到并杀掉 Linux 系统中的僵尸进程 - The blog of qs" />
+    <meta property="og:description" content="大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。
+
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux ..." />
+    <meta property="og:type" content="articles" />
+    <meta property="og:url" content="https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" />
+    <meta
+      property="og:image"
+      content="https://qs100371.vip/images/avatar.png" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="1200" />
+    <meta
+      name="twitter:title"
+      content="找到并杀掉 Linux 系统中的僵尸进程 - The blog of qs" />
+    <meta name="twitter:description" content="大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。
+
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux ..." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/photoswipe@4.1.3/dist/photoswipe.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/photoswipe@4.1.3/dist/default-skin/default-skin.css" />
+
+    
+    <link
+      rel="stylesheet"
+      href="https://qs100371.vip/media/css/prism-synthwave84.css" />
+     
+  </head>
+
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <a
+        href="https://qs100371.vip"
+        class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+        The blog of qs
+      </a>
+      <div class="max-w-4xl w-full mx-auto">
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+          <h1
+            class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+            找到并杀掉 Linux 系统中的僵尸进程
+          </h1>
+          
+          <div class="mb-8 flex flex-wrap">
+            <div class="text-gray-400 text-sm mr-4">
+              2025-03-21 · 5 min read
+            </div>
+            
+            <a
+              href="https://qs100371.vip/tag/linux/"
+              class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              linux
+            </a>
+            
+         
+          </div>
+          <div class="markdown mb-8" v-pre><p>大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。</p>
+<!-- more -->
+<pre><code>Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-134-generic x86_64)
+
+ System information as of Fri Mar 21 10:38:43 AM CST 2025
+
+  System load:             0.02
+  Usage of /:              44.3% of 79.95GB
+  Memory usage:            17%
+  Swap usage:              1%
+  Processes:               180
+  Users logged in:         0
+  IPv4 address for ens133: 192.168.0.5
+  IPv6 address for ens133: 2409:8a04:2567:c580:2e0:4cff:fe36:127c
+
+  =&gt; There is 1 zombie process.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+Last login: Fri Mar 21 08:07:59 2025 from 192.168.0.14
+</code></pre>
+<p>ssh登录主机，发现提示：&quot;=&gt; There is 1 zombie process.&quot;</p>
+<h1 id="进程">进程</h1>
+<p>进程是一个程序的运行实例。它可能运行在前端（比如有交互的进程），也可能运行在后端（比如无交互或自动运行的进程）。它可能是一个父进程（运行期间创建了其他进程），也可能是一个子进程（由其他进程所创建）。<br>
+在 Linux 系统中，除 PID 为 0 的第一个 init 进程（或 systemd）外，其余进程都有父进程。进程也可以拥有自己的子进程。<br>
+在终端中使用 pstree 命令查看进程的树型结构，能看到系统各个进程的“家族树”。</p>
+<pre><code>qs@ubuntu:~$pstree
+systemd─┬─ModemManager───2*[{ModemManager}]
+        ├─NetworkManager───2*[{NetworkManager}]
+        ├─agetty
+        ├─containerd───11*[{containerd}]
+        ├─containerd-shim─┬─s6-svscan─┬─s6-supervise───s6-linux-init-s
+        │                 │           ├─s6-supervise───s6-ipcserverd
+        │                 │           ├─s6-supervise───qbittorrent-nox───8*[{qbittorrent-nox}]
+        │                 │           ├─s6-supervise───busybox
+        │                 │           └─s6-supervise
+        │                 └─11*[{containerd-shim}]
+        ├─containerd-shim─┬─agent───5*[{agent}]
+        │                 └─11*[{containerd-shim}]
+        ├─containerd-shim─┬─node───10*[{node}]
+        │                 └─11*[{containerd-shim}]
+        ├─containerd-shim─┬─xlp─┬─xlp─┬─xlp─┬─xunlei-pan-cli-─┬─xunlei-pan-cli.───22*[{xunlei-pan-cli.}]
+        │                 │     │     │     │                 └─9*[{xunlei-pan-cli-}]
+        │                 │     │     │     └─10*[{xlp}]
+        │                 │     │     └─7*[{xlp}]
+        │                 │     └─7*[{xlp}]
+        │                 └─11*[{containerd-shim}]
+        ├─containerd-shim─┬─filebrowser───7*[{filebrowser}]
+        │                 └─11*[{containerd-shim}]
+        ├─cron
+        ├─dbus-daemon
+        ├─dockerd─┬─6*[docker-proxy───7*[{docker-proxy}]]
+        │         ├─docker-proxy───8*[{docker-proxy}]
+        │         ├─docker-proxy───6*[{docker-proxy}]
+        │         └─20*[{dockerd}]
+        ├─irqbalance───{irqbalance}
+        ├─jellyfin───16*[{jellyfin}]
+        ├─multipathd───6*[{multipathd}]
+        ├─networkd-dispat
+        ├─nmbd
+        ├─polkitd───2*[{polkitd}]
+        ├─rsyslogd───3*[{rsyslogd}]
+        ├─smbd─┬─cleanupd
+        │      ├─samba-bgqd
+        │      └─smbd-notifyd
+        ├─sshd───sshd───sshd───bash───pstree
+        ├─systemd───(sd-pam)
+        ├─systemd-journal
+        ├─systemd-logind
+        ├─systemd-network
+        ├─systemd-resolve
+        ├─systemd-udevd
+        ├─unattended-upgr───{unattended-upgr}
+        ├─v2ray───8*[{v2ray}]
+        ├─v2raya───8*[{v2raya}]
+        └─wpa_supplicant
+</code></pre>
+<h1 id="僵尸进程">僵尸进程</h1>
+<p>子进程死亡后，它的父进程会接收到通知去执行一些清理操作，如释放内存之类。然而，若父进程并未察觉到子进程死亡，子进程就会进入到“ 僵尸(zombie)”状态。从父进程角度看，子进程仍然存在，即使子进程实际上已经死亡。这就是“ 僵尸进程(zombie process)”（也被称为“ 已消失进程(defunct process)”）是如何产生并存在于系统中的。<br>
+进程可能处于如下状态中的一种：<br>
+D = 不可中断的休眠<br>
+I = 空闲<br>
+R = 运行中<br>
+S = 休眠<br>
+T = 被调度信号终止<br>
+t = 被调试器终止<br>
+Z = 僵尸状态<br>
+如何查看进程和它的当前状态呢？一个简单的方法是在终端中使用 top 命令。</p>
+<pre><code>qs@ubuntu:~$top
+top - 15:46:57 up  4:27,  1 user,  load average: 0.02, 0.02, 0.00
+Tasks: 176 total,   1 running, 175 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.2 us,  0.1 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   3774.1 total,    548.7 free,    610.6 used,   2614.7 buff/cache
+MiB Swap:   3767.0 total,   3695.7 free,     71.2 used.   2829.9 avail Mem 
+...
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://qs100371.vip/post-images/1742543449493.webp" alt="" loading="lazy"></figure>
+<h1 id="处理僵尸进程">处理僵尸进程</h1>
+<p>确定僵尸进程的相关信息，比如父进程ppid、僵尸进程的pid以及命令行等信息。可以执行如下命令：<br>
+<code>ps -e -o stat,ppid,pid,cmd | egrep '^[Zz]'</code><br>
+说明：<br>
+ps：ps命令用于获取当前系统的进程信息<br>
+-e：参数用于列出所有的进程<br>
+-o：参数用于设定输出格式，这里只输出进程的stat(状态信息)、ppid(父进程pid)、pid（当前进程的pid)，cmd(即进程的可执行文件<br>
+egrep：是linux下的正则表达式工具：‘1’：这是正则表达式，表示第一个字符的位置，[Zz]，表示z或者大写的Z字母，即表示第一个字符为Z或者z开头的进程数据，只所以这样是因为僵尸进程的状态信息以Z或者z字母开头。<br>
+然后可以kill -9 父进程pid，假设父进程pid为 1024<br>
+<code>kill -9 1024</code></p>
+</div>
+          <!-- Share to Twitter, Weibo, Telegram -->
+          <div class="flex items-center">
+            <div class="mr-4 flex items-center">
+              <i class="ri-share-forward-line text-gray-500"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToTwitter">
+              <i class="ri-twitter-line"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToWeibo">
+              <i class="ri-weibo-line"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToTelegram">
+              <i class="ri-telegram-line"></i>
+            </div>
+          </div>
+        </div>
+
+         
+        <div id="vlaine-comment"></div>
+         <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+
+      <!-- TOC Container -->
+      <div
+        class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight"
+        @click="showToc = true">
+        <i class="ri-file-list-line"></i>
+      </div>
+
+      <div
+        class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast"
+        :class="{ '-mr-64': !showToc }">
+        <div class="flex mb-4 justify-end">
+          <div
+            class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast"
+            @click="showToc = false">
+            <i class="ri-close-line text-lg"></i>
+          </div>
+        </div>
+        <div class="post-toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E8%BF%9B%E7%A8%8B">进程</a></li>
+<li><a href="#%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B">僵尸进程</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B">处理僵尸进程</a></li>
+</ul>
+</div>
+      </div>
+
+      <!-- Back to top -->
+      <div
+        class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200"
+        @click="backToUp"
+        v-show="scrolled">
+        <i class="ri-arrow-up-line"></i>
+      </div>
+    </div>
+
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe.
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter"></div>
+        <button
+          class="pswp__button pswp__button--close"
+          title="Close (Esc)"></button>
+        <button
+          class="pswp__button pswp__button--fs"
+          title="Toggle fullscreen"></button>
+        <button
+          class="pswp__button pswp__button--zoom"
+          title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+      <button
+        class="pswp__button pswp__button--arrow--left"
+        title="Previous (arrow left)"></button>
+      <button
+        class="pswp__button pswp__button--arrow--right"
+        title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+
+    <!-- Code Highlight -->
+    
+    <script src="https://qs100371.vip/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+    
+
+    <script src="https://unpkg.com/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+    <script src="https://unpkg.com/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+    <script>
+      //拿到预览框架，也就是上面的html代码
+      var pswpElement = document.querySelectorAll('.pswp')[0]
+      //定义图片数组变量
+      var imgitems
+      /**
+       * 用于显示预览界面
+       * @param index 图片数组下标
+       */
+      function viewImg(index) {
+        //其它选项这里不做过多阐述，详情见官网
+        var pswpoptions = {
+          index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+          bgOpacity: 0.7, // 背景透明度，0-1
+          maxSpreadZoom: 3, // 缩放级别，不要太大
+        }
+        //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+        var gallery = new PhotoSwipe(
+          pswpElement,
+          PhotoSwipeUI_Default,
+          imgitems,
+          pswpoptions
+        )
+        gallery.init()
+      }
+      /**
+       * 用于添加图片点击事件
+       * @param img 图片元素
+       * @param index 所属下标（在imgitems中的位置）
+       */
+      function addImgClick(img, index) {
+        img.onclick = function () {
+          viewImg(index)
+        }
+      }
+      /**
+       * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+       * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+       * 异步加载图片可在图片元素创建完成后调用此方法
+       */
+      function initImg() {
+        //重置图片数组
+        imgitems = []
+        //查找class:markdown 下的所有img元素并遍历
+        var imgs = document.querySelectorAll('.markdown img')
+        for (var i = 0; i < imgs.length; i++) {
+          var img = imgs[i]
+          //本站相册初始为loading图片，真实图片放在data-src
+          var ds = img.getAttribute('data-src')
+          //创建image对象，用于获取图片宽高
+          var imgtemp = new Image()
+          //判断是否存在data-src
+          if (ds != null && ds.length > 0) {
+            imgtemp.src = ds
+          } else {
+            imgtemp.src = img.src
+          }
+          //判断是否存在缓存
+          if (imgtemp.complete) {
+            var imgobj = {
+              src: imgtemp.src,
+              w: imgtemp.width,
+              h: imgtemp.height,
+            }
+            imgitems[i] = imgobj
+            addImgClick(img, i)
+          } else {
+            console.log('进来了2')
+            imgtemp.index = i
+            imgtemp.img = img
+            imgtemp.onload = function () {
+              var imgobj = {
+                src: this.src,
+                w: this.width,
+                h: this.height,
+              }
+              //不要使用push，因为onload前后顺序会不同
+              imgitems[this.index] = imgobj
+              //添加点击事件
+              addImgClick(this.img, this.index)
+            }
+          }
+        }
+      }
+      //初始化
+      initImg()
+    </script>
+     <script type="application/javascript" src="https://unpkg.com/valine"></script>
+<script type="application/javascript">
+  new Valine({
+    el: '#vlaine-comment',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    pageSize: '10',
+    notify: 'false',
+    avatar: 'mp',
+    verify: 'false',
+    placeholder: '来都来了，不妨评论一下',
+    visitor: 'true',
+    highlight: 'false',
+    recordIP: 'false',
+  })
+</script>
+  
+  </body>
+</html>

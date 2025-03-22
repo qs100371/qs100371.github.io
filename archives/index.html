@@ -1,0 +1,668 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      日常
+    </a>
+    
+    <a
+      href="https://w.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div class="max-w-4xl w-full mx-auto pt-32">
+        <div
+          class="py-8 shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/an-zhuang-homeassistant/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                安装homeassistant
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                windows和linux双系统时间同步方案
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                找到并杀掉 Linux 系统中的僵尸进程
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                scp和rsync基本用法与断点续传
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/an-zhuang-jellyfin/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                安装Jellyfin
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/linux-xia-de-shi-jian-she-zhi-he-tong-bu/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                Linux下的时间设置和同步
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/ying-yin-bo-fang-xi-tong-emby/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                影音播放系统Emby
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/xia-zai-gong-ju-transmission/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                下载工具Transmission
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-li-de-xun-lei/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker里的迅雷
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/synctvyuan-cheng-yi-qi-guan-kan-dian-ying-he-zhi-bo/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                SyncTV：远程一起观看电影和直播
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/shi-shi-re-men-xin-wen-newsnow/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                实时热门新闻newsnow
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/ci-li-sou-suo-bitmagnet-next-web/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                磁力搜索Bitmagnet-Next-Web
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/quan-wang-zi-yuan-sou-suo-shen-qi-bitmagnet/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                全网资源搜索神器bitmagnet
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-li-de-yt-dlp-shi-pin-xia-zai-qi/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker里的yt-dlp视频下载器
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/lshw-ming-ling-yi-ge-quan-mian-de-ying-jian-xin-xi-cha-xun-gong-ju/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                lshw命令：一个全面的硬件信息查询工具
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/ben-di-bu-shu-deepseek/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                本地部署deepseek
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/zai-xian-yin-yue-hai-bao-sheng-cheng-qi-musiccard/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                在线音乐海报生成器musiccard
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/zai-xian-ban-gong-tao-jian-onlyoffice/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                在线办公套件onlyoffice
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yi-ge-kai-yuan-hu-lian-wang-cao-zuo-xi-tong-puter/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                一个开源互联网操作系统puter
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/bash-jiao-ben-ti-huan-zi-fu-chuan/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                bash脚本-替换字符串
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker 部署 Draw.io 在线流程图系统 
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/zai-xian-wen-dang-guan-li-xi-tong-mrdoc/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                在线文档管理系统mrdoc
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-li-de-windows/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker里的windows
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-li-de-macos/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker里的macos
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-li-de-fei-niu-os/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker里的飞牛os
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-li-de-qun-hui-virtual-dsm/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker里的群晖Virtual DSM
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-bu-shu-linux-wan-zheng-zhuo-mian-xi-tong-webtop/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker部署linux完整桌面系统webtop
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-bu-shu-qing-liang-ji-linux-xi-tong-instantbox/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker部署轻量级Linux系统instantbox
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/xiao-xi-fa-song-fu-wu-gotify/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                消息发送服务gotify
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                armbian发送邮件：s-nail
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yi-kuan-kai-yuan-de-si-you-yun-pan-xiang-mu-file-browser/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                一款开源的私有云盘项目：File Browser
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                dkTurbo，docker 镜像加速器自动切换
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker可视化管理工具Portainer
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/mysqldump-de-shi-yong/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                mysqldump的使用
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/crontab-ming-ling/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                crontab 命令
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yi-ge-web-fu-wu-qi-zi-dong-bei-fen-jiao-ben/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                一个WEB 服务器自动备份脚本
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/filecodebox-yi-kuan-qing-liang-ji-de-wen-jian-kuai-di-ju/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                FileCodeBox: 一款轻量级的文件快递柜
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yong-cloudflare-da-jian-jing-xiang-zhan/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                用CloudFlare搭建镜像站
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/gei-ubuntu-server-da-ge-ti-zi/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                给ubuntu server搭个梯子
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-yun-shou-ji-fang-an-budtmodocker-android/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker云手机方案：budtmo/docker-android
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-bu-shu-yun-shou-ji-redroid/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker部署云手机：redroid
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/nginxphp-an-zhuang-he-pei-zhi/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                nginx+php安装和配置
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                github图床和cdn加速的实现
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/da-jian-sui-ji-tu-pian-api/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                搭建随机图片API
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yi-ge-chao-ji-jian-dan-de-tu-chuang-easyimage/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                一个超级简单的图床：easyImage
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                如何给网站添加中英文切换
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yi-ge-kai-yuan-de-zai-xian-ni-ming-fen-xiang-fu-wu-privatebin/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                一个开源的在线匿名分享服务privatebin
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                一个即时聊天应用vocechat
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/docker-da-jian-liu-yan-ban-sayhello/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                docker 搭建留言板 sayhello
+              </a>
+            </div>
+          </div>
+          
+          <div class="px-8 pb-5 flex relative overflow-hidden">
+            
+            <div class="flex-1">
+              <a
+                href="https://qs100371.vip/post/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/"
+                class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+                一个非常棒的自托管仪表板：glance
+              </a>
+            </div>
+          </div>
+          
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+   
+  <a href="https://qs100371.vip/archives/page/2" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+</html>
