@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>安卓手机上的linux模拟器termux | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+  <link rel="canonical" href="https://qs100371.vip/post/an-zhuo-shou-ji-shang-de-linux-mo-ni-qi-termux/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="Termux是一个适用于 Android 的终端模拟器，其环境类似于 Linux 环境。 无需Root或设置即可使用。
+
+安装
+官网：https://termux.dev/cn/
+下载：https://github.com/termux/t..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            安卓手机上的linux模拟器termux
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-06
+          </time>
+          <span class="read-times">
+            1 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/termux/" class="post-tags">
+            # termux
+          </a>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>Termux是一个适用于 Android 的终端模拟器，其环境类似于 Linux 环境。 无需Root或设置即可使用。</p>
+<!-- more -->
+<h1 id="安装">安装</h1>
+<p>官网：<a href="https://termux.dev/cn/">https://termux.dev/cn/</a><br>
+下载：<a href="https://github.com/termux/termux-app/releases">https://github.com/termux/termux-app/releases</a></p>
+<p>手机上下载对应的apk安装，打开显示：<br>
+<img src="https://qs100371.vip/post-images/1736206797188.webp" alt="" loading="lazy"></p>
+<h1 id="使用">使用</h1>
+<p>访问外部存储<br>
+<code>termux-setup-storage</code><br>
+安装ssh<br>
+<code>pkg install -y openssh</code><br>
+设置密码<br>
+<code>passwd</code><br>
+查看用户名<br>
+<code>whoami</code><br>
+启动ssh服务端<br>
+<code>sshd</code><br>
+现在可以连接ssh了<br>
+<code>ssh User@Host -p 8022</code><br>
+设置打开应用时自动启动ssh服务<br>
+<code>echo &quot;sshd&quot; &gt;&gt; ~/.bashrc</code></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/an-zhuo-shou-ji-shang-de-linux-mo-ni-qi-termux/" title="安卓手机上的linux模拟器termux">https://qs100371.vip/post/an-zhuo-shou-ji-shang-de-linux-mo-ni-qi-termux/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/gei-clean-zhu-ti-tian-jia-sou-suo-gong-neng/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/termux-zhong-an-zhuang-alpinealpine-li-an-zhuang-docker/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

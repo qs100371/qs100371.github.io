@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>删除docker多余的网络接口 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+  <link rel="canonical" href="https://qs100371.vip/post/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="docker network
+输出
+Usage:  docker network COMMAND
+Manage networks
+Commands:
+connect     Connect a container to a network
+..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            删除docker多余的网络接口
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2024-11-19
+          </time>
+          <span class="read-times">
+            3 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/docker/" class="post-tags">
+            # docker
+          </a>
+          
+          <a href="https://qs100371.vip/tag/armbian/" class="post-tags">
+            # armbian
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p><code>docker network</code><br>
+输出<br>
+Usage:  docker network COMMAND<br>
+Manage networks<br>
+Commands:<br>
+connect     Connect a container to a network<br>
+create      Create a network<br>
+disconnect  Disconnect a container from a network<br>
+inspect     Display detailed information on one or more networks<br>
+ls          List networks<br>
+prune       Remove all unused networks<br>
+rm          Remove one or more networks<br>
+Run 'docker network COMMAND --help' for more information on a command.</p>
+<!-- more -->
+<p><code>docker network ls</code>       #列表<br>
+输出<br>
+NETWORK ID     NAME                        DRIVER    SCOPE<br>
+570aa00b4993   1panel-network              bridge    local<br>
+96c43c65055c   bridge                      bridge    local<br>
+d79eb8059fa6   facefusion-docker_default   bridge    local<br>
+dec4c4dcc288   host                        host      local<br>
+ef13ce84ff20   navidrome_default           bridge    local<br>
+8f584c65131f   none                        null      local<br>
+21e45a60fd2a   openwrt                     macvlan   local</p>
+<p><code>docker network inspect 96c43c65055c </code>    #查看<br>
+输出</p>
+<p>[<br>
+{<br>
+&quot;Name&quot;: &quot;bridge&quot;,<br>
+&quot;Id&quot;: &quot;96c43c65055ccbc04b7130aa1e430758a0d1e83b0b5088f6f4689753ac019fba&quot;,<br>
+&quot;Created&quot;: &quot;2024-11-19T22:04:32.919431129+08:00&quot;,<br>
+&quot;Scope&quot;: &quot;local&quot;,<br>
+&quot;Driver&quot;: &quot;bridge&quot;,<br>
+&quot;EnableIPv6&quot;: false,<br>
+&quot;IPAM&quot;: {<br>
+&quot;Driver&quot;: &quot;default&quot;,<br>
+&quot;Options&quot;: null,<br>
+&quot;Config&quot;: [<br>
+{<br>
+&quot;Subnet&quot;: &quot;172.17.0.0/16&quot;,<br>
+&quot;Gateway&quot;: &quot;172.17.0.1&quot;<br>
+}<br>
+]<br>
+},<br>
+&quot;Internal&quot;: false,<br>
+&quot;Attachable&quot;: false,<br>
+&quot;Ingress&quot;: false,<br>
+&quot;ConfigFrom&quot;: {<br>
+&quot;Network&quot;: &quot;&quot;<br>
+},<br>
+&quot;ConfigOnly&quot;: false,<br>
+&quot;Containers&quot;: {<br>
+&quot;73b570230b169dcf763832950b0cb18761d60a090409eaa5771b588922fe45ae&quot;: {<br>
+&quot;Name&quot;: &quot;freshrss1&quot;,<br>
+&quot;EndpointID&quot;: &quot;3200f57026d38d0660d5595e36623422a5c3fb832c7438c06fd276ee1da44e6f&quot;,<br>
+&quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,<br>
+&quot;IPv4Address&quot;: &quot;172.17.0.3/16&quot;,<br>
+&quot;IPv6Address&quot;: &quot;&quot;<br>
+},<br>
+&quot;c61273c4fa0109cc5e4ff85c06f2662174f689100af52a5dcb885c21f5ff8699&quot;: {<br>
+&quot;Name&quot;: &quot;navidrome&quot;,<br>
+&quot;EndpointID&quot;: &quot;23343fea4a3f19c150d9526b83c5bc3d13598a8008efa044712455a7da173931&quot;,<br>
+&quot;MacAddress&quot;: &quot;02:42:ac:11:00:02&quot;,<br>
+&quot;IPv4Address&quot;: &quot;172.17.0.2/16&quot;,<br>
+&quot;IPv6Address&quot;: &quot;&quot;<br>
+}<br>
+},<br>
+&quot;Options&quot;: {<br>
+&quot;com.docker.network.bridge.default_bridge&quot;: &quot;true&quot;,<br>
+&quot;com.docker.network.bridge.enable_icc&quot;: &quot;true&quot;,<br>
+&quot;com.docker.network.bridge.enable_ip_masquerade&quot;: &quot;true&quot;,<br>
+&quot;com.docker.network.bridge.host_binding_ipv4&quot;: &quot;0.0.0.0&quot;,<br>
+&quot;com.docker.network.bridge.name&quot;: &quot;docker0&quot;,<br>
+&quot;com.docker.network.driver.mtu&quot;: &quot;1500&quot;<br>
+},<br>
+&quot;Labels&quot;: {}<br>
+}<br>
+]</p>
+<p><code>docker network rm 1panel-network</code>                       #删掉<br>
+输出<br>
+1panel-network<br>
+<code>docker network prune</code>  #删掉所有没用的<br>
+输出<br>
+WARNING! This will remove all custom networks not used by at least one container.<br>
+Are you sure you want to continue? [y/N] y<br>
+Deleted Networks:<br>
+navidrome_default</p>
+<blockquote>
+<p>慎用，很危险的功能。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/" title="删除docker多余的网络接口">https://qs100371.vip/post/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-an-zhuang-yin-le-fu-wu-navidrome/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/gei-docker-pull-she-zhi-dai-li/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

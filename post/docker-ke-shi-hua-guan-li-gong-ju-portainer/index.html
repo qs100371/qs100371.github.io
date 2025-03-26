@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>docker可视化管理工具Portainer | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+  <link rel="canonical" href="https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="Portainer 是一个轻量级的图形工具。使用 Portainer 可以轻松管理不同的 Docker 环境。
+
+Portainer 的部署和使用都非常简单，它由一个可以运行在任何 Docker 引擎上的容器组成。Portainer 可以管..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            docker可视化管理工具Portainer
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-02-08
+          </time>
+          <span class="read-times">
+            3 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/docker/" class="post-tags">
+            # docker
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>Portainer 是一个轻量级的图形工具。使用 Portainer 可以轻松管理不同的 Docker 环境。</p>
+<!-- more -->
+<p>Portainer 的部署和使用都非常简单，它由一个可以运行在任何 Docker 引擎上的容器组成。Portainer 可以管理 Docker 的镜像、容器、数据卷和网络等。</p>
+<h1 id="优点">优点：</h1>
+<ul>
+<li>既可以管理单机环境，也可以管理 Swarm 集群</li>
+<li>提供了用户的登录界面</li>
+<li>可以为用户分配某个容器</li>
+</ul>
+<h1 id="拉取镜像">拉取镜像</h1>
+<p><code>docker pull portainer/portainer-ce:latest</code></p>
+<h1 id="docker-composeyml">docker-compose.yml</h1>
+<pre><code>services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+    - &quot;9000:9000&quot;
+    restart:unless-stopped
+    volumes:
+    - /data/portainer:/data
+    - /var/run/docker.sock:/var/run/docker.sock
+</code></pre>
+<h1 id="启动容器">启动容器</h1>
+<p><code>docker-compose up -d</code><br>
+从IP:9000访问。<br>
+<img src="https://qs100371.vip/post-images/1739023973549.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739023978977.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739023982978.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739023987106.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739023993646.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1739023998882.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>本机上的容器和镜像一目了然。</p>
+</blockquote>
+<h1 id="添加远程服务器">添加远程服务器</h1>
+<p>左侧Settings-Environments-Add environment-Docker Standalone-start wizard<br>
+<img src="https://qs100371.vip/post-images/1739024935531.webp" alt="" loading="lazy"></p>
+<pre><code>docker run -d \
+  -p 9001:9001 \
+  --name portainer_agent \
+  --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /var/lib/docker/volumes:/var/lib/docker/volumes \
+  -v /:/host \
+  portainer/agent:2.21.5
+</code></pre>
+<p>ssh进入ubuntu-server，运行上面的docker run，建立容器并运行。<br>
+在上面的界面上填上远程服务器名（随意）,Environment address：远程服务器IP:9001，点connect，成功连接上去后，在 Home 下就多了一个 Docker 管理项。<br>
+<img src="https://qs100371.vip/post-images/1739025151367.webp" alt="" loading="lazy"></p>
+<h1 id="重置密码">重置密码</h1>
+<p>停止Portainer容器</p>
+<pre><code>docker-compose down
+docker run --rm -v /data/portainer:/data portainer/helper-reset-password
+</code></pre>
+<p>显示：</p>
+<pre><code>\{&quot;level&quot;:&quot;info&quot;,&quot;filename&quot;:&quot;portainer.db&quot;,&quot;time&quot;:&quot;2025-02-09T03:04:35Z&quot;,&quot;message&quot;:&quot;loading PortainerDB&quot;}
+2025/02/09 03:04:36 Password successfully updated for user: admin
+2025/02/09 03:04:36 Use the following password to login: 5)\V3om78a%HQ[10R9r&gt;-q&lt;tNJ&amp;6IpuZ
+</code></pre>
+<blockquote>
+<p>选择我们要的 Docker 环境就可以进行远程管理了。这样的话，无需每台主机都安装 Portainer，只需要一台服务器安装后，就可以管理多台远程主机。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E4%BC%98%E7%82%B9">优点：</a></li>
+<li><a href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F">拉取镜像</a></li>
+<li><a href="#docker-composeyml">docker-compose.yml</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8">启动容器</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8">添加远程服务器</a></li>
+<li><a href="#%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81">重置密码</a></li>
+</ul>
+
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/" title="docker可视化管理工具Portainer">https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/mysqldump-de-shi-yong/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

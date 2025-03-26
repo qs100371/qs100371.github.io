@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>Docker管理 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+  <link rel="canonical" href="https://qs100371.vip/post/docker-guan-li/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="安装dock.io
+启动服务
+systemctl enable docker
+
+镜像操作
+
+
+
+命令
+作用
+
+
+
+
+docker search 关键字
+搜索镜像
+
+
+docker pull 仓库名称
+获取镜像
+
+
+docker images..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            Docker管理
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2024-11-07
+          </time>
+          <span class="read-times">
+            1 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/docker/" class="post-tags">
+            # docker
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>安装dock.io<br>
+启动服务<br>
+<code>systemctl enable docker</code></p>
+<!-- more -->
+<p>镜像操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker search 关键字</td>
+<td>搜索镜像</td>
+</tr>
+<tr>
+<td>docker pull 仓库名称</td>
+<td>获取镜像</td>
+</tr>
+<tr>
+<td>docker images 仓库名称</td>
+<td>查看镜像信息</td>
+</tr>
+<tr>
+<td>docker rmi 仓库名称:镜像ID号</td>
+<td>删除镜像</td>
+</tr>
+</tbody>
+</table>
+<p>容器操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker create 镜像  运行的程序</td>
+<td>创建容器</td>
+</tr>
+<tr>
+<td>docker start 容器的ID/名称</td>
+<td>运行容器</td>
+</tr>
+<tr>
+<td>docker stop 容器的ID/名称</td>
+<td>停止容器</td>
+</tr>
+<tr>
+<td>docker rm  容器的ID/名称</td>
+<td>删除容器</td>
+</tr>
+<tr>
+<td>docker ps</td>
+<td>查看容器</td>
+</tr>
+<tr>
+<td>docker exec  容器ID/名称 /bin/bash</td>
+<td>进入容器</td>
+</tr>
+</tbody>
+</table>
+<p>停止openwrt<br>
+<code>docker stop openwrt</code><br>
+停用自动重启功能<br>
+<code>docker update --restart=no openwrt</code><br>
+在Docker中，容器的自动重启行为是由Docker引擎的重启策略控制的。Docker引擎提供了以下几种重启策略：</p>
+<ul>
+<li>no：不重启容器，默认策略</li>
+<li>always：容器退出时总是重启</li>
+<li>on-failure：容器退出时，只有在退出状态非零时才重启</li>
+<li>unless-stopped：除非手动停止容器，否则总是重启</li>
+</ul>
+
+          </div>
+          <div class="toc-container">
+            
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/docker-guan-li/" title="Docker管理">https://qs100371.vip/post/docker-guan-li/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/samba-ni-ming-gong-xiang/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/openwrt-pang-lu-you/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

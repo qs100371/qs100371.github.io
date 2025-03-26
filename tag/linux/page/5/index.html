@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title> linux | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="https://t.qs100371.vip" class="menu" target="_blank">
+        笔记
+      </a></li>
+    
+    
+    
+      <li><a href="https://m.qs100371.vip/u/guest" class="menu" target="_blank">
+        日常
+      </a></li>
+    
+    
+    
+      <li><a href="https://w.qs100371.vip" class="menu">
+        文字版
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索文章" />
+    </form></li>
+  </ul>
+</nav>
+
+      <!-- Main -->
+      <div id="main">
+        <div class="inner">
+          <div class="current-tag-container">
+            <h2 class="tags-title">
+              #linux
+            </h2>
+          </div>
+          <section class="tiles">
+            
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/ru-he-xiu-fu-wu-fa-huo-qu-suo-ding-varlibdpkglock-cuo-wu/">
+        <h2>如何修复无法获取锁定 /var/lib/dpkg/lock 错误</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-17
+      </time>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p><code>E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)</code><br>
+在使用 apt 执行任何命令行操作时，由于某些原因（例如无法从服务器检索某些软件包，或者互联网连接中途中断或由于其他一些问题），如果 apt 进程突然结束，那么系统可能会遇到上述错误。这意味着 apt 进程无法完成，现在除非修复它，否则将无法使用任何其他 apt 命令。</p>
+
+    </div>
+  </article>
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/xiu-fu-dpkg-fan-hui-cuo-wu-dai-ma-1-de-wen-ti/">
+        <h2>修复dpkg返回错误代码1的问题</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-15
+      </time>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p>apt安装中断后出现<code>Sub-process /usr/bin/dpkg returned an error code (1) </code><br>
+之后无论用apt install -f 或apt autoremove 都不行。<br>
+<code>sudo dpkg --configure -a</code><br>
+<code>sudo apt install -f</code><br>
+<code>sudo apt remove --purge package_name</code><br>
+<code>sudo apt autoremove</code></p>
+
+    </div>
+  </article>
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/grub2-xiu-gai-qi-dong-xiang/">
+        <h2>grub2修改启动项</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-14
+      </time>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p>要修改GRUB2的默认启动项，可以编辑<code>/etc/default/grub</code>文件<br>
+<code>GRUB_DEFAULT</code>        修改默认项<br>
+<code>GRUB_TIMEOUT</code>       修改等待时间<br>
+修改GRUB2启动项的背景和主题，可以将背景图片复制到<code>/boot/grub</code>目录下，并替换原有的背景图片。可以通过编辑<code>/etc/default/grub</code>文件来设置背景图片的路径<br>
+<code>GRUB_BACKGROUND</code><br>
+添加自定义的启动项，可以通过编辑<code>/etc/grub.d/40_custom</code>文件来实现，添加新的<code>menuentry</code>条目</p>
+
+    </div>
+  </article>
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/arch-yi-ri-ti-yan/">
+        <h2>arch一日体验</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-13
+      </time>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p>下载了iso，虚拟机一启动，直接就是命令行界面<br>
+自带安装脚本archinstall<br>
+运行之后，先选中文源，(不能选中文语言，否则是乱码，没有中文字体)，<br>
+分区，建立用户，声卡不能选，下一步安装，顺利的话，最后chroot到新系统</p>
+
+    </div>
+  </article>
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/an-zhuang-qbittorrent/">
+        <h2>安装qbittorrent</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-11
+      </time>
+      
+        <a href="https://qs100371.vip/tag/web/" class="post-tag">
+          # web
+        </a>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p>安装软件<br>
+<code>apt install qbittorrent-nox</code><br>
+创建qBittorrent服务<br>
+<code>nano /etc/systemd/system/qbittorrent.service</code></p>
+
+    </div>
+  </article>
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/samba-ni-ming-gong-xiang/">
+        <h2>samba匿名共享</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-07
+      </time>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p>安装samba<br>
+修改/etc/samba/smb.conf</p>
+
+    </div>
+  </article>
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/linux-gua-zai-nei-cun-qia/">
+        <h2>linux挂载内存卡</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-07
+      </time>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+        <a href="https://qs100371.vip/tag/armbian/" class="post-tag">
+          # armbian
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p>linux挂载内存卡的方法。</p>
+
+    </div>
+  </article>
+
+  <article class="style1">
+    <span class="image">
+      
+    </span>
+    <div class="post-title">
+      <a href="https://qs100371.vip/post/xiao-pi-mian-ban/">
+        <h2>小皮面板</h2>
+      </a>
+    </div>
+    <div class="post-info">
+      <time class="post-time">
+        2024-11-04
+      </time>
+      
+        <a href="https://qs100371.vip/tag/web/" class="post-tag">
+          # web
+        </a>
+      
+        <a href="https://qs100371.vip/tag/linux/" class="post-tag">
+          # linux
+        </a>
+      
+    </div>
+    <div class="post-abstract content">
+      <p><a href="https://www.xp.cn">https://www.xp.cn</a><br>
+Debian安装脚本<br>
+<code>sudo wget -O install.sh https://dl.xp.cn/dl/xp/install.sh &amp;&amp; sudo bash install.sh</code></p>
+
+    </div>
+  </article>
+
+
+
+
+          </section>
+          <div class="pagination-container">
+  
+    <a href="https://qs100371.vip/tag/linux/page/4/" class="prev-page">上一页</a>
+  
+  
+    <a href="https://qs100371.vip/tag/linux/page/6/" class="next-page">下一页</a>
+  
+</div>
+
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+
+  </div>
+  </div>
+</body>
+
+</html>
