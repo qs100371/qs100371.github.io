@@ -1,0 +1,371 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      
+<div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      日常
+    </a>
+    
+    <a
+      href="https://w.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div class="max-w-4xl w-full mx-auto pt-32">
+        <h1 class="text-2xl font-bold pb-8 flex justify-center items-center">
+          <i class="ri-hashtag"></i>
+          onecloud
+        </h1>
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-pull-shi-yong-dai-li-shi-xiao-de-jie-jue-fang-fa/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker pull使用代理失效的解决方法
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-26
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>docker在拉取镜像的时候需要用到梯子，在使用lucky的stun穿透之后，原先在systemd上给docker服务加上代理的方式不行了，一直是重试然后失败。<br>
+原来根源在于dmz。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-pull-shi-yong-dai-li-shi-xiao-de-jie-jue-fang-fa/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        cloudflare tunnel内网穿透
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-12-20
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>使用cloudflare建立tunnel，在主机上安装守护程序cloudflared，绑定内网服务到tunnel上，实现直接用二级域名访问内网服务。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-si-yuan-bi-ji-siyuan/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker部署思源笔记siyuan
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-30
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>思源笔记是一款隐私优先的个人知识管理系统，支持细粒度块级引用和 Markdown 所见即所得。<br>
+只可以使用网页进行访问。leanote和为知笔记都可以用官方客户端选择私有存贮进行访问。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-si-yuan-bi-ji-siyuan/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-searxng-sou-suo-yin-qing/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker部署searxng搜索引擎
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-29
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p><a href="https://github.com/searxng/searxng-docker">searxng-docker</a>，使用 Docker 创建SearXNG 实例。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-searxng-sou-suo-yin-qing/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-jin-ri-re-bang-dailyhot-shi-bai/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker部署今日热榜dailyhot失败
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-28
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>dailyhot今日热榜整合了互联网上各个领域的热门话题，涵盖新闻、娱乐、科技、社会等多个方面，可以提供最新、最热门的信息，尽览各大平台热点，轻松掌握时事动态。<br>
+rehiy/dailyhot-docker：合并前端和后端到一个容器。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-jin-ri-re-bang-dailyhot-shi-bai/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker搭建为知笔记wiznote
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-27
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>为知笔记定位于高效率工作笔记，主打工作笔记的移动应用，是国内一款“工作笔记”的云笔记类产品。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云docker安装导航面板sun-panel
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-26
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-si-you-bi-ji-fu-wu-trilium/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云Docker搭建私有笔记服务Trilium
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-25
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>Trilium，是一个基于 electron、跨平台的分层级笔记应用，主要使用场景是建立个人知识库。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-si-you-bi-ji-fu-wu-trilium/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+   
+  <a href="https://qs100371.vip/tag/onecloud/page/2" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+</html>

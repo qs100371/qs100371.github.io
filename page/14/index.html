@@ -1,0 +1,396 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      
+<div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      日常
+    </a>
+    
+    <a
+      href="https://w.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div
+        class="max-w-4xl w-full mx-auto pt-32">
+        
+
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/wan-ke-yun-2024-11-20-ji-lu/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        玩客云2024-11-20记录
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-20
+    
+       <i class="ri-hashtag"></i>
+       onecloud
+      
+       <i class="ri-hashtag"></i>
+       armbian
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>v24.8.4 for OneCloud running Armbian Linux 6.10.11-edge-meson<br>
+Packages:     Debian stable (bookworm)<br>
+IP addresses: (LAN) 172.17.0.1 192.168.0.2 (WAN) 183.197.217.187<br>
+Performance:<br>
+Load:         8%           	Up time:       2 days 10:37	<br>
+Memory usage: 25% of 987M   	Zram usage:    16% of 493M   	<br>
+CPU temp:     50°C           	Usage of /:    45% of 6.9G   	<br>
+RX today:     1 GiB</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/wan-ke-yun-2024-11-20-ji-lu/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/linux-she-zhi-dai-li/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        linux设置代理
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-20
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+       <i class="ri-hashtag"></i>
+       linux
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>临时代理设置<br>
+<code>export HTTP_PROXY=http://192.168.0.74:10809/</code><br>
+<code>export HTTPS_PROXY=https://192.168.0.74:10809/</code><br>
+取消<br>
+<code>unset HTTP_PROXY</code><br>
+<code>unset HTTP_PROXY</code><br>
+查看代理：<br>
+<code>env | grep xxx</code><br>
+要使代理服务器永久生效，可以修改 /etc/profile文件 ，在profile 中添加或者删除。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/linux-she-zhi-dai-li/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/gei-docker-pull-she-zhi-dai-li/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        给docker pull设置代理
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-20
+    
+       <i class="ri-hashtag"></i>
+       docker
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>docker一个最大的问题就是拉取不到镜像，因此需要给加上代理。<br>
+在执行docker pull时，是由守护进程dockerd来执行。因此，代理需要配在dockerd的环境中。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/gei-docker-pull-she-zhi-dai-li/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        删除docker多余的网络接口
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-19
+    
+       <i class="ri-hashtag"></i>
+       docker
+      
+       <i class="ri-hashtag"></i>
+       armbian
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p><code>docker network</code><br>
+输出<br>
+Usage:  docker network COMMAND<br>
+Manage networks<br>
+Commands:<br>
+connect     Connect a container to a network<br>
+create      Create a network<br>
+disconnect  Disconnect a container from a network<br>
+inspect     Display detailed information on one or more networks<br>
+ls          List networks<br>
+prune       Remove all unused networks<br>
+rm          Remove one or more networks<br>
+Run 'docker network COMMAND --help' for more information on a command.</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-an-zhuang-yin-le-fu-wu-navidrome/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker安装音乐服务navidrome
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-18
+    
+       <i class="ri-hashtag"></i>
+       docker
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>navidrome是一个本地音乐服务。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-an-zhuang-yin-le-fu-wu-navidrome/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/ru-he-xiu-fu-wu-fa-huo-qu-suo-ding-varlibdpkglock-cuo-wu/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        如何修复无法获取锁定 /var/lib/dpkg/lock 错误
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-17
+    
+       <i class="ri-hashtag"></i>
+       linux
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p><code>E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)</code><br>
+在使用 apt 执行任何命令行操作时，由于某些原因（例如无法从服务器检索某些软件包，或者互联网连接中途中断或由于其他一些问题），如果 apt 进程突然结束，那么系统可能会遇到上述错误。这意味着 apt 进程无法完成，现在除非修复它，否则将无法使用任何其他 apt 命令。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/ru-he-xiu-fu-wu-fa-huo-qu-suo-ding-varlibdpkglock-cuo-wu/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-bu-shu-freshrss/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        Docker 部署 FreshRSS
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-16
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>安装<br>
+以下是官方的 Docker 脚本，需要做适当修改</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-bu-shu-freshrss/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/script-defer-async-qu-bie/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        Script defer async 区别
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-16
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>script defer async的区别：<br>
+当script中有defer属性时，脚本的加载过程和文档加载是异步发生的，等到文档解析完(DOMContentLoaded事件发生)脚本才开始执行。<br>
+当script有async属性时，脚本的加载过程和文档加载也是异步发生的。但脚本下载完成后会停止HTML解析，执行脚本，脚本解析完继续HTML解析。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/script-defer-async-qu-bie/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+  
+  <a href="https://qs100371.vip/page/13/" class="btn btn-white">
+    <i class="ri-arrow-left-line mr-4"></i>
+    上一页
+  </a>
+   
+  <a href="https://qs100371.vip/page/15/" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+  
+</html>

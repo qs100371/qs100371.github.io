@@ -1,0 +1,366 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      
+<div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      日常
+    </a>
+    
+    <a
+      href="https://w.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div class="max-w-4xl w-full mx-auto pt-32">
+        <h1 class="text-2xl font-bold pb-8 flex justify-center items-center">
+          <i class="ri-hashtag"></i>
+          web
+        </h1>
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/xiao-pi-mian-ban/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        小皮面板
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-04
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+       <i class="ri-hashtag"></i>
+       linux
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p><a href="https://www.xp.cn">https://www.xp.cn</a><br>
+Debian安装脚本<br>
+<code>sudo wget -O install.sh https://dl.xp.cn/dl/xp/install.sh &amp;&amp; sudo bash install.sh</code></p>
+
+    </div>
+    <a href="https://qs100371.vip/post/xiao-pi-mian-ban/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/nginx-fan-xiang-dai-li-she-zhi/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        nginx反向代理设置
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-02
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>/etc/nginx/sites-available/default内容如下：</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/nginx-fan-xiang-dai-li-she-zhi/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/an-zhuang-nextcloud/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        安装nextcloud
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-11-01
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>nextcloud是一个功能强大的网盘系统，snap安装。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/an-zhuang-nextcloud/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/yun-bi-ji-leanote-da-jian/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        云笔记leanote搭建
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-10-31
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>leanote是一个云笔记项目，需要数据库和进程守护。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/yun-bi-ji-leanote-da-jian/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/an-zhuang-wordpress/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        安装wordpress
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-10-28
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>wordpress需要web服务和数据库。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/an-zhuang-wordpress/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/cpolar-nei-wang-chuan-tou/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        cpolar内网穿透
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-10-22
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>cpolar是一种收费的内网穿透方法，免费也能勉强一用。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/cpolar-nei-wang-chuan-tou/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        电视直播软件和iptv源
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-10-20
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>软件：<br>
+Hypnopix<br>
+yuki-iptv<br>
+freetuxtv</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/an-zhuang-ftp-fu-wu/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        安装ftp服务
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2024-10-14
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>安装vsftpd：<br>
+sudo apt install vsftpd<br>
+检测是否安装：<br>
+vsftpd -version</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/an-zhuang-ftp-fu-wu/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+  
+  <a href="https://qs100371.vip/tag/web/page/10/" class="btn btn-white">
+    <i class="ri-arrow-left-line mr-4"></i>
+    上一页
+  </a>
+   
+  <a href="https://qs100371.vip/tag/web/page/12/" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+</html>

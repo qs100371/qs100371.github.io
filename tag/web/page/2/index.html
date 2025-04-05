@@ -1,0 +1,356 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico" />
+<link
+  href="https://unpkg.com/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://qs100371.vip/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="The blog of qs - Atom Feed"
+  href="https://qs100371.vip/atom.xml" />
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+    <meta name="description" content="It's just a note, not a guide." />
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      
+<div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="https://t.qs100371.vip"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      笔记
+    </a>
+    
+    <a
+      href="https://m.qs100371.vip/u/guest"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      日常
+    </a>
+    
+    <a
+      href="https://w.qs100371.vip"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      文字版
+    </a>
+    
+    
+  </nav>
+</div>
+
+
+      <div class="max-w-4xl w-full mx-auto pt-32">
+        <h1 class="text-2xl font-bold pb-8 flex justify-center items-center">
+          <i class="ri-hashtag"></i>
+          web
+        </h1>
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/synctvyuan-cheng-yi-qi-guan-kan-dian-ying-he-zhi-bo/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        SyncTV：远程一起观看电影和直播
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-03-10
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>SyncTV 是一个远程一起观看电影和直播的程序，提供了同步观影、直播、聊天等功能。可以与朋友和家人一起观看视频和直播。</p>
+<p>SyncTV 的同步观影功能确保所有观看视频的人都在同一点上。这意味着可以暂停、快进快退、倍速等操作，其他人也会同步到同一点。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/synctvyuan-cheng-yi-qi-guan-kan-dian-ying-he-zhi-bo/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/shi-shi-re-men-xin-wen-newsnow/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        实时热门新闻newsnow
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-03-09
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>newsnow本质是一个爬虫，但是整个UI画面设计得非常时尚，热点新闻来源也非常多。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/shi-shi-re-men-xin-wen-newsnow/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/ci-li-sou-suo-bitmagnet-next-web/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        磁力搜索Bitmagnet-Next-Web
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-03-06
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>Bitmagnet-Next-Web是对 Bitmagnet 程序的索引数据进行检索和重新排版的前端程序。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/ci-li-sou-suo-bitmagnet-next-web/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/quan-wang-zi-yuan-sou-suo-shen-qi-bitmagnet/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        全网资源搜索神器bitmagnet
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-03-06
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>bitmagnet是一个自托管的 BitTorrent 索引器、DHT 爬虫、内容分类器和 Torrent 搜索引擎，具有 Web UI。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/quan-wang-zi-yuan-sou-suo-shen-qi-bitmagnet/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/docker-li-de-yt-dlp-shi-pin-xia-zai-qi/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        docker里的yt-dlp视频下载器
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-03-05
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>yt-dlp-web 是一个自托管的应用程序，提供了 yt-dlp 的 Web 界面。用户可以通过这个界面观看或下载存储在远程服务器上的视频。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/docker-li-de-yt-dlp-shi-pin-xia-zai-qi/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/ben-di-bu-shu-deepseek/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        本地部署deepseek
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-03-02
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>部署deepseek需要先安装ollama，运行之后再安装大模型deepseek或其他模型，配合浏览器插件page assist就可以在浏览器上和大模型对话了。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/ben-di-bu-shu-deepseek/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/zai-xian-yin-yue-hai-bao-sheng-cheng-qi-musiccard/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        在线音乐海报生成器musiccard
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-02-27
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>MusicCard 是一个基于 Next.js 开发的在线音乐海报生成工具,让用户能够为自己喜爱的网易云音乐创建精美的可视化海报。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/zai-xian-yin-yue-hai-bao-sheng-cheng-qi-musiccard/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://qs100371.vip/post/zai-xian-ban-gong-tao-jian-onlyoffice/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        在线办公套件onlyoffice
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2025-02-27
+    
+       <i class="ri-hashtag"></i>
+       web
+      
+    </div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <p>ONLYOFFICE Document Server 是一款在线办公套件，由文本、电子表格和演示文稿的查看器和编辑器组成，与 Office Open XML 格式完全兼容：.docx、.xlsx .pptx，并支持实时协作编辑。</p>
+
+    </div>
+    <a href="https://qs100371.vip/post/zai-xian-ban-gong-tao-jian-onlyoffice/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+</div>
+
+
+        </div>
+
+        
+<div class="my-4 flex justify-between px-4 md:px-0">
+  
+  <a href="https://qs100371.vip/tag/web" class="btn btn-white">
+    <i class="ri-arrow-left-line mr-4"></i>
+    上一页
+  </a>
+   
+  <a href="https://qs100371.vip/tag/web/page/3/" class="btn btn-white">
+    下一页
+    <i class="ri-arrow-right-line ml-4"></i>
+  </a>
+  
+</div>
+
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  </body>
+</html>
