@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>github actions运行代码并发布到pages上 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://qs100371.vip/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="前文生成了python代码爬取豆瓣电影信息，得到静态页面，可以创建一个 GitHub Actions 工作流，自动运行 Python 脚本抓取数据，并生成 HTML 页面，然后将其部署到 GitHub Pages 上。
+
+准备GitHub仓..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="/center" class="menu">
+        应用
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            github actions运行代码并发布到pages上
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-04-11
+          </time>
+          <span class="read-times">
+            3 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/actions/" class="post-tags">
+            # actions
+          </a>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>前文生成了python代码爬取豆瓣电影信息，得到静态页面，可以创建一个 GitHub Actions 工作流，自动运行 Python 脚本抓取数据，并生成 HTML 页面，然后将其部署到 GitHub Pages 上。</p>
+<!-- more -->
+<h1 id="准备github仓库">准备GitHub仓库</h1>
+<ul>
+<li>创建一个新的 GitHub 仓库（如 douban-movies-nowplaying）。</li>
+<li>将之前的 Python 脚本保存为 main.py（确保它能正确生成 douban_hot_movies.html）。</li>
+<li>添加 requirements.txt 文件，列出依赖：</li>
+</ul>
+<pre><code>requests
+beautifulsoup4
+</code></pre>
+<h1 id="创建-github-actions-工作流">创建 GitHub Actions 工作流</h1>
+<p>在项目根目录创建 .github/workflows/deploy.yml，内容如下：</p>
+<pre><code>name: Deploy Douban Movies
+
+on:
+  schedule:
+    - cron: '0 16 * * *'  # 北京时间每天0点（UTC 16:00）
+  workflow_dispatch:      # 允许手动触发
+  push:
+    branches: [ main ]   # 推送时触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    # 必需：写入权限
+
+    steps:
+      # 步骤1：检出代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 步骤2：设置Python环境
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: &quot;3.10&quot;
+
+      # 步骤3：安装依赖
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytz  # 时区支持
+
+      # 步骤4：运行爬虫脚本（生成HTML）
+      - name: Generate HTML
+        run: python main.py
+
+      # 步骤5：部署到GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs       # 推荐使用子目录
+          publish_branch: gh-pages      # 部署到gh-pages分支
+          force_orphan: true  # 确保分支干净     
+</code></pre>
+<h1 id="建立gh-pages分支并修改文件生成路径">建立gh-pages分支并修改文件生成路径</h1>
+<p>python脚本生成的html文件换到docs子目录下。<br>
+导入<code>import os</code></p>
+<pre><code>def save_html(html_content, filename=&quot;docs/douban_movies.html&quot;):
+    os.makedirs(&quot;docs&quot;, exist_ok=True)
+    with open(filename, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+        f.write(html_content)
+</code></pre>
+<p>新建gh-pages分支。</p>
+<h1 id="启用-github-pages">启用 GitHub Pages</h1>
+<p>进入仓库的 Settings &gt; Pages。<br>
+选择 部署来源 为 GitHub Actions。</p>
+<h1 id="手动触发首次运行">手动触发首次运行</h1>
+<p>提交代码后，进入 Actions 标签页。<br>
+选择 Deploy Douban Movies 工作流，点击 Run workflow 手动触发。</p>
+<h1 id="访问生成的页面">访问生成的页面</h1>
+<p>工作流运行完成后，访问：<br>
+https://&lt;GitHub用户名&gt;.github.io/douban-movies-nowplaying/douban_hot_movies.html<br>
+示例（html文件名改成了index.html）：<br>
+<a href="http://qs100371.vip/douban-movies-nowplaying/">https://qs100371.vip/douban-movies-nowplaying/</a><br>
+最终效果：</p>
+<ul>
+<li>自动运行：每天更新豆瓣热映电影数据；</li>
+<li>自动部署：生成 HTML 并发布到 GitHub Pages；</li>
+<li>手动触发：可随时手动更新数据。</li>
+</ul>
+<blockquote>
+<p>还有，数据生成时间是按utc得来的，和东8区差8个小时，问ds也给出了修改方法。<br>
+详细代码：<a href="https://github.com/qs100371/douban-movies-nowplaying">qs100371/douban-movies-nowplaying</a></p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E5%87%86%E5%A4%87github%E4%BB%93%E5%BA%93">准备GitHub仓库</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA-github-actions-%E5%B7%A5%E4%BD%9C%E6%B5%81">创建 GitHub Actions 工作流</a></li>
+<li><a href="#%E5%BB%BA%E7%AB%8Bgh-pages%E5%88%86%E6%94%AF%E5%B9%B6%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E8%B7%AF%E5%BE%84">建立gh-pages分支并修改文件生成路径</a></li>
+<li><a href="#%E5%90%AF%E7%94%A8-github-pages">启用 GitHub Pages</a></li>
+<li><a href="#%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E9%A6%96%E6%AC%A1%E8%BF%90%E8%A1%8C">手动触发首次运行</a></li>
+<li><a href="#%E8%AE%BF%E9%97%AE%E7%94%9F%E6%88%90%E7%9A%84%E9%A1%B5%E9%9D%A2">访问生成的页面</a></li>
+</ul>
+
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/" title="github actions运行代码并发布到pages上">https://qs100371.vip/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">下一篇</a>
+          </div>
+        </div>
+        
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

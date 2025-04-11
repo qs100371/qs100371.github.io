@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://qs100371.vip</id>
+    <title>The blog of qs</title>
+    <updated>2025-04-11T15:10:49.659Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://qs100371.vip"/>
+    <link rel="self" href="https://qs100371.vip/atom.xml"/>
+    <subtitle>It&apos;s just a note, not a guide.</subtitle>
+    <logo>https://qs100371.vip/images/avatar.png</logo>
+    <icon>https://qs100371.vip/favicon.ico</icon>
+    <rights>All rights reserved 2025, The blog of qs</rights>
+    <entry>
+        <title type="html"><![CDATA[github actions运行代码并发布到pages上]]></title>
+        <id>https://qs100371.vip/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/</id>
+        <link href="https://qs100371.vip/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">
+        </link>
+        <updated>2025-04-11T12:17:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>前文生成了python代码爬取豆瓣电影信息，得到静态页面，可以创建一个 GitHub Actions 工作流，自动运行 Python 脚本抓取数据，并生成 HTML 页面，然后将其部署到 GitHub Pages 上。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>前文生成了python代码爬取豆瓣电影信息，得到静态页面，可以创建一个 GitHub Actions 工作流，自动运行 Python 脚本抓取数据，并生成 HTML 页面，然后将其部署到 GitHub Pages 上。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[豆瓣热映电影网页生成器]]></title>
+        <id>https://qs100371.vip/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/</id>
+        <link href="https://qs100371.vip/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">
+        </link>
+        <updated>2025-04-11T12:00:17.000Z</updated>
+        <summary type="html"><![CDATA[<p>爱盼项目上显示了豆瓣热映和电视剧等信息，自己也想要一个这样的页面，不会写怎么办，呼叫deepseek生成一个。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>爱盼项目上显示了豆瓣热映和电视剧等信息，自己也想要一个这样的页面，不会写怎么办，呼叫deepseek生成一个。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[网盘聚合搜索项目Aipan]]></title>
+        <id>https://qs100371.vip/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/</id>
+        <link href="https://qs100371.vip/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">
+        </link>
+        <updated>2025-04-09T07:38:37.000Z</updated>
+        <summary type="html"><![CDATA[<p>Aipan是一个基于 Vue 和 Nuxt.js 技术构建的开源网盘搜索项目。其主要目标是为用户提供一个能够自主拥有和管理的网盘搜索网站。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Aipan是一个基于 Vue 和 Nuxt.js 技术构建的开源网盘搜索项目。其主要目标是为用户提供一个能够自主拥有和管理的网盘搜索网站。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装AdGuard Home]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-adguard-home/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-adguard-home/">
+        </link>
+        <updated>2025-04-08T08:58:42.000Z</updated>
+        <summary type="html"><![CDATA[<p>AdGuard Home 是免费且开源，强大的全网广告和跟踪器阻止 DNS 服务器。本文详细记录了安装方法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>AdGuard Home 是免费且开源，强大的全网广告和跟踪器阻止 DNS 服务器。本文详细记录了安装方法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[网易爆米花：观影好助手]]></title>
+        <id>https://qs100371.vip/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/</id>
+        <link href="https://qs100371.vip/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/">
+        </link>
+        <updated>2025-03-31T10:52:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>网易爆米花是一款聚合型视频播放器，自动归类影片，聚合电视剧季和集。无需下载视频，即可在线播放4K超清视频，支持超200种音视频字幕编码，几乎可以播放所有主流格式的视频。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>网易爆米花是一款聚合型视频播放器，自动归类影片，聚合电视剧季和集。无需下载视频，即可在线播放4K超清视频，支持超200种音视频字幕编码，几乎可以播放所有主流格式的视频。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Homeassistant接入国家电网用电数据]]></title>
+        <id>https://qs100371.vip/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/</id>
+        <link href="https://qs100371.vip/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/">
+        </link>
+        <updated>2025-03-31T10:16:18.000Z</updated>
+        <summary type="html"><![CDATA[<p>本文记录了将电网数据接入HA的方法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>本文记录了将电网数据接入HA的方法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给Valine添加邮件提醒功能]]></title>
+        <id>https://qs100371.vip/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/</id>
+        <link href="https://qs100371.vip/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/">
+        </link>
+        <updated>2025-03-25T07:05:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>Valine是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。本文记录了使用第三方邮件提醒：<br>
+valine-admin的过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Valine是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。本文记录了使用第三方邮件提醒：<br>
+valine-admin的过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装homeassistant]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-homeassistant/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-homeassistant/">
+        </link>
+        <updated>2025-03-22T03:51:52.000Z</updated>
+        <summary type="html"><![CDATA[<p>Home Assistant把家中的智能家居设备整合到HA中，它能够接入的设备非常的多比如大名鼎鼎的小米、博联、易微联、飞利浦、特斯拉…，也可以接入软件，然后让各个品牌之间的设备可以联网。本文记录了docker安装方式。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Home Assistant把家中的智能家居设备整合到HA中，它能够接入的设备非常的多比如大名鼎鼎的小米、博联、易微联、飞利浦、特斯拉…，也可以接入软件，然后让各个品牌之间的设备可以联网。本文记录了docker安装方式。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[windows和linux双系统时间同步方案]]></title>
+        <id>https://qs100371.vip/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/</id>
+        <link href="https://qs100371.vip/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/">
+        </link>
+        <updated>2025-03-21T10:25:57.000Z</updated>
+        <summary type="html"><![CDATA[<p>在双系统下，主机的时间经常会发生混乱，windows以硬件时间为当前时区时间，而linux通常以硬件时间为utc时间，对于+8时区，两者相差8小时。如果以windows为主系统，可以在linux下做以下设置。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在双系统下，主机的时间经常会发生混乱，windows以硬件时间为当前时区时间，而linux通常以硬件时间为utc时间，对于+8时区，两者相差8小时。如果以windows为主系统，可以在linux下做以下设置。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[找到并杀掉 Linux 系统中的僵尸进程]]></title>
+        <id>https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/</id>
+        <link href="https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/">
+        </link>
+        <updated>2025-03-21T07:40:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[scp和rsync基本用法与断点续传]]></title>
+        <id>https://qs100371.vip/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/</id>
+        <link href="https://qs100371.vip/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/">
+        </link>
+        <updated>2025-03-21T07:19:33.000Z</updated>
+        <summary type="html"><![CDATA[<p>在远程服务器和本地之间传输文件，可以使用scp命令，也可以使用rsync。本文记录了两个命令的用法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在远程服务器和本地之间传输文件，可以使用scp命令，也可以使用rsync。本文记录了两个命令的用法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装Jellyfin]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-jellyfin/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-jellyfin/">
+        </link>
+        <updated>2025-03-19T09:46:54.000Z</updated>
+        <summary type="html"><![CDATA[<p>Jellyfin是一个开源的媒体系统，是Emby 和 Plex的替代方案，后两者功能类似但都要收费。本文记录了deb和docker两种安装方式。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Jellyfin是一个开源的媒体系统，是Emby 和 Plex的替代方案，后两者功能类似但都要收费。本文记录了deb和docker两种安装方式。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux下的时间设置和同步]]></title>
+        <id>https://qs100371.vip/post/linux-xia-de-shi-jian-she-zhi-he-tong-bu/</id>
+        <link href="https://qs100371.vip/post/linux-xia-de-shi-jian-she-zhi-he-tong-bu/">
+        </link>
+        <updated>2025-03-17T09:33:29.000Z</updated>
+        <summary type="html"><![CDATA[<p>在双系统下，主机的时间经常会发生混乱，windows以硬件时间为当前时区时间，而linux通常以硬件时间为utc时间，对于+8时区，两者相差8小时。本文介绍了linux下时间的设置和同步。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在双系统下，主机的时间经常会发生混乱，windows以硬件时间为当前时区时间，而linux通常以硬件时间为utc时间，对于+8时区，两者相差8小时。本文介绍了linux下时间的设置和同步。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[影音播放系统Emby]]></title>
+        <id>https://qs100371.vip/post/ying-yin-bo-fang-xi-tong-emby/</id>
+        <link href="https://qs100371.vip/post/ying-yin-bo-fang-xi-tong-emby/">
+        </link>
+        <updated>2025-03-12T13:19:24.000Z</updated>
+        <summary type="html"><![CDATA[<p>Emby是一款优秀的媒体服务器软件，致力于为用户提供丰富的多媒体体验。通过Emby，可以方便地在家庭内的各种设备上观看喜爱的电影、电视剧和其他视频内容。而且，Emby还具备强大的媒体管理功能，让影视资源井然有序，随时随地畅享观影乐趣。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Emby是一款优秀的媒体服务器软件，致力于为用户提供丰富的多媒体体验。通过Emby，可以方便地在家庭内的各种设备上观看喜爱的电影、电视剧和其他视频内容。而且，Emby还具备强大的媒体管理功能，让影视资源井然有序，随时随地畅享观影乐趣。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[下载工具Transmission]]></title>
+        <id>https://qs100371.vip/post/xia-zai-gong-ju-transmission/</id>
+        <link href="https://qs100371.vip/post/xia-zai-gong-ju-transmission/">
+        </link>
+        <updated>2025-03-12T09:25:37.000Z</updated>
+        <summary type="html"><![CDATA[<p>Transmission是一个免费的bittorrent客户端。可部署在docker中。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Transmission是一个免费的bittorrent客户端。可部署在docker中。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker里的迅雷]]></title>
+        <id>https://qs100371.vip/post/docker-li-de-xun-lei/</id>
+        <link href="https://qs100371.vip/post/docker-li-de-xun-lei/">
+        </link>
+        <updated>2025-03-11T13:42:45.000Z</updated>
+        <summary type="html"><![CDATA[<p>有大神将NAS版迅雷移植到了Docker中，从而实现Docker容器即可安装NAS版迅雷。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>有大神将NAS版迅雷移植到了Docker中，从而实现Docker容器即可安装NAS版迅雷。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[SyncTV：远程一起观看电影和直播]]></title>
+        <id>https://qs100371.vip/post/synctvyuan-cheng-yi-qi-guan-kan-dian-ying-he-zhi-bo/</id>
+        <link href="https://qs100371.vip/post/synctvyuan-cheng-yi-qi-guan-kan-dian-ying-he-zhi-bo/">
+        </link>
+        <updated>2025-03-10T07:42:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>SyncTV 是一个远程一起观看电影和直播的程序，提供了同步观影、直播、聊天等功能。可以与朋友和家人一起观看视频和直播。</p>
+<p>SyncTV 的同步观影功能确保所有观看视频的人都在同一点上。这意味着可以暂停、快进快退、倍速等操作，其他人也会同步到同一点。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>SyncTV 是一个远程一起观看电影和直播的程序，提供了同步观影、直播、聊天等功能。可以与朋友和家人一起观看视频和直播。</p>
+<p>SyncTV 的同步观影功能确保所有观看视频的人都在同一点上。这意味着可以暂停、快进快退、倍速等操作，其他人也会同步到同一点。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[实时热门新闻newsnow]]></title>
+        <id>https://qs100371.vip/post/shi-shi-re-men-xin-wen-newsnow/</id>
+        <link href="https://qs100371.vip/post/shi-shi-re-men-xin-wen-newsnow/">
+        </link>
+        <updated>2025-03-09T13:41:25.000Z</updated>
+        <summary type="html"><![CDATA[<p>newsnow本质是一个爬虫，但是整个UI画面设计得非常时尚，热点新闻来源也非常多。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>newsnow本质是一个爬虫，但是整个UI画面设计得非常时尚，热点新闻来源也非常多。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[磁力搜索Bitmagnet-Next-Web]]></title>
+        <id>https://qs100371.vip/post/ci-li-sou-suo-bitmagnet-next-web/</id>
+        <link href="https://qs100371.vip/post/ci-li-sou-suo-bitmagnet-next-web/">
+        </link>
+        <updated>2025-03-06T09:15:41.000Z</updated>
+        <summary type="html"><![CDATA[<p>Bitmagnet-Next-Web是对 Bitmagnet 程序的索引数据进行检索和重新排版的前端程序。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Bitmagnet-Next-Web是对 Bitmagnet 程序的索引数据进行检索和重新排版的前端程序。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[全网资源搜索神器bitmagnet]]></title>
+        <id>https://qs100371.vip/post/quan-wang-zi-yuan-sou-suo-shen-qi-bitmagnet/</id>
+        <link href="https://qs100371.vip/post/quan-wang-zi-yuan-sou-suo-shen-qi-bitmagnet/">
+        </link>
+        <updated>2025-03-06T09:01:37.000Z</updated>
+        <summary type="html"><![CDATA[<p>bitmagnet是一个自托管的 BitTorrent 索引器、DHT 爬虫、内容分类器和 Torrent 搜索引擎，具有 Web UI。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>bitmagnet是一个自托管的 BitTorrent 索引器、DHT 爬虫、内容分类器和 Torrent 搜索引擎，具有 Web UI。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker里的yt-dlp视频下载器]]></title>
+        <id>https://qs100371.vip/post/docker-li-de-yt-dlp-shi-pin-xia-zai-qi/</id>
+        <link href="https://qs100371.vip/post/docker-li-de-yt-dlp-shi-pin-xia-zai-qi/">
+        </link>
+        <updated>2025-03-05T11:28:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>yt-dlp-web 是一个自托管的应用程序，提供了 yt-dlp 的 Web 界面。用户可以通过这个界面观看或下载存储在远程服务器上的视频。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>yt-dlp-web 是一个自托管的应用程序，提供了 yt-dlp 的 Web 界面。用户可以通过这个界面观看或下载存储在远程服务器上的视频。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[lshw命令：一个全面的硬件信息查询工具]]></title>
+        <id>https://qs100371.vip/post/lshw-ming-ling-yi-ge-quan-mian-de-ying-jian-xin-xi-cha-xun-gong-ju/</id>
+        <link href="https://qs100371.vip/post/lshw-ming-ling-yi-ge-quan-mian-de-ying-jian-xin-xi-cha-xun-gong-ju/">
+        </link>
+        <updated>2025-03-04T03:16:10.000Z</updated>
+        <summary type="html"><![CDATA[<p>Linux系统中lshw（List Hardware）是一个强大的命令，可以获取底层硬件信息。该命令在需要了解和诊断系统硬件配置时非常实用。只需在命令行输入 lshw 即可运行此命令。这将返回关于系统硬件的详细列表，包括CPU、内存、磁盘驱动器等所有组件的信息。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Linux系统中lshw（List Hardware）是一个强大的命令，可以获取底层硬件信息。该命令在需要了解和诊断系统硬件配置时非常实用。只需在命令行输入 lshw 即可运行此命令。这将返回关于系统硬件的详细列表，包括CPU、内存、磁盘驱动器等所有组件的信息。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[本地部署deepseek]]></title>
+        <id>https://qs100371.vip/post/ben-di-bu-shu-deepseek/</id>
+        <link href="https://qs100371.vip/post/ben-di-bu-shu-deepseek/">
+        </link>
+        <updated>2025-03-02T11:55:56.000Z</updated>
+        <summary type="html"><![CDATA[<p>部署deepseek需要先安装ollama，运行之后再安装大模型deepseek或其他模型，配合浏览器插件page assist就可以在浏览器上和大模型对话了。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>部署deepseek需要先安装ollama，运行之后再安装大模型deepseek或其他模型，配合浏览器插件page assist就可以在浏览器上和大模型对话了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在线音乐海报生成器musiccard]]></title>
+        <id>https://qs100371.vip/post/zai-xian-yin-yue-hai-bao-sheng-cheng-qi-musiccard/</id>
+        <link href="https://qs100371.vip/post/zai-xian-yin-yue-hai-bao-sheng-cheng-qi-musiccard/">
+        </link>
+        <updated>2025-02-27T08:22:51.000Z</updated>
+        <summary type="html"><![CDATA[<p>MusicCard 是一个基于 Next.js 开发的在线音乐海报生成工具,让用户能够为自己喜爱的网易云音乐创建精美的可视化海报。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>MusicCard 是一个基于 Next.js 开发的在线音乐海报生成工具,让用户能够为自己喜爱的网易云音乐创建精美的可视化海报。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在线办公套件onlyoffice]]></title>
+        <id>https://qs100371.vip/post/zai-xian-ban-gong-tao-jian-onlyoffice/</id>
+        <link href="https://qs100371.vip/post/zai-xian-ban-gong-tao-jian-onlyoffice/">
+        </link>
+        <updated>2025-02-27T08:02:03.000Z</updated>
+        <summary type="html"><![CDATA[<p>ONLYOFFICE Document Server 是一款在线办公套件，由文本、电子表格和演示文稿的查看器和编辑器组成，与 Office Open XML 格式完全兼容：.docx、.xlsx .pptx，并支持实时协作编辑。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>ONLYOFFICE Document Server 是一款在线办公套件，由文本、电子表格和演示文稿的查看器和编辑器组成，与 Office Open XML 格式完全兼容：.docx、.xlsx .pptx，并支持实时协作编辑。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个开源互联网操作系统puter]]></title>
+        <id>https://qs100371.vip/post/yi-ge-kai-yuan-hu-lian-wang-cao-zuo-xi-tong-puter/</id>
+        <link href="https://qs100371.vip/post/yi-ge-kai-yuan-hu-lian-wang-cao-zuo-xi-tong-puter/">
+        </link>
+        <updated>2025-02-24T10:02:52.000Z</updated>
+        <summary type="html"><![CDATA[<p>Puter 是一站式云平台打造个人服务器和工作站。可以自托管。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Puter 是一站式云平台打造个人服务器和工作站。可以自托管。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[bash脚本-替换字符串]]></title>
+        <id>https://qs100371.vip/post/bash-jiao-ben-ti-huan-zi-fu-chuan/</id>
+        <link href="https://qs100371.vip/post/bash-jiao-ben-ti-huan-zi-fu-chuan/">
+        </link>
+        <updated>2025-02-24T07:54:09.000Z</updated>
+        <summary type="html"><![CDATA[<p>需要把md文件里的图片由.jpg或.png替换成.webp。由deepseek生成了一段脚本。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>需要把md文件里的图片由.jpg或.png替换成.webp。由deepseek生成了一段脚本。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker 部署 Draw.io 在线流程图系统 ]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/">
+        </link>
+        <updated>2025-02-23T08:51:20.000Z</updated>
+        <summary type="html"><![CDATA[<p>Draw.io 是一款开源的绘制流程图的工具，拥有大量免费素材和模板。程序本身支持中文在内的多国语言，创建的文档可以导出到多种网盘或本地。无论是创建流程图、组织结构图、网络拓扑图还是其他类型的图表，Draw.io 基本都能满足图形展示的多样需求。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Draw.io 是一款开源的绘制流程图的工具，拥有大量免费素材和模板。程序本身支持中文在内的多国语言，创建的文档可以导出到多种网盘或本地。无论是创建流程图、组织结构图、网络拓扑图还是其他类型的图表，Draw.io 基本都能满足图形展示的多样需求。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在线文档管理系统mrdoc]]></title>
+        <id>https://qs100371.vip/post/zai-xian-wen-dang-guan-li-xi-tong-mrdoc/</id>
+        <link href="https://qs100371.vip/post/zai-xian-wen-dang-guan-li-xi-tong-mrdoc/">
+        </link>
+        <updated>2025-02-19T13:30:41.000Z</updated>
+        <summary type="html"><![CDATA[<p>MrDoc 觅思文档，自托管、私有部署的在线文档管理系统和知识库。可以创建各类私有化部署的文档应用，进行知识管理、构建团队文库、制作产品手册以及在线教程等。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>MrDoc 觅思文档，自托管、私有部署的在线文档管理系统和知识库。可以创建各类私有化部署的文档应用，进行知识管理、构建团队文库、制作产品手册以及在线教程等。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker里的windows]]></title>
+        <id>https://qs100371.vip/post/docker-li-de-windows/</id>
+        <link href="https://qs100371.vip/post/docker-li-de-windows/">
+        </link>
+        <updated>2025-02-19T10:10:34.000Z</updated>
+        <summary type="html"><![CDATA[<p>dockur/windows是一个windows容器，自动下载iso，kvm加速，web ui。和前文的macOS一样，对硬件要求要低一些，可以跑起来。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>dockur/windows是一个windows容器，自动下载iso，kvm加速，web ui。和前文的macOS一样，对硬件要求要低一些，可以跑起来。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker里的macos]]></title>
+        <id>https://qs100371.vip/post/docker-li-de-macos/</id>
+        <link href="https://qs100371.vip/post/docker-li-de-macos/">
+        </link>
+        <updated>2025-02-19T09:27:04.000Z</updated>
+        <summary type="html"><![CDATA[<p>dockur/macos是OSX (macOS) 容器，支持kvm加速和web ui。实测主机跑不动这个容器。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>dockur/macos是OSX (macOS) 容器，支持kvm加速和web ui。实测主机跑不动这个容器。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker里的飞牛os]]></title>
+        <id>https://qs100371.vip/post/docker-li-de-fei-niu-os/</id>
+        <link href="https://qs100371.vip/post/docker-li-de-fei-niu-os/">
+        </link>
+        <updated>2025-02-16T08:26:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker下运行飞牛os，这个容器不调用kvm，只支持x86，所以是个x86机器都可以运行。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker下运行飞牛os，这个容器不调用kvm，只支持x86，所以是个x86机器都可以运行。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker里的群晖Virtual DSM]]></title>
+        <id>https://qs100371.vip/post/docker-li-de-qun-hui-virtual-dsm/</id>
+        <link href="https://qs100371.vip/post/docker-li-de-qun-hui-virtual-dsm/">
+        </link>
+        <updated>2025-02-16T01:13:17.000Z</updated>
+        <summary type="html"><![CDATA[<p>我们对于群晖的认知还停留在通过安装群晖系统的方式来安装，目前在Github已经支持使用Docker来运行群晖dsm系统。本文记录了安装过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>我们对于群晖的认知还停留在通过安装群晖系统的方式来安装，目前在Github已经支持使用Docker来运行群晖dsm系统。本文记录了安装过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署linux完整桌面系统webtop]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-linux-wan-zheng-zhuo-mian-xi-tong-webtop/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-linux-wan-zheng-zhuo-mian-xi-tong-webtop/">
+        </link>
+        <updated>2025-02-15T08:16:14.000Z</updated>
+        <summary type="html"><![CDATA[<p>WebTop是一个基于 Linux （ Ubuntu 和 Alpine 两种版本）的轻量级容器，具有在浏览器中运行的完整桌面环境，具有基本的窗口管理器、像素完美的渲染分辨率、音频支持、剪贴板支持、屏幕键盘支持，以及用于上传/下载的远程文件管理。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>WebTop是一个基于 Linux （ Ubuntu 和 Alpine 两种版本）的轻量级容器，具有在浏览器中运行的完整桌面环境，具有基本的窗口管理器、像素完美的渲染分辨率、音频支持、剪贴板支持、屏幕键盘支持，以及用于上传/下载的远程文件管理。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署轻量级Linux系统instantbox]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-qing-liang-ji-linux-xi-tong-instantbox/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-qing-liang-ji-linux-xi-tong-instantbox/">
+        </link>
+        <updated>2025-02-15T06:54:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>instantbox 是一款非常实用的项目，它能够让你在几秒内启动一个主流的 Linux 系统，随起随用，支持 Ubuntu，CentOS， Arch Linux，Debian，Fedora 和 Alpine，通过 WebShell 访问，简单快捷，适合于演示、测试、体验等场合。也就是说可以通过浏览器页面来操作 Linux 系统。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>instantbox 是一款非常实用的项目，它能够让你在几秒内启动一个主流的 Linux 系统，随起随用，支持 Ubuntu，CentOS， Arch Linux，Debian，Fedora 和 Alpine，通过 WebShell 访问，简单快捷，适合于演示、测试、体验等场合。也就是说可以通过浏览器页面来操作 Linux 系统。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[消息发送服务gotify]]></title>
+        <id>https://qs100371.vip/post/xiao-xi-fa-song-fu-wu-gotify/</id>
+        <link href="https://qs100371.vip/post/xiao-xi-fa-song-fu-wu-gotify/">
+        </link>
+        <updated>2025-02-12T10:33:57.000Z</updated>
+        <summary type="html"><![CDATA[<p>Gotify 是一个可以自己搭建的用于发送和接受通知的服务。可以用客户端或命令行等方式发送消息。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Gotify 是一个可以自己搭建的用于发送和接受通知的服务。可以用客户端或命令行等方式发送消息。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[armbian发送邮件：s-nail]]></title>
+        <id>https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/</id>
+        <link href="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/">
+        </link>
+        <updated>2025-02-11T13:55:57.000Z</updated>
+        <summary type="html"><![CDATA[<p>实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一款开源的私有云盘项目：File Browser]]></title>
+        <id>https://qs100371.vip/post/yi-kuan-kai-yuan-de-si-you-yun-pan-xiang-mu-file-browser/</id>
+        <link href="https://qs100371.vip/post/yi-kuan-kai-yuan-de-si-you-yun-pan-xiang-mu-file-browser/">
+        </link>
+        <updated>2025-02-11T12:21:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>File Browser，简单实用、轻量级、跨平台，安装部署简单快捷，自带网页版文件管理器，基于 Go 语言开发，运行速度快。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>File Browser，简单实用、轻量级、跨平台，安装部署简单快捷，自带网页版文件管理器，基于 Go 语言开发，运行速度快。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[dkTurbo，docker 镜像加速器自动切换]]></title>
+        <id>https://qs100371.vip/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/</id>
+        <link href="https://qs100371.vip/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/">
+        </link>
+        <updated>2025-02-10T15:18:51.000Z</updated>
+        <summary type="html"><![CDATA[<p>dkTurbo，一个傻瓜式的可以帮你自动换源，从而使用更快的镜像加速下载的项目。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>dkTurbo，一个傻瓜式的可以帮你自动换源，从而使用更快的镜像加速下载的项目。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker可视化管理工具Portainer]]></title>
+        <id>https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/</id>
+        <link href="https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/">
+        </link>
+        <updated>2025-02-08T14:02:48.000Z</updated>
+        <summary type="html"><![CDATA[<p>Portainer 是一个轻量级的图形工具。使用 Portainer 可以轻松管理不同的 Docker 环境。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Portainer 是一个轻量级的图形工具。使用 Portainer 可以轻松管理不同的 Docker 环境。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[mysqldump的使用]]></title>
+        <id>https://qs100371.vip/post/mysqldump-de-shi-yong/</id>
+        <link href="https://qs100371.vip/post/mysqldump-de-shi-yong/">
+        </link>
+        <updated>2025-02-07T13:17:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>mysqldump 是 MySQL 自带的逻辑备份工具。<br>
+它的备份原理是通过协议连接到 MySQL 数据库，将需要备份的数据查询出来，将查询出的数据转换成对应的insert 语句，当我们需要还原这些数据时，只要执行这些 insert 语句，即可将对应的数据还原。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>mysqldump 是 MySQL 自带的逻辑备份工具。<br>
+它的备份原理是通过协议连接到 MySQL 数据库，将需要备份的数据查询出来，将查询出的数据转换成对应的insert 语句，当我们需要还原这些数据时，只要执行这些 insert 语句，即可将对应的数据还原。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[crontab 命令]]></title>
+        <id>https://qs100371.vip/post/crontab-ming-ling/</id>
+        <link href="https://qs100371.vip/post/crontab-ming-ling/">
+        </link>
+        <updated>2025-02-07T09:22:18.000Z</updated>
+        <summary type="html"><![CDATA[<p>Linux crontab 是 Linux 系统中用于设置周期性被执行的指令的命令。<br>
+当安装完成操作系统之后，默认便会启动此任务调度命令。<br>
+crond 命令每分钟会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Linux crontab 是 Linux 系统中用于设置周期性被执行的指令的命令。<br>
+当安装完成操作系统之后，默认便会启动此任务调度命令。<br>
+crond 命令每分钟会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个WEB 服务器自动备份脚本]]></title>
+        <id>https://qs100371.vip/post/yi-ge-web-fu-wu-qi-zi-dong-bei-fen-jiao-ben/</id>
+        <link href="https://qs100371.vip/post/yi-ge-web-fu-wu-qi-zi-dong-bei-fen-jiao-ben/">
+        </link>
+        <updated>2025-02-07T01:33:33.000Z</updated>
+        <summary type="html"><![CDATA[<p>主机上运行了一些服务，虽然都不是很重要，但数据还是有备份的必要，文件类的可以直接复制备份，数据库也可以手动备份，有自动化脚本则减轻了负担。WebServerAutoBackup项目可以完成这个任务。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>主机上运行了一些服务，虽然都不是很重要，但数据还是有备份的必要，文件类的可以直接复制备份，数据库也可以手动备份，有自动化脚本则减轻了负担。WebServerAutoBackup项目可以完成这个任务。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[FileCodeBox: 一款轻量级的文件快递柜]]></title>
+        <id>https://qs100371.vip/post/filecodebox-yi-kuan-qing-liang-ji-de-wen-jian-kuai-di-ju/</id>
+        <link href="https://qs100371.vip/post/filecodebox-yi-kuan-qing-liang-ji-de-wen-jian-kuai-di-ju/">
+        </link>
+        <updated>2025-02-07T01:11:45.000Z</updated>
+        <summary type="html"><![CDATA[<p>在日常生活和工作中，经常需要将一些文件或文本分享给他人，或者在不同的设备之间传递信息。然而，许多共享工具都需要下载特定的应用程序或使用复杂的登录过程才能完成这些操作，这会给我们带来很多不必要的麻烦。那么这款工具FileCodeBox，正好可以解决这样的问题。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在日常生活和工作中，经常需要将一些文件或文本分享给他人，或者在不同的设备之间传递信息。然而，许多共享工具都需要下载特定的应用程序或使用复杂的登录过程才能完成这些操作，这会给我们带来很多不必要的麻烦。那么这款工具FileCodeBox，正好可以解决这样的问题。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[用CloudFlare搭建镜像站]]></title>
+        <id>https://qs100371.vip/post/yong-cloudflare-da-jian-jing-xiang-zhan/</id>
+        <link href="https://qs100371.vip/post/yong-cloudflare-da-jian-jing-xiang-zhan/">
+        </link>
+        <updated>2025-02-06T06:48:35.000Z</updated>
+        <summary type="html"><![CDATA[<p>国内访问一些在国内没有设立服务器的网站可能速度较慢或者经常连接不上，一般会找一个镜像站，但如果使用的网站比较冷门，没有其他用户搭建的镜像站的花，就需要我们自己搭建了。这里使用cloudflare works搭建一个。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>国内访问一些在国内没有设立服务器的网站可能速度较慢或者经常连接不上，一般会找一个镜像站，但如果使用的网站比较冷门，没有其他用户搭建的镜像站的花，就需要我们自己搭建了。这里使用cloudflare works搭建一个。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给ubuntu server搭个梯子]]></title>
+        <id>https://qs100371.vip/post/gei-ubuntu-server-da-ge-ti-zi/</id>
+        <link href="https://qs100371.vip/post/gei-ubuntu-server-da-ge-ti-zi/">
+        </link>
+        <updated>2025-02-02T10:08:55.000Z</updated>
+        <summary type="html"><![CDATA[<p>ubuntu server上安装了docker，众所周知，拉取镜像是个技术活，小的镜像用cloudflare搭的桥可以慢慢下，太大的要用github actions下载，再转到主机上。直接给服务器架个梯子是必然的选择。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>ubuntu server上安装了docker，众所周知，拉取镜像是个技术活，小的镜像用cloudflare搭的桥可以慢慢下，太大的要用github actions下载，再转到主机上。直接给服务器架个梯子是必然的选择。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker云手机方案：budtmo/docker-android]]></title>
+        <id>https://qs100371.vip/post/docker-yun-shou-ji-fang-an-budtmodocker-android/</id>
+        <link href="https://qs100371.vip/post/docker-yun-shou-ji-fang-an-budtmodocker-android/">
+        </link>
+        <updated>2025-02-01T03:38:30.000Z</updated>
+        <summary type="html"><![CDATA[<p>budtmo/docker-android是一个 Docker 镜像，用于与 Android 相关的一切，可用于应用程序开发和测试（本机、Web 和混合应用程序）。<s>主机上因为不支持kvm部署失败。</s></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>budtmo/docker-android是一个 Docker 镜像，用于与 Android 相关的一切，可用于应用程序开发和测试（本机、Web 和混合应用程序）。<s>主机上因为不支持kvm部署失败。</s></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署云手机：redroid]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-yun-shou-ji-redroid/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-yun-shou-ji-redroid/">
+        </link>
+        <updated>2025-01-30T11:25:03.000Z</updated>
+        <summary type="html"><![CDATA[<p>Redroid （Remote anDroid） 是一种 GPU 加速的 AIC （Android In Cloud） 解决方案。可以在 Linux 主机（Docker、podman、k8s 等）中启动许多实例。Redroid 支持 arm64 和 amd64 架构，适用于云游戏、虚拟化手机、自动化测试等。本文记录了部署过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Redroid （Remote anDroid） 是一种 GPU 加速的 AIC （Android In Cloud） 解决方案。可以在 Linux 主机（Docker、podman、k8s 等）中启动许多实例。Redroid 支持 arm64 和 amd64 架构，适用于云游戏、虚拟化手机、自动化测试等。本文记录了部署过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[nginx+php安装和配置]]></title>
+        <id>https://qs100371.vip/post/nginxphp-an-zhuang-he-pei-zhi/</id>
+        <link href="https://qs100371.vip/post/nginxphp-an-zhuang-he-pei-zhi/">
+        </link>
+        <updated>2025-01-28T01:40:51.000Z</updated>
+        <summary type="html"><![CDATA[<p>在docker里部署了很多网络服务，有些就自带有php支持，例如typecho，easyimage等，这里在主机上直接安装。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在docker里部署了很多网络服务，有些就自带有php支持，例如typecho，easyimage等，这里在主机上直接安装。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[github图床和cdn加速的实现]]></title>
+        <id>https://qs100371.vip/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/</id>
+        <link href="https://qs100371.vip/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/">
+        </link>
+        <updated>2025-01-28T01:17:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>github能存放静态资源，但国内访问不畅，需要使用cdn加速，jsDelivr能提供免费的cdn加速（也是cloudflare家的）。本文使用picgo软件上传图片至github仓库，输出多种cdn加速的图片访问方式。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>github能存放静态资源，但国内访问不畅，需要使用cdn加速，jsDelivr能提供免费的cdn加速（也是cloudflare家的）。本文使用picgo软件上传图片至github仓库，输出多种cdn加速的图片访问方式。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[搭建随机图片API]]></title>
+        <id>https://qs100371.vip/post/da-jian-sui-ji-tu-pian-api/</id>
+        <link href="https://qs100371.vip/post/da-jian-sui-ji-tu-pian-api/">
+        </link>
+        <updated>2025-01-27T02:41:23.000Z</updated>
+        <summary type="html"><![CDATA[<p>之前一直用网上找的随机图片api以实现网站的随机背景图，这里自己搭建一个api。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>之前一直用网上找的随机图片api以实现网站的随机背景图，这里自己搭建一个api。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个超级简单的图床：easyImage]]></title>
+        <id>https://qs100371.vip/post/yi-ge-chao-ji-jian-dan-de-tu-chuang-easyimage/</id>
+        <link href="https://qs100371.vip/post/yi-ge-chao-ji-jian-dan-de-tu-chuang-easyimage/">
+        </link>
+        <updated>2025-01-26T14:31:54.000Z</updated>
+        <summary type="html"><![CDATA[<p>EasyImage2.0图床是一个免费开源的图床程序，支持多文件上传且无需数据库。非常适合低配服务器。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>EasyImage2.0图床是一个免费开源的图床程序，支持多文件上传且无需数据库。非常适合低配服务器。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[如何给网站添加中英文切换]]></title>
+        <id>https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/</id>
+        <link href="https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/">
+        </link>
+        <updated>2025-01-26T07:51:23.000Z</updated>
+        <summary type="html"><![CDATA[<p>本文介绍了两种方法可以实现网站的多语言切换。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>本文介绍了两种方法可以实现网站的多语言切换。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个开源的在线匿名分享服务privatebin]]></title>
+        <id>https://qs100371.vip/post/yi-ge-kai-yuan-de-zai-xian-ni-ming-fen-xiang-fu-wu-privatebin/</id>
+        <link href="https://qs100371.vip/post/yi-ge-kai-yuan-de-zai-xian-ni-ming-fen-xiang-fu-wu-privatebin/">
+        </link>
+        <updated>2025-01-25T16:19:02.000Z</updated>
+        <summary type="html"><![CDATA[<p>PrivateBin是一个开源的在线匿名分享服务，有阅后即焚的方便功能。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>PrivateBin是一个开源的在线匿名分享服务，有阅后即焚的方便功能。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个即时聊天应用vocechat]]></title>
+        <id>https://qs100371.vip/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/</id>
+        <link href="https://qs100371.vip/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/">
+        </link>
+        <updated>2025-01-25T13:16:45.000Z</updated>
+        <summary type="html"><![CDATA[<p>VoceChat有一个小功能，可以在博客右下角添加一个小聊天挂件，其实只是VoceChat里面的一个小功能。本文记录了部署方法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>VoceChat有一个小功能，可以在博客右下角添加一个小聊天挂件，其实只是VoceChat里面的一个小功能。本文记录了部署方法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker 搭建留言板 sayhello]]></title>
+        <id>https://qs100371.vip/post/docker-da-jian-liu-yan-ban-sayhello/</id>
+        <link href="https://qs100371.vip/post/docker-da-jian-liu-yan-ban-sayhello/">
+        </link>
+        <updated>2025-01-25T03:23:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>sayhello是一个简单的留言板，docker部署。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>sayhello是一个简单的留言板，docker部署。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个非常棒的自托管仪表板：glance]]></title>
+        <id>https://qs100371.vip/post/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/</id>
+        <link href="https://qs100371.vip/post/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/">
+        </link>
+        <updated>2025-01-24T14:05:33.000Z</updated>
+        <summary type="html"><![CDATA[<p>glance是一个非常棒的自托管仪表板，可以显示实时 RSS 订阅、Reddit 子版块帖子、天气、书签、特定频道的最新 YouTube 视频、日历、股票信息、iframe、twitch 频道和热门游戏、GitHub 发布和网站监控等。本文记录了部署过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>glance是一个非常棒的自托管仪表板，可以显示实时 RSS 订阅、Reddit 子版块帖子、天气、书签、特定频道的最新 YouTube 视频、日历、股票信息、iframe、twitch 频道和热门游戏、GitHub 发布和网站监控等。本文记录了部署过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ubuntu server上qemu搭建arm64平台]]></title>
+        <id>https://qs100371.vip/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/</id>
+        <link href="https://qs100371.vip/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/">
+        </link>
+        <updated>2025-01-24T12:23:40.000Z</updated>
+        <summary type="html"><![CDATA[<p>玩客云只支持armv7，在ubuntu server上可以用qemu建立arm64虚拟机。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>玩客云只支持armv7，在ubuntu server上可以用qemu建立arm64虚拟机。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个仿微信朋友圈的项目moments]]></title>
+        <id>https://qs100371.vip/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/</id>
+        <link href="https://qs100371.vip/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/">
+        </link>
+        <updated>2025-01-24T12:12:37.000Z</updated>
+        <summary type="html"><![CDATA[<p>moments是一个仿微信朋友圈的项目，适合记录生活。本文记录了部署方法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>moments是一个仿微信朋友圈的项目，适合记录生活。本文记录了部署方法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ubuntu上修改系统时区的方法]]></title>
+        <id>https://qs100371.vip/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/</id>
+        <link href="https://qs100371.vip/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/">
+        </link>
+        <updated>2025-01-24T03:30:21.000Z</updated>
+        <summary type="html"><![CDATA[<p>正确的时区设置对于确保准确的时间和日期非常重要，本文介绍两种常用的方法来修改Ubuntu系统的时区设置：使用timedatectl命令和直接编辑/etc/timezone文件。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>正确的时区设置对于确保准确的时间和日期非常重要，本文介绍两种常用的方法来修改Ubuntu系统的时区设置：使用timedatectl命令和直接编辑/etc/timezone文件。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux 运维命令]]></title>
+        <id>https://qs100371.vip/post/linux-yun-wei-ming-ling/</id>
+        <link href="https://qs100371.vip/post/linux-yun-wei-ming-ling/">
+        </link>
+        <updated>2025-01-20T01:14:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>能用到“退休”的 Linux 命令，可以解决日常99%的问题。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>能用到“退休”的 Linux 命令，可以解决日常99%的问题。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[apache2开启地址重写功能]]></title>
+        <id>https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/</id>
+        <link href="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/">
+        </link>
+        <updated>2025-01-16T09:46:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>typecho缺省网页地址是<code>/index.php/archives/{slug}.html</code>的形式，在设置-永久链接设置里，启用地址重写功能，就能变成<code>/archives/{cid}/</code>或<code>/archives/{slug}.html</code>，让链接看上去完全是静态地址。这需要服务器打开rewrite功能。本文记录了打开过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>typecho缺省网页地址是<code>/index.php/archives/{slug}.html</code>的形式，在设置-永久链接设置里，启用地址重写功能，就能变成<code>/archives/{cid}/</code>或<code>/archives/{slug}.html</code>，让链接看上去完全是静态地址。这需要服务器打开rewrite功能。本文记录了打开过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署photoprism:失败]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-photoprismshi-bai/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-photoprismshi-bai/">
+        </link>
+        <updated>2025-01-13T11:00:35.000Z</updated>
+        <summary type="html"><![CDATA[<p>PhotoPrism 是一个开源的 AI 驱动照片管理工具，使用 Go 语言开发，提供了强大的照片组织和浏览功能。本文记录了部署过程，成功了，但也是失败了。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>PhotoPrism 是一个开源的 AI 驱动照片管理工具，使用 Go 语言开发，提供了强大的照片组织和浏览功能。本文记录了部署过程，成功了，但也是失败了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署wordpress]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-wordpress/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-wordpress/">
+        </link>
+        <updated>2025-01-12T07:42:34.000Z</updated>
+        <summary type="html"><![CDATA[<p>WordPress是一个以PHP和MySQL为平台的自由开源的博客软件和内容管理系统。WordPress具有插件架构和模板系统，是目前因特网上最流行的博客系统。本文用docker部署wordpress。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>WordPress是一个以PHP和MySQL为平台的自由开源的博客软件和内容管理系统。WordPress具有插件架构和模板系统，是目前因特网上最流行的博客系统。本文用docker部署wordpress。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[termux下的nginx]]></title>
+        <id>https://qs100371.vip/post/termux-xia-de-nginx/</id>
+        <link href="https://qs100371.vip/post/termux-xia-de-nginx/">
+        </link>
+        <updated>2025-01-10T14:24:55.000Z</updated>
+        <summary type="html"><![CDATA[<p>手机也可以做为一个小服务器。termux+nginx</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>手机也可以做为一个小服务器。termux+nginx</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署typecho]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-typecho/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-typecho/">
+        </link>
+        <updated>2025-01-10T02:12:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>Typecho是一款轻量级的PHP博客程序，支持多种数据库和扩展。本文记录了部署和配置Typecho过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Typecho是一款轻量级的PHP博客程序，支持多种数据库和扩展。本文记录了部署和配置Typecho过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[termux中用qemu安装debian]]></title>
+        <id>https://qs100371.vip/post/termux-zhong-yong-qemu-an-zhuang-debian/</id>
+        <link href="https://qs100371.vip/post/termux-zhong-yong-qemu-an-zhuang-debian/">
+        </link>
+        <updated>2025-01-08T07:53:04.000Z</updated>
+        <summary type="html"><![CDATA[<p>termux-qemu+debian联动。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>termux-qemu+debian联动。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[qemu-img用法]]></title>
+        <id>https://qs100371.vip/post/qemu-img-yong-fa/</id>
+        <link href="https://qs100371.vip/post/qemu-img-yong-fa/">
+        </link>
+        <updated>2025-01-08T06:57:03.000Z</updated>
+        <summary type="html"><![CDATA[<p>qemu-img可以用来缩减虚拟磁盘映像的大小。<br>
+<code>qemu-img convert -O qcow2 -c disk.qcow2 disk-new.qcows</code></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>qemu-img可以用来缩减虚拟磁盘映像的大小。<br>
+<code>qemu-img convert -O qcow2 -c disk.qcow2 disk-new.qcows</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[tmux解决退出ssh导致qemu退出的问题]]></title>
+        <id>https://qs100371.vip/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/</id>
+        <link href="https://qs100371.vip/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/">
+        </link>
+        <updated>2025-01-08T06:27:54.000Z</updated>
+        <summary type="html"><![CDATA[<p>tmux是一个终端复用器，可以解决退出ssh导致运行中的qemu退出的问题。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>tmux是一个终端复用器，可以解决退出ssh导致运行中的qemu退出的问题。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[termux proot安装ubuntu]]></title>
+        <id>https://qs100371.vip/post/termux-proot-an-zhuang-ubuntu/</id>
+        <link href="https://qs100371.vip/post/termux-proot-an-zhuang-ubuntu/">
+        </link>
+        <updated>2025-01-07T14:58:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>用termux proot安装ubuntu。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>用termux proot安装ubuntu。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[termux proot安装debian]]></title>
+        <id>https://qs100371.vip/post/termux-proot-an-zhuang-debian/</id>
+        <link href="https://qs100371.vip/post/termux-proot-an-zhuang-debian/">
+        </link>
+        <updated>2025-01-07T13:56:20.000Z</updated>
+        <summary type="html"><![CDATA[<p>PRoot 是 chroot、mount --bind 和 binfmt_misc 的用户空间实现用户不需要任何权限或设置即可通过 QEMU 用户模式透明地执行为另一个 CPU 架构构建的程序等操作。这里用来安装debian。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>PRoot 是 chroot、mount --bind 和 binfmt_misc 的用户空间实现用户不需要任何权限或设置即可通过 QEMU 用户模式透明地执行为另一个 CPU 架构构建的程序等操作。这里用来安装debian。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[alpine term中安装docker]]></title>
+        <id>https://qs100371.vip/post/alpine-term-zhong-an-zhuang-docker/</id>
+        <link href="https://qs100371.vip/post/alpine-term-zhong-an-zhuang-docker/">
+        </link>
+        <updated>2025-01-06T14:04:43.000Z</updated>
+        <summary type="html"><![CDATA[<p>termux-qemu-alpine，一步一步安装，才是真正的linux。有人把Termux+Qemu+Alpine整合好了，名为alpine-term，开箱即用，安装一个apk打开就是配置完全的alpine linux。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>termux-qemu-alpine，一步一步安装，才是真正的linux。有人把Termux+Qemu+Alpine整合好了，名为alpine-term，开箱即用，安装一个apk打开就是配置完全的alpine linux。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[termux中安装alpine，alpine里安装docker]]></title>
+        <id>https://qs100371.vip/post/termux-zhong-an-zhuang-alpinealpine-li-an-zhuang-docker/</id>
+        <link href="https://qs100371.vip/post/termux-zhong-an-zhuang-alpinealpine-li-an-zhuang-docker/">
+        </link>
+        <updated>2025-01-06T08:59:17.000Z</updated>
+        <summary type="html"><![CDATA[<p>termux只是一个linux模拟环境，不是真正的系统，要安装docker，需要先用qemu建立linux虚拟机，在虚拟机上安装alpine，在alpine里安装docker。本文得到的是x86-64版本的docker。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>termux只是一个linux模拟环境，不是真正的系统，要安装docker，需要先用qemu建立linux虚拟机，在虚拟机上安装alpine，在alpine里安装docker。本文得到的是x86-64版本的docker。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安卓手机上的linux模拟器termux]]></title>
+        <id>https://qs100371.vip/post/an-zhuo-shou-ji-shang-de-linux-mo-ni-qi-termux/</id>
+        <link href="https://qs100371.vip/post/an-zhuo-shou-ji-shang-de-linux-mo-ni-qi-termux/">
+        </link>
+        <updated>2025-01-06T07:46:28.000Z</updated>
+        <summary type="html"><![CDATA[<p>Termux是一个适用于 Android 的终端模拟器，其环境类似于 Linux 环境。 无需Root或设置即可使用。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Termux是一个适用于 Android 的终端模拟器，其环境类似于 Linux 环境。 无需Root或设置即可使用。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给clean主题添加搜索功能]]></title>
+        <id>https://qs100371.vip/post/gei-clean-zhu-ti-tian-jia-sou-suo-gong-neng/</id>
+        <link href="https://qs100371.vip/post/gei-clean-zhu-ti-tian-jia-sou-suo-gong-neng/">
+        </link>
+        <updated>2025-01-04T14:39:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>clean主题简洁明了，唯独缺少搜索功能，于是从pure主题里搬了过来，这是一个全文搜索。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>clean主题简洁明了，唯独缺少搜索功能，于是从pure主题里搬了过来，这是一个全文搜索。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用Cloudflare Worker代理Google搜索]]></title>
+        <id>https://qs100371.vip/post/shi-yong-cloudflare-worker-dai-li-google-sou-suo/</id>
+        <link href="https://qs100371.vip/post/shi-yong-cloudflare-worker-dai-li-google-sou-suo/">
+        </link>
+        <updated>2025-01-03T07:16:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>使用 Cloudflare Worker 代理 Google 站点，间接访问google。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>使用 Cloudflare Worker 代理 Google 站点，间接访问google。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Cloudflare Workers设立Docker镜像加速代理]]></title>
+        <id>https://qs100371.vip/post/cloudflare-workers-she-li-docker-jing-xiang-jia-su-dai-li/</id>
+        <link href="https://qs100371.vip/post/cloudflare-workers-she-li-docker-jing-xiang-jia-su-dai-li/">
+        </link>
+        <updated>2025-01-02T10:09:09.000Z</updated>
+        <summary type="html"><![CDATA[<p>利用cloudflare workers部署代码并绑定自定义域名，修改/etc/docker/daemon.json使用此地址作为加速服务器。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>利用cloudflare workers部署代码并绑定自定义域名，修改/etc/docker/daemon.json使用此地址作为加速服务器。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[网页头部滚动展示最近的memos]]></title>
+        <id>https://qs100371.vip/post/wang-ye-tou-bu-gun-dong-zhan-shi-zui-jin-de-memos/</id>
+        <link href="https://qs100371.vip/post/wang-ye-tou-bu-gun-dong-zhan-shi-zui-jin-de-memos/">
+        </link>
+        <updated>2025-01-02T09:18:25.000Z</updated>
+        <summary type="html"><![CDATA[<p>在网页部署代码，把memos最近几条滚动展示在网页最上方。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在网页部署代码，把memos最近几条滚动展示在网页最上方。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[curl使用示例]]></title>
+        <id>https://qs100371.vip/post/curl-shi-yong-shi-li/</id>
+        <link href="https://qs100371.vip/post/curl-shi-yong-shi-li/">
+        </link>
+        <updated>2024-12-29T23:32:22.000Z</updated>
+        <summary type="html"><![CDATA[<p>curl的几个常用命令行用法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>curl的几个常用命令行用法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cloudflare tunnels 和 lucky stun穿透的比较]]></title>
+        <id>https://qs100371.vip/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/</id>
+        <link href="https://qs100371.vip/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/">
+        </link>
+        <updated>2024-12-28T11:04:41.000Z</updated>
+        <summary type="html"><![CDATA[<p>cloudflare zero trust tunnels 和 lucky stun都能进行内网穿透，用域名进行直接访问。<br>
+cf tunnels在使用时，浏览器地址栏域名保持不变，而stun方法地址栏会由域名跳转到ip加端口，并且浏览器上会提示不安全（非https），穿透ip和端口也无法保持。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>cloudflare zero trust tunnels 和 lucky stun都能进行内网穿透，用域名进行直接访问。<br>
+cf tunnels在使用时，浏览器地址栏域名保持不变，而stun方法地址栏会由域名跳转到ip加端口，并且浏览器上会提示不安全（非https），穿透ip和端口也无法保持。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[轻量级笔记服务memos]]></title>
+        <id>https://qs100371.vip/post/qing-liang-ji-bi-ji-fu-wu-memos/</id>
+        <link href="https://qs100371.vip/post/qing-liang-ji-bi-ji-fu-wu-memos/">
+        </link>
+        <updated>2024-12-27T06:29:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>Memos 是一项隐私优先的轻量级笔记服务，可以docker部署，实现类似微博的效果。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Memos 是一项隐私优先的轻量级笔记服务，可以docker部署，实现类似微博的效果。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker pull使用代理失效的解决方法]]></title>
+        <id>https://qs100371.vip/post/docker-pull-shi-yong-dai-li-shi-xiao-de-jie-jue-fang-fa/</id>
+        <link href="https://qs100371.vip/post/docker-pull-shi-yong-dai-li-shi-xiao-de-jie-jue-fang-fa/">
+        </link>
+        <updated>2024-12-26T03:33:35.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker在拉取镜像的时候需要用到梯子，在使用lucky的stun穿透之后，原先在systemd上给docker服务加上代理的方式不行了，一直是重试然后失败。<br>
+原来根源在于dmz。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker在拉取镜像的时候需要用到梯子，在使用lucky的stun穿透之后，原先在systemd上给docker服务加上代理的方式不行了，一直是重试然后失败。<br>
+原来根源在于dmz。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cloudflare tunnel内网穿透]]></title>
+        <id>https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/</id>
+        <link href="https://qs100371.vip/post/cloudflare-tunnel-nei-wang-chuan-tou/">
+        </link>
+        <updated>2024-12-20T13:55:45.000Z</updated>
+        <summary type="html"><![CDATA[<p>使用cloudflare建立tunnel，在主机上安装守护程序cloudflared，绑定内网服务到tunnel上，实现直接用二级域名访问内网服务。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>使用cloudflare建立tunnel，在主机上安装守护程序cloudflared，绑定内网服务到tunnel上，实现直接用二级域名访问内网服务。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker命令行和compose文件相互转化]]></title>
+        <id>https://qs100371.vip/post/docker-ming-ling-xing-he-compose-wen-jian-xiang-hu-zhuan-hua/</id>
+        <link href="https://qs100371.vip/post/docker-ming-ling-xing-he-compose-wen-jian-xiang-hu-zhuan-hua/">
+        </link>
+        <updated>2024-12-18T13:49:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker可以直接用命令行建立容器，命令一般比较长，参数多，容易出错，compose方法使用yml文件就简单多了。<br>
+通过docker-compose.yml文件用<code>docker-compose up -d</code>来建立并运行容器。<br>
+cli和yml相互转化工具：<a href="https://www.mklab.cn/utils/docker">https://www.mklab.cn/utils/docker</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker可以直接用命令行建立容器，命令一般比较长，参数多，容易出错，compose方法使用yml文件就简单多了。<br>
+通过docker-compose.yml文件用<code>docker-compose up -d</code>来建立并运行容器。<br>
+cli和yml相互转化工具：<a href="https://www.mklab.cn/utils/docker">https://www.mklab.cn/utils/docker</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker内外数据交流]]></title>
+        <id>https://qs100371.vip/post/docker-nei-wai-shu-ju-jiao-liu/</id>
+        <link href="https://qs100371.vip/post/docker-nei-wai-shu-ju-jiao-liu/">
+        </link>
+        <updated>2024-12-18T07:12:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>在Docker中，容器数据共享与持久化是两个关键的概念，它们确保了数据的安全性和应用的连续性。本文探讨Docker如何实现内外路径打通，从而轻松实现容器数据共享与持久化。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在Docker中，容器数据共享与持久化是两个关键的概念，它们确保了数据的安全性和应用的连续性。本文探讨Docker如何实现内外路径打通，从而轻松实现容器数据共享与持久化。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用cloudflare实现自定义域名邮箱]]></title>
+        <id>https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/</id>
+        <link href="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/">
+        </link>
+        <updated>2024-12-17T13:43:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[证件照制作HivisionIDPhoto]]></title>
+        <id>https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/</id>
+        <link href="https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/">
+        </link>
+        <updated>2024-12-13T23:36:07.000Z</updated>
+        <summary type="html"><![CDATA[<p>HivisionIDPhoto 是一个轻量级的 AI 证件照制作算法。利用一套完善的 AI 模型工作流程，实现对多种用户拍照场景的识别、抠图与证件照生成。可解决证件照应急制作问题。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>HivisionIDPhoto 是一个轻量级的 AI 证件照制作算法。利用一套完善的 AI 模型工作流程，实现对多种用户拍照场景的识别、抠图与证件照生成。可解决证件照应急制作问题。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署网盘cloudreve]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/">
+        </link>
+        <updated>2024-12-13T12:32:58.000Z</updated>
+        <summary type="html"><![CDATA[<p>cloudreve是一个轻便的网盘系统，可以用docker部署。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>cloudreve是一个轻便的网盘系统，可以用docker部署。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[用lucky加cloudflare实现域名访问内网]]></title>
+        <id>https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/</id>
+        <link href="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/">
+        </link>
+        <updated>2024-12-11T12:23:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb/s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb/s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker安装lucky]]></title>
+        <id>https://qs100371.vip/post/docker-an-zhuang-lucky/</id>
+        <link href="https://qs100371.vip/post/docker-an-zhuang-lucky/">
+        </link>
+        <updated>2024-12-10T12:12:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>lucky是一个内网工具，功能很多。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>lucky是一个内网工具，功能很多。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装微力同步verysync]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-wei-li-tong-bu-verysync/">
+        </link>
+        <updated>2024-12-06T05:09:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>微力同步是一个简单易用的多平台文件同步软件。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>微力同步是一个简单易用的多平台文件同步软件。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker部署talebook]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-talebook/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-talebook/">
+        </link>
+        <updated>2024-12-04T11:55:32.000Z</updated>
+        <summary type="html"><![CDATA[<p>talebook是一个个人图书管理系统。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>talebook是一个个人图书管理系统。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安装casaos]]></title>
+        <id>https://qs100371.vip/post/an-zhuang-casaos/</id>
+        <link href="https://qs100371.vip/post/an-zhuang-casaos/">
+        </link>
+        <updated>2024-12-04T09:57:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>casaos是基于社区的开源软件，专注于围绕 Docker 生态系统提供简单的个人云体验。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>casaos是基于社区的开源软件，专注于围绕 Docker 生态系统提供简单的个人云体验。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[通过GitHub工作流下载Docker镜像]]></title>
+        <id>https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/</id>
+        <link href="https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/">
+        </link>
+        <updated>2024-12-03T08:22:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker pull失败怎么办？可以试试github工作流的方法来下载。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker pull失败怎么办？可以试试github工作流的方法来下载。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker部署IPTV]]></title>
+        <id>https://qs100371.vip/post/docker-bu-shu-iptv/</id>
+        <link href="https://qs100371.vip/post/docker-bu-shu-iptv/">
+        </link>
+        <updated>2024-12-03T07:40:28.000Z</updated>
+        <summary type="html"><![CDATA[<p>Docker部署IPTV，200多电视节目，4K.8K秒切台</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Docker部署IPTV，200多电视节目，4K.8K秒切台</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker 命令大全]]></title>
+        <id>https://qs100371.vip/post/docker-ming-ling-da-quan/</id>
+        <link href="https://qs100371.vip/post/docker-ming-ling-da-quan/">
+        </link>
+        <updated>2024-12-02T13:08:39.000Z</updated>
+        <summary type="html"><![CDATA[<p>分类展示docker命令列表。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>分类展示docker命令列表。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker 安装 Ubuntu]]></title>
+        <id>https://qs100371.vip/post/docker-an-zhuang-ubuntu/</id>
+        <link href="https://qs100371.vip/post/docker-an-zhuang-ubuntu/">
+        </link>
+        <updated>2024-12-02T12:51:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker拉取ubuntu最新镜像。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker拉取ubuntu最新镜像。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker镜像的导出、导入]]></title>
+        <id>https://qs100371.vip/post/docker-jing-xiang-de-dao-chu-dao-ru/</id>
+        <link href="https://qs100371.vip/post/docker-jing-xiang-de-dao-chu-dao-ru/">
+        </link>
+        <updated>2024-12-02T11:54:45.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker镜像的导入、导出和保存、载入命令行方法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker镜像的导入、导出和保存、载入命令行方法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker部署思源笔记siyuan]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-si-yuan-bi-ji-siyuan/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-si-yuan-bi-ji-siyuan/">
+        </link>
+        <updated>2024-11-30T02:06:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>思源笔记是一款隐私优先的个人知识管理系统，支持细粒度块级引用和 Markdown 所见即所得。<br>
+只可以使用网页进行访问。leanote和为知笔记都可以用官方客户端选择私有存贮进行访问。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>思源笔记是一款隐私优先的个人知识管理系统，支持细粒度块级引用和 Markdown 所见即所得。<br>
+只可以使用网页进行访问。leanote和为知笔记都可以用官方客户端选择私有存贮进行访问。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[玩客云docker部署searxng搜索引擎]]></title>
+        <id>https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-searxng-sou-suo-yin-qing/</id>
+        <link href="https://qs100371.vip/post/wan-ke-yun-docker-bu-shu-searxng-sou-suo-yin-qing/">
+        </link>
+        <updated>2024-11-29T13:22:12.000Z</updated>
+        <summary type="html"><![CDATA[<p><a href="https://github.com/searxng/searxng-docker">searxng-docker</a>，使用 Docker 创建SearXNG 实例。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><a href="https://github.com/searxng/searxng-docker">searxng-docker</a>，使用 Docker 创建SearXNG 实例。</p>
+]]></content>
+    </entry>
+</feed>

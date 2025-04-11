@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>用lucky加cloudflare实现域名访问内网 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb/s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。
+
+
+主机上..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="/center" class="menu">
+        应用
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            用lucky加cloudflare实现域名访问内网
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2024-12-11
+          </time>
+          <span class="read-times">
+            4 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb/s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+<!-- more -->
+<blockquote>
+<p>主机上安装lucky，参见上一篇。</p>
+</blockquote>
+<p>通过IP:16601访问，从左侧导航打开stun内网穿透，添加穿透规则，规则名ssh，目标地址：192.168.0.2，目标端口：22，点确定，会看到穿透详情里有蓝色标出的IP:随机端口。<br>
+<img src="https://qs100371.vip/post-images/1733923179558.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>通过webhook把得到的IP和端口应用到cloudflare</p>
+</blockquote>
+<p>先注册，登录cloudflare，添加主机，把自己的域名托管到cloudflare，系统会提供两个dns主机名，把它填到域名注册商网站上的dns服务器上，过一会cloudflare就会把dns设置的记录复制过来。添加一条指向s.domain.com的A记录，IP随便填（填8.8.8.8就行），domain.com为自己的域名。</p>
+<p>打开cloudflare左侧导航栏中的重定向规则，单一重定向，创建规则，名称ssh，自定义筛选表达式，下面选“主机名”“等于”“s.domain.com”，URL重定向，“动态”，“concat(&quot;http://192.168.0.2:22&quot;, http.request.uri.path)”，保存。<br>
+<img src="https://qs100371.vip/post-images/1733923286732.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1733923303229.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1733923314406.webp" alt="" loading="lazy"><br>
+按F12打开游览器开发者工具，选中网络，再修改刚才的规则，把条目都点选一次，在右侧面板中找一条请求方法为PATCH的条目，请求网址类似于<code>https://dash.cloudflare.com/api/v4/zones/4b6f20be9bbd211b60fe38542a*****f/rulesets/9df41177ce8*****a8c7c4ff3ee70beb/rules/4cba3b12a12f4efea640*****f1e1d10</code>，把地址的dash替换成api，api替换成client，保存为url1备用。<br>
+<strong>这个url中zones，rulesets，rules三处后面有长长的字符串，第三段每个规则不一样。</strong></p>
+<p><img src="https://qs100371.vip/post-images/1733923431876.webp" alt="" loading="lazy"><br>
+打开lucky设置里的内网穿透，修改规则ssh，打开全局webhook，webhook，启用仅在地址不同时触发，接口地址填前面的url1，请求方法PATCH，请求头<code>Authorization: Bearer LrM4kmqPEZKqa5dQjHJYEAa80F*****nXqE8HJ</code>（Bearer后面是cloudflare申请的令牌），请求主体</p>
+<pre><code>{
+        &quot;action&quot;: &quot;redirect&quot;,
+    &quot;description&quot;: &quot;ssh&quot;,
+    &quot;expression&quot;: &quot;(http.host eq \&quot;s.domain.com\&quot;)&quot;,
+        &quot;action_parameters&quot;: {
+          &quot;from_value&quot;: {
+            &quot;preserve_query_string&quot;: true,
+            &quot;status_code&quot;: 301,
+            &quot;target_url&quot;: {
+              &quot;expression&quot;: &quot;concat(\&quot;http://#{ipAddr}\&quot;, http.request.uri.path)&quot;
+            }
+          }
+        }
+      }
+</code></pre>
+<p>调用成功包含的字符串<code>&quot;success&quot;: true</code><br>
+点手动触发，再去看cloudflare上修改ssh的条目，发现里面的URL转发地址变成了<code>concat(&quot;http://192.168.0.2:22&quot;, http.request.uri.path)</code>，这就成功了。在lucky里点保存修改。<br>
+<img src="https://qs100371.vip/post-images/1733923493541.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>添加微信公众号通知（可以没有）</p>
+</blockquote>
+<p>打开内网穿透-设置，开启全局webhook。使用pushplus消息推送功能。<br>
+打开www.pushplus.plus，微信扫码注册，实名，点右上角头像，个人中心，复制token。<br>
+在lucky里webhook界面，填写接口地址<code>https://www.pushplus.plus/send</code>，请求方式POST，请求头<code>Content-Type: application/json</code>，请求主体</p>
+<pre><code>{
+    &quot;token&quot;: &quot;16dc****5064f13ba75feaa87303686&quot;,
+    &quot;title&quot;: &quot;#{ruleName} 公网变化通知&quot;,
+    &quot;content&quot;: &quot;#{ipAddr}&quot;, 
+    &quot;template&quot;: &quot;txt&quot;
+}
+</code></pre>
+<p>调用成功包含字符串“请求成功”，保存。<br>
+<img src="https://qs100371.vip/post-images/1733923507385.webp" alt="" loading="lazy"></p>
+<p>把规则ssh关闭再打开，就会触发，微信会收到提示ssh公网变化通知。</p>
+<p>更详细的图文说明参见--&gt;<a href="https://club.fnnas.com/forum.php?mod=viewthread&amp;tid=6545"><em>使用Lucky的STUN内网穿透功能获取ipv4公网绑域名进行外网访问</em></a></p>
+<hr>
+<blockquote>
+<p>这种方法适用于二级域名指向内网服务，相当于内网穿透加反向代理。但象ssh，xrdp，ftp这些需要带端口访问的服务则不行，但也可以从微信推送得知穿透的IP和端口。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/" title="用lucky加cloudflare实现域名访问内网">https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-an-zhuang-lucky/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

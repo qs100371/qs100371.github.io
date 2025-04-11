@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>如何给网站添加中英文切换 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="本文介绍了两种方法可以实现网站的多语言切换。
+
+使用 Google Translate
+对于单一语言的 Web 应用，使用 Google Translate 增加几行代码就能实现网页内容的一键翻译，可以有效的提升用户友好度，又不必去做繁琐的..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="/center" class="menu">
+        应用
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            如何给网站添加中英文切换
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-26
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>本文介绍了两种方法可以实现网站的多语言切换。</p>
+<!-- more -->
+<h1 id="使用-google-translate">使用 Google Translate</h1>
+<p>对于单一语言的 Web 应用，使用 Google Translate 增加几行代码就能实现网页内容的一键翻译，可以有效的提升用户友好度，又不必去做繁琐的多语言配置。</p>
+<pre><code>&lt;div id='google_translate_element'&gt;&lt;/div&gt;
+&lt;script&gt;
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'zh',
+      includedLanguages: 'en,it,fr,ru,tr'
+    }, 'google_translate_element');
+  }
+&lt;/script&gt;
+&lt;!-- 引入 Google Translate 依赖，可放在网页的 Footer 处，避免堵塞正文加载 --&gt;
+&lt;script src=&quot;https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&quot;&gt;
+&lt;/script&gt;
+</code></pre>
+<p>在页面的最上方就出现了选择语言的 select 切换标签。<br>
+此方法需要可访问谷歌网站（梯子）。</p>
+<h1 id="使用translatejs">使用translate.js</h1>
+<p>两行js实现html全自动翻译。<br>
+无需改动页面、无语言配置文件、无API Key、对SEO友好！<br>
+在网页最末尾， </html> 之前，加入以下代码，一般在页面的最底部就出现了选择语言的 select 切换标签。 就这么简单。</p>
+<pre><code>&lt;script src=&quot;https://cdn.staticfile.net/translate.js/3.12.0/translate.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+translate.language.setLocal('chinese_simplified'); //设置本地语种（当前网页的语种）。如果不设置，默认自动识别当前网页显示文字的语种。 可填写如 'english'、'chinese_simplified' 等，具体参见文档下方关于此的说明。
+translate.service.use('client.edge'); //设置机器翻译服务通道，直接客户端本身，不依赖服务端 。相关说明参考 http://translate.zvo.cn/43086.html
+translate.execute();//进行翻译 
+&lt;/script&gt;
+</code></pre>
+<p>此方法不需要梯子。</p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E4%BD%BF%E7%94%A8-google-translate">使用 Google Translate</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8translatejs">使用translate.js</a></li>
+</ul>
+
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/" title="如何给网站添加中英文切换">https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/yi-ge-kai-yuan-de-zai-xian-ni-ming-fen-xiang-fu-wu-privatebin/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/yi-ge-chao-ji-jian-dan-de-tu-chuang-easyimage/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>安装AdGuard Home | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://qs100371.vip/post/an-zhuang-adguard-home/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="AdGuard Home 是免费且开源，强大的全网广告和跟踪器阻止 DNS 服务器。本文详细记录了安装方法。
+
+项目地址：AdguardTeam/AdGuardHome
+AdGuard Home 作为 DNS 服务器运行，将跟踪域重新路由到..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="/center" class="menu">
+        应用
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            安装AdGuard Home
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-04-08
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>AdGuard Home 是免费且开源，强大的全网广告和跟踪器阻止 DNS 服务器。本文详细记录了安装方法。</p>
+<!-- more -->
+<p>项目地址：<a href="https://github.com/AdguardTeam/AdGuardHome">AdguardTeam/AdGuardHome</a><br>
+AdGuard Home 作为 DNS 服务器运行，将跟踪域重新路由到“黑洞”，从而防止设备连接到这些服务器。</p>
+<h1 id="自动安装">自动安装</h1>
+<p><code>curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v</code></p>
+<h1 id="docker安装">docker安装</h1>
+<pre><code>docker pull adguard/adguardhome
+mkdir /etc/AdGuard_Home
+docker run --name AdGuard_Home \
+      -v /etc/AdGuard_Home/:/opt/adguardhome/work \
+       -v /etc/AdGuard_Home/:/opt/adguardhome/conf \
+       -p 53:53/tcp -p 53:53/udp -p 67:67/udp -p 70:68/tcp -p 70:68/udp \
+       -p 3001:80/tcp -p 446:443/tcp -p 853:853/tcp \
+       -p 3000:3000/tcp --restart=always -d adguard/adguardhome
+</code></pre>
+<p>各参数意义详见：<a href="https://hub.docker.com/r/adguard/adguardhome">https://hub.docker.com/r/adguard/adguardhome</a></p>
+<h1 id="设置">设置</h1>
+<p>从ip:3000访问，并设置。</p>
+<ul>
+<li>DNS 服务器推荐<br>
+不同地区连接至 DNS 服务器的速度各有差异，各位可以通过 Ping 测速的方式寻找当地连接延迟最低的 DNS 服务器。更多 DNS 服务器可以在 AdGuard 文档中找到。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>DNS 提供商</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>阿里</td>
+<td>223.5.5.5</td>
+</tr>
+<tr>
+<td>DNSPod</td>
+<td>119.29.29.29</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>添加过滤规则<br>
+为了更好地发挥 AdGuard Home 去广告的功能，仅依靠默认的过滤规则是不够的，但也不宜过多，过多的过滤规则会影响解析的速度，可以根据需要添加过滤规则。</li>
+</ul>
+<h1 id="替换设备-dns">替换设备 DNS</h1>
+<p>完成 AdGuard Home 的设置后，便可将 AdGuard Home 的 DNS 地址部署到局域网设备上。可以在路由器上把DHCP的DNS1设为此IP，DNS2设成原路由器地址。<br>
+<img src="https://qs100371.vip/post-images/1744103652506.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1744103657904.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1744103662460.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1744103666466.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1744103670720.webp" alt="" loading="lazy"><br>
+参考：<br>
+<a href="https://sspai.com/post/63088"><em>AdGuard Home 安装及使用指北</em></a></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85">自动安装</a></li>
+<li><a href="#docker%E5%AE%89%E8%A3%85">docker安装</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE">设置</a></li>
+<li><a href="#%E6%9B%BF%E6%8D%A2%E8%AE%BE%E5%A4%87-dns">替换设备 DNS</a></li>
+</ul>
+
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/an-zhuang-adguard-home/" title="安装AdGuard Home">https://qs100371.vip/post/an-zhuang-adguard-home/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

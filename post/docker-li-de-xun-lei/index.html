@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>docker里的迅雷 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://qs100371.vip/post/docker-li-de-xun-lei/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="有大神将NAS版迅雷移植到了Docker中，从而实现Docker容器即可安装NAS版迅雷。
+
+迅雷在早些时期已经支持NAS安装，不过从官网的介绍来看仅支持“群晖/威联通”等主流NAS设备，且需要内测邀请，并没有直接支持Docker安装，具体..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="/center" class="menu">
+        应用
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            docker里的迅雷
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-03-11
+          </time>
+          <span class="read-times">
+            2 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/web/" class="post-tags">
+            # web
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>有大神将NAS版迅雷移植到了Docker中，从而实现Docker容器即可安装NAS版迅雷。</p>
+<!-- more -->
+<p>迅雷在早些时期已经支持NAS安装，不过从官网的介绍来看仅支持“群晖/威联通”等主流NAS设备，且需要内测邀请，并没有直接支持Docker安装，具体见官网：https://nas.xunlei.com/<br>
+<img src="https://qs100371.vip/post-images/1741701398926.webp" alt="" loading="lazy"></p>
+<p>项目地址：<a href="https://github.com/cnk3x/xunlei">cnk3x/xunlei</a></p>
+<p>从迅雷群晖套件中提取出来用于其他设备的迅雷远程下载服务程序。仅提供 Linux 模拟和容器化运行环境，未对原版迅雷程序进行任何修改。</p>
+<h1 id="部署nas版迅雷">部署NAS版迅雷</h1>
+<pre><code>docker run -d \
+ --name=xunlei \
+ -p 2345:2345 \
+ -v /data/xunlei:/xunlei/data \
+ -v /data/bank/bt:/xunlei/downloads \
+ --restart=unless-stopped \
+ --privileged \
+ cnk3x/xunlei:latest
+</code></pre>
+<p>或<br>
+docker-compose.yml</p>
+<pre><code>version: '3.9'
+services:
+  xunlei:
+      container_name: xunlei
+      image: 'cnk3x/xunlei:latest'
+      privileged: true
+      restart: unless-stopped
+      volumes:
+          - '/data/bank/bt:/xunlei/downloads'
+          - '/data/xunlei:/xunlei/data'
+      ports:
+          - '2345:2345'
+</code></pre>
+<p>从ip:2345访问。</p>
+<h1 id="初始化nas版迅雷">初始化NAS版迅雷</h1>
+<p>下载迅雷APP，扫码登录NAS版迅雷（不登录不让用），还可以通过APP远程管理，如果不需要远程管理，也可以直接在http://IP:2345页面通过账号密码登录。</p>
+<ul>
+<li>NAS版迅雷安装并登录后还需要内测邀请码[迅雷牛通]才能正常使用。</li>
+</ul>
+<h1 id="使用nas版迅雷">使用NAS版迅雷</h1>
+<p>NAS版迅雷比较简洁，除了基本的下载功能外，还支持云盘取回/影片库/在线播放等功能，如果您安装了手机APP，还可以进行远程管理，非常方便。<br>
+<img src="https://qs100371.vip/post-images/1741701121329.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1741701127702.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1741701134547.webp" alt="" loading="lazy"></p>
+<blockquote>
+<p>没有会员下载速度也不错。不过迅雷在下载界名声比较臭，万不得已的情况下可以用一下。</p>
+</blockquote>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E9%83%A8%E7%BD%B2nas%E7%89%88%E8%BF%85%E9%9B%B7">部署NAS版迅雷</a></li>
+<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96nas%E7%89%88%E8%BF%85%E9%9B%B7">初始化NAS版迅雷</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8nas%E7%89%88%E8%BF%85%E9%9B%B7">使用NAS版迅雷</a></li>
+</ul>
+
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/docker-li-de-xun-lei/" title="docker里的迅雷">https://qs100371.vip/post/docker-li-de-xun-lei/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/synctvyuan-cheng-yi-qi-guan-kan-dian-ying-he-zhi-bo/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/xia-zai-gong-ju-transmission/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>

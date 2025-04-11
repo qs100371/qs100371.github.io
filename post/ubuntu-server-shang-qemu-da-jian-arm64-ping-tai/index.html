@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="It&#39;s just a note, not a guide." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="baidu-site-verification" content="codeva-LhXgKgQNnq" />
+<meta name="keywords" content="linux onecloud armbian docker 学习笔记 个人博客">
+<title>ubuntu server上qemu搭建arm64平台 | The blog of qs</title>
+<link rel="shortcut icon" href="https://qs100371.vip/favicon.ico">
+
+<link rel="stylesheet" href="https://qs100371.vip/styles/main.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+<script src="/media/scripts/Valine.min.js" ></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1853375781503714"
+     crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://qs100371.vip/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/" />
+  <meta name="socialText" content="" />
+  <meta name="description" content="玩客云只支持armv7，在ubuntu server上可以用qemu建立arm64虚拟机。
+
+安装ubuntu server
+平常安装的都是桌面版，这次安装server版，安装界面都是文本模式，安装起来比gui方式费劲多了，由于ubuntu..." />
+  <meta name="referrer" content="always" />
+  
+  
+  <link rel="stylesheet" href="https://qs100371.vip/media/css/prism.css">
+  
+ 
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://qs100371.vip" class="logo">
+      <span class="symbol"
+        ><img
+          src="https://qs100371.vip/images/avatar.png"
+          alt=""
+        />
+      </span>
+      <div class="site-title"> The blog of qs </div>
+    </a>
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+    
+      <li><a href="/" class="menu">
+        首页
+      </a></li>
+      
+    
+    
+      <li><a href="/archives" class="menu">
+        归档
+      </a></li>
+      
+    
+    
+      <li><a href="/tags" class="menu">
+        标签
+      </a></li>
+      
+    
+    
+      <li><a href="/center" class="menu">
+        应用
+      </a></li>
+      
+    
+    <li>
+    <form id="gridea-search-form" action="https://qs100371.vip/search/">
+      <input name="q" placeholder="搜索" />
+    </form></li>
+  </ul>
+</nav>
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <div class="post-pagetitle">
+          <h1>
+            ubuntu server上qemu搭建arm64平台
+          </h1>
+        </div>
+        <div class="post-info">
+          <time class="post-time">
+            2025-01-24
+          </time>
+          <span class="read-times">
+            3 min read
+          </span>
+          
+          <a href="https://qs100371.vip/tag/linux/" class="post-tags">
+            # linux
+          </a>
+          
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-content">
+            <p>玩客云只支持armv7，在ubuntu server上可以用qemu建立arm64虚拟机。</p>
+<!-- more -->
+<h1 id="安装ubuntu-server">安装ubuntu server</h1>
+<p>平常安装的都是桌面版，这次安装server版，安装界面都是文本模式，安装起来比gui方式费劲多了，由于ubuntu安全服务器连不上，安装时设置了一个本地http代理，安装完成后却找不到这个代理设置在什么地方，最后在/etc/apt/apt.conf.d下找到一个名字里有proxy的文件里找到了，删除之后网络正常，不需时时挂上代理。<br>
+/etc/apt/apt.conf.d/90curtin-aptproxy<br>
+文件内容：<br>
+Acquire::http::Proxy &quot;http://192.168.0.4:10809&quot;;<br>
+Acquire::https::Proxy &quot;http://192.168.0.4:10809&quot;;</p>
+<h1 id="准备工作">准备工作</h1>
+<ul>
+<li>安装qemu-system-aarch64<br>
+<code>apt install qemu-system-aarch64</code></li>
+<li>uefi固件下载：<br>
+<code>wget https://releases.linaro.org/components/kernel/uefi-linaro/16.02/release/qemu64/QEMU_EFI.fd</code></li>
+<li>ubuntu arm64安装镜像下载：<br>
+<code>wget https://old-releases.ubuntu.com/releases/16.04.3/ubuntu-16.04.3-server-arm64.iso</code><br>
+搭梯子下载比较快，用sftp传到主机上。</li>
+<li>创建虚拟硬盘：<br>
+<code>qemu-img create ubuntu16.04-arm64.img 16G</code></li>
+</ul>
+<h1 id="虚拟机安装">虚拟机安装</h1>
+<p><code>qemu-system-aarch64 -m 2048 -cpu cortex-a57 -smp 2 -M virt -bios QEMU_EFI.fd -nographic -drive if=none,file=ubuntu-16.04.3-server-arm64.iso,id=cdrom,media=cdrom -device virtio-scsi-device -device scsi-cd,drive=cdrom -drive if=none,file=ubuntu16.04-arm64.img,id=hd0 -device virtio-blk-device,drive=hd0</code><br>
+安装成功后，再启动<br>
+<code>qemu-system-aarch64 -m 2048 -cpu cortex-a57 -smp 2 -M virt -bios QEMU_EFI.fd -nographic -drive if=none,file=ubuntu16.04-arm64.img,id=hd0 -device virtio-blk-device,drive=hd0</code></p>
+<blockquote>
+<p>安装了很久，显示成功了，但是去掉安装镜像，就启动不起来，停止在efi启动界面，进不到操作系统，不知道是不是efi文件的问题。dc7900性能太差了，跑一个ubuntu很费劲，server要稍微好一点，里面再跑一个qemu不行了，和pixel3上跑termux-qemu-debian速度差不多。</p>
+</blockquote>
+<p><img src="https://qs100371.vip/post-images/1737723270449.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1737723285096.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1737723297524.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1737723303227.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1737723312605.webp" alt="" loading="lazy"><br>
+<img src="https://qs100371.vip/post-images/1737723319704.webp" alt="" loading="lazy"></p>
+
+          </div>
+          <div class="toc-container">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E5%AE%89%E8%A3%85ubuntu-server">安装ubuntu server</a></li>
+<li><a href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">准备工作</a></li>
+<li><a href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85">虚拟机安装</a></li>
+</ul>
+
+          </div>
+        </div>
+        <hr>
+        <div class="post-footer">
+          <ul class="post-copyright">
+            
+            <li class="post-copyright-link">
+              <strong class="language" data-lan="link">本文链接：</strong>
+              <a href="https://qs100371.vip/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/" title="ubuntu server上qemu搭建arm64平台">https://qs100371.vip/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/</a>
+            </li>
+            <li class="post-copyright-license">
+              <strong class="language" data-lan="copyright">版权声明： </strong>
+              本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank">CC BY-NC-SA</a> 许可协议。转载请注明出处！
+            </li> 
+          </ul>
+        </div>
+        
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'monsterid',
+    visitor: true,
+    visitor: 'true',
+    highlight: 'true',
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
+     
+      </div>
+
+      <div class="post-pagination inner">
+        
+        <div class="next-post">
+          <div>
+            <a href="https://qs100371.vip/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/">下一篇</a>
+          </div>
+        </div>
+        
+        
+        <div class="prev-post">
+          <div>
+            <a href="https://qs100371.vip/post/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/">上一篇</a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <!-- back to top -->
+    <button oneclik="topFunction()" id="BackToTop">
+      TOP
+    </button>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    
+    <ul class="copyright">
+     
+      ©2025   <a href="mailto:admin@qs100371.vip">qs100371.vip</a>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://qs100371.vip/media/scripts/jquery.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/browser.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/breakpoints.min.js"></script>
+  <script src="https://qs100371.vip/media/scripts/util.js"></script>
+  <script src="https://qs100371.vip/media/scripts/main.js"></script>
+  
+  <script src="https://qs100371.vip/media/scripts/prism.js"></script>
+  <script>
+    Prism.highlightAll();
+  </script>
+  
+  <script>
+    post_scroll();
+    back_to_top();
+  </script>
+</body>
+
+</html>
