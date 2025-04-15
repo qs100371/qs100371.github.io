@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>玩客云docker安装leanote失败 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="蚂蚁笔记 &#x3D; 笔记 + 博客 + 协作 + 私有云">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩客云docker安装leanote失败">
+<meta property="og:url" content="https://qs100371.vip/2024/11/24/wan-ke-yun-docker-an-zhuang-leanote-shi-bai/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="蚂蚁笔记 &#x3D; 笔记 + 博客 + 协作 + 私有云">
+<meta property="og:locale">
+<meta property="og:image" content="https://qs100371.vip/post-images/1732937996387.webp">
+<meta property="article:published_time" content="2024-11-24T13:19:57.000Z">
+<meta property="article:modified_time" content="2025-03-06T09:58:26.041Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="onecloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1732937996387.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-wan-ke-yun-docker-an-zhuang-leanote-shi-bai" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/24/wan-ke-yun-docker-an-zhuang-leanote-shi-bai/" class="article-date">
+  <time class="dt-published" datetime="2024-11-24T13:19:57.000Z" itemprop="datePublished">2024-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      玩客云docker安装leanote失败
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>蚂蚁笔记 &#x3D; 笔记 + 博客 + 协作 + 私有云</p>
+<span id="more"></span>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/leanote/db</span><br><span class="line">mkdir -p /data/leanote/conf</span><br><span class="line">mkdir -p /data/leanote/files</span><br><span class="line">mkdir -p /data/leanote/public/upload</span><br><span class="line"></span><br><span class="line">docker run -d --name leanote \</span><br><span class="line">    -v /data/leanote/db:/data/db \</span><br><span class="line">    -v /data/leanote/conf/:/data/leanote/conf \</span><br><span class="line">    -v /data/leanote/files:/data/leanote/files \</span><br><span class="line">    -v /data/leanote/public/upload:/data/leanote/public/upload \</span><br><span class="line">    -p 9000:9000 --restart unless-stopped \</span><br><span class="line">    axboy/leanote</span><br></pre></td></tr></table></figure>
+
+<p>Digest: sha256:2e1c118ac664a64305821f9f7eb5d1264fd2c82a88af6616c6e04a6bd1ad9f92<br>Status: Downloaded newer image for axboy&#x2F;leanote:latest<br>WARNING: The requested image’s platform (linux&#x2F;amd64) does not match the detected host platform (linux&#x2F;arm&#x2F;v7) and no specific platform was requested<br>40579a6980b478c46c19da36055ced75d65153c3555ca540eadc4245b93e78ac</p>
+<blockquote>
+<p>玩客云是armv7，镜像是amd64，不能运行。加上–platform linux&#x2F;amd64也不行。在debian12虚拟机里可以正常部署。</p>
+</blockquote>
+<p><img src="https://qs100371.vip/post-images/1732937996387.webp"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/2024/11/24/wan-ke-yun-docker-an-zhuang-leanote-shi-bai/" data-id="cm9ifefsl002xo0tz07bv89at" data-title="玩客云docker安装leanote失败" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/11/25/wan-ke-yun-docker-da-jian-si-you-bi-ji-fu-wu-trilium/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          玩客云Docker搭建私有笔记服务Trilium
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/11/22/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">玩客云docker安装qbittorrent失败</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/04/15/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/14/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/09/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

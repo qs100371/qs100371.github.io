@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>lshw命令：一个全面的硬件信息查询工具 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux系统中lshw（List Hardware）是一个强大的命令，可以获取底层硬件信息。该命令在需要了解和诊断系统硬件配置时非常实用。只需在命令行输入 lshw 即可运行此命令。这将返回关于系统硬件的详细列表，包括CPU、内存、磁盘驱动器等所有组件的信息。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lshw命令：一个全面的硬件信息查询工具">
+<meta property="og:url" content="https://qs100371.vip/2025/03/04/lshw-ming-ling-yi-ge-quan-mian-de-ying-jian-xin-xi-cha-xun-gong-ju/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="Linux系统中lshw（List Hardware）是一个强大的命令，可以获取底层硬件信息。该命令在需要了解和诊断系统硬件配置时非常实用。只需在命令行输入 lshw 即可运行此命令。这将返回关于系统硬件的详细列表，包括CPU、内存、磁盘驱动器等所有组件的信息。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-03-04T03:16:10.000Z">
+<meta property="article:modified_time" content="2025-03-09T13:57:33.281Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-lshw-ming-ling-yi-ge-quan-mian-de-ying-jian-xin-xi-cha-xun-gong-ju" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/04/lshw-ming-ling-yi-ge-quan-mian-de-ying-jian-xin-xi-cha-xun-gong-ju/" class="article-date">
+  <time class="dt-published" datetime="2025-03-04T03:16:10.000Z" itemprop="datePublished">2025-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      lshw命令：一个全面的硬件信息查询工具
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Linux系统中lshw（List Hardware）是一个强大的命令，可以获取底层硬件信息。该命令在需要了解和诊断系统硬件配置时非常实用。只需在命令行输入 lshw 即可运行此命令。这将返回关于系统硬件的详细列表，包括CPU、内存、磁盘驱动器等所有组件的信息。</p>
+<span id="more"></span>
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><p><code>lshw -h</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Hardware Lister (lshw) - </span><br><span class="line">usage: lshw [-format] [-options ...]</span><br><span class="line">       lshw -version</span><br><span class="line"></span><br><span class="line">	-version        print program version ()</span><br><span class="line"></span><br><span class="line">format can be</span><br><span class="line">	-html           output hardware tree as HTML</span><br><span class="line">	-xml            output hardware tree as XML</span><br><span class="line">	-json           output hardware tree as a JSON object</span><br><span class="line">	-short          output hardware paths</span><br><span class="line">	-businfo        output bus information</span><br><span class="line"></span><br><span class="line">options can be</span><br><span class="line">	-class CLASS    only show a certain class of hardware</span><br><span class="line">	-C CLASS        same as &#x27;-class CLASS&#x27;</span><br><span class="line">	-c CLASS        same as &#x27;-class CLASS&#x27;</span><br><span class="line">	-disable TEST   disable a test (like pci, isapnp, cpuid, etc. )</span><br><span class="line">	-enable TEST    enable a test (like pci, isapnp, cpuid, etc. )</span><br><span class="line">	-quiet          don&#x27;t display status</span><br><span class="line">	-sanitize       sanitize output (remove sensitive information like serial numbers, etc.)</span><br><span class="line">	-numeric        output numeric IDs (for PCI, USB, etc.)</span><br><span class="line">	-notime         exclude volatile attributes (timestamps) from output</span><br></pre></td></tr></table></figure>
+<h1 id="列出主机信息"><a href="#列出主机信息" class="headerlink" title="列出主机信息"></a>列出主机信息</h1><p><code>sudo lshw -short</code><br>玩客云主机：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">H/W path  Device          Class      Description</span><br><span class="line">================================================</span><br><span class="line">                          system     Xunlei OneCloud</span><br><span class="line">/0                        bus        Motherboard</span><br><span class="line">/0/0                      processor  cpu</span><br><span class="line">/0/1                      processor  cpu</span><br><span class="line">/0/2                      processor  cpu</span><br><span class="line">/0/3                      processor  cpu</span><br><span class="line">/0/4                      memory     987MiB System memory</span><br><span class="line">/1        usb1            bus        DWC OTG Controller</span><br><span class="line">/2        usb2            bus        DWC OTG Controller</span><br><span class="line">/3        mmc0            bus        MMC Host</span><br><span class="line">/3/aaaa   /dev/mmcblk0    volume     238GiB SN256</span><br><span class="line">/4        mmc1            bus        MMC Host</span><br><span class="line">/4/1      /dev/mmcblk1    generic    8GME4R</span><br><span class="line">/4/1/1    /dev/mmcblk1p1  volume     256MiB Windows FAT volume</span><br><span class="line">/4/1/2    /dev/mmcblk1p2  volume     7184MiB EXT4 volume</span><br><span class="line">/5        input0          input      button</span><br><span class="line">/6        input1          input      meson-ir</span><br><span class="line">/7        eth0            network    Ethernet interface</span><br></pre></td></tr></table></figure>
+<p>ubuntu主机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">H/W path               Device     Class          Description</span><br><span class="line">============================================================</span><br><span class="line">                                  system         To Be Filled By O.E.M. (To Be Filled By O.E.M.)</span><br><span class="line">/0                                bus            HM55</span><br><span class="line">/0/0                              memory         64KiB BIOS</span><br><span class="line">/0/4                              processor      Intel(R) Core(TM) i3 CPU       M 380  @ 2.53GHz</span><br><span class="line">/0/4/5                            memory         128KiB L1 cache</span><br><span class="line">/0/4/6                            memory         512KiB L2 cache</span><br><span class="line">/0/4/7                            memory         3MiB L3 cache</span><br><span class="line">/0/29                             memory         4GiB System Memory</span><br><span class="line">/0/29/0                           memory         4GiB DIMM SDRAM Synchronous</span><br><span class="line">/0/29/1                           memory         DIMM [empty]</span><br><span class="line">/0/29/2                           memory         DIMM [empty]</span><br><span class="line">/0/29/3                           memory         DIMM [empty]</span><br><span class="line">/0/100                            bridge         Core Processor DRAM Controller</span><br><span class="line">/0/100/2               /dev/fb0   display        Core Processor Integrated Graphics Controller</span><br><span class="line">/0/100/4                          generic        Core Processor Thermal Management Controller</span><br><span class="line">/0/100/1a                         bus            5 Series/3400 Series Chipset USB Universal Host Controller</span><br><span class="line">/0/100/1a/1            usb3       bus            UHCI Host Controller</span><br><span class="line">/0/100/1a.1                       bus            5 Series/3400 Series Chipset USB Universal Host Controller</span><br><span class="line">/0/100/1a.1/1          usb4       bus            UHCI Host Controller</span><br><span class="line">/0/100/1a.2                       bus            5 Series/3400 Series Chipset USB Universal Host Controller</span><br><span class="line">/0/100/1a.2/1          usb5       bus            UHCI Host Controller</span><br><span class="line">/0/100/1a.7                       bus            5 Series/3400 Series Chipset USB2 Enhanced Host Controller</span><br><span class="line">/0/100/1a.7/1          usb1       bus            EHCI Host Controller</span><br><span class="line">/0/100/1b              card0      multimedia     5 Series/3400 Series Chipset High Definition Audio</span><br><span class="line">/0/100/1b/0            input10    input          HDA Intel MID HDMI/DP,pcm=7</span><br><span class="line">/0/100/1b/1            input11    input          HDA Intel MID HDMI/DP,pcm=8</span><br><span class="line">/0/100/1b/2            input5     input          HDA Intel MID Front Mic</span><br><span class="line">/0/100/1b/3            input6     input          HDA Intel MID Rear Mic</span><br><span class="line">/0/100/1b/4            input7     input          HDA Intel MID Line Out</span><br><span class="line">/0/100/1b/5            input8     input          HDA Intel MID Front Headphone</span><br><span class="line">/0/100/1b/6            input9     input          HDA Intel MID HDMI/DP,pcm=3</span><br><span class="line">/0/100/1c                         bridge         5 Series/3400 Series Chipset PCI Express Root Port 1</span><br><span class="line">/0/100/1c.1                       bridge         5 Series/3400 Series Chipset PCI Express Root Port 2</span><br><span class="line">/0/100/1c.1/0          wls129     network        AR9285 Wireless Network Adapter (PCI-Express)</span><br><span class="line">/0/100/1c.5                       bridge         5 Series/3400 Series Chipset PCI Express Root Port 6</span><br><span class="line">/0/100/1c.5/0          ens133     network        RTL810xE PCI Express Fast Ethernet controller</span><br><span class="line">/0/100/1d                         bus            5 Series/3400 Series Chipset USB Universal Host Controller</span><br><span class="line">/0/100/1d/1            usb6       bus            UHCI Host Controller</span><br><span class="line">/0/100/1d.1                       bus            5 Series/3400 Series Chipset USB Universal Host Controller</span><br><span class="line">/0/100/1d.1/1          usb7       bus            UHCI Host Controller</span><br><span class="line">/0/100/1d.2                       bus            5 Series/3400 Series Chipset USB Universal Host Controller</span><br><span class="line">/0/100/1d.2/1          usb8       bus            UHCI Host Controller</span><br><span class="line">/0/100/1d.3                       bus            5 Series/3400 Series Chipset USB Universal Host Controller</span><br><span class="line">/0/100/1d.3/1          usb9       bus            UHCI Host Controller</span><br><span class="line">/0/100/1d.7                       bus            5 Series/3400 Series Chipset USB2 Enhanced Host Controller</span><br><span class="line">/0/100/1d.7/1          usb2       bus            EHCI Host Controller</span><br><span class="line">/0/100/1e                         bridge         82801 Mobile PCI Bridge</span><br><span class="line">/0/100/1f                         bridge         HM55 Chipset LPC Interface Controller</span><br><span class="line">/0/100/1f/0                       system         PnP device PNP0c01</span><br><span class="line">/0/100/1f/1                       system         PnP device PNP0b00</span><br><span class="line">/0/100/1f/2                       communication  PnP device PNP0501</span><br><span class="line">/0/100/1f/3                       system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/4                       system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/5                       system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/6                       system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/7                       system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/8                       system         PnP device PNP0c01</span><br><span class="line">/0/100/1f.2            scsi0      storage        5 Series/3400 Series Chipset 4 port SATA AHCI Controller</span><br><span class="line">/0/100/1f.2/0.0.0      /dev/sda   disk           120GB SSD 120GB</span><br><span class="line">/0/100/1f.2/0.0.0/1    /dev/sda1  volume         30GiB Windows NTFS volume</span><br><span class="line">/0/100/1f.2/0.0.0/2    /dev/sda2  volume         81GiB Extended partition</span><br><span class="line">/0/100/1f.2/0.0.0/2/5  /dev/sda5  volume         81GiB EXT4 volume</span><br><span class="line">/0/100/1f.3                       bus            5 Series/3400 Series Chipset SMBus Controller</span><br><span class="line">/0/101                            bridge         Core Processor QuickPath Architecture Generic Non-core Regist</span><br><span class="line">/0/102                            bridge         Core Processor QuickPath Architecture System Address Decoder</span><br><span class="line">/0/103                            bridge         Core Processor QPI Link 0</span><br><span class="line">/0/104                            bridge         1st Generation Core i3/5/7 Processor QPI Physical 0</span><br><span class="line">/0/105                            bridge         1st Generation Core i3/5/7 Processor Reserved</span><br><span class="line">/0/106                            bridge         1st Generation Core i3/5/7 Processor Reserved</span><br><span class="line">/1                                power          To Be Filled By O.E.M.</span><br><span class="line">/2                     input0     input          Power Button</span><br><span class="line">/3                     input1     input          Power Button</span><br></pre></td></tr></table></figure>
+<p>dell笔记本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">H/W path       Device          Class          Description</span><br><span class="line">=========================================================</span><br><span class="line">                               system         Inspiron 15 5510 (0B24)</span><br><span class="line">/0                             bus            02MXDR</span><br><span class="line">/0/0                           memory         1MiB BIOS</span><br><span class="line">/0/400                         processor      11th Gen Intel(R) Core(TM) i5-11320H @ 3.20GHz</span><br><span class="line">/0/400/701                     memory         128KiB L1 cache</span><br><span class="line">/0/400/702                     memory         5MiB L2 cache</span><br><span class="line">/0/400/703                     memory         8MiB L3 cache</span><br><span class="line">/0/700                         memory         192KiB L1 cache</span><br><span class="line">/0/1000                        memory         16GiB System Memory</span><br><span class="line">/0/1000/0                      memory         16GiB SODIMM DDR4 Synchronous 3200 MHz (0.3 ns)</span><br><span class="line">/0/1000/1                      memory         [empty]</span><br><span class="line">/0/100                         bridge         11th Gen Core Processor Host Bridge/DRAM Registers</span><br><span class="line">/0/100/2       /dev/fb0        display        TigerLake-LP GT2 [Iris Xe Graphics]</span><br><span class="line">/0/100/4                       generic        TigerLake-LP Dynamic Tuning Processor Participant</span><br><span class="line">/0/100/6                       bridge         11th Gen Core Processor PCIe Controller</span><br><span class="line">/0/100/6/0                     display        TU117M [GeForce MX450]</span><br><span class="line">/0/100/7                       bridge         Tiger Lake-LP Thunderbolt 4 PCI Express Root Port #0</span><br><span class="line">/0/100/a                       generic        Tigerlake Telemetry Aggregator Driver</span><br><span class="line">/0/100/d                       bus            Tiger Lake-LP Thunderbolt 4 USB Controller</span><br><span class="line">/0/100/d/0     usb1            bus            xHCI Host Controller</span><br><span class="line">/0/100/d/1     usb2            bus            xHCI Host Controller</span><br><span class="line">/0/100/d.2                     bus            Tiger Lake-LP Thunderbolt 4 NHI #0</span><br><span class="line">/0/100/e                       storage        Volume Management Device NVMe RAID Controller</span><br><span class="line">/0/100/12                      communication  Tiger Lake-LP Integrated Sensor Hub</span><br><span class="line">/0/100/14                      bus            Tiger Lake-LP USB 3.2 Gen 2x1 xHCI Host Controller</span><br><span class="line">/0/100/14/0    usb3            bus            xHCI Host Controller</span><br><span class="line">/0/100/14/0/4  input9          input          Logitech Wireless Receiver Mouse</span><br><span class="line">/0/100/14/0/6                  multimedia     Integrated_Webcam_HD</span><br><span class="line">/0/100/14/0/a                  communication  AX201 Bluetooth</span><br><span class="line">/0/100/14/1    usb4            bus            xHCI Host Controller</span><br><span class="line">/0/100/14.2                    memory         RAM memory</span><br><span class="line">/0/100/14.3    wlp0s20f3       network        Wi-Fi 6 AX201</span><br><span class="line">/0/100/15                      bus            Tiger Lake-LP Serial IO I2C Controller #0</span><br><span class="line">/0/100/15.1                    bus            Tiger Lake-LP Serial IO I2C Controller #1</span><br><span class="line">/0/100/16                      communication  Tiger Lake-LP Management Engine Interface</span><br><span class="line">/0/100/1f                      bridge         Tiger Lake-LP LPC Controller</span><br><span class="line">/0/100/1f/0                    system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/1                    system         PnP device PNP0b00</span><br><span class="line">/0/100/1f/2                    generic        PnP device INT3f0d</span><br><span class="line">/0/100/1f/3                    input          PnP device PNP0303</span><br><span class="line">/0/100/1f/4                    generic        PnP device DLL0b24</span><br><span class="line">/0/100/1f/5                    system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/6                    system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/7                    system         PnP device PNP0c02</span><br><span class="line">/0/100/1f/8                    system         PnP device PNP0c02</span><br><span class="line">/0/100/1f.3    card0           multimedia     Tiger Lake-LP Smart Sound Technology Audio Controller</span><br><span class="line">/0/100/1f.4                    bus            Tiger Lake-LP SMBus Controller</span><br><span class="line">/0/100/1f.5                    bus            Tiger Lake-LP SPI Controller</span><br><span class="line">/0/1c                          generic        RST VMD Managed Controller</span><br><span class="line">/0/1c.4                        bridge         Tiger Lake-LP PCI Express Root Port #5</span><br><span class="line">/0/1c.4/0                      storage        IM2P33F3 NVMe SSD (DRAM-less)</span><br><span class="line">/1                             power          DELL XDY9K15</span><br><span class="line">/2                             power          </span><br><span class="line">/3             /dev/nvme0      storage        IM2P33F3A NVMe ADATA 512GB</span><br><span class="line">/3/0           /dev/ng0n1      disk           NVMe disk</span><br><span class="line">/3/1           /dev/nvme0n1    disk           512GB NVMe disk</span><br><span class="line">/3/1/1         /dev/nvme0n1p1  volume         249MiB Windows FAT volume</span><br><span class="line">/3/1/2         /dev/nvme0n1p2  volume         127MiB reserved partition</span><br><span class="line">/3/1/3         /dev/nvme0n1p3  volume         103GiB Windows NTFS volume</span><br><span class="line">/3/1/4         /dev/nvme0n1p4  volume         107GiB Windows NTFS volume</span><br><span class="line">/3/1/5         /dev/nvme0n1p5  volume         195GiB Windows NTFS volume</span><br><span class="line">/3/1/6         /dev/nvme0n1p6  volume         989MiB Windows NTFS volume</span><br><span class="line">/3/1/7         /dev/nvme0n1p7  volume         18GiB Windows NTFS volume</span><br><span class="line">/3/1/8         /dev/nvme0n1p8  volume         1458MiB Windows NTFS volume</span><br><span class="line">/3/1/9         /dev/nvme0n1p9  volume         48GiB EXT4 volume</span><br><span class="line">/4             input0          input          Lid Switch</span><br><span class="line">/5             input1          input          Power Button</span><br><span class="line">/6             input10         input          Video Bus</span><br><span class="line">/7             input11         input          Video Bus</span><br><span class="line">/8             input12         input          Intel HID events</span><br><span class="line">/9             input13         input          PC Speaker</span><br><span class="line">/a             input14         input          Intel HID 5 button array</span><br><span class="line">/b             input15         input          Dell Privacy Driver</span><br><span class="line">/c             input16         input          Dell WMI hotkeys</span><br><span class="line">/d             input17         input          DELL0B24:00 04F3:3147 Mouse</span><br><span class="line">/e             input18         input          DELL0B24:00 04F3:3147 Touchpad</span><br><span class="line">/f             input2          input          Sleep Button</span><br><span class="line">/10            input20         input          sof-hda-dsp Headphone Mic</span><br><span class="line">/11            input21         input          sof-hda-dsp HDMI/DP,pcm=3</span><br><span class="line">/12            input22         input          sof-hda-dsp HDMI/DP,pcm=4</span><br><span class="line">/13            input23         input          sof-hda-dsp HDMI/DP,pcm=5</span><br><span class="line">/14            input3          input          AT Translated Set 2 keyboard</span><br><span class="line">/15            input5          input          PS/2 Generic Mouse</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/2025/03/04/lshw-ming-ling-yi-ge-quan-mian-de-ying-jian-xin-xi-cha-xun-gong-ju/" data-id="cm9ifefmp0018o0tzhoig1s8e" data-title="lshw命令：一个全面的硬件信息查询工具" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/05/docker-li-de-yt-dlp-shi-pin-xia-zai-qi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          docker里的yt-dlp视频下载器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/03/02/ben-di-bu-shu-deepseek/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">本地部署deepseek</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/04/15/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/14/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/09/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

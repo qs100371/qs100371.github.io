@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>一个非常棒的自托管仪表板：glance | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="glance是一个非常棒的自托管仪表板，可以显示实时 RSS 订阅、Reddit 子版块帖子、天气、书签、特定频道的最新 YouTube 视频、日历、股票信息、iframe、twitch 频道和热门游戏、GitHub 发布和网站监控等。本文记录了部署过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个非常棒的自托管仪表板：glance">
+<meta property="og:url" content="https://qs100371.vip/2025/01/24/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="glance是一个非常棒的自托管仪表板，可以显示实时 RSS 订阅、Reddit 子版块帖子、天气、书签、特定频道的最新 YouTube 视频、日历、股票信息、iframe、twitch 频道和热门游戏、GitHub 发布和网站监控等。本文记录了部署过程。">
+<meta property="og:locale">
+<meta property="og:image" content="https://qs100371.vip/post-images/1737727910260.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1737823265853.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1737823281233.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1737823272662.webp">
+<meta property="article:published_time" content="2025-01-24T14:05:33.000Z">
+<meta property="article:modified_time" content="2025-03-06T09:53:47.860Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1737727910260.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/24/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/" class="article-date">
+  <time class="dt-published" datetime="2025-01-24T14:05:33.000Z" itemprop="datePublished">2025-01-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      一个非常棒的自托管仪表板：glance
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>glance是一个非常棒的自托管仪表板，可以显示实时 RSS 订阅、Reddit 子版块帖子、天气、书签、特定频道的最新 YouTube 视频、日历、股票信息、iframe、twitch 频道和热门游戏、GitHub 发布和网站监控等。本文记录了部署过程。</p>
+<span id="more"></span>
+<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><p><code>docker pull glanceapp/glance</code></p>
+<h1 id="编辑docker-compose-yml"><a href="#编辑docker-compose-yml" class="headerlink" title="编辑docker-compose.yml"></a>编辑docker-compose.yml</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  glance:</span><br><span class="line">    image: glanceapp/glance</span><br><span class="line">    container_name: glance</span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    ports:</span><br><span class="line">      - 8888:8080        # 左边的8080可以自由修改成服务器上没有被占用的端口，右边的8080不要动。</span><br><span class="line">    volumes:</span><br><span class="line">      - /data/glance/glance.yml:/app/glance.yml</span><br><span class="line">      - /data/glance/assets:/app/assets</span><br><span class="line">      - /etc/TZ:/etc/timezone:ro</span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br></pre></td></tr></table></figure>
+<h1 id="配置面板"><a href="#配置面板" class="headerlink" title="配置面板"></a>配置面板</h1><p>glance.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">theme:</span><br><span class="line">  background-color: 100 20 10</span><br><span class="line">  primary-color: 40 90 40</span><br><span class="line">  contrast-multiplier: 1.1</span><br><span class="line">pages:</span><br><span class="line">  - name: Home</span><br><span class="line">    columns:</span><br><span class="line">      - size: small</span><br><span class="line">        widgets:</span><br><span class="line">          - type: calendar</span><br><span class="line"></span><br><span class="line">      - size: full</span><br><span class="line">        widgets:</span><br><span class="line">          - type: rss</span><br><span class="line">            limit: 10</span><br><span class="line">            collapse-after: 10</span><br><span class="line">            cache: 3h</span><br><span class="line">            feeds:</span><br><span class="line">              - url: https://qs100371.vip/atom.xml</span><br><span class="line">                title: the blog of qs</span><br><span class="line"></span><br><span class="line">      - size: small</span><br><span class="line">        widgets:</span><br><span class="line">          - type: weather</span><br><span class="line">            location: Beidaihe, China</span><br></pre></td></tr></table></figure>
+<p>天气设置：<a target="_blank" rel="noopener" href="https://open-meteo.com/">https://open-meteo.com/</a></p>
+<h1 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h1><p><code>docker-compose up -d</code><br>配合删除容器命令<br><code>docker-compose down</code><br>可以很方便的调整面板主题和内容。<br>从ip:8888访问。<br><img src="https://qs100371.vip/post-images/1737727910260.webp"><br>手机访问效果，分三页显示，从下面的点切换，不能左右滑动切换：<br><img src="https://qs100371.vip/post-images/1737823265853.webp"><br><img src="https://qs100371.vip/post-images/1737823281233.webp"><br><img src="https://qs100371.vip/post-images/1737823272662.webp"><br>更多设置参见：<br><a target="_blank" rel="noopener" href="https://github.com/glanceapp/glance/blob/main/docs/configuration.md"><em>https://github.com/glanceapp/glance</em></a></p>
+<blockquote>
+<p>也可以把这个仪表板当成网站首页，精心设置之后效果挺不错的。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/2025/01/24/yi-ge-fei-chang-bang-de-zi-tuo-guan-yi-biao-ban-glance/" data-id="cm9ifefvl003mo0tz3rri8xa4" data-title="一个非常棒的自托管仪表板：glance" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/01/25/docker-da-jian-liu-yan-ban-sayhello/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          docker 搭建留言板 sayhello
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/01/24/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ubuntu server上qemu搭建arm64平台</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/04/15/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/14/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/09/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

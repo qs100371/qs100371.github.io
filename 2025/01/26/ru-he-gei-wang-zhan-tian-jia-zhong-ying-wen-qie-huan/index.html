@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>如何给网站添加中英文切换 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文介绍了两种方法可以实现网站的多语言切换。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何给网站添加中英文切换">
+<meta property="og:url" content="https://qs100371.vip/2025/01/26/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="本文介绍了两种方法可以实现网站的多语言切换。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-01-26T07:51:23.000Z">
+<meta property="article:modified_time" content="2025-02-23T02:54:47.975Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/26/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/" class="article-date">
+  <time class="dt-published" datetime="2025-01-26T07:51:23.000Z" itemprop="datePublished">2025-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      如何给网站添加中英文切换
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文介绍了两种方法可以实现网站的多语言切换。</p>
+<span id="more"></span>
+<h1 id="使用-Google-Translate"><a href="#使用-Google-Translate" class="headerlink" title="使用 Google Translate"></a>使用 Google Translate</h1><p>对于单一语言的 Web 应用，使用 Google Translate 增加几行代码就能实现网页内容的一键翻译，可以有效的提升用户友好度，又不必去做繁琐的多语言配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&#x27;google_translate_element&#x27;&gt;&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function googleTranslateElementInit() &#123;</span><br><span class="line">    new google.translate.TranslateElement(&#123;</span><br><span class="line">      pageLanguage: &#x27;zh&#x27;,</span><br><span class="line">      includedLanguages: &#x27;en,it,fr,ru,tr&#x27;</span><br><span class="line">    &#125;, &#x27;google_translate_element&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!-- 引入 Google Translate 依赖，可放在网页的 Footer 处，避免堵塞正文加载 --&gt;</span><br><span class="line">&lt;script src=&quot;https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在页面的最上方就出现了选择语言的 select 切换标签。<br>此方法需要可访问谷歌网站（梯子）。</p>
+<h1 id="使用translate-js"><a href="#使用translate-js" class="headerlink" title="使用translate.js"></a>使用translate.js</h1><p>两行js实现html全自动翻译。<br>无需改动页面、无语言配置文件、无API Key、对SEO友好！<br>在网页最末尾， </html> 之前，加入以下代码，一般在页面的最底部就出现了选择语言的 select 切换标签。 就这么简单。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://cdn.staticfile.net/translate.js/3.12.0/translate.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">translate.language.setLocal(&#x27;chinese_simplified&#x27;); //设置本地语种（当前网页的语种）。如果不设置，默认自动识别当前网页显示文字的语种。 可填写如 &#x27;english&#x27;、&#x27;chinese_simplified&#x27; 等，具体参见文档下方关于此的说明。</span><br><span class="line">translate.service.use(&#x27;client.edge&#x27;); //设置机器翻译服务通道，直接客户端本身，不依赖服务端 。相关说明参考 http://translate.zvo.cn/43086.html</span><br><span class="line">translate.execute();//进行翻译 </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>此方法不需要梯子。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/2025/01/26/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/" data-id="cm9ifegbd007wo0tzafteaz67" data-title="如何给网站添加中英文切换" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/01/26/yi-ge-chao-ji-jian-dan-de-tu-chuang-easyimage/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          一个超级简单的图床：easyImage
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/01/26/yi-ge-kai-yuan-de-zai-xian-ni-ming-fen-xiang-fu-wu-privatebin/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一个开源的在线匿名分享服务privatebin</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/04/15/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/14/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/09/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

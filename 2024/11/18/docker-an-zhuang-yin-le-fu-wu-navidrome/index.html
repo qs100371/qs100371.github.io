@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>docker安装音乐服务navidrome | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="navidrome是一个本地音乐服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装音乐服务navidrome">
+<meta property="og:url" content="https://qs100371.vip/2024/11/18/docker-an-zhuang-yin-le-fu-wu-navidrome/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="navidrome是一个本地音乐服务。">
+<meta property="og:locale">
+<meta property="og:image" content="https://qs100371.vip/post-images/1731914183069.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1731917775121.webp">
+<meta property="article:published_time" content="2024-11-18T06:52:58.000Z">
+<meta property="article:modified_time" content="2025-02-23T02:54:47.675Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1731914183069.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-docker-an-zhuang-yin-le-fu-wu-navidrome" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/18/docker-an-zhuang-yin-le-fu-wu-navidrome/" class="article-date">
+  <time class="dt-published" datetime="2024-11-18T06:52:58.000Z" itemprop="datePublished">2024-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      docker安装音乐服务navidrome
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>navidrome是一个本地音乐服务。</p>
+<span id="more"></span>
+<blockquote>
+<p>Navidrome</p>
+</blockquote>
+<p>docker架设本地服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">   --name navidrome \</span><br><span class="line">   --restart=unless-stopped \</span><br><span class="line">   --user $(id -u):$(id -g) \</span><br><span class="line">   -v /data/music:/music \</span><br><span class="line">   -v /data/navidrome:/data \</span><br><span class="line">   -p 4533:4533 \</span><br><span class="line">   -e ND_LOGLEVEL=info \</span><br><span class="line">   deluan/navidrome:latest</span><br></pre></td></tr></table></figure>
+<p>  成功后，访问localhost:4533。<br>  <img src="https://qs100371.vip/post-images/1731914183069.webp"></p>
+<blockquote>
+<p>音乐：</p>
+</blockquote>
+<p>  歌曲宝 <a target="_blank" rel="noopener" href="https://www.gequbao.com/">https://www.gequbao.com/</a><br>  可单曲下载，怕麻烦直接下打包曲库，要转迅雷云下载，每月有5G高速流量，剩下的只能1Mbps慢慢下了。音乐文件的ID3 tag都没有了，可以用Music Tag来更新，同时有歌词和封面信息，<a target="_blank" rel="noopener" href="https://www.123pan.com/s/c8zA-d36N3.html">win版本下载</a>。</p>
+<blockquote>
+<p>播放器</p>
+</blockquote>
+<p>  用支持navidrome的音流，<a target="_blank" rel="noopener" href="https://music.aqzscn.cn/">https://music.aqzscn.cn/</a><br>  <img src="https://qs100371.vip/post-images/1731917775121.webp"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/2024/11/18/docker-an-zhuang-yin-le-fu-wu-navidrome/" data-id="cm9ifeg810074o0tzgpibd99r" data-title="docker安装音乐服务navidrome" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/11/19/shan-chu-docker-duo-yu-de-wang-luo-jie-kou/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          删除docker多余的网络接口
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/11/17/ru-he-xiu-fu-wu-fa-huo-qu-suo-ding-varlibdpkglock-cuo-wu/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何修复无法获取锁定 /var/lib/dpkg/lock 错误</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/04/15/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/14/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/11/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/09/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
