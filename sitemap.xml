@@ -1352,13 +1352,6 @@
 
   
   <url>
-    <loc>https://qs100371.vip/tags/web/</loc>
-    <lastmod>2025-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://qs100371.vip/tags/docker/</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -1366,14 +1359,14 @@
   </url>
   
   <url>
-    <loc>https://qs100371.vip/tags/actions/</loc>
+    <loc>https://qs100371.vip/tags/termux/</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://qs100371.vip/tags/python/</loc>
+    <loc>https://qs100371.vip/tags/web/</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1401,7 +1394,14 @@
   </url>
   
   <url>
-    <loc>https://qs100371.vip/tags/termux/</loc>
+    <loc>https://qs100371.vip/tags/python/</loc>
+    <lastmod>2025-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://qs100371.vip/tags/actions/</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

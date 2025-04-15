@@ -148,11 +148,11 @@ https://qs100371.vip/2025/01/24/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/
 https://qs100371.vip/2025/01/24/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/
 https://qs100371.vip/2024/11/15/xiu-fu-dpkg-fan-hui-cuo-wu-dai-ma-1-de-wen-ti/
 https://qs100371.vip/
-https://qs100371.vip/tags/web/
 https://qs100371.vip/tags/docker/
-https://qs100371.vip/tags/actions/
-https://qs100371.vip/tags/python/
+https://qs100371.vip/tags/termux/
+https://qs100371.vip/tags/web/
 https://qs100371.vip/tags/linux/
 https://qs100371.vip/tags/armbian/
 https://qs100371.vip/tags/onecloud/
-https://qs100371.vip/tags/termux/
+https://qs100371.vip/tags/python/
+https://qs100371.vip/tags/actions/
