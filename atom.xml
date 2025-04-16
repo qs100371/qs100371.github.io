@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-04-15T08:36:57.766Z</updated>
+  <updated>2025-04-16T07:27:39.758Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>把md文件和图片资源从gridea迁移到hexo</title>
+    <link href="https://qs100371.vip/post/ba-md-wen-jian-he-tu-pian-zi-yuan-cong-gridea-qian-yi-dao-hexo/"/>
+    <id>https://qs100371.vip/post/ba-md-wen-jian-he-tu-pian-zi-yuan-cong-gridea-qian-yi-dao-hexo/</id>
+    <published>2025-04-16T07:18:52.000Z</published>
+    <updated>2025-04-16T07:27:39.758Z</updated>
+    
+    <content type="html"><![CDATA[<p>gridea用了半年，开始试试hexo。这是一个迁移脚本。<br><img src="https://qs100371.vip/post-images/1744788456054.png"></p><span id="more"></span><p>这是deepseek完成的作业。</p><h1 id="完整脚本"><a href="#完整脚本" class="headerlink" title="完整脚本"></a>完整脚本</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import shutil</span><br><span class="line"></span><br><span class="line">def sync_files(src_dir, dst_dir):</span><br><span class="line">    &quot;&quot;&quot;同步源目录到目标目录（增量模式）&quot;&quot;&quot;</span><br><span class="line">    if not os.path.isdir(src_dir):</span><br><span class="line">        print(f&quot;错误：源目录不存在 &#123;src_dir&#125;&quot;)</span><br><span class="line">        return False</span><br><span class="line">    </span><br><span class="line">    if not os.path.exists(dst_dir):</span><br><span class="line">        print(f&quot;创建目标目录 &#123;dst_dir&#125;&quot;)</span><br><span class="line">        os.makedirs(dst_dir)</span><br><span class="line"></span><br><span class="line">    print(f&quot;正在同步 &#123;src_dir&#125; -&gt; &#123;dst_dir&#125;&quot;)</span><br><span class="line">    </span><br><span class="line">    total = copied = skipped = 0</span><br><span class="line">    </span><br><span class="line">    for root, _, files in os.walk(src_dir):</span><br><span class="line">        for filename in files:</span><br><span class="line">            total += 1</span><br><span class="line">            src_path = os.path.join(root, filename)</span><br><span class="line">            rel_path = os.path.relpath(src_path, src_dir)</span><br><span class="line">            dst_path = os.path.join(dst_dir, rel_path)</span><br><span class="line">            </span><br><span class="line">            # 检查是否需要复制</span><br><span class="line">            if not os.path.exists(dst_path):</span><br><span class="line">                copy_reason = &quot;新文件&quot;</span><br><span class="line">            else:</span><br><span class="line">                # 比较修改时间和文件大小</span><br><span class="line">                src_stat = os.stat(src_path)</span><br><span class="line">                dst_stat = os.stat(dst_path)</span><br><span class="line">                </span><br><span class="line">                if src_stat.st_mtime &gt; dst_stat.st_mtime or src_stat.st_size != dst_stat.st_size:</span><br><span class="line">                    copy_reason = &quot;已更新&quot;</span><br><span class="line">                else:</span><br><span class="line">                    skipped += 1</span><br><span class="line">                    continue</span><br><span class="line">            </span><br><span class="line">            # 确保目标目录存在</span><br><span class="line">            os.makedirs(os.path.dirname(dst_path), exist_ok=True)</span><br><span class="line">            </span><br><span class="line">            # 执行复制</span><br><span class="line">            try:</span><br><span class="line">                shutil.copy2(src_path, dst_path)</span><br><span class="line">                print(f&quot;已复制 (&#123;copy_reason&#125;): &#123;rel_path&#125;&quot;)</span><br><span class="line">                copied += 1</span><br><span class="line">            except Exception as e:</span><br><span class="line">                print(f&quot;复制失败 &#123;rel_path&#125;: &#123;str(e)&#125;&quot;)</span><br><span class="line">    </span><br><span class="line">    print(f&quot;同步完成. 总计: &#123;total&#125;, 已复制: &#123;copied&#125;, 已跳过: &#123;skipped&#125;&quot;)</span><br><span class="line">    return True</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    # 同步图片目录</span><br><span class="line">    sync_files(</span><br><span class="line">        r&quot;E:\documents\Gridea\post-images&quot;,</span><br><span class="line">        r&quot;D:\hexo\blog\source\post-images&quot;</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    # 同步文章目录</span><br><span class="line">    sync_files(</span><br><span class="line">        r&quot;E:\documents\Gridea\posts&quot;,</span><br><span class="line">        r&quot;D:\hexo\blog\source\_posts&quot;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure><p>保存为 sync_hexo.py，直接运行。</p><h1 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h1><ul><li>简洁实现：完全去除了日志系统，只保留必要的控制台输出；</li><li>双目录同步：同时处理图片目录和文章目录；</li><li>增量同步：通过比较文件修改时间和大小，只复制有变动的文件；</li><li>自动创建目录：如果目标目录不存在会自动创建；</li><li>错误处理：会捕获并显示复制过程中出现的错误。</li></ul><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>确保源目录路径正确（特别是Gridea的默认路径可能有变化）。</p><blockquote><p>就是任性，用gridea客户端写，用hexo生成网站。</p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;gridea用了半年，开始试试hexo。这是一个迁移脚本。&lt;br&gt;&lt;img src=&quot;https://qs100371.vip/post-images/1744788456054.png&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="python" scheme="https://qs100371.vip/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>从 docker 容器生成 docker-compose yaml 定义</title>
@@ -376,25 +395,6 @@
     
     <summary type="html">&lt;p&gt;SyncTV 是一个远程一起观看电影和直播的程序，提供了同步观影、直播、聊天等功能。可以与朋友和家人一起观看视频和直播。&lt;/p&gt;
 &lt;p&gt;SyncTV 的同步观影功能确保所有观看视频的人都在同一点上。这意味着可以暂停、快进快退、倍速等操作，其他人也会同步到同一点。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>实时热门新闻newsnow</title>
-    <link href="https://qs100371.vip/post/shi-shi-re-men-xin-wen-newsnow/"/>
-    <id>https://qs100371.vip/post/shi-shi-re-men-xin-wen-newsnow/</id>
-    <published>2025-03-09T13:41:25.000Z</published>
-    <updated>2025-03-11T09:06:00.375Z</updated>
-    
-    <content type="html"><![CDATA[<p>newsnow本质是一个爬虫，但是整个UI画面设计得非常时尚，热点新闻来源也非常多。</p><span id="more"></span><p>项目地址：<a href="https://github.com/ourongxing/newsnow">ourongxing&#x2F;newsnow</a></p><h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><p>• 优雅的设计，优雅的阅读体验，时刻关注最新最热的新闻。<br>• 支持 Github 登录，支持数据同步。<br>• 默认 30 分钟缓存，登录用户可以强制拉取最新数据。但也会根据内容源的更新间隔设置不同的爬虫间隔时间（最快两分钟），节约资源的同时避免频繁爬取而导致 IP 封禁。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">version: ‘3’</span><br><span class="line">services:</span><br><span class="line"> newsnow:</span><br><span class="line">   image: ghcr.io/ourongxing/newsnow:latest</span><br><span class="line">   container_name: newsnow</span><br><span class="line">   restart: unless-stopped</span><br><span class="line">   ports:</span><br><span class="line">     - &#x27;4444:4444&#x27;</span><br><span class="line">   environment:</span><br><span class="line">     - G_CLIENT_ID=</span><br><span class="line">     - G_CLIENT_SECRET=</span><br><span class="line">     - JWT_SECRET=</span><br><span class="line">     - INIT_TABLE=true</span><br><span class="line">     - ENABLE_CACHE=true</span><br></pre></td></tr></table></figure><p>启动后从ip:4444访问。<br><img src="https://qs100371.vip/post-images/1741528078060.webp"><br><img src="https://qs100371.vip/post-images/1741528084230.webp"><br><img src="https://qs100371.vip/post-images/1741528089347.webp"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;newsnow本质是一个爬虫，但是整个UI画面设计得非常时尚，热点新闻来源也非常多。&lt;/p&gt;</summary>
     
     
     
