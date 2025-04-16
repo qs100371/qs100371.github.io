@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Homeassistant接入国家电网用电数据 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文记录了将电网数据接入HA的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Homeassistant接入国家电网用电数据">
+<meta property="og:url" content="https://qs100371.vip/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="本文记录了将电网数据接入HA的方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/post-images/1743417138110.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1743417165061.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1743583264287.webp">
+<meta property="article:published_time" content="2025-03-31T10:16:18.000Z">
+<meta property="article:modified_time" content="2025-04-11T13:08:39.298Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1743417138110.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://t.qs100371.vip">Trilum</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://m.qs100371.vip">memos</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://media.qs100371.vip">jellyfin</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://ha.qs100371.vip">homeassistant</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://n.qs100371.vip">alist</a>
+        
+          <a class="main-nav-link" href="https://qs100371.vip/douban-movies-nowplaying/">douban</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/" class="article-date">
+  <time class="dt-published" datetime="2025-03-31T10:16:18.000Z" itemprop="datePublished">2025-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Homeassistant接入国家电网用电数据
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文记录了将电网数据接入HA的方法。</p>
+<span id="more"></span>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/ARC-MX/sgcc_electricity_new">HomeAssistant 国家电网电费查询：ARC-MX&#x2F;sgcc_electricity_new</a></p>
+<p>可以帮助将国网的电费、用电量数据接入homeassistant，实现实时追踪家庭用电量情况；并且可以将每日用电量保存到数据库，历史有迹可循。<br>在homeassistant以实体显示：</p>
+<table>
+<thead>
+<tr>
+<th>实体entity_id</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sensor.last_electricity_usage_xxxx</td>
+<td>最近一天用电量，单位KWH、度。</td>
+</tr>
+<tr>
+<td>sensor.electricity_charge_balance_xxxx</td>
+<td>预付费显示电费余额，反之显示上月应交电费，单位元。</td>
+</tr>
+<tr>
+<td>sensor.yearly_electricity_usage_xxxx</td>
+<td>今年总用电量，单位KWH、度。</td>
+</tr>
+<tr>
+<td>sensor.yearly_electricity_charge_xxxx</td>
+<td>今年总用电费，单位元。</td>
+</tr>
+<tr>
+<td>sensor.month_electricity_usage_xxxx</td>
+<td>最近一个月用电量，单位KWH、度。</td>
+</tr>
+<tr>
+<td>sensor.month_electricity_charge_xxxx</td>
+<td>上月总用电费，单位元。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>适用范围<br>适用于除广东、广西、云南、贵州、海南等省份的用户外，均可使用本应用获取电力、电费数据。</li>
+<li>实现流程<br>通过python的selenium包获取国家电网的数据，通过homeassistant的提供的REST API将采用POST请求将实体状态更新到homeassistant。</li>
+</ul>
+<p>安装与部署</p>
+<h1 id="注册国家电网账户"><a href="#注册国家电网账户" class="headerlink" title="注册国家电网账户"></a>注册国家电网账户</h1><p>首先要注册国家电网账户，绑定电表，并且可以手动查询电量，需要手机号和登录密码。<br>注册网址：<a target="_blank" rel="noopener" href="https://www.95598.cn/osgweb/login">https://www.95598.cn/osgweb/login</a></p>
+<h1 id="获取HA-token"><a href="#获取HA-token" class="headerlink" title="获取HA token"></a>获取HA token</h1><p><img src="https://qs100371.vip/post-images/1743417138110.webp"></p>
+<h1 id="docker镜像部署"><a href="#docker镜像部署" class="headerlink" title="docker镜像部署"></a>docker镜像部署</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ARC-MX/sgcc_electricity_new.git</span><br><span class="line"># 如果github网络环境不好的话可以使用国内镜像，完全同步的，个人推荐使用国内镜像</span><br><span class="line"># git clone https://gitee.com/ARC-MX/sgcc_electricity_new.git</span><br><span class="line">cd sgcc_electricity_new</span><br><span class="line"></span><br><span class="line">cp example.env .env # 创建环境变量文件</span><br><span class="line">nano .env</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">### 以下项都需要修改</span><br><span class="line">## 国网登录信息</span><br><span class="line"># 修改为自己的登录账号</span><br><span class="line">PHONE_NUMBER=&quot;xxx&quot; </span><br><span class="line"># 修改为自己的登录密码</span><br><span class="line">PASSWORD=&quot;xxxx&quot; </span><br><span class="line"># 排除指定用户ID，如果出现一些不想检测的ID或者有些充电、发电帐号、可以使用这个环境变量，如果有多个就用&quot;,&quot;分隔，&quot;,&quot;之间不要有空格</span><br><span class="line">IGNORE_USER_ID=xxxxxxx,xxxxxxx,xxxxxxx</span><br><span class="line"></span><br><span class="line"># SQLite 数据库配置</span><br><span class="line"># or False 不启用数据库储存每日用电量数据。</span><br><span class="line">ENABLE_DATABASE_STORAGE=True</span><br><span class="line"># 数据库名，默认为homeassistant</span><br><span class="line">DB_NAME=&quot;homeassistant.db&quot;</span><br><span class="line"># COLLECTION_NAME默认为electricity_daily_usage_&#123;国网用户id&#125;，不支持修改。</span><br><span class="line"></span><br><span class="line">## homeassistant配置</span><br><span class="line"># 改为你的localhost为你的homeassistant地址</span><br><span class="line">HASS_URL=&quot;http://localhost:8123/&quot; </span><br><span class="line"># homeassistant的长期令牌</span><br><span class="line">HASS_TOKEN=&quot;eyxxxxx&quot;</span><br><span class="line"></span><br><span class="line">## selenium运行参数</span><br><span class="line"># 任务开始时间，24小时制，例如&quot;07:00”则为每天早上7点执行，第一次启动程序如果时间晚于早上7点则会立即执行一次，每隔12小时执行一次。</span><br><span class="line">JOB_START_TIME=&quot;07:00&quot;</span><br><span class="line"># 每次操作等待时间，推荐设定范围为[2,30]，该值表示每次点击网页后所要等待数据加载的时间，如果出现“no such element”诸如此类的错误可适当调大该值，如果硬件性能较好可以适当调小该值</span><br><span class="line">RETRY_WAIT_TIME_OFFSET_UNIT=15</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 记录的天数, 仅支持填写 7 或 30</span><br><span class="line"># 国网原本可以记录 30 天,现在不开通智能缴费只能查询 7 天造成错误</span><br><span class="line">DATA_RETENTION_DAYS=7</span><br><span class="line"></span><br><span class="line">## 余额提醒</span><br><span class="line"># 是否缴费提醒</span><br><span class="line">RECHARGE_NOTIFY=Flase</span><br><span class="line"># 余额</span><br><span class="line">BALANCE=5.0</span><br><span class="line"># pushplus token 如果有多个就用&quot;,&quot;分隔，&quot;,&quot;之间不要有空格，单个就不要有&quot;,&quot;</span><br><span class="line">PUSHPLUS_TOKEN=xxxxxxx,xxxxxxx,xxxxxxx</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">运行获取传感器名称</span><br><span class="line">docker-compose up -d</span><br><span class="line">docker-compose logs sgcc_electricity_app</span><br></pre></td></tr></table></figure>
+<p>成功的话，日志应该是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">2025-03-31 16:36:23  [INFO    ] ---- Homeassistant sensor sensor.month_electricity_charge_7787 state updated: 104.52 CNY</span><br><span class="line">2025-03-31 16:36:23  [INFO    ] ---- User xxxxxx3667787 state-refresh task run successfully!</span><br><span class="line">2025-03-31 16:37:43  [INFO    ] ---- Get electricity charge balance for 1601356178519 successfully, balance is 131.3 CNY.</span><br><span class="line">2025-03-31 16:39:19  [INFO    ] ---- Get year power usage for xxxxxx6178519 successfully, usage is 141 kwh</span><br><span class="line">2025-03-31 16:39:19  [INFO    ] ---- Get year power charge for xxxxxx6178519 successfully, yealrly charge is 73.32 CNY</span><br><span class="line">2025-03-31 16:39:34  [INFO    ] ---- Get month power charge for xxxxxx6178519 successfully, 2025-01-01-2025-01-31 usage is 73 KWh, charge is 37.96 CNY.</span><br><span class="line">2025-03-31 16:39:34  [INFO    ] ---- Get month power charge for xxxxxx6178519 successfully, 2025-02-01-2025-02-28 usage is 68 KWh, charge is 35.36 CNY.</span><br><span class="line">2025-03-31 16:39:49  [INFO    ] ---- Get daily power consumption for 1601356178519 successfully, , 2025-03-30 usage is 1.95 kwh.</span><br><span class="line">2025-03-31 16:39:49  [INFO    ] ---- enable_database_storage is true, we will store the data to the database.</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- Database of /data/homeassistant.db created successfully.</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- Table dailyxxxxxx6178519 created successfully</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- Table dataxxxxxx6178519 created successfully</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- The electricity consumption of 1.95KWh on 2025-03-30 has been successfully deposited into the database</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- The electricity consumption of 2.45KWh on 2025-03-29 has been successfully deposited into the database</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- The electricity consumption of 2.77KWh on 2025-03-28 has been successfully deposited into the database</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- The electricity consumption of 1.76KWh on 2025-03-27 has been successfully deposited into the database</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- The electricity consumption of 2.52KWh on 2025-03-26 has been successfully deposited into the database</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- The electricity consumption of 2.1KWh on 2025-03-25 has been successfully deposited into the database</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- The electricity consumption of 2.74KWh on 2025-03-24 has been successfully deposited into the database</span><br><span class="line">2025-03-31 16:40:20  [INFO    ] ---- Check the electricity bill balance, the notification will be sent = False</span><br></pre></td></tr></table></figure>
+<h1 id="HA中的显示"><a href="#HA中的显示" class="headerlink" title="HA中的显示"></a>HA中的显示</h1><p>样式1<br><img src="https://qs100371.vip/post-images/1743417165061.webp"><br>样式2<br>结合mini-graph-card 和mushroom实现美化效果（在hacs上安装）：<br><img src="https://qs100371.vip/post-images/1743583264287.webp"></p>
+<h1 id="电费不足通知"><a href="#电费不足通知" class="headerlink" title="电费不足通知"></a>电费不足通知</h1><p>电费余额不足提醒，在.env里设置提醒余额。目前是用pushplus的方案，注册pushplus，获取token。通知给谁就让谁注册并将token填到.env中。</p>
+<h1 id="修改configuration-yaml文件"><a href="#修改configuration-yaml文件" class="headerlink" title="修改configuration.yaml文件"></a>修改configuration.yaml文件</h1><p>由于是API方式传递传感器数据，要想重启ha实体ID可用，必须配置如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">template:</span><br><span class="line">  - trigger:</span><br><span class="line">      - platform: event</span><br><span class="line">        event_type: state_changed</span><br><span class="line">        event_data:</span><br><span class="line">          entity_id: sensor.electricity_charge_balance_xxxx</span><br><span class="line">    sensor:</span><br><span class="line">      - name: electricity_charge_balance_xxxx</span><br><span class="line">        unique_id: electricity_charge_balance_xxxx</span><br><span class="line">        state: &quot;&#123;&#123; states(&#x27;sensor.electricity_charge_balance_xxxx&#x27;) &#125;&#125;&quot;</span><br><span class="line">        state_class: total</span><br><span class="line">        unit_of_measurement: &quot;CNY&quot;</span><br><span class="line">        device_class: monetary</span><br><span class="line"></span><br><span class="line">  - trigger:</span><br><span class="line">      - platform: event</span><br><span class="line">        event_type: state_changed</span><br><span class="line">        event_data:</span><br><span class="line">          entity_id: sensor.last_electricity_usage_xxxx</span><br><span class="line">    sensor:</span><br><span class="line">      - name: last_electricity_usage_xxxx</span><br><span class="line">        unique_id: last_electricity_usage_xxxx</span><br><span class="line">        state: &quot;&#123;&#123; states(&#x27;sensor.last_electricity_usage_xxxx&#x27;) &#125;&#125;&quot;</span><br><span class="line">        state_class: measurement</span><br><span class="line">        unit_of_measurement: &quot;kWh&quot;</span><br><span class="line">        device_class: energy</span><br><span class="line"></span><br><span class="line">  - trigger:</span><br><span class="line">      - platform: event</span><br><span class="line">        event_type: state_changed</span><br><span class="line">        event_data:</span><br><span class="line">          entity_id: sensor.month_electricity_usage_xxxx</span><br><span class="line">    sensor:</span><br><span class="line">      - name: month_electricity_usage_xxxx</span><br><span class="line">        unique_id: month_electricity_usage_xxxx</span><br><span class="line">        state: &quot;&#123;&#123; states(&#x27;sensor.month_electricity_usage_xxxx&#x27;) &#125;&#125;&quot;</span><br><span class="line">        state_class: measurement</span><br><span class="line">        unit_of_measurement: &quot;kWh&quot;</span><br><span class="line">        device_class: energy</span><br><span class="line"></span><br><span class="line">  - trigger:</span><br><span class="line">      - platform: event</span><br><span class="line">        event_type: state_changed</span><br><span class="line">        event_data:</span><br><span class="line">          entity_id: sensor.month_electricity_charge_xxxx</span><br><span class="line">    sensor:</span><br><span class="line">      - name: month_electricity_charge_xxxx</span><br><span class="line">        unique_id: month_electricity_charge_xxxx</span><br><span class="line">        state: &quot;&#123;&#123; states(&#x27;sensor.month_electricity_charge_xxxx&#x27;) &#125;&#125;&quot;</span><br><span class="line">        state_class: measurement</span><br><span class="line">        unit_of_measurement: &quot;CNY&quot;</span><br><span class="line">        device_class: monetary</span><br><span class="line"></span><br><span class="line">  - trigger:</span><br><span class="line">      - platform: event</span><br><span class="line">        event_type: state_changed</span><br><span class="line">        event_data:</span><br><span class="line">          entity_id: sensor.yearly_electricity_usage_xxxx</span><br><span class="line">    sensor:</span><br><span class="line">      - name: yearly_electricity_usage_xxxx</span><br><span class="line">        unique_id: yearly_electricity_usage_xxxx</span><br><span class="line">        state: &quot;&#123;&#123; states(&#x27;sensor.yearly_electricity_usage_xxxx&#x27;) &#125;&#125;&quot;</span><br><span class="line">        state_class: total_increasing</span><br><span class="line">        unit_of_measurement: &quot;kWh&quot;</span><br><span class="line">        device_class: energy</span><br><span class="line"></span><br><span class="line">  - trigger:</span><br><span class="line">      - platform: event</span><br><span class="line">        event_type: state_changed</span><br><span class="line">        event_data:</span><br><span class="line">          entity_id: sensor.yearly_electricity_charge_xxxx</span><br><span class="line">    sensor:</span><br><span class="line">      - name: yearly_electricity_charge_xxxx</span><br><span class="line">        unique_id: yearly_electricity_charge_xxxx</span><br><span class="line">        state: &quot;&#123;&#123; states(&#x27;sensor.yearly_electricity_charge_xxxx&#x27;) &#125;&#125;&quot;</span><br><span class="line">        state_class: total_increasing</span><br><span class="line">        unit_of_measurement: &quot;CNY&quot;</span><br><span class="line">        device_class: monetary</span><br></pre></td></tr></table></figure>
+<p>xxxx是log中的_xxxx后缀。<br>configuration.yaml在homeassistant配置目录下，也就是docker挂载的目录。<br>修改后重启ha，就不会出现传感器无效的提示。</p>
+<blockquote>
+<p>在HA当中改变显示样式太复杂了，没学会。电网的数据更新很慢，每天下午才会刷新前一天的数据。<del>发现一个问题，ha的docker一重启数据就没了。（已解决）</del></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/" data-id="cm9jjqwlz004dv8tz8wicd0gp" data-title="Homeassistant接入国家电网用电数据" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          网易爆米花：观影好助手
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">给Valine添加邮件提醒功能</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">94</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-adguard-home/">安装AdGuard Home</a>
+          </li>
+        
+          <li>
+            <a href="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/">网易爆米花：观影好助手</a>
+          </li>
+        
+          <li>
+            <a href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/">Homeassistant接入国家电网用电数据</a>
+          </li>
+        
+          <li>
+            <a href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/">给Valine添加邮件提醒功能</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-homeassistant/">安装homeassistant</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <div><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></br> All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br><div>
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a target="_blank" rel="noopener" href="https://t.qs100371.vip" class="mobile-nav-link">Trilum</a>
+  
+    <a target="_blank" rel="noopener" href="https://m.qs100371.vip" class="mobile-nav-link">memos</a>
+  
+    <a target="_blank" rel="noopener" href="https://media.qs100371.vip" class="mobile-nav-link">jellyfin</a>
+  
+    <a target="_blank" rel="noopener" href="https://ha.qs100371.vip" class="mobile-nav-link">homeassistant</a>
+  
+    <a target="_blank" rel="noopener" href="https://n.qs100371.vip" class="mobile-nav-link">alist</a>
+  
+    <a href="https://qs100371.vip/douban-movies-nowplaying/" class="mobile-nav-link">douban</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

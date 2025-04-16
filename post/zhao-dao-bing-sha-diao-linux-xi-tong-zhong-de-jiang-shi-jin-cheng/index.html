@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>找到并杀掉 Linux 系统中的僵尸进程 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="找到并杀掉 Linux 系统中的僵尸进程">
+<meta property="og:url" content="https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/post-images/1742543449493.webp">
+<meta property="article:published_time" content="2025-03-21T07:40:01.000Z">
+<meta property="article:modified_time" content="2025-03-22T02:03:21.195Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1742543449493.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://t.qs100371.vip">Trilum</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://m.qs100371.vip">memos</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://media.qs100371.vip">jellyfin</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://ha.qs100371.vip">homeassistant</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://n.qs100371.vip">alist</a>
+        
+          <a class="main-nav-link" href="https://qs100371.vip/douban-movies-nowplaying/">douban</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" class="article-date">
+  <time class="dt-published" datetime="2025-03-21T07:40:01.000Z" itemprop="datePublished">2025-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      找到并杀掉 Linux 系统中的僵尸进程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。</p>
+<span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-134-generic x86_64)</span><br><span class="line"></span><br><span class="line"> System information as of Fri Mar 21 10:38:43 AM CST 2025</span><br><span class="line"></span><br><span class="line">  System load:             0.02</span><br><span class="line">  Usage of /:              44.3% of 79.95GB</span><br><span class="line">  Memory usage:            17%</span><br><span class="line">  Swap usage:              1%</span><br><span class="line">  Processes:               180</span><br><span class="line">  Users logged in:         0</span><br><span class="line">  IPv4 address for ens133: 192.168.0.5</span><br><span class="line">  IPv6 address for ens133: 2409:8a04:2567:c580:2e0:4cff:fe36:127c</span><br><span class="line"></span><br><span class="line">  =&gt; There is 1 zombie process.</span><br><span class="line"></span><br><span class="line">Expanded Security Maintenance for Applications is not enabled.</span><br><span class="line"></span><br><span class="line">0 updates can be applied immediately.</span><br><span class="line"></span><br><span class="line">Enable ESM Apps to receive additional future security updates.</span><br><span class="line">See https://ubuntu.com/esm or run: sudo pro status</span><br><span class="line"></span><br><span class="line">Last login: Fri Mar 21 08:07:59 2025 from 192.168.0.14</span><br></pre></td></tr></table></figure>
+<p>ssh登录主机，发现提示：”&#x3D;&gt; There is 1 zombie process.”</p>
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>进程是一个程序的运行实例。它可能运行在前端（比如有交互的进程），也可能运行在后端（比如无交互或自动运行的进程）。它可能是一个父进程（运行期间创建了其他进程），也可能是一个子进程（由其他进程所创建）。<br>在 Linux 系统中，除 PID 为 0 的第一个 init 进程（或 systemd）外，其余进程都有父进程。进程也可以拥有自己的子进程。<br>在终端中使用 pstree 命令查看进程的树型结构，能看到系统各个进程的“家族树”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">qs@ubuntu:~$pstree</span><br><span class="line">systemd─┬─ModemManager───2*[&#123;ModemManager&#125;]</span><br><span class="line">        ├─NetworkManager───2*[&#123;NetworkManager&#125;]</span><br><span class="line">        ├─agetty</span><br><span class="line">        ├─containerd───11*[&#123;containerd&#125;]</span><br><span class="line">        ├─containerd-shim─┬─s6-svscan─┬─s6-supervise───s6-linux-init-s</span><br><span class="line">        │                 │           ├─s6-supervise───s6-ipcserverd</span><br><span class="line">        │                 │           ├─s6-supervise───qbittorrent-nox───8*[&#123;qbittorrent-nox&#125;]</span><br><span class="line">        │                 │           ├─s6-supervise───busybox</span><br><span class="line">        │                 │           └─s6-supervise</span><br><span class="line">        │                 └─11*[&#123;containerd-shim&#125;]</span><br><span class="line">        ├─containerd-shim─┬─agent───5*[&#123;agent&#125;]</span><br><span class="line">        │                 └─11*[&#123;containerd-shim&#125;]</span><br><span class="line">        ├─containerd-shim─┬─node───10*[&#123;node&#125;]</span><br><span class="line">        │                 └─11*[&#123;containerd-shim&#125;]</span><br><span class="line">        ├─containerd-shim─┬─xlp─┬─xlp─┬─xlp─┬─xunlei-pan-cli-─┬─xunlei-pan-cli.───22*[&#123;xunlei-pan-cli.&#125;]</span><br><span class="line">        │                 │     │     │     │                 └─9*[&#123;xunlei-pan-cli-&#125;]</span><br><span class="line">        │                 │     │     │     └─10*[&#123;xlp&#125;]</span><br><span class="line">        │                 │     │     └─7*[&#123;xlp&#125;]</span><br><span class="line">        │                 │     └─7*[&#123;xlp&#125;]</span><br><span class="line">        │                 └─11*[&#123;containerd-shim&#125;]</span><br><span class="line">        ├─containerd-shim─┬─filebrowser───7*[&#123;filebrowser&#125;]</span><br><span class="line">        │                 └─11*[&#123;containerd-shim&#125;]</span><br><span class="line">        ├─cron</span><br><span class="line">        ├─dbus-daemon</span><br><span class="line">        ├─dockerd─┬─6*[docker-proxy───7*[&#123;docker-proxy&#125;]]</span><br><span class="line">        │         ├─docker-proxy───8*[&#123;docker-proxy&#125;]</span><br><span class="line">        │         ├─docker-proxy───6*[&#123;docker-proxy&#125;]</span><br><span class="line">        │         └─20*[&#123;dockerd&#125;]</span><br><span class="line">        ├─irqbalance───&#123;irqbalance&#125;</span><br><span class="line">        ├─jellyfin───16*[&#123;jellyfin&#125;]</span><br><span class="line">        ├─multipathd───6*[&#123;multipathd&#125;]</span><br><span class="line">        ├─networkd-dispat</span><br><span class="line">        ├─nmbd</span><br><span class="line">        ├─polkitd───2*[&#123;polkitd&#125;]</span><br><span class="line">        ├─rsyslogd───3*[&#123;rsyslogd&#125;]</span><br><span class="line">        ├─smbd─┬─cleanupd</span><br><span class="line">        │      ├─samba-bgqd</span><br><span class="line">        │      └─smbd-notifyd</span><br><span class="line">        ├─sshd───sshd───sshd───bash───pstree</span><br><span class="line">        ├─systemd───(sd-pam)</span><br><span class="line">        ├─systemd-journal</span><br><span class="line">        ├─systemd-logind</span><br><span class="line">        ├─systemd-network</span><br><span class="line">        ├─systemd-resolve</span><br><span class="line">        ├─systemd-udevd</span><br><span class="line">        ├─unattended-upgr───&#123;unattended-upgr&#125;</span><br><span class="line">        ├─v2ray───8*[&#123;v2ray&#125;]</span><br><span class="line">        ├─v2raya───8*[&#123;v2raya&#125;]</span><br><span class="line">        └─wpa_supplicant</span><br></pre></td></tr></table></figure>
+<h1 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h1><p>子进程死亡后，它的父进程会接收到通知去执行一些清理操作，如释放内存之类。然而，若父进程并未察觉到子进程死亡，子进程就会进入到“ 僵尸(zombie)”状态。从父进程角度看，子进程仍然存在，即使子进程实际上已经死亡。这就是“ 僵尸进程(zombie process)”（也被称为“ 已消失进程(defunct process)”）是如何产生并存在于系统中的。<br>进程可能处于如下状态中的一种：<br>D &#x3D; 不可中断的休眠<br>I &#x3D; 空闲<br>R &#x3D; 运行中<br>S &#x3D; 休眠<br>T &#x3D; 被调度信号终止<br>t &#x3D; 被调试器终止<br>Z &#x3D; 僵尸状态<br>如何查看进程和它的当前状态呢？一个简单的方法是在终端中使用 top 命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">qs@ubuntu:~$top</span><br><span class="line">top - 15:46:57 up  4:27,  1 user,  load average: 0.02, 0.02, 0.00</span><br><span class="line">Tasks: 176 total,   1 running, 175 sleeping,   0 stopped,   0 zombie</span><br><span class="line">%Cpu(s):  0.2 us,  0.1 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">MiB Mem :   3774.1 total,    548.7 free,    610.6 used,   2614.7 buff/cache</span><br><span class="line">MiB Swap:   3767.0 total,   3695.7 free,     71.2 used.   2829.9 avail Mem </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><img src="https://qs100371.vip/post-images/1742543449493.webp"></p>
+<h1 id="处理僵尸进程"><a href="#处理僵尸进程" class="headerlink" title="处理僵尸进程"></a>处理僵尸进程</h1><p>确定僵尸进程的相关信息，比如父进程ppid、僵尸进程的pid以及命令行等信息。可以执行如下命令：<br><code>ps -e -o stat,ppid,pid,cmd | egrep &#39;^[Zz]&#39;</code><br>说明：<br>ps：ps命令用于获取当前系统的进程信息<br>-e：参数用于列出所有的进程<br>-o：参数用于设定输出格式，这里只输出进程的stat(状态信息)、ppid(父进程pid)、pid（当前进程的pid)，cmd(即进程的可执行文件<br>egrep：是linux下的正则表达式工具：‘1’：这是正则表达式，表示第一个字符的位置，[Zz]，表示z或者大写的Z字母，即表示第一个字符为Z或者z开头的进程数据，只所以这样是因为僵尸进程的状态信息以Z或者z字母开头。<br>然后可以kill -9 父进程pid，假设父进程pid为 1024<br><code>kill -9 1024</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" data-id="cm9jjqwmj008jv8tz9y3be0ol" data-title="找到并杀掉 Linux 系统中的僵尸进程" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          windows和linux双系统时间同步方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">scp和rsync基本用法与断点续传</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">94</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-adguard-home/">安装AdGuard Home</a>
+          </li>
+        
+          <li>
+            <a href="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/">网易爆米花：观影好助手</a>
+          </li>
+        
+          <li>
+            <a href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/">Homeassistant接入国家电网用电数据</a>
+          </li>
+        
+          <li>
+            <a href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/">给Valine添加邮件提醒功能</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-homeassistant/">安装homeassistant</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <div><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></br> All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br><div>
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a target="_blank" rel="noopener" href="https://t.qs100371.vip" class="mobile-nav-link">Trilum</a>
+  
+    <a target="_blank" rel="noopener" href="https://m.qs100371.vip" class="mobile-nav-link">memos</a>
+  
+    <a target="_blank" rel="noopener" href="https://media.qs100371.vip" class="mobile-nav-link">jellyfin</a>
+  
+    <a target="_blank" rel="noopener" href="https://ha.qs100371.vip" class="mobile-nav-link">homeassistant</a>
+  
+    <a target="_blank" rel="noopener" href="https://n.qs100371.vip" class="mobile-nav-link">alist</a>
+  
+    <a href="https://qs100371.vip/douban-movies-nowplaying/" class="mobile-nav-link">douban</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

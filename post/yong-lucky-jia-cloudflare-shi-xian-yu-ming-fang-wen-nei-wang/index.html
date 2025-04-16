@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>用lucky加cloudflare实现域名访问内网 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb&#x2F;s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用lucky加cloudflare实现域名访问内网">
+<meta property="og:url" content="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb&#x2F;s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/post-images/1733923179558.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1733923286732.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1733923303229.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1733923314406.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1733923431876.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1733923493541.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1733923507385.webp">
+<meta property="article:published_time" content="2024-12-11T12:23:15.000Z">
+<meta property="article:modified_time" content="2025-03-06T09:56:27.415Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1733923179558.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://t.qs100371.vip">Trilum</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://m.qs100371.vip">memos</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://media.qs100371.vip">jellyfin</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://ha.qs100371.vip">homeassistant</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://n.qs100371.vip">alist</a>
+        
+          <a class="main-nav-link" href="https://qs100371.vip/douban-movies-nowplaying/">douban</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/" class="article-date">
+  <time class="dt-published" datetime="2024-12-11T12:23:15.000Z" itemprop="datePublished">2024-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      用lucky加cloudflare实现域名访问内网
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb&#x2F;s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+<span id="more"></span>
+<blockquote>
+<p>主机上安装lucky，参见上一篇。</p>
+</blockquote>
+<p>通过IP:16601访问，从左侧导航打开stun内网穿透，添加穿透规则，规则名ssh，目标地址：192.168.0.2，目标端口：22，点确定，会看到穿透详情里有蓝色标出的IP:随机端口。<br><img src="https://qs100371.vip/post-images/1733923179558.webp"></p>
+<blockquote>
+<p>通过webhook把得到的IP和端口应用到cloudflare</p>
+</blockquote>
+<p>先注册，登录cloudflare，添加主机，把自己的域名托管到cloudflare，系统会提供两个dns主机名，把它填到域名注册商网站上的dns服务器上，过一会cloudflare就会把dns设置的记录复制过来。添加一条指向s.domain.com的A记录，IP随便填（填8.8.8.8就行），domain.com为自己的域名。</p>
+<p>打开cloudflare左侧导航栏中的重定向规则，单一重定向，创建规则，名称ssh，自定义筛选表达式，下面选“主机名”“等于”“s.domain.com”，URL重定向，“动态”，“concat(“<a target="_blank" rel="noopener" href="http://192.168.0.2:22/">http://192.168.0.2:22</a>“, http.request.uri.path)”，保存。<br><img src="https://qs100371.vip/post-images/1733923286732.webp"><br><img src="https://qs100371.vip/post-images/1733923303229.webp"><br><img src="https://qs100371.vip/post-images/1733923314406.webp"><br>按F12打开游览器开发者工具，选中网络，再修改刚才的规则，把条目都点选一次，在右侧面板中找一条请求方法为PATCH的条目，请求网址类似于<code>https://dash.cloudflare.com/api/v4/zones/4b6f20be9bbd211b60fe38542a*****f/rulesets/9df41177ce8*****a8c7c4ff3ee70beb/rules/4cba3b12a12f4efea640*****f1e1d10</code>，把地址的dash替换成api，api替换成client，保存为url1备用。<br><strong>这个url中zones，rulesets，rules三处后面有长长的字符串，第三段每个规则不一样。</strong></p>
+<p><img src="https://qs100371.vip/post-images/1733923431876.webp"><br>打开lucky设置里的内网穿透，修改规则ssh，打开全局webhook，webhook，启用仅在地址不同时触发，接口地址填前面的url1，请求方法PATCH，请求头<code>Authorization: Bearer LrM4kmqPEZKqa5dQjHJYEAa80F*****nXqE8HJ</code>（Bearer后面是cloudflare申请的令牌），请求主体</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;action&quot;: &quot;redirect&quot;,</span><br><span class="line">    &quot;description&quot;: &quot;ssh&quot;,</span><br><span class="line">    &quot;expression&quot;: &quot;(http.host eq \&quot;s.domain.com\&quot;)&quot;,</span><br><span class="line">        &quot;action_parameters&quot;: &#123;</span><br><span class="line">          &quot;from_value&quot;: &#123;</span><br><span class="line">            &quot;preserve_query_string&quot;: true,</span><br><span class="line">            &quot;status_code&quot;: 301,</span><br><span class="line">            &quot;target_url&quot;: &#123;</span><br><span class="line">              &quot;expression&quot;: &quot;concat(\&quot;http://#&#123;ipAddr&#125;\&quot;, http.request.uri.path)&quot;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用成功包含的字符串<code>&quot;success&quot;: true</code><br>点手动触发，再去看cloudflare上修改ssh的条目，发现里面的URL转发地址变成了<code>concat(&quot;http://192.168.0.2:22&quot;, http.request.uri.path)</code>，这就成功了。在lucky里点保存修改。<br><img src="https://qs100371.vip/post-images/1733923493541.webp"></p>
+<blockquote>
+<p>添加微信公众号通知（可以没有）</p>
+</blockquote>
+<p>打开内网穿透-设置，开启全局webhook。使用pushplus消息推送功能。<br>打开<a target="_blank" rel="noopener" href="http://www.pushplus.plus,微信扫码注册,实名,点右上角头像,个人中心,复制token./">www.pushplus.plus，微信扫码注册，实名，点右上角头像，个人中心，复制token。</a><br>在lucky里webhook界面，填写接口地址<code>https://www.pushplus.plus/send</code>，请求方式POST，请求头<code>Content-Type: application/json</code>，请求主体</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;token&quot;: &quot;16dc****5064f13ba75feaa87303686&quot;,</span><br><span class="line">    &quot;title&quot;: &quot;#&#123;ruleName&#125; 公网变化通知&quot;,</span><br><span class="line">    &quot;content&quot;: &quot;#&#123;ipAddr&#125;&quot;, </span><br><span class="line">    &quot;template&quot;: &quot;txt&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用成功包含字符串“请求成功”，保存。<br><img src="https://qs100371.vip/post-images/1733923507385.webp"></p>
+<p>把规则ssh关闭再打开，就会触发，微信会收到提示ssh公网变化通知。</p>
+<p>更详细的图文说明参见–&gt;<a target="_blank" rel="noopener" href="https://club.fnnas.com/forum.php?mod=viewthread&tid=6545"><em>使用Lucky的STUN内网穿透功能获取ipv4公网绑域名进行外网访问</em></a></p>
+<hr>
+<blockquote>
+<p>这种方法适用于二级域名指向内网服务，相当于内网穿透加反向代理。但象ssh，xrdp，ftp这些需要带端口访问的服务则不行，但也可以从微信推送得知穿透的IP和端口。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qs100371.vip/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/" data-id="cm9jjqwmi0087v8tz13ah017a" data-title="用lucky加cloudflare实现域名访问内网" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/yong-lucky-jia-cloudflare-shi-xian-yu-ming-fang-wen-nei-wang/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/docker-bu-shu-wang-pan-cloudreve/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          docker部署网盘cloudreve
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/docker-an-zhuang-lucky/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">docker安装lucky</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actions/" rel="tag">actions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">94</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/actions/" style="font-size: 10px;">actions</a> <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/cong-docker-rong-qi-sheng-cheng-docker-compose-yaml-ding-yi/">从 docker 容器生成 docker-compose yaml 定义</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-alist/">安装alist</a>
+          </li>
+        
+          <li>
+            <a href="/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+          </li>
+        
+          <li>
+            <a href="/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">豆瓣热映电影网页生成器</a>
+          </li>
+        
+          <li>
+            <a href="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-adguard-home/">安装AdGuard Home</a>
+          </li>
+        
+          <li>
+            <a href="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/">网易爆米花：观影好助手</a>
+          </li>
+        
+          <li>
+            <a href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/">Homeassistant接入国家电网用电数据</a>
+          </li>
+        
+          <li>
+            <a href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/">给Valine添加邮件提醒功能</a>
+          </li>
+        
+          <li>
+            <a href="/post/an-zhuang-homeassistant/">安装homeassistant</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <div><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></br> All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br><div>
+      
+      &copy; 2025 qs100371<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a target="_blank" rel="noopener" href="https://t.qs100371.vip" class="mobile-nav-link">Trilum</a>
+  
+    <a target="_blank" rel="noopener" href="https://m.qs100371.vip" class="mobile-nav-link">memos</a>
+  
+    <a target="_blank" rel="noopener" href="https://media.qs100371.vip" class="mobile-nav-link">jellyfin</a>
+  
+    <a target="_blank" rel="noopener" href="https://ha.qs100371.vip" class="mobile-nav-link">homeassistant</a>
+  
+    <a target="_blank" rel="noopener" href="https://n.qs100371.vip" class="mobile-nav-link">alist</a>
+  
+    <a href="https://qs100371.vip/douban-movies-nowplaying/" class="mobile-nav-link">douban</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>
