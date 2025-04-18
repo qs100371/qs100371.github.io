@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-04-17T13:55:12.923Z</updated>
+  <updated>2025-04-18T12:57:43.233Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>免费在线视频搜索与观看平台LibreTV</title>
+    <link href="https://qs100371.vip/post/mian-fei-zai-xian-shi-pin-sou-suo-yu-guan-kan-ping-tai-libretv/"/>
+    <id>https://qs100371.vip/post/mian-fei-zai-xian-shi-pin-sou-suo-yu-guan-kan-ping-tai-libretv/</id>
+    <published>2025-04-18T12:47:04.000Z</published>
+    <updated>2025-04-18T12:57:43.233Z</updated>
+    
+    <content type="html"><![CDATA[<p>LibreTV是一个轻量级、免费的在线视频搜索与观看平台，提供来自多个视频源的内容搜索与播放服务。无需注册，即开即用，支持多种设备访问。项目结合了前端技术和后端代理功能，可部署在支持服务端功能的各类网站托管服务上。</p><span id="more"></span><p>项目地址：<a href="https://github.com/LibreSpark/LibreTV">LibreSpark&#x2F;LibreTV</a></p><p>功能：</p><ul><li>多源视频搜索功能，覆盖电影、电视剧等内容；</li><li>聚合多个视频源，自动提取播放链接；</li><li>内置广告过滤功能，提供更干净的观影体验。</li></ul><h1 id="Vercel部署"><a href="#Vercel部署" class="headerlink" title="Vercel部署"></a>Vercel部署</h1><p>点击项目说明页上的Deploy按键，连接仓库并部署即可，无需特殊配置。<br>由于vercel.app的地址不能直接访问，需要设置二级域名，才能在国内正常访问。</p><h1 id="docker部署"><a href="#docker部署" class="headerlink" title="docker部署"></a>docker部署</h1><ul><li>cli<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull bestzwei/libretv:latest</span><br><span class="line">docker run -d --name libretv -p 8899:80 bestzwei/libretv:latest</span><br></pre></td></tr></table></figure></li><li>docker-compose.yml<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">services:</span><br><span class="line">  libretv:</span><br><span class="line">    image: bestzwei/libretv:latest</span><br><span class="line">    container_name: libretv</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8899:80&quot;</span><br><span class="line">    restart: unless-stopped</span><br></pre></td></tr></table></figure>从ip:8899访问。<br><img src="https://qs100371.vip/post-images/1744980998836.webp"></li></ul><p><img src="https://qs100371.vip/post-images/1744981003676.webp"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;LibreTV是一个轻量级、免费的在线视频搜索与观看平台，提供来自多个视频源的内容搜索与播放服务。无需注册，即开即用，支持多种设备访问。项目结合了前端技术和后端代理功能，可部署在支持服务端功能的各类网站托管服务上。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
+    
+    <category term="vercel" scheme="https://qs100371.vip/tags/vercel/"/>
+    
+  </entry>
   
   <entry>
     <title>抓取豆瓣书影音信息</title>
@@ -375,25 +396,6 @@
     
     
     <summary type="html">&lt;p&gt;Transmission是一个免费的bittorrent客户端。可部署在docker中。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker里的迅雷</title>
-    <link href="https://qs100371.vip/post/docker-li-de-xun-lei/"/>
-    <id>https://qs100371.vip/post/docker-li-de-xun-lei/</id>
-    <published>2025-03-11T13:42:45.000Z</published>
-    <updated>2025-03-17T04:26:17.316Z</updated>
-    
-    <content type="html"><![CDATA[<p>有大神将NAS版迅雷移植到了Docker中，从而实现Docker容器即可安装NAS版迅雷。</p><span id="more"></span><p>迅雷在早些时期已经支持NAS安装，不过从官网的介绍来看仅支持“群晖&#x2F;威联通”等主流NAS设备，且需要内测邀请，并没有直接支持Docker安装，具体见官网：<a href="https://nas.xunlei.com/">https://nas.xunlei.com/</a><br><img src="https://qs100371.vip/post-images/1741701398926.webp"></p><p>项目地址：<a href="https://github.com/cnk3x/xunlei">cnk3x&#x2F;xunlei</a></p><p>从迅雷群晖套件中提取出来用于其他设备的迅雷远程下载服务程序。仅提供 Linux 模拟和容器化运行环境，未对原版迅雷程序进行任何修改。</p><h1 id="部署NAS版迅雷"><a href="#部署NAS版迅雷" class="headerlink" title="部署NAS版迅雷"></a>部署NAS版迅雷</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line"> --name=xunlei \</span><br><span class="line"> -p 2345:2345 \</span><br><span class="line"> -v /data/xunlei:/xunlei/data \</span><br><span class="line"> -v /data/bank/bt:/xunlei/downloads \</span><br><span class="line"> --restart=unless-stopped \</span><br><span class="line"> --privileged \</span><br><span class="line"> cnk3x/xunlei:latest</span><br></pre></td></tr></table></figure><p> 或<br> docker-compose.yml<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> version: &#x27;3.9&#x27;</span><br><span class="line">services:</span><br><span class="line">   xunlei:</span><br><span class="line">       container_name: xunlei</span><br><span class="line">       image: &#x27;cnk3x/xunlei:latest&#x27;</span><br><span class="line">       privileged: true</span><br><span class="line">       restart: unless-stopped</span><br><span class="line">       volumes:</span><br><span class="line">           - &#x27;/data/bank/bt:/xunlei/downloads&#x27;</span><br><span class="line">           - &#x27;/data/xunlei:/xunlei/data&#x27;</span><br><span class="line">       ports:</span><br><span class="line">           - &#x27;2345:2345&#x27;</span><br></pre></td></tr></table></figure><br>  从ip:2345访问。</p><h1 id="初始化NAS版迅雷"><a href="#初始化NAS版迅雷" class="headerlink" title="初始化NAS版迅雷"></a>初始化NAS版迅雷</h1><p> 下载迅雷APP，扫码登录NAS版迅雷（不登录不让用），还可以通过APP远程管理，如果不需要远程管理，也可以直接在<a href="http://IP:2345页面通过账号密码登录。">http://IP:2345页面通过账号密码登录。</a></p><ul><li>NAS版迅雷安装并登录后还需要内测邀请码[迅雷牛通]才能正常使用。</li></ul><h1 id="使用NAS版迅雷"><a href="#使用NAS版迅雷" class="headerlink" title="使用NAS版迅雷"></a>使用NAS版迅雷</h1><p>NAS版迅雷比较简洁，除了基本的下载功能外，还支持云盘取回&#x2F;影片库&#x2F;在线播放等功能，如果您安装了手机APP，还可以进行远程管理，非常方便。<br><img src="https://qs100371.vip/post-images/1741701121329.webp"><br><img src="https://qs100371.vip/post-images/1741701127702.webp"><br><img src="https://qs100371.vip/post-images/1741701134547.webp"></p><blockquote><p>没有会员下载速度也不错。不过迅雷在下载界名声比较臭，万不得已的情况下可以用一下。</p></blockquote>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;有大神将NAS版迅雷移植到了Docker中，从而实现Docker容器即可安装NAS版迅雷。&lt;/p&gt;</summary>
     
     
     
