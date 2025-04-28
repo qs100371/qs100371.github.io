@@ -101,12 +101,17 @@
     
       <header class="article-header">
         
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Linux 运维命令
-    </h1><hr><img src="https://img.shields.io/badge/字数统计-3.9k-blue"><img src="https://img.shields.io/badge/阅读时间-54分-green">
-  
-
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          Linux 运维命令
+        </h1>
+        <hr>
+        
+          <img src="https://img.shields.io/badge/字数统计-3.9k-blue"><img
+            src="https://img.shields.io/badge/阅读时间-54分-green">
+          
+            
+              
       </header>
     
     
@@ -116,7 +121,7 @@
          
           <div id="toc" class="toc-article">
             <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E6%9C%BA"><span class="toc-text">关机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-text">文件和目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2"><span class="toc-text">文件搜索</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-text">挂载一个文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4"><span class="toc-text">磁盘空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%92%8C%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6"><span class="toc-text">打包和压缩文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DEB-%E5%8C%85"><span class="toc-text">DEB 包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">查看文件内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86"><span class="toc-text">文本处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD"><span class="toc-text">备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%89%E7%9B%98"><span class="toc-text">光盘</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C"><span class="toc-text">网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">查看文件的类型</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E6%9C%BA"><span class="toc-number">2.</span> <span class="toc-text">关机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-number">3.</span> <span class="toc-text">文件和目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2"><span class="toc-number">4.</span> <span class="toc-text">文件搜索</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.</span> <span class="toc-text">挂载一个文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4"><span class="toc-number">6.</span> <span class="toc-text">磁盘空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%92%8C%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">打包和压缩文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DEB-%E5%8C%85"><span class="toc-number">8.</span> <span class="toc-text">DEB 包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-number">9.</span> <span class="toc-text">查看文件内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86"><span class="toc-number">10.</span> <span class="toc-text">文本处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD"><span class="toc-number">11.</span> <span class="toc-text">备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%89%E7%9B%98"><span class="toc-number">12.</span> <span class="toc-text">光盘</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C"><span class="toc-number">13.</span> <span class="toc-text">网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">14.</span> <span class="toc-text">查看文件的类型</span></a></li></ol>
           </div>
          
         <!-- Table of Contents -->

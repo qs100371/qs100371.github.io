@@ -15,7 +15,7 @@
 <meta property="og:description" content="192.168.1.0&#x2F;24 包含哪些IP？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-25T07:27:06.000Z">
-<meta property="article:modified_time" content="2025-04-25T07:32:09.164Z">
+<meta property="article:modified_time" content="2025-04-28T22:55:46.329Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
@@ -101,12 +101,17 @@
     
       <header class="article-header">
         
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      IP段192.168.1.0/24和192.168.0.0/16的意义
-    </h1><hr><img src="https://img.shields.io/badge/字数统计-425-blue"><img src="https://img.shields.io/badge/阅读时间-5分-green">
-  
-
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          IP段192.168.1.0/24和192.168.0.0/16的意义
+        </h1>
+        <hr>
+        
+          <img src="https://img.shields.io/badge/字数统计-431-blue"><img
+            src="https://img.shields.io/badge/阅读时间-5分-green">
+          
+            
+              
       </header>
     
     
@@ -116,14 +121,14 @@
          
           <div id="toc" class="toc-article">
             <strong class="toc-title">目录</strong>
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">IP地址格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%A2%E7%AE%97"><span class="toc-number">2.</span> <span class="toc-text">换算</span></a></li></ol>
           </div>
          
         <!-- Table of Contents -->
         <p>192.168.1.0&#x2F;24 包含哪些IP？</p>
 <span id="more"></span>
-<p>IP地址格式采用“斜线记法”，即：IP地址&#x2F;网络前缀。<br>例如 192.168.1.0&#x2F;24 表示32位的二进制地址中（任何IP的二进制地址都是32位），前24位为网络前缀，后8位代表主机号。</p>
-<p>在换算中，192.168.1.0&#x2F;24 对应的二进制为：<br>1100 0000，1010 1000，0000 0001，0000 0000<br>其中最后为主机号，总共有8位。当这8位全为0时，取最小地址192.168.1.0，当这8位全为1时，取最大地址192.168.1.255。在实际中，主机号全为0或者全为1的地址一般不使用，作为预留地址另有作用。<br>所以第一个地址为：<br>1100 0000，1010 1000，0000 0001，0000 0001<br>即 192.168.1.1 最后一个地址为：<br>1100 0000，1010 1000，0000 0001，1111 1110<br>即 192.168.1.254。</p>
+<h1 id="IP地址格式"><a href="#IP地址格式" class="headerlink" title="IP地址格式"></a>IP地址格式</h1><p>IP地址格式采用“斜线记法”，即：IP地址&#x2F;网络前缀。<br>例如 192.168.1.0&#x2F;24 表示32位的二进制地址中（任何IP的二进制地址都是32位），前24位为网络前缀，后8位代表主机号。</p>
+<h1 id="换算"><a href="#换算" class="headerlink" title="换算"></a>换算</h1><p>在换算中，192.168.1.0&#x2F;24 对应的二进制为：<br>1100 0000，1010 1000，0000 0001，0000 0000<br>其中最后为主机号，总共有8位。当这8位全为0时，取最小地址192.168.1.0，当这8位全为1时，取最大地址192.168.1.255。在实际中，主机号全为0或者全为1的地址一般不使用，作为预留地址另有作用。<br>所以第一个地址为：<br>1100 0000，1010 1000，0000 0001，0000 0001<br>即 192.168.1.1 最后一个地址为：<br>1100 0000，1010 1000，0000 0001，1111 1110<br>即 192.168.1.254。</p>
 <p>因此，192.168.1.0&#x2F;24 代表的IP段就是 192.168.1.1 ~ 192.168.1.254。</p>
 <p>192.168.0.0&#x2F;16 包含哪些IP？<br>方法同上。192.168.0.0&#x2F;16 表示32位的二进制地址中，前16位为网络前缀，后16位代表主机号。</p>
 <p>在换算中，192.168.0.0&#x2F;16 对应的二进制为：<br>1100 0000，1010 1000，0000 0000，0000 0000<br>其中后两段为主机号，总共有16位。当这16位全为0时，取最小地址192.168.0.0，当这16位全为1时，取最大地址192.168.255.255。<br>第一个地址为：<br>1100 0000，1010 1000，0000 0000，0000 0001<br>即 192.168.0.1<br>最后一个地址为：<br>1100 0000，1010 1000，1111 1111，1111 1110<br>即 192.168.255.254。</p>
