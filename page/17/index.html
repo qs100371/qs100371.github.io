@@ -435,8 +435,7 @@
         <!-- 文章目录 -->
         
         <!-- Table of Contents -->
-        <p>站点统计数据：</p>
-<div id="posts-calendar"></div>
+        <div id="posts-calendar"></div>
   <script id="postsCalendar">
     let postsCalendar = echarts.init(document.getElementById('posts-calendar'));
     let postsCalendarOption = {
@@ -508,6 +507,7 @@
     };
     postsCalendar.setOption(postsCalendarOption);
     </script>
+
 <div id="posts-chart"></div>
   <script id="postsChart">
     let postsChart = echarts.init(document.getElementById('posts-chart'));
@@ -558,6 +558,7 @@
     };
     postsChart.setOption(postsOption);
     </script>
+
 <!-- "data-length" = how many tags to show, default 10 -->
 <div id="tags-chart" data-length="10"></div>
   <script id="tagsChart">
