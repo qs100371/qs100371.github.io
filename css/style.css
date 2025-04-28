@@ -915,7 +915,7 @@ a.article-title:hover {
   border-radius: 3px;
   margin: 1.5em 0 0.3em 0;
   padding: 1.2em 1em 0 1em;
-  max-width: 28%;
+  max-width: 300pt;
 }
 .toc-title {
   font-size: 120%;
