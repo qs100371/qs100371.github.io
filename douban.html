@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的豆瓣收藏</title>
+    <!-- 引入 iDouban CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/idouban/dist/index.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        #douban-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #007722;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="douban-container">
+        <h1>我的豆瓣收藏</h1>
+        <div id="douban"></div>
+    </div>
+
+    <!-- 引入 iDouban JS -->
+    <script src="https://cdn.jsdelivr.net/npm/idouban/dist/index.js"></script>
+    <script>
+        // 初始化配置
+        document.addEventListener('DOMContentLoaded', function() {
+            idouban.init({
+                selector: '#douban',
+                lang: 'zh',
+                douban_id: '288237448',  // 替换为你的豆瓣ID
+                type: 'movie',           // 可选：book/movie/music
+                
+                actions: ['collect', 'do', 'wish'], // 在读/想读/已读
+                page_size: 10,
+                max_line: 3,
+                // 高级配置
+                proxy: 'https://your-proxy.com', // 如果需要代理
+                show_cover: true,      // 显示封面
+                show_rating: true,      // 显示评分
+                show_comment: false     // 不显示评论
+            });
+        });
+    </script>
+</body>
+</html>
