@@ -206,31 +206,21 @@ book，movie，game，song中不要的可删掉。<br>do，wish，collect顺序�
         <div class="widget">
             
         
+            <div class="notice" style="margin-top:5px">
+                <i class="fa fa-bell"></i>
+                <div class="notice-content" id="broad"></div>
+            </div>
+            <script type="text/javascript">
+                fetch('https://v1.hitokoto.cn')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("broad").innerHTML = data.hitokoto;
+                    })
+                    .catch(console.error)
+            </script>
+            
                 
                         
-                            <div class="notice" style="margin-top:5px">
-                                <i class="fa "></i>
-                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
-
-                                <script>
-                                    
-                                    function loadRandomContent() {
-                                        fetch('https://img.qs100371.vip/songci.php')
-                                            .then(response => response.text())
-                                            .then(text => {
-                                                document.getElementById('poem-container').innerText = text;
-                                            })
-                                            .catch(error => {
-                                                console.error('加载失败:', error);
-                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
-                                            });
-                                    }
-
-                                    // 页面加载时自动获取一次
-                                    loadRandomContent();
-                                </script>
-                            </div>
-                            
                                 <style>
                                     .notice {
                                         padding: 5px;
@@ -357,7 +347,7 @@ book，movie，game，song中不要的可删掉。<br>do，wish，collect顺序�
       <span class="post-count"><img id="site-days-badge" src=""><img 
         src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img 
         src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-        <img src="https://img.shields.io/badge/共- 60.1k 字-green"><!--<img id="weather-badge" src="">--></span>
+        <img src="https://img.shields.io/badge/共- 60.2k 字-green"><!--<img id="weather-badge" src="">--></span>
       
         </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
             

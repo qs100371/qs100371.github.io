@@ -15,7 +15,7 @@
 <meta property="og:description" content="crond是linux系统运行定时任务的程序。发现docker里定时任务设置了，但并没有执行。本文记录了处理过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-29T10:48:18.000Z">
-<meta property="article:modified_time" content="2025-04-29T10:59:04.691Z">
+<meta property="article:modified_time" content="2025-04-29T13:14:13.552Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="linux">
@@ -108,7 +108,7 @@
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-384-blue"><img
+          <img src="https://img.shields.io/badge/字数统计-422-blue"><img
             src="https://img.shields.io/badge/阅读时间-5分-green">
           
             
@@ -122,7 +122,7 @@
          
           <div id="toc" class="toc-article">
             <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%8F%91%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">问题发现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%8F%91%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">问题发现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">3.</span> <span class="toc-text">注意事项</span></a></li></ol>
           </div>
          
         <!-- Table of Contents -->
@@ -135,6 +135,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># 后台启动</span><br><span class="line">php-fpm -D</span><br><span class="line">crond</span><br><span class="line"># 关闭后台启动，hold住进程</span><br><span class="line">nginx -g &#x27;daemon off;&#x27;</span><br></pre></td></tr></table></figure>
 <p>ps:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">PID   USER     TIME  COMMAND</span><br><span class="line">    1 root      0:00 &#123;run.sh&#125; /bin/sh /run.sh</span><br><span class="line">    8 root      0:00 php-fpm: master process (/usr/local/etc/php-fpm.conf)</span><br><span class="line">    9 www-data  0:00 php-fpm: pool www</span><br><span class="line">   10 www-data  0:00 php-fpm: pool www</span><br><span class="line">   12 root      0:00 crond</span><br><span class="line">   13 root      0:00 nginx: master process nginx -g daemon off;</span><br><span class="line">   14 nginx     0:00 nginx: worker process</span><br><span class="line">   15 nginx     0:00 nginx: worker process</span><br><span class="line">   16 nginx     0:00 nginx: worker process</span><br><span class="line">   17 nginx     0:00 nginx: worker process</span><br><span class="line">   18 root      0:00 [run-parts]</span><br><span class="line">   19 root      0:00 sh</span><br><span class="line">   26 root      0:00 ps</span><br></pre></td></tr></table></figure>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>crontab里的命令和文件要用绝对路径，比如.py文件和生成的.html文件，否则不会生成文件。</p>
 <p>问题解决。<br>毛病出在alpine和惯用的debian系不一样，docker里的更精简，差异太大了。</p>
 
       
@@ -187,31 +188,21 @@
         <div class="widget">
             
         
+            <div class="notice" style="margin-top:5px">
+                <i class="fa fa-bell"></i>
+                <div class="notice-content" id="broad"></div>
+            </div>
+            <script type="text/javascript">
+                fetch('https://v1.hitokoto.cn')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("broad").innerHTML = data.hitokoto;
+                    })
+                    .catch(console.error)
+            </script>
+            
                 
                         
-                            <div class="notice" style="margin-top:5px">
-                                <i class="fa "></i>
-                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
-
-                                <script>
-                                    
-                                    function loadRandomContent() {
-                                        fetch('https://img.qs100371.vip/songci.php')
-                                            .then(response => response.text())
-                                            .then(text => {
-                                                document.getElementById('poem-container').innerText = text;
-                                            })
-                                            .catch(error => {
-                                                console.error('加载失败:', error);
-                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
-                                            });
-                                    }
-
-                                    // 页面加载时自动获取一次
-                                    loadRandomContent();
-                                </script>
-                            </div>
-                            
                                 <style>
                                     .notice {
                                         padding: 5px;
@@ -338,7 +329,7 @@
       <span class="post-count"><img id="site-days-badge" src=""><img 
         src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img 
         src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-        <img src="https://img.shields.io/badge/共- 60.1k 字-green"><!--<img id="weather-badge" src="">--></span>
+        <img src="https://img.shields.io/badge/共- 60.2k 字-green"><!--<img id="weather-badge" src="">--></span>
       
         </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
             
