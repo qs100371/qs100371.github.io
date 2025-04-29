@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-04-29T09:22:09.880Z</updated>
+  <updated>2025-04-29T10:59:04.691Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>docker alpine里的crond</title>
+    <link href="https://qs100371.vip/post/docker-alpine-li-de-crond/"/>
+    <id>https://qs100371.vip/post/docker-alpine-li-de-crond/</id>
+    <published>2025-04-29T10:48:18.000Z</published>
+    <updated>2025-04-29T10:59:04.691Z</updated>
+    
+    <content type="html"><![CDATA[<p>crond是linux系统运行定时任务的程序。发现docker里定时任务设置了，但并没有执行。本文记录了处理过程。</p><span id="more"></span><h1 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h1><p>原来用github actions定时执行的脚本由于改成vercel部署，域名指向了vercel，github.io不能直接访问，不想再设二级域名，就放到玩客云中的docker运行。由于alpine没有安装service，crontab没有正确执行。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>前台运行crond，由于没有服务，要把crond加到docker入口run.sh里。<br>原来的run.sh:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># 后台启动</span><br><span class="line">php-fpm -D</span><br><span class="line"># 关闭后台启动，hold住进程</span><br><span class="line">nginx -g &#x27;daemon off;&#x27;</span><br></pre></td></tr></table></figure><p>想也没想，直接把crond加到最后一句。重启docker，再进入docker，发现进程中没有crond。手动执行crond就有。<br>最后才发现是nginx这一句的问题，把crond加到前一句就正常了。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># 后台启动</span><br><span class="line">php-fpm -D</span><br><span class="line">crond</span><br><span class="line"># 关闭后台启动，hold住进程</span><br><span class="line">nginx -g &#x27;daemon off;&#x27;</span><br></pre></td></tr></table></figure><p>ps:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">PID   USER     TIME  COMMAND</span><br><span class="line">    1 root      0:00 &#123;run.sh&#125; /bin/sh /run.sh</span><br><span class="line">    8 root      0:00 php-fpm: master process (/usr/local/etc/php-fpm.conf)</span><br><span class="line">    9 www-data  0:00 php-fpm: pool www</span><br><span class="line">   10 www-data  0:00 php-fpm: pool www</span><br><span class="line">   12 root      0:00 crond</span><br><span class="line">   13 root      0:00 nginx: master process nginx -g daemon off;</span><br><span class="line">   14 nginx     0:00 nginx: worker process</span><br><span class="line">   15 nginx     0:00 nginx: worker process</span><br><span class="line">   16 nginx     0:00 nginx: worker process</span><br><span class="line">   17 nginx     0:00 nginx: worker process</span><br><span class="line">   18 root      0:00 [run-parts]</span><br><span class="line">   19 root      0:00 sh</span><br><span class="line">   26 root      0:00 ps</span><br></pre></td></tr></table></figure><p>问题解决。<br>毛病出在alpine和惯用的debian系不一样，docker里的更精简，差异太大了。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;crond是linux系统运行定时任务的程序。发现docker里定时任务设置了，但并没有执行。本文记录了处理过程。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="docker" scheme="https://qs100371.vip/tags/docker/"/>
+    
+    <category term="linux" scheme="https://qs100371.vip/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>利用clawcloud部署自托管rustdesk服务器</title>
@@ -44,10 +65,10 @@
     <published>2025-04-28T13:00:16.000Z</published>
     <updated>2025-04-28T13:13:17.163Z</updated>
     
-    <content type="html"><![CDATA[<p>收到一封来自<a href="mailto:&#115;&#x65;&#x63;&#117;&#x72;&#105;&#x74;&#121;&#x40;&#x67;&#x65;&#x74;&#103;&#105;&#116;&#x67;&#117;&#97;&#114;&#100;&#105;&#x61;&#110;&#x2e;&#99;&#111;&#109;">&#115;&#x65;&#x63;&#117;&#x72;&#105;&#x74;&#121;&#x40;&#x67;&#x65;&#x74;&#103;&#105;&#116;&#x67;&#117;&#97;&#114;&#100;&#105;&#x61;&#110;&#x2e;&#99;&#111;&#109;</a>的信，提醒我把openweather的api-key保存到github上了。</p><span id="more"></span><h1 id="GitGuardian"><a href="#GitGuardian" class="headerlink" title="GitGuardian"></a>GitGuardian</h1><p>查了一下，才知道GitGuardian是GitHub 敏感信息泄露自动提示平台。<br><img src="https://qs100371.vip/post-images/1745845516578.webp"><br><img src="https://qs100371.vip/post-images/1745845522334.webp"><br>GitGuardian 是首个实时，自动扫描开源项目代码的平台。当发布敏感资料到 Github 开源项目时，它就会自动提醒我们，比如说发送电子邮件。它也提供很多 API 来提示用户问题，不过免费版本就只会发送电子邮件。</p><h1 id="应对方法"><a href="#应对方法" class="headerlink" title="应对方法"></a>应对方法</h1><p>吓得我赶紧把github.io变成了私有，把api-key也删了。</p>]]></content>
+    <content type="html"><![CDATA[<p>收到一封来自<a href="mailto:&#x73;&#x65;&#99;&#117;&#x72;&#x69;&#x74;&#x79;&#64;&#x67;&#101;&#x74;&#x67;&#x69;&#116;&#x67;&#117;&#x61;&#114;&#100;&#x69;&#x61;&#x6e;&#x2e;&#x63;&#x6f;&#109;">&#x73;&#x65;&#99;&#117;&#x72;&#x69;&#x74;&#x79;&#64;&#x67;&#101;&#x74;&#x67;&#x69;&#116;&#x67;&#117;&#x61;&#114;&#100;&#x69;&#x61;&#x6e;&#x2e;&#x63;&#x6f;&#109;</a>的信，提醒我把openweather的api-key保存到github上了。</p><span id="more"></span><h1 id="GitGuardian"><a href="#GitGuardian" class="headerlink" title="GitGuardian"></a>GitGuardian</h1><p>查了一下，才知道GitGuardian是GitHub 敏感信息泄露自动提示平台。<br><img src="https://qs100371.vip/post-images/1745845516578.webp"><br><img src="https://qs100371.vip/post-images/1745845522334.webp"><br>GitGuardian 是首个实时，自动扫描开源项目代码的平台。当发布敏感资料到 Github 开源项目时，它就会自动提醒我们，比如说发送电子邮件。它也提供很多 API 来提示用户问题，不过免费版本就只会发送电子邮件。</p><h1 id="应对方法"><a href="#应对方法" class="headerlink" title="应对方法"></a>应对方法</h1><p>吓得我赶紧把github.io变成了私有，把api-key也删了。</p>]]></content>
     
     
-    <summary type="html">&lt;p&gt;收到一封来自&lt;a href=&quot;mailto:&amp;#115;&amp;#x65;&amp;#x63;&amp;#117;&amp;#x72;&amp;#105;&amp;#x74;&amp;#121;&amp;#x40;&amp;#x67;&amp;#x65;&amp;#x74;&amp;#103;&amp;#105;&amp;#116;&amp;#x67;&amp;#117;&amp;#97;&amp;#114;&amp;#100;&amp;#105;&amp;#x61;&amp;#110;&amp;#x2e;&amp;#99;&amp;#111;&amp;#109;&quot;&gt;&amp;#115;&amp;#x65;&amp;#x63;&amp;#117;&amp;#x72;&amp;#105;&amp;#x74;&amp;#121;&amp;#x40;&amp;#x67;&amp;#x65;&amp;#x74;&amp;#103;&amp;#105;&amp;#116;&amp;#x67;&amp;#117;&amp;#97;&amp;#114;&amp;#100;&amp;#105;&amp;#x61;&amp;#110;&amp;#x2e;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;的信，提醒我把openweather的api-key保存到github上了。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;收到一封来自&lt;a href=&quot;mailto:&amp;#x73;&amp;#x65;&amp;#99;&amp;#117;&amp;#x72;&amp;#x69;&amp;#x74;&amp;#x79;&amp;#64;&amp;#x67;&amp;#101;&amp;#x74;&amp;#x67;&amp;#x69;&amp;#116;&amp;#x67;&amp;#117;&amp;#x61;&amp;#114;&amp;#100;&amp;#x69;&amp;#x61;&amp;#x6e;&amp;#x2e;&amp;#x63;&amp;#x6f;&amp;#109;&quot;&gt;&amp;#x73;&amp;#x65;&amp;#99;&amp;#117;&amp;#x72;&amp;#x69;&amp;#x74;&amp;#x79;&amp;#64;&amp;#x67;&amp;#101;&amp;#x74;&amp;#x67;&amp;#x69;&amp;#116;&amp;#x67;&amp;#117;&amp;#x61;&amp;#114;&amp;#100;&amp;#x69;&amp;#x61;&amp;#x6e;&amp;#x2e;&amp;#x63;&amp;#x6f;&amp;#109;&lt;/a&gt;的信，提醒我把openweather的api-key保存到github上了。&lt;/p&gt;</summary>
     
     
     
@@ -376,25 +397,6 @@
     
     
     <category term="docker" scheme="https://qs100371.vip/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>安装alist</title>
-    <link href="https://qs100371.vip/post/an-zhuang-alist/"/>
-    <id>https://qs100371.vip/post/an-zhuang-alist/</id>
-    <published>2025-04-14T09:37:34.000Z</published>
-    <updated>2025-04-14T09:53:28.760Z</updated>
-    
-    <content type="html"><![CDATA[<p>AList 提供了网页版界面集中管理各大网盘的文件，支持文件上传下载、文件管理、预览图片、查看文档、在线播放音乐、视频等等。AList 网页版可以支持 PC 以及手机浏览器。</p><span id="more"></span><p>项目地址：<a href="https://github.com/AlistGo/alist">AlistGo&#x2F;alist</a><br>网站：<a href="https://alist.nn.ci/zh/">https://alist.nn.ci/zh/</a><br><img src="https://qs100371.vip/post-images/1744623994690.webp"><br>AList 支持后端挂载的存储服务，白嫖上百 TB 的网络资源！支持 WebDAV，直接在线播放，收集网络资源时，也只需保存到网盘里就行，不必真正下载到本地，省时省力。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><ul><li>docker cli<br><code>docker run -d --restart=unless-stopped -v /etc/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name=&quot;alist&quot; xhofe/alist:latest</code></li><li>docker-compose<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3.3&#x27;</span><br><span class="line">services:</span><br><span class="line">  alist:</span><br><span class="line">    image: &#x27;xhofe/alist:beta&#x27;</span><br><span class="line">    container_name: alist</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;/etc/alist:/opt/alist/data&#x27;</span><br><span class="line">    ports:</span><br><span class="line">      - &#x27;5244:5244&#x27;</span><br><span class="line">    environment:</span><br><span class="line">      - PUID=0</span><br><span class="line">      - PGID=0</span><br><span class="line">      - UMASK=022</span><br><span class="line">    restart: unless-stopped</span><br></pre></td></tr></table></figure>从ip:5244访问。<br><img src="https://qs100371.vip/post-images/1744624012530.webp"></li></ul><h1 id="挂载存储"><a href="#挂载存储" class="headerlink" title="挂载存储"></a>挂载存储</h1><p>从首页下方“管理”进入，左侧菜单“存储”，点添加<br><img src="https://qs100371.vip/post-images/1744624111681.webp"><br><img src="https://qs100371.vip/post-images/1744624145543.webp"><br>按要求填写，主要是各网盘需要token或cookie，可按文档中的提示进行操作。<br><img src="https://qs100371.vip/post-images/1744624227650.webp"></p><blockquote><p>添加了百度、迅雷、阿里云和夸克，确实能很方便的访问数据，在线观看一些视频还可以，能看。至于速度，由于都没有会员，只是说能用。百度是第一个挂上去了就又删掉的，速度太慢了。</p></blockquote>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;AList 提供了网页版界面集中管理各大网盘的文件，支持文件上传下载、文件管理、预览图片、查看文档、在线播放音乐、视频等等。AList 网页版可以支持 PC 以及手机浏览器。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
     
   </entry>
   

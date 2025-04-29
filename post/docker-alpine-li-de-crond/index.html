@@ -5,32 +5,21 @@
   <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
   
   
-  <title>docker里的群晖Virtual DSM | the blog of qs</title>
+  <title>docker alpine里的crond | the blog of qs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="我们对于群晖的认知还停留在通过安装群晖系统的方式来安装，目前在Github已经支持使用Docker来运行群晖dsm系统。本文记录了安装过程。">
+  <meta name="description" content="crond是linux系统运行定时任务的程序。发现docker里定时任务设置了，但并没有执行。本文记录了处理过程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker里的群晖Virtual DSM">
-<meta property="og:url" content="https://qs100371.vip/post/docker-li-de-qun-hui-virtual-dsm/index.html">
+<meta property="og:title" content="docker alpine里的crond">
+<meta property="og:url" content="https://qs100371.vip/post/docker-alpine-li-de-crond/index.html">
 <meta property="og:site_name" content="the blog of qs">
-<meta property="og:description" content="我们对于群晖的认知还停留在通过安装群晖系统的方式来安装，目前在Github已经支持使用Docker来运行群晖dsm系统。本文记录了安装过程。">
+<meta property="og:description" content="crond是linux系统运行定时任务的程序。发现docker里定时任务设置了，但并没有执行。本文记录了处理过程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668872516.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668878192.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668886213.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668968823.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668975612.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668986043.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668990873.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739668995920.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739669001414.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1739669006358.webp">
-<meta property="article:published_time" content="2025-02-16T01:13:17.000Z">
-<meta property="article:modified_time" content="2025-03-06T23:18:22.677Z">
+<meta property="article:published_time" content="2025-04-29T10:48:18.000Z">
+<meta property="article:modified_time" content="2025-04-29T10:59:04.691Z">
 <meta property="article:author" content="qs100371">
-<meta property="article:tag" content="web">
+<meta property="article:tag" content="docker">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qs100371.vip/post-images/1739668872516.webp">
   
     <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
   
@@ -101,10 +90,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-docker-li-de-qun-hui-virtual-dsm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-docker-alpine-li-de-crond" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/post/docker-li-de-qun-hui-virtual-dsm/" class="article-date">
-  <time class="dt-published" datetime="2025-02-16T01:13:17.000Z" itemprop="datePublished">2025-02-16</time>
+    <a href="/post/docker-alpine-li-de-crond/" class="article-date">
+  <time class="dt-published" datetime="2025-04-29T10:48:18.000Z" itemprop="datePublished">2025-04-29</time>
 </a>
     
   </div>
@@ -115,12 +104,12 @@
         
     
         <h1 class="p-name article-title" itemprop="headline name">
-          docker里的群晖Virtual DSM
+          docker alpine里的crond
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-185-blue"><img
-            src="https://img.shields.io/badge/阅读时间-2分-green">
+          <img src="https://img.shields.io/badge/字数统计-384-blue"><img
+            src="https://img.shields.io/badge/阅读时间-5分-green">
           
             
               
@@ -133,35 +122,36 @@
          
           <div id="toc" class="toc-article">
             <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">部署方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">启动</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%8F%91%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">问题发现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li></ol>
           </div>
          
         <!-- Table of Contents -->
-        <p>我们对于群晖的认知还停留在通过安装群晖系统的方式来安装，目前在Github已经支持使用Docker来运行群晖dsm系统。本文记录了安装过程。</p>
+        <p>crond是linux系统运行定时任务的程序。发现docker里定时任务设置了，但并没有执行。本文记录了处理过程。</p>
 <span id="more"></span>
-<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/vdsm/virtual-dsm">vdsm&#x2F;virtual-dsm</a></p>
-<h1 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h1><p>docker-compose.yml内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line"> dsm:</span><br><span class="line">   container_name: dsm</span><br><span class="line">   image: vdsm/virtual-dsm:7.23</span><br><span class="line">   environment:</span><br><span class="line">     RAM_SIZE: &quot;2G&quot;</span><br><span class="line">     CPU_CORES: &quot;2&quot;</span><br><span class="line">   devices:</span><br><span class="line">     - /dev/kvm</span><br><span class="line">     - /dev/net/tun</span><br><span class="line">   cap_add:</span><br><span class="line">     - NET_ADMIN</span><br><span class="line">   ports:</span><br><span class="line">     - 5000:5000</span><br><span class="line">   volumes:</span><br><span class="line">     - /data/dsm:/storage</span><br><span class="line">   restart: unless-stopped</span><br><span class="line">   stop_grace_period: 2m</span><br></pre></td></tr></table></figure>
-<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p><code>docker-compose up</code>   #可以看到启动过程，这里一个在docker里启动qemu，再启动dsm的过程，具体过程可以查看<code>docker logs dsm</code>。<br><img src="https://qs100371.vip/post-images/1739668872516.webp"><br><img src="https://qs100371.vip/post-images/1739668878192.webp"><br><img src="https://qs100371.vip/post-images/1739668886213.webp"><br><img src="https://qs100371.vip/post-images/1739668968823.webp"><br><img src="https://qs100371.vip/post-images/1739668975612.webp"><br><img src="https://qs100371.vip/post-images/1739668986043.webp"><br><img src="https://qs100371.vip/post-images/1739668990873.webp"><br><img src="https://qs100371.vip/post-images/1739668995920.webp"><br><img src="https://qs100371.vip/post-images/1739669001414.webp"><br><img src="https://qs100371.vip/post-images/1739669006358.webp"></p>
-<blockquote>
-<p>在BIOS里没有打开vt-x的情况下，不支持kvm，启动要很久，打开之后只要一分钟就启动完毕了。</p>
-</blockquote>
+<h1 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h1><p>原来用github actions定时执行的脚本由于改成vercel部署，域名指向了vercel，github.io不能直接访问，不想再设二级域名，就放到玩客云中的docker运行。由于alpine没有安装service，crontab没有正确执行。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>前台运行crond，由于没有服务，要把crond加到docker入口run.sh里。<br>原来的run.sh:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># 后台启动</span><br><span class="line">php-fpm -D</span><br><span class="line"># 关闭后台启动，hold住进程</span><br><span class="line">nginx -g &#x27;daemon off;&#x27;</span><br></pre></td></tr></table></figure>
+<p>想也没想，直接把crond加到最后一句。重启docker，再进入docker，发现进程中没有crond。手动执行crond就有。<br>最后才发现是nginx这一句的问题，把crond加到前一句就正常了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># 后台启动</span><br><span class="line">php-fpm -D</span><br><span class="line">crond</span><br><span class="line"># 关闭后台启动，hold住进程</span><br><span class="line">nginx -g &#x27;daemon off;&#x27;</span><br></pre></td></tr></table></figure>
+<p>ps:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">PID   USER     TIME  COMMAND</span><br><span class="line">    1 root      0:00 &#123;run.sh&#125; /bin/sh /run.sh</span><br><span class="line">    8 root      0:00 php-fpm: master process (/usr/local/etc/php-fpm.conf)</span><br><span class="line">    9 www-data  0:00 php-fpm: pool www</span><br><span class="line">   10 www-data  0:00 php-fpm: pool www</span><br><span class="line">   12 root      0:00 crond</span><br><span class="line">   13 root      0:00 nginx: master process nginx -g daemon off;</span><br><span class="line">   14 nginx     0:00 nginx: worker process</span><br><span class="line">   15 nginx     0:00 nginx: worker process</span><br><span class="line">   16 nginx     0:00 nginx: worker process</span><br><span class="line">   17 nginx     0:00 nginx: worker process</span><br><span class="line">   18 root      0:00 [run-parts]</span><br><span class="line">   19 root      0:00 sh</span><br><span class="line">   26 root      0:00 ps</span><br></pre></td></tr></table></figure>
+<p>问题解决。<br>毛病出在alpine和惯用的debian系不一样，docker里的更精简，差异太大了。</p>
 
       
     </div>
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/docker-li-de-qun-hui-virtual-dsm/" data-id="cma2ea5wu003mz8tz1n5x3wzp" data-title="docker里的群晖Virtual DSM" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/docker-alpine-li-de-crond/" data-id="cma2ea5wn002cz8tz2rof9rny" data-title="docker alpine里的crond" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
-        <a href="/post/docker-li-de-qun-hui-virtual-dsm/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/docker-li-de-qun-hui-virtual-dsm/" itemprop="commentCount"></span>
+        <a href="/post/docker-alpine-li-de-crond/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/docker-alpine-li-de-crond/" itemprop="commentCount"></span>
           留言
         </a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
  
     </footer>
   </div>
@@ -169,19 +159,10 @@
     
 <nav id="article-nav">
   
-    <a href="/post/docker-li-de-fei-niu-os/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          docker里的飞牛os
-        
-      </div>
-    </a>
   
-  
-    <a href="/post/docker-bu-shu-linux-wan-zheng-zhuo-mian-xi-tong-webtop/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">docker部署linux完整桌面系统webtop</div>
+      <div class="article-nav-title">利用clawcloud部署自托管rustdesk服务器</div>
     </a>
   
 </nav>
