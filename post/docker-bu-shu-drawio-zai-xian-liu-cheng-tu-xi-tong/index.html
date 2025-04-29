@@ -77,16 +77,16 @@
       <nav id="sub-nav">
         
           
-            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/qs100371"><span class="fa fa-github"></span></a>
+            <a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a>
           
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
       </div>
     </div>
   </div>
@@ -131,7 +131,7 @@
         <!-- Table of Contents -->
         <p>Draw.io 是一款开源的绘制流程图的工具，拥有大量免费素材和模板。程序本身支持中文在内的多国语言，创建的文档可以导出到多种网盘或本地。无论是创建流程图、组织结构图、网络拓扑图还是其他类型的图表，Draw.io 基本都能满足图形展示的多样需求。</p>
 <span id="more"></span>
-<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/jgraph/docker-drawio">https://github.com/jgraph/docker-drawio</a></p>
+<p>项目地址：<a href="https://github.com/jgraph/docker-drawio">https://github.com/jgraph/docker-drawio</a></p>
 <h1 id="cli部署"><a href="#cli部署" class="headerlink" title="cli部署"></a>cli部署</h1><p><code>docker run -it --rm --name=&quot;draw&quot; -p 8080:8080 -p 8443:8443 jgraph/drawio</code><br><img src="https://qs100371.vip/post-images/1740300889754.webp"><br><img src="https://qs100371.vip/post-images/1740300895140.webp"><br><img src="https://qs100371.vip/post-images/1740300900064.webp"></p>
 
       
@@ -139,12 +139,12 @@
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/" data-id="cma2ea5wo002iz8tz8dnn6ryg" data-title="docker 部署 Draw.io 在线流程图系统 " class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/" data-id="cma2ea5wo002iz8tz8dnn6ryg" data-title="docker 部署 Draw.io 在线流程图系统 " class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/docker-bu-shu-drawio-zai-xian-liu-cheng-tu-xi-tong/" itemprop="commentCount"></span>
-          留言
+          Kommentare
         </a>
       
       
@@ -157,7 +157,7 @@
 <nav id="article-nav">
   
     <a href="/post/bash-jiao-ben-ti-huan-zi-fu-chuan/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
           bash脚本-替换字符串
@@ -167,7 +167,7 @@
   
   
     <a href="/post/zai-xian-wen-dang-guan-li-xi-tong-mrdoc/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">在线文档管理系统mrdoc</div>
     </a>
   
@@ -193,21 +193,31 @@
         <div class="widget">
             
         
-            <div class="notice" style="margin-top:5px">
-                <i class="fa fa-bell"></i>
-                <div class="notice-content" id="broad"></div>
-            </div>
-            <script type="text/javascript">
-                fetch('https://v1.hitokoto.cn')
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById("broad").innerHTML = data.hitokoto;
-                    })
-                    .catch(console.error)
-            </script>
-            
                 
                         
+                            <div class="notice" style="margin-top:5px">
+                                <i class="fa "></i>
+                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
+
+                                <script>
+                                    
+                                    function loadRandomContent() {
+                                        fetch('https://img.qs100371.vip/songci.php')
+                                            .then(response => response.text())
+                                            .then(text => {
+                                                document.getElementById('poem-container').innerText = text;
+                                            })
+                                            .catch(error => {
+                                                console.error('加载失败:', error);
+                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
+                                            });
+                                    }
+
+                                    // 页面加载时自动获取一次
+                                    loadRandomContent();
+                                </script>
+                            </div>
+                            
                                 <style>
                                     .notice {
                                         padding: 5px;
@@ -243,7 +253,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">105</span></li></ul>
     </div>
@@ -253,7 +263,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
     </div>
@@ -262,7 +272,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul>
     </div>
@@ -272,7 +282,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
