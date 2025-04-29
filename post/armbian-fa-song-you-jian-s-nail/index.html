@@ -132,7 +132,7 @@
 <h1 id="安装s-nail"><a href="#安装s-nail" class="headerlink" title="安装s-nail"></a>安装s-nail</h1><p><code>apt install s-nail</code></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set from=user@163.com</span><br><span class="line">set smtp=smtps://smtp.163.com:465    </span><br><span class="line">set smtp-auth=login</span><br><span class="line">set smtp-auth-user=user@163.com</span><br><span class="line">set smtp-auth-password=此处不是邮箱密码，而是smtp服务提供的授权码！！！</span><br></pre></td></tr></table></figure>
-<h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#120;&#x78;&#120;&#120;&#x78;&#120;&#x78;&#120;&#x40;&#113;&#x71;&#x2e;&#99;&#111;&#x6d;">&#120;&#x78;&#120;&#120;&#x78;&#120;&#x78;&#120;&#x40;&#113;&#x71;&#x2e;&#99;&#111;&#x6d;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p>
+<h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#x78;&#x78;&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#109;">&#x78;&#x78;&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#109;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@onecloud:/etc# echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; ease_lee@qq.com</span><br><span class="line">s-nail: Warning: variable superseded or obsoleted: smtp</span><br><span class="line">s-nail: Warning: variable superseded or obsoleted: smtp-auth-user</span><br><span class="line">s-nail: Warning: variable superseded or obsoleted: smtp-auth-password</span><br><span class="line">s-nail: The empty (default) command is ignored here, but has arguments: 1</span><br><span class="line">s-nail: Obsoletion warning: please do not use *smtp*, instead assign a smtp:// URL to *mta*!</span><br><span class="line">s-nail: Obsoletion warning: Use of old-style credentials, which will vanish in v15!</span><br><span class="line">s-nail:   Please read the manual section &quot;On URL syntax and credential lookup&quot;</span><br></pre></td></tr></table></figure>
 <p>添加附件<br><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p>
 <blockquote>
@@ -151,7 +151,7 @@
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cma194wja00114ctz10lx0ktz" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cma28by7i00110otzcwg68749" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
         <a href="/post/armbian-fa-song-you-jian-s-nail/#comments" class="article-comment-link">
@@ -267,7 +267,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">48</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">104</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">48</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">105</span></li></ul>
     </div>
   </div>
 
@@ -286,7 +286,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul>
     </div>
   </div>
 
@@ -297,6 +297,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a>
+          </li>
         
           <li>
             <a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a>
@@ -334,10 +338,6 @@
             <a href="/post/ip-duan-1921681024-he-1921680016-de-yi-yi/">IP段192.168.1.0/24和192.168.0.0/16的意义</a>
           </li>
         
-          <li>
-            <a href="/post/homeassistant-nei-wang-chuan-tou-400-bad-request/">Homeassistant内网穿透: 400: Bad Request</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -356,7 +356,7 @@
       <span class="post-count"><img id="site-days-badge" src=""><img 
         src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img 
         src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-        <img src="https://img.shields.io/badge/共- 58.7k 字-green"><img id="weather-badge" src=""></span>
+        <img src="https://img.shields.io/badge/共- 59.1k 字-green"><img id="weather-badge" src=""></span>
       
         </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
             
