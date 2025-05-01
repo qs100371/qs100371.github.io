@@ -359,41 +359,104 @@
 
         
       </div>
-      
-<footer id="footer">
+      <footer id="footer">
   
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      <span class="post-count"><img id="site-days-badge" src=""><img 
-        src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img 
-        src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-        <img src="https://img.shields.io/badge/共- 60.3k 字-green"><img id="weather-badge" src=""></span>
-      
-        </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
-            
-      &copy; 2025 qs100371<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-  <script>
-  // 1. 计算建站天数
-  const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
-  const today = new Date();
-  const timeDiff = today.getTime() - startDate.getTime();
-  const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        
+          <div class="outer">
+            <div id="footer-info" class="inner">
+              <span class="post-count"><img id="site-days-badge" src=""><img
+                  src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
+                  src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
+                <img src="https://img.shields.io/badge/共- 60.3k 字-green"><img id="weather-badge"
+                  src=""></span>
+              
+                </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                  
+                    &copy; 2025
+                      qs100371<br>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+            </div>
+          </div>
+          <script>
+            // 1. 计算建站天数
+            const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
+            const today = new Date();
+            const timeDiff = today.getTime() - startDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-  // 2. 动态生成 Shields.io 徽章
-  const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
-  document.getElementById('site-days-badge').src = badgeUrl;
+            // 2. 动态生成 Shields.io 徽章
+            const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
+            document.getElementById('site-days-badge').src = badgeUrl;
 
-  // 3. 每天 00:00 自动刷新（可选）
-  //setInterval(() => {
-  //  location.reload();
-  //}, 24 * 60 * 60 * 1000); // 24小时后刷新页面
-</script>
+            // 3. 每天 00:00 自动刷新（可选）
+            //setInterval(() => {
+            //  location.reload();
+            //}, 24 * 60 * 60 * 1000); // 24小时后刷新页面
+          </script>
 </footer>
+<style>
+  /* 返回顶部按钮 - 基础样式 */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    /* 移动端距离底部更近 */
+    right: 20px;
+    /* 移动端距离右侧更近 */
+    width: 46px;
+    /* 移动端稍小 */
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    /* 默认隐藏 */
+    z-index: 9999;
+    /* 确保在最上层 */
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
 
+  /* 适配 PC 端（更大按钮） */
+  @media (min-width: 768px) {
+    .back-to-top {
+      bottom: 50px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+    }
+  }
+
+  /* 悬停效果 */
+  .back-to-top:hover {
+    opacity: 1;
+    background-color: #ff3d00;
+    transform: scale(1.1);
+  }
+
+  /* 滚动时跳动动画 */
+  .back-to-top.active {
+    animation: bounce 0.8s infinite;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>
 <!--带缓存-->
 <script>
   // 配置
@@ -402,89 +465,111 @@
   const keyPart1 = 'f7d5ad';
   const keyPart2 = '880781cdd548';
   const API_KEY = keyPart1 + keyPart2 + '403c2801fb23b4';
-  
+
   const CITY_NAME = "今日天气";
   const CACHE_KEY = "weather_cache"; // 缓存键名
   const CACHE_EXPIRE = 30 * 60 * 1000; // 30分钟缓存（毫秒）
 
   async function updateWeatherBadge() {
-      // 1. 尝试从缓存读取
-      const cachedData = getCachedWeather();
-      if (cachedData) {
-          updateBadgeUI(cachedData);
-          return; // 直接使用缓存，不再请求API
-      }
+    // 1. 尝试从缓存读取
+    const cachedData = getCachedWeather();
+    if (cachedData) {
+      updateBadgeUI(cachedData);
+      return; // 直接使用缓存，不再请求API
+    }
 
-      // 2. 缓存无效时调用API
-      try {
-          const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${API_KEY}&units=metric&lang=zh_cn`;
-          const response = await fetch(apiUrl);
-          
-          if (!response.ok) throw new Error(`API错误: ${response.status}`);
-          
-          const data = await response.json();
-          const weatherData = processWeatherData(data);
-          
-          // 保存到缓存
-          cacheWeather(weatherData);
-          updateBadgeUI(weatherData);
-          
-      } catch (error) {
-          console.error("获取天气失败:", error);
-          showErrorBadge();
-      }
+    // 2. 缓存无效时调用API
+    try {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${API_KEY}&units=metric&lang=zh_cn`;
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) throw new Error(`API错误: ${response.status}`);
+
+      const data = await response.json();
+      const weatherData = processWeatherData(data);
+
+      // 保存到缓存
+      cacheWeather(weatherData);
+      updateBadgeUI(weatherData);
+
+    } catch (error) {
+      console.error("获取天气失败:", error);
+      showErrorBadge();
+    }
   }
 
   // === 工具函数 ===
   function processWeatherData(data) {
-      const temp = Math.round(data.main.temp);
-      const description = data.weather[0].description;
-      
-      // 根据温度选择颜色
-      let color;
-      if (temp < 0) color = "lightblue";
-      else if (temp < 16) color = "blue";
-      else if (temp < 26) color = "green";
-      else if (temp < 31) color = "orange";
-      else color = "red";
-      
-      return {
-          temp,
-          description,
-          color,
-          timestamp: Date.now() // 添加当前时间戳
-      };
+    const temp = Math.round(data.main.temp);
+    const description = data.weather[0].description;
+
+    // 根据温度选择颜色
+    let color;
+    if (temp < 0) color = "lightblue";
+    else if (temp < 16) color = "blue";
+    else if (temp < 26) color = "green";
+    else if (temp < 31) color = "orange";
+    else color = "red";
+
+    return {
+      temp,
+      description,
+      color,
+      timestamp: Date.now() // 添加当前时间戳
+    };
   }
 
   function updateBadgeUI(weather) {
-      const badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(CITY_NAME)}-${weather.temp}°C_${encodeURIComponent(weather.description)}-${weather.color}.svg`;
-      document.getElementById("weather-badge").src = badgeUrl;
+    const badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(CITY_NAME)}-${weather.temp}°C_${encodeURIComponent(weather.description)}-${weather.color}.svg`;
+    document.getElementById("weather-badge").src = badgeUrl;
   }
 
   function showErrorBadge() {
-      document.getElementById("weather-badge").src = 
-          "https://img.shields.io/badge/天气-加载失败-red.svg";
+    document.getElementById("weather-badge").src =
+      "https://img.shields.io/badge/天气-加载失败-red.svg";
   }
 
   // === 缓存相关函数 ===
   function getCachedWeather() {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (!cached) return null;
-      
-      const parsed = JSON.parse(cached);
-      const isExpired = (Date.now() - parsed.timestamp) > CACHE_EXPIRE;
-      
-      return isExpired ? null : parsed;
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (!cached) return null;
+
+    const parsed = JSON.parse(cached);
+    const isExpired = (Date.now() - parsed.timestamp) > CACHE_EXPIRE;
+
+    return isExpired ? null : parsed;
   }
 
   function cacheWeather(data) {
-      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    localStorage.setItem(CACHE_KEY, JSON.stringify(data));
   }
 
   // === 初始化 ===
   document.addEventListener('DOMContentLoaded', () => {
-      updateWeatherBadge(); // 首次加载
-      setInterval(updateWeatherBadge, CACHE_EXPIRE); // 定时检查更新
+    updateWeatherBadge(); // 首次加载
+    setInterval(updateWeatherBadge, CACHE_EXPIRE); // 定时检查更新
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   });
 </script>
     </div>
