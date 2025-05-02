@@ -1566,13 +1566,6 @@
   </url>
   
   <url>
-    <loc>https://qs100371.vip/tags/python/</loc>
-    <lastmod>2025-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://qs100371.vip/tags/termux/</loc>
     <lastmod>2025-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -1581,6 +1574,13 @@
   
   <url>
     <loc>https://qs100371.vip/tags/web/</loc>
+    <lastmod>2025-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://qs100371.vip/tags/python/</loc>
     <lastmod>2025-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
