@@ -17,8 +17,8 @@
 <meta property="article:published_time" content="2025-02-11T13:55:57.000Z">
 <meta property="article:modified_time" content="2025-04-28T07:43:10.943Z">
 <meta property="article:author" content="qs100371">
-<meta property="article:tag" content="web">
 <meta property="article:tag" content="linux">
+<meta property="article:tag" content="web">
 <meta property="article:tag" content="armbian">
 <meta name="twitter:card" content="summary">
   
@@ -69,9 +69,9 @@
         
           <a class="main-nav-link" href="/random.html">黑洞</a>
         
-          <a class="main-nav-link" href="/post/app/">应用</a>
+          <a class="main-nav-link" href="/appscenter/">应用</a>
         
-          <a class="main-nav-link" href="/post/about/">关于</a>
+          <a class="main-nav-link" href="/about/">关于</a>
         
       </nav>
       <nav id="sub-nav">
@@ -134,7 +134,7 @@
 <h1 id="安装s-nail"><a href="#安装s-nail" class="headerlink" title="安装s-nail"></a>安装s-nail</h1><p><code>apt install s-nail</code></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp</span>=smtps://smtp.163.com:465    </span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-user</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-password</span>=此处不是邮箱密码，而是smtp服务提供的授权码！！！</span><br></pre></td></tr></table></figure>
-<h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#120;&#x78;&#120;&#120;&#120;&#x78;&#x78;&#x78;&#64;&#113;&#113;&#x2e;&#99;&#111;&#109;">&#120;&#x78;&#120;&#120;&#120;&#x78;&#x78;&#x78;&#64;&#113;&#113;&#x2e;&#99;&#111;&#109;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p>
+<h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#120;&#120;&#120;&#120;&#x78;&#120;&#x78;&#120;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#109;">&#120;&#120;&#120;&#120;&#x78;&#120;&#x78;&#120;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#109;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root<span class="keyword">@onecloud</span>:/etc# echo <span class="string">&quot;Successful&quot;</span> | s-nail -s <span class="string">&quot;hello?&quot;</span> ease_lee<span class="keyword">@qq</span>.com</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-user</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-password</span><br><span class="line"><span class="attribute">s-nail</span>: The empty (default) command is ignored here, but has <span class="attribute">arguments</span>: <span class="number">1</span></span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: please do <span class="keyword">not</span> use *smtp*, instead assign a <span class="attribute">smtp</span>:// URL to *mta*!</span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: Use of old-style credentials, which will vanish in v15!</span><br><span class="line"><span class="attribute">s-nail</span>:   Please read the manual section <span class="string">&quot;On URL syntax and credential lookup&quot;</span></span><br></pre></td></tr></table></figure>
 <p>添加附件<br><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p>
 <blockquote>
@@ -153,7 +153,7 @@
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cma8ydv3c000yhgtz56cxdiee" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cma90mu71001014tzbuky5yfv" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
         <a href="/post/armbian-fa-song-you-jian-s-nail/#comments" class="article-comment-link">
@@ -291,7 +291,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -483,9 +483,9 @@
   
     <a href="/random.html" class="mobile-nav-link">黑洞</a>
   
-    <a href="/post/app/" class="mobile-nav-link">应用</a>
+    <a href="/appscenter/" class="mobile-nav-link">应用</a>
   
-    <a href="/post/about/" class="mobile-nav-link">关于</a>
+    <a href="/about/" class="mobile-nav-link">关于</a>
   
 </nav>
     
