@@ -1,1 +1,621 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><title>不同基础镜像docker构建及对比 | the blog of qs</title><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="description" content="前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。"><meta property="og:type" content="article"><meta property="og:title" content="不同基础镜像docker构建及对比"><meta property="og:url" content="https://qs100371.vip/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/index.html"><meta property="og:site_name" content="the blog of qs"><meta property="og:description" content="前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://qs100371.vip/post-images/1745116172395.webp"><meta property="article:published_time" content="2025-04-20T02:03:16.000Z"><meta property="article:modified_time" content="2025-04-20T02:30:01.200Z"><meta property="article:author" content="qs100371"><meta property="article:tag" content="docker"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://qs100371.vip/post-images/1745116172395.webp"><link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml"><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/" id="logo">the blog of qs</a></h1><h2 id="subtitle-wrap"><a href="/" id="subtitle">生命不止，折腾不止。</a></h2></div><div id="header-inner" class="inner"><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a> <a class="main-nav-link" href="/">首页</a> <a class="main-nav-link" href="/archives">归档</a> <a class="main-nav-link" href="/random.html">黑洞</a> <a class="main-nav-link" href="/post/app/">应用</a> <a class="main-nav-link" href="/post/about/">关于</a></nav><nav id="sub-nav"><a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a> <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a> <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form></div></div></div></header><div class="outer"><section id="main"><article id="post-bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><div class="article-meta"><a href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" class="article-date"><time class="dt-published" datetime="2025-04-20T02:03:16.000Z" itemprop="datePublished">2025-04-20</time></a></div><div class="article-inner"><header class="article-header"><h1 class="p-name article-title" itemprop="headline name">不同基础镜像docker构建及对比</h1><hr><img src="https://img.shields.io/badge/字数统计-1.5k-blue"><img src="https://img.shields.io/badge/阅读时间-26分-green"></header><div class="e-content article-entry" itemprop="articleBody"><div id="toc" class="toc-article"><strong class="toc-title">目录</strong><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5alpine%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">以alpine为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5ubuntu%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">以ubuntu为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5debian%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">以debian为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">4.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol></div><p>前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。</p><span id="more"></span><h1 id="以alpine为基础镜像"><a href="#以alpine为基础镜像" class="headerlink" title="以alpine为基础镜像"></a>以alpine为基础镜像</h1><p>Dockerfile：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FROM php:7.3-fpm-alpine3.11</span><br><span class="line"></span><br><span class="line"># 1. 使用国内镜像源加速（可选）</span><br><span class="line">RUN echo &quot;https://mirrors.aliyun.com/alpine/v3.11/main&quot; &gt; /etc/apk/repositories &amp;&amp; \</span><br><span class="line">    echo &quot;https://mirrors.aliyun.com/alpine/v3.11/community&quot; &gt;&gt; /etc/apk/repositories</span><br><span class="line"></span><br><span class="line"># 2. 仅安装必要软件（Nginx，删除所有编译工具）</span><br><span class="line">RUN apk update &amp;&amp; \</span><br><span class="line">    apk add --no-cache nginx &amp;&amp; \</span><br><span class="line">    mkdir /run/nginx</span><br><span class="line"></span><br><span class="line"># 3. 直接使用默认配置（删除不必要的扩展和自定义配置）</span><br><span class="line"># 注：默认 php.ini 已足够，无需覆盖</span><br><span class="line"></span><br><span class="line"># 4. 添加最小化文件</span><br><span class="line">COPY index.php /var/www/html/</span><br><span class="line">COPY default.conf /etc/nginx/conf.d/</span><br><span class="line">COPY run.sh /</span><br><span class="line"></span><br><span class="line"># 5. 设置权限并清理</span><br><span class="line">RUN chmod +x /run.sh &amp;&amp; \</span><br><span class="line">    rm -rf /var/cache/apk/*</span><br><span class="line"></span><br><span class="line"># 6. 暴露端口</span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line"># 7. 启动命令</span><br><span class="line">ENTRYPOINT [&quot;/run.sh&quot;]</span><br></pre></td></tr></table></figure><p>default.conf：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name localhost;</span><br><span class="line"></span><br><span class="line">  root /var/www/html;</span><br><span class="line">  index index.php index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">  location / &#123;</span><br><span class="line">    try_files $uri $uri/ =404;</span><br><span class="line">  &#125;</span><br><span class="line">  location ~ \.php$ &#123;</span><br><span class="line">    fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">    fastcgi_index index.php;</span><br><span class="line">    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">    include fastcgi_params;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><p>run.sh：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># 后台启动</span><br><span class="line">php-fpm -D</span><br><span class="line"># 关闭后台启动，hold住进程</span><br><span class="line">nginx -g &#x27;daemon off;&#x27;</span><br></pre></td></tr></table></figure><p>文件结构：<br>├── Dockerfile<br>├── default.conf<br>├── index.php<br>└── run.sh<br>构建过程输出：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@onecloud:~/php/php-alpine# docker build -t qs/php-alpine:v1 .</span><br><span class="line">[+] Building 16.3s (12/12) FINISHED                                                                         docker:default</span><br><span class="line"> =&gt; [internal] load build definition from Dockerfile                                                                  0.3s</span><br><span class="line"> =&gt; =&gt; transferring dockerfile: 814B                                                                                  0.1s</span><br><span class="line"> =&gt; [internal] load metadata for docker.io/library/php:7.3-fpm-alpine3.11                                             1.9s</span><br><span class="line"> =&gt; [internal] load .dockerignore                                                                                     0.1s</span><br><span class="line"> =&gt; =&gt; transferring context: 2B                                                                                       0.0s</span><br><span class="line"> =&gt; CACHED [1/7] FROM docker.io/library/php:7.3-fpm-alpine3.11@sha256:b0d07b0ccb6847add12a222025066d406a55f055acfce7  0.0s</span><br><span class="line"> =&gt; [internal] load build context                                                                                     0.2s</span><br><span class="line"> =&gt; =&gt; transferring context: 74.37kB                                                                                  0.1s</span><br><span class="line"> =&gt; [2/7] RUN echo &quot;https://mirrors.aliyun.com/alpine/v3.11/main&quot; &gt; /etc/apk/repositories &amp;&amp;     echo &quot;https://mirro  2.7s</span><br><span class="line"> =&gt; [3/7] RUN apk update &amp;&amp;     apk add --no-cache nginx &amp;&amp;     mkdir /run/nginx                                      6.3s</span><br><span class="line"> =&gt; [4/7] COPY index.php /var/www/html/                                                                               0.5s </span><br><span class="line"> =&gt; [5/7] COPY default.conf /etc/nginx/conf.d/                                                                        0.5s </span><br><span class="line"> =&gt; [6/7] COPY run.sh /                                                                                               0.5s </span><br><span class="line"> =&gt; [7/7] RUN chmod +x /run.sh &amp;&amp;     rm -rf /var/cache/apk/*                                                         1.2s </span><br><span class="line"> =&gt; exporting to image                                                                                                1.6s </span><br><span class="line"> =&gt; =&gt; exporting layers                                                                                               1.4s </span><br><span class="line"> =&gt; =&gt; writing image sha256:4753ea1ce06772744ecacaec680891a2211f3b55f797860c1132449b160fd1f7                          0.0s</span><br><span class="line"> =&gt; =&gt; naming to docker.io/qs/php-alpine:v1    </span><br></pre></td></tr></table></figure><h1 id="以ubuntu为基础镜像"><a href="#以ubuntu为基础镜像" class="headerlink" title="以ubuntu为基础镜像"></a>以ubuntu为基础镜像</h1><p>Dockerfile：<br></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> # 使用官方Ubuntu镜像</span><br><span class="line">FROM ubuntu:22.04</span><br><span class="line"></span><br><span class="line"># 设置非交互式环境</span><br><span class="line">ENV DEBIAN_FRONTEND=noninteractive</span><br><span class="line"></span><br><span class="line"># 创建工作目录</span><br><span class="line">RUN mkdir -p /var/www/html</span><br><span class="line"></span><br><span class="line"># 安装必要软件</span><br><span class="line">RUN apt-get update &amp;&amp; \</span><br><span class="line">    apt-get install -y --no-install-recommends \</span><br><span class="line">    nginx \</span><br><span class="line">    php-fpm \</span><br><span class="line">    &amp;&amp; \</span><br><span class="line">    apt-get clean &amp;&amp; \</span><br><span class="line">    rm -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line"># 复制文件（使用明确路径）</span><br><span class="line">COPY index.php /var/www/html/</span><br><span class="line">COPY default.conf /etc/nginx/conf.d/</span><br><span class="line">COPY run.sh /</span><br><span class="line"></span><br><span class="line"># 设置权限</span><br><span class="line">RUN chmod +x /run.sh &amp;&amp; \</span><br><span class="line">    chown -R www-data:www-data /var/www/html</span><br><span class="line"></span><br><span class="line"># 清理默认配置</span><br><span class="line">RUN rm -f /etc/nginx/sites-enabled/default</span><br><span class="line"></span><br><span class="line"># 暴露端口</span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line"># 启动命令</span><br><span class="line">CMD [&quot;/run.sh&quot;]</span><br></pre></td></tr></table></figure><br>default.conf：<p></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name localhost;</span><br><span class="line">    root /var/www/html;</span><br><span class="line">    index index.php;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include snippets/fastcgi-php.conf;</span><br><span class="line">        fastcgi_pass unix:/run/php/php-fpm.sock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>run.sh：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># 后台启动</span><br><span class="line">service php8.1-fpm start  # 根据实际 PHP 版本调整</span><br><span class="line"># 关闭后台启动，hold住进程</span><br><span class="line">nginx -g &#x27;daemon off;&#x27;</span><br></pre></td></tr></table></figure><p>构建过程输出：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root@onecloud:~/php/php-ubuntu# docker build -t qs/php-ubuntu:v1 .</span><br><span class="line">[+] Building 335.9s (13/13) FINISHED                                                                        docker:default</span><br><span class="line"> =&gt; [internal] load build definition from Dockerfile                                                                  0.2s</span><br><span class="line"> =&gt; =&gt; transferring dockerfile: 712B                                                                                  0.0s</span><br><span class="line"> =&gt; [internal] load metadata for docker.io/library/ubuntu:22.04                                                       1.8s</span><br><span class="line"> =&gt; [internal] load .dockerignore                                                                                     0.1s</span><br><span class="line"> =&gt; =&gt; transferring context: 2B                                                                                       0.0s</span><br><span class="line"> =&gt; [internal] load build context                                                                                     0.7s</span><br><span class="line"> =&gt; =&gt; transferring context: 90B                                                                                      0.0s</span><br><span class="line"> =&gt; [1/8] FROM docker.io/library/ubuntu:22.04@sha256:d80997daaa3811b175119350d84305e1ec9129e1799bba0bd1e3120da3ff52  58.5s</span><br><span class="line"> =&gt; =&gt; resolve docker.io/library/ubuntu:22.04@sha256:d80997daaa3811b175119350d84305e1ec9129e1799bba0bd1e3120da3ff52c  0.3s</span><br><span class="line"> =&gt; =&gt; sha256:d80997daaa3811b175119350d84305e1ec9129e1799bba0bd1e3120da3ff52c3 6.69kB / 6.69kB                        0.0s</span><br><span class="line"> =&gt; =&gt; sha256:4f6f9af1518bf360df5bd6214cd573d6dc0143334234757ed745715f6a95d0cd 424B / 424B                            0.0s</span><br><span class="line"> =&gt; =&gt; sha256:9aa01b7cb660ca7978b749d3ddd2ce2bf9495d1556820e724c091be026c33ad4 2.31kB / 2.31kB                        0.0s</span><br><span class="line"> =&gt; =&gt; sha256:f3e10eb95482b14d0f5a969fafb71afd541d5efd38890d551e27c957ed3ae84e 26.64MB / 26.64MB                     30.0s</span><br><span class="line"> =&gt; =&gt; extracting sha256:f3e10eb95482b14d0f5a969fafb71afd541d5efd38890d551e27c957ed3ae84e                            22.7s</span><br><span class="line"> =&gt; [2/8] RUN mkdir -p /var/www/html                                                                                  6.2s</span><br><span class="line"> =&gt; [3/8] RUN apt-get update &amp;&amp;     apt-get install -y --no-install-recommends     nginx     php-fpm     &amp;&amp;     ap  235.0s</span><br><span class="line"> =&gt; [4/8] COPY index.php /var/www/html/                                                                               0.5s </span><br><span class="line"> =&gt; [5/8] COPY default.conf /etc/nginx/conf.d/                                                                        0.4s </span><br><span class="line"> =&gt; [6/8] COPY run.sh /                                                                                               0.3s </span><br><span class="line"> =&gt; [7/8] RUN chmod +x /run.sh &amp;&amp;     chown -R www-data:www-data /var/www/html                                        2.1s </span><br><span class="line"> =&gt; [8/8] RUN rm -f /etc/nginx/sites-enabled/default                                                                  1.5s </span><br><span class="line"> =&gt; exporting to image                                                                                               28.3s </span><br><span class="line"> =&gt; =&gt; exporting layers                                                                                              28.0s</span><br><span class="line"> =&gt; =&gt; writing image sha256:c53001d8d966e2e8951c57d26a7c90477eecae863ead67dd13071f93475ef8af                          0.0s</span><br><span class="line"> =&gt; =&gt; naming to docker.io/qs/php-ubuntu:v1   </span><br></pre></td></tr></table></figure><h1 id="以debian为基础镜像"><a href="#以debian为基础镜像" class="headerlink" title="以debian为基础镜像"></a>以debian为基础镜像</h1><p>只有Dockerfile第一行与以ubuntu为基础镜像的Dockerfile不同：<br></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> # 使用 Debian 官方 slim 镜像（比 Ubuntu 更小）</span><br><span class="line">FROM debian:11-slim</span><br></pre></td></tr></table></figure><br>构建过程输出：<p></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root@onecloud:~/php/php-debian# docker build -t qs/php-debian .</span><br><span class="line">[+] Building 275.6s (13/13) FINISHED                                                                        docker:default</span><br><span class="line"> =&gt; [internal] load build definition from Dockerfile                                                                  0.1s</span><br><span class="line"> =&gt; =&gt; transferring dockerfile: 745B                                                                                  0.0s</span><br><span class="line"> =&gt; [internal] load metadata for docker.io/library/debian:11-slim                                                     1.0s</span><br><span class="line"> =&gt; [internal] load .dockerignore                                                                                     0.0s</span><br><span class="line"> =&gt; =&gt; transferring context: 2B                                                                                       0.0s</span><br><span class="line"> =&gt; [1/8] FROM docker.io/library/debian:11-slim@sha256:7aafeb23eaef5d5b1de26e967b9a78f018baaac81dd75246b99781eaaa2d  32.4s</span><br><span class="line"> =&gt; =&gt; resolve docker.io/library/debian:11-slim@sha256:7aafeb23eaef5d5b1de26e967b9a78f018baaac81dd75246b99781eaaa2d5  0.1s</span><br><span class="line"> =&gt; =&gt; sha256:7aafeb23eaef5d5b1de26e967b9a78f018baaac81dd75246b99781eaaa2d59ef 4.54kB / 4.54kB                        0.0s</span><br><span class="line"> =&gt; =&gt; sha256:b04da799ff9e4e278427561460ab9a95eaa9264e67cde09b1eb306e5c2bc3f7f 1.04kB / 1.04kB                        0.0s</span><br><span class="line"> =&gt; =&gt; sha256:9c163ad39b7cf022fcd764b33bcf677bfdfc4afb538d049c49c8e2cb2d76eacb 466B / 466B                            0.0s</span><br><span class="line"> =&gt; =&gt; sha256:bfc445187b87c4f640fe8b85c4ee3c251ce5e7023a5ff0acd053bde1f01e6aaf 25.54MB / 25.54MB                      9.3s</span><br><span class="line"> =&gt; =&gt; extracting sha256:bfc445187b87c4f640fe8b85c4ee3c251ce5e7023a5ff0acd053bde1f01e6aaf                            19.3s</span><br><span class="line"> =&gt; [internal] load build context                                                                                     0.1s</span><br><span class="line"> =&gt; =&gt; transferring context: 246B                                                                                     0.0s</span><br><span class="line"> =&gt; [2/8] RUN mkdir -p /var/www/html                                                                                  4.5s</span><br><span class="line"> =&gt; [3/8] RUN apt-get update &amp;&amp;     apt-get install -y --no-install-recommends     nginx     php-fpm     &amp;&amp;     ap  207.7s</span><br><span class="line"> =&gt; [4/8] COPY index.php /var/www/html/                                                                               0.5s </span><br><span class="line"> =&gt; [5/8] COPY default.conf /etc/nginx/conf.d/                                                                        0.3s </span><br><span class="line"> =&gt; [6/8] COPY run.sh /                                                                                               0.3s </span><br><span class="line"> =&gt; [7/8] RUN chmod +x /run.sh &amp;&amp;     chown -R www-data:www-data /var/www/html                                        3.3s </span><br><span class="line"> =&gt; [8/8] RUN rm -f /etc/nginx/sites-enabled/default                                                                  1.8s </span><br><span class="line"> =&gt; exporting to image                                                                                               22.8s </span><br><span class="line"> =&gt; =&gt; exporting layers                                                                                              22.3s</span><br><span class="line"> =&gt; =&gt; writing image sha256:dfc71ebf160c92153b8974ee4c86624ad4a8a2652155a049cd3f3b942be77605                          0.0s</span><br><span class="line"> =&gt; =&gt; naming to docker.io/qs/php-debian</span><br></pre></td></tr></table></figure><h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table><thead><tr><th>基础镜像</th><th>构建时间</th><th>镜像大小</th></tr></thead><tbody><tr><td>alpine</td><td>16s</td><td>64M</td></tr><tr><td>ubuntu</td><td>336s</td><td>187M</td></tr><tr><td>debian</td><td>276s</td><td>164M</td></tr></tbody></table><p><img src="https://qs100371.vip/post-images/1745116172395.webp"><br>镜像体积对比</p><table><thead><tr><th>镜像</th><th>基础体积</th><th>安装 Nginx+PHP 后体积</th><th>特点</th></tr></thead><tbody><tr><td>alpine</td><td>~5MB</td><td>~50MB</td><td>最小，适合极致轻量化</td></tr><tr><td>debian (slim)</td><td>~50MB</td><td>~100MB</td><td>平衡体积与兼容性</td></tr><tr><td>ubuntu</td><td>~70MB</td><td>~150MB</td><td>最大，但工具链最完整</td></tr></tbody></table><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ul><li>追求最小体积 → alpine</li><li>平衡选择 → debian slim</li><li>需要完整工具链 → ubuntu</li></ul></div><footer class="article-footer"><a data-url="https://qs100371.vip/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" data-id="cma7nfq7w001gc0tz1v0xbsg6" data-title="不同基础镜像docker构建及对比" class="article-share-link"><span class="fa fa-share">分享</span></a> <a href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/#comments" class="article-comment-link"><span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" itemprop="commentCount"></span> 留言</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul></footer></div><nav id="article-nav"><a href="/post/jing-tai-yin-le-bo-fang-qi-heomusic/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">前一篇</strong><div class="article-nav-title">静态音乐播放器HeoMusic</div></a><a href="/post/docker-da-bao-yi-ge-php-huan-jing/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">后一篇</strong><div class="article-nav-title">docker打包一个php环境</div></a></nav></article><section id="comments" class="vcomment"></section></section><aside id="sidebar"><div class="widget-wrap"><h3 class="widget-title">公告板</h3><div class="widget"><div class="notice" style="margin-top:5px"><i class="fa"></i><div class="notice-content"><span id="poem-container">正在加载....</span></div><script>function loadRandomContent(){fetch("https://img.qs100371.vip/songci.php").then(e=>e.text()).then(e=>{document.getElementById("poem-container").innerText=e}).catch(e=>{console.error("加载失败:",e),document.getElementById("poem-container").innerText="加载失败，请重试"})}loadRandomContent()</script></div><style>.notice{padding:5px;border:1px dashed #e6e6e6;color:red;position:relative;display:inline-block;width:96%;background:#fbfbfb50;border-radius:10px}.notice i{float:left;color:#999;font-size:18px;padding-right:0;vertical-align:middle;margin-top:3px}.notice-content{display:initial;vertical-align:middle}</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"></div></div><div class="widget-wrap"><h3 class="widget-title">标签</h3><div class="widget"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">标签云</h3><div class="widget tagcloud"><a href="/tags/armbian/" style="font-size:13.33px">armbian</a> <a href="/tags/docker/" style="font-size:16.67px">docker</a> <a href="/tags/linux/" style="font-size:18.33px">linux</a> <a href="/tags/onecloud/" style="font-size:15px">onecloud</a> <a href="/tags/python/" style="font-size:10px">python</a> <a href="/tags/termux/" style="font-size:11.67px">termux</a> <a href="/tags/web/" style="font-size:20px">web</a></div></div><div class="widget-wrap"><h3 class="widget-title">归档</h3><div class="widget"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">最新文章</h3><div class="widget"><ul><li><a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a></li><li><a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a></li><li><a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a></li><li><a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a></li><li><a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a></li><li><a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a></li><li><a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a></li><li><a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a></li><li><a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a></li><li><a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a></li></ul></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><span class="post-count"><img id="site-days-badge" src=""><img src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow"> <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge" src=""></span><br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>&copy; 2025 qs100371<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></div></div><script>const startDate=new Date("2024-10-02 00:00:00"),today=new Date,timeDiff=today.getTime()-startDate.getTime(),daysDiff=Math.floor(timeDiff/864e5),badgeUrl=`https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;document.getElementById("site-days-badge").src=badgeUrl</script></footer><style>.back-to-top{position:fixed;bottom:20px;right:20px;width:46px;height:46px;border-radius:50%;background-color:#ff5722;color:#fff;text-align:center;line-height:46px;font-size:18px;cursor:pointer;display:none;z-index:9999;opacity:.9;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:all .3s}@media (min-width:768px){.back-to-top{bottom:50px;right:50px;width:50px;height:50px;line-height:50px;font-size:20px}}.back-to-top:hover{opacity:1;background-color:#ff3d00;transform:scale(1.1)}.back-to-top.active{animation:bounce .8s infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style><script>document.addEventListener("DOMContentLoaded",(function(){var e=document.createElement("div");e.className="back-to-top",e.innerHTML="↑",document.body.appendChild(e),window.addEventListener("scroll",(function(){window.pageYOffset>300?e.style.display="block":e.style.display="none"})),e.addEventListener("click",(function(e){e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}))}))</script></div><nav id="mobile-nav"><a href="/" class="mobile-nav-link">首页</a> <a href="/archives" class="mobile-nav-link">归档</a> <a href="/random.html" class="mobile-nav-link">黑洞</a> <a href="/post/app/" class="mobile-nav-link">应用</a> <a href="/post/about/" class="mobile-nav-link">关于</a></nav><script src="/js/jquery-3.6.4.min.js"></script><script src="/fancybox/jquery.fancybox.min.js"></script><script src="/js/script.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.5.2/dist/Valine.min.js"></script><script>var GUEST_INFO=["nick","mail","link"],guest_info="nick,mail,link".split(",").filter((function(i){return GUEST_INFO.indexOf(i)>-1})),notify=!1,verify=!1;new Valine({el:".vcomment",notify:notify,verify:verify,appId:"shrivAmDul1K9RSnayhd7foS-gzGzoHsz",appKey:"MJ6IotbRMRrEumBy45DTigT6",placeholder:"Just go go",pageSize:"10",avatar:"mm",lang:"zh-cn"})</script><script type="text/javascript">const backgroundImages=["/images/1.png","/images/2.png","/images/3.png","/images/4.png"];document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".v .veditor");if(e){const n=backgroundImages[Math.floor(Math.random()*backgroundImages.length)];e.style.backgroundImage=`url("${n}")`}})</script><style>.v[data-class=v] .veditor{background-size:contain;background-repeat:no-repeat;background-position:right}</style></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+  
+  
+  <title>不同基础镜像docker构建及对比 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不同基础镜像docker构建及对比">
+<meta property="og:url" content="https://qs100371.vip/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745116172395.webp">
+<meta property="article:published_time" content="2025-04-20T02:03:16.000Z">
+<meta property="article:modified_time" content="2025-04-20T02:30:01.200Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1745116172395.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/avatar.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/random.html">黑洞</a>
+        
+          <a class="main-nav-link" href="/post/app/">应用</a>
+        
+          <a class="main-nav-link" href="/post/about/">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" class="article-date">
+  <time class="dt-published" datetime="2025-04-20T02:03:16.000Z" itemprop="datePublished">2025-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          不同基础镜像docker构建及对比
+        </h1>
+        <hr>
+        
+          <img src="https://img.shields.io/badge/字数统计-1.5k-blue"><img
+            src="https://img.shields.io/badge/阅读时间-26分-green">
+          
+            
+              
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- 文章目录 没有tag的不显示目录-->
+         
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5alpine%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">以alpine为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5ubuntu%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">以ubuntu为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5debian%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">以debian为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">4.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
+          </div>
+         
+        <!-- Table of Contents -->
+        <p>前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。</p>
+<span id="more"></span>
+<h1 id="以alpine为基础镜像"><a href="#以alpine为基础镜像" class="headerlink" title="以alpine为基础镜像"></a>以alpine为基础镜像</h1><p>Dockerfile：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> php:<span class="number">7.3</span>-fpm-alpine3.<span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 使用国内镜像源加速（可选）</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;https://mirrors.aliyun.com/alpine/v3.11/main&quot;</span> &gt; /etc/apk/repositories &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">echo</span> <span class="string">&quot;https://mirrors.aliyun.com/alpine/v3.11/community&quot;</span> &gt;&gt; /etc/apk/repositories</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 仅安装必要软件（Nginx，删除所有编译工具）</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk update &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apk add --no-cache nginx &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mkdir</span> /run/nginx</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 直接使用默认配置（删除不必要的扩展和自定义配置）</span></span><br><span class="line"><span class="comment"># 注：默认 php.ini 已足够，无需覆盖</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 添加最小化文件</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> index.php /var/www/html/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> default.conf /etc/nginx/conf.d/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> run.sh /</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 设置权限并清理</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x /run.sh &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">rm</span> -rf /var/cache/apk/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 启动命令</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;/run.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<p>default.conf：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">  <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">  <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">  <span class="attribute">root</span> /var/www/html;</span><br><span class="line">  <span class="attribute">index</span> index.php index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">  <span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="section">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">    <span class="attribute">fastcgi_pass</span> <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">    <span class="attribute">fastcgi_index</span> index.php;</span><br><span class="line">    <span class="attribute">fastcgi_param</span> SCRIPT_FILENAME <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">    <span class="attribute">include</span> fastcgi_params;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>run.sh：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 后台启动</span></span><br><span class="line">php-fpm -D</span><br><span class="line"><span class="comment"># 关闭后台启动，hold住进程</span></span><br><span class="line">nginx -g <span class="string">&#x27;daemon off;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>文件结构：<br>├── Dockerfile<br>├── default.conf<br>├── index.php<br>└── run.sh<br>构建过程输出：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@onecloud:~/php/php-alpine<span class="comment"># docker build -t qs/php-alpine:v1 .</span></span><br><span class="line">[+] Building <span class="number">16.3s</span> (<span class="number">12</span>/<span class="number">12</span>) FINISHED                                                                         docker:<span class="keyword">default</span></span><br><span class="line"> =&gt; [internal] load build definition <span class="keyword">from</span> Dockerfile                                                                  <span class="number">0.3s</span></span><br><span class="line"> =&gt; =&gt; transferring dockerfile: <span class="number">814</span>B                                                                                  <span class="number">0.1s</span></span><br><span class="line"> =&gt; [internal] load metadata <span class="keyword">for</span> docker.io/library/php:<span class="number">7.3</span>-fpm-alpine3.<span class="number">11</span>                                             <span class="number">1.9s</span></span><br><span class="line"> =&gt; [internal] load .dockerignore                                                                                     <span class="number">0.1s</span></span><br><span class="line"> =&gt; =&gt; transferring context: <span class="number">2</span>B                                                                                       <span class="number">0.0s</span></span><br><span class="line"> =&gt; CACHED [<span class="number">1</span>/<span class="number">7</span>] FROM docker.io/library/php:<span class="number">7.3</span>-fpm-alpine3.<span class="number">11</span>@sha256:b0d07b0ccb6847add12a222025066d406a55f055acfce7  <span class="number">0.0s</span></span><br><span class="line"> =&gt; [internal] load build context                                                                                     <span class="number">0.2s</span></span><br><span class="line"> =&gt; =&gt; transferring context: <span class="number">74.37k</span>B                                                                                  <span class="number">0.1s</span></span><br><span class="line"> =&gt; [<span class="number">2</span>/<span class="number">7</span>] RUN echo <span class="string">&quot;https://mirrors.aliyun.com/alpine/v3.11/main&quot;</span> &gt; <span class="regexp">/etc/apk/repositories &amp;&amp;     echo &quot;https:/</span>/mirro  <span class="number">2.7s</span></span><br><span class="line"> =&gt; [<span class="number">3</span>/<span class="number">7</span>] RUN apk update &amp;&amp;     apk add --<span class="literal">no</span>-cache nginx &amp;&amp;     mkdir /run/nginx                                      <span class="number">6.3s</span></span><br><span class="line"> =&gt; [<span class="number">4</span>/<span class="number">7</span>] COPY index.php <span class="regexp">/var/www/html/</span>                                                                               <span class="number">0.5s</span> </span><br><span class="line"> =&gt; [<span class="number">5</span>/<span class="number">7</span>] COPY <span class="keyword">default</span>.conf <span class="regexp">/etc/nginx/conf.d/</span>                                                                        <span class="number">0.5s</span> </span><br><span class="line"> =&gt; [<span class="number">6</span>/<span class="number">7</span>] COPY run.sh /                                                                                               <span class="number">0.5s</span> </span><br><span class="line"> =&gt; [<span class="number">7</span>/<span class="number">7</span>] RUN chmod +x <span class="regexp">/run.sh &amp;&amp;     rm -rf /var/cache/apk/</span>*                                                         <span class="number">1.2s</span> </span><br><span class="line"> =&gt; exporting <span class="keyword">to</span> image                                                                                                <span class="number">1.6s</span> </span><br><span class="line"> =&gt; =&gt; exporting layers                                                                                               <span class="number">1.4s</span> </span><br><span class="line"> =&gt; =&gt; writing image sha256:<span class="number">4753ea</span>1ce06772744ecacaec680891a2211f3b55f797860c1132449b160fd1f7                          <span class="number">0.0s</span></span><br><span class="line"> =&gt; =&gt; naming <span class="keyword">to</span> docker.io/qs/php-alpine:v1    </span><br></pre></td></tr></table></figure>
+<h1 id="以ubuntu为基础镜像"><a href="#以ubuntu为基础镜像" class="headerlink" title="以ubuntu为基础镜像"></a>以ubuntu为基础镜像</h1><p> Dockerfile：<br> <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 使用官方Ubuntu镜像</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">22.04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置非交互式环境</span></span><br><span class="line"><span class="keyword">ENV</span> DEBIAN_FRONTEND=noninteractive</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建工作目录</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> -p /var/www/html</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装必要软件</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get install -y --no-install-recommends \</span></span><br><span class="line"><span class="language-bash">    nginx \</span></span><br><span class="line"><span class="language-bash">    php-fpm \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get clean &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制文件（使用明确路径）</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> index.php /var/www/html/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> default.conf /etc/nginx/conf.d/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> run.sh /</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置权限</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x /run.sh &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">chown</span> -R www-data:www-data /var/www/html</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理默认配置</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">rm</span> -f /etc/nginx/sites-enabled/default</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动命令</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;/run.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure><br>default.conf：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line">    <span class="attribute">root</span> /var/www/html;</span><br><span class="line">    <span class="attribute">index</span> index.php;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">        <span class="attribute">include</span> snippets/fastcgi-php.conf;</span><br><span class="line">        <span class="attribute">fastcgi_pass</span> unix:/run/php/php-fpm.sock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>run.sh：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 后台启动</span></span><br><span class="line">service php8.1-fpm start  <span class="comment"># 根据实际 PHP 版本调整</span></span><br><span class="line"><span class="comment"># 关闭后台启动，hold住进程</span></span><br><span class="line">nginx -g <span class="string">&#x27;daemon off;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>构建过程输出：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@onecloud</span><span class="symbol">:~/php/php-ubuntu</span><span class="comment"># docker build -t qs/php-ubuntu:v1 .</span></span><br><span class="line">[+] <span class="title class_">Building</span> <span class="number">335</span>.9s (<span class="number">13</span>/<span class="number">13</span>) <span class="variable constant_">FINISHED</span>                                                                        <span class="symbol">docker:</span>default</span><br><span class="line"> =&gt; [internal] load build definition from <span class="title class_">Dockerfile</span>                                                                  <span class="number">0</span>.2s</span><br><span class="line"> =&gt; =&gt; transferring <span class="symbol">dockerfile:</span> 712B                                                                                  <span class="number">0</span>.0s</span><br><span class="line"> =&gt; [internal] load metadata for docker.io/library/<span class="symbol">ubuntu:</span><span class="number">22.04</span>                                                       <span class="number">1</span>.8s</span><br><span class="line"> =&gt; [internal] load .dockerignore                                                                                     <span class="number">0</span>.1s</span><br><span class="line"> =&gt; =&gt; transferring <span class="symbol">context:</span> 2B                                                                                       <span class="number">0</span>.0s</span><br><span class="line"> =&gt; [internal] load build context                                                                                     <span class="number">0</span>.7s</span><br><span class="line"> =&gt; =&gt; transferring <span class="symbol">context:</span> 90B                                                                                      <span class="number">0</span>.0s</span><br><span class="line"> =&gt; [<span class="number">1</span>/<span class="number">8</span>] <span class="variable constant_">FROM</span> docker.io/library/<span class="symbol">ubuntu:</span><span class="number">22.04</span><span class="variable">@sha256</span><span class="symbol">:d80997daaa3811b175119350d84305e1ec9129e1799bba0bd1e3120da3ff52</span>  <span class="number">58</span>.5s</span><br><span class="line"> =&gt; =&gt; resolve docker.io/library/<span class="symbol">ubuntu:</span><span class="number">22.04</span><span class="variable">@sha256</span><span class="symbol">:d80997daaa3811b175119350d84305e1ec9129e1799bba0bd1e3120da3ff52c</span>  <span class="number">0</span>.3s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>d80997daaa3811b175119350d84305e1ec9129e1799bba0bd1e3120da3ff52c3 <span class="number">6</span>.69kB / <span class="number">6</span>.69kB                        <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>4f6f9af1518bf360df5bd6214cd573d6dc0143334234757ed745715f6a95d0cd 424B / 424B                            <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>9aa01b7cb660ca7978b749d3ddd2ce2bf9495d1556820e724c091be026c33ad4 <span class="number">2</span>.31kB / <span class="number">2</span>.31kB                        <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>f3e10eb95482b14d0f5a969fafb71afd541d5efd38890d551e27c957ed3ae84e <span class="number">26</span>.64MB / <span class="number">26</span>.64MB                     <span class="number">30</span>.0s</span><br><span class="line"> =&gt; =&gt; extracting <span class="symbol">sha256:</span>f3e10eb95482b14d0f5a969fafb71afd541d5efd38890d551e27c957ed3ae84e                            <span class="number">22</span>.7s</span><br><span class="line"> =&gt; [<span class="number">2</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> mkdir -p /var/www/html                                                                                  <span class="number">6</span>.2s</span><br><span class="line"> =&gt; [<span class="number">3</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> apt-get update &amp;&amp;     apt-get install -y --no-install-recommends     nginx     php-fpm     &amp;&amp;     ap  <span class="number">235</span>.0s</span><br><span class="line"> =&gt; [<span class="number">4</span>/<span class="number">8</span>] <span class="variable constant_">COPY</span> index.php /var/www/html/                                                                               <span class="number">0</span>.5s </span><br><span class="line"> =&gt; [<span class="number">5</span>/<span class="number">8</span>] <span class="variable constant_">COPY</span> default.conf /etc/nginx/conf.d/                                                                        <span class="number">0</span>.4s </span><br><span class="line"> =&gt; [<span class="number">6</span>/<span class="number">8</span>] <span class="variable constant_">COPY</span> run.sh /                                                                                               <span class="number">0</span>.3s </span><br><span class="line"> =&gt; [<span class="number">7</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> chmod +x /run.sh &amp;&amp;     chown -R www-<span class="symbol">data:</span>www-data /var/www/html                                        <span class="number">2</span>.1s </span><br><span class="line"> =&gt; [<span class="number">8</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> rm -f /etc/nginx/sites-enabled/default                                                                  <span class="number">1</span>.5s </span><br><span class="line"> =&gt; exporting to image                                                                                               <span class="number">28</span>.3s </span><br><span class="line"> =&gt; =&gt; exporting layers                                                                                              <span class="number">28</span>.0s</span><br><span class="line"> =&gt; =&gt; writing image <span class="symbol">sha256:</span>c53001d8d966e2e8951c57d26a7c90477eecae863ead67dd13071f93475ef8af                          <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; naming to docker.io/qs/php-<span class="symbol">ubuntu:</span>v1   </span><br></pre></td></tr></table></figure>
+<h1 id="以debian为基础镜像"><a href="#以debian为基础镜像" class="headerlink" title="以debian为基础镜像"></a>以debian为基础镜像</h1><p> 只有Dockerfile第一行与以ubuntu为基础镜像的Dockerfile不同：<br> <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 使用 Debian 官方 slim 镜像（比 Ubuntu 更小）</span></span><br><span class="line"><span class="attribute">FROM</span> debian:<span class="number">11</span>-slim</span><br></pre></td></tr></table></figure><br>构建过程输出：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@onecloud</span><span class="symbol">:~/php/php-debian</span><span class="comment"># docker build -t qs/php-debian .</span></span><br><span class="line">[+] <span class="title class_">Building</span> <span class="number">275</span>.6s (<span class="number">13</span>/<span class="number">13</span>) <span class="variable constant_">FINISHED</span>                                                                        <span class="symbol">docker:</span>default</span><br><span class="line"> =&gt; [internal] load build definition from <span class="title class_">Dockerfile</span>                                                                  <span class="number">0</span>.1s</span><br><span class="line"> =&gt; =&gt; transferring <span class="symbol">dockerfile:</span> 745B                                                                                  <span class="number">0</span>.0s</span><br><span class="line"> =&gt; [internal] load metadata for docker.io/library/<span class="symbol">debian:</span><span class="number">11</span>-slim                                                     <span class="number">1</span>.0s</span><br><span class="line"> =&gt; [internal] load .dockerignore                                                                                     <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; transferring <span class="symbol">context:</span> 2B                                                                                       <span class="number">0</span>.0s</span><br><span class="line"> =&gt; [<span class="number">1</span>/<span class="number">8</span>] <span class="variable constant_">FROM</span> docker.io/library/<span class="symbol">debian:</span><span class="number">11</span>-slim<span class="variable">@sha256</span><span class="symbol">:</span>7aafeb23eaef5d5b1de26e967b9a78f018baaac81dd75246b99781eaaa2d  <span class="number">32</span>.4s</span><br><span class="line"> =&gt; =&gt; resolve docker.io/library/<span class="symbol">debian:</span><span class="number">11</span>-slim<span class="variable">@sha256</span><span class="symbol">:</span>7aafeb23eaef5d5b1de26e967b9a78f018baaac81dd75246b99781eaaa2d5  <span class="number">0</span>.1s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>7aafeb23eaef5d5b1de26e967b9a78f018baaac81dd75246b99781eaaa2d59ef <span class="number">4</span>.54kB / <span class="number">4</span>.54kB                        <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>b04da799ff9e4e278427561460ab9a95eaa9264e67cde09b1eb306e5c2bc3f7f <span class="number">1</span>.04kB / <span class="number">1</span>.04kB                        <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>9c163ad39b7cf022fcd764b33bcf677bfdfc4afb538d049c49c8e2cb2d76eacb 466B / 466B                            <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; <span class="symbol">sha256:</span>bfc445187b87c4f640fe8b85c4ee3c251ce5e7023a5ff0acd053bde1f01e6aaf <span class="number">25</span>.54MB / <span class="number">25</span>.54MB                      <span class="number">9</span>.3s</span><br><span class="line"> =&gt; =&gt; extracting <span class="symbol">sha256:</span>bfc445187b87c4f640fe8b85c4ee3c251ce5e7023a5ff0acd053bde1f01e6aaf                            <span class="number">19</span>.3s</span><br><span class="line"> =&gt; [internal] load build context                                                                                     <span class="number">0</span>.1s</span><br><span class="line"> =&gt; =&gt; transferring <span class="symbol">context:</span> 246B                                                                                     <span class="number">0</span>.0s</span><br><span class="line"> =&gt; [<span class="number">2</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> mkdir -p /var/www/html                                                                                  <span class="number">4</span>.5s</span><br><span class="line"> =&gt; [<span class="number">3</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> apt-get update &amp;&amp;     apt-get install -y --no-install-recommends     nginx     php-fpm     &amp;&amp;     ap  <span class="number">207</span>.7s</span><br><span class="line"> =&gt; [<span class="number">4</span>/<span class="number">8</span>] <span class="variable constant_">COPY</span> index.php /var/www/html/                                                                               <span class="number">0</span>.5s </span><br><span class="line"> =&gt; [<span class="number">5</span>/<span class="number">8</span>] <span class="variable constant_">COPY</span> default.conf /etc/nginx/conf.d/                                                                        <span class="number">0</span>.3s </span><br><span class="line"> =&gt; [<span class="number">6</span>/<span class="number">8</span>] <span class="variable constant_">COPY</span> run.sh /                                                                                               <span class="number">0</span>.3s </span><br><span class="line"> =&gt; [<span class="number">7</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> chmod +x /run.sh &amp;&amp;     chown -R www-<span class="symbol">data:</span>www-data /var/www/html                                        <span class="number">3</span>.3s </span><br><span class="line"> =&gt; [<span class="number">8</span>/<span class="number">8</span>] <span class="variable constant_">RUN</span> rm -f /etc/nginx/sites-enabled/default                                                                  <span class="number">1</span>.8s </span><br><span class="line"> =&gt; exporting to image                                                                                               <span class="number">22</span>.8s </span><br><span class="line"> =&gt; =&gt; exporting layers                                                                                              <span class="number">22</span>.3s</span><br><span class="line"> =&gt; =&gt; writing image <span class="symbol">sha256:</span>dfc71ebf160c92153b8974ee4c86624ad4a8a2652155a049cd3f3b942be77605                          <span class="number">0</span>.0s</span><br><span class="line"> =&gt; =&gt; naming to docker.io/qs/php-debian</span><br></pre></td></tr></table></figure>
+<h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
+<thead>
+<tr>
+<th>基础镜像</th>
+<th>构建时间</th>
+<th>镜像大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>alpine</td>
+<td>16s</td>
+<td>64M</td>
+</tr>
+<tr>
+<td>ubuntu</td>
+<td>336s</td>
+<td>187M</td>
+</tr>
+<tr>
+<td>debian</td>
+<td>276s</td>
+<td>164M</td>
+</tr>
+</tbody></table>
+<p><img src="https://qs100371.vip/post-images/1745116172395.webp"><br>镜像体积对比</p>
+<table>
+<thead>
+<tr>
+<th>镜像</th>
+<th>基础体积</th>
+<th>安装 Nginx+PHP 后体积</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>alpine</td>
+<td>~5MB</td>
+<td>~50MB</td>
+<td>最小，适合极致轻量化</td>
+</tr>
+<tr>
+<td>debian (slim)</td>
+<td>~50MB</td>
+<td>~100MB</td>
+<td>平衡体积与兼容性</td>
+</tr>
+<tr>
+<td>ubuntu</td>
+<td>~70MB</td>
+<td>~150MB</td>
+<td>最大，但工具链最完整</td>
+</tr>
+</tbody></table>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ul>
+<li>追求最小体积 → alpine</li>
+<li>平衡选择 → debian slim</li>
+<li>需要完整工具链 → ubuntu</li>
+</ul>
+
+      
+    </div>
+    
+    <footer class="article-footer">
+     
+      <a data-url="https://qs100371.vip/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" data-id="cma8ydv3f001dhgtz2ptqe1ox" data-title="不同基础镜像docker构建及对比" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+ 
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/jing-tai-yin-le-bo-fang-qi-heomusic/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          静态音乐播放器HeoMusic
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/docker-da-bao-yi-ge-php-huan-jing/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">docker打包一个php环境</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+</section>
+        
+          
+<aside id="sidebar" >
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">公告板</h3>
+        <div class="widget">
+            
+        
+                
+                        
+                            <div class="notice" style="margin-top:5px">
+                                <i class="fa "></i>
+                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
+
+                                <script>
+                                    
+                                    function loadRandomContent() {
+                                        fetch('https://img.qs100371.vip/songci.php')
+                                            .then(response => response.text())
+                                            .then(text => {
+                                                document.getElementById('poem-container').innerText = text;
+                                            })
+                                            .catch(error => {
+                                                console.error('加载失败:', error);
+                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
+                                            });
+                                    }
+
+                                    // 页面加载时自动获取一次
+                                    loadRandomContent();
+                                </script>
+                            </div>
+                            
+                                <style>
+                                    .notice {
+                                        padding: 5px;
+                                        border: 1px dashed #e6e6e6;
+                                        color: red;
+                                        position: relative;
+                                        display: inline-block;
+                                        width: 96%;
+                                        background: #fbfbfb50;
+                                        border-radius: 10px;
+                                    }
+
+                                    .notice i {
+                                        float: left;
+                                        color: #999;
+                                        font-size: 18px;
+                                        padding-right: 0px;
+                                        vertical-align: middle;
+                                        margin-top: 3px;
+                                    }
+
+                                    .notice-content {
+                                        display: initial;
+                                        vertical-align: middle;
+                                    }
+                                </style>
+                                <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+        </div>
+        
+      </div>
+    
+    
+  
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a>
+          </li>
+        
+          <li>
+            <a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a>
+          </li>
+        
+          <li>
+            <a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a>
+          </li>
+        
+          <li>
+            <a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+        
+          <div class="outer">
+            <div id="footer-info" class="inner">
+              <span class="post-count"><img id="site-days-badge" src=""><img
+                  src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
+                  src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge"
+                  src=""></span>
+              
+                </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                  
+                    &copy; 2025
+                      qs100371<br>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+            </div>
+          </div>
+          <script>
+            // 1. 计算建站天数
+            const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
+            const today = new Date();
+            const timeDiff = today.getTime() - startDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            // 2. 动态生成 Shields.io 徽章
+            const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
+            document.getElementById('site-days-badge').src = badgeUrl;
+
+            // 3. 每天 00:00 自动刷新（可选）
+            //setInterval(() => {
+            //  location.reload();
+            //}, 24 * 60 * 60 * 1000); // 24小时后刷新页面
+          </script>
+</footer>
+<style>
+  /* 返回顶部按钮 - 基础样式 */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    /* 移动端距离底部更近 */
+    right: 20px;
+    /* 移动端距离右侧更近 */
+    width: 46px;
+    /* 移动端稍小 */
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    /* 默认隐藏 */
+    z-index: 9999;
+    /* 确保在最上层 */
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+
+  /* 适配 PC 端（更大按钮） */
+  @media (min-width: 768px) {
+    .back-to-top {
+      bottom: 50px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+    }
+  }
+
+  /* 悬停效果 */
+  .back-to-top:hover {
+    opacity: 1;
+    background-color: #ff3d00;
+    transform: scale(1.1);
+  }
+
+  /* 滚动时跳动动画 */
+  .back-to-top.active {
+    animation: bounce 0.8s infinite;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/random.html" class="mobile-nav-link">黑洞</a>
+  
+    <a href="/post/app/" class="mobile-nav-link">应用</a>
+  
+    <a href="/post/about/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.5.2/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+<script type="text/javascript">
+  const backgroundImages = [
+  "/images/1.png",
+  "/images/2.png",
+  "/images/3.png",
+  "/images/4.png",
+  // 更多图片...
+];
+
+// Valine 初始化后设置随机背景
+  document.addEventListener('DOMContentLoaded', () => {
+    const veditor = document.querySelector('.v .veditor');
+    if (veditor) {
+      const randomImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+      veditor.style.backgroundImage = `url("${randomImage}")`;
+    }
+  });
+</script>
+<style>
+  .v[data-class=v] .veditor {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+  }
+  </style>
+
+
+  </div>
+</body>
+</html>

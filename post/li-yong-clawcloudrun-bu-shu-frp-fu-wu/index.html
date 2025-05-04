@@ -1,1 +1,603 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><title>利用clawcloud部署frp服务 | the blog of qs</title><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="description" content="clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。"><meta property="og:type" content="article"><meta property="og:title" content="利用clawcloud部署frp服务"><meta property="og:url" content="https://qs100371.vip/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/index.html"><meta property="og:site_name" content="the blog of qs"><meta property="og:description" content="clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://qs100371.vip/post-images/1745398371131.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745413244326.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745398494645.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745398556468.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745398605624.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745398616217.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745398622450.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745398779154.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745398785946.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745399417298.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745399040763.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745399353693.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745400450061.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745401125572.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745401131490.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1745401954745.webp"><meta property="article:published_time" content="2025-04-23T06:36:18.000Z"><meta property="article:modified_time" content="2025-04-29T07:12:34.067Z"><meta property="article:author" content="qs100371"><meta property="article:tag" content="web"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://qs100371.vip/post-images/1745398371131.webp"><link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml"><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/" id="logo">the blog of qs</a></h1><h2 id="subtitle-wrap"><a href="/" id="subtitle">生命不止，折腾不止。</a></h2></div><div id="header-inner" class="inner"><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a> <a class="main-nav-link" href="/">首页</a> <a class="main-nav-link" href="/archives">归档</a> <a class="main-nav-link" href="/random.html">黑洞</a> <a class="main-nav-link" href="/post/app/">应用</a> <a class="main-nav-link" href="/post/about/">关于</a></nav><nav id="sub-nav"><a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a> <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a> <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form></div></div></div></header><div class="outer"><section id="main"><article id="post-li-yong-clawcloudrun-bu-shu-frp-fu-wu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><div class="article-meta"><a href="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" class="article-date"><time class="dt-published" datetime="2025-04-23T06:36:18.000Z" itemprop="datePublished">2025-04-23</time></a></div><div class="article-inner"><header class="article-header"><h1 class="p-name article-title" itemprop="headline name">利用clawcloud部署frp服务</h1><hr><img src="https://img.shields.io/badge/字数统计-1.2k-blue"><img src="https://img.shields.io/badge/阅读时间-15分-green"></header><div class="e-content article-entry" itemprop="articleBody"><div id="toc" class="toc-article"><strong class="toc-title">目录</strong><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#clawcloud-run%E4%BA%91%E7%AB%AF%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">clawcloud run云端设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">客户端设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#frpc%E6%8C%81%E4%B9%85%E8%BF%90%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">frpc持久运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE"><span class="toc-number">4.</span> <span class="toc-text">外部访问</span></a></li></ol></div><p>clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。</p><span id="more"></span><h1 id="clawcloud-run云端设置"><a href="#clawcloud-run云端设置" class="headerlink" title="clawcloud run云端设置"></a>clawcloud run云端设置</h1><p>官方网站：<a href="https://run.claw.cloud/">https://run.claw.cloud/</a><br>使用 AI 构建、云部署，CLAWCLOUD Run 降低了技术堆栈的复杂性。从编码到生产，只需点击几下。</p><p><img src="https://qs100371.vip/post-images/1745398371131.webp"><br>用github帐号登入，<br>免费额度：<br><img src="https://qs100371.vip/post-images/1745413244326.webp"><br><img src="https://qs100371.vip/post-images/1745398494645.webp"><br>App Store里面有很多应用，可直接添加，如alist，frp等。<br><img src="https://qs100371.vip/post-images/1745398556468.webp"><br>添加frp，这是打开一个docker容器，frp是运行在容器中，<br><img src="https://qs100371.vip/post-images/1745398605624.webp"><br><img src="https://qs100371.vip/post-images/1745398616217.webp"><br><img src="https://qs100371.vip/post-images/1745398622450.webp"><br>这里标红的地方是容器内7000端口穿透出来的端口，后面客户端从外界连接需要使用。<br>打开应用，<br><img src="https://qs100371.vip/post-images/1745398779154.webp"><br><img src="https://qs100371.vip/post-images/1745398785946.webp"><br>点击Manage Network，进去之后是容器内部端口的访问地址，可以给80端口设定自定义域名。<br><img src="https://qs100371.vip/post-images/1745399417298.webp"><br>在自己的域名商处建立CNAME指向系统给的地址，注意cloudflare域名要取消代理，选仅DNS。<br>这里有坑，本来自动生成的地址是https的，自定义后就变成了http，不知道是不是故意的。<br>往下拉，是frps设置，<br><img src="https://qs100371.vip/post-images/1745399040763.webp"><br>点进去，编辑frps.toml内容：<br><img src="https://qs100371.vip/post-images/1745399353693.webp"><br>修改内容见下面的例子。完成后确认。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># frps.toml</span><br><span class="line"></span><br><span class="line">bindPort = 7000</span><br><span class="line">vhostHTTPPort = 80</span><br><span class="line">#添加的内容</span><br><span class="line">auth.method = &quot;token&quot;</span><br><span class="line">auth.token = &quot;xxxxxxx&quot;</span><br><span class="line">#------------</span><br><span class="line"># The default value is 127.0.0.1. Change it to 0.0.0.0 when you want to access it from a public network.</span><br><span class="line">webServer.addr = &quot;0.0.0.0&quot;</span><br><span class="line">webServer.port = 7500</span><br><span class="line"># dashboard&#x27;s username and password are both optional</span><br><span class="line">webServer.user = &quot;admin&quot;</span><br><span class="line">webServer.password = &quot;123456&quot;</span><br><span class="line"></span><br><span class="line">enablePrometheus = true</span><br></pre></td></tr></table></figure><p>此处的token要与客户端的设置一致。<br>webServer.user &#x3D; “admin”<br>webServer.password &#x3D; “123456”是从7500端口访问面板的帐号。<br>此处有更改的话，需点右上方update，再restart项目。</p><h1 id="客户端设置"><a href="#客户端设置" class="headerlink" title="客户端设置"></a>客户端设置</h1><ul><li>下载客户端<br>本地主机是玩客云，在<a href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a>，选择arm hf。可能需要梯子。<br>主要文件是4个，frpc，frpc.toml，frps，frps.toml，前两个是客户端及设置文件，后两个是服务端。这里用的是前两个文件。<br>编辑frpc.toml：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># frpc.toml</span><br><span class="line">serverAddr = &quot;自定义域名或系统给的地址&quot;</span><br><span class="line">serverPort = 32385  </span><br><span class="line">auth.method = &quot;token&quot;</span><br><span class="line">auth.token = &quot;xxxxxxxx&quot;</span><br><span class="line"></span><br><span class="line">[[proxies]]</span><br><span class="line">name = &quot;img&quot;</span><br><span class="line">type = &quot;http&quot;</span><br><span class="line">localIP = &quot;192.168.0.2&quot;</span><br><span class="line">localPort = 80</span><br><span class="line">customDomains = [&quot;自定义域名&quot;]</span><br><span class="line">[[proxies]]</span><br><span class="line">name = &quot;navidrom&quot;</span><br><span class="line">type = &quot;tcp&quot;</span><br><span class="line">localIP = &quot;192.168.0.2&quot;</span><br><span class="line">localPort = 4533</span><br><span class="line">remotePort = 6000</span><br></pre></td></tr></table></figure>32385是容器穿透的端口，每个例子对应的不一样，刚建项目的时候会显示，也可以从App Launchpad进入，在应用列表里，点name处打开应用，例如显示frp-xxxxx的，点标红处，页面拉到最下方。<br><img src="https://qs100371.vip/post-images/1745400450061.webp"><br>token与前文服务端一致，是自己设定的。<br>proxies部分是穿透设置。<br>例子里是穿了两个端口，</li></ul><table><thead><tr><th>本地端口</th><th>远程端口</th><th>穿透类型</th></tr></thead><tbody><tr><td>80</td><td>80</td><td>http</td></tr><tr><td>4533</td><td>6000</td><td>tcp</td></tr></tbody></table><p>指定http类需要customDomains，指定tcp类需要remotePort，对应需要在服务端添加6000端口，并生成一个外部访问地址。<br>如果要从外部指定端口连接客户端，只能穿透22端口。比如ssh连接。<br>remotePort需要在服务器端增加出口。</p><ul><li>运行：<br><code>./frpc -c ./frpc.toml</code><br>会显示连接进程。成功的话就穿透成功。昨天折腾的时候由于玩客云上安装了adguardhome，导致与服务器连接不上，折腾了好久。在windows上一试又可以，才发现是玩客云上adguardhome的锅，删了就好了。<br>从clawcloud给的7500端口地址进入面板，显示连接信息。<br><img src="https://qs100371.vip/post-images/1745401125572.webp"><br><img src="https://qs100371.vip/post-images/1745401131490.webp"></li></ul><p>云端服务使用的镜像snowdreamtech&#x2F;frps:0.59，CPU限制0.1核心，内存限制128M，个人使用应该可以。<br>容器版本可以更新至最新版本0.62。</p><h1 id="frpc持久运行"><a href="#frpc持久运行" class="headerlink" title="frpc持久运行"></a>frpc持久运行</h1><p>直接运行，在退出ssh时就会退出。<br>有多种方法可以保持运行。</p><ul><li>tmux<br>打开tmux命令，在里面运行<code>./frpc -c ./frpc.toml</code>，在按ctrl B，D退出，tmux会保持运行。下次进入使用<code>tmux attach -t 0</code></li><li>systemd服务<br>主机是玩客云，支持systemd。<br>在&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;下建立frpc.service文件，内容如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=frpc</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/root/frp/frpc -c /root/frp/frpc.toml</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line">ExecStop=/bin/kill -s TERM $MAINPID</span><br><span class="line">Restart=always</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>此处frp文件在&#x2F;root&#x2F;frp目录，如果不同，做相应改动。<br>打开服务：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable frpc</span><br><span class="line">systemctl start frpc</span><br></pre></td></tr></table></figure>查看状态：<br><code>systemctl status frpc</code><br>正常显示如下：<br><img src="https://qs100371.vip/post-images/1745401954745.webp"><br>出错的话，修改service文件，<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl  daemon-reload</span><br><span class="line">systemctl restart frpc</span><br></pre></td></tr></table></figure>先要确保frpc命令能正常连接。</li></ul><h1 id="外部访问"><a href="#外部访问" class="headerlink" title="外部访问"></a>外部访问</h1><p>由系统生成对应端口的访问地址，7500对应的是面板地址，其他端口是穿透后从外部访问的地址，直接使用就可以，还是https连接。自定义域名会变成http连接。<br><a href="https://frp-ekssprzl.ap-northeast-1.clawcloudrun.com/">https://frp-ekssprzl.ap-northeast-1.clawcloudrun.com</a> 类似这样的，有点长，暂时国内可以直接访问，无需自定义域名。<br>8181<br><a href="https://yflkngrorbsa.ap-northeast-1.clawcloudrun.com/">https://yflkngrorbsa.ap-northeast-1.clawcloudrun.com</a><br>5230<br><a href="https://dtlfgygpbbue.ap-northeast-1.clawcloudrun.com/">https://dtlfgygpbbue.ap-northeast-1.clawcloudrun.com</a><br>5244<br><a href="https://keojrxujkccp.ap-northeast-1.clawcloudrun.com/">https://keojrxujkccp.ap-northeast-1.clawcloudrun.com</a><br>8124<br><a href="https://juzfkhyjvapr.ap-northeast-1.clawcloudrun.com/">https://juzfkhyjvapr.ap-northeast-1.clawcloudrun.com</a></p></div><footer class="article-footer"><a data-url="https://qs100371.vip/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" data-id="cma7nfq8i0058c0tzff828fiu" data-title="利用clawcloud部署frp服务" class="article-share-link"><span class="fa fa-share">分享</span></a> <a href="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/#comments" class="article-comment-link"><span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" itemprop="commentCount"></span> 留言</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul></footer></div><nav id="article-nav"><a href="/post/homeassistant-nei-wang-chuan-tou-400-bad-request/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">前一篇</strong><div class="article-nav-title">Homeassistant内网穿透: 400: Bad Request</div></a><a href="/post/jing-tai-yin-le-bo-fang-qi-heomusic/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">后一篇</strong><div class="article-nav-title">静态音乐播放器HeoMusic</div></a></nav></article><section id="comments" class="vcomment"></section></section><aside id="sidebar"><div class="widget-wrap"><h3 class="widget-title">公告板</h3><div class="widget"><div class="notice" style="margin-top:5px"><i class="fa"></i><div class="notice-content"><span id="poem-container">正在加载....</span></div><script>function loadRandomContent(){fetch("https://img.qs100371.vip/songci.php").then(e=>e.text()).then(e=>{document.getElementById("poem-container").innerText=e}).catch(e=>{console.error("加载失败:",e),document.getElementById("poem-container").innerText="加载失败，请重试"})}loadRandomContent()</script></div><style>.notice{padding:5px;border:1px dashed #e6e6e6;color:red;position:relative;display:inline-block;width:96%;background:#fbfbfb50;border-radius:10px}.notice i{float:left;color:#999;font-size:18px;padding-right:0;vertical-align:middle;margin-top:3px}.notice-content{display:initial;vertical-align:middle}</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"></div></div><div class="widget-wrap"><h3 class="widget-title">标签</h3><div class="widget"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">标签云</h3><div class="widget tagcloud"><a href="/tags/armbian/" style="font-size:13.33px">armbian</a> <a href="/tags/docker/" style="font-size:16.67px">docker</a> <a href="/tags/linux/" style="font-size:18.33px">linux</a> <a href="/tags/onecloud/" style="font-size:15px">onecloud</a> <a href="/tags/python/" style="font-size:10px">python</a> <a href="/tags/termux/" style="font-size:11.67px">termux</a> <a href="/tags/web/" style="font-size:20px">web</a></div></div><div class="widget-wrap"><h3 class="widget-title">归档</h3><div class="widget"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">最新文章</h3><div class="widget"><ul><li><a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a></li><li><a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a></li><li><a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a></li><li><a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a></li><li><a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a></li><li><a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a></li><li><a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a></li><li><a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a></li><li><a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a></li><li><a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a></li></ul></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><span class="post-count"><img id="site-days-badge" src=""><img src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow"> <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge" src=""></span><br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>&copy; 2025 qs100371<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></div></div><script>const startDate=new Date("2024-10-02 00:00:00"),today=new Date,timeDiff=today.getTime()-startDate.getTime(),daysDiff=Math.floor(timeDiff/864e5),badgeUrl=`https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;document.getElementById("site-days-badge").src=badgeUrl</script></footer><style>.back-to-top{position:fixed;bottom:20px;right:20px;width:46px;height:46px;border-radius:50%;background-color:#ff5722;color:#fff;text-align:center;line-height:46px;font-size:18px;cursor:pointer;display:none;z-index:9999;opacity:.9;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:all .3s}@media (min-width:768px){.back-to-top{bottom:50px;right:50px;width:50px;height:50px;line-height:50px;font-size:20px}}.back-to-top:hover{opacity:1;background-color:#ff3d00;transform:scale(1.1)}.back-to-top.active{animation:bounce .8s infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style><script>document.addEventListener("DOMContentLoaded",(function(){var e=document.createElement("div");e.className="back-to-top",e.innerHTML="↑",document.body.appendChild(e),window.addEventListener("scroll",(function(){window.pageYOffset>300?e.style.display="block":e.style.display="none"})),e.addEventListener("click",(function(e){e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}))}))</script></div><nav id="mobile-nav"><a href="/" class="mobile-nav-link">首页</a> <a href="/archives" class="mobile-nav-link">归档</a> <a href="/random.html" class="mobile-nav-link">黑洞</a> <a href="/post/app/" class="mobile-nav-link">应用</a> <a href="/post/about/" class="mobile-nav-link">关于</a></nav><script src="/js/jquery-3.6.4.min.js"></script><script src="/fancybox/jquery.fancybox.min.js"></script><script src="/js/script.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.5.2/dist/Valine.min.js"></script><script>var GUEST_INFO=["nick","mail","link"],guest_info="nick,mail,link".split(",").filter((function(i){return GUEST_INFO.indexOf(i)>-1})),notify=!1,verify=!1;new Valine({el:".vcomment",notify:notify,verify:verify,appId:"shrivAmDul1K9RSnayhd7foS-gzGzoHsz",appKey:"MJ6IotbRMRrEumBy45DTigT6",placeholder:"Just go go",pageSize:"10",avatar:"mm",lang:"zh-cn"})</script><script type="text/javascript">const backgroundImages=["/images/1.png","/images/2.png","/images/3.png","/images/4.png"];document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".v .veditor");if(e){const n=backgroundImages[Math.floor(Math.random()*backgroundImages.length)];e.style.backgroundImage=`url("${n}")`}})</script><style>.v[data-class=v] .veditor{background-size:contain;background-repeat:no-repeat;background-position:right}</style></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+  
+  
+  <title>利用clawcloud部署frp服务 | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用clawcloud部署frp服务">
+<meta property="og:url" content="https://qs100371.vip/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398371131.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745413244326.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398494645.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398556468.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398605624.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398616217.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398622450.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398779154.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745398785946.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745399417298.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745399040763.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745399353693.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745400450061.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745401125572.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745401131490.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1745401954745.webp">
+<meta property="article:published_time" content="2025-04-23T06:36:18.000Z">
+<meta property="article:modified_time" content="2025-04-29T07:12:34.067Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1745398371131.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/avatar.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/random.html">黑洞</a>
+        
+          <a class="main-nav-link" href="/post/app/">应用</a>
+        
+          <a class="main-nav-link" href="/post/about/">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-li-yong-clawcloudrun-bu-shu-frp-fu-wu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" class="article-date">
+  <time class="dt-published" datetime="2025-04-23T06:36:18.000Z" itemprop="datePublished">2025-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          利用clawcloud部署frp服务
+        </h1>
+        <hr>
+        
+          <img src="https://img.shields.io/badge/字数统计-1.2k-blue"><img
+            src="https://img.shields.io/badge/阅读时间-15分-green">
+          
+            
+              
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- 文章目录 没有tag的不显示目录-->
+         
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#clawcloud-run%E4%BA%91%E7%AB%AF%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">clawcloud run云端设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">客户端设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#frpc%E6%8C%81%E4%B9%85%E8%BF%90%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">frpc持久运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE"><span class="toc-number">4.</span> <span class="toc-text">外部访问</span></a></li></ol>
+          </div>
+         
+        <!-- Table of Contents -->
+        <p>clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。</p>
+<span id="more"></span>
+<h1 id="clawcloud-run云端设置"><a href="#clawcloud-run云端设置" class="headerlink" title="clawcloud run云端设置"></a>clawcloud run云端设置</h1><p>官方网站：<a href="https://run.claw.cloud/">https://run.claw.cloud/</a><br>使用 AI 构建、云部署，CLAWCLOUD Run 降低了技术堆栈的复杂性。从编码到生产，只需点击几下。</p>
+<p><img src="https://qs100371.vip/post-images/1745398371131.webp"><br>用github帐号登入，<br>免费额度：<br><img src="https://qs100371.vip/post-images/1745413244326.webp"><br><img src="https://qs100371.vip/post-images/1745398494645.webp"><br>App Store里面有很多应用，可直接添加，如alist，frp等。<br><img src="https://qs100371.vip/post-images/1745398556468.webp"><br>添加frp，这是打开一个docker容器，frp是运行在容器中，<br><img src="https://qs100371.vip/post-images/1745398605624.webp"><br><img src="https://qs100371.vip/post-images/1745398616217.webp"><br><img src="https://qs100371.vip/post-images/1745398622450.webp"><br>这里标红的地方是容器内7000端口穿透出来的端口，后面客户端从外界连接需要使用。<br>打开应用，<br><img src="https://qs100371.vip/post-images/1745398779154.webp"><br><img src="https://qs100371.vip/post-images/1745398785946.webp"><br>点击Manage Network，进去之后是容器内部端口的访问地址，可以给80端口设定自定义域名。<br><img src="https://qs100371.vip/post-images/1745399417298.webp"><br>在自己的域名商处建立CNAME指向系统给的地址，注意cloudflare域名要取消代理，选仅DNS。<br>这里有坑，本来自动生成的地址是https的，自定义后就变成了http，不知道是不是故意的。<br>往下拉，是frps设置，<br><img src="https://qs100371.vip/post-images/1745399040763.webp"><br>点进去，编辑frps.toml内容：<br><img src="https://qs100371.vip/post-images/1745399353693.webp"><br>修改内容见下面的例子。完成后确认。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frps.toml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">bindPort</span> = <span class="number">7000</span></span><br><span class="line"><span class="attr">vhostHTTPPort</span> = <span class="number">80</span></span><br><span class="line"><span class="comment">#添加的内容</span></span><br><span class="line"><span class="attr">auth.method</span> = <span class="string">&quot;token&quot;</span></span><br><span class="line"><span class="attr">auth.token</span> = <span class="string">&quot;xxxxxxx&quot;</span></span><br><span class="line"><span class="comment">#------------</span></span><br><span class="line"><span class="comment"># The default value is 127.0.0.1. Change it to 0.0.0.0 when you want to access it from a public network.</span></span><br><span class="line"><span class="attr">webServer.addr</span> = <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line"><span class="attr">webServer.port</span> = <span class="number">7500</span></span><br><span class="line"><span class="comment"># dashboard&#x27;s username and password are both optional</span></span><br><span class="line"><span class="attr">webServer.user</span> = <span class="string">&quot;admin&quot;</span></span><br><span class="line"><span class="attr">webServer.password</span> = <span class="string">&quot;123456&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">enablePrometheus</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>此处的token要与客户端的设置一致。<br>webServer.user &#x3D; “admin”<br>webServer.password &#x3D; “123456”是从7500端口访问面板的帐号。<br>此处有更改的话，需点右上方update，再restart项目。</p>
+<h1 id="客户端设置"><a href="#客户端设置" class="headerlink" title="客户端设置"></a>客户端设置</h1><ul>
+<li>下载客户端<br>本地主机是玩客云，在<a href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a>，选择arm hf。可能需要梯子。<br>主要文件是4个，frpc，frpc.toml，frps，frps.toml，前两个是客户端及设置文件，后两个是服务端。这里用的是前两个文件。<br>编辑frpc.toml：<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frpc.toml</span></span><br><span class="line"><span class="attr">serverAddr</span> = <span class="string">&quot;自定义域名或系统给的地址&quot;</span></span><br><span class="line"><span class="attr">serverPort</span> = <span class="number">32385</span>  </span><br><span class="line"><span class="attr">auth.method</span> = <span class="string">&quot;token&quot;</span></span><br><span class="line"><span class="attr">auth.token</span> = <span class="string">&quot;xxxxxxxx&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[[proxies]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;img&quot;</span></span><br><span class="line"><span class="attr">type</span> = <span class="string">&quot;http&quot;</span></span><br><span class="line"><span class="attr">localIP</span> = <span class="string">&quot;192.168.0.2&quot;</span></span><br><span class="line"><span class="attr">localPort</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">customDomains</span> = [<span class="string">&quot;自定义域名&quot;</span>]</span><br><span class="line"><span class="section">[[proxies]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;navidrom&quot;</span></span><br><span class="line"><span class="attr">type</span> = <span class="string">&quot;tcp&quot;</span></span><br><span class="line"><span class="attr">localIP</span> = <span class="string">&quot;192.168.0.2&quot;</span></span><br><span class="line"><span class="attr">localPort</span> = <span class="number">4533</span></span><br><span class="line"><span class="attr">remotePort</span> = <span class="number">6000</span></span><br></pre></td></tr></table></figure>
+32385是容器穿透的端口，每个例子对应的不一样，刚建项目的时候会显示，也可以从App Launchpad进入，在应用列表里，点name处打开应用，例如显示frp-xxxxx的，点标红处，页面拉到最下方。<br><img src="https://qs100371.vip/post-images/1745400450061.webp"><br>token与前文服务端一致，是自己设定的。<br>proxies部分是穿透设置。<br>例子里是穿了两个端口，</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>本地端口</th>
+<th>远程端口</th>
+<th>穿透类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>80</td>
+<td>80</td>
+<td>http</td>
+</tr>
+<tr>
+<td>4533</td>
+<td>6000</td>
+<td>tcp</td>
+</tr>
+</tbody></table>
+<p>指定http类需要customDomains，指定tcp类需要remotePort，对应需要在服务端添加6000端口，并生成一个外部访问地址。<br>如果要从外部指定端口连接客户端，只能穿透22端口。比如ssh连接。<br>remotePort需要在服务器端增加出口。</p>
+<ul>
+<li>运行：<br><code>./frpc -c ./frpc.toml</code><br>会显示连接进程。成功的话就穿透成功。昨天折腾的时候由于玩客云上安装了adguardhome，导致与服务器连接不上，折腾了好久。在windows上一试又可以，才发现是玩客云上adguardhome的锅，删了就好了。<br>从clawcloud给的7500端口地址进入面板，显示连接信息。<br><img src="https://qs100371.vip/post-images/1745401125572.webp"><br><img src="https://qs100371.vip/post-images/1745401131490.webp"></li>
+</ul>
+<p>云端服务使用的镜像snowdreamtech&#x2F;frps:0.59，CPU限制0.1核心，内存限制128M，个人使用应该可以。<br>容器版本可以更新至最新版本0.62。</p>
+<h1 id="frpc持久运行"><a href="#frpc持久运行" class="headerlink" title="frpc持久运行"></a>frpc持久运行</h1><p>直接运行，在退出ssh时就会退出。<br>有多种方法可以保持运行。</p>
+<ul>
+<li>tmux<br>打开tmux命令，在里面运行<code>./frpc -c ./frpc.toml</code>，在按ctrl B，D退出，tmux会保持运行。下次进入使用<code>tmux attach -t 0</code></li>
+<li>systemd服务<br>主机是玩客云，支持systemd。<br>在&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;下建立frpc.service文件，内容如下：<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=frpc</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">ExecStart</span>=/root/frp/frpc -c /root/frp/frpc.toml</span><br><span class="line"><span class="attr">ExecReload</span>=/bin/kill -s HUP <span class="variable">$MAINPID</span></span><br><span class="line"><span class="attr">ExecStop</span>=/bin/kill -s TERM <span class="variable">$MAINPID</span></span><br><span class="line"><span class="attr">Restart</span>=always</span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=default.target</span><br></pre></td></tr></table></figure>
+此处frp文件在&#x2F;root&#x2F;frp目录，如果不同，做相应改动。<br>打开服务：<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">system</span>ctl enable frpc</span><br><span class="line"><span class="params">system</span>ctl start frpc</span><br></pre></td></tr></table></figure>
+查看状态：<br><code>systemctl status frpc</code><br>正常显示如下：<br><img src="https://qs100371.vip/post-images/1745401954745.webp"><br>出错的话，修改service文件，<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">system</span>ctl  daemon-reload</span><br><span class="line"><span class="params">system</span>ctl restart frpc</span><br></pre></td></tr></table></figure>
+先要确保frpc命令能正常连接。</li>
+</ul>
+<h1 id="外部访问"><a href="#外部访问" class="headerlink" title="外部访问"></a>外部访问</h1><p>由系统生成对应端口的访问地址，7500对应的是面板地址，其他端口是穿透后从外部访问的地址，直接使用就可以，还是https连接。自定义域名会变成http连接。<br><a href="https://frp-ekssprzl.ap-northeast-1.clawcloudrun.com/">https://frp-ekssprzl.ap-northeast-1.clawcloudrun.com</a> 类似这样的，有点长，暂时国内可以直接访问，无需自定义域名。<br>8181<br><a href="https://yflkngrorbsa.ap-northeast-1.clawcloudrun.com/">https://yflkngrorbsa.ap-northeast-1.clawcloudrun.com</a><br>5230<br><a href="https://dtlfgygpbbue.ap-northeast-1.clawcloudrun.com/">https://dtlfgygpbbue.ap-northeast-1.clawcloudrun.com</a><br>5244<br><a href="https://keojrxujkccp.ap-northeast-1.clawcloudrun.com/">https://keojrxujkccp.ap-northeast-1.clawcloudrun.com</a><br>8124<br><a href="https://juzfkhyjvapr.ap-northeast-1.clawcloudrun.com/">https://juzfkhyjvapr.ap-northeast-1.clawcloudrun.com</a></p>
+
+      
+    </div>
+    
+    <footer class="article-footer">
+     
+      <a data-url="https://qs100371.vip/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" data-id="cma8ydv490057hgtz0inafit5" data-title="利用clawcloud部署frp服务" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+ 
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/homeassistant-nei-wang-chuan-tou-400-bad-request/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Homeassistant内网穿透: 400: Bad Request
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/jing-tai-yin-le-bo-fang-qi-heomusic/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">静态音乐播放器HeoMusic</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+</section>
+        
+          
+<aside id="sidebar" >
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">公告板</h3>
+        <div class="widget">
+            
+        
+                
+                        
+                            <div class="notice" style="margin-top:5px">
+                                <i class="fa "></i>
+                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
+
+                                <script>
+                                    
+                                    function loadRandomContent() {
+                                        fetch('https://img.qs100371.vip/songci.php')
+                                            .then(response => response.text())
+                                            .then(text => {
+                                                document.getElementById('poem-container').innerText = text;
+                                            })
+                                            .catch(error => {
+                                                console.error('加载失败:', error);
+                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
+                                            });
+                                    }
+
+                                    // 页面加载时自动获取一次
+                                    loadRandomContent();
+                                </script>
+                            </div>
+                            
+                                <style>
+                                    .notice {
+                                        padding: 5px;
+                                        border: 1px dashed #e6e6e6;
+                                        color: red;
+                                        position: relative;
+                                        display: inline-block;
+                                        width: 96%;
+                                        background: #fbfbfb50;
+                                        border-radius: 10px;
+                                    }
+
+                                    .notice i {
+                                        float: left;
+                                        color: #999;
+                                        font-size: 18px;
+                                        padding-right: 0px;
+                                        vertical-align: middle;
+                                        margin-top: 3px;
+                                    }
+
+                                    .notice-content {
+                                        display: initial;
+                                        vertical-align: middle;
+                                    }
+                                </style>
+                                <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+        </div>
+        
+      </div>
+    
+    
+  
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a>
+          </li>
+        
+          <li>
+            <a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a>
+          </li>
+        
+          <li>
+            <a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a>
+          </li>
+        
+          <li>
+            <a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+        
+          <div class="outer">
+            <div id="footer-info" class="inner">
+              <span class="post-count"><img id="site-days-badge" src=""><img
+                  src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
+                  src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge"
+                  src=""></span>
+              
+                </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                  
+                    &copy; 2025
+                      qs100371<br>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+            </div>
+          </div>
+          <script>
+            // 1. 计算建站天数
+            const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
+            const today = new Date();
+            const timeDiff = today.getTime() - startDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            // 2. 动态生成 Shields.io 徽章
+            const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
+            document.getElementById('site-days-badge').src = badgeUrl;
+
+            // 3. 每天 00:00 自动刷新（可选）
+            //setInterval(() => {
+            //  location.reload();
+            //}, 24 * 60 * 60 * 1000); // 24小时后刷新页面
+          </script>
+</footer>
+<style>
+  /* 返回顶部按钮 - 基础样式 */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    /* 移动端距离底部更近 */
+    right: 20px;
+    /* 移动端距离右侧更近 */
+    width: 46px;
+    /* 移动端稍小 */
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    /* 默认隐藏 */
+    z-index: 9999;
+    /* 确保在最上层 */
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+
+  /* 适配 PC 端（更大按钮） */
+  @media (min-width: 768px) {
+    .back-to-top {
+      bottom: 50px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+    }
+  }
+
+  /* 悬停效果 */
+  .back-to-top:hover {
+    opacity: 1;
+    background-color: #ff3d00;
+    transform: scale(1.1);
+  }
+
+  /* 滚动时跳动动画 */
+  .back-to-top.active {
+    animation: bounce 0.8s infinite;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/random.html" class="mobile-nav-link">黑洞</a>
+  
+    <a href="/post/app/" class="mobile-nav-link">应用</a>
+  
+    <a href="/post/about/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.5.2/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+<script type="text/javascript">
+  const backgroundImages = [
+  "/images/1.png",
+  "/images/2.png",
+  "/images/3.png",
+  "/images/4.png",
+  // 更多图片...
+];
+
+// Valine 初始化后设置随机背景
+  document.addEventListener('DOMContentLoaded', () => {
+    const veditor = document.querySelector('.v .veditor');
+    if (veditor) {
+      const randomImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+      veditor.style.backgroundImage = `url("${randomImage}")`;
+    }
+  });
+</script>
+<style>
+  .v[data-class=v] .veditor {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+  }
+  </style>
+
+
+  </div>
+</body>
+</html>

@@ -1,1 +1,561 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><title>用ds生成小工具image_converter | the blog of qs</title><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="description" content="deepseek能做很多事，本文借助ds开发一个windows小工具，图片转换器image_converter。"><meta property="og:type" content="article"><meta property="og:title" content="用ds生成小工具image_converter"><meta property="og:url" content="https://qs100371.vip/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/index.html"><meta property="og:site_name" content="the blog of qs"><meta property="og:description" content="deepseek能做很多事，本文借助ds开发一个windows小工具，图片转换器image_converter。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://qs100371.vip/post-images/1746158967560.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1746159250160.webp"><meta property="og:image" content="https://qs100371.vip/post-images/1746159744581.webp"><meta property="article:published_time" content="2025-05-02T04:05:04.000Z"><meta property="article:modified_time" content="2025-05-02T13:46:20.674Z"><meta property="article:author" content="qs100371"><meta property="article:tag" content="python"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://qs100371.vip/post-images/1746158967560.webp"><link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml"><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/" id="logo">the blog of qs</a></h1><h2 id="subtitle-wrap"><a href="/" id="subtitle">生命不止，折腾不止。</a></h2></div><div id="header-inner" class="inner"><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a> <a class="main-nav-link" href="/">首页</a> <a class="main-nav-link" href="/archives">归档</a> <a class="main-nav-link" href="/random.html">黑洞</a> <a class="main-nav-link" href="/post/app/">应用</a> <a class="main-nav-link" href="/post/about/">关于</a></nav><nav id="sub-nav"><a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a> <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a> <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form></div></div></div></header><div class="outer"><section id="main"><article id="post-yong-ds-sheng-cheng-xiao-gong-ju-image_converter" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><div class="article-meta"><a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/" class="article-date"><time class="dt-published" datetime="2025-05-02T04:05:04.000Z" itemprop="datePublished">2025-05-02</time></a></div><div class="article-inner"><header class="article-header"><h1 class="p-name article-title" itemprop="headline name">用ds生成小工具image_converter</h1><hr><img src="https://img.shields.io/badge/字数统计-1.5k-blue"><img src="https://img.shields.io/badge/阅读时间-25分-green"></header><div class="e-content article-entry" itemprop="articleBody"><div id="toc" class="toc-article"><strong class="toc-title">目录</strong><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%BB%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">程序主代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%B9%B6%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">安装依赖并运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E6%88%90%E5%8D%95%E4%B8%80%E7%9A%84exe%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">打包成单一的exe文件</span></a></li></ol></div><p>deepseek能做很多事，本文借助ds开发一个windows小工具，图片转换器image_converter。</p><span id="more"></span><h1 id="程序主代码"><a href="#程序主代码" class="headerlink" title="程序主代码"></a>程序主代码</h1><p>提问：用python完成把一个目录下的图片转换格式到另一个目录，并提供图形界面，打包成单个文件的windows程序。<br><img src="https://qs100371.vip/post-images/1746158967560.webp"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import sys</span><br><span class="line">import json</span><br><span class="line">from PyQt5.QtGui import QIcon</span><br><span class="line">from PyQt5.QtWidgets import (</span><br><span class="line">    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,</span><br><span class="line">    QLabel, QLineEdit, QPushButton, QFileDialog, QComboBox,</span><br><span class="line">    QProgressBar, QMessageBox</span><br><span class="line">)</span><br><span class="line">from PyQt5.QtCore import Qt, QThread, pyqtSignal, QStandardPaths</span><br><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line"># 图片转换线程</span><br><span class="line">class ImageConverter(QThread):</span><br><span class="line">    progress_updated = pyqtSignal(int)</span><br><span class="line">    conversion_complete = pyqtSignal(str)</span><br><span class="line">    error_occurred = pyqtSignal(str)</span><br><span class="line"></span><br><span class="line">    def __init__(self, src_dir, dest_dir, output_format, parent=None):</span><br><span class="line">        super().__init__(parent)</span><br><span class="line">        self.src_dir = src_dir</span><br><span class="line">        self.dest_dir = dest_dir</span><br><span class="line">        self.output_format = output_format.lower()</span><br><span class="line">        self.running = True</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        try:</span><br><span class="line">            if not os.path.exists(self.src_dir):</span><br><span class="line">                self.error_occurred.emit(f&quot;源目录不存在: &#123;self.src_dir&#125;&quot;)</span><br><span class="line">                return</span><br><span class="line"></span><br><span class="line">            os.makedirs(self.dest_dir, exist_ok=True)</span><br><span class="line"></span><br><span class="line">            supported_formats = [&#x27;jpg&#x27;, &#x27;jpeg&#x27;, &#x27;png&#x27;, &#x27;bmp&#x27;, &#x27;gif&#x27;, &#x27;tiff&#x27;, &#x27;webp&#x27;]</span><br><span class="line">            if self.output_format not in supported_formats:</span><br><span class="line">                self.error_occurred.emit(f&quot;不支持的格式: &#123;self.output_format&#125;&quot;)</span><br><span class="line">                return</span><br><span class="line"></span><br><span class="line">            image_files = [f for f in os.listdir(self.src_dir) </span><br><span class="line">                         if f.lower().endswith((&#x27;.png&#x27;, &#x27;.jpg&#x27;, &#x27;.jpeg&#x27;, &#x27;.bmp&#x27;, &#x27;.gif&#x27;, &#x27;.tiff&#x27;, &#x27;.webp&#x27;))]</span><br><span class="line">            </span><br><span class="line">            total_files = len(image_files)</span><br><span class="line">            if total_files == 0:</span><br><span class="line">                self.error_occurred.emit(&quot;未找到支持的图片文件&quot;)</span><br><span class="line">                return</span><br><span class="line"></span><br><span class="line">            for i, filename in enumerate(image_files):</span><br><span class="line">                if not self.running:</span><br><span class="line">                    break</span><br><span class="line"></span><br><span class="line">                try:</span><br><span class="line">                    img_path = os.path.join(self.src_dir, filename)</span><br><span class="line">                    img = Image.open(img_path)</span><br><span class="line">                    </span><br><span class="line">                    # 透明背景转JPG处理</span><br><span class="line">                    if img.mode in (&#x27;RGBA&#x27;, &#x27;LA&#x27;) and self.output_format in (&#x27;jpg&#x27;, &#x27;jpeg&#x27;):</span><br><span class="line">                        background = Image.new(&#x27;RGB&#x27;, img.size, (255, 255, 255))</span><br><span class="line">                        background.paste(img, mask=img.split()[-1])</span><br><span class="line">                        img = background</span><br><span class="line">                    </span><br><span class="line">                    output_filename = f&quot;&#123;os.path.splitext(filename)[0]&#125;.&#123;self.output_format&#125;&quot;</span><br><span class="line">                    output_path = os.path.join(self.dest_dir, output_filename)</span><br><span class="line">                    img.save(output_path, quality=95)</span><br><span class="line">                    </span><br><span class="line">                    self.progress_updated.emit(int((i + 1) / total_files * 100))</span><br><span class="line">                </span><br><span class="line">                except Exception as e:</span><br><span class="line">                    self.error_occurred.emit(f&quot;处理 &#123;filename&#125; 失败: &#123;str(e)&#125;&quot;)</span><br><span class="line">                    continue</span><br><span class="line"></span><br><span class="line">            if self.running:</span><br><span class="line">                self.conversion_complete.emit(f&quot;转换完成! 共处理 &#123;total_files&#125; 个文件&quot;)</span><br><span class="line">        </span><br><span class="line">        except Exception as e:</span><br><span class="line">            self.error_occurred.emit(f&quot;发生错误: &#123;str(e)&#125;&quot;)</span><br><span class="line"></span><br><span class="line">    def stop(self):</span><br><span class="line">        self.running = False</span><br><span class="line"></span><br><span class="line"># 主窗口</span><br><span class="line">class ImageConverterApp(QMainWindow):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.setWindowTitle(&quot;图片格式转换工具&quot;)</span><br><span class="line">        self.setGeometry(100, 100, 500, 300)</span><br><span class="line">        # 设置窗口图标（关键代码）</span><br><span class="line">        self.setWindowIcon(self.load_icon(&quot;icon.ico&quot;))</span><br><span class="line">        self.settings_file = self.get_settings_path()</span><br><span class="line">        self.init_ui()</span><br><span class="line">        self.load_settings()</span><br><span class="line">        self.converter_thread = None</span><br><span class="line">    def load_icon(self, icon_name):</span><br><span class="line">        &quot;&quot;&quot;动态加载图标（兼容开发模式和打包模式）&quot;&quot;&quot;</span><br><span class="line">        if getattr(sys, &#x27;frozen&#x27;, False):  # 打包后</span><br><span class="line">            base_path = sys._MEIPASS</span><br><span class="line">        else:  # 开发模式</span><br><span class="line">            base_path = os.path.dirname(__file__)</span><br><span class="line">        icon_path = os.path.join(base_path, icon_name)</span><br><span class="line">        return QIcon(icon_path)</span><br><span class="line">    def get_settings_path(self):</span><br><span class="line">        &quot;&quot;&quot;获取跨平台的配置文件路径&quot;&quot;&quot;</span><br><span class="line">        config_dir = QStandardPaths.writableLocation(QStandardPaths.AppConfigLocation)</span><br><span class="line">        os.makedirs(config_dir, exist_ok=True)</span><br><span class="line">        return os.path.join(config_dir, &quot;image_converter_settings.json&quot;)</span><br><span class="line"></span><br><span class="line">    def init_ui(self):</span><br><span class="line">        main_widget = QWidget()</span><br><span class="line">        layout = QVBoxLayout()</span><br><span class="line">        </span><br><span class="line">        # 源目录</span><br><span class="line">        src_layout = QHBoxLayout()</span><br><span class="line">        src_layout.addWidget(QLabel(&quot;源目录:&quot;))</span><br><span class="line">        self.src_line_edit = QLineEdit()</span><br><span class="line">        src_layout.addWidget(self.src_line_edit)</span><br><span class="line">        self.src_browse_btn = QPushButton(&quot;浏览...&quot;)</span><br><span class="line">        self.src_browse_btn.clicked.connect(self.browse_src_dir)</span><br><span class="line">        src_layout.addWidget(self.src_browse_btn)</span><br><span class="line">        layout.addLayout(src_layout)</span><br><span class="line">        </span><br><span class="line">        # 目标目录</span><br><span class="line">        dest_layout = QHBoxLayout()</span><br><span class="line">        dest_layout.addWidget(QLabel(&quot;目标目录:&quot;))</span><br><span class="line">        self.dest_line_edit = QLineEdit()</span><br><span class="line">        dest_layout.addWidget(self.dest_line_edit)</span><br><span class="line">        self.dest_browse_btn = QPushButton(&quot;浏览...&quot;)</span><br><span class="line">        self.dest_browse_btn.clicked.connect(self.browse_dest_dir)</span><br><span class="line">        dest_layout.addWidget(self.dest_browse_btn)</span><br><span class="line">        layout.addLayout(dest_layout)</span><br><span class="line">        </span><br><span class="line">        # 输出格式</span><br><span class="line">        format_layout = QHBoxLayout()</span><br><span class="line">        format_layout.addWidget(QLabel(&quot;输出格式:&quot;))</span><br><span class="line">        self.format_combo = QComboBox()</span><br><span class="line">        self.format_combo.addItems([&#x27;JPG&#x27;, &#x27;PNG&#x27;, &#x27;BMP&#x27;, &#x27;GIF&#x27;, &#x27;TIFF&#x27;, &#x27;WEBP&#x27;])</span><br><span class="line">        format_layout.addWidget(self.format_combo)</span><br><span class="line">        layout.addLayout(format_layout)</span><br><span class="line">        </span><br><span class="line">        # 进度条</span><br><span class="line">        self.progress_bar = QProgressBar()</span><br><span class="line">        layout.addWidget(self.progress_bar)</span><br><span class="line">        </span><br><span class="line">        # 按钮</span><br><span class="line">        btn_layout = QHBoxLayout()</span><br><span class="line">        self.convert_btn = QPushButton(&quot;开始转换&quot;)</span><br><span class="line">        self.convert_btn.clicked.connect(self.start_conversion)</span><br><span class="line">        btn_layout.addWidget(self.convert_btn)</span><br><span class="line">        </span><br><span class="line">        self.cancel_btn = QPushButton(&quot;取消&quot;)</span><br><span class="line">        self.cancel_btn.clicked.connect(self.cancel_conversion)</span><br><span class="line">        self.cancel_btn.setEnabled(False)</span><br><span class="line">        btn_layout.addWidget(self.cancel_btn)</span><br><span class="line">        layout.addLayout(btn_layout)</span><br><span class="line">        </span><br><span class="line">        # 状态栏</span><br><span class="line">        self.status_label = QLabel(&quot;准备就绪&quot;)</span><br><span class="line">        self.status_label.setAlignment(Qt.AlignCenter)</span><br><span class="line">        layout.addWidget(self.status_label)</span><br><span class="line">        </span><br><span class="line">        main_widget.setLayout(layout)</span><br><span class="line">        self.setCentralWidget(main_widget)</span><br><span class="line"></span><br><span class="line">    def browse_src_dir(self):</span><br><span class="line">        dir_path = QFileDialog.getExistingDirectory(self, &quot;选择源目录&quot;)</span><br><span class="line">        if dir_path:</span><br><span class="line">            self.src_line_edit.setText(dir_path)</span><br><span class="line">            # 自动设置目标目录</span><br><span class="line">            if not self.dest_line_edit.text():</span><br><span class="line">                self.dest_line_edit.setText(os.path.join(dir_path, &quot;converted&quot;))</span><br><span class="line"></span><br><span class="line">    def browse_dest_dir(self):</span><br><span class="line">        dir_path = QFileDialog.getExistingDirectory(self, &quot;选择目标目录&quot;)</span><br><span class="line">        if dir_path:</span><br><span class="line">            self.dest_line_edit.setText(dir_path)</span><br><span class="line"></span><br><span class="line">    def load_settings(self):</span><br><span class="line">        &quot;&quot;&quot;加载上次的设置&quot;&quot;&quot;</span><br><span class="line">        try:</span><br><span class="line">            if os.path.exists(self.settings_file):</span><br><span class="line">                with open(self.settings_file, &#x27;r&#x27;) as f:</span><br><span class="line">                    settings = json.load(f)</span><br><span class="line">                    self.src_line_edit.setText(settings.get(&#x27;src_dir&#x27;, &#x27;&#x27;))</span><br><span class="line">                    self.dest_line_edit.setText(settings.get(&#x27;dest_dir&#x27;, &#x27;&#x27;))</span><br><span class="line">                    self.format_combo.setCurrentText(settings.get(&#x27;format&#x27;, &#x27;JPG&#x27;))</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print(f&quot;加载设置失败: &#123;e&#125;&quot;)</span><br><span class="line"></span><br><span class="line">    def save_settings(self):</span><br><span class="line">        &quot;&quot;&quot;保存当前设置&quot;&quot;&quot;</span><br><span class="line">        try:</span><br><span class="line">            settings = &#123;</span><br><span class="line">                &#x27;src_dir&#x27;: self.src_line_edit.text(),</span><br><span class="line">                &#x27;dest_dir&#x27;: self.dest_line_edit.text(),</span><br><span class="line">                &#x27;format&#x27;: self.format_combo.currentText()</span><br><span class="line">            &#125;</span><br><span class="line">            with open(self.settings_file, &#x27;w&#x27;) as f:</span><br><span class="line">                json.dump(settings, f)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print(f&quot;保存设置失败: &#123;e&#125;&quot;)</span><br><span class="line"></span><br><span class="line">    def start_conversion(self):</span><br><span class="line">        src_dir = self.src_line_edit.text()</span><br><span class="line">        dest_dir = self.dest_line_edit.text()</span><br><span class="line">        output_format = self.format_combo.currentText().lower()</span><br><span class="line">        </span><br><span class="line">        if not src_dir or not dest_dir:</span><br><span class="line">            QMessageBox.warning(self, &quot;警告&quot;, &quot;请选择源目录和目标目录!&quot;)</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        self.progress_bar.setValue(0)</span><br><span class="line">        self.status_label.setText(&quot;正在转换...&quot;)</span><br><span class="line">        self.convert_btn.setEnabled(False)</span><br><span class="line">        self.cancel_btn.setEnabled(True)</span><br><span class="line">        </span><br><span class="line">        self.converter_thread = ImageConverter(src_dir, dest_dir, output_format)</span><br><span class="line">        self.converter_thread.progress_updated.connect(self.update_progress)</span><br><span class="line">        self.converter_thread.conversion_complete.connect(self.conversion_finished)</span><br><span class="line">        self.converter_thread.error_occurred.connect(self.show_error)</span><br><span class="line">        self.converter_thread.start()</span><br><span class="line"></span><br><span class="line">    def update_progress(self, value):</span><br><span class="line">        self.progress_bar.setValue(value)</span><br><span class="line"></span><br><span class="line">    def conversion_finished(self, message):</span><br><span class="line">        self.status_label.setText(message)</span><br><span class="line">        self.convert_btn.setEnabled(True)</span><br><span class="line">        self.cancel_btn.setEnabled(False)</span><br><span class="line">        self.save_settings()  # 转换完成后保存设置</span><br><span class="line">        QMessageBox.information(self, &quot;完成&quot;, message)</span><br><span class="line"></span><br><span class="line">    def show_error(self, error_message):</span><br><span class="line">        self.status_label.setText(f&quot;错误: &#123;error_message&#125;&quot;)</span><br><span class="line">        self.convert_btn.setEnabled(True)</span><br><span class="line">        self.cancel_btn.setEnabled(False)</span><br><span class="line">        QMessageBox.critical(self, &quot;错误&quot;, error_message)</span><br><span class="line"></span><br><span class="line">    def cancel_conversion(self):</span><br><span class="line">        if self.converter_thread and self.converter_thread.isRunning():</span><br><span class="line">            self.converter_thread.stop()</span><br><span class="line">            self.converter_thread.wait()</span><br><span class="line">            self.status_label.setText(&quot;转换已取消&quot;)</span><br><span class="line"></span><br><span class="line">    def closeEvent(self, event):</span><br><span class="line">        self.save_settings()</span><br><span class="line">        if self.converter_thread and self.converter_thread.isRunning():</span><br><span class="line">            reply = QMessageBox.question(</span><br><span class="line">                self, &#x27;确认退出&#x27;,</span><br><span class="line">                &#x27;转换正在进行中，确定退出吗?&#x27;,</span><br><span class="line">                QMessageBox.Yes | QMessageBox.No,</span><br><span class="line">                QMessageBox.No</span><br><span class="line">            )</span><br><span class="line">            if reply == QMessageBox.Yes:</span><br><span class="line">                self.converter_thread.stop()</span><br><span class="line">                self.converter_thread.wait()</span><br><span class="line">                event.accept()</span><br><span class="line">            else:</span><br><span class="line">                event.ignore()</span><br><span class="line">        else:</span><br><span class="line">            event.accept()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    window = ImageConverterApp()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure><p>保存为image_converter.py。</p><h1 id="安装依赖并运行"><a href="#安装依赖并运行" class="headerlink" title="安装依赖并运行"></a>安装依赖并运行</h1><p><code>pip install pyinstaller pillow pyqt5</code><br>此时已经可以运行py文件了。<br><code>python image_converter.py</code><br>同一目录下放一个icon.ico的图标文件，可在网络上随便找一个。<br>程序主界面如下：<br><img src="https://qs100371.vip/post-images/1746159250160.webp"></p><h1 id="打包成单一的exe文件"><a href="#打包成单一的exe文件" class="headerlink" title="打包成单一的exe文件"></a>打包成单一的exe文件</h1><ul><li>upx<br>由于使用了upx压缩以减小可执行文件大小，需下载upx放到py文件同一目录下。<br>这里使用的是windows x64版本，<br><a href="https://github.com/upx/upx/releases/download/v5.0.0/upx-5.0.0-win64.zip">https://github.com/upx/upx/releases/download/v5.0.0/upx-5.0.0-win64.zip</a>，解压出upx.exe。</li><li>打包<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller --onefile --windowed --icon=&quot;%cd%\icon.ico&quot; --add-data &quot;icon.ico;.&quot; image_converter.py</span><br></pre></td></tr></table></figure>得到dist&#x2F;image_converter.exe，31, 332 kb。<br><img src="https://qs100371.vip/post-images/1746159744581.webp"></li></ul><p>预览：<a href="https://img.qs100371.vip/downloads/image_converter.exe">image_converter.exe</a></p><hr><p>ds能解决很多问题，不只是生成小app。</p></div><footer class="article-footer"><a data-url="https://qs100371.vip/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/" data-id="cma7nfq93009cc0tz96ur1h4q" data-title="用ds生成小工具image_converter" class="article-share-link"><span class="fa fa-share">分享</span></a> <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/#comments" class="article-comment-link"><span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/" itemprop="commentCount"></span> 留言</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul></footer></div><nav id="article-nav"><a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">前一篇</strong><div class="article-nav-title">用ds生成markdown编辑器</div></a><a href="/post/docker-alpine-li-de-crond/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">后一篇</strong><div class="article-nav-title">docker alpine里的crond</div></a></nav></article><section id="comments" class="vcomment"></section></section><aside id="sidebar"><div class="widget-wrap"><h3 class="widget-title">公告板</h3><div class="widget"><div class="notice" style="margin-top:5px"><i class="fa"></i><div class="notice-content"><span id="poem-container">正在加载....</span></div><script>function loadRandomContent(){fetch("https://img.qs100371.vip/songci.php").then(e=>e.text()).then(e=>{document.getElementById("poem-container").innerText=e}).catch(e=>{console.error("加载失败:",e),document.getElementById("poem-container").innerText="加载失败，请重试"})}loadRandomContent()</script></div><style>.notice{padding:5px;border:1px dashed #e6e6e6;color:red;position:relative;display:inline-block;width:96%;background:#fbfbfb50;border-radius:10px}.notice i{float:left;color:#999;font-size:18px;padding-right:0;vertical-align:middle;margin-top:3px}.notice-content{display:initial;vertical-align:middle}</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"></div></div><div class="widget-wrap"><h3 class="widget-title">标签</h3><div class="widget"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">标签云</h3><div class="widget tagcloud"><a href="/tags/armbian/" style="font-size:13.33px">armbian</a> <a href="/tags/docker/" style="font-size:16.67px">docker</a> <a href="/tags/linux/" style="font-size:18.33px">linux</a> <a href="/tags/onecloud/" style="font-size:15px">onecloud</a> <a href="/tags/python/" style="font-size:10px">python</a> <a href="/tags/termux/" style="font-size:11.67px">termux</a> <a href="/tags/web/" style="font-size:20px">web</a></div></div><div class="widget-wrap"><h3 class="widget-title">归档</h3><div class="widget"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">最新文章</h3><div class="widget"><ul><li><a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a></li><li><a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a></li><li><a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a></li><li><a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a></li><li><a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a></li><li><a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a></li><li><a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a></li><li><a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a></li><li><a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a></li><li><a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a></li></ul></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><span class="post-count"><img id="site-days-badge" src=""><img src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow"> <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge" src=""></span><br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>&copy; 2025 qs100371<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></div></div><script>const startDate=new Date("2024-10-02 00:00:00"),today=new Date,timeDiff=today.getTime()-startDate.getTime(),daysDiff=Math.floor(timeDiff/864e5),badgeUrl=`https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;document.getElementById("site-days-badge").src=badgeUrl</script></footer><style>.back-to-top{position:fixed;bottom:20px;right:20px;width:46px;height:46px;border-radius:50%;background-color:#ff5722;color:#fff;text-align:center;line-height:46px;font-size:18px;cursor:pointer;display:none;z-index:9999;opacity:.9;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:all .3s}@media (min-width:768px){.back-to-top{bottom:50px;right:50px;width:50px;height:50px;line-height:50px;font-size:20px}}.back-to-top:hover{opacity:1;background-color:#ff3d00;transform:scale(1.1)}.back-to-top.active{animation:bounce .8s infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style><script>document.addEventListener("DOMContentLoaded",(function(){var e=document.createElement("div");e.className="back-to-top",e.innerHTML="↑",document.body.appendChild(e),window.addEventListener("scroll",(function(){window.pageYOffset>300?e.style.display="block":e.style.display="none"})),e.addEventListener("click",(function(e){e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}))}))</script></div><nav id="mobile-nav"><a href="/" class="mobile-nav-link">首页</a> <a href="/archives" class="mobile-nav-link">归档</a> <a href="/random.html" class="mobile-nav-link">黑洞</a> <a href="/post/app/" class="mobile-nav-link">应用</a> <a href="/post/about/" class="mobile-nav-link">关于</a></nav><script src="/js/jquery-3.6.4.min.js"></script><script src="/fancybox/jquery.fancybox.min.js"></script><script src="/js/script.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.5.2/dist/Valine.min.js"></script><script>var GUEST_INFO=["nick","mail","link"],guest_info="nick,mail,link".split(",").filter((function(i){return GUEST_INFO.indexOf(i)>-1})),notify=!1,verify=!1;new Valine({el:".vcomment",notify:notify,verify:verify,appId:"shrivAmDul1K9RSnayhd7foS-gzGzoHsz",appKey:"MJ6IotbRMRrEumBy45DTigT6",placeholder:"Just go go",pageSize:"10",avatar:"mm",lang:"zh-cn"})</script><script type="text/javascript">const backgroundImages=["/images/1.png","/images/2.png","/images/3.png","/images/4.png"];document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".v .veditor");if(e){const n=backgroundImages[Math.floor(Math.random()*backgroundImages.length)];e.style.backgroundImage=`url("${n}")`}})</script><style>.v[data-class=v] .veditor{background-size:contain;background-repeat:no-repeat;background-position:right}</style></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+  
+  
+  <title>用ds生成小工具image_converter | the blog of qs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="deepseek能做很多事，本文借助ds开发一个windows小工具，图片转换器image_converter。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用ds生成小工具image_converter">
+<meta property="og:url" content="https://qs100371.vip/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/index.html">
+<meta property="og:site_name" content="the blog of qs">
+<meta property="og:description" content="deepseek能做很多事，本文借助ds开发一个windows小工具，图片转换器image_converter。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/post-images/1746158967560.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1746159250160.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1746159744581.webp">
+<meta property="article:published_time" content="2025-05-02T04:05:04.000Z">
+<meta property="article:modified_time" content="2025-05-02T13:46:20.674Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1746158967560.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/avatar.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">the blog of qs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/random.html">黑洞</a>
+        
+          <a class="main-nav-link" href="/post/app/">应用</a>
+        
+          <a class="main-nav-link" href="/post/about/">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-yong-ds-sheng-cheng-xiao-gong-ju-image_converter" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/" class="article-date">
+  <time class="dt-published" datetime="2025-05-02T04:05:04.000Z" itemprop="datePublished">2025-05-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          用ds生成小工具image_converter
+        </h1>
+        <hr>
+        
+          <img src="https://img.shields.io/badge/字数统计-1.5k-blue"><img
+            src="https://img.shields.io/badge/阅读时间-25分-green">
+          
+            
+              
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- 文章目录 没有tag的不显示目录-->
+         
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%BB%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">程序主代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%B9%B6%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">安装依赖并运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E6%88%90%E5%8D%95%E4%B8%80%E7%9A%84exe%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">打包成单一的exe文件</span></a></li></ol>
+          </div>
+         
+        <!-- Table of Contents -->
+        <p>deepseek能做很多事，本文借助ds开发一个windows小工具，图片转换器image_converter。</p>
+<span id="more"></span>
+<h1 id="程序主代码"><a href="#程序主代码" class="headerlink" title="程序主代码"></a>程序主代码</h1><p>提问：用python完成把一个目录下的图片转换格式到另一个目录，并提供图形界面，打包成单个文件的windows程序。<br><img src="https://qs100371.vip/post-images/1746158967560.webp"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtGui <span class="keyword">import</span> QIcon</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtWidgets <span class="keyword">import</span> (</span><br><span class="line">    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,</span><br><span class="line">    QLabel, QLineEdit, QPushButton, QFileDialog, QComboBox,</span><br><span class="line">    QProgressBar, QMessageBox</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtCore <span class="keyword">import</span> Qt, QThread, pyqtSignal, QStandardPaths</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图片转换线程</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ImageConverter</span>(<span class="title class_ inherited__">QThread</span>):</span><br><span class="line">    progress_updated = pyqtSignal(<span class="built_in">int</span>)</span><br><span class="line">    conversion_complete = pyqtSignal(<span class="built_in">str</span>)</span><br><span class="line">    error_occurred = pyqtSignal(<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, src_dir, dest_dir, output_format, parent=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(parent)</span><br><span class="line">        <span class="variable language_">self</span>.src_dir = src_dir</span><br><span class="line">        <span class="variable language_">self</span>.dest_dir = dest_dir</span><br><span class="line">        <span class="variable language_">self</span>.output_format = output_format.lower()</span><br><span class="line">        <span class="variable language_">self</span>.running = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="variable language_">self</span>.src_dir):</span><br><span class="line">                <span class="variable language_">self</span>.error_occurred.emit(<span class="string">f&quot;源目录不存在: <span class="subst">&#123;self.src_dir&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            os.makedirs(<span class="variable language_">self</span>.dest_dir, exist_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">            supported_formats = [<span class="string">&#x27;jpg&#x27;</span>, <span class="string">&#x27;jpeg&#x27;</span>, <span class="string">&#x27;png&#x27;</span>, <span class="string">&#x27;bmp&#x27;</span>, <span class="string">&#x27;gif&#x27;</span>, <span class="string">&#x27;tiff&#x27;</span>, <span class="string">&#x27;webp&#x27;</span>]</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.output_format <span class="keyword">not</span> <span class="keyword">in</span> supported_formats:</span><br><span class="line">                <span class="variable language_">self</span>.error_occurred.emit(<span class="string">f&quot;不支持的格式: <span class="subst">&#123;self.output_format&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            image_files = [f <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(<span class="variable language_">self</span>.src_dir) </span><br><span class="line">                         <span class="keyword">if</span> f.lower().endswith((<span class="string">&#x27;.png&#x27;</span>, <span class="string">&#x27;.jpg&#x27;</span>, <span class="string">&#x27;.jpeg&#x27;</span>, <span class="string">&#x27;.bmp&#x27;</span>, <span class="string">&#x27;.gif&#x27;</span>, <span class="string">&#x27;.tiff&#x27;</span>, <span class="string">&#x27;.webp&#x27;</span>))]</span><br><span class="line">            </span><br><span class="line">            total_files = <span class="built_in">len</span>(image_files)</span><br><span class="line">            <span class="keyword">if</span> total_files == <span class="number">0</span>:</span><br><span class="line">                <span class="variable language_">self</span>.error_occurred.emit(<span class="string">&quot;未找到支持的图片文件&quot;</span>)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> i, filename <span class="keyword">in</span> <span class="built_in">enumerate</span>(image_files):</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.running:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    img_path = os.path.join(<span class="variable language_">self</span>.src_dir, filename)</span><br><span class="line">                    img = Image.<span class="built_in">open</span>(img_path)</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># 透明背景转JPG处理</span></span><br><span class="line">                    <span class="keyword">if</span> img.mode <span class="keyword">in</span> (<span class="string">&#x27;RGBA&#x27;</span>, <span class="string">&#x27;LA&#x27;</span>) <span class="keyword">and</span> <span class="variable language_">self</span>.output_format <span class="keyword">in</span> (<span class="string">&#x27;jpg&#x27;</span>, <span class="string">&#x27;jpeg&#x27;</span>):</span><br><span class="line">                        background = Image.new(<span class="string">&#x27;RGB&#x27;</span>, img.size, (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">                        background.paste(img, mask=img.split()[-<span class="number">1</span>])</span><br><span class="line">                        img = background</span><br><span class="line">                    </span><br><span class="line">                    output_filename = <span class="string">f&quot;<span class="subst">&#123;os.path.splitext(filename)[<span class="number">0</span>]&#125;</span>.<span class="subst">&#123;self.output_format&#125;</span>&quot;</span></span><br><span class="line">                    output_path = os.path.join(<span class="variable language_">self</span>.dest_dir, output_filename)</span><br><span class="line">                    img.save(output_path, quality=<span class="number">95</span>)</span><br><span class="line">                    </span><br><span class="line">                    <span class="variable language_">self</span>.progress_updated.emit(<span class="built_in">int</span>((i + <span class="number">1</span>) / total_files * <span class="number">100</span>))</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                    <span class="variable language_">self</span>.error_occurred.emit(<span class="string">f&quot;处理 <span class="subst">&#123;filename&#125;</span> 失败: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.running:</span><br><span class="line">                <span class="variable language_">self</span>.conversion_complete.emit(<span class="string">f&quot;转换完成! 共处理 <span class="subst">&#123;total_files&#125;</span> 个文件&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="variable language_">self</span>.error_occurred.emit(<span class="string">f&quot;发生错误: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.running = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主窗口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ImageConverterApp</span>(<span class="title class_ inherited__">QMainWindow</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.setWindowTitle(<span class="string">&quot;图片格式转换工具&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.setGeometry(<span class="number">100</span>, <span class="number">100</span>, <span class="number">500</span>, <span class="number">300</span>)</span><br><span class="line">        <span class="comment"># 设置窗口图标（关键代码）</span></span><br><span class="line">        <span class="variable language_">self</span>.setWindowIcon(<span class="variable language_">self</span>.load_icon(<span class="string">&quot;icon.ico&quot;</span>))</span><br><span class="line">        <span class="variable language_">self</span>.settings_file = <span class="variable language_">self</span>.get_settings_path()</span><br><span class="line">        <span class="variable language_">self</span>.init_ui()</span><br><span class="line">        <span class="variable language_">self</span>.load_settings()</span><br><span class="line">        <span class="variable language_">self</span>.converter_thread = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">load_icon</span>(<span class="params">self, icon_name</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;动态加载图标（兼容开发模式和打包模式）&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">getattr</span>(sys, <span class="string">&#x27;frozen&#x27;</span>, <span class="literal">False</span>):  <span class="comment"># 打包后</span></span><br><span class="line">            base_path = sys._MEIPASS</span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 开发模式</span></span><br><span class="line">            base_path = os.path.dirname(__file__)</span><br><span class="line">        icon_path = os.path.join(base_path, icon_name)</span><br><span class="line">        <span class="keyword">return</span> QIcon(icon_path)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_settings_path</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;获取跨平台的配置文件路径&quot;&quot;&quot;</span></span><br><span class="line">        config_dir = QStandardPaths.writableLocation(QStandardPaths.AppConfigLocation)</span><br><span class="line">        os.makedirs(config_dir, exist_ok=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">return</span> os.path.join(config_dir, <span class="string">&quot;image_converter_settings.json&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_ui</span>(<span class="params">self</span>):</span><br><span class="line">        main_widget = QWidget()</span><br><span class="line">        layout = QVBoxLayout()</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 源目录</span></span><br><span class="line">        src_layout = QHBoxLayout()</span><br><span class="line">        src_layout.addWidget(QLabel(<span class="string">&quot;源目录:&quot;</span>))</span><br><span class="line">        <span class="variable language_">self</span>.src_line_edit = QLineEdit()</span><br><span class="line">        src_layout.addWidget(<span class="variable language_">self</span>.src_line_edit)</span><br><span class="line">        <span class="variable language_">self</span>.src_browse_btn = QPushButton(<span class="string">&quot;浏览...&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.src_browse_btn.clicked.connect(<span class="variable language_">self</span>.browse_src_dir)</span><br><span class="line">        src_layout.addWidget(<span class="variable language_">self</span>.src_browse_btn)</span><br><span class="line">        layout.addLayout(src_layout)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 目标目录</span></span><br><span class="line">        dest_layout = QHBoxLayout()</span><br><span class="line">        dest_layout.addWidget(QLabel(<span class="string">&quot;目标目录:&quot;</span>))</span><br><span class="line">        <span class="variable language_">self</span>.dest_line_edit = QLineEdit()</span><br><span class="line">        dest_layout.addWidget(<span class="variable language_">self</span>.dest_line_edit)</span><br><span class="line">        <span class="variable language_">self</span>.dest_browse_btn = QPushButton(<span class="string">&quot;浏览...&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.dest_browse_btn.clicked.connect(<span class="variable language_">self</span>.browse_dest_dir)</span><br><span class="line">        dest_layout.addWidget(<span class="variable language_">self</span>.dest_browse_btn)</span><br><span class="line">        layout.addLayout(dest_layout)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 输出格式</span></span><br><span class="line">        format_layout = QHBoxLayout()</span><br><span class="line">        format_layout.addWidget(QLabel(<span class="string">&quot;输出格式:&quot;</span>))</span><br><span class="line">        <span class="variable language_">self</span>.format_combo = QComboBox()</span><br><span class="line">        <span class="variable language_">self</span>.format_combo.addItems([<span class="string">&#x27;JPG&#x27;</span>, <span class="string">&#x27;PNG&#x27;</span>, <span class="string">&#x27;BMP&#x27;</span>, <span class="string">&#x27;GIF&#x27;</span>, <span class="string">&#x27;TIFF&#x27;</span>, <span class="string">&#x27;WEBP&#x27;</span>])</span><br><span class="line">        format_layout.addWidget(<span class="variable language_">self</span>.format_combo)</span><br><span class="line">        layout.addLayout(format_layout)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 进度条</span></span><br><span class="line">        <span class="variable language_">self</span>.progress_bar = QProgressBar()</span><br><span class="line">        layout.addWidget(<span class="variable language_">self</span>.progress_bar)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 按钮</span></span><br><span class="line">        btn_layout = QHBoxLayout()</span><br><span class="line">        <span class="variable language_">self</span>.convert_btn = QPushButton(<span class="string">&quot;开始转换&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.convert_btn.clicked.connect(<span class="variable language_">self</span>.start_conversion)</span><br><span class="line">        btn_layout.addWidget(<span class="variable language_">self</span>.convert_btn)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.cancel_btn = QPushButton(<span class="string">&quot;取消&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.cancel_btn.clicked.connect(<span class="variable language_">self</span>.cancel_conversion)</span><br><span class="line">        <span class="variable language_">self</span>.cancel_btn.setEnabled(<span class="literal">False</span>)</span><br><span class="line">        btn_layout.addWidget(<span class="variable language_">self</span>.cancel_btn)</span><br><span class="line">        layout.addLayout(btn_layout)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 状态栏</span></span><br><span class="line">        <span class="variable language_">self</span>.status_label = QLabel(<span class="string">&quot;准备就绪&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.status_label.setAlignment(Qt.AlignCenter)</span><br><span class="line">        layout.addWidget(<span class="variable language_">self</span>.status_label)</span><br><span class="line">        </span><br><span class="line">        main_widget.setLayout(layout)</span><br><span class="line">        <span class="variable language_">self</span>.setCentralWidget(main_widget)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">browse_src_dir</span>(<span class="params">self</span>):</span><br><span class="line">        dir_path = QFileDialog.getExistingDirectory(<span class="variable language_">self</span>, <span class="string">&quot;选择源目录&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> dir_path:</span><br><span class="line">            <span class="variable language_">self</span>.src_line_edit.setText(dir_path)</span><br><span class="line">            <span class="comment"># 自动设置目标目录</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.dest_line_edit.text():</span><br><span class="line">                <span class="variable language_">self</span>.dest_line_edit.setText(os.path.join(dir_path, <span class="string">&quot;converted&quot;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">browse_dest_dir</span>(<span class="params">self</span>):</span><br><span class="line">        dir_path = QFileDialog.getExistingDirectory(<span class="variable language_">self</span>, <span class="string">&quot;选择目标目录&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> dir_path:</span><br><span class="line">            <span class="variable language_">self</span>.dest_line_edit.setText(dir_path)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">load_settings</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;加载上次的设置&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> os.path.exists(<span class="variable language_">self</span>.settings_file):</span><br><span class="line">                <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.settings_file, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                    settings = json.load(f)</span><br><span class="line">                    <span class="variable language_">self</span>.src_line_edit.setText(settings.get(<span class="string">&#x27;src_dir&#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">                    <span class="variable language_">self</span>.dest_line_edit.setText(settings.get(<span class="string">&#x27;dest_dir&#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">                    <span class="variable language_">self</span>.format_combo.setCurrentText(settings.get(<span class="string">&#x27;format&#x27;</span>, <span class="string">&#x27;JPG&#x27;</span>))</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;加载设置失败: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">save_settings</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;保存当前设置&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            settings = &#123;</span><br><span class="line">                <span class="string">&#x27;src_dir&#x27;</span>: <span class="variable language_">self</span>.src_line_edit.text(),</span><br><span class="line">                <span class="string">&#x27;dest_dir&#x27;</span>: <span class="variable language_">self</span>.dest_line_edit.text(),</span><br><span class="line">                <span class="string">&#x27;format&#x27;</span>: <span class="variable language_">self</span>.format_combo.currentText()</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.settings_file, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                json.dump(settings, f)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;保存设置失败: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">start_conversion</span>(<span class="params">self</span>):</span><br><span class="line">        src_dir = <span class="variable language_">self</span>.src_line_edit.text()</span><br><span class="line">        dest_dir = <span class="variable language_">self</span>.dest_line_edit.text()</span><br><span class="line">        output_format = <span class="variable language_">self</span>.format_combo.currentText().lower()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> src_dir <span class="keyword">or</span> <span class="keyword">not</span> dest_dir:</span><br><span class="line">            QMessageBox.warning(<span class="variable language_">self</span>, <span class="string">&quot;警告&quot;</span>, <span class="string">&quot;请选择源目录和目标目录!&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.progress_bar.setValue(<span class="number">0</span>)</span><br><span class="line">        <span class="variable language_">self</span>.status_label.setText(<span class="string">&quot;正在转换...&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.convert_btn.setEnabled(<span class="literal">False</span>)</span><br><span class="line">        <span class="variable language_">self</span>.cancel_btn.setEnabled(<span class="literal">True</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.converter_thread = ImageConverter(src_dir, dest_dir, output_format)</span><br><span class="line">        <span class="variable language_">self</span>.converter_thread.progress_updated.connect(<span class="variable language_">self</span>.update_progress)</span><br><span class="line">        <span class="variable language_">self</span>.converter_thread.conversion_complete.connect(<span class="variable language_">self</span>.conversion_finished)</span><br><span class="line">        <span class="variable language_">self</span>.converter_thread.error_occurred.connect(<span class="variable language_">self</span>.show_error)</span><br><span class="line">        <span class="variable language_">self</span>.converter_thread.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update_progress</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.progress_bar.setValue(value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">conversion_finished</span>(<span class="params">self, message</span>):</span><br><span class="line">        <span class="variable language_">self</span>.status_label.setText(message)</span><br><span class="line">        <span class="variable language_">self</span>.convert_btn.setEnabled(<span class="literal">True</span>)</span><br><span class="line">        <span class="variable language_">self</span>.cancel_btn.setEnabled(<span class="literal">False</span>)</span><br><span class="line">        <span class="variable language_">self</span>.save_settings()  <span class="comment"># 转换完成后保存设置</span></span><br><span class="line">        QMessageBox.information(<span class="variable language_">self</span>, <span class="string">&quot;完成&quot;</span>, message)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">show_error</span>(<span class="params">self, error_message</span>):</span><br><span class="line">        <span class="variable language_">self</span>.status_label.setText(<span class="string">f&quot;错误: <span class="subst">&#123;error_message&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.convert_btn.setEnabled(<span class="literal">True</span>)</span><br><span class="line">        <span class="variable language_">self</span>.cancel_btn.setEnabled(<span class="literal">False</span>)</span><br><span class="line">        QMessageBox.critical(<span class="variable language_">self</span>, <span class="string">&quot;错误&quot;</span>, error_message)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">cancel_conversion</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.converter_thread <span class="keyword">and</span> <span class="variable language_">self</span>.converter_thread.isRunning():</span><br><span class="line">            <span class="variable language_">self</span>.converter_thread.stop()</span><br><span class="line">            <span class="variable language_">self</span>.converter_thread.wait()</span><br><span class="line">            <span class="variable language_">self</span>.status_label.setText(<span class="string">&quot;转换已取消&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">closeEvent</span>(<span class="params">self, event</span>):</span><br><span class="line">        <span class="variable language_">self</span>.save_settings()</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.converter_thread <span class="keyword">and</span> <span class="variable language_">self</span>.converter_thread.isRunning():</span><br><span class="line">            reply = QMessageBox.question(</span><br><span class="line">                <span class="variable language_">self</span>, <span class="string">&#x27;确认退出&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;转换正在进行中，确定退出吗?&#x27;</span>,</span><br><span class="line">                QMessageBox.Yes | QMessageBox.No,</span><br><span class="line">                QMessageBox.No</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">if</span> reply == QMessageBox.Yes:</span><br><span class="line">                <span class="variable language_">self</span>.converter_thread.stop()</span><br><span class="line">                <span class="variable language_">self</span>.converter_thread.wait()</span><br><span class="line">                event.accept()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                event.ignore()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            event.accept()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    window = ImageConverterApp()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<p>保存为image_converter.py。</p>
+<h1 id="安装依赖并运行"><a href="#安装依赖并运行" class="headerlink" title="安装依赖并运行"></a>安装依赖并运行</h1><p><code>pip install pyinstaller pillow pyqt5</code><br>此时已经可以运行py文件了。<br><code>python image_converter.py</code><br>同一目录下放一个icon.ico的图标文件，可在网络上随便找一个。<br>程序主界面如下：<br><img src="https://qs100371.vip/post-images/1746159250160.webp"></p>
+<h1 id="打包成单一的exe文件"><a href="#打包成单一的exe文件" class="headerlink" title="打包成单一的exe文件"></a>打包成单一的exe文件</h1><ul>
+<li>upx<br>由于使用了upx压缩以减小可执行文件大小，需下载upx放到py文件同一目录下。<br>这里使用的是windows x64版本，<br><a href="https://github.com/upx/upx/releases/download/v5.0.0/upx-5.0.0-win64.zip">https://github.com/upx/upx/releases/download/v5.0.0/upx-5.0.0-win64.zip</a>，解压出upx.exe。</li>
+<li>打包<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller <span class="params">--onefile</span> <span class="params">--windowed</span> <span class="params">--icon=</span><span class="string">&quot;%cd%\icon.ico&quot;</span> <span class="params">--add-data</span> <span class="string">&quot;icon.ico;.&quot;</span> image_converter.py</span><br></pre></td></tr></table></figure>
+得到dist&#x2F;image_converter.exe，31, 332 kb。<br><img src="https://qs100371.vip/post-images/1746159744581.webp"></li>
+</ul>
+<p>预览：<a href="https://img.qs100371.vip/downloads/image_converter.exe">image_converter.exe</a></p>
+<hr>
+<p>ds能解决很多问题，不只是生成小app。</p>
+
+      
+    </div>
+    
+    <footer class="article-footer">
+     
+      <a data-url="https://qs100371.vip/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/" data-id="cma8ydv51009fhgtzhikq2jv7" data-title="用ds生成小工具image_converter" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+ 
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          用ds生成markdown编辑器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/docker-alpine-li-de-crond/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">docker alpine里的crond</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+</section>
+        
+          
+<aside id="sidebar" >
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">公告板</h3>
+        <div class="widget">
+            
+        
+                
+                        
+                            <div class="notice" style="margin-top:5px">
+                                <i class="fa "></i>
+                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
+
+                                <script>
+                                    
+                                    function loadRandomContent() {
+                                        fetch('https://img.qs100371.vip/songci.php')
+                                            .then(response => response.text())
+                                            .then(text => {
+                                                document.getElementById('poem-container').innerText = text;
+                                            })
+                                            .catch(error => {
+                                                console.error('加载失败:', error);
+                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
+                                            });
+                                    }
+
+                                    // 页面加载时自动获取一次
+                                    loadRandomContent();
+                                </script>
+                            </div>
+                            
+                                <style>
+                                    .notice {
+                                        padding: 5px;
+                                        border: 1px dashed #e6e6e6;
+                                        color: red;
+                                        position: relative;
+                                        display: inline-block;
+                                        width: 96%;
+                                        background: #fbfbfb50;
+                                        border-radius: 10px;
+                                    }
+
+                                    .notice i {
+                                        float: left;
+                                        color: #999;
+                                        font-size: 18px;
+                                        padding-right: 0px;
+                                        vertical-align: middle;
+                                        margin-top: 3px;
+                                    }
+
+                                    .notice-content {
+                                        display: initial;
+                                        vertical-align: middle;
+                                    }
+                                </style>
+                                <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+        </div>
+        
+      </div>
+    
+    
+  
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a>
+          </li>
+        
+          <li>
+            <a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a>
+          </li>
+        
+          <li>
+            <a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a>
+          </li>
+        
+          <li>
+            <a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+        
+          <div class="outer">
+            <div id="footer-info" class="inner">
+              <span class="post-count"><img id="site-days-badge" src=""><img
+                  src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
+                  src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge"
+                  src=""></span>
+              
+                </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                  
+                    &copy; 2025
+                      qs100371<br>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+            </div>
+          </div>
+          <script>
+            // 1. 计算建站天数
+            const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
+            const today = new Date();
+            const timeDiff = today.getTime() - startDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            // 2. 动态生成 Shields.io 徽章
+            const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
+            document.getElementById('site-days-badge').src = badgeUrl;
+
+            // 3. 每天 00:00 自动刷新（可选）
+            //setInterval(() => {
+            //  location.reload();
+            //}, 24 * 60 * 60 * 1000); // 24小时后刷新页面
+          </script>
+</footer>
+<style>
+  /* 返回顶部按钮 - 基础样式 */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    /* 移动端距离底部更近 */
+    right: 20px;
+    /* 移动端距离右侧更近 */
+    width: 46px;
+    /* 移动端稍小 */
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    /* 默认隐藏 */
+    z-index: 9999;
+    /* 确保在最上层 */
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+
+  /* 适配 PC 端（更大按钮） */
+  @media (min-width: 768px) {
+    .back-to-top {
+      bottom: 50px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+    }
+  }
+
+  /* 悬停效果 */
+  .back-to-top:hover {
+    opacity: 1;
+    background-color: #ff3d00;
+    transform: scale(1.1);
+  }
+
+  /* 滚动时跳动动画 */
+  .back-to-top.active {
+    animation: bounce 0.8s infinite;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/random.html" class="mobile-nav-link">黑洞</a>
+  
+    <a href="/post/app/" class="mobile-nav-link">应用</a>
+  
+    <a href="/post/about/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.5.2/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+<script type="text/javascript">
+  const backgroundImages = [
+  "/images/1.png",
+  "/images/2.png",
+  "/images/3.png",
+  "/images/4.png",
+  // 更多图片...
+];
+
+// Valine 初始化后设置随机背景
+  document.addEventListener('DOMContentLoaded', () => {
+    const veditor = document.querySelector('.v .veditor');
+    if (veditor) {
+      const randomImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+      veditor.style.backgroundImage = `url("${randomImage}")`;
+    }
+  });
+</script>
+<style>
+  .v[data-class=v] .veditor {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+  }
+  </style>
+
+
+  </div>
+</body>
+</html>
