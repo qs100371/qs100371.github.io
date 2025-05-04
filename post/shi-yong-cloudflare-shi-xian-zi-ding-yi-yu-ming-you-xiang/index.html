@@ -5,13 +5,13 @@
   <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
   
   
-  <title>使用cloudflare实现自定义域名邮箱 | the blog of qs</title>
+  <title>使用cloudflare实现自定义域名邮箱 | qs blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用cloudflare实现自定义域名邮箱">
 <meta property="og:url" content="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/index.html">
-<meta property="og:site_name" content="the blog of qs">
+<meta property="og:site_name" content="qs blog">
 <meta property="og:description" content="Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://qs100371.vip/post-images/1734443747560.webp">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://qs100371.vip/post-images/1734443747560.webp">
   
-    <link rel="alternate" href="/atom.xml" title="the blog of qs" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/images/avatar.png">
@@ -56,7 +56,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">the blog of qs</a>
+        <a href="/" id="logo">qs blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
@@ -72,8 +72,6 @@
         
           <a class="main-nav-link" href="/archives">归档</a>
         
-          <a class="main-nav-link" href="/random.html">黑洞</a>
-        
           <a class="main-nav-link" href="/appscenter/">应用</a>
         
           <a class="main-nav-link" href="/about/">关于</a>
@@ -83,6 +81,8 @@
         
           
             <a class="nav-icon" href="https://github.com/qs100371"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a>
           
         
         
@@ -141,7 +141,7 @@
 <li>启用电子邮件路由功能</li>
 </ul>
 <h1 id="Cloudflare注册并迁入域名"><a href="#Cloudflare注册并迁入域名" class="headerlink" title="Cloudflare注册并迁入域名"></a>Cloudflare注册并迁入域名</h1><p>域名托管到cloudflare。</p>
-<h1 id="启用电子邮件路由"><a href="#启用电子邮件路由" class="headerlink" title="启用电子邮件路由"></a>启用电子邮件路由</h1><p>打开网站，域名，在左侧打开“电子邮件”-“电子邮件路由”<br>添加自定义地址（比如<a href="mailto:&#x61;&#100;&#109;&#x69;&#x6e;&#x40;&#100;&#x6f;&#109;&#x61;&#105;&#x6e;&#46;&#x63;&#111;&#x6d;">&#x61;&#100;&#109;&#x69;&#x6e;&#x40;&#100;&#x6f;&#109;&#x61;&#105;&#x6e;&#46;&#x63;&#111;&#x6d;</a>），目标地址（常用邮箱），到邮箱中验证，再回来。<br>系统自动添加mx记录。<br>这样，发往自定义域名邮箱的邮件会被转发到目标邮箱，并且系统有记录。</p>
+<h1 id="启用电子邮件路由"><a href="#启用电子邮件路由" class="headerlink" title="启用电子邮件路由"></a>启用电子邮件路由</h1><p>打开网站，域名，在左侧打开“电子邮件”-“电子邮件路由”<br>添加自定义地址（比如<a href="mailto:&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#x64;&#x6f;&#x6d;&#x61;&#x69;&#x6e;&#46;&#x63;&#x6f;&#109;">&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#x64;&#x6f;&#x6d;&#x61;&#x69;&#x6e;&#46;&#x63;&#x6f;&#109;</a>），目标地址（常用邮箱），到邮箱中验证，再回来。<br>系统自动添加mx记录。<br>这样，发往自定义域名邮箱的邮件会被转发到目标邮箱，并且系统有记录。</p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://qs100371.vip/post-images/1734443747560.webp"><br><img src="https://qs100371.vip/post-images/1734444076292.webp"><br><img src="https://qs100371.vip/post-images/1734444039726.webp"><br><img src="https://qs100371.vip/post-images/1734444016319.webp"><br><img src="https://qs100371.vip/post-images/1734444022488.webp"><br><img src="https://qs100371.vip/post-images/1734444031714.webp"></h2><p>CloudFlare的电子邮件路由是单向的，只是把特定域名邮箱地址收到的邮件转发到指定的信箱，不能发件。因此也就不提供 IMAP&#x2F;SMTP服务。</p>
 
       
@@ -149,7 +149,7 @@
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/" data-id="cma90mu81006u14tz3ewvfxv5" data-title="使用cloudflare实现自定义域名邮箱" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/" data-id="cma9exhnj006rkctzcnezcs86" data-title="使用cloudflare实现自定义域名邮箱" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
         <a href="/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/#comments" class="article-comment-link">
@@ -254,8 +254,8 @@
                                         vertical-align: middle;
                                     }
                                 </style>
-                                <link rel="stylesheet"
-                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+                            <!--    <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"> -->
         </div>
         
       </div>
@@ -476,8 +476,6 @@
     <a href="/" class="mobile-nav-link">首页</a>
   
     <a href="/archives" class="mobile-nav-link">归档</a>
-  
-    <a href="/random.html" class="mobile-nav-link">黑洞</a>
   
     <a href="/appscenter/" class="mobile-nav-link">应用</a>
   
