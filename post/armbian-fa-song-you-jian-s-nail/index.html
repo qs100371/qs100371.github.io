@@ -132,7 +132,7 @@
 <h1 id="安装s-nail"><a href="#安装s-nail" class="headerlink" title="安装s-nail"></a>安装s-nail</h1><p><code>apt install s-nail</code></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp</span>=smtps://smtp.163.com:465    </span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-user</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-password</span>=此处不是邮箱密码，而是smtp服务提供的授权码！！！</span><br></pre></td></tr></table></figure>
-<h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#120;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#x6d;">&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#120;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#x6d;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p>
+<h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#x40;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;">&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#x40;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root<span class="keyword">@onecloud</span>:/etc# echo <span class="string">&quot;Successful&quot;</span> | s-nail -s <span class="string">&quot;hello?&quot;</span> ease_lee<span class="keyword">@qq</span>.com</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-user</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-password</span><br><span class="line"><span class="attribute">s-nail</span>: The empty (default) command is ignored here, but has <span class="attribute">arguments</span>: <span class="number">1</span></span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: please do <span class="keyword">not</span> use *smtp*, instead assign a <span class="attribute">smtp</span>:// URL to *mta*!</span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: Use of old-style credentials, which will vanish in v15!</span><br><span class="line"><span class="attribute">s-nail</span>:   Please read the manual section <span class="string">&quot;On URL syntax and credential lookup&quot;</span></span><br></pre></td></tr></table></figure>
 <p>添加附件<br><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p>
 <blockquote>
@@ -151,7 +151,7 @@
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cma9exhmn0012kctzca2ge2o2" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cma9rma220012wwtz52ogas50" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
         <a href="/post/armbian-fa-song-you-jian-s-nail/#comments" class="article-comment-link">
@@ -358,8 +358,9 @@
               <span class="post-count"><img id="site-days-badge" src=""><img
                   src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
                   src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-                <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge"
-                  src=""></span>
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green">
+                <img id="load-time-badge" src="">
+              </span>
               
                 </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
                   
@@ -472,6 +473,52 @@
   });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 性能数据兼容性处理
+    const perf = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+    const timing = perf.timing;
+
+    // 计算加载时间
+    let loadTime;
+    if (timing && timing.loadEventEnd && timing.navigationStart) {
+      loadTime = timing.loadEventEnd - timing.navigationStart;
+    } else {
+      // 回退方案：使用 performance.now() 或 Date.now()
+      loadTime = perf.now ? perf.now() : (Date.now() - (perf.timing?.navigationStart || Date.now()));
+    }
+
+    // 处理异常值
+    let displayTime;
+    if (loadTime <= 0 || loadTime > 60000) { // 超过1分钟视为异常
+      displayTime = 'N/A';
+    } else if (loadTime < 1000) {
+      displayTime = `${Math.round(loadTime)}ms`; // 毫秒
+    } else {
+      displayTime = `${(loadTime / 1000).toFixed(2)}s`; // 秒（保留2位小数）
+    }
+
+    // 根据加载时间确定颜色
+    function getColor(ms) {
+      if (ms === 'N/A') return 'lightgrey';
+      const time = typeof ms === 'number' ? ms : parseFloat(ms) * 1000;
+      if (time < 800) return 'brightgreen';
+      if (time < 1500) return 'green';
+      if (time < 3000) return 'yellowgreen';
+      if (time < 5000) return 'orange';
+      return 'red';
+    }
+
+    const color = getColor(loadTime);
+
+    // 生成 shields.io 徽章 URL
+    const badgeUrl = `https://img.shields.io/badge/加载时间-${encodeURIComponent(displayTime)}-${color}`;
+
+    // 插入徽章到容器
+    document.getElementById('load-time-badge').src = badgeUrl;
+
+  });
+</script>
     </div>
     <nav id="mobile-nav">
   

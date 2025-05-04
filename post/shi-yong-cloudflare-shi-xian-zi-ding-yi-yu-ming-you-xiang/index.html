@@ -139,7 +139,7 @@
 <li>启用电子邮件路由功能</li>
 </ul>
 <h1 id="Cloudflare注册并迁入域名"><a href="#Cloudflare注册并迁入域名" class="headerlink" title="Cloudflare注册并迁入域名"></a>Cloudflare注册并迁入域名</h1><p>域名托管到cloudflare。</p>
-<h1 id="启用电子邮件路由"><a href="#启用电子邮件路由" class="headerlink" title="启用电子邮件路由"></a>启用电子邮件路由</h1><p>打开网站，域名，在左侧打开“电子邮件”-“电子邮件路由”<br>添加自定义地址（比如<a href="mailto:&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#x64;&#x6f;&#x6d;&#x61;&#x69;&#x6e;&#46;&#x63;&#x6f;&#109;">&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#x64;&#x6f;&#x6d;&#x61;&#x69;&#x6e;&#46;&#x63;&#x6f;&#109;</a>），目标地址（常用邮箱），到邮箱中验证，再回来。<br>系统自动添加mx记录。<br>这样，发往自定义域名邮箱的邮件会被转发到目标邮箱，并且系统有记录。</p>
+<h1 id="启用电子邮件路由"><a href="#启用电子邮件路由" class="headerlink" title="启用电子邮件路由"></a>启用电子邮件路由</h1><p>打开网站，域名，在左侧打开“电子邮件”-“电子邮件路由”<br>添加自定义地址（比如<a href="mailto:&#97;&#100;&#x6d;&#x69;&#110;&#64;&#x64;&#111;&#109;&#x61;&#x69;&#x6e;&#x2e;&#x63;&#x6f;&#x6d;">&#97;&#100;&#x6d;&#x69;&#110;&#64;&#x64;&#111;&#109;&#x61;&#x69;&#x6e;&#x2e;&#x63;&#x6f;&#x6d;</a>），目标地址（常用邮箱），到邮箱中验证，再回来。<br>系统自动添加mx记录。<br>这样，发往自定义域名邮箱的邮件会被转发到目标邮箱，并且系统有记录。</p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://qs100371.vip/post-images/1734443747560.webp"><br><img src="https://qs100371.vip/post-images/1734444076292.webp"><br><img src="https://qs100371.vip/post-images/1734444039726.webp"><br><img src="https://qs100371.vip/post-images/1734444016319.webp"><br><img src="https://qs100371.vip/post-images/1734444022488.webp"><br><img src="https://qs100371.vip/post-images/1734444031714.webp"></h2><p>CloudFlare的电子邮件路由是单向的，只是把特定域名邮箱地址收到的邮件转发到指定的信箱，不能发件。因此也就不提供 IMAP&#x2F;SMTP服务。</p>
 
       
@@ -147,7 +147,7 @@
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/" data-id="cma9exhnj006rkctzcnezcs86" data-title="使用cloudflare实现自定义域名邮箱" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/" data-id="cma9rma33006rwwtz0rnz1g9h" data-title="使用cloudflare实现自定义域名邮箱" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
         <a href="/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/#comments" class="article-comment-link">
@@ -354,8 +354,9 @@
               <span class="post-count"><img id="site-days-badge" src=""><img
                   src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
                   src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-                <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge"
-                  src=""></span>
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green">
+                <img id="load-time-badge" src="">
+              </span>
               
                 </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
                   
@@ -468,6 +469,52 @@
   });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 性能数据兼容性处理
+    const perf = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+    const timing = perf.timing;
+
+    // 计算加载时间
+    let loadTime;
+    if (timing && timing.loadEventEnd && timing.navigationStart) {
+      loadTime = timing.loadEventEnd - timing.navigationStart;
+    } else {
+      // 回退方案：使用 performance.now() 或 Date.now()
+      loadTime = perf.now ? perf.now() : (Date.now() - (perf.timing?.navigationStart || Date.now()));
+    }
+
+    // 处理异常值
+    let displayTime;
+    if (loadTime <= 0 || loadTime > 60000) { // 超过1分钟视为异常
+      displayTime = 'N/A';
+    } else if (loadTime < 1000) {
+      displayTime = `${Math.round(loadTime)}ms`; // 毫秒
+    } else {
+      displayTime = `${(loadTime / 1000).toFixed(2)}s`; // 秒（保留2位小数）
+    }
+
+    // 根据加载时间确定颜色
+    function getColor(ms) {
+      if (ms === 'N/A') return 'lightgrey';
+      const time = typeof ms === 'number' ? ms : parseFloat(ms) * 1000;
+      if (time < 800) return 'brightgreen';
+      if (time < 1500) return 'green';
+      if (time < 3000) return 'yellowgreen';
+      if (time < 5000) return 'orange';
+      return 'red';
+    }
+
+    const color = getColor(loadTime);
+
+    // 生成 shields.io 徽章 URL
+    const badgeUrl = `https://img.shields.io/badge/加载时间-${encodeURIComponent(displayTime)}-${color}`;
+
+    // 插入徽章到容器
+    document.getElementById('load-time-badge').src = badgeUrl;
+
+  });
+</script>
     </div>
     <nav id="mobile-nav">
   

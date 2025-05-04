@@ -145,7 +145,7 @@
     
     <footer class="article-footer">
      
-      <a data-url="https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/" data-id="cma9exho000b7kctz0ae86krx" data-title="证件照制作HivisionIDPhoto" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://qs100371.vip/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/" data-id="cma9rma3o00b6wwtz3h54fk33" data-title="证件照制作HivisionIDPhoto" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
         <a href="/post/zheng-jian-zhao-zhi-zuo-hivisionidphoto/#comments" class="article-comment-link">
@@ -352,8 +352,9 @@
               <span class="post-count"><img id="site-days-badge" src=""><img
                   src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
                   src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-                <img src="https://img.shields.io/badge/共- 67.5k 字-green"><img id="weather-badge"
-                  src=""></span>
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green">
+                <img id="load-time-badge" src="">
+              </span>
               
                 </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
                   
@@ -466,6 +467,52 @@
   });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 性能数据兼容性处理
+    const perf = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+    const timing = perf.timing;
+
+    // 计算加载时间
+    let loadTime;
+    if (timing && timing.loadEventEnd && timing.navigationStart) {
+      loadTime = timing.loadEventEnd - timing.navigationStart;
+    } else {
+      // 回退方案：使用 performance.now() 或 Date.now()
+      loadTime = perf.now ? perf.now() : (Date.now() - (perf.timing?.navigationStart || Date.now()));
+    }
+
+    // 处理异常值
+    let displayTime;
+    if (loadTime <= 0 || loadTime > 60000) { // 超过1分钟视为异常
+      displayTime = 'N/A';
+    } else if (loadTime < 1000) {
+      displayTime = `${Math.round(loadTime)}ms`; // 毫秒
+    } else {
+      displayTime = `${(loadTime / 1000).toFixed(2)}s`; // 秒（保留2位小数）
+    }
+
+    // 根据加载时间确定颜色
+    function getColor(ms) {
+      if (ms === 'N/A') return 'lightgrey';
+      const time = typeof ms === 'number' ? ms : parseFloat(ms) * 1000;
+      if (time < 800) return 'brightgreen';
+      if (time < 1500) return 'green';
+      if (time < 3000) return 'yellowgreen';
+      if (time < 5000) return 'orange';
+      return 'red';
+    }
+
+    const color = getColor(loadTime);
+
+    // 生成 shields.io 徽章 URL
+    const badgeUrl = `https://img.shields.io/badge/加载时间-${encodeURIComponent(displayTime)}-${color}`;
+
+    // 插入徽章到容器
+    document.getElementById('load-time-badge').src = badgeUrl;
+
+  });
+</script>
     </div>
     <nav id="mobile-nav">
   
