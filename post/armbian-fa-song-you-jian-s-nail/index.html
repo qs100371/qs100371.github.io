@@ -1,4 +1,480 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><title>armbian发送邮件: s-nail | qs blog</title><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="description" content="实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。"><meta property="og:type" content="article"><meta property="og:title" content="armbian发送邮件: s-nail"><meta property="og:url" content="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/index.html"><meta property="og:site_name" content="qs blog"><meta property="og:description" content="实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2025-02-11T13:55:57.000Z"><meta property="article:modified_time" content="2025-04-28T07:43:10.943Z"><meta property="article:author" content="qs100371"><meta property="article:tag" content="web"><meta property="article:tag" content="linux"><meta property="article:tag" content="armbian"><meta name="twitter:card" content="summary"><link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml"><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/" id="logo">qs blog</a></h1><h2 id="subtitle-wrap"><a href="/" id="subtitle">生命不止，折腾不止。</a></h2></div><div id="header-inner" class="inner"><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a> <a class="main-nav-link" href="/">首页</a> <a class="main-nav-link" href="/archives">归档</a> <a class="main-nav-link" href="/appscenter/">应用</a> <a class="main-nav-link" href="/about/">关于</a></nav><nav id="sub-nav"><a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a> <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a> <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form></div></div></div></header><div class="outer"><section id="main"><article id="post-armbian-fa-song-you-jian-s-nail" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><div class="article-meta"><a href="/post/armbian-fa-song-you-jian-s-nail/" class="article-date"><time class="dt-published" datetime="2025-02-11T13:55:57.000Z" itemprop="datePublished">2025-02-11</time></a></div><div class="article-inner"><header class="article-header"><h1 class="p-name article-title" itemprop="headline name">armbian发送邮件: s-nail</h1><hr><img src="https://img.shields.io/badge/字数统计-468-blue"><img src="https://img.shields.io/badge/阅读时间-7分-green"></header><div class="e-content article-entry" itemprop="articleBody"><div id="toc" class="toc-article"><strong class="toc-title">目录</strong><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85s-nail"><span class="toc-number">1.</span> <span class="toc-text">安装s-nail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%B5%8B%E8%AF%95%E9%82%AE%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">发送测试邮件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">新设置</span></a></li></ol></div><p>实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。</p><span id="more"></span><h1 id="安装s-nail"><a href="#安装s-nail" class="headerlink" title="安装s-nail"></a>安装s-nail</h1><p><code>apt install s-nail</code></p><h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp</span>=smtps://smtp.163.com:465    </span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-user</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-password</span>=此处不是邮箱密码，而是smtp服务提供的授权码！！！</span><br></pre></td></tr></table></figure><h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#x40;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;">&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#x40;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root<span class="keyword">@onecloud</span>:/etc# echo <span class="string">&quot;Successful&quot;</span> | s-nail -s <span class="string">&quot;hello?&quot;</span> ease_lee<span class="keyword">@qq</span>.com</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-user</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-password</span><br><span class="line"><span class="attribute">s-nail</span>: The empty (default) command is ignored here, but has <span class="attribute">arguments</span>: <span class="number">1</span></span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: please do <span class="keyword">not</span> use *smtp*, instead assign a <span class="attribute">smtp</span>:// URL to *mta*!</span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: Use of old-style credentials, which will vanish in v15!</span><br><span class="line"><span class="attribute">s-nail</span>:   Please read the manual section <span class="string">&quot;On URL syntax and credential lookup&quot;</span></span><br></pre></td></tr></table></figure><p>添加附件<br><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p><blockquote><p>虽然有警告，邮件还是发送出去了。</p></blockquote><h1 id="新设置"><a href="#新设置" class="headerlink" title="新设置"></a>新设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=<span class="string">&quot;user@163.com&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">mta</span>=smtps://user:password@smtp.163.com:465   #smtp服务器端口是465</span><br><span class="line"><span class="built_in">set</span> v15-compat  #必须要</span><br></pre></td></tr></table></figure><p>输出：<br>s-nail: The empty (default) command is ignored here, but has arguments: 1</p><blockquote><p>邮件能正常发送。附件较大的邮件只能发送到163邮箱，发到QQ邮箱会被退信。163邮箱和QQ邮箱做为smtp服务器都需要授权码。<br>在WebServerAutoBackup的备份脚本中第294行加上以下代码就可以把每天的备份包以附件的形式发送到163邮箱（附件较大，只能发到这里）：</p></blockquote><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)] Backup Successful&quot;</span> | s-nail -s <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)]服务器备份文件&quot;</span> -a $&#123;SAVE_DIR&#125;/backup.$NOW.zip user@163.com</span><br></pre></td></tr></table></figure></div><footer class="article-footer"><a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cma9rma220012wwtz52ogas50" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a> <a href="/post/armbian-fa-song-you-jian-s-nail/#comments" class="article-comment-link"><span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/armbian-fa-song-you-jian-s-nail/" itemprop="commentCount"></span> 留言</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul></footer></div><nav id="article-nav"><a href="/post/xiao-xi-fa-song-fu-wu-gotify/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">前一篇</strong><div class="article-nav-title">消息发送服务gotify</div></a><a href="/post/yi-kuan-kai-yuan-de-si-you-yun-pan-xiang-mu-file-browser/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">后一篇</strong><div class="article-nav-title">一款开源的私有云盘项目: File Browser</div></a></nav></article><section id="comments" class="vcomment"></section></section><aside id="sidebar"><div class="widget-wrap"><h3 class="widget-title">公告板</h3><div class="widget"><div class="notice" style="margin-top:5px"><i class="fa"></i><div class="notice-content"><span id="poem-container">正在加载....</span></div><script>function loadRandomContent(){fetch("https://img.qs100371.vip/songci.php").then(e=>e.text()).then(e=>{document.getElementById("poem-container").innerText=e}).catch(e=>{console.error("加载失败:",e),document.getElementById("poem-container").innerText="加载失败，请重试"})}loadRandomContent()</script></div><style>.notice{padding:5px;border:1px dashed #e6e6e6;color:red;position:relative;display:inline-block;width:96%;background:#fbfbfb50;border-radius:10px}.notice i{float:left;color:#999;font-size:18px;padding-right:0;vertical-align:middle;margin-top:3px}.notice-content{display:initial;vertical-align:middle}</style></div></div><div class="widget-wrap"><h3 class="widget-title">标签</h3><div class="widget"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">标签云</h3><div class="widget tagcloud"><a href="/tags/armbian/" style="font-size:13.33px">armbian</a> <a href="/tags/docker/" style="font-size:16.67px">docker</a> <a href="/tags/linux/" style="font-size:18.33px">linux</a> <a href="/tags/onecloud/" style="font-size:15px">onecloud</a> <a href="/tags/python/" style="font-size:10px">python</a> <a href="/tags/termux/" style="font-size:11.67px">termux</a> <a href="/tags/web/" style="font-size:20px">web</a></div></div><div class="widget-wrap"><h3 class="widget-title">归档</h3><div class="widget"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">最新文章</h3><div class="widget"><ul><li><a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a></li><li><a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a></li><li><a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a></li><li><a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a></li><li><a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a></li><li><a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a></li><li><a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a></li><li><a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a></li><li><a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a></li><li><a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a></li></ul></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><span class="post-count"><img id="site-days-badge" src=""><img src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow"> <img src="https://img.shields.io/badge/共- 67.5k 字-green"> <img id="load-time-badge" src=""></span><br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>&copy; 2025 qs100371<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></div></div><script>const startDate=new Date("2024-10-02 00:00:00"),today=new Date,timeDiff=today.getTime()-startDate.getTime(),daysDiff=Math.floor(timeDiff/864e5),badgeUrl=`https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;document.getElementById("site-days-badge").src=badgeUrl</script></footer><style>.back-to-top{position:fixed;bottom:20px;right:20px;width:46px;height:46px;border-radius:50%;background-color:#ff5722;color:#fff;text-align:center;line-height:46px;font-size:18px;cursor:pointer;display:none;z-index:9999;opacity:.9;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:all .3s}@media (min-width:768px){.back-to-top{bottom:50px;right:50px;width:50px;height:50px;line-height:50px;font-size:20px}}.back-to-top:hover{opacity:1;background-color:#ff3d00;transform:scale(1.1)}.back-to-top.active{animation:bounce .8s infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style><script>document.addEventListener("DOMContentLoaded",(function(){var e=document.createElement("div");e.className="back-to-top",e.innerHTML="↑",document.body.appendChild(e),window.addEventListener("scroll",(function(){window.pageYOffset>300?e.style.display="block":e.style.display="none"})),e.addEventListener("click",(function(e){e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}))}))</script><script>document.addEventListener('DOMContentLoaded', function () {
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+  
+  
+  <title>armbian发送邮件: s-nail | qs blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="armbian发送邮件: s-nail">
+<meta property="og:url" content="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/index.html">
+<meta property="og:site_name" content="qs blog">
+<meta property="og:description" content="实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-11T13:55:57.000Z">
+<meta property="article:modified_time" content="2025-04-28T07:43:10.943Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="armbian">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/avatar.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qs blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/appscenter/">应用</a>
+        
+          <a class="main-nav-link" href="/about/">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-armbian-fa-song-you-jian-s-nail" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/armbian-fa-song-you-jian-s-nail/" class="article-date">
+  <time class="dt-published" datetime="2025-02-11T13:55:57.000Z" itemprop="datePublished">2025-02-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          armbian发送邮件: s-nail
+        </h1>
+        <hr>
+        
+          <img src="https://img.shields.io/badge/字数统计-468-blue"><img
+            src="https://img.shields.io/badge/阅读时间-7分-green">
+          
+            
+              
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- 文章目录 没有tag的不显示目录-->
+         
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85s-nail"><span class="toc-number">1.</span> <span class="toc-text">安装s-nail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%B5%8B%E8%AF%95%E9%82%AE%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">发送测试邮件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">新设置</span></a></li></ol>
+          </div>
+         
+        <!-- Table of Contents -->
+        <p>实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。</p>
+<span id="more"></span>
+<h1 id="安装s-nail"><a href="#安装s-nail" class="headerlink" title="安装s-nail"></a>安装s-nail</h1><p><code>apt install s-nail</code></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp</span>=smtps://smtp.163.com:465    </span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-user</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-password</span>=此处不是邮箱密码，而是smtp服务提供的授权码！！！</span><br></pre></td></tr></table></figure>
+<h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#120;&#x40;&#113;&#113;&#x2e;&#99;&#x6f;&#x6d;">&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#x78;&#120;&#x40;&#113;&#113;&#x2e;&#99;&#x6f;&#x6d;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root<span class="keyword">@onecloud</span>:/etc# echo <span class="string">&quot;Successful&quot;</span> | s-nail -s <span class="string">&quot;hello?&quot;</span> ease_lee<span class="keyword">@qq</span>.com</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-user</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-password</span><br><span class="line"><span class="attribute">s-nail</span>: The empty (default) command is ignored here, but has <span class="attribute">arguments</span>: <span class="number">1</span></span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: please do <span class="keyword">not</span> use *smtp*, instead assign a <span class="attribute">smtp</span>:// URL to *mta*!</span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: Use of old-style credentials, which will vanish in v15!</span><br><span class="line"><span class="attribute">s-nail</span>:   Please read the manual section <span class="string">&quot;On URL syntax and credential lookup&quot;</span></span><br></pre></td></tr></table></figure>
+<p>添加附件<br><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p>
+<blockquote>
+<p>虽然有警告，邮件还是发送出去了。</p>
+</blockquote>
+<h1 id="新设置"><a href="#新设置" class="headerlink" title="新设置"></a>新设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=<span class="string">&quot;user@163.com&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">mta</span>=smtps://user:password@smtp.163.com:465   #smtp服务器端口是465</span><br><span class="line"><span class="built_in">set</span> v15-compat  #必须要</span><br></pre></td></tr></table></figure>
+<p>输出：<br>s-nail: The empty (default) command is ignored here, but has arguments: 1</p>
+<blockquote>
+<p>邮件能正常发送。附件较大的邮件只能发送到163邮箱，发到QQ邮箱会被退信。163邮箱和QQ邮箱做为smtp服务器都需要授权码。<br>在WebServerAutoBackup的备份脚本中第294行加上以下代码就可以把每天的备份包以附件的形式发送到163邮箱（附件较大，只能发到这里）：</p>
+</blockquote>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)] Backup Successful&quot;</span> | s-nail -s <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)]服务器备份文件&quot;</span> -a $&#123;SAVE_DIR&#125;/backup.$NOW.zip user@163.com</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <footer class="article-footer">
+     
+      <a data-url="https://qs100371.vip/post/armbian-fa-song-you-jian-s-nail/" data-id="cmaagyjyw0010c8tzfxntezxb" data-title="armbian发送邮件: s-nail" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/armbian-fa-song-you-jian-s-nail/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/armbian-fa-song-you-jian-s-nail/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+ 
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/xiao-xi-fa-song-fu-wu-gotify/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          消息发送服务gotify
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/yi-kuan-kai-yuan-de-si-you-yun-pan-xiang-mu-file-browser/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">一款开源的私有云盘项目: File Browser</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+</section>
+        
+          
+<aside id="sidebar" >
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">公告板</h3>
+        <div class="widget">
+            
+        
+                
+                        
+                            <div class="notice" style="margin-top:5px">
+                                <i class="fa "></i>
+                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
+
+                                <script>
+                                    
+                                    function loadRandomContent() {
+                                        fetch('https://img.qs100371.vip/songci.php')
+                                            .then(response => response.text())
+                                            .then(text => {
+                                                document.getElementById('poem-container').innerText = text;
+                                            })
+                                            .catch(error => {
+                                                console.error('加载失败:', error);
+                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
+                                            });
+                                    }
+
+                                    // 页面加载时自动获取一次
+                                    loadRandomContent();
+                                </script>
+                            </div>
+                            
+                                <style>
+                                    .notice {
+                                        padding: 5px;
+                                        border: 1px dashed #e6e6e6;
+                                        color: red;
+                                        position: relative;
+                                        display: inline-block;
+                                        width: 96%;
+                                        background: #fbfbfb50;
+                                        border-radius: 10px;
+                                    }
+
+                                    .notice i {
+                                        float: left;
+                                        color: #999;
+                                        font-size: 18px;
+                                        padding-right: 0px;
+                                        vertical-align: middle;
+                                        margin-top: 3px;
+                                    }
+
+                                    .notice-content {
+                                        display: initial;
+                                        vertical-align: middle;
+                                    }
+                                </style>
+                            <!--    <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"> -->
+        </div>
+        
+      </div>
+    
+    
+  
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">108</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a>
+          </li>
+        
+          <li>
+            <a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a>
+          </li>
+        
+          <li>
+            <a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a>
+          </li>
+        
+          <li>
+            <a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+        
+          <div class="outer">
+            <div id="footer-info" class="inner">
+              <span class="post-count"><img id="site-days-badge" src=""><img
+                  src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
+                  src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green">
+                <img id="load-time-badge" src="">
+              </span>
+              
+                </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                  
+                    &copy; 2025
+                      qs100371<br>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+            </div>
+          </div>
+          <script>
+            // 1. 计算建站天数
+            const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
+            const today = new Date();
+            const timeDiff = today.getTime() - startDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            // 2. 动态生成 Shields.io 徽章
+            const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
+            document.getElementById('site-days-badge').src = badgeUrl;
+
+            // 3. 每天 00:00 自动刷新（可选）
+            //setInterval(() => {
+            //  location.reload();
+            //}, 24 * 60 * 60 * 1000); // 24小时后刷新页面
+          </script>
+</footer>
+<style>
+  /* 返回顶部按钮 - 基础样式 */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    /* 移动端距离底部更近 */
+    right: 20px;
+    /* 移动端距离右侧更近 */
+    width: 46px;
+    /* 移动端稍小 */
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    /* 默认隐藏 */
+    z-index: 9999;
+    /* 确保在最上层 */
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+
+  /* 适配 PC 端（更大按钮） */
+  @media (min-width: 768px) {
+    .back-to-top {
+      bottom: 50px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+    }
+  }
+
+  /* 悬停效果 */
+  .back-to-top:hover {
+    opacity: 1;
+    background-color: #ff3d00;
+    transform: scale(1.1);
+  }
+
+  /* 滚动时跳动动画 */
+  .back-to-top.active {
+    animation: bounce 0.8s infinite;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     // 性能数据兼容性处理
     const perf = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
     const timing = perf.timing;
@@ -41,4 +517,91 @@
     // 插入徽章到容器
     document.getElementById('load-time-badge').src = badgeUrl;
 
-  });</script></div><nav id="mobile-nav"><a href="/" class="mobile-nav-link">首页</a> <a href="/archives" class="mobile-nav-link">归档</a> <a href="/appscenter/" class="mobile-nav-link">应用</a> <a href="/about/" class="mobile-nav-link">关于</a></nav><script src="/js/jquery-3.6.4.min.js"></script><script src="/fancybox/jquery.fancybox.min.js"></script><script src="/js/script.js"></script><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>var GUEST_INFO=["nick","mail","link"],guest_info="nick,mail,link".split(",").filter((function(a){return GUEST_INFO.indexOf(a)>-1})),notify=!1,verify=!1;new Valine({el:".vcomment",notify:notify,verify:verify,appId:"shrivAmDul1K9RSnayhd7foS-gzGzoHsz",appKey:"MJ6IotbRMRrEumBy45DTigT6",placeholder:"Just go go",pageSize:"10",avatar:"mm",lang:"zh-cn",avatar_cdn:"https://cravatar.cn/avatar/"})</script><script type="text/javascript">const backgroundImages=["/images/1.png","/images/2.png","/images/3.png","/images/4.png"];document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".v .veditor");if(e){const n=backgroundImages[Math.floor(Math.random()*backgroundImages.length)];e.style.backgroundImage=`url("${n}")`}})</script><style>.v[data-class=v] .veditor{background-size:contain;background-repeat:no-repeat;background-position:right}</style></div></body></html>
+  });
+</script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/appscenter/" class="mobile-nav-link">应用</a>
+  
+    <a href="/about/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn',
+        avatar_cdn: 'https://cravatar.cn/avatar/'
+    });
+</script>
+<script type="text/javascript">
+  const backgroundImages = [
+  "/images/1.png",
+  "/images/2.png",
+  "/images/3.png",
+  "/images/4.png",
+  // 更多图片...
+];
+
+// Valine 初始化后设置随机背景
+  document.addEventListener('DOMContentLoaded', () => {
+    const veditor = document.querySelector('.v .veditor');
+    if (veditor) {
+      const randomImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+      veditor.style.backgroundImage = `url("${randomImage}")`;
+    }
+  });
+</script>
+<style>
+  .v[data-class=v] .veditor {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+  }
+  </style>
+
+
+  </div>
+</body>
+</html>

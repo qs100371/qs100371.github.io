@@ -1,4 +1,522 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><title>linux系统日志及查看方法 | qs blog</title><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="description" content="linux作为服务器运行时，会产生大量的日志以记录系统运行状况。"><meta property="og:type" content="article"><meta property="og:title" content="linux系统日志及查看方法"><meta property="og:url" content="https://qs100371.vip/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/index.html"><meta property="og:site_name" content="qs blog"><meta property="og:description" content="linux作为服务器运行时，会产生大量的日志以记录系统运行状况。"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2025-04-25T07:40:20.000Z"><meta property="article:modified_time" content="2025-04-25T23:48:49.699Z"><meta property="article:author" content="qs100371"><meta property="article:tag" content="linux"><meta name="twitter:card" content="summary"><link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml"><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/" id="logo">qs blog</a></h1><h2 id="subtitle-wrap"><a href="/" id="subtitle">生命不止，折腾不止。</a></h2></div><div id="header-inner" class="inner"><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a> <a class="main-nav-link" href="/">首页</a> <a class="main-nav-link" href="/archives">归档</a> <a class="main-nav-link" href="/appscenter/">应用</a> <a class="main-nav-link" href="/about/">关于</a></nav><nav id="sub-nav"><a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a> <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a> <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form></div></div></div></header><div class="outer"><section id="main"><article id="post-linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><div class="article-meta"><a href="/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/" class="article-date"><time class="dt-published" datetime="2025-04-25T07:40:20.000Z" itemprop="datePublished">2025-04-25</time></a></div><div class="article-inner"><header class="article-header"><h1 class="p-name article-title" itemprop="headline name">linux系统日志及查看方法</h1><hr><img src="https://img.shields.io/badge/字数统计-987-blue"><img src="https://img.shields.io/badge/阅读时间-11分-green"></header><div class="e-content article-entry" itemprop="articleBody"><div id="toc" class="toc-article"><strong class="toc-title">目录</strong><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">日志文件的位置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">查看方式</span></a></li></ol></div><p>linux作为服务器运行时，会产生大量的日志以记录系统运行状况。</p><span id="more"></span><h1 id="日志文件的位置"><a href="#日志文件的位置" class="headerlink" title="日志文件的位置"></a>日志文件的位置</h1><p>Linux系统本身和大部分服务器程序的日志文件默认放在&#x2F;var&#x2F;log&#x2F;下。 部分程序共用一个日志文件，一部分程序使用单个日志文件。 而有些大型服务器程序日志由于日志文件不止一个，所以会在&#x2F;var&#x2F;log&#x2F;目录中建立相应的子目录来存放日志文件，这样既保证了日志文件目录的结构清晰，又可以快速定位日志文件。有一部分日志文件只有root用户才有权限读取，这保证了相关日志信息的安全性。</p><p>#常见的日志文件</p><table><thead><tr><th>日志文件</th><th>存放内容</th></tr></thead><tbody><tr><td>&#x2F;var&#x2F;log&#x2F;message</td><td>内核消息及各种应用程序的公共日志信息，包括启动、I&#x2F;O错误、 网络错误</td></tr><tr><td>&#x2F;var&#x2F;log&#x2F;cron</td><td>crond周期性计划任务产生的时间信息</td></tr><tr><td>&#x2F;var&#x2F;log&#x2F;dmesg</td><td>引导过程中的各种时间信息</td></tr><tr><td>&#x2F;var&#x2F;log&#x2F;maillog</td><td>进入或发出系统的电子邮件活动</td></tr><tr><td>&#x2F;var&#x2F;log&#x2F;lastlog</td><td>每个用户最近的登录事件</td></tr><tr><td>&#x2F;var&#x2F;log&#x2F;secure</td><td>用户认证相关的安全事件信息</td></tr><tr><td>&#x2F;var&#x2F;log&#x2F;wtmp</td><td>每个用户登录注销及系统启动和停机事件</td></tr><tr><td>&#x2F;var&#x2F;log&#x2F;btmp</td><td>失败的、错误的登录尝试及验证事件</td></tr></tbody></table><ul><li>内核及大多数系统消息<br>主要由默认安装的rsyslog软件包提供，rsyslog服务所使用的配置文件为&#x2F;etc&#x2F;rsyslog.conf，通过查看配置文件内容可以了解到系统默认的日志位置。</li></ul><p>rsyslog日志服务是一个常会被攻击的目标，破坏了它将使运维员很难发现入侵及入侵的痕迹，因此要特别注意监控其守护进程及配置文件。</p><ul><li>用户日志：<br>存放位置: &#x2F;var&#x2F;og&#x2F;wtmp、 &#x2F;var&#x2F;log&#x2F;btmp、 &#x2F;var&#x2F;log&#x2F;lastlog</li></ul><h1 id="查看方式"><a href="#查看方式" class="headerlink" title="查看方式"></a>查看方式</h1><ul><li>查询命令<br>users、who、w、last、 lastlog、 lastb等。<br>users命令：只是简单的输出当前登录的用户名，每个显示的用户名对应一个会话。<br>who命令：报告当前登录到系统的每个用户的信息，包括用户名，终端，登录日期，远程主机。<br>w命令：显示当前操作系统的每个用户及其远程所运行的进程信息。<br>last命令：用于查询成功登录到系统的用户记录，最近的登录情况在最前面。 通过last命令可以及时掌握Linux主机的登录情况，若发现未经授权的用户登陆过，则表示当前主机可能已被入侵。<br>lastlog命令：用于显示系统中所有用户最近一次登录信息。</li></ul><p>grep -v “#” &#x2F;etc&#x2F;syslog.conf &#x2F;&#x2F;列出非#打头的每一行</p><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*.info;mail.<span class="built_in">none</span>;authpriv.<span class="built_in">none</span>;cron.<span class="built_in">none</span> /<span class="keyword">var</span>/<span class="built_in">log</span>/messages</span><br><span class="line">authpriv.* <span class="regexp">/var/</span><span class="built_in">log</span>/secure</span><br><span class="line">mail.* -<span class="regexp">/var/</span><span class="built_in">log</span>/maillog</span><br><span class="line">cron.* <span class="regexp">/var/</span><span class="built_in">log</span>/cron</span><br><span class="line">*.emerg *</span><br><span class="line">uucp,news.crit /<span class="keyword">var</span>/<span class="built_in">log</span>/spooler</span><br><span class="line">local7.* <span class="regexp">/var/</span><span class="built_in">log</span>/boot.<span class="built_in">log</span></span><br></pre></td></tr></table></figure><ul><li>查看日志常用命令<br>tail:<br>​ -n 是显示行号；相当于nl命令;<br>​ <code>tail -100f test.log</code> 实时监控100行日志；<br>​ <code>tail -n 10 test.log</code> 查询日志尾部最后10行的日志；<br>​ <code>tail -n +10 test.log</code> 查询10行之后的所有日志；</li></ul><p>head:<br>​ 跟tail是相反的，tail是看后多少行日志，而head是查看日志文件的头多少行：<br>​ <code>head -n 10 test.log</code> 查询日志文件中的头10行日志；<br>​ <code>head -n -10 test.log</code> 查询日志文件除了最后10行的其他所有日志；</p><p>cat：<br>​ tac是倒序查看，是cat单词反写：<br>​ <code>cat -n test.log |grep &quot;debug&quot;</code> 查询关键字的日志(常用！~)</p><p>tail -f<br><code>tail -f file</code> 查看正在滚动的日志文件。这个命令可以查看大文件。</p></div><footer class="article-footer"><a data-url="https://qs100371.vip/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/" data-id="cma9rma2q005dwwtz58d24hop" data-title="linux系统日志及查看方法" class="article-share-link"><span class="fa fa-share">分享</span></a> <a href="/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/#comments" class="article-comment-link"><span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/" itemprop="commentCount"></span> 留言</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul></footer></div><nav id="article-nav"><a href="/post/you-qu-de-shieldsio-hui-zhang-badge/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">前一篇</strong><div class="article-nav-title">有趣的Shields.io 徽章</div></a><a href="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">后一篇</strong><div class="article-nav-title">docker容器日志查看方法</div></a></nav></article><section id="comments" class="vcomment"></section></section><aside id="sidebar"><div class="widget-wrap"><h3 class="widget-title">公告板</h3><div class="widget"><div class="notice" style="margin-top:5px"><i class="fa"></i><div class="notice-content"><span id="poem-container">正在加载....</span></div><script>function loadRandomContent(){fetch("https://img.qs100371.vip/songci.php").then(e=>e.text()).then(e=>{document.getElementById("poem-container").innerText=e}).catch(e=>{console.error("加载失败:",e),document.getElementById("poem-container").innerText="加载失败，请重试"})}loadRandomContent()</script></div><style>.notice{padding:5px;border:1px dashed #e6e6e6;color:red;position:relative;display:inline-block;width:96%;background:#fbfbfb50;border-radius:10px}.notice i{float:left;color:#999;font-size:18px;padding-right:0;vertical-align:middle;margin-top:3px}.notice-content{display:initial;vertical-align:middle}</style></div></div><div class="widget-wrap"><h3 class="widget-title">标签</h3><div class="widget"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">107</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">标签云</h3><div class="widget tagcloud"><a href="/tags/armbian/" style="font-size:13.33px">armbian</a> <a href="/tags/docker/" style="font-size:16.67px">docker</a> <a href="/tags/linux/" style="font-size:18.33px">linux</a> <a href="/tags/onecloud/" style="font-size:15px">onecloud</a> <a href="/tags/python/" style="font-size:10px">python</a> <a href="/tags/termux/" style="font-size:11.67px">termux</a> <a href="/tags/web/" style="font-size:20px">web</a></div></div><div class="widget-wrap"><h3 class="widget-title">归档</h3><div class="widget"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul></div></div><div class="widget-wrap"><h3 class="widget-title">最新文章</h3><div class="widget"><ul><li><a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a></li><li><a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a></li><li><a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a></li><li><a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a></li><li><a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a></li><li><a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a></li><li><a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a></li><li><a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a></li><li><a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a></li><li><a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a></li></ul></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><span class="post-count"><img id="site-days-badge" src=""><img src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow"> <img src="https://img.shields.io/badge/共- 67.5k 字-green"> <img id="load-time-badge" src=""></span><br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>&copy; 2025 qs100371<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></div></div><script>const startDate=new Date("2024-10-02 00:00:00"),today=new Date,timeDiff=today.getTime()-startDate.getTime(),daysDiff=Math.floor(timeDiff/864e5),badgeUrl=`https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;document.getElementById("site-days-badge").src=badgeUrl</script></footer><style>.back-to-top{position:fixed;bottom:20px;right:20px;width:46px;height:46px;border-radius:50%;background-color:#ff5722;color:#fff;text-align:center;line-height:46px;font-size:18px;cursor:pointer;display:none;z-index:9999;opacity:.9;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:all .3s}@media (min-width:768px){.back-to-top{bottom:50px;right:50px;width:50px;height:50px;line-height:50px;font-size:20px}}.back-to-top:hover{opacity:1;background-color:#ff3d00;transform:scale(1.1)}.back-to-top.active{animation:bounce .8s infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style><script>document.addEventListener("DOMContentLoaded",(function(){var e=document.createElement("div");e.className="back-to-top",e.innerHTML="↑",document.body.appendChild(e),window.addEventListener("scroll",(function(){window.pageYOffset>300?e.style.display="block":e.style.display="none"})),e.addEventListener("click",(function(e){e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}))}))</script><script>document.addEventListener('DOMContentLoaded', function () {
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+  
+  
+  <title>linux系统日志及查看方法 | qs blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="linux作为服务器运行时，会产生大量的日志以记录系统运行状况。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux系统日志及查看方法">
+<meta property="og:url" content="https://qs100371.vip/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/index.html">
+<meta property="og:site_name" content="qs blog">
+<meta property="og:description" content="linux作为服务器运行时，会产生大量的日志以记录系统运行状况。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-25T07:40:20.000Z">
+<meta property="article:modified_time" content="2025-04-25T23:48:49.699Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/avatar.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qs blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">生命不止，折腾不止。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/appscenter/">应用</a>
+        
+          <a class="main-nav-link" href="/about/">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/" class="article-date">
+  <time class="dt-published" datetime="2025-04-25T07:40:20.000Z" itemprop="datePublished">2025-04-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          linux系统日志及查看方法
+        </h1>
+        <hr>
+        
+          <img src="https://img.shields.io/badge/字数统计-987-blue"><img
+            src="https://img.shields.io/badge/阅读时间-11分-green">
+          
+            
+              
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- 文章目录 没有tag的不显示目录-->
+         
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">日志文件的位置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">查看方式</span></a></li></ol>
+          </div>
+         
+        <!-- Table of Contents -->
+        <p>linux作为服务器运行时，会产生大量的日志以记录系统运行状况。</p>
+<span id="more"></span>
+<h1 id="日志文件的位置"><a href="#日志文件的位置" class="headerlink" title="日志文件的位置"></a>日志文件的位置</h1><p>Linux系统本身和大部分服务器程序的日志文件默认放在&#x2F;var&#x2F;log&#x2F;下。 部分程序共用一个日志文件，一部分程序使用单个日志文件。 而有些大型服务器程序日志由于日志文件不止一个，所以会在&#x2F;var&#x2F;log&#x2F;目录中建立相应的子目录来存放日志文件，这样既保证了日志文件目录的结构清晰，又可以快速定位日志文件。有一部分日志文件只有root用户才有权限读取，这保证了相关日志信息的安全性。</p>
+<p>#常见的日志文件</p>
+<table>
+<thead>
+<tr>
+<th>日志文件</th>
+<th>存放内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;var&#x2F;log&#x2F;message</td>
+<td>内核消息及各种应用程序的公共日志信息，包括启动、I&#x2F;O错误、 网络错误</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;cron</td>
+<td>crond周期性计划任务产生的时间信息</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;dmesg</td>
+<td>引导过程中的各种时间信息</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;maillog</td>
+<td>进入或发出系统的电子邮件活动</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;lastlog</td>
+<td>每个用户最近的登录事件</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;secure</td>
+<td>用户认证相关的安全事件信息</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;wtmp</td>
+<td>每个用户登录注销及系统启动和停机事件</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;btmp</td>
+<td>失败的、错误的登录尝试及验证事件</td>
+</tr>
+</tbody></table>
+<ul>
+<li>内核及大多数系统消息<br>主要由默认安装的rsyslog软件包提供，rsyslog服务所使用的配置文件为&#x2F;etc&#x2F;rsyslog.conf，通过查看配置文件内容可以了解到系统默认的日志位置。</li>
+</ul>
+<p>rsyslog日志服务是一个常会被攻击的目标，破坏了它将使运维员很难发现入侵及入侵的痕迹，因此要特别注意监控其守护进程及配置文件。</p>
+<ul>
+<li>用户日志：<br>存放位置: &#x2F;var&#x2F;og&#x2F;wtmp、 &#x2F;var&#x2F;log&#x2F;btmp、 &#x2F;var&#x2F;log&#x2F;lastlog</li>
+</ul>
+<h1 id="查看方式"><a href="#查看方式" class="headerlink" title="查看方式"></a>查看方式</h1><ul>
+<li>查询命令<br>users、who、w、last、 lastlog、 lastb等。<br>users命令：只是简单的输出当前登录的用户名，每个显示的用户名对应一个会话。<br>who命令：报告当前登录到系统的每个用户的信息，包括用户名，终端，登录日期，远程主机。<br>w命令：显示当前操作系统的每个用户及其远程所运行的进程信息。<br>last命令：用于查询成功登录到系统的用户记录，最近的登录情况在最前面。 通过last命令可以及时掌握Linux主机的登录情况，若发现未经授权的用户登陆过，则表示当前主机可能已被入侵。<br>lastlog命令：用于显示系统中所有用户最近一次登录信息。</li>
+</ul>
+<p>grep -v “#” &#x2F;etc&#x2F;syslog.conf &#x2F;&#x2F;列出非#打头的每一行</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*.info;mail.<span class="built_in">none</span>;authpriv.<span class="built_in">none</span>;cron.<span class="built_in">none</span> /<span class="keyword">var</span>/<span class="built_in">log</span>/messages</span><br><span class="line">authpriv.* <span class="regexp">/var/</span><span class="built_in">log</span>/secure</span><br><span class="line">mail.* -<span class="regexp">/var/</span><span class="built_in">log</span>/maillog</span><br><span class="line">cron.* <span class="regexp">/var/</span><span class="built_in">log</span>/cron</span><br><span class="line">*.emerg *</span><br><span class="line">uucp,news.crit /<span class="keyword">var</span>/<span class="built_in">log</span>/spooler</span><br><span class="line">local7.* <span class="regexp">/var/</span><span class="built_in">log</span>/boot.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看日志常用命令<br>tail:<br>​ -n 是显示行号；相当于nl命令;<br>​ <code>tail -100f test.log</code> 实时监控100行日志；<br>​ <code>tail -n 10 test.log</code> 查询日志尾部最后10行的日志；<br>​ <code>tail -n +10 test.log</code> 查询10行之后的所有日志；</li>
+</ul>
+<p>head:<br>​ 跟tail是相反的，tail是看后多少行日志，而head是查看日志文件的头多少行：<br>​ <code>head -n 10 test.log</code> 查询日志文件中的头10行日志；<br>​ <code>head -n -10 test.log</code> 查询日志文件除了最后10行的其他所有日志；</p>
+<p>cat：<br>​ tac是倒序查看，是cat单词反写：<br>​ <code>cat -n test.log |grep &quot;debug&quot;</code> 查询关键字的日志(常用！~)</p>
+<p>tail -f<br><code>tail -f file</code> 查看正在滚动的日志文件。这个命令可以查看大文件。</p>
+
+      
+    </div>
+    
+    <footer class="article-footer">
+     
+      <a data-url="https://qs100371.vip/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/" data-id="cmaagyjzt005ic8tz3bmz1y9a" data-title="linux系统日志及查看方法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+        <a href="/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/linux-xi-tong-ri-zhi-ji-cha-kan-fang-fa/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+ 
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/post/you-qu-de-shieldsio-hui-zhang-badge/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          有趣的Shields.io 徽章
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">docker容器日志查看方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+</section>
+        
+          
+<aside id="sidebar" >
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">公告板</h3>
+        <div class="widget">
+            
+        
+                
+                        
+                            <div class="notice" style="margin-top:5px">
+                                <i class="fa "></i>
+                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
+
+                                <script>
+                                    
+                                    function loadRandomContent() {
+                                        fetch('https://img.qs100371.vip/songci.php')
+                                            .then(response => response.text())
+                                            .then(text => {
+                                                document.getElementById('poem-container').innerText = text;
+                                            })
+                                            .catch(error => {
+                                                console.error('加载失败:', error);
+                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
+                                            });
+                                    }
+
+                                    // 页面加载时自动获取一次
+                                    loadRandomContent();
+                                </script>
+                            </div>
+                            
+                                <style>
+                                    .notice {
+                                        padding: 5px;
+                                        border: 1px dashed #e6e6e6;
+                                        color: red;
+                                        position: relative;
+                                        display: inline-block;
+                                        width: 96%;
+                                        background: #fbfbfb50;
+                                        border-radius: 10px;
+                                    }
+
+                                    .notice i {
+                                        float: left;
+                                        color: #999;
+                                        font-size: 18px;
+                                        padding-right: 0px;
+                                        vertical-align: middle;
+                                        margin-top: 3px;
+                                    }
+
+                                    .notice-content {
+                                        display: initial;
+                                        vertical-align: middle;
+                                    }
+                                </style>
+                            <!--    <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"> -->
+        </div>
+        
+      </div>
+    
+    
+  
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">108</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a>
+          </li>
+        
+          <li>
+            <a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a>
+          </li>
+        
+          <li>
+            <a href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/">利用clawcloud部署自托管rustdesk服务器</a>
+          </li>
+        
+          <li>
+            <a href="/post/gitguardian-zhao-shang-men-liao/">GitGuardian找上门了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+        
+          <div class="outer">
+            <div id="footer-info" class="inner">
+              <span class="post-count"><img id="site-days-badge" src=""><img
+                  src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
+                  src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
+                <img src="https://img.shields.io/badge/共- 67.5k 字-green">
+                <img id="load-time-badge" src="">
+              </span>
+              
+                </br>All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                  
+                    &copy; 2025
+                      qs100371<br>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+            </div>
+          </div>
+          <script>
+            // 1. 计算建站天数
+            const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
+            const today = new Date();
+            const timeDiff = today.getTime() - startDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            // 2. 动态生成 Shields.io 徽章
+            const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
+            document.getElementById('site-days-badge').src = badgeUrl;
+
+            // 3. 每天 00:00 自动刷新（可选）
+            //setInterval(() => {
+            //  location.reload();
+            //}, 24 * 60 * 60 * 1000); // 24小时后刷新页面
+          </script>
+</footer>
+<style>
+  /* 返回顶部按钮 - 基础样式 */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    /* 移动端距离底部更近 */
+    right: 20px;
+    /* 移动端距离右侧更近 */
+    width: 46px;
+    /* 移动端稍小 */
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    /* 默认隐藏 */
+    z-index: 9999;
+    /* 确保在最上层 */
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+
+  /* 适配 PC 端（更大按钮） */
+  @media (min-width: 768px) {
+    .back-to-top {
+      bottom: 50px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+    }
+  }
+
+  /* 悬停效果 */
+  .back-to-top:hover {
+    opacity: 1;
+    background-color: #ff3d00;
+    transform: scale(1.1);
+  }
+
+  /* 滚动时跳动动画 */
+  .back-to-top.active {
+    animation: bounce 0.8s infinite;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     // 性能数据兼容性处理
     const perf = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
     const timing = perf.timing;
@@ -41,4 +559,91 @@
     // 插入徽章到容器
     document.getElementById('load-time-badge').src = badgeUrl;
 
-  });</script></div><nav id="mobile-nav"><a href="/" class="mobile-nav-link">首页</a> <a href="/archives" class="mobile-nav-link">归档</a> <a href="/appscenter/" class="mobile-nav-link">应用</a> <a href="/about/" class="mobile-nav-link">关于</a></nav><script src="/js/jquery-3.6.4.min.js"></script><script src="/fancybox/jquery.fancybox.min.js"></script><script src="/js/script.js"></script><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>var GUEST_INFO=["nick","mail","link"],guest_info="nick,mail,link".split(",").filter((function(a){return GUEST_INFO.indexOf(a)>-1})),notify=!1,verify=!1;new Valine({el:".vcomment",notify:notify,verify:verify,appId:"shrivAmDul1K9RSnayhd7foS-gzGzoHsz",appKey:"MJ6IotbRMRrEumBy45DTigT6",placeholder:"Just go go",pageSize:"10",avatar:"mm",lang:"zh-cn",avatar_cdn:"https://cravatar.cn/avatar/"})</script><script type="text/javascript">const backgroundImages=["/images/1.png","/images/2.png","/images/3.png","/images/4.png"];document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".v .veditor");if(e){const n=backgroundImages[Math.floor(Math.random()*backgroundImages.length)];e.style.backgroundImage=`url("${n}")`}})</script><style>.v[data-class=v] .veditor{background-size:contain;background-repeat:no-repeat;background-position:right}</style></div></body></html>
+  });
+</script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/appscenter/" class="mobile-nav-link">应用</a>
+  
+    <a href="/about/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn',
+        avatar_cdn: 'https://cravatar.cn/avatar/'
+    });
+</script>
+<script type="text/javascript">
+  const backgroundImages = [
+  "/images/1.png",
+  "/images/2.png",
+  "/images/3.png",
+  "/images/4.png",
+  // 更多图片...
+];
+
+// Valine 初始化后设置随机背景
+  document.addEventListener('DOMContentLoaded', () => {
+    const veditor = document.querySelector('.v .veditor');
+    if (veditor) {
+      const randomImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+      veditor.style.backgroundImage = `url("${randomImage}")`;
+    }
+  });
+</script>
+<style>
+  .v[data-class=v] .veditor {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+  }
+  </style>
+
+
+  </div>
+</body>
+</html>
