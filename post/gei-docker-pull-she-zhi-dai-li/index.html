@@ -15,7 +15,7 @@
 <meta property="og:description" content="docker一个最大的问题就是拉取不到镜像，因此需要给加上代理。在执行docker pull时，是由守护进程dockerd来执行。因此，代理需要配在dockerd的环境中。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-20T01:55:59.000Z">
-<meta property="article:modified_time" content="2025-03-09T03:17:45.076Z">
+<meta property="article:modified_time" content="2025-05-06T00:54:50.324Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -121,19 +121,18 @@
          
           <div id="toc" class="toc-article">
             <strong class="toc-title">目录</strong>
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#systemctl-edit-docker"><span class="toc-number">1.</span> <span class="toc-text">systemctl edit docker</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6-lib-systemd-system-docker-service"><span class="toc-number">2.</span> <span class="toc-text">也可以直接修改文件&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;docker.service</span></a></li></ol>
           </div>
          
         <!-- Table of Contents -->
         <p>docker一个最大的问题就是拉取不到镜像，因此需要给加上代理。<br>在执行docker pull时，是由守护进程dockerd来执行。因此，代理需要配在dockerd的环境中。</p>
 <span id="more"></span>
-<p><code>systemctl edit docker</code>     #或在&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;docker.service.d下建立override.conf<br>加上</p>
+<h1 id="systemctl-edit-docker"><a href="#systemctl-edit-docker" class="headerlink" title="systemctl edit docker"></a><code>systemctl edit docker</code></h1><p>或在&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;docker.service.d下建立override.conf<br>加上</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;HTTP_PROXY=http://192.168.0.74:10809/&quot;</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;HTTPS_PROXY=http://192.168.0.74:10809/&quot;</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;NO_PROXY=localhost,127.0.0.1&quot;</span></span><br></pre></td></tr></table></figure>
-<p>此处192.168.0.74:10809是本地代理。<br>也可以直接修改文件<code>/lib/systemd/system/docker.service</code><br>重启docker<br><code>systemctl daemon-reload</code><br><code>systemctl restart docker</code><br>代理生效。<br>可以通过systemctl show –property&#x3D;Environment docker看到设置的环境变量。</p>
-<p>为了拉取talebook&#x2F;talebook，费力连上了却发现没有适用于arm的包。</p>
-<blockquote>
-<p>此处用的代理不可以是docker里的openwrt提供的代理</p>
-</blockquote>
+<p>此处192.168.0.74:10809是本地代理。</p>
+<h1 id="也可以直接修改文件-lib-systemd-system-docker-service"><a href="#也可以直接修改文件-lib-systemd-system-docker-service" class="headerlink" title="也可以直接修改文件/lib/systemd/system/docker.service"></a>也可以直接修改文件<code>/lib/systemd/system/docker.service</code></h1><p>重启docker<br><code>systemctl daemon-reload</code><br><code>systemctl restart docker</code><br>代理生效。<br>可以通过systemctl show –property&#x3D;Environment docker看到设置的环境变量。</p>
+<hr>
+<p>为了拉取talebook&#x2F;talebook，费力连上了却发现没有适用于arm的包。<br>此处用的代理不可以是docker里的openwrt提供的代理</p>
 
       
     </div>
