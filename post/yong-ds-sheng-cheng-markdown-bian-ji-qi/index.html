@@ -95,18 +95,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-yong-ds-sheng-cheng-markdown-bian-ji-qi" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-yong-ds-sheng-cheng-markdown-bian-ji-qi" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" class="article-date">
   <time class="dt-published" datetime="2025-05-02T12:10:47.000Z" itemprop="datePublished">2025-05-02</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           用ds生成markdown编辑器
@@ -118,20 +119,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%BB%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">程序主代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">2.</span> <span class="toc-text">扩展</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>写作一直用的是gridea，自带有markdown编辑器，本文生成一个轻量级的编辑器。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%BB%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">程序主代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">2.</span> <span class="toc-text">扩展</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>写作一直用的是gridea，自带有markdown编辑器，本文生成一个轻量级的编辑器。</p>
 <span id="more"></span>
 <h1 id="程序主代码"><a href="#程序主代码" class="headerlink" title="程序主代码"></a>程序主代码</h1><p>提问：生成一个markdown编辑器，左右分屏，左边源代码，右边预览<br><img src="https://qs100371.vip/post-images/1746188044285.webp"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;zh-CN&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Markdown 编辑器&lt;/title&gt;</span><br><span class="line">    &lt;script src=<span class="string">&quot;https://cdn.jsdelivr.net/npm/marked/marked.min.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body &#123;</span><br><span class="line">            margin: <span class="number">0</span>;</span><br><span class="line">            padding: <span class="number">0</span>;</span><br><span class="line">            font-family: Arial, sans-serif;</span><br><span class="line">            display: flex;</span><br><span class="line">            height: 100vh;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        .editor-container &#123;</span><br><span class="line">            display: flex;</span><br><span class="line">            width: <span class="number">100</span>%;</span><br><span class="line">            height: <span class="number">100</span>%;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        .editor-pane &#123;</span><br><span class="line">            flex: <span class="number">1</span>;</span><br><span class="line">            padding: 10px;</span><br><span class="line">            box-sizing: border-box;</span><br><span class="line">            overflow: auto;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#editor &#123;</span></span><br><span class="line">            width: <span class="number">100</span>%;</span><br><span class="line">            height: <span class="number">100</span>%;</span><br><span class="line">            border: 1px solid <span class="comment">#ddd;</span></span><br><span class="line">            padding: 10px;</span><br><span class="line">            font-family: monospace;</span><br><span class="line">            resize: none;</span><br><span class="line">            outline: none;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#preview &#123;</span></span><br><span class="line">            width: <span class="number">100</span>%;</span><br><span class="line">            height: <span class="number">100</span>%;</span><br><span class="line">            border: 1px solid <span class="comment">#ddd;</span></span><br><span class="line">            padding: 10px;</span><br><span class="line">            overflow: auto;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        .pane-header &#123;</span><br><span class="line">            font-weight: bold;</span><br><span class="line">            margin-bottom: 10px;</span><br><span class="line">            padding-bottom: 5px;</span><br><span class="line">            border-bottom: 1px solid <span class="comment">#eee;</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        .resize-handle &#123;</span><br><span class="line">            width: 10px;</span><br><span class="line">            background: <span class="comment">#f0f0f0;</span></span><br><span class="line">            cursor: col-resize;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="keyword">class</span>=<span class="string">&quot;editor-container&quot;</span>&gt;</span><br><span class="line">        &lt;div <span class="keyword">class</span>=<span class="string">&quot;editor-pane&quot;</span>&gt;</span><br><span class="line">            &lt;div <span class="keyword">class</span>=<span class="string">&quot;pane-header&quot;</span>&gt;Markdown 源代码&lt;/div&gt;</span><br><span class="line">            &lt;textarea <span class="built_in">id</span>=<span class="string">&quot;editor&quot;</span>&gt;<span class="comment"># Markdown 编辑器</span></span><br><span class="line"></span><br><span class="line">这是一个**左右分屏**的 Markdown 编辑器。</span><br><span class="line"></span><br><span class="line">- 左边编辑 Markdown 源代码</span><br><span class="line">- 右边实时预览渲染结果</span><br><span class="line"></span><br><span class="line"><span class="comment">## 功能特点</span></span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 实时预览</span><br><span class="line"><span class="number">2.</span> 语法高亮</span><br><span class="line"><span class="number">3.</span> 响应式布局</span><br><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">// 示例代码</span><br><span class="line">function hello() &#123;</span><br><span class="line">    console.log(<span class="string">&quot;Hello, Markdown!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">```&lt;/textarea&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;div <span class="keyword">class</span>=<span class="string">&quot;resize-handle&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;resize-handle&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;div <span class="keyword">class</span>=<span class="string">&quot;editor-pane&quot;</span>&gt;</span><br><span class="line">            &lt;div <span class="keyword">class</span>=<span class="string">&quot;pane-header&quot;</span>&gt;预览&lt;/div&gt;</span><br><span class="line">            &lt;div <span class="built_in">id</span>=<span class="string">&quot;preview&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        const editor = document.getElementById(<span class="string">&#x27;editor&#x27;</span>);</span><br><span class="line">        const preview = document.getElementById(<span class="string">&#x27;preview&#x27;</span>);</span><br><span class="line">        const resizeHandle = document.getElementById(<span class="string">&#x27;resize-handle&#x27;</span>);</span><br><span class="line">        </span><br><span class="line">        // 初始渲染</span><br><span class="line">        updatePreview();</span><br><span class="line">        </span><br><span class="line">        // 实时更新预览</span><br><span class="line">        editor.addEventListener(<span class="string">&#x27;input&#x27;</span>, updatePreview);</span><br><span class="line">        </span><br><span class="line">        // 调整分屏大小</span><br><span class="line">        let isResizing = false;</span><br><span class="line">        resizeHandle.addEventListener(<span class="string">&#x27;mousedown&#x27;</span>, (e) =&gt; &#123;</span><br><span class="line">            isResizing = true;</span><br><span class="line">            document.body.style.cursor = <span class="string">&#x27;col-resize&#x27;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        document.addEventListener(<span class="string">&#x27;mousemove&#x27;</span>, (e) =&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isResizing) <span class="keyword">return</span>;</span><br><span class="line">            </span><br><span class="line">            const container = document.querySelector(<span class="string">&#x27;.editor-container&#x27;</span>);</span><br><span class="line">            const containerRect = container.getBoundingClientRect();</span><br><span class="line">            const leftWidth = e.clientX - containerRect.left;</span><br><span class="line">            const rightWidth = containerRect.width - leftWidth - <span class="number">10</span>; // 10px <span class="keyword">for</span> handle</span><br><span class="line">            </span><br><span class="line">            container.children[<span class="number">0</span>].style.flex = `<span class="number">0</span> <span class="number">0</span> $&#123;leftWidth&#125;px`;</span><br><span class="line">            container.children[<span class="number">2</span>].style.flex = `<span class="number">0</span> <span class="number">0</span> $&#123;rightWidth&#125;px`;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        document.addEventListener(<span class="string">&#x27;mouseup&#x27;</span>, () =&gt; &#123;</span><br><span class="line">            isResizing = false;</span><br><span class="line">            document.body.style.cursor = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        function updatePreview() &#123;</span><br><span class="line">            preview.innerHTML = marked.parse(editor.value);</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
@@ -151,23 +152,33 @@
 <p>经过与ds反复交流，生成了一个index.html版的markdown编辑器。</p>
 <p>预览：<a href="https://img.qs100371.vip/downloads/index.html">markdown编辑器</a></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" data-id="cmaagyk0p009ec8tz0av43gtp" data-title="用ds生成markdown编辑器" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" data-id="cmadtg0de009cpwtzev5vclpm" data-title="用ds生成markdown编辑器"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -190,16 +201,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -571,6 +581,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

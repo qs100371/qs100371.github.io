@@ -92,18 +92,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/" class="article-date">
   <time class="dt-published" datetime="2025-02-10T15:18:51.000Z" itemprop="datePublished">2025-02-10</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           dkTurbo, docker 镜像加速器自动切换
@@ -115,42 +116,52 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-compose-yml"><span class="toc-number">1.</span> <span class="toc-text">docker-compose.yml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">启动容器</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>dkTurbo，一个傻瓜式的可以帮你自动换源，从而使用更快的镜像加速下载的项目。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-compose-yml"><span class="toc-number">1.</span> <span class="toc-text">docker-compose.yml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">启动容器</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>dkTurbo，一个傻瓜式的可以帮你自动换源，从而使用更快的镜像加速下载的项目。</p>
 <span id="more"></span>
 <h1 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h1><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">dkturbo</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">registry.cn-shenzhen.aliyuncs.com/cp0204/dkturbo:main</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">dkturbo</span></span><br><span class="line">    <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/docker:/etc/docker</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/opt:/opt</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MODE=registry</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REGISTRY=auto</span></span><br><span class="line">    <span class="attribute">network_mode</span><span class="punctuation">:</span> <span class="string">bridge</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attribute">pid</span><span class="punctuation">:</span> <span class="string">host</span></span><br><span class="line">    <span class="attribute">privileged</span><span class="punctuation">:</span> <span class="string">true</span></span><br></pre></td></tr></table></figure>
 <h1 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h1><p><code>docker-compose up -d</code><br><code>docker logs dkturbo</code></p>
 <p>因为搭建这个服务的原因是拉取不到镜像，所以作者也是非常贴心，将镜像上传到了阿里云，并且附上了阿里云的加速地址，所以在部署镜像的时候不需要担心镜像无法拉取。<br>项目提供了两种加速模式，默认状态为「registry 模式」，此模式下应用会从指定的 registry 镜像源下载所需资源，无需配置代理，更加简单便捷。其中环境变量中的「REGISTRY」默认为auto，意为加载在线镜像列表，并自动选择最快的镜像源，也可以选择将变量设置为local，使用项目内置的加速源列表，也是自动择优选择，最后也可以选择输入自定义的镜像源。<br>除了默认模式，还有「proxy 模式」，此模式下，docker pull 流量都会通过代理服务器，适合本地开有代理的用户。<br><img src="https://qs100371.vip/post-images/1739265275391.webp"><br><img src="https://qs100371.vip/post-images/1739265281473.webp"><br>查看日志，就能看到刚刚运行项目后的运行过程以及结果，尝试了是否支持直连DockerHub，下载了线上镜像列表，并对每个镜像源进行测速，通过速度情况最后设置了最佳的镜像加速地址并重启docker。<br><code>docker info</code><br>显示：<br>Registry Mirrors:<br>  <a href="https://docker.1ms.run/">https://docker.1ms.run/</a></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/" data-id="cmaagyjz40027c8tzd079hz9p" data-title="dkTurbo, docker 镜像加速器自动切换" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/" data-id="cmadtg0c50026pwtzht4l189e" data-title="dkTurbo, docker 镜像加速器自动切换"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -173,16 +184,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -554,6 +564,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

@@ -90,18 +90,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" class="article-date">
   <time class="dt-published" datetime="2024-11-22T02:33:58.000Z" itemprop="datePublished">2024-11-22</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           玩客云docker安装qbittorrent失败
@@ -113,43 +114,53 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>qBittorrent 是一款开源免费的种子和磁力链接下载工具，支持 Windows、Mac 和 Linux。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>qBittorrent 是一款开源免费的种子和磁力链接下载工具，支持 Windows、Mac 和 Linux。</p>
 <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> run -d <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>--network host  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>--name=qbittorrent <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e PUID=<span class="number">1000</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e PGID=<span class="number">1000</span>  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e TZ=Asia/Shanghai  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e WEBUI PORT=<span class="number">8080</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-p <span class="number">8080</span>:<span class="number">8080</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-p <span class="number">6881</span>:<span class="number">6881</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-p <span class="number">6881</span>:<span class="number">6881</span>/udp <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v /data/qbittorrent:/config  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v /data/downloads:/downloads <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>--restart unless-stopped  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>lscr.io/linuxserver/qbittorrent:latest</span><br></pre></td></tr></table></figure>
 <p>Unable to find image ‘lscr.io&#x2F;linuxserver&#x2F;qbittorrent:latest’ locally<br>latest: Pulling from linuxserver&#x2F;qbittorrent<br>docker: no matching manifest for linux&#x2F;arm&#x2F;v7 in the manifest list entries.<br>See ‘docker run –help’.</p>
 <hr>
 <p> 没装上，不过可以直接apt安装，下载磁力链接速度还能接受，不过速度比直接用手机差很多。</p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" data-id="cmaagyk0f007uc8tzftw932yf" data-title="玩客云docker安装qbittorrent失败" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" data-id="cmadtg0d7007ypwtz3u4raa3p" data-title="玩客云docker安装qbittorrent失败"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/wan-ke-yun-docker-an-zhuang-qbittorrent-shi-bai/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -172,16 +183,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -553,6 +563,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

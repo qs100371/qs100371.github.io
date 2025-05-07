@@ -19,8 +19,8 @@
 <meta property="article:published_time" content="2024-12-03T08:22:11.000Z">
 <meta property="article:modified_time" content="2025-05-03T04:14:45.991Z">
 <meta property="article:author" content="qs100371">
-<meta property="article:tag" content="web">
 <meta property="article:tag" content="docker">
+<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://qs100371.vip/post-images/1733214627361.webp">
   
@@ -93,18 +93,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/" class="article-date">
   <time class="dt-published" datetime="2024-12-03T08:22:11.000Z" itemprop="datePublished">2024-12-03</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           通过GitHub工作流下载Docker镜像
@@ -116,20 +117,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C-%E7%99%BB%E5%BD%95GitHub%E8%B4%A6%E6%88%B7"><span class="toc-number">1.</span> <span class="toc-text">注册&#x2F;登录GitHub账户</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fork%E9%A1%B9%E7%9B%AEhttps-github-com-wukongdaily-DockerTarBuilder"><span class="toc-number">2.</span> <span class="toc-text">Fork项目https:&#x2F;&#x2F;github.com&#x2F;wukongdaily&#x2F;DockerTarBuilder</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">3.</span> <span class="toc-text">运行工作流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8B%89%E5%8F%96%E8%BF%9B%E5%BA%A6%E5%B9%B6%E4%B8%8B%E8%BD%BD%E9%95%9C%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">查看拉取进度并下载镜像</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>docker pull失败怎么办？可以试试github工作流的方法来下载。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C-%E7%99%BB%E5%BD%95GitHub%E8%B4%A6%E6%88%B7"><span class="toc-number">1.</span> <span class="toc-text">注册&#x2F;登录GitHub账户</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fork%E9%A1%B9%E7%9B%AEhttps-github-com-wukongdaily-DockerTarBuilder"><span class="toc-number">2.</span> <span class="toc-text">Fork项目https:&#x2F;&#x2F;github.com&#x2F;wukongdaily&#x2F;DockerTarBuilder</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">3.</span> <span class="toc-text">运行工作流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8B%89%E5%8F%96%E8%BF%9B%E5%BA%A6%E5%B9%B6%E4%B8%8B%E8%BD%BD%E9%95%9C%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">查看拉取进度并下载镜像</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>docker pull失败怎么办？可以试试github工作流的方法来下载。</p>
 <span id="more"></span>
 <h1 id="注册-登录GitHub账户"><a href="#注册-登录GitHub账户" class="headerlink" title="注册&#x2F;登录GitHub账户"></a>注册&#x2F;登录GitHub账户</h1><h1 id="Fork项目https-github-com-wukongdaily-DockerTarBuilder"><a href="#Fork项目https-github-com-wukongdaily-DockerTarBuilder" class="headerlink" title="Fork项目https://github.com/wukongdaily/DockerTarBuilder"></a>Fork项目<a href="https://github.com/wukongdaily/DockerTarBuilder">https://github.com/wukongdaily/DockerTarBuilder</a></h1><p>点击Actions选项卡，进入GitHub Actions界面</p>
 <h1 id="运行工作流"><a href="#运行工作流" class="headerlink" title="运行工作流"></a>运行工作流</h1><p>找到名为“Run workflow”的选项，点击之后，将看到一个界面，输入需要拉取的Docker镜像名称。然后点击Run workflow按钮。<br>GitHub后台将自动开始拉取指定的Docker镜像。这是GitHub Actions自动化的一部分，后台会根据工作流的定义从Docker Hub或其他镜像库中拉取镜像。</p>
@@ -138,23 +139,33 @@
 <hr>
 <p>用docker import方式会出错，提示<br>docker: Error response from daemon: no command specified.<br>See ‘docker run –help’.<br>这个工作流的实质是执行<br><code>docker pull --platform linux/arm/v7  ****</code><br>platform有linux&#x2F;amd64,linux&#x2F;arm64,linux&#x2F;arm&#x2F;v7等，再save image，tar，zip。</p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/" data-id="cmaagyk0d007ec8tzc5bh3d1s" data-title="通过GitHub工作流下载Docker镜像" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/" data-id="cmadtg0d4007gpwtzheitayc1" data-title="通过GitHub工作流下载Docker镜像"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/tong-guo-github-gong-zuo-liu-xia-zai-docker-jing-xiang/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -177,16 +188,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -558,6 +568,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

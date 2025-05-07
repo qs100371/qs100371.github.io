@@ -89,18 +89,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-docker-jing-xiang-de-dao-chu-dao-ru" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-docker-jing-xiang-de-dao-chu-dao-ru" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/docker-jing-xiang-de-dao-chu-dao-ru/" class="article-date">
   <time class="dt-published" datetime="2024-12-02T11:54:45.000Z" itemprop="datePublished">2024-12-02</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           Docker镜像的导出、导入
@@ -112,43 +113,53 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#export%E5%92%8Cimport"><span class="toc-number">1.</span> <span class="toc-text">export和import</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#save%E5%92%8Cload"><span class="toc-number">2.</span> <span class="toc-text">save和load</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>docker镜像的导入、导出和保存、载入命令行方法。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#export%E5%92%8Cimport"><span class="toc-number">1.</span> <span class="toc-text">export和import</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#save%E5%92%8Cload"><span class="toc-number">2.</span> <span class="toc-text">save和load</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>docker镜像的导入、导出和保存、载入命令行方法。</p>
 <span id="more"></span>
 <h1 id="export和import"><a href="#export和import" class="headerlink" title="export和import"></a>export和import</h1><p>从容器导出到文件：<br><code>docker export 容器ID或名称 &gt; file.tar</code><br>从文件导入镜像：<br><code>docker import -  新镜像名 &lt; file.tar</code></p>
 <h1 id="save和load"><a href="#save和load" class="headerlink" title="save和load"></a>save和load</h1><p>根据镜像名或ID将镜像保存到文件，可以同时打包多个：<br><code>docker  save    镜像名或ID  &gt; file.tar </code><br><code>docker  save -o file.tar ID1 ID2 ID3</code><br>载入镜像：<br><code>docker load &lt; file.tar</code></p>
 <hr>
 <p>导出的文件不能混用，import导入save产生的文件，启动容器时会出错。</p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/docker-jing-xiang-de-dao-chu-dao-ru/" data-id="cmaagyjzc003ec8tzgo5v1fiq" data-title="Docker镜像的导出、导入" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/docker-jing-xiang-de-dao-chu-dao-ru/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/docker-jing-xiang-de-dao-chu-dao-ru/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/docker-jing-xiang-de-dao-chu-dao-ru/" data-id="cmadtg0cg003gpwtzdz2w15oo" data-title="Docker镜像的导出、导入"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/docker-jing-xiang-de-dao-chu-dao-ru/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/docker-jing-xiang-de-dao-chu-dao-ru/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/docker-jing-xiang-de-dao-chu-dao-ru/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -171,16 +182,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -552,6 +562,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

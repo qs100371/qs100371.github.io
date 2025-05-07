@@ -89,18 +89,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-docker-ce-an-zhuang" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-docker-ce-an-zhuang" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/docker-ce-an-zhuang/" class="article-date">
   <time class="dt-published" datetime="2024-11-12T10:18:54.000Z" itemprop="datePublished">2024-11-12</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           docker-ce安装
@@ -112,20 +113,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">自动安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">手动安装</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>docker-ce是linux装机必备。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">自动安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">手动安装</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>docker-ce是linux装机必备。</p>
 <span id="more"></span>
 <h1 id="自动安装"><a href="#自动安装" class="headerlink" title="自动安装"></a>自动安装</h1><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">curl</span> -<span class="string">fsSL</span> <span class="string">https</span>://<span class="string">get</span>.<span class="string">docker</span>.<span class="string">com</span> -<span class="string">o</span> <span class="built_in">get-docker.sh</span></span><br><span class="line"><span class="string">sh</span> ./<span class="built_in">get-docker.sh</span></span><br></pre></td></tr></table></figure>
 <h1 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h1><p>如果过去安装过 docker，先删掉：<br><code>for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done</code></p>
@@ -133,23 +134,33 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">install -m 0755 -d /etc/apt/keyrings</span><br><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | <span class="built_in">sudo</span> gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> a+r /etc/apt/keyrings/docker.gpg</span><br><span class="line"><span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">&quot;deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \</span></span><br><span class="line"><span class="string">  &quot;</span>$(. /etc/os-release &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$VERSION_CODENAME</span>&quot;</span>)<span class="string">&quot; stable&quot;</span> | \</span><br><span class="line">  <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
 <p>最后安装<br><code>sudo update</code><br><code>sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/docker-ce-an-zhuang/" data-id="cmaagyjza0034c8tzerx31iyi" data-title="docker-ce安装" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/docker-ce-an-zhuang/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/docker-ce-an-zhuang/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/docker-ce-an-zhuang/" data-id="cmadtg0ce0038pwtzbpcr1jne" data-title="docker-ce安装"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/docker-ce-an-zhuang/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/docker-ce-an-zhuang/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/docker-ce-an-zhuang/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -172,16 +183,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -553,6 +563,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

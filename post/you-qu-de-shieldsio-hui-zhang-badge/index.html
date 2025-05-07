@@ -105,18 +105,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-you-qu-de-shieldsio-hui-zhang-badge" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-you-qu-de-shieldsio-hui-zhang-badge" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/you-qu-de-shieldsio-hui-zhang-badge/" class="article-date">
   <time class="dt-published" datetime="2025-04-26T01:39:54.000Z" itemprop="datePublished">2025-04-26</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           有趣的Shields.io 徽章
@@ -128,20 +129,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%BE%BD%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">静态徽章</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">2.</span> <span class="toc-text">进阶</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8AI"><span class="toc-number">3.</span> <span class="toc-text">使用AI</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>很多项目都有很漂亮的徽章。这些徽章可以用来显示项目版本、进度条、star 数量、fork 数量….，那么这些徽章是如何生成的呢？</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%BE%BD%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">静态徽章</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">2.</span> <span class="toc-text">进阶</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8AI"><span class="toc-number">3.</span> <span class="toc-text">使用AI</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>很多项目都有很漂亮的徽章。这些徽章可以用来显示项目版本、进度条、star 数量、fork 数量….，那么这些徽章是如何生成的呢？</p>
 <span id="more"></span>
 <p><a href="https://shields.io/">https://shields.io/</a><br>在这里，可以生成最基本的徽章样式。只需简单的几行代码，就能让项目页面瞬间生动起来。<br><img src="https://qs100371.vip/post-images/1745632303482.webp"></p>
 <p><img src="https://qs100371.vip/post-images/1745632308196.webp"></p>
@@ -164,23 +165,33 @@
 <p>方法 2：动态生成（JavaScript）<br>如果想每天自动换文案（如随机推荐食物）：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foods = [<span class="string">&quot;拉面&quot;</span>, <span class="string">&quot;饺子&quot;</span>, <span class="string">&quot;汉堡&quot;</span>, <span class="string">&quot;沙拉&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> randomFood = foods[<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * foods.<span class="property">length</span>)];</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;food-badge&#x27;</span>).<span class="property">src</span> = </span><br><span class="line">  <span class="string">`https://img.shields.io/badge/今天-吃<span class="subst">$&#123;randomFood&#125;</span>-blue?colorA=blue&amp;colorB=orange`</span>;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">&quot;food-badge&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;今天吃什么&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/you-qu-de-shieldsio-hui-zhang-badge/" data-id="cmaagyk0r009mc8tzfd435qev" data-title="有趣的Shields.io 徽章" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/you-qu-de-shieldsio-hui-zhang-badge/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/you-qu-de-shieldsio-hui-zhang-badge/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/you-qu-de-shieldsio-hui-zhang-badge/" data-id="cmadtg0dg009opwtz9b212mur" data-title="有趣的Shields.io 徽章"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/you-qu-de-shieldsio-hui-zhang-badge/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/you-qu-de-shieldsio-hui-zhang-badge/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/you-qu-de-shieldsio-hui-zhang-badge/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -203,16 +214,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -584,6 +594,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

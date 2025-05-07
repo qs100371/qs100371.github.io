@@ -90,18 +90,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" class="article-date">
   <time class="dt-published" datetime="2024-11-22T02:07:52.000Z" itemprop="datePublished">2024-11-22</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           玩客云docker安装Aria2 Pro和AriaNg
@@ -113,20 +114,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Aria2-Pro"><span class="toc-number">1.</span> <span class="toc-text">安装Aria2 Pro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85AriaNg"><span class="toc-number">2.</span> <span class="toc-text">安装AriaNg</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEAria2"><span class="toc-number">3.</span> <span class="toc-text">配置Aria2</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>Aria2是一个命令行下载器。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Aria2-Pro"><span class="toc-number">1.</span> <span class="toc-text">安装Aria2 Pro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85AriaNg"><span class="toc-number">2.</span> <span class="toc-text">安装AriaNg</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEAria2"><span class="toc-number">3.</span> <span class="toc-text">配置Aria2</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>Aria2是一个命令行下载器。</p>
 <span id="more"></span>
 <h1 id="安装Aria2-Pro"><a href="#安装Aria2-Pro" class="headerlink" title="安装Aria2 Pro"></a>安装Aria2 Pro</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -d  \</span><br><span class="line">--name aria2-pro  \</span><br><span class="line">--restart unless-stopped  \</span><br><span class="line">--log-opt <span class="attribute">max-size</span>=1m  \</span><br><span class="line">-e <span class="attribute">PUID</span>=<span class="variable">$UID</span>  \</span><br><span class="line">-e <span class="attribute">PGID</span>=<span class="variable">$GID</span>  \</span><br><span class="line">-e <span class="attribute">UMASK_SET</span>=022 \</span><br><span class="line">-e <span class="attribute">RPC_SECRET</span>=qq1172851433  \</span><br><span class="line">-e <span class="attribute">RPC_PORT</span>=6800  \</span><br><span class="line">-p 6800:6800 \</span><br><span class="line">-e <span class="attribute">LISTEN_PORT</span>=6888 \</span><br><span class="line">-p 6888:6888  \</span><br><span class="line">-p 6888:6888/udp \ </span><br><span class="line">-v /data/aria2:<span class="built_in">/config </span>\</span><br><span class="line">-v /data/downloads:/downloads \</span><br><span class="line">p3terx/aria2-pro</span><br></pre></td></tr></table></figure>
 
@@ -136,23 +137,33 @@
 <hr>
 <p>aria2下载比不上qbittorrent，暂时没有发现有什么更好的用途。</p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" data-id="cmaagyk0e007oc8tz8prrg5aw" data-title="玩客云docker安装Aria2 Pro和AriaNg" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" data-id="cmadtg0d6007spwtz9p4r0te7" data-title="玩客云docker安装Aria2 Pro和AriaNg"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -175,16 +186,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -556,6 +566,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

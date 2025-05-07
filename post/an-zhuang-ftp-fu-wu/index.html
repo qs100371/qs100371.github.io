@@ -89,18 +89,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-an-zhuang-ftp-fu-wu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-an-zhuang-ftp-fu-wu" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/an-zhuang-ftp-fu-wu/" class="article-date">
   <time class="dt-published" datetime="2024-10-14T13:17:20.000Z" itemprop="datePublished">2024-10-14</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           安装ftp服务
@@ -112,20 +113,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">匿名用户模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8-srv-ftp%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%88%9B%E5%BB%BAupload%E7%9B%AE%E5%BD%95%E5%B9%B6%E5%AE%8C%E6%88%90%E8%B5%8B%E6%9D%83%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">在&#x2F;srv&#x2F;ftp目录下创建upload目录并完成赋权操作：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEupload%E7%9B%AE%E5%BD%95%E7%9A%84%E6%9D%83%E9%99%90%E4%B8%BA775"><span class="toc-number">3.</span> <span class="toc-text">设置upload目录的权限为775</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>安装vsftpd：<br>sudo apt install vsftpd<br>检测是否安装：<br>vsftpd -version</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">匿名用户模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8-srv-ftp%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%88%9B%E5%BB%BAupload%E7%9B%AE%E5%BD%95%E5%B9%B6%E5%AE%8C%E6%88%90%E8%B5%8B%E6%9D%83%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">在&#x2F;srv&#x2F;ftp目录下创建upload目录并完成赋权操作：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEupload%E7%9B%AE%E5%BD%95%E7%9A%84%E6%9D%83%E9%99%90%E4%B8%BA775"><span class="toc-number">3.</span> <span class="toc-text">设置upload目录的权限为775</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>安装vsftpd：<br>sudo apt install vsftpd<br>检测是否安装：<br>vsftpd -version</p>
 <span id="more"></span>
 
 <h1 id="匿名用户模式"><a href="#匿名用户模式" class="headerlink" title="匿名用户模式"></a>匿名用户模式</h1><p>在vsftpd.conf文件中添加匿名用户相关配置：</p>
@@ -133,23 +134,33 @@
 <h1 id="在-srv-ftp目录下创建upload目录并完成赋权操作："><a href="#在-srv-ftp目录下创建upload目录并完成赋权操作：" class="headerlink" title="在&#x2F;srv&#x2F;ftp目录下创建upload目录并完成赋权操作："></a>在&#x2F;srv&#x2F;ftp目录下创建upload目录并完成赋权操作：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> /srv/ftp/upload</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R :ftp /srv/ftp/upload</span><br></pre></td></tr></table></figure>
 <h1 id="设置upload目录的权限为775"><a href="#设置upload目录的权限为775" class="headerlink" title="设置upload目录的权限为775"></a>设置upload目录的权限为775</h1><p>sudo chmod 775 &#x2F;srv&#x2F;ftp&#x2F;upload<br>重启服务<br>sudo systemctl restart vsftpd<br>查看服务状态<br>sudo systemctl  status  vsftpd</p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/an-zhuang-ftp-fu-wu/" data-id="cmaagyjyq000ac8tz9cql01xp" data-title="安装ftp服务" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/an-zhuang-ftp-fu-wu/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/an-zhuang-ftp-fu-wu/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/an-zhuang-ftp-fu-wu/" data-id="cmadtg0bv000dpwtz00qb9vqc" data-title="安装ftp服务"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/an-zhuang-ftp-fu-wu/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/an-zhuang-ftp-fu-wu/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/an-zhuang-ftp-fu-wu/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -172,16 +183,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -553,6 +563,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

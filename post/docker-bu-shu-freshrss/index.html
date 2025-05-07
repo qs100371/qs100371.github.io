@@ -89,18 +89,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-docker-bu-shu-freshrss" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-docker-bu-shu-freshrss" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/docker-bu-shu-freshrss/" class="article-date">
   <time class="dt-published" datetime="2024-11-16T04:38:50.000Z" itemprop="datePublished">2024-11-16</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           Docker 部署 FreshRSS
@@ -112,20 +113,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cli"><span class="toc-number">1.</span> <span class="toc-text">cli</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8-RSS-%E6%BA%90%E5%88%97%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">常用 RSS 源列表</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>安装<br>以下是官方的 Docker 脚本，需要做适当修改</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cli"><span class="toc-number">1.</span> <span class="toc-text">cli</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8-RSS-%E6%BA%90%E5%88%97%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">常用 RSS 源列表</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>安装<br>以下是官方的 Docker 脚本，需要做适当修改</p>
 <span id="more"></span>
 <h1 id="cli"><a href="#cli" class="headerlink" title="cli"></a>cli</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> run -d --restart unless-stopped --log-opt max-size=<span class="number">10</span>m <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-p <span class="number">8282</span>:<span class="number">80</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e TZ=Asia/Shanghai <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e &#x27;CRON_MIN=<span class="number">1</span>,<span class="number">31</span>&#x27; <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v freshrss_data:/var/www/FreshRSS/data <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v freshrss_extensions:/var/www/FreshRSS/extensions <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>--name freshrss <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>freshrss/freshrss</span><br></pre></td></tr></table></figure>
 
@@ -133,23 +134,33 @@
 <h1 id="常用-RSS-源列表"><a href="#常用-RSS-源列表" class="headerlink" title="常用 RSS 源列表"></a>常用 RSS 源列表</h1><p><a href="https://plink.anyfeeder.com/">https://plink.anyfeeder.com/</a></p>
 <p>执行以进入容器<br><code>docker exec -it freshrss1 bash</code><br><code>cd cli</code><br><code>ls</code></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/docker-bu-shu-freshrss/" data-id="cmaagyjz7002qc8tz1y0143l3" data-title="Docker 部署 FreshRSS" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/docker-bu-shu-freshrss/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/docker-bu-shu-freshrss/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/docker-bu-shu-freshrss/" data-id="cmadtg0c8002lpwtza91kcf4o" data-title="Docker 部署 FreshRSS"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/docker-bu-shu-freshrss/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/docker-bu-shu-freshrss/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/docker-bu-shu-freshrss/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -172,16 +183,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -553,6 +563,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

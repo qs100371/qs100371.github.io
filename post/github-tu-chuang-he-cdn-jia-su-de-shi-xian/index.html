@@ -94,18 +94,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-github-tu-chuang-he-cdn-jia-su-de-shi-xian" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-github-tu-chuang-he-cdn-jia-su-de-shi-xian" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/" class="article-date">
   <time class="dt-published" datetime="2025-01-28T01:17:44.000Z" itemprop="datePublished">2025-01-28</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           github图床和cdn加速的实现
@@ -117,20 +118,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8Bgithub%E4%BB%93%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">建立github仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDpicgo"><span class="toc-number">2.</span> <span class="toc-text">下载picgo</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>github能存放静态资源，但国内访问不畅，需要使用cdn加速，jsDelivr能提供免费的cdn加速（也是cloudflare家的）。本文使用picgo软件上传图片至github仓库，输出多种cdn加速的图片访问方式。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8Bgithub%E4%BB%93%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">建立github仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDpicgo"><span class="toc-number">2.</span> <span class="toc-text">下载picgo</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>github能存放静态资源，但国内访问不畅，需要使用cdn加速，jsDelivr能提供免费的cdn加速（也是cloudflare家的）。本文使用picgo软件上传图片至github仓库，输出多种cdn加速的图片访问方式。</p>
 <span id="more"></span>
 <h1 id="建立github仓库"><a href="#建立github仓库" class="headerlink" title="建立github仓库"></a>建立github仓库</h1><p>登录github（没有的话先注册），建立一个名为img的仓库。<br>地址为：<a href="https://github.com/uesrname/img%E3%80%82">https://github.com/uesrname/img。</a><br>生成 Access token，选中repo权限。</p>
 <h1 id="下载picgo"><a href="#下载picgo" class="headerlink" title="下载picgo"></a>下载picgo</h1><p>picgo网站：<a href="https://picgo.github.io/PicGo-Doc/zh/">https://picgo.github.io/PicGo-Doc/zh/</a><br>下载：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a><br>这里用的是x64的win版本。<br>安装后设置github仓库信息。<br><img src="https://qs100371.vip/post-images/1738027864579.webp"><br><img src="https://qs100371.vip/post-images/1738027869617.webp"><br>自定义域名为cdn加速地址<a href="https://cdn.jsdelivr.net/gh/username/img@main%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%BB%A5%E5%90%8E%E5%9B%BE%E7%89%87%E7%9A%84%E8%AE%BF%E9%97%AE%E5%9C%B0%E5%9D%80%E5%89%8D%E7%BC%80%E3%80%82">https://cdn.jsdelivr.net/gh/username/img@main，就是以后图片的访问地址前缀。</a><br><img src="https://qs100371.vip/post-images/1738028039928.webp"><br>点击图片下方的小图标复制图片地址。把这个地址粘贴到浏览器地址栏就可以打开这个图片。<br><img src="https://qs100371.vip/post-images/1738028215996.webp"><br>点击url处，可更改图片引用格式，有markdown，html，url，ubb方式。<br>这是一个可直接访问的地址：<br><a href="https://cdn.jsdelivr.net/gh/qs100371/img@main/20250127213917429.webp">https://cdn.jsdelivr.net/gh/qs100371/img@main/20250127213917429.webp</a></p>
@@ -138,23 +139,33 @@
 <p>上传并不顺利，可能需要加一个本地代理（梯子）。</p>
 </blockquote>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/" data-id="cmaagyjzp004sc8tzg6nm8ufs" data-title="github图床和cdn加速的实现" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/" data-id="cmadtg0cn004qpwtz0j3d1wm4" data-title="github图床和cdn加速的实现"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -177,16 +188,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -558,6 +568,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

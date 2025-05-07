@@ -89,18 +89,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" class="article-date">
   <time class="dt-published" datetime="2025-03-21T07:19:33.000Z" itemprop="datePublished">2025-03-21</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           scp和rsync基本用法与断点续传
@@ -112,43 +113,53 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scp"><span class="toc-number">1.</span> <span class="toc-text">scp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rsync"><span class="toc-number">2.</span> <span class="toc-text">rsync</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0"><span class="toc-number">3.</span> <span class="toc-text">断点续传</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>在远程服务器和本地之间传输文件，可以使用scp命令，也可以使用rsync。本文记录了两个命令的用法。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scp"><span class="toc-number">1.</span> <span class="toc-text">scp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rsync"><span class="toc-number">2.</span> <span class="toc-text">rsync</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0"><span class="toc-number">3.</span> <span class="toc-text">断点续传</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>在远程服务器和本地之间传输文件，可以使用scp命令，也可以使用rsync。本文记录了两个命令的用法。</p>
 <span id="more"></span>
 <p>scp和rsync对比：scp节约资源，系统负荷小，但断点续传是个问题；rsync速度更快，断点续传方便，但系统负荷大，尤其是传输很多文件的时候，硬盘I&#x2F;O非常高。</p>
 <h1 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h1><p><code>scp [OPTION] SRC DEST</code><br>常用参数：<br>-r：递归拷贝目录<br>-q：不显示进度<br>-l：限制传输带宽，单位是kbits&#x2F;s<br><code>scp -r -l 200 /home/user/exampledir user@192.168.XXX.XXX:/home/user/</code><br>系统会要求输入user在192.168.XXX.XXX的登录密码，密码正确后就开始复制，scp默认显示复制进度。<br>如果经常在两个服务器之间拷贝文件，就需要一个非常有用的技术：scp免密码拷贝文件。</p>
 <h1 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h1><p><code>rsync [OPTION] SRC DEST</code><br>常用参数：<br>–progress： 显示拷贝进度。<br>–partial：保留不完整文件，实现断点续传。<br>–partial-dir&#x3D;DIR：指定不完整文件的存储目录，而不是默认存储到目的地目录。<br>-P：包含–progress和–partial<br>–rsh&#x3D;ssh：使用ssh方式传输文件，注意：如果之前设置过ssh免密码登录，那么此时也就不需要密码，非常方便。<br>-v：显示详细信息。<br>-a：归档模式。也就是以递归方式传输文件，并保持所有文件属性。<br>-r：递归方式传输文件。<br>本地复制文件：<br><code>rsync -av --progress SRC DEST</code></p>
 <h1 id="断点续传"><a href="#断点续传" class="headerlink" title="断点续传"></a>断点续传</h1><p><code>rsync -P --rsh=ssh qs@192.168.0.2:/home/test.mp4 /root</code></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" data-id="cmaagyk05006gc8tze0yv3q73" data-title="scp和rsync基本用法与断点续传" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" data-id="cmadtg0d0006mpwtzcqb34mxk" data-title="scp和rsync基本用法与断点续传"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -171,16 +182,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -552,6 +562,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

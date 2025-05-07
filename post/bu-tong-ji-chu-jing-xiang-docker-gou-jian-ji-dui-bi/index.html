@@ -91,18 +91,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" class="article-date">
   <time class="dt-published" datetime="2025-04-20T02:03:16.000Z" itemprop="datePublished">2025-04-20</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           不同基础镜像docker构建及对比
@@ -114,20 +115,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5alpine%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">以alpine为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5ubuntu%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">以ubuntu为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5debian%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">以debian为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">4.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5alpine%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">以alpine为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5ubuntu%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">以ubuntu为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5debian%E4%B8%BA%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">以debian为基础镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">4.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。</p>
 <span id="more"></span>
 <h1 id="以alpine为基础镜像"><a href="#以alpine为基础镜像" class="headerlink" title="以alpine为基础镜像"></a>以alpine为基础镜像</h1><p>Dockerfile：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> php:<span class="number">7.3</span>-fpm-alpine3.<span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 使用国内镜像源加速（可选）</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;https://mirrors.aliyun.com/alpine/v3.11/main&quot;</span> &gt; /etc/apk/repositories &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">echo</span> <span class="string">&quot;https://mirrors.aliyun.com/alpine/v3.11/community&quot;</span> &gt;&gt; /etc/apk/repositories</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 仅安装必要软件（Nginx，删除所有编译工具）</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk update &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apk add --no-cache nginx &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mkdir</span> /run/nginx</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 直接使用默认配置（删除不必要的扩展和自定义配置）</span></span><br><span class="line"><span class="comment"># 注：默认 php.ini 已足够，无需覆盖</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 添加最小化文件</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> index.php /var/www/html/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> default.conf /etc/nginx/conf.d/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> run.sh /</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 设置权限并清理</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x /run.sh &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">rm</span> -rf /var/cache/apk/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 启动命令</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;/run.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
@@ -204,23 +205,33 @@
 <li>需要完整工具链 → ubuntu</li>
 </ul>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" data-id="cmaagyjyz001ac8tz1pwy9x42" data-title="不同基础镜像docker构建及对比" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" data-id="cmadtg0c10019pwtzcgg2efeq" data-title="不同基础镜像docker构建及对比"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -243,16 +254,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -624,6 +634,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

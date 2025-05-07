@@ -89,18 +89,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-docker-rong-qi-ri-zhi-cha-kan-fang-fa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-docker-rong-qi-ri-zhi-cha-kan-fang-fa" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" class="article-date">
   <time class="dt-published" datetime="2025-04-25T07:33:04.000Z" itemprop="datePublished">2025-04-25</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           docker容器日志查看方法
@@ -112,42 +113,52 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-logs-%E5%AE%B9%E5%99%A8%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">docker logs 容器名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-logs-%E2%80%93tail"><span class="toc-number">2.</span> <span class="toc-text">docker logs –tail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E8%BF%87%E6%BB%A4-grep"><span class="toc-number">3.</span> <span class="toc-text">日志过滤 grep</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>建立和运行docker时，会产生大量的日志，有时需要查看docker运行状态。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-logs-%E5%AE%B9%E5%99%A8%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">docker logs 容器名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-logs-%E2%80%93tail"><span class="toc-number">2.</span> <span class="toc-text">docker logs –tail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E8%BF%87%E6%BB%A4-grep"><span class="toc-number">3.</span> <span class="toc-text">日志过滤 grep</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>建立和运行docker时，会产生大量的日志，有时需要查看docker运行状态。</p>
 <span id="more"></span>
 <h1 id="docker-logs-容器名"><a href="#docker-logs-容器名" class="headerlink" title="docker logs 容器名"></a>docker logs 容器名</h1><p>docker logs命令允许查看 Docker 容器的日志输出。</p>
 <h1 id="docker-logs-–tail"><a href="#docker-logs-–tail" class="headerlink" title="docker logs –tail"></a>docker logs –tail</h1><p>–tail 参数用于限制返回的日志行数，只显示最新的 N 条日志记录。下面是一个使用 –tail 参数的示例：<br>假设有一个正在运行的 Docker 容器，其 ID 或名称为 my_container，查看该容器的最后 10 条日志记录，可以使用以下命令：<br><code>docker logs --tail 10 my_container</code><br>将会输出 my_container 容器的最后 10 条日志信息。<br>如果想实时跟踪日志输出并显示时间戳：<br><code>docker logs -f -t --tail 10 my_container</code><br>-f 或 –follow 选项表示跟随日志输出，即持续显示新的日志条目。<br>-t 或 –timestamps 选项会在每条日志前添加时间戳，以便于追踪日志的时间顺序。<br>还想知道更具体的日志内容，例如包含更多的上下文信息，可以加上 –details 参数：<br><code>docker logs --details --tail 10 --timestamps my_container</code><br>这样，会看到每条日志条目附带有更多容器运行时的环境变量和标签等详细信息。<br>综上，–tail 参数是一个非常实用的选项，特别是在处理大量日志输出时，可以快速定位到最近的错误信息或状态更新。</p>
 <h1 id="日志过滤-grep"><a href="#日志过滤-grep" class="headerlink" title="日志过滤 grep"></a>日志过滤 grep</h1><p>docker logs 命令本身并不支持直接使用 grep 进行过滤。然而，可以通过结合使用管道（|）和 grep 命令来在 Docker 日志中进行文本匹配和过滤。<br><code>docker logs 容器id | grep &#39;2024-03-28 11:25:58&#39;</code><br><code>docker logs 容器id| grep 2024 | grep 03 | grep 184</code></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" data-id="cmaagyjzj0042c8tzax5d7yxr" data-title="docker容器日志查看方法" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" data-id="cmadtg0ck0044pwtzgl5c88dh" data-title="docker容器日志查看方法"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/docker-rong-qi-ri-zhi-cha-kan-fang-fa/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -170,16 +181,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -551,6 +561,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

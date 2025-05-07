@@ -97,18 +97,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-yi-ge-ji-shi-liao-tian-ying-yong-vocechat" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-yi-ge-ji-shi-liao-tian-ying-yong-vocechat" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/" class="article-date">
   <time class="dt-published" datetime="2025-01-25T13:16:45.000Z" itemprop="datePublished">2025-01-25</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           一个即时聊天应用vocechat
@@ -120,42 +121,52 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">部署</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>VoceChat有一个小功能，可以在博客右下角添加一个小聊天挂件，其实只是VoceChat里面的一个小功能。本文记录了部署方法。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">部署</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>VoceChat有一个小功能，可以在博客右下角添加一个小聊天挂件，其实只是VoceChat里面的一个小功能。本文记录了部署方法。</p>
 <span id="more"></span>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">vocechat</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">always</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;3019:3000&#x27;  # 冒号左边可以改成自己服务器未被占用的端口</span></span><br><span class="line">        <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">vocechat-server</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/vocechat:/home/vocechat-server/data&#x27; # 冒号左边可以改路径</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">privoce/vocechat-server:latest</span></span><br></pre></td></tr></table></figure>
 <p>从ip:3019访问。<br><img src="https://qs100371.vip/post-images/1737811501573.webp"><br><img src="https://qs100371.vip/post-images/1737811507698.webp"><br><img src="https://qs100371.vip/post-images/1737811513423.webp"><br><img src="https://qs100371.vip/post-images/1737811520142.webp"><br><img src="https://qs100371.vip/post-images/1737811529659.webp"><br><img src="https://qs100371.vip/post-images/1737811638031.webp"><br><img src="https://qs100371.vip/post-images/1737811643086.webp"></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/" data-id="cmaagyk0m008wc8tzcehoehwp" data-title="一个即时聊天应用vocechat" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/" data-id="cmadtg0db008ypwtzgrcc8eo8" data-title="一个即时聊天应用vocechat"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/yi-ge-ji-shi-liao-tian-ying-yong-vocechat/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -178,16 +189,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -559,6 +569,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

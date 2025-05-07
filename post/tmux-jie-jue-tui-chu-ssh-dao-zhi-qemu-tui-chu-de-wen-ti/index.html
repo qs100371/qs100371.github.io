@@ -92,18 +92,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/" class="article-date">
   <time class="dt-published" datetime="2025-01-08T06:27:54.000Z" itemprop="datePublished">2025-01-08</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           tmux解决退出ssh导致qemu退出的问题
@@ -115,20 +116,20 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8Ctmux"><span class="toc-number">2.</span> <span class="toc-text">运行tmux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Btmux%E6%89%80%E6%9C%89%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.</span> <span class="toc-text">查看tmux所有会话</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E6%8E%A5%E5%85%A5%E4%BC%9A%E8%AF%9D"><span class="toc-number">4.</span> <span class="toc-text">重新接入会话</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>tmux是一个终端复用器，可以解决退出ssh导致运行中的qemu退出的问题。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8Ctmux"><span class="toc-number">2.</span> <span class="toc-text">运行tmux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Btmux%E6%89%80%E6%9C%89%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.</span> <span class="toc-text">查看tmux所有会话</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E6%8E%A5%E5%85%A5%E4%BC%9A%E8%AF%9D"><span class="toc-number">4.</span> <span class="toc-text">重新接入会话</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>tmux是一个终端复用器，可以解决退出ssh导致运行中的qemu退出的问题。</p>
 <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>pkg install tmux</code></p>
 <h1 id="运行tmux"><a href="#运行tmux" class="headerlink" title="运行tmux"></a>运行<code>tmux</code></h1><p>会打开一个终端一样的窗口，在里面运行启动qemu的脚本，按ctrl+b，d退出，qemu会在后台继续运行，而不会直接退出。</p>
@@ -139,23 +140,33 @@
 </blockquote>
 <p>tmux更多用法参见：<br><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html"><em>Tmux 使用教程</em></a></p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/" data-id="cmaagyk0c007cc8tz241p94yz" data-title="tmux解决退出ssh导致qemu退出的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/" data-id="cmadtg0d4007epwtz1q7menx7" data-title="tmux解决退出ssh导致qemu退出的问题"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/tmux-jie-jue-tui-chu-ssh-dao-zhi-qemu-tui-chu-de-wen-ti/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -178,16 +189,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -559,6 +569,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

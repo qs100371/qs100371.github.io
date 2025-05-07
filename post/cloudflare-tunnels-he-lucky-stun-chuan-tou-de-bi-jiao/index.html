@@ -92,18 +92,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/" class="article-date">
   <time class="dt-published" datetime="2024-12-28T11:04:41.000Z" itemprop="datePublished">2024-12-28</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           cloudflare tunnels 和 lucky stun穿透的比较
@@ -115,43 +116,53 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#stun%E7%A9%BF%E9%80%8F"><span class="toc-number">1.</span> <span class="toc-text">stun穿透</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cf-tunnels"><span class="toc-number">2.</span> <span class="toc-text">cf tunnels</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>cloudflare zero trust tunnels 和 lucky stun都能进行内网穿透，用域名进行直接访问。<br>cf tunnels在使用时，浏览器地址栏域名保持不变，而stun方法地址栏会由域名跳转到ip加端口，并且浏览器上会提示不安全（非https），穿透ip和端口也无法保持。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#stun%E7%A9%BF%E9%80%8F"><span class="toc-number">1.</span> <span class="toc-text">stun穿透</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cf-tunnels"><span class="toc-number">2.</span> <span class="toc-text">cf tunnels</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>cloudflare zero trust tunnels 和 lucky stun都能进行内网穿透，用域名进行直接访问。<br>cf tunnels在使用时，浏览器地址栏域名保持不变，而stun方法地址栏会由域名跳转到ip加端口，并且浏览器上会提示不安全（非https），穿透ip和端口也无法保持。</p>
 <span id="more"></span>
 <h1 id="stun穿透"><a href="#stun穿透" class="headerlink" title="stun穿透"></a>stun穿透</h1><p>除了地址栏显示让人不适之外，速度一直没有问题。有一点，在ip变化的时候，cf域名响应有时会有滞后（短时无法访问）。</p>
 <h1 id="cf-tunnels"><a href="#cf-tunnels" class="headerlink" title="cf tunnels"></a>cf tunnels</h1><p>最近经常打不开</p>
 <p><img src="https://qs100371.vip/post-images/1735386768430.webp"><br><img src="https://qs100371.vip/post-images/1735386773222.webp"></p>
 <p>使用 CF Tunnel 速度上限是 32Mbps 左右，延时可能会略高于直接使用 CDN，但仍能保持在可接受的范围内。隧道速度取决于用户到 CF 数据中心 的距离和网络状况。CF 隧道无端口限制。<br>但是有个相当致命的缺点：Cloudflare到中国大陆的网络情况不佳，分配到的EndPoint基本都在美西，速度慢不说，还经常炸。</p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/" data-id="cmaagyjz1001pc8tzhq2j54im" data-title="cloudflare tunnels 和 lucky stun穿透的比较" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/" data-id="cmadtg0c3001mpwtz2dv771zr" data-title="cloudflare tunnels 和 lucky stun穿透的比较"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -174,16 +185,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -555,6 +565,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",

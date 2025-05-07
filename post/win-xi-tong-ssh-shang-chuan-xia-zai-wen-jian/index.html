@@ -89,18 +89,19 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/" class="article-date">
   <time class="dt-published" datetime="2024-11-06T03:04:31.000Z" itemprop="datePublished">2024-11-06</time>
 </a>
-    
+      
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+      
+        <header class="article-header">
+          
     
         <h1 class="p-name article-title" itemprop="headline name">
           win系统ssh上传下载文件
@@ -112,43 +113,53 @@
           
             
               
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- 文章目录 没有tag的不显示目录-->
-         
-          <div id="toc" class="toc-article">
-            <strong class="toc-title">目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ssh%E5%91%BD%E4%BB%A4%E7%99%BB%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">使用ssh命令登录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8scp%E5%91%BD%E4%BB%A4%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">使用scp命令复制文件到远程服务器：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%9Axshell%EF%BC%8Cxftp"><span class="toc-number">3.</span> <span class="toc-text">使用客户端：xshell，xftp</span></a></li></ol>
-          </div>
-         
-        <!-- Table of Contents -->
-        <p>ssh上传下载文件的几个方法。</p>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                      <!-- 文章目录 没有tag的不显示目录-->
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ssh%E5%91%BD%E4%BB%A4%E7%99%BB%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">使用ssh命令登录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8scp%E5%91%BD%E4%BB%A4%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">使用scp命令复制文件到远程服务器：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%9Axshell%EF%BC%8Cxftp"><span class="toc-number">3.</span> <span class="toc-text">使用客户端：xshell，xftp</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>ssh上传下载文件的几个方法。</p>
 <span id="more"></span>
 <h1 id="使用ssh命令登录"><a href="#使用ssh命令登录" class="headerlink" title="使用ssh命令登录"></a>使用ssh命令登录</h1><p><code>ssh username@remote_host</code></p>
 <h1 id="使用scp命令复制文件到远程服务器："><a href="#使用scp命令复制文件到远程服务器：" class="headerlink" title="使用scp命令复制文件到远程服务器："></a>使用scp命令复制文件到远程服务器：</h1><p><code>scp /path/to/file.txt username@remote_host:/path/to/remote/directory/</code><br>从远程服务器复制文件到本地：<br><code>scp username@remote_host:/path/to/remote/file.txt /path/to/local/direct</code></p>
 <h1 id="使用客户端：xshell，xftp"><a href="#使用客户端：xshell，xftp" class="headerlink" title="使用客户端：xshell，xftp"></a>使用客户端：xshell，xftp</h1><hr>
 <p>难怪传文件速率只有130k，原来免费的cpolar转发速率只有1Mbps，还以为是移动宽带上传速率不达标。windows中powershell中有scp命令，cmd里没有。</p>
 
-      
-    </div>
-    
-    <footer class="article-footer">
-     
-      <a data-url="https://qs100371.vip/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/" data-id="cmaagyk0j008ec8tz852u9r1d" data-title="win系统ssh上传下载文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-        <a href="/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/" data-id="cmadtg0d9008gpwtz1g4q81i1" data-title="win系统ssh上传下载文件"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
- 
-    </footer>
+
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/win-xi-tong-ssh-shang-chuan-xia-zai-wen-jian/" class="leancloud_visitors">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+          </footer>
   </div>
   
     
@@ -171,16 +182,15 @@
   
 </nav>
 
-  
+      
 </article>
 
 
+    
+      <section id="comments" class="vcomment">
 
-  <section id="comments" class="vcomment">
-
-  </section>
-
-</section>
+      </section>
+      </section>
         
           
 <aside id="sidebar" >
@@ -552,6 +562,7 @@
         el: '.vcomment',
         notify: notify,
         verify: verify,
+        visitor: true,
         appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
         appKey: "MJ6IotbRMRrEumBy45DTigT6",
         placeholder: "Just go go",
