@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">
 <meta property="og:image" content="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">
 <meta property="article:published_time" content="2025-05-08T13:00:15.000Z">
-<meta property="article:modified_time" content="2025-05-08T13:31:47.164Z">
+<meta property="article:modified_time" content="2025-05-13T07:41:44.129Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
@@ -112,7 +112,7 @@
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-621-blue"><img
+          <img src="https://img.shields.io/badge/字数统计-618-blue"><img
             src="https://img.shields.io/badge/阅读时间-6分-green">
           
             
@@ -136,7 +136,7 @@
 <p>一个Gravatar头像可以使用高达512像素的图片（JPEG、PNG、GIF，大小上限：5MB，建议尺寸：1280 x 288），并且默认地以80*80的尺寸显示出来。如果上传的头像不是这个尺寸，Gravatar会对头像进行缩放。用户可以按照MPAA分级制度确定自己的头像级别，这样网站管理员可以在他们的站点上显示合适的头像。</p>
 <p>为了防止用户的电子邮件地址遭到泄漏而收到大量垃圾邮件，Gravatar在传递用户的邮箱地址时采用的是通过MD5散列运算的邮件地址。</p>
 <p>在官网<a href="https://gravatar.com/">https://gravatar.com/</a>上使用邮箱注册，邮箱会收到验证码，使用验证码继续在官网注册，上传头像，其它步骤都可以忽略，Gravatar头像已经可以用了。</p>
-<h1 id="头像的使用"><a href="#头像的使用" class="headerlink" title="头像的使用"></a>头像的使用</h1><p>gravatar依赖邮箱生成的哈希值作为图片地址的一部分，所以需要把邮箱地址哈希化。<br>简单的说，就是把邮箱地址的md5值放到地址上。网络上有很多在线工具可把文本转为md5。<br>如：<br><a href="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5">https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5</a><br><img src="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5" alt="Gravatar"><br><a href="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580" alt="Gravatar"><br>第一个是没有注册的，会显示缺省头像。第二个是注册过的，显示的是自定义头像。<br>地址里的www也可写成cn。使用www的时候可能需要梯子，cn就不用。</p>
+<h1 id="头像的使用"><a href="#头像的使用" class="headerlink" title="头像的使用"></a>头像的使用</h1><p>gravatar依赖邮箱生成的哈希值作为图片地址的一部分，所以需要把邮箱地址哈希化。<br>简单的说，就是把邮箱地址的md5值放到地址上。网络上有很多在线工具可计算md5。<br>如：<br><a href="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5">https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5</a><br><img src="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5" alt="Gravatar"><br><a href="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580" alt="Gravatar"><br>第一个是没有注册的，会显示缺省头像。第二个是注册过的，显示的是自定义头像。<br>地址里的www也可写成cn。使用www的时候可能需要梯子，cn就不用。</p>
 <h1 id="使用cdn"><a href="#使用cdn" class="headerlink" title="使用cdn"></a>使用cdn</h1><p>使用cravatar.com可以不用梯子。<br>地址为：<a href="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580"><br>Cravatar支持在用户未设置Cravatar头像及Gravatar头像时匹配QQ头像（仅限于QQ数字邮箱的用户）。<br>如果没有给邮箱添加过头像，但是不想要默认的图片G，可以添加参数d&#x3D;identicon，则可以随机生成头像，但是生成之后就不会再变。</p>
 
                             
@@ -172,6 +172,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/post/zai-xian-gong-ju-ji-it-tools/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          在线工具集:it-tools
+        
+      </div>
+    </a>
   
   
     <a href="/post/qing-chu-linux-duo-yu-de-nei-he/" id="article-nav-older" class="article-nav-link-wrap">
@@ -264,7 +273,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">109</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">110</span></li></ul>
     </div>
   </div>
 
@@ -284,7 +293,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -295,6 +304,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/post/zai-xian-gong-ju-ji-it-tools/">在线工具集:it-tools</a>
+          </li>
         
           <li>
             <a href="/post/gravatar-tou-xiang-de-shi-yong/">Gravatar头像的使用</a>
@@ -332,10 +345,6 @@
             <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a>
           </li>
         
-          <li>
-            <a href="/post/docker-alpine-li-de-crond/">docker alpine里的crond</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -353,7 +362,7 @@
               <span class="post-count"><img id="site-days-badge" src=""><img
                   src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
                   src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-                <img src="https://img.shields.io/badge/共- 68.8k 字-green">
+                <img src="https://img.shields.io/badge/共- 69.4k 字-green">
                 <img id="load-time-badge" src="">
               </span>
               

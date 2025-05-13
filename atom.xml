@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-05-08T13:31:47.164Z</updated>
+  <updated>2025-05-13T08:14:48.484Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -17,13 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>在线工具集:it-tools</title>
+    <link href="https://qs100371.vip/post/zai-xian-gong-ju-ji-it-tools/"/>
+    <id>https://qs100371.vip/post/zai-xian-gong-ju-ji-it-tools/</id>
+    <published>2025-05-13T08:00:02.000Z</published>
+    <updated>2025-05-13T08:14:48.484Z</updated>
+    
+    <content type="html"><![CDATA[<p>it-tools是一个为开发人员提供的一组实用的在线工具集合。可以docker部署，方便使用。</p><span id="more"></span><p>项目地址：<a href="https://github.com/CorentinTh/it-tools">CorentinTh&#x2F;it-tools</a></p><h1 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h1><p><code>docker run -d --name it-tools --restart unless-stopped -p 8080:80 ghcr.io/corentinth/it-tools:latest</code><br><img src="https://qs100371.vip/post-images/1747123982168.webp"></p><h1 id="工具列表"><a href="#工具列表" class="headerlink" title="工具列表"></a>工具列表</h1><ul><li>加密<br>Token 生成器<br>Hash 文本<br>加密<br>UUIDs 生成器<br>ULID 生成器<br>加密&#x2F;解密文本<br>BIP39密码生成器<br>Hmac 生成器<br>RSA密钥对生成器<br>密码强度分析仪<br>PDF签名检查器</li><li>转换器<br>日期时间转换器<br>整数基转换器<br>罗马数字转换器<br>Base64 字符串编码&#x2F;解码<br>Base64 文件转换器<br>Color 选择器<br>大小写转换<br>文本转北约字母表<br>文本到 ASCII 二进制<br>文本转 Unicode<br>YAML到JSON转换器<br>YAML 到 TOML<br>JSON到YAML转换器<br>JSON 转 TOML<br>List 转换器<br>TOML 到 JSON<br>TOML 到 YAML<br>XML to JSON<br>JSON to XML<br>Markdown to HTML</li><li>Web<br>编码&#x2F;解码url格式的字符串<br>转义html实体<br>Url分析器<br>设备信息<br>基本身份验证生成器<br>开放式图形元生成器<br>OTP代码生成器<br>mime类型<br>JWT 解析器<br>Keycode 信息<br>打乱字符串<br>HTML所见即所得编辑器<br>用户代理分析器<br>HTTP 状态码<br>JSON 差异比较<br>Outlook Safelink decoder</li><li>图片和视频<br>二维码生成器<br>WiFi 二维码生成器<br>SVG 占位符生成器<br>摄像机记录器</li><li>开发<br>Git 备忘录<br>随机端口生成<br>Crontab 表达式生成<br>JSON美化和格式化<br>JSON 压缩<br>JSON 转 CSV<br>SQL 美化和格式化<br>Chmod 计算器<br>Docker Run 到 docker-compose 转换器<br>XML 格式化<br>YAML美化和格式化<br>Email normalizer<br>Regex Tester<br>Regex cheatsheet</li><li>网络<br>IPv4子网计算器<br>Ipv4地址转换器<br>IPv4范围扩展器<br>MAC地址查找<br>MAC 地址生成器<br>IPv6 ULA生成器</li><li>数学<br>数学计算器<br>ETA 计算器<br>百分比计算器</li><li>测量<br>计时器<br>温度转换器<br>基准生成器</li><li>文本<br>Lorem ipsum生成器<br>文本统计<br>Emoji 选择器<br>字符串混淆器<br>文本比较<br>数字名称生成器<br>ASCII Art Text Generator</li><li>数据<br>电话分析器和格式化程序<br>IBAN验证器和解析器</li></ul><p>Gravatar地址里的md5值就可以用hash工具来计算，url转义和docker cli和docker compose相互转换也很常用。<br><img src="https://qs100371.vip/post-images/1747124011668.webp"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;it-tools是一个为开发人员提供的一组实用的在线工具集合。可以docker部署，方便使用。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Gravatar头像的使用</title>
     <link href="https://qs100371.vip/post/gravatar-tou-xiang-de-shi-yong/"/>
     <id>https://qs100371.vip/post/gravatar-tou-xiang-de-shi-yong/</id>
     <published>2025-05-08T13:00:15.000Z</published>
-    <updated>2025-05-08T13:31:47.164Z</updated>
+    <updated>2025-05-13T07:41:44.129Z</updated>
     
-    <content type="html"><![CDATA[<p>Gravatar（Globally Recognized Avatar）是一项用于提供在全球范围内使用的头像服务。本文记录了注册和使用方法。</p><span id="more"></span><h1 id="注册方法"><a href="#注册方法" class="headerlink" title="注册方法"></a>注册方法</h1><p>在Gravatar上，可以用电子邮件注册一个帐号，并且上传一个与之绑定的头像。许多流行的博客程序都支持Gravatar，包括Wordpress和Typecho等著名博客程序，当用户发布一个评论并填写了他的电子邮件地址时，博客程序会自动查找在Gravatar上是否有与之绑定的头像。如果有，则这个头像将会与评论一起显示出来。</p><p>一个Gravatar头像可以使用高达512像素的图片（JPEG、PNG、GIF，大小上限：5MB，建议尺寸：1280 x 288），并且默认地以80*80的尺寸显示出来。如果上传的头像不是这个尺寸，Gravatar会对头像进行缩放。用户可以按照MPAA分级制度确定自己的头像级别，这样网站管理员可以在他们的站点上显示合适的头像。</p><p>为了防止用户的电子邮件地址遭到泄漏而收到大量垃圾邮件，Gravatar在传递用户的邮箱地址时采用的是通过MD5散列运算的邮件地址。</p><p>在官网<a href="https://gravatar.com/">https://gravatar.com/</a>上使用邮箱注册，邮箱会收到验证码，使用验证码继续在官网注册，上传头像，其它步骤都可以忽略，Gravatar头像已经可以用了。</p><h1 id="头像的使用"><a href="#头像的使用" class="headerlink" title="头像的使用"></a>头像的使用</h1><p>gravatar依赖邮箱生成的哈希值作为图片地址的一部分，所以需要把邮箱地址哈希化。<br>简单的说，就是把邮箱地址的md5值放到地址上。网络上有很多在线工具可把文本转为md5。<br>如：<br><a href="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5">https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5</a><br><img src="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5" alt="Gravatar"><br><a href="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580" alt="Gravatar"><br>第一个是没有注册的，会显示缺省头像。第二个是注册过的，显示的是自定义头像。<br>地址里的www也可写成cn。使用www的时候可能需要梯子，cn就不用。</p><h1 id="使用cdn"><a href="#使用cdn" class="headerlink" title="使用cdn"></a>使用cdn</h1><p>使用cravatar.com可以不用梯子。<br>地址为：<a href="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580"><br>Cravatar支持在用户未设置Cravatar头像及Gravatar头像时匹配QQ头像（仅限于QQ数字邮箱的用户）。<br>如果没有给邮箱添加过头像，但是不想要默认的图片G，可以添加参数d&#x3D;identicon，则可以随机生成头像，但是生成之后就不会再变。</p>]]></content>
+    <content type="html"><![CDATA[<p>Gravatar（Globally Recognized Avatar）是一项用于提供在全球范围内使用的头像服务。本文记录了注册和使用方法。</p><span id="more"></span><h1 id="注册方法"><a href="#注册方法" class="headerlink" title="注册方法"></a>注册方法</h1><p>在Gravatar上，可以用电子邮件注册一个帐号，并且上传一个与之绑定的头像。许多流行的博客程序都支持Gravatar，包括Wordpress和Typecho等著名博客程序，当用户发布一个评论并填写了他的电子邮件地址时，博客程序会自动查找在Gravatar上是否有与之绑定的头像。如果有，则这个头像将会与评论一起显示出来。</p><p>一个Gravatar头像可以使用高达512像素的图片（JPEG、PNG、GIF，大小上限：5MB，建议尺寸：1280 x 288），并且默认地以80*80的尺寸显示出来。如果上传的头像不是这个尺寸，Gravatar会对头像进行缩放。用户可以按照MPAA分级制度确定自己的头像级别，这样网站管理员可以在他们的站点上显示合适的头像。</p><p>为了防止用户的电子邮件地址遭到泄漏而收到大量垃圾邮件，Gravatar在传递用户的邮箱地址时采用的是通过MD5散列运算的邮件地址。</p><p>在官网<a href="https://gravatar.com/">https://gravatar.com/</a>上使用邮箱注册，邮箱会收到验证码，使用验证码继续在官网注册，上传头像，其它步骤都可以忽略，Gravatar头像已经可以用了。</p><h1 id="头像的使用"><a href="#头像的使用" class="headerlink" title="头像的使用"></a>头像的使用</h1><p>gravatar依赖邮箱生成的哈希值作为图片地址的一部分，所以需要把邮箱地址哈希化。<br>简单的说，就是把邮箱地址的md5值放到地址上。网络上有很多在线工具可计算md5。<br>如：<br><a href="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5">https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5</a><br><img src="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5" alt="Gravatar"><br><a href="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580" alt="Gravatar"><br>第一个是没有注册的，会显示缺省头像。第二个是注册过的，显示的是自定义头像。<br>地址里的www也可写成cn。使用www的时候可能需要梯子，cn就不用。</p><h1 id="使用cdn"><a href="#使用cdn" class="headerlink" title="使用cdn"></a>使用cdn</h1><p>使用cravatar.com可以不用梯子。<br>地址为：<a href="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580"><br>Cravatar支持在用户未设置Cravatar头像及Gravatar头像时匹配QQ头像（仅限于QQ数字邮箱的用户）。<br>如果没有给邮箱添加过头像，但是不想要默认的图片G，可以添加参数d&#x3D;identicon，则可以随机生成头像，但是生成之后就不会再变。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;Gravatar（Globally Recognized Avatar）是一项用于提供在全球范围内使用的头像服务。本文记录了注册和使用方法。&lt;/p&gt;</summary>
@@ -378,25 +397,6 @@
     
     
     <category term="docker" scheme="https://qs100371.vip/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IP段192.168.1.0/24和192.168.0.0/16的意义</title>
-    <link href="https://qs100371.vip/post/ip-duan-1921681024-he-1921680016-de-yi-yi/"/>
-    <id>https://qs100371.vip/post/ip-duan-1921681024-he-1921680016-de-yi-yi/</id>
-    <published>2025-04-25T07:27:06.000Z</published>
-    <updated>2025-04-28T22:55:46.329Z</updated>
-    
-    <content type="html"><![CDATA[<p>192.168.1.0&#x2F;24 包含哪些IP？</p><span id="more"></span><h1 id="IP地址格式"><a href="#IP地址格式" class="headerlink" title="IP地址格式"></a>IP地址格式</h1><p>IP地址格式采用“斜线记法”，即：IP地址&#x2F;网络前缀。<br>例如 192.168.1.0&#x2F;24 表示32位的二进制地址中（任何IP的二进制地址都是32位），前24位为网络前缀，后8位代表主机号。</p><h1 id="换算"><a href="#换算" class="headerlink" title="换算"></a>换算</h1><p>在换算中，192.168.1.0&#x2F;24 对应的二进制为：<br>1100 0000，1010 1000，0000 0001，0000 0000<br>其中最后为主机号，总共有8位。当这8位全为0时，取最小地址192.168.1.0，当这8位全为1时，取最大地址192.168.1.255。在实际中，主机号全为0或者全为1的地址一般不使用，作为预留地址另有作用。<br>所以第一个地址为：<br>1100 0000，1010 1000，0000 0001，0000 0001<br>即 192.168.1.1 最后一个地址为：<br>1100 0000，1010 1000，0000 0001，1111 1110<br>即 192.168.1.254。</p><p>因此，192.168.1.0&#x2F;24 代表的IP段就是 192.168.1.1 ~ 192.168.1.254。</p><p>192.168.0.0&#x2F;16 包含哪些IP？<br>方法同上。192.168.0.0&#x2F;16 表示32位的二进制地址中，前16位为网络前缀，后16位代表主机号。</p><p>在换算中，192.168.0.0&#x2F;16 对应的二进制为：<br>1100 0000，1010 1000，0000 0000，0000 0000<br>其中后两段为主机号，总共有16位。当这16位全为0时，取最小地址192.168.0.0，当这16位全为1时，取最大地址192.168.255.255。<br>第一个地址为：<br>1100 0000，1010 1000，0000 0000，0000 0001<br>即 192.168.0.1<br>最后一个地址为：<br>1100 0000，1010 1000，1111 1111，1111 1110<br>即 192.168.255.254。</p><p>因此，192.168.0.0&#x2F;16 代表的IP段就是 192.168.0.1 ~ 192.168.255.254。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;192.168.1.0&amp;#x2F;24 包含哪些IP？&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
     
   </entry>
   
