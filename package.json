@@ -1,0 +1,15 @@
+{
+    "app_name": "public",
+    "main": "D:\\hexo\\blog\\public\\index.html",
+    "name": "public",
+    "webkit": {},
+    "window": {
+        "frame": true,
+        "id": "public",
+        "resizable": true,
+        "show": true,
+        "show_in_taskbar": true,
+        "title": "public",
+        "visible": true
+    }
+}
