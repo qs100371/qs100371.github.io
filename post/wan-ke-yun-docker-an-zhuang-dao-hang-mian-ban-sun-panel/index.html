@@ -133,16 +133,16 @@
                           <p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p>
 <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -<span class="keyword">p</span> /data/<span class="keyword">sun</span>-panel</span><br><span class="line">docker pull hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br><span class="line">docker run -d --restart=always -<span class="keyword">p</span> <span class="number">8000</span>:<span class="number">3002</span> \</span><br><span class="line">-v /data/<span class="keyword">sun</span>-panel/<span class="keyword">conf</span>:/app/<span class="keyword">conf</span> \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name <span class="keyword">sun</span>-panel \</span><br><span class="line">hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br></pre></td></tr></table></figure>
-<h1 id="从ip-8000访问"><a href="#从ip-8000访问" class="headerlink" title="从ip:8000访问"></a>从ip:8000访问</h1><p>默认账号密码<br>账号：<a href="mailto:&#97;&#x64;&#x6d;&#105;&#x6e;&#x40;&#x73;&#117;&#x6e;&#x2e;&#99;&#99;">&#97;&#x64;&#x6d;&#105;&#x6e;&#x40;&#x73;&#117;&#x6e;&#x2e;&#99;&#99;</a><br>密码：12345678</p>
+<h1 id="从ip-8000访问"><a href="#从ip-8000访问" class="headerlink" title="从ip:8000访问"></a>从ip:8000访问</h1><p>默认账号密码<br>账号：<a href="mailto:&#97;&#x64;&#109;&#x69;&#110;&#x40;&#115;&#x75;&#110;&#x2e;&#x63;&#99;">&#97;&#x64;&#109;&#x69;&#110;&#x40;&#115;&#x75;&#110;&#x2e;&#x63;&#99;</a><br>密码：12345678</p>
 <p><img src="https://qs100371.vip/post-images/1732624370260.webp"><br><img src="https://qs100371.vip/post-images/1732623522998.webp"></p>
-<h1 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h1><p><code>docker exec -it sun-panel bash</code><br><code>./sun-panel -password-reset</code><br>输出<br>The password has been successfully reset. Here is the account information<br>Username  <a href="mailto:&#97;&#x64;&#109;&#105;&#110;&#64;&#115;&#117;&#x6e;&#x2e;&#99;&#99;">&#97;&#x64;&#109;&#105;&#110;&#64;&#115;&#117;&#x6e;&#x2e;&#99;&#99;</a><br>Password  12345678</p>
+<h1 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h1><p><code>docker exec -it sun-panel bash</code><br><code>./sun-panel -password-reset</code><br>输出<br>The password has been successfully reset. Here is the account information<br>Username  <a href="mailto:&#x61;&#x64;&#109;&#105;&#110;&#x40;&#115;&#117;&#x6e;&#x2e;&#x63;&#99;">&#x61;&#x64;&#109;&#105;&#110;&#x40;&#115;&#117;&#x6e;&#x2e;&#x63;&#99;</a><br>Password  12345678</p>
 
                             
           </div>
 
           <footer class="article-footer">
 
-            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/" data-id="cmatmhcqd007zn0tzawk6ano6" data-title="玩客云docker安装导航面板sun-panel"
+            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/" data-id="cmatqkz1t007w2gtz9bwp9dw6" data-title="玩客云docker安装导航面板sun-panel"
               class="article-share-link"><span class="fa fa-share">
                 分享
               </span></a>
@@ -271,7 +271,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">110</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">111</span></li></ul>
     </div>
   </div>
 
@@ -291,7 +291,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -302,6 +302,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/post/meting-apiyin-le-bo-fang-fu-wu-jie-kou/">Meting API:音乐播放服务接口</a>
+          </li>
         
           <li>
             <a href="/post/zai-xian-gong-ju-ji-it-tools/">在线工具集:it-tools</a>
@@ -339,10 +343,6 @@
             <a href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/">用ds生成markdown编辑器</a>
           </li>
         
-          <li>
-            <a href="/post/yong-ds-sheng-cheng-xiao-gong-ju-image_converter/">用ds生成小工具image_converter</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -360,7 +360,7 @@
               <span class="post-count"><img id="site-days-badge" src=""><img
                   src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
                   src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-                <img src="https://img.shields.io/badge/共- 69.4k 字-green">
+                <img src="https://img.shields.io/badge/共- 70.3k 字-green">
                 <img id="load-time-badge" src="">
               </span>
               
