@@ -4,31 +4,58 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.getElementById('close-btn');
     const iframe = document.getElementById('floating-iframe');
     
-    // 关闭按钮功能
-    closeBtn.addEventListener('click', function() {
-        floatingWindow.style.display = 'none';
-    });
+    // 关闭按钮功能 - 同时支持点击和触摸
+    closeBtn.addEventListener('click', closeWindow);
+    closeBtn.addEventListener('touchend', closeWindow);
     
-    // 拖动功能
+    function closeWindow(e) {
+        e.preventDefault(); // 防止触摸事件触发其他行为
+        floatingWindow.style.display = 'none';
+    }
+    
+    // 拖动功能 - 同时支持鼠标和触摸
     let isDragging = false;
     let offsetX, offsetY;
     
-    floatingHeader.addEventListener('mousedown', function(e) {
-        isDragging = true;
-        offsetX = e.clientX - floatingWindow.getBoundingClientRect().left;
-        offsetY = e.clientY - floatingWindow.getBoundingClientRect().top;
-        floatingWindow.style.cursor = 'grabbing';
-    });
+    // 开始拖动
+    floatingHeader.addEventListener('mousedown', startDrag);
+    floatingHeader.addEventListener('touchstart', startDrag, {passive: false});
     
-    document.addEventListener('mousemove', function(e) {
+    function startDrag(e) {
+        isDragging = true;
+        const clientX = e.clientX || e.touches[0].clientX;
+        const clientY = e.clientY || e.touches[0].clientY;
+        
+        const rect = floatingWindow.getBoundingClientRect();
+        offsetX = clientX - rect.left;
+        offsetY = clientY - rect.top;
+        
+        floatingWindow.style.cursor = 'grabbing';
+        e.preventDefault(); // 防止触摸滚动
+    }
+    
+    // 拖动中
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag, {passive: false});
+    
+    function drag(e) {
         if (!isDragging) return;
         
-        floatingWindow.style.left = (e.clientX - offsetX) + 'px';
-        floatingWindow.style.top = (e.clientY - offsetY) + 'px';
-        floatingWindow.style.bottom = 'auto'; // 取消底部定位
-    });
+        const clientX = e.clientX || e.touches[0].clientX;
+        const clientY = e.clientY || e.touches[0].clientY;
+        
+        floatingWindow.style.left = (clientX - offsetX) + 'px';
+        floatingWindow.style.top = (clientY - offsetY) + 'px';
+        floatingWindow.style.bottom = 'auto';
+        
+        e.preventDefault(); // 防止触摸滚动
+    }
     
-    document.addEventListener('mouseup', function() {
+    // 结束拖动
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
+    
+    function endDrag() {
         isDragging = false;
         floatingWindow.style.cursor = 'grab';
         
@@ -40,13 +67,12 @@ document.addEventListener('DOMContentLoaded', function() {
             floatingWindow.style.top = 'auto';
             floatingWindow.style.bottom = '20px';
         }
-    });
-    
-    // 改变iframe的URL（如果需要从外部控制）
-    function changeIframeUrl(url) {
-        iframe.src = url;
     }
     
-    // 示例：5秒后更改iframe内容（可选）
-    // setTimeout(() => changeIframeUrl('https://another-website.com'), 5000);
+    // 防止触摸时触发iframe内容
+    floatingHeader.addEventListener('touchend', function(e) {
+        if (!isDragging) {
+            e.preventDefault();
+        }
+    }, {passive: false});
 });

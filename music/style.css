@@ -15,6 +15,7 @@
 }
 
 #floating-header {
+    touch-action: none; /* 防止触摸事件的默认行为 */
     padding: 5px 10px;
     background: #f0f0f0;
     border-bottom: 1px solid #ddd;
@@ -26,6 +27,7 @@
 
 #close-btn {
     background: none;
+    padding: 8px 12px; /* 更大的点击区域 */
     border: none;
     font-size: 16px;
     cursor: pointer;
@@ -37,10 +39,12 @@
     border: none;
 }
 
-/* 响应式设计 - 在小屏幕上调整大小 */
-@media (max-width: 768px) {
+* 移动设备上的窗口大小调整 */
+@media (max-width: 480px) {
     #floating-window {
-        width: 250px;
-        height: 150px;
+        width: 90vw; /* 使用视口宽度 */
+        height: 40vh; /* 使用视口高度 */
+        left: 5vw;
+        bottom: 10px;
     }
 }
