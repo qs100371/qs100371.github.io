@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-05-25T10:40:07.128Z</updated>
+  <updated>2025-06-11T10:21:36.127Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>程序员做饭指南: how to cook</title>
+    <link href="https://qs100371.vip/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/"/>
+    <id>https://qs100371.vip/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/</id>
+    <published>2025-06-11T09:54:26.000Z</published>
+    <updated>2025-06-11T10:21:36.127Z</updated>
+    
+    <content type="html"><![CDATA[<p>程序员做饭指南是一个开源项目，一个菜谱 Web 服务。</p><span id="more"></span><p>项目地址：<a href="https://github.com/Anduin2017/HowToCook">Anduin2017&#x2F;HowToCook</a><br>官方网站：<a href="https://cook.aiursoft.cn/">https://cook.aiursoft.cn/</a></p><h1 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull ghcr.io/anduin2017/how-to-cook:latest</span><br><span class="line">docker run -d -p 5000:5000 ghcr.io/anduin2017/how-to-cook:latest</span><br></pre></td></tr></table></figure><p><img src="https://qs100371.vip/post-images/1749637189204.webp"></p><p><img src="https://qs100371.vip/post-images/1749637196203.webp"></p><p><img src="https://qs100371.vip/post-images/1749637201804.webp"></p><hr><p>简直就是生存指南。要是加上收藏功能就好了，毕竟能学会几个能做的就很不错了。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;程序员做饭指南是一个开源项目，一个菜谱 Web 服务。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="docker" scheme="https://qs100371.vip/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>docker更新方法</title>
@@ -293,10 +312,10 @@
     <published>2025-04-28T13:00:16.000Z</published>
     <updated>2025-04-28T13:13:17.163Z</updated>
     
-    <content type="html"><![CDATA[<p>收到一封来自<a href="mailto:&#x73;&#101;&#x63;&#x75;&#114;&#x69;&#x74;&#x79;&#x40;&#103;&#101;&#116;&#x67;&#x69;&#x74;&#x67;&#117;&#97;&#x72;&#x64;&#105;&#x61;&#110;&#46;&#99;&#x6f;&#109;">&#x73;&#101;&#x63;&#x75;&#114;&#x69;&#x74;&#x79;&#x40;&#103;&#101;&#116;&#x67;&#x69;&#x74;&#x67;&#117;&#97;&#x72;&#x64;&#105;&#x61;&#110;&#46;&#99;&#x6f;&#109;</a>的信，提醒我把openweather的api-key保存到github上了。</p><span id="more"></span><h1 id="GitGuardian"><a href="#GitGuardian" class="headerlink" title="GitGuardian"></a>GitGuardian</h1><p>查了一下，才知道GitGuardian是GitHub 敏感信息泄露自动提示平台。<br><img src="https://qs100371.vip/post-images/1745845516578.webp"><br><img src="https://qs100371.vip/post-images/1745845522334.webp"><br>GitGuardian 是首个实时，自动扫描开源项目代码的平台。当发布敏感资料到 Github 开源项目时，它就会自动提醒我们，比如说发送电子邮件。它也提供很多 API 来提示用户问题，不过免费版本就只会发送电子邮件。</p><h1 id="应对方法"><a href="#应对方法" class="headerlink" title="应对方法"></a>应对方法</h1><p>吓得我赶紧把github.io变成了私有，把api-key也删了。</p>]]></content>
+    <content type="html"><![CDATA[<p>收到一封来自<a href="mailto:&#115;&#101;&#99;&#x75;&#x72;&#105;&#x74;&#121;&#x40;&#x67;&#x65;&#116;&#x67;&#105;&#x74;&#103;&#x75;&#x61;&#114;&#x64;&#105;&#x61;&#110;&#46;&#99;&#111;&#x6d;">&#115;&#101;&#99;&#x75;&#x72;&#105;&#x74;&#121;&#x40;&#x67;&#x65;&#116;&#x67;&#105;&#x74;&#103;&#x75;&#x61;&#114;&#x64;&#105;&#x61;&#110;&#46;&#99;&#111;&#x6d;</a>的信，提醒我把openweather的api-key保存到github上了。</p><span id="more"></span><h1 id="GitGuardian"><a href="#GitGuardian" class="headerlink" title="GitGuardian"></a>GitGuardian</h1><p>查了一下，才知道GitGuardian是GitHub 敏感信息泄露自动提示平台。<br><img src="https://qs100371.vip/post-images/1745845516578.webp"><br><img src="https://qs100371.vip/post-images/1745845522334.webp"><br>GitGuardian 是首个实时，自动扫描开源项目代码的平台。当发布敏感资料到 Github 开源项目时，它就会自动提醒我们，比如说发送电子邮件。它也提供很多 API 来提示用户问题，不过免费版本就只会发送电子邮件。</p><h1 id="应对方法"><a href="#应对方法" class="headerlink" title="应对方法"></a>应对方法</h1><p>吓得我赶紧把github.io变成了私有，把api-key也删了。</p>]]></content>
     
     
-    <summary type="html">&lt;p&gt;收到一封来自&lt;a href=&quot;mailto:&amp;#x73;&amp;#101;&amp;#x63;&amp;#x75;&amp;#114;&amp;#x69;&amp;#x74;&amp;#x79;&amp;#x40;&amp;#103;&amp;#101;&amp;#116;&amp;#x67;&amp;#x69;&amp;#x74;&amp;#x67;&amp;#117;&amp;#97;&amp;#x72;&amp;#x64;&amp;#105;&amp;#x61;&amp;#110;&amp;#46;&amp;#99;&amp;#x6f;&amp;#109;&quot;&gt;&amp;#x73;&amp;#101;&amp;#x63;&amp;#x75;&amp;#114;&amp;#x69;&amp;#x74;&amp;#x79;&amp;#x40;&amp;#103;&amp;#101;&amp;#116;&amp;#x67;&amp;#x69;&amp;#x74;&amp;#x67;&amp;#117;&amp;#97;&amp;#x72;&amp;#x64;&amp;#105;&amp;#x61;&amp;#110;&amp;#46;&amp;#99;&amp;#x6f;&amp;#109;&lt;/a&gt;的信，提醒我把openweather的api-key保存到github上了。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;收到一封来自&lt;a href=&quot;mailto:&amp;#115;&amp;#101;&amp;#99;&amp;#x75;&amp;#x72;&amp;#105;&amp;#x74;&amp;#121;&amp;#x40;&amp;#x67;&amp;#x65;&amp;#116;&amp;#x67;&amp;#105;&amp;#x74;&amp;#103;&amp;#x75;&amp;#x61;&amp;#114;&amp;#x64;&amp;#105;&amp;#x61;&amp;#110;&amp;#46;&amp;#99;&amp;#111;&amp;#x6d;&quot;&gt;&amp;#115;&amp;#101;&amp;#99;&amp;#x75;&amp;#x72;&amp;#105;&amp;#x74;&amp;#121;&amp;#x40;&amp;#x67;&amp;#x65;&amp;#116;&amp;#x67;&amp;#105;&amp;#x74;&amp;#103;&amp;#x75;&amp;#x61;&amp;#114;&amp;#x64;&amp;#105;&amp;#x61;&amp;#110;&amp;#46;&amp;#99;&amp;#111;&amp;#x6d;&lt;/a&gt;的信，提醒我把openweather的api-key保存到github上了。&lt;/p&gt;</summary>
     
     
     
@@ -373,25 +392,6 @@
     
     
     <summary type="html">&lt;p&gt;给hexo默认主题添加了一个公告板，可以显示自定义语句，随机一言或每日诗词。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>有趣的Shields.io 徽章</title>
-    <link href="https://qs100371.vip/post/you-qu-de-shieldsio-hui-zhang-badge/"/>
-    <id>https://qs100371.vip/post/you-qu-de-shieldsio-hui-zhang-badge/</id>
-    <published>2025-04-26T01:39:54.000Z</published>
-    <updated>2025-05-02T04:27:30.260Z</updated>
-    
-    <content type="html"><![CDATA[<p>很多项目都有很漂亮的徽章。这些徽章可以用来显示项目版本、进度条、star 数量、fork 数量….，那么这些徽章是如何生成的呢？</p><span id="more"></span><p><a href="https://shields.io/">https://shields.io/</a><br>在这里，可以生成最基本的徽章样式。只需简单的几行代码，就能让项目页面瞬间生动起来。<br><img src="https://qs100371.vip/post-images/1745632303482.webp"></p><p><img src="https://qs100371.vip/post-images/1745632308196.webp"></p><h1 id="静态徽章"><a href="#静态徽章" class="headerlink" title="静态徽章"></a>静态徽章</h1><p><code>https://img.shields.io/badge/:badgeContent</code><br>:badgeContent 的内容是 label-message-color?Query Parameters<br>lablel：左侧字符<br>message：右侧字符（可选）<br>color：颜色<br>Query Parameters：查询参数<br>示例：<br><a href="https://img.shields.io/badge/label-red">https://img.shields.io/badge/label-red</a><br><img src="https://img.shields.io/badge/label-red"><br><a href="https://img.shields.io/badge/label-message-red">https://img.shields.io/badge/label-message-red</a><br><img src="https://img.shields.io/badge/label-message-red"><br><a href="https://img.shields.io/badge/label-message-fdfesf">https://img.shields.io/badge/label-message-fdfesf</a><br><img src="https://img.shields.io/badge/label-message-fdfesf"></p><h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><ul><li><p>labelColor<br>类型：字符串<br>内容：颜色值（支持 hex、rgb、rgba、hsl、hsla 和 css 颜色名）<br>左侧部分的背景颜色<br>示例：<br><a href="https://img.shields.io/badge/label-message-red?labelColor=green">https://img.shields.io/badge/label-message-red?labelColor=green</a><br><img src="https://img.shields.io/badge/label-message-red?labelColor=green"></p></li><li><p>style<br>类型：字符串<br>内容：flat, flat-square, plastic, for-the-badge, social<br>默认为 flat 样式<br>示例：<br>flat：<a href="https://img.shields.io/badge/label-message-red?style=flat">https://img.shields.io/badge/label-message-red?style=flat</a><br><img src="https://img.shields.io/badge/label-message-red?style=flat"><br>flat-square：<a href="https://img.shields.io/badge/label-message-red?style=flat-square">https://img.shields.io/badge/label-message-red?style=flat-square</a><br><img src="https://img.shields.io/badge/label-message-red?style=flat-square"><br>plastic：<a href="https://img.shields.io/badge/label-message-red?style=plastic">https://img.shields.io/badge/label-message-red?style=plastic</a><br><img src="https://img.shields.io/badge/label-message-red?style=plastic"><br>for-the-badge：<a href="https://img.shields.io/badge/label-message-red?style=for-the-badge">https://img.shields.io/badge/label-message-red?style=for-the-badge</a><br><img src="https://img.shields.io/badge/label-message-red?style=for-the-badge"><br>social：<a href="https://img.shields.io/badge/label-message-red?style=social">https://img.shields.io/badge/label-message-red?style=social</a><br><img src="https://img.shields.io/badge/label-message-red?style=social"></p></li><li><p>logo<br>类型：字符串<br>内容：bitcoin、dependabot、gitlab、npm、paypal、serverfault、stackexchange、superuser、telegram<br>示例：<br><a href="https://img.shields.io/badge/label-%E6%8C%87%E5%AE%9A%E5%9B%BE%E6%A0%87-red?logo=dependabot">https://img.shields.io/badge/label-指定图标-red?logo=dependabot</a><br><img src="https://img.shields.io/badge/label-%E8%BF%99%E9%87%8C%E7%9A%84%E5%9B%BE%E6%A0%87%E6%98%AF%E6%8C%87%E5%AE%9A%E5%9B%BE%E6%A0%87-red?logo=dependabot"><br><a href="https://img.shields.io/badge/label-simple%20icon%E5%9B%BE%E6%A0%87-red?logo=creativecommons">https://img.shields.io/badge/label-simple%20icon图标-red?logo=creativecommons</a><br><img src="https://img.shields.io/badge/label-%E8%BF%99%E9%87%8C%E7%9A%84%E5%9B%BE%E6%A0%87%E6%98%AFsimple%20icon%E5%9B%BE%E6%A0%87-red?logo=creativecommons"></p></li><li><p>logoColor<br>类型：字符串<br>内容：颜色值（支持 hex、rgb、rgba、hsl、hsla 和 css 颜色名）<br>支持 Simple-Icon 图标和 Shields 图标。<br>示例：<br><a href="https://img.shields.io/badge/label-message-red?logo=dependabot&logoColor=blue">https://img.shields.io/badge/label-message-red?logo=dependabot&amp;logoColor=blue</a><br><img src="https://img.shields.io/badge/label-message-red?logo=dependabot&logoColor=blue"></p></li></ul><p>其实很简单，地址<code>https://img.shields.io/badge/a-b-color</code>，其中字段a，字段b和颜色都可以用代码生成，连接起来作为图片地址，从而实现动态效果。还有其它类型的动态徽章，比如微博关注数，github Star等就复杂一些，暂时没有研究，因为用不上。</p><h1 id="使用AI"><a href="#使用AI" class="headerlink" title="使用AI"></a>使用AI</h1><p>比如：deepseek<br>问：生成一个徽章，左文本是今天，右文本吃什么，左颜色为蓝色，右颜色为橙色<br>答：你可以使用 Shields.io 动态生成一个徽章，左文本显示 “今天”（蓝色），右文本显示 “吃什么”（橙色）。以下是实现方式：</p><p>方法 1：直接使用 Shields.io URL</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![今天吃什么]<span class="params">(https://img.shields.io/badge/今天-吃什么-blue?<span class="attr">logoColor</span>=orange&amp;<span class="attr">colorA</span>=blue&amp;<span class="attr">colorB</span>=orange)</span></span><br></pre></td></tr></table></figure><p><img src="https://img.shields.io/badge/%E4%BB%8A%E5%A4%A9-%E5%90%83%E4%BB%80%E4%B9%88-blue?logoColor=orange&colorA=blue&colorB=orange" alt="今天吃什么"></p><p>方法 2：动态生成（JavaScript）<br>如果想每天自动换文案（如随机推荐食物）：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foods = [<span class="string">&quot;拉面&quot;</span>, <span class="string">&quot;饺子&quot;</span>, <span class="string">&quot;汉堡&quot;</span>, <span class="string">&quot;沙拉&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> randomFood = foods[<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * foods.<span class="property">length</span>)];</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;food-badge&#x27;</span>).<span class="property">src</span> = </span><br><span class="line">  <span class="string">`https://img.shields.io/badge/今天-吃<span class="subst">$&#123;randomFood&#125;</span>-blue?colorA=blue&amp;colorB=orange`</span>;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">&quot;food-badge&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;今天吃什么&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;很多项目都有很漂亮的徽章。这些徽章可以用来显示项目版本、进度条、star 数量、fork 数量….，那么这些徽章是如何生成的呢？&lt;/p&gt;</summary>
     
     
     

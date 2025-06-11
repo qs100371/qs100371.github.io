@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
+
+  
+  <title>程序员做饭指南: how to cook | qs blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="程序员做饭指南是一个开源项目，一个菜谱 Web 服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程序员做饭指南: how to cook">
+<meta property="og:url" content="https://qs100371.vip/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/index.html">
+<meta property="og:site_name" content="qs blog">
+<meta property="og:description" content="程序员做饭指南是一个开源项目，一个菜谱 Web 服务。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/post-images/1749637189204.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1749637196203.webp">
+<meta property="og:image" content="https://qs100371.vip/post-images/1749637201804.webp">
+<meta property="article:published_time" content="2025-06-11T09:54:26.000Z">
+<meta property="article:modified_time" content="2025-06-11T10:21:36.127Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1749637189204.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/avatar.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qs blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/appscenter/">应用</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/" class="article-date">
+  <time class="dt-published" datetime="2025-06-11T09:54:26.000Z" itemprop="datePublished">2025-06-11</time>
+</a>
+      
+  </div>
+  <div class="article-inner">
+    
+      
+        <header class="article-header">
+          
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          程序员做饭指南: how to cook
+        </h1>
+        <hr>
+        
+            
+              
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+                     
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">本地部署</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>程序员做饭指南是一个开源项目，一个菜谱 Web 服务。</p>
+<span id="more"></span>
+<p>项目地址：<a href="https://github.com/Anduin2017/HowToCook">Anduin2017&#x2F;HowToCook</a><br>官方网站：<a href="https://cook.aiursoft.cn/">https://cook.aiursoft.cn/</a></p>
+<h1 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull ghcr.io/anduin2017/how-to-cook:latest</span><br><span class="line">docker run -d -p 5000:5000 ghcr.io/anduin2017/how-to-cook:latest</span><br></pre></td></tr></table></figure>
+<p><img src="https://qs100371.vip/post-images/1749637189204.webp"></p>
+<p><img src="https://qs100371.vip/post-images/1749637196203.webp"></p>
+<p><img src="https://qs100371.vip/post-images/1749637201804.webp"></p>
+<hr>
+<p>简直就是生存指南。要是加上收藏功能就好了，毕竟能学会几个能做的就很不错了。</p>
+
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            <a data-url="https://qs100371.vip/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/" data-id="cmbrswm9b0000ewtz0nvh3aw6" data-title="程序员做饭指南: how to cook"
+              class="article-share-link"><span class="fa fa-share">
+                分享
+              </span></a>
+            
+                
+
+                  <a href="/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count fa fa-comment"
+                      data-xid="/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/" itemprop="commentCount"></span>
+                    留言
+                  </a>
+                  
+                    
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+                    
+                      <i class="fa fa-eye"></i>
+                      <span id="/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/" class="leancloud_visitors" data-flag-title="程序员做饭指南: how to cook">
+                        <span class="leancloud-visitors-count">
+                        </span>
+                      </span>
+                      
+          </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/post/docker-geng-xin-fang-fa/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">docker更新方法</div>
+    </a>
+  
+</nav>
+
+      
+</article>
+
+
+    
+      <section id="comments" class="vcomment">
+
+      </section>
+      </section>
+        
+          
+<aside id="sidebar" >
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">公告板</h3>
+        <div class="widget">
+            
+        
+                
+                        
+                            <div class="notice" style="margin-top:5px">
+                                <i class="fa "></i>
+                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
+
+                                <script>
+                                    
+                                    function loadRandomContent() {
+                                        fetch('https://img.qs100371.vip/songci.php')
+                                            .then(response => response.text())
+                                            .then(text => {
+                                                document.getElementById('poem-container').innerText = text;
+                                            })
+                                            .catch(error => {
+                                                console.error('加载失败:', error);
+                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
+                                            });
+                                    }
+
+                                    // 页面加载时自动获取一次
+                                    loadRandomContent();
+                                </script>
+                            </div>
+                            
+                                <style>
+                                    .notice {
+                                        padding: 5px;
+                                        border: 1px dashed #e6e6e6;
+                                        color: red;
+                                        position: relative;
+                                        display: inline-block;
+                                        width: 96%;
+                                        background: #fbfbfb50;
+                                        border-radius: 10px;
+                                    }
+
+                                    .notice i {
+                                        float: left;
+                                        color: #999;
+                                        font-size: 18px;
+                                        padding-right: 0px;
+                                        vertical-align: middle;
+                                        margin-top: 3px;
+                                    }
+
+                                    .notice-content {
+                                        display: initial;
+                                        vertical-align: middle;
+                                    }
+                                </style>
+                            <!--    <link rel="stylesheet"
+                                    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"> -->
+        </div>
+        
+      </div>
+    
+    
+  
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">111</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/armbian/" style="font-size: 13.33px;">armbian</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/onecloud/" style="font-size: 15px;">onecloud</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/">程序员做饭指南: how to cook</a>
+          </li>
+        
+          <li>
+            <a href="/post/docker-geng-xin-fang-fa/">docker更新方法</a>
+          </li>
+        
+          <li>
+            <a href="/post/meting-apiyin-le-bo-fang-fu-wu-jie-kou/">Meting API:音乐播放服务接口</a>
+          </li>
+        
+          <li>
+            <a href="/post/zai-xian-gong-ju-ji-it-tools/">在线工具集:it-tools</a>
+          </li>
+        
+          <li>
+            <a href="/post/gravatar-tou-xiang-de-shi-yong/">Gravatar头像的使用</a>
+          </li>
+        
+          <li>
+            <a href="/post/qing-chu-linux-duo-yu-de-nei-he/">清除linux多余的内核</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/">用批处理文件备份hexo博客到本地目录</a>
+          </li>
+        
+          <li>
+            <a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">用tkinter代替pyqt5重新生成image_converter</a>
+          </li>
+        
+          <li>
+            <a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+        
+          <div class="outer">
+            <div id="footer-info" class="inner">        
+              
+                All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                  
+                    &copy; 2025
+                      qs100371<br>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+            </div>
+          </div>
+</footer>
+<style>
+  /* 返回顶部按钮 - 基础样式 */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    /* 移动端距离底部更近 */
+    right: 20px;
+    /* 移动端距离右侧更近 */
+    width: 46px;
+    /* 移动端稍小 */
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    /* 默认隐藏 */
+    z-index: 9999;
+    /* 确保在最上层 */
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+
+  /* 适配 PC 端（更大按钮） */
+  @media (min-width: 768px) {
+    .back-to-top {
+      bottom: 50px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+    }
+  }
+
+  /* 悬停效果 */
+  .back-to-top:hover {
+    opacity: 1;
+    background-color: #ff3d00;
+    transform: scale(1.1);
+  }
+
+  /* 滚动时跳动动画 */
+  .back-to-top.active {
+    animation: bounce 0.8s infinite;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/appscenter/" class="mobile-nav-link">应用</a>
+  
+</nav>
+    
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        visitor: true,
+        appId: "shrivAmDul1K9RSnayhd7foS-gzGzoHsz",
+        appKey: "MJ6IotbRMRrEumBy45DTigT6",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn',
+        avatar_cdn: 'https://cravatar.cn/avatar/'
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
