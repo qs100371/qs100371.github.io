@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-06-11T10:21:36.127Z</updated>
+  <updated>2025-06-11T10:31:17.129Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://qs100371.vip/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/"/>
     <id>https://qs100371.vip/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/</id>
     <published>2025-06-11T09:54:26.000Z</published>
-    <updated>2025-06-11T10:21:36.127Z</updated>
+    <updated>2025-06-11T10:31:17.129Z</updated>
     
-    <content type="html"><![CDATA[<p>程序员做饭指南是一个开源项目，一个菜谱 Web 服务。</p><span id="more"></span><p>项目地址：<a href="https://github.com/Anduin2017/HowToCook">Anduin2017&#x2F;HowToCook</a><br>官方网站：<a href="https://cook.aiursoft.cn/">https://cook.aiursoft.cn/</a></p><h1 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull ghcr.io/anduin2017/how-to-cook:latest</span><br><span class="line">docker run -d -p 5000:5000 ghcr.io/anduin2017/how-to-cook:latest</span><br></pre></td></tr></table></figure><p><img src="https://qs100371.vip/post-images/1749637189204.webp"></p><p><img src="https://qs100371.vip/post-images/1749637196203.webp"></p><p><img src="https://qs100371.vip/post-images/1749637201804.webp"></p><hr><p>简直就是生存指南。要是加上收藏功能就好了，毕竟能学会几个能做的就很不错了。</p>]]></content>
+    <content type="html"><![CDATA[<p>程序员做饭指南是一个开源项目，一个菜谱 Web 服务。</p><span id="more"></span><p>项目地址：<a href="https://github.com/Anduin2017/HowToCook">Anduin2017&#x2F;HowToCook</a><br>官方网站：<a href="https://cook.aiursoft.cn/">https://cook.aiursoft.cn/</a></p><h1 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull ghcr.io/anduin2017/how-to-cook:latest</span><br><span class="line">docker run -d -p 5000:80 ghcr.io/anduin2017/how-to-cook:latest</span><br></pre></td></tr></table></figure><p><img src="https://qs100371.vip/post-images/1749637189204.webp"></p><p><img src="https://qs100371.vip/post-images/1749637196203.webp"></p><p><img src="https://qs100371.vip/post-images/1749637201804.webp"></p><hr><p>简直就是生存指南。要是加上收藏功能就好了，毕竟能学会几个能做的就很不错了。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;程序员做饭指南是一个开源项目，一个菜谱 Web 服务。&lt;/p&gt;</summary>
