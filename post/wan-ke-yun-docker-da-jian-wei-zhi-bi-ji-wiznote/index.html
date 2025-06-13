@@ -127,14 +127,14 @@
 <blockquote>
 <p>安装成功之后通过 ip:8383 访问网页版</p>
 </blockquote>
-<p>默认管理员账号：<a href="mailto:&#97;&#x64;&#109;&#105;&#x6e;&#x40;&#x77;&#105;&#122;&#x2e;&#x63;&#110;">&#97;&#x64;&#109;&#105;&#x6e;&#x40;&#x77;&#105;&#122;&#x2e;&#x63;&#110;</a><br>密码：123456<br><img src="https://qs100371.vip/post-images/1732942414217.webp"></p>
+<p>默认管理员账号：<a href="mailto:&#97;&#x64;&#109;&#x69;&#x6e;&#x40;&#x77;&#x69;&#x7a;&#x2e;&#x63;&#110;">&#97;&#x64;&#109;&#x69;&#x6e;&#x40;&#x77;&#x69;&#x7a;&#x2e;&#x63;&#110;</a><br>密码：123456<br><img src="https://qs100371.vip/post-images/1732942414217.webp"></p>
 
                             
           </div>
 
           <footer class="article-footer">
 
-            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/" data-id="cmb7tq894008fvotz2z1e1vsk" data-title="玩客云docker搭建为知笔记wiznote"
+            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/" data-id="cmbutk3gs008h3otz204e9jqj" data-title="玩客云docker搭建为知笔记wiznote"
               class="article-share-link"><span class="fa fa-share">
                 分享
               </span></a>
@@ -199,31 +199,21 @@
         <div class="widget">
             
         
+            <div class="notice" style="margin-top:5px">
+                <i class="fa "></i>
+                <div class="notice-content" id="broad"></div>
+            </div>
+            <script type="text/javascript">
+                fetch('https://v1.hitokoto.cn')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("broad").innerHTML = data.hitokoto;
+                    })
+                    .catch(console.error)
+            </script>
+            
                 
                         
-                            <div class="notice" style="margin-top:5px">
-                                <i class="fa "></i>
-                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
-
-                                <script>
-                                    
-                                    function loadRandomContent() {
-                                        fetch('https://img.qs100371.vip/songci.php')
-                                            .then(response => response.text())
-                                            .then(text => {
-                                                document.getElementById('poem-container').innerText = text;
-                                            })
-                                            .catch(error => {
-                                                console.error('加载失败:', error);
-                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
-                                            });
-                                    }
-
-                                    // 页面加载时自动获取一次
-                                    loadRandomContent();
-                                </script>
-                            </div>
-                            
                                 <style>
                                     .notice {
                                         padding: 5px;

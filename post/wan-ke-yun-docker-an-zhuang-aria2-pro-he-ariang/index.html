@@ -133,7 +133,7 @@
 
           <footer class="article-footer">
 
-            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" data-id="cmb7tq892007zvotz14lw29hv" data-title="玩客云docker安装Aria2 Pro和AriaNg"
+            <a data-url="https://qs100371.vip/post/wan-ke-yun-docker-an-zhuang-aria2-pro-he-ariang/" data-id="cmbutk3gq00813otz5dyt8bnc" data-title="玩客云docker安装Aria2 Pro和AriaNg"
               class="article-share-link"><span class="fa fa-share">
                 分享
               </span></a>
@@ -198,31 +198,21 @@
         <div class="widget">
             
         
+            <div class="notice" style="margin-top:5px">
+                <i class="fa "></i>
+                <div class="notice-content" id="broad"></div>
+            </div>
+            <script type="text/javascript">
+                fetch('https://v1.hitokoto.cn')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("broad").innerHTML = data.hitokoto;
+                    })
+                    .catch(console.error)
+            </script>
+            
                 
                         
-                            <div class="notice" style="margin-top:5px">
-                                <i class="fa "></i>
-                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
-
-                                <script>
-                                    
-                                    function loadRandomContent() {
-                                        fetch('https://img.qs100371.vip/songci.php')
-                                            .then(response => response.text())
-                                            .then(text => {
-                                                document.getElementById('poem-container').innerText = text;
-                                            })
-                                            .catch(error => {
-                                                console.error('加载失败:', error);
-                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
-                                            });
-                                    }
-
-                                    // 页面加载时自动获取一次
-                                    loadRandomContent();
-                                </script>
-                            </div>
-                            
                                 <style>
                                     .notice {
                                         padding: 5px;
