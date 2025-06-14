@@ -57,34 +57,55 @@
     <div class="content index width mx-auto px2 my4">
         
           <header id="header">
-  <a href="/">
-  
+  <a href="/%20/">
     
-      <div id="logo" style="background-image: url(/images/avatar.png);"></div>
-    
-  
-    <div id="title">
-      <h1>qs blog</h1>
-    </div>
+      
+          <div id="logo" style="background-image: url(/images/avatar.png);"></div>
+          
+            
+              <div id="title">
+                <h1>
+                  qs blog
+                </h1>
+              </div>
   </a>
   <div id="nav">
     <ul>
       <li class="icon">
         <a href="#"><i class="fa fa-bars fa-2x"></i></a>
       </li>
-       
-        <li><a href="/">Home</a></li>
-       
-        <li><a href="/archives/">Archives</a></li>
-       
-        <li><a href="/appscenter/">Projects</a></li>
-       
-        <li><a href="/random.html">random</a></li>
       
+        <li><a href="/">
+            Home
+          </a></li>
+        
+        <li><a href="/archives/">
+            Archives
+          </a></li>
+        
+        <li><a href="/appscenter/">
+            Projects
+          </a></li>
+        
+        <li><a href="/random.html">
+            random
+          </a></li>
+        
+         <li>  <form onsubmit="bingSiteSearch(this); return false;">
+            <input type="text" id="bing-search-query" placeholder="search" size="6" required>
+            
+          </form></li>
+
+          <script>
+            function bingSiteSearch(form) {
+              const query = document.getElementById('bing-search-query').value;
+              const domain = window.location.hostname; // 自动获取当前网站域名
+              window.open(`https://www.bing.com/search?q=site:${domain} ${encodeURIComponent(query)}`, '_blank');
+            }
+          </script>
     </ul>
   </div>
 </header>
-
         
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   
