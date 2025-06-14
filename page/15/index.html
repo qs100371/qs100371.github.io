@@ -99,11 +99,18 @@
                 
             </ul>.
             
-              <form action="https://www.bing.com/search" target="_blank">
-                <input type="hidden" name="q" value="site:qs100371.vip">
-                <input type="text" name="q" placeholder="用 Bing 搜索本站...">
+              <form onsubmit="bingSiteSearch(this); return false;">
+                <input type="text" id="bing-search-query" placeholder="用 Bing 搜索本站..." required>
                 <button type="submit">搜索</button>
               </form>
+
+              <script>
+                function bingSiteSearch(form) {
+                  const query = document.getElementById('bing-search-query').value;
+                  const domain = window.location.hostname; // 自动获取当前网站域名
+                  window.open(`https://www.bing.com/search?q=site:${domain} ${encodeURIComponent(query)}`, '_blank');
+                }
+              </script>
         </p>
 </section>
 
