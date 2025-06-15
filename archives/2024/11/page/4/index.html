@@ -82,14 +82,14 @@
           </a></li>
         
         <li><a href="/appscenter/">
-            Projects
+            Apps
           </a></li>
         
         <li><a href="/random.html">
             random
           </a></li>
         
-         <li>  <form onsubmit="bingSiteSearch(this); return false;">
+        <!-- <li>  <form onsubmit="bingSiteSearch(this); return false;">
             <input type="text" id="bing-search-query" placeholder="search" size="6" required>
             
           </form></li>
@@ -100,7 +100,7 @@
               const domain = window.location.hostname; // 自动获取当前网站域名
               window.open(`https://www.bing.com/search?q=site:${domain} ${encodeURIComponent(query)}`, '_blank');
             }
-          </script>
+          </script>-->
     </ul>
   </div>
 </header>
@@ -269,25 +269,42 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2025 qs100371 theme:cactus-light
+    Copyright &copy; 2025
+      qs100371 |hexo:cactus-light
   </div>
   <div class="footer-right">
     <nav>
       <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Archives</a></li>
-         
-          <li><a href="/appscenter/">Projects</a></li>
-         
-          <li><a href="/random.html">random</a></li>
         
+          <li><a href="/">
+              Home
+            </a></li>
+          
+          <li><a href="/archives/">
+              Archives
+            </a></li>
+          
+          <li><a href="/appscenter/">
+              Apps
+            </a></li>
+          
+          <li><a href="/random.html">
+              random
+            </a></li>
+          
       </ul>
     </nav>
   </div>
 </footer>
 
+<script src="/js/jquery.min.js"></script>
+
+  
+<script src="/js/search.js"></script>
+
+    <script type="text/javascript">
+      searchFunc("search.xml", "local-search-input", "local-search-result");
+    </script>
 </body>
 </html>
 <!-- styles -->
