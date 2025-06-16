@@ -125,29 +125,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-25T03:23:05.000Z" itemprop="datePublished">2025-01-25</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>sayhello是一个简单的留言板，docker部署。</p>
+    <div class="content" itemprop="articleBody">
+      <p>sayhello是一个简单的留言板，docker部署。</p>
 <span id="more"></span>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p><code>docker run -d -p 5000:5000 --name sayhello powersee/sayhello</code><br>从ip:5000访问。<br><img src="https://qs100371.vip/post-images/1737777030764.webp"></p>
 <h1 id="留言管理"><a href="#留言管理" class="headerlink" title="留言管理"></a>留言管理</h1><p>使用的是sqlite数据库，需要进入容器进行管理。<br><code>docker exec -it sayhello /bin/sh</code><br>安装sqlite<br><code>apk add sqlite</code><br>再对data.db进行更改。</p>
@@ -160,10 +160,57 @@
 </ul>
 <p>更多操作参见：<br><a href="https://powersee.github.io/2023/02/about-sayhello/"><em>Docker 搭建留言板 sayhello 进阶使用教程</em></a></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

@@ -128,29 +128,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-06T08:59:17.000Z" itemprop="datePublished">2025-01-06</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/termux/" rel="tag">termux</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>termux只是一个linux模拟环境，不是真正的系统，要安装docker，需要先用qemu建立linux虚拟机，在虚拟机上安装alpine，在alpine里安装docker。本文得到的是x86-64版本的docker。</p>
+    <div class="content" itemprop="articleBody">
+      <p>termux只是一个linux模拟环境，不是真正的系统，要安装docker，需要先用qemu建立linux虚拟机，在虚拟机上安装alpine，在alpine里安装docker。本文得到的是x86-64版本的docker。</p>
 <span id="more"></span>
 <h1 id="termux内操作"><a href="#termux内操作" class="headerlink" title="termux内操作"></a>termux内操作</h1><p>打开 Termux<br><code>pkg update -y &amp;&amp; pkg upgrade -y</code><br>安装必要的依赖<br><code>pkg install qemu-utils qemu-common qemu-system-x86_64-headless wget -y</code><br>建立目录<br><code>mkdir alpine &amp;&amp; cd alpine</code><br>下载Alpine Linux 3.20.2 iso<br><code>wget http://dl-cdn.alpinelinux.org/alpine/v3.20/releases/x86_64/alpine-virt-3.20.2-x86_64.iso</code><br>创建磁盘<br><code>qemu-img create -f qcow2 alpine.img 5G</code><br>启动<br><code>qemu-system-x86_64 -machine q35 -m 2024 -smp cpus=2 -cpu qemu64 -drive if=pflash,format=raw,read-only=on,file=$PREFIX/share/qemu/edk2-x86_64-code.fd -netdev user,id=n1,hostfwd=tcp::2222-:22 -device virtio-net,netdev=n1 -cdrom alpine-virt-3.20.2-x86_64.iso -nographic alpine.img</code></p>
 <h1 id="虚拟机内部操作"><a href="#虚拟机内部操作" class="headerlink" title="虚拟机内部操作"></a>虚拟机内部操作</h1><p> 用root登录，无密码<br>设置网络<br><code>setup-interfaces</code><br>直接选默认<br><code>ifup eth0</code><br>安装到虚拟机硬盘<br><code>setup-alpine</code><br>mirrors自动选择<br>安装完成后，关闭虚拟机（命令 poweroff）</p>
@@ -164,10 +164,57 @@
 <p>启动命令中的<code>hostfwd=tcp::15230-:5230</code>是把内网的5230和外部的15230端口关联以便用外部IP访问内网。此方式无法使用桥接方式连接网络，只能用映射端口的方式访问内部容器。</p>
 </blockquote>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

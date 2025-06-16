@@ -128,39 +128,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-03-12T09:25:37.000Z" itemprop="datePublished">2025-03-12</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>Transmission是一个免费的bittorrent客户端。可部署在docker中。</p>
+    <div class="content" itemprop="articleBody">
+      <p>Transmission是一个免费的bittorrent客户端。可部署在docker中。</p>
 <span id="more"></span>
 <p>官网：<a href="https://transmissionbt.com/">https://transmissionbt.com/</a><br>项目地址：<a href="https://github.com/linuxserver/docker-transmission">linuxserver&#x2F;docker-transmission</a></p>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line"> <span class="attribute">transmission</span><span class="punctuation">:</span></span><br><span class="line">   <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">lscr.io/linuxserver/transmission:latest</span></span><br><span class="line">   <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">transmission</span></span><br><span class="line">   <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">PUID=1000</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">PGID=1000</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">TZ=Etc/UTC</span></span><br><span class="line">   <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/data/transmission:/config</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/data/bank/bt:/downloads #optional</span></span><br><span class="line">   <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">9091:9091</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">51413:51413</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">51413:51413/udp</span></span><br><span class="line">   <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br></pre></td></tr></table></figure>
 <p>   从ip:9091访问。<br>   <img src="https://qs100371.vip/post-images/1741772514315.webp"><br>   <img src="https://qs100371.vip/post-images/1741772520474.webp"><br>   <img src="https://qs100371.vip/post-images/1741772525402.webp"><br>   <img src="https://qs100371.vip/post-images/1741772529717.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

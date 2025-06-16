@@ -128,29 +128,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-24T14:05:33.000Z" itemprop="datePublished">2025-01-24</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>glance是一个非常棒的自托管仪表板，可以显示实时 RSS 订阅、Reddit 子版块帖子、天气、书签、特定频道的最新 YouTube 视频、日历、股票信息、iframe、twitch 频道和热门游戏、GitHub 发布和网站监控等。本文记录了部署过程。</p>
+    <div class="content" itemprop="articleBody">
+      <p>glance是一个非常棒的自托管仪表板，可以显示实时 RSS 订阅、Reddit 子版块帖子、天气、书签、特定频道的最新 YouTube 视频、日历、股票信息、iframe、twitch 频道和热门游戏、GitHub 发布和网站监控等。本文记录了部署过程。</p>
 <span id="more"></span>
 <h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><p><code>docker pull glanceapp/glance</code></p>
 <h1 id="编辑docker-compose-yml"><a href="#编辑docker-compose-yml" class="headerlink" title="编辑docker-compose.yml"></a>编辑docker-compose.yml</h1><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  glance:</span></span><br><span class="line"><span class="symbol">    image:</span> glanceapp/glance</span><br><span class="line"><span class="symbol">    container_name:</span> glance</span><br><span class="line"><span class="symbol">    restart:</span> unless-stopped</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="number">8888</span>:<span class="number">8080</span>        <span class="meta"># 左边的8080可以自由修改成服务器上没有被占用的端口，右边的8080不要动。</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="keyword">/data/</span>glance/glance.yml:<span class="keyword">/app/</span>glance.yml</span><br><span class="line">      - <span class="keyword">/data/</span>glance/assets:<span class="keyword">/app/</span>assets</span><br><span class="line">      - <span class="keyword">/etc/</span>TZ:<span class="keyword">/etc/</span>timezone:ro</span><br><span class="line">      - <span class="keyword">/etc/</span>localtime:<span class="keyword">/etc/</span>localtime:ro</span><br></pre></td></tr></table></figure>
@@ -162,10 +162,57 @@
 <p>也可以把这个仪表板当成网站首页，精心设置之后效果挺不错的。</p>
 </blockquote>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

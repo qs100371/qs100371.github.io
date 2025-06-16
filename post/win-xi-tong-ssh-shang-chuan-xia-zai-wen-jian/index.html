@@ -123,39 +123,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-06T03:04:31.000Z" itemprop="datePublished">2024-11-06</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>ssh上传下载文件的几个方法。</p>
+    <div class="content" itemprop="articleBody">
+      <p>ssh上传下载文件的几个方法。</p>
 <span id="more"></span>
 <h1 id="使用ssh命令登录"><a href="#使用ssh命令登录" class="headerlink" title="使用ssh命令登录"></a>使用ssh命令登录</h1><p><code>ssh username@remote_host</code></p>
 <h1 id="使用scp命令复制文件到远程服务器："><a href="#使用scp命令复制文件到远程服务器：" class="headerlink" title="使用scp命令复制文件到远程服务器："></a>使用scp命令复制文件到远程服务器：</h1><p><code>scp /path/to/file.txt username@remote_host:/path/to/remote/directory/</code><br>从远程服务器复制文件到本地：<br><code>scp username@remote_host:/path/to/remote/file.txt /path/to/local/direct</code></p>
 <h1 id="使用客户端：xshell，xftp"><a href="#使用客户端：xshell，xftp" class="headerlink" title="使用客户端：xshell，xftp"></a>使用客户端：xshell，xftp</h1><hr>
 <p>难怪传文件速率只有130k，原来免费的cpolar转发速率只有1Mbps，还以为是移动宽带上传速率不达标。windows中powershell中有scp命令，cmd里没有。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

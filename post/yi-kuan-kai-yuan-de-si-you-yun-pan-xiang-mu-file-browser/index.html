@@ -128,39 +128,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-02-11T12:21:53.000Z" itemprop="datePublished">2025-02-11</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>File Browser，简单实用、轻量级、跨平台，安装部署简单快捷，自带网页版文件管理器，基于 Go 语言开发，运行速度快。</p>
+    <div class="content" itemprop="articleBody">
+      <p>File Browser，简单实用、轻量级、跨平台，安装部署简单快捷，自带网页版文件管理器，基于 Go 语言开发，运行速度快。</p>
 <span id="more"></span>
 <p>项目地址：<a href="https://filebrowser.org/">https://filebrowser.org/</a></p>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/filebrowser</span><br><span class="line">docker run -d --name filebrowser \</span><br><span class="line">    --restart=unless-stopped \</span><br><span class="line">    -v /data/downloads:/srv \</span><br><span class="line">    -v /data/filebrowser/filebrowser.db:/database/filebrowser.db \</span><br><span class="line">    -v /data/filebrowser/settings.json:/config/settings.json \</span><br><span class="line">    -e PUID=$(<span class="built_in">id</span> -u) \</span><br><span class="line">    -e PGID=$(<span class="built_in">id</span> -g) \</span><br><span class="line">    -p 10000:80 \</span><br><span class="line">    filebrowser/filebrowser</span><br></pre></td></tr></table></figure>
 
 <p>从IP:10000访问。<br><img src="https://qs100371.vip/post-images/1739276954877.webp"><br><img src="https://qs100371.vip/post-images/1739276960092.webp"><br><img src="https://qs100371.vip/post-images/1739276966105.webp"><br><img src="https://qs100371.vip/post-images/1739276970499.webp"><br>生成的分享链接：<a href="http://192.168.0.2:10000/share/3O36kkUo">http://192.168.0.2:10000/share/3O36kkUo</a></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

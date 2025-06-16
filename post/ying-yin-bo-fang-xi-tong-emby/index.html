@@ -135,38 +135,85 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-03-12T13:19:24.000Z" itemprop="datePublished">2025-03-12</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>Emby是一款优秀的媒体服务器软件，致力于为用户提供丰富的多媒体体验。通过Emby，可以方便地在家庭内的各种设备上观看喜爱的电影、电视剧和其他视频内容。而且，Emby还具备强大的媒体管理功能，让影视资源井然有序，随时随地畅享观影乐趣。</p>
+    <div class="content" itemprop="articleBody">
+      <p>Emby是一款优秀的媒体服务器软件，致力于为用户提供丰富的多媒体体验。通过Emby，可以方便地在家庭内的各种设备上观看喜爱的电影、电视剧和其他视频内容。而且，Emby还具备强大的媒体管理功能，让影视资源井然有序，随时随地畅享观影乐趣。</p>
 <span id="more"></span>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">version:</span> <span class="string">&quot;2.3&quot;</span></span><br><span class="line"><span class="params">services:</span></span><br><span class="line">  <span class="params">emby:</span></span><br><span class="line">    <span class="params">image:</span> emby<span class="symbol">/embyserver</span></span><br><span class="line">    <span class="params">container_name:</span> embyserver</span><br><span class="line">    <span class="comment">#runtime: nvidia # Expose NVIDIA GPUs</span></span><br><span class="line">    <span class="comment">#network_mode: host # Enable DLNA and Wake-on-Lan</span></span><br><span class="line">    <span class="params">environment:</span></span><br><span class="line">      <span class="operator">-</span> UID<span class="operator">=</span><span class="number">1000</span> <span class="comment"># The UID to run emby as (default: 2)</span></span><br><span class="line">      <span class="operator">-</span> GID<span class="operator">=</span><span class="number">100</span> <span class="comment"># The GID to run emby as (default 2)</span></span><br><span class="line">      <span class="operator">-</span> GIDLIST<span class="operator">=</span><span class="number">100</span> <span class="comment"># A comma-separated list of additional GIDs to run emby as (default: 2)</span></span><br><span class="line">    <span class="params">volumes:</span></span><br><span class="line">      <span class="operator">-</span> <span class="operator">/</span>data<span class="operator">/</span>emby:<span class="symbol">/config</span> <span class="comment"># Configuration directory</span></span><br><span class="line">      <span class="operator">-</span> <span class="operator">/</span>data<span class="operator">/</span>bank<span class="operator">/</span>tvshows:<span class="symbol">/mnt/share1</span> <span class="comment"># Media directory</span></span><br><span class="line">      <span class="operator">-</span> <span class="operator">/</span>data<span class="operator">/</span>bank<span class="operator">/</span>bt:<span class="symbol">/mnt/share2</span> <span class="comment"># Media directory</span></span><br><span class="line">    <span class="params">ports:</span></span><br><span class="line">      <span class="operator">-</span> <span class="number">8096</span>:<span class="number">8096</span> <span class="comment"># HTTP port</span></span><br><span class="line">      <span class="operator">-</span> <span class="number">8920</span>:<span class="number">8920</span> <span class="comment"># HTTPS port</span></span><br><span class="line">    <span class="comment">#devices:</span></span><br><span class="line">      <span class="comment">#- /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes</span></span><br><span class="line">      <span class="comment">#- /dev/vchiq:/dev/vchiq # MMAL/OMX on Raspberry Pi</span></span><br><span class="line">    <span class="params">restart:</span> unless-stopped</span><br></pre></td></tr></table></figure>
 <p>从ip:8096访问。<br><img src="https://qs100371.vip/post-images/1741786606877.webp"><br><img src="https://qs100371.vip/post-images/1741786612004.webp"><br><img src="https://qs100371.vip/post-images/1741786616144.webp"><br><img src="https://qs100371.vip/post-images/1741786620416.webp"><br><img src="https://qs100371.vip/post-images/1741786625010.webp"><br><img src="https://qs100371.vip/post-images/1741786629454.webp"><br><img src="https://qs100371.vip/post-images/1741786634060.webp"><br><img src="https://qs100371.vip/post-images/1741786641680.webp"><br><img src="https://qs100371.vip/post-images/1741786637859.webp"><br><img src="https://qs100371.vip/post-images/1741937557335.webp"><br><img src="https://qs100371.vip/post-images/1741937564501.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

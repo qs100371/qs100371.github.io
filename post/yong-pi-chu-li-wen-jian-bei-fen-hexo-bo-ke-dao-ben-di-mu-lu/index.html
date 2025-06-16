@@ -123,29 +123,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-05-03T07:05:55.000Z" itemprop="datePublished">2025-05-03</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>hexo在折腾过程，难免会出现数据丢失的问题，有不少备份的方案，但在windows上最简单的就是压缩后复制到指定目录。可复制到onedrive目录下，会自动备份到云端。</p>
+    <div class="content" itemprop="articleBody">
+      <p>hexo在折腾过程，难免会出现数据丢失的问题，有不少备份的方案，但在windows上最简单的就是压缩后复制到指定目录。可复制到onedrive目录下，会自动备份到云端。</p>
 <span id="more"></span>
 <h1 id="主代码"><a href="#主代码" class="headerlink" title="主代码"></a>主代码</h1><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">setlocal</span> enabledelayedexpansion</span><br><span class="line"></span><br><span class="line">:: 配置参数</span><br><span class="line"><span class="built_in">set</span> &quot;SOURCE_DIR=D:\HexoBlog&quot;      :: Hexo博客根目录</span><br><span class="line"><span class="built_in">set</span> &quot;BACKUP_DIR=D:\BlogBackups&quot;   :: 备份存放目录</span><br><span class="line"><span class="built_in">set</span> &quot;IGNORE_DIRS=node_modules public .deploy_git&quot;  :: 要忽略的目录（空格分隔）</span><br><span class="line"><span class="built_in">set</span> &quot;ZIP_NAME=HexoBackup_<span class="variable">%date:~0,4%</span><span class="variable">%date:~5,2%</span><span class="variable">%date:~8,2%</span>.zip&quot;  :: 压缩文件名（带日期）</span><br><span class="line"></span><br><span class="line">:: 创建临时工作目录</span><br><span class="line"><span class="built_in">set</span> &quot;TEMP_DIR=<span class="variable">%TEMP%</span>\HexoBackupTemp&quot;</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">exist</span> &quot;<span class="variable">%TEMP_DIR%</span>&quot; <span class="built_in">rd</span> /s /q &quot;<span class="variable">%TEMP_DIR%</span>&quot;</span><br><span class="line"><span class="built_in">mkdir</span> &quot;<span class="variable">%TEMP_DIR%</span>&quot;</span><br><span class="line"></span><br><span class="line">:: 复制文件，排除指定目录</span><br><span class="line"><span class="built_in">echo</span> 正在复制文件...</span><br><span class="line"><span class="keyword">for</span> /d <span class="variable">%%d</span> <span class="keyword">in</span> (&quot;<span class="variable">%SOURCE_DIR%</span>\*&quot;) <span class="keyword">do</span> (</span><br><span class="line">    <span class="built_in">set</span> &quot;skip=&quot;</span><br><span class="line">    <span class="keyword">for</span> <span class="variable">%%i</span> <span class="keyword">in</span> (<span class="variable">%IGNORE_DIRS%</span>) <span class="keyword">do</span> (</span><br><span class="line">        <span class="keyword">if</span> /i &quot;<span class="variable">%%~</span>nxd&quot;==&quot;<span class="variable">%%i</span>&quot; <span class="built_in">set</span> skip=<span class="number">1</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> skip (</span><br><span class="line">        <span class="built_in">xcopy</span> /E /I /Y &quot;<span class="variable">%%d</span>&quot; &quot;<span class="variable">%TEMP_DIR%</span>\<span class="variable">%%~</span>nxd&quot;</span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">:: 复制单独的文件（非目录）</span><br><span class="line"><span class="keyword">for</span> <span class="variable">%%f</span> <span class="keyword">in</span> (&quot;<span class="variable">%SOURCE_DIR%</span>\*.*&quot;) <span class="keyword">do</span> (</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> &quot;<span class="variable">%%~</span>nxf&quot;==&quot;.gitignore&quot; (  :: 可以添加其他要排除的文件</span><br><span class="line">        <span class="built_in">copy</span> /Y &quot;<span class="variable">%%f</span>&quot; &quot;<span class="variable">%TEMP_DIR%</span>\&quot; &gt;<span class="built_in">nul</span></span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">:: 创建备份目录（如果不存在）</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exist</span> &quot;<span class="variable">%BACKUP_DIR%</span>&quot; <span class="built_in">mkdir</span> &quot;<span class="variable">%BACKUP_DIR%</span>&quot;</span><br><span class="line"></span><br><span class="line">:: 压缩文件</span><br><span class="line"><span class="built_in">echo</span> 正在压缩备份文件...</span><br><span class="line">powershell -nologo -noprofile -command &quot;Add-<span class="built_in">Type</span> -Assembly &#x27;System.IO.Compression.FileSystem&#x27;; [System.IO.Compression.ZipFile]::CreateFromDirectory(&#x27;<span class="variable">%TEMP_DIR%</span>&#x27;, &#x27;<span class="variable">%BACKUP_DIR%</span>\<span class="variable">%ZIP_NAME%</span>&#x27;, &#x27;Optimal&#x27;, $false)&quot;</span><br><span class="line"></span><br><span class="line">:: 清理临时文件</span><br><span class="line"><span class="built_in">rd</span> /s /q &quot;<span class="variable">%TEMP_DIR%</span>&quot;</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 备份完成！备份文件保存在: <span class="variable">%BACKUP_DIR%</span>\<span class="variable">%ZIP_NAME%</span></span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
 <p>以ansi编码保存为backup_hexo.bat。</p>
@@ -168,10 +168,57 @@
 <h1 id="7zip压缩方案"><a href="#7zip压缩方案" class="headerlink" title="7zip压缩方案"></a>7zip压缩方案</h1><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">setlocal</span></span><br><span class="line"></span><br><span class="line">:: 配置参数</span><br><span class="line"><span class="built_in">set</span> &quot;SOURCE_DIR=D:\Hexo\Blog&quot;</span><br><span class="line"><span class="built_in">set</span> &quot;BACKUP_DIR=D:\BlogBackups&quot;</span><br><span class="line"><span class="built_in">set</span> &quot;SEVEN_ZIP=C:\Program Files\<span class="number">7</span>-Zip\<span class="number">7</span>z.exe&quot;</span><br><span class="line"></span><br><span class="line">:: 创建临时排除列表文件</span><br><span class="line"><span class="built_in">set</span> &quot;EXCLUDE_LIST=<span class="variable">%temp%</span>\exclude.txt&quot;</span><br><span class="line">(</span><br><span class="line"> <span class="built_in">echo</span> node_modules\*</span><br><span class="line"> <span class="built_in">echo</span> public\*</span><br><span class="line"> <span class="built_in">echo</span> .deploy_git\*</span><br><span class="line"> <span class="built_in">echo</span> .github\*</span><br><span class="line">) &gt; &quot;<span class="variable">%EXCLUDE_LIST%</span>&quot;</span><br><span class="line"></span><br><span class="line">:: 执行压缩</span><br><span class="line">&quot;<span class="variable">%SEVEN_ZIP%</span>&quot; a -t7z -mx9 &quot;<span class="variable">%BACKUP_DIR%</span>\HexoBackup_<span class="variable">%date:~0,4%</span><span class="variable">%date:~5,2%</span><span class="variable">%date:~8,2%</span>.<span class="number">7</span>z&quot; &quot;<span class="variable">%SOURCE_DIR%</span>\*&quot; -x@&quot;<span class="variable">%EXCLUDE_LIST%</span>&quot;</span><br><span class="line"></span><br><span class="line">:: 清理</span><br><span class="line"><span class="built_in">del</span> &quot;<span class="variable">%EXCLUDE_LIST%</span>&quot;</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 备份完成！</span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
 <p>不使用powershell压缩，改为7zip。最后生成的文件差不多大小。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

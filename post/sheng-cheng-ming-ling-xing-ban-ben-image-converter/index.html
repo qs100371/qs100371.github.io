@@ -126,29 +126,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-05-03T02:41:39.000Z" itemprop="datePublished">2025-05-03</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>本文生成带参数运行的命令行版本image-converter。</p>
+    <div class="content" itemprop="articleBody">
+      <p>本文生成带参数运行的命令行版本image-converter。</p>
 <span id="more"></span>
 <p>提问：如果生成命令行exe程序，带三个参数运行，目录A，目录B，转换方式（png,webp,jpg等，默认webp，可省略），怎么做？<br><img src="https://qs100371.vip/post-images/1746240225812.webp"></p>
 <h1 id="主代码"><a href="#主代码" class="headerlink" title="主代码"></a>主代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_images</span>(<span class="params">src_dir, dest_dir, output_format=<span class="string">&#x27;webp&#x27;</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    核心转换函数</span></span><br><span class="line"><span class="string">    :param src_dir: 源目录</span></span><br><span class="line"><span class="string">    :param dest_dir: 目标目录</span></span><br><span class="line"><span class="string">    :param output_format: 输出格式 (webp/jpg/png)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(src_dir):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;错误：源目录不存在 <span class="subst">&#123;src_dir&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    os.makedirs(dest_dir, exist_ok=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    supported_formats = [<span class="string">&#x27;webp&#x27;</span>, <span class="string">&#x27;jpg&#x27;</span>, <span class="string">&#x27;jpeg&#x27;</span>, <span class="string">&#x27;png&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> output_format.lower() <span class="keyword">not</span> <span class="keyword">in</span> supported_formats:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;错误：不支持的格式 <span class="subst">&#123;output_format&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(src_dir):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> filename.lower().endswith((<span class="string">&#x27;.png&#x27;</span>, <span class="string">&#x27;.jpg&#x27;</span>, <span class="string">&#x27;.jpeg&#x27;</span>, <span class="string">&#x27;.bmp&#x27;</span>, <span class="string">&#x27;.gif&#x27;</span>, <span class="string">&#x27;.tiff&#x27;</span>, <span class="string">&#x27;.webp&#x27;</span>)):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            src_path = os.path.join(src_dir, filename)</span><br><span class="line">            dest_path = os.path.join(dest_dir, <span class="string">f&quot;<span class="subst">&#123;os.path.splitext(filename)[<span class="number">0</span>]&#125;</span>.<span class="subst">&#123;output_format&#125;</span>&quot;</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">with</span> Image.<span class="built_in">open</span>(src_path) <span class="keyword">as</span> img:</span><br><span class="line">                <span class="comment"># 透明背景处理</span></span><br><span class="line">                <span class="keyword">if</span> img.mode <span class="keyword">in</span> (<span class="string">&#x27;RGBA&#x27;</span>, <span class="string">&#x27;LA&#x27;</span>) <span class="keyword">and</span> output_format <span class="keyword">in</span> (<span class="string">&#x27;jpg&#x27;</span>, <span class="string">&#x27;jpeg&#x27;</span>):</span><br><span class="line">                    background = Image.new(<span class="string">&#x27;RGB&#x27;</span>, img.size, (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">                    background.paste(img, mask=img.split()[-<span class="number">1</span>])</span><br><span class="line">                    img = background</span><br><span class="line">                </span><br><span class="line">                <span class="comment"># 高质量保存参数</span></span><br><span class="line">                save_args = &#123;&#125;</span><br><span class="line">                <span class="keyword">if</span> output_format == <span class="string">&#x27;webp&#x27;</span>:</span><br><span class="line">                    save_args = &#123;<span class="string">&#x27;quality&#x27;</span>: <span class="number">100</span>, <span class="string">&#x27;method&#x27;</span>: <span class="number">6</span>&#125;</span><br><span class="line">                <span class="keyword">elif</span> output_format <span class="keyword">in</span> (<span class="string">&#x27;jpg&#x27;</span>, <span class="string">&#x27;jpeg&#x27;</span>):</span><br><span class="line">                    save_args = &#123;<span class="string">&#x27;quality&#x27;</span>: <span class="number">95</span>&#125;</span><br><span class="line">                </span><br><span class="line">                img.save(dest_path, **save_args)</span><br><span class="line">                count += <span class="number">1</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;转换成功: <span class="subst">&#123;filename&#125;</span> -&gt; <span class="subst">&#123;os.path.basename(dest_path)&#125;</span>&quot;</span>)</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;转换失败 <span class="subst">&#123;filename&#125;</span>: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;\n转换完成! 共处理 <span class="subst">&#123;count&#125;</span> 个文件&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="comment"># 设置命令行参数解析</span></span><br><span class="line">    parser = argparse.ArgumentParser(</span><br><span class="line">        description=<span class="string">&quot;图片格式转换工具 (命令行版)&quot;</span>,</span><br><span class="line">        formatter_class=argparse.RawTextHelpFormatter</span><br><span class="line">    )</span><br><span class="line">    parser.add_argument(<span class="string">&#x27;src_dir&#x27;</span>, <span class="built_in">help</span>=<span class="string">&quot;源图片目录路径&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&#x27;dest_dir&#x27;</span>, <span class="built_in">help</span>=<span class="string">&quot;输出目录路径&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&#x27;-f&#x27;</span>, <span class="string">&#x27;--format&#x27;</span>, </span><br><span class="line">                        choices=[<span class="string">&#x27;webp&#x27;</span>, <span class="string">&#x27;jpg&#x27;</span>, <span class="string">&#x27;png&#x27;</span>],</span><br><span class="line">                        default=<span class="string">&#x27;webp&#x27;</span>,</span><br><span class="line">                        <span class="built_in">help</span>=<span class="string">&quot;输出格式 (默认: webp)&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 解析参数</span></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 执行转换</span></span><br><span class="line">    convert_images(args.src_dir, args.dest_dir, args.<span class="built_in">format</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
@@ -161,10 +161,57 @@
 <li>带空格的路径需要用引号<br><code>image_converter_cli.exe &quot;C:\my photos&quot; &quot;D:\converted&quot; -f png</code><br><img src="https://qs100371.vip/post-images/1746240414925.webp"><br>在windows上，路径使用  \ 和 &#x2F; 效果一样，有空格的路径需加引号。</li>
 </ul>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

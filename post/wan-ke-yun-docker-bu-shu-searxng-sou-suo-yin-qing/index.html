@@ -127,39 +127,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-29T13:22:12.000Z" itemprop="datePublished">2024-11-29</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/onecloud/" rel="tag">onecloud</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p><a href="https://github.com/searxng/searxng-docker">searxng-docker</a>，使用 Docker 创建SearXNG 实例。</p>
+    <div class="content" itemprop="articleBody">
+      <p><a href="https://github.com/searxng/searxng-docker">searxng-docker</a>，使用 Docker 创建SearXNG 实例。</p>
 <span id="more"></span>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/searxng/searxng-docker.git</span><br><span class="line"><span class="built_in">cd</span> searxng-docker</span><br><span class="line"><span class="built_in">mv</span> docker-compose.yaml docker-compose.yaml.bak</span><br><span class="line">nano docker-compose.yaml</span><br></pre></td></tr></table></figure>
 <h1 id="docker-compose-yaml"><a href="#docker-compose-yaml" class="headerlink" title="docker-compose.yaml"></a>docker-compose.yaml</h1><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">version</span><span class="punctuation">:</span> <span class="string">&#x27;3.7&#x27;</span></span><br><span class="line"> <span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">redis</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">&quot;redis:alpine&quot;</span></span><br><span class="line">    <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">redis-server --save &quot;&quot; --appendonly &quot;no&quot;</span></span><br><span class="line">    <span class="attribute">networks</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">searxng</span></span><br><span class="line">    <span class="attribute">tmpfs</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/lib/redis</span></span><br><span class="line">    <span class="attribute">cap_drop</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ALL</span></span><br><span class="line">    <span class="attribute">cap_add</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SETGID</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SETUID</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DAC_OVERRIDE</span></span><br><span class="line"> </span><br><span class="line">  <span class="attribute">searxng</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">searxng</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">searxng/searxng:latest</span></span><br><span class="line">    <span class="attribute">networks</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">searxng</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">&quot;8180:8080&quot;   # 这个冒号左边的端口可以更改，右边的不要改</span></span><br><span class="line">    <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./searxng:/etc/searxng:rw</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SEARXNG_BASE_URL=https://$&#123;SEARXNG_HOSTNAME:-https://你的域名&#125;/</span></span><br><span class="line">    <span class="attribute">cap_drop</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ALL</span></span><br><span class="line">    <span class="attribute">cap_add</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">CHOWN</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SETGID</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SETUID</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DAC_OVERRIDE</span></span><br><span class="line">    <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">      <span class="attribute">driver</span><span class="punctuation">:</span> <span class="string">&quot;json-file&quot;</span></span><br><span class="line">      <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">max-size</span><span class="punctuation">:</span> <span class="string">&quot;1m&quot;</span></span><br><span class="line">        <span class="attribute">max-file</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="attribute">networks</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">searxng</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">ipam</span><span class="punctuation">:</span></span><br><span class="line">      <span class="attribute">driver</span><span class="punctuation">:</span> <span class="string">default</span></span><br></pre></td></tr></table></figure>
 <p><code>sed -i &quot;s|ultrasecretkey|$(openssl rand -hex 32)|g&quot; searxng/settings.yml</code><br><code>docker compose up -d</code></p>
 <h1 id="从ip-8180访问"><a href="#从ip-8180访问" class="headerlink" title="从ip:8180访问"></a>从ip:8180访问</h1><p><img src="https://qs100371.vip/post-images/1732887065914.webp"><br><img src="https://qs100371.vip/post-images/1732887449181.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

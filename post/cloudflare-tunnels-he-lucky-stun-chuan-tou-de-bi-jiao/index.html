@@ -126,39 +126,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-12-28T11:04:41.000Z" itemprop="datePublished">2024-12-28</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>cloudflare zero trust tunnels 和 lucky stun都能进行内网穿透，用域名进行直接访问。<br>cf tunnels在使用时，浏览器地址栏域名保持不变，而stun方法地址栏会由域名跳转到ip加端口，并且浏览器上会提示不安全（非https），穿透ip和端口也无法保持。</p>
+    <div class="content" itemprop="articleBody">
+      <p>cloudflare zero trust tunnels 和 lucky stun都能进行内网穿透，用域名进行直接访问。<br>cf tunnels在使用时，浏览器地址栏域名保持不变，而stun方法地址栏会由域名跳转到ip加端口，并且浏览器上会提示不安全（非https），穿透ip和端口也无法保持。</p>
 <span id="more"></span>
 <h1 id="stun穿透"><a href="#stun穿透" class="headerlink" title="stun穿透"></a>stun穿透</h1><p>除了地址栏显示让人不适之外，速度一直没有问题。有一点，在ip变化的时候，cf域名响应有时会有滞后（短时无法访问）。</p>
 <h1 id="cf-tunnels"><a href="#cf-tunnels" class="headerlink" title="cf tunnels"></a>cf tunnels</h1><p>最近经常打不开</p>
 <p><img src="https://qs100371.vip/post-images/1735386768430.webp"><br><img src="https://qs100371.vip/post-images/1735386773222.webp"></p>
 <p>使用 CF Tunnel 速度上限是 32Mbps 左右，延时可能会略高于直接使用 CDN，但仍能保持在可接受的范围内。隧道速度取决于用户到 CF 数据中心 的距离和网络状况。CF 隧道无端口限制。<br>但是有个相当致命的缺点：Cloudflare到中国大陆的网络情况不佳，分配到的EndPoint基本都在美西，速度慢不说，还经常炸。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

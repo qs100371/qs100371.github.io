@@ -127,29 +127,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-03-09T13:41:25.000Z" itemprop="datePublished">2025-03-09</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>newsnow本质是一个爬虫，但是整个UI画面设计得非常时尚，热点新闻来源也非常多。</p>
+    <div class="content" itemprop="articleBody">
+      <p>newsnow本质是一个爬虫，但是整个UI画面设计得非常时尚，热点新闻来源也非常多。</p>
 <span id="more"></span>
 <p>项目地址：<a href="https://github.com/ourongxing/newsnow">ourongxing&#x2F;newsnow</a></p>
 <h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><p>• 优雅的设计，优雅的阅读体验，时刻关注最新最热的新闻。<br>• 支持 Github 登录，支持数据同步。<br>• 默认 30 分钟缓存，登录用户可以强制拉取最新数据。但也会根据内容源的更新间隔设置不同的爬虫间隔时间（最快两分钟），节约资源的同时避免频繁爬取而导致 IP 封禁。</p>
@@ -157,10 +157,57 @@
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">version</span><span class="punctuation">:</span> <span class="string">‘3’</span></span><br><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line"> <span class="attribute">newsnow</span><span class="punctuation">:</span></span><br><span class="line">   <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">ghcr.io/ourongxing/newsnow:latest</span></span><br><span class="line">   <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">newsnow</span></span><br><span class="line">   <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line">   <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">&#x27;4444:4444&#x27;</span></span><br><span class="line">   <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">G_CLIENT_ID=</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">G_CLIENT_SECRET=</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">JWT_SECRET=</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">INIT_TABLE=true</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">ENABLE_CACHE=true</span></span><br></pre></td></tr></table></figure>
 <p>启动后从ip:4444访问。<br><img src="https://qs100371.vip/post-images/1741528078060.webp"><br><img src="https://qs100371.vip/post-images/1741528084230.webp"><br><img src="https://qs100371.vip/post-images/1741528089347.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

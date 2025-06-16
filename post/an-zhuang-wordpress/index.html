@@ -123,29 +123,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-10-28T14:00:26.000Z" itemprop="datePublished">2024-10-28</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>wordpress需要web服务和数据库。</p>
+    <div class="content" itemprop="articleBody">
+      <p>wordpress需要web服务和数据库。</p>
 <span id="more"></span>
 <h1 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h1><p>sudo apt install nginx<br>sudo systemctl enable nginx<br>sudo systemctl start nginx<br>sudo systemctl status nginx</p>
 <p>让（Nginx 用户）成为 Web 目录的所有者。默认情况下，其权限归 root 用户所有。<br>sudo chown www-data:www-data &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html -R</p>
@@ -163,10 +163,57 @@
 <h1 id="测试-Nginx-配置"><a href="#测试-Nginx-配置" class="headerlink" title="测试 Nginx 配置"></a>测试 Nginx 配置</h1><p>sudo nginx -t<br>sudo systemctl reload nginx</p>
 <p>在浏览器地址栏中如下输入。<br>localhost&#x2F;wp-admin&#x2F;install.php<br>如果未显示安装向导，则可能需要安装一些 PHP 扩展。<br>sudo apt install php-imagick php-fpm php-mbstring php-bcmath php-xml php-mysql php-common php-gd php-json php-cli php-curl php-zip<br>sudo systemctl reload php8.2-fpm nginx<br>然后重新加载 PHP-FPM 和 Nginx服务。现在应该显示向导。<br>使用安装向导完成安装。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

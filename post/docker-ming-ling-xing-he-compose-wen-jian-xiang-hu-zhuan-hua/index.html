@@ -123,38 +123,85 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-12-18T13:49:49.000Z" itemprop="datePublished">2024-12-18</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/docker/" rel="tag">docker</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>docker可以直接用命令行建立容器，命令一般比较长，参数多，容易出错，compose方法使用yml文件就简单多了。<br>通过docker-compose.yml文件用<code>docker-compose up -d</code>来建立并运行容器。<br>cli和yml相互转化工具：<a href="https://www.mklab.cn/utils/docker">https://www.mklab.cn/utils/docker</a></p>
+    <div class="content" itemprop="articleBody">
+      <p>docker可以直接用命令行建立容器，命令一般比较长，参数多，容易出错，compose方法使用yml文件就简单多了。<br>通过docker-compose.yml文件用<code>docker-compose up -d</code>来建立并运行容器。<br>cli和yml相互转化工具：<a href="https://www.mklab.cn/utils/docker">https://www.mklab.cn/utils/docker</a></p>
 <span id="more"></span>
 <h1 id="cli"><a href="#cli" class="headerlink" title="cli"></a>cli</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -d --name cloudreve \</span></span><br><span class="line"><span class="language-bash">-p 5212:5212 --restart unless-stopped \</span></span><br><span class="line"><span class="language-bash">--mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/data/cloudreve/conf.ini,target=/cloudreve/conf.ini \</span></span><br><span class="line"><span class="language-bash">--mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/data/cloudreve/cloudreve.db,target=/cloudreve/cloudreve.db \</span></span><br><span class="line"><span class="language-bash">-v /data/cloudreve/uploads&gt;:/cloudreve/uploads \</span></span><br><span class="line"><span class="language-bash">-v /data/cloudreve/avatar&gt;:/cloudreve/avatar \</span></span><br><span class="line"><span class="language-bash">cloudreve/cloudreve:latest</span></span><br></pre></td></tr></table></figure>
 <h1 id="compose-yml"><a href="#compose-yml" class="headerlink" title="compose.yml"></a>compose.yml</h1><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">version</span><span class="punctuation">:</span> <span class="string">&#x27;3.1&#x27; </span></span><br><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">cloudreve</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">cloudreve/cloudreve:latest</span></span><br><span class="line">        <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">cloudreve</span></span><br><span class="line">        <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;5212:5212&#x27;</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/cloudreve/uploads&gt;:/cloudreve/uploads&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/cloudreve/avatar&gt;:/cloudreve/avatar&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>参考：<a href="https://zhuanlan.zhihu.com/p/689723007"><em>Docker - 记录docker-compose基础命令</em></a></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

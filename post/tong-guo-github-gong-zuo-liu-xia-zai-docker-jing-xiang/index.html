@@ -127,29 +127,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-12-03T08:22:11.000Z" itemprop="datePublished">2024-12-03</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/docker/" rel="tag">docker</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>docker pull失败怎么办？可以试试github工作流的方法来下载。</p>
+    <div class="content" itemprop="articleBody">
+      <p>docker pull失败怎么办？可以试试github工作流的方法来下载。</p>
 <span id="more"></span>
 <h1 id="注册-登录GitHub账户"><a href="#注册-登录GitHub账户" class="headerlink" title="注册&#x2F;登录GitHub账户"></a>注册&#x2F;登录GitHub账户</h1><h1 id="Fork项目https-github-com-wukongdaily-DockerTarBuilder"><a href="#Fork项目https-github-com-wukongdaily-DockerTarBuilder" class="headerlink" title="Fork项目https://github.com/wukongdaily/DockerTarBuilder"></a>Fork项目<a href="https://github.com/wukongdaily/DockerTarBuilder">https://github.com/wukongdaily/DockerTarBuilder</a></h1><p>点击Actions选项卡，进入GitHub Actions界面</p>
 <h1 id="运行工作流"><a href="#运行工作流" class="headerlink" title="运行工作流"></a>运行工作流</h1><p>找到名为“Run workflow”的选项，点击之后，将看到一个界面，输入需要拉取的Docker镜像名称。然后点击Run workflow按钮。<br>GitHub后台将自动开始拉取指定的Docker镜像。这是GitHub Actions自动化的一部分，后台会根据工作流的定义从Docker Hub或其他镜像库中拉取镜像。</p>
@@ -158,10 +158,57 @@
 <hr>
 <p>用docker import方式会出错，提示<br>docker: Error response from daemon: no command specified.<br>See ‘docker run –help’.<br>这个工作流的实质是执行<br><code>docker pull --platform linux/arm/v7  ****</code><br>platform有linux&#x2F;amd64,linux&#x2F;arm64,linux&#x2F;arm&#x2F;v7等，再save image，tar，zip。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

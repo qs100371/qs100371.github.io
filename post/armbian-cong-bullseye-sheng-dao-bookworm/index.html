@@ -124,39 +124,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-11T05:53:01.000Z" itemprop="datePublished">2024-11-11</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/armbian/" rel="tag">armbian</a>, <a class="tag-link-link" href="/tags/onecloud/" rel="tag">onecloud</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>armbian11升级到12的步骤。</p>
+    <div class="content" itemprop="articleBody">
+      <p>armbian11升级到12的步骤。</p>
 <span id="more"></span>
 <h1 id="升级系统到最新"><a href="#升级系统到最新" class="headerlink" title="升级系统到最新"></a>升级系统到最新</h1><h1 id="安装pgp-key"><a href="#安装pgp-key" class="headerlink" title="安装pgp key"></a>安装pgp key</h1><p><code>touch /usr/share/keyrings/armbian.gpg</code><br><code>chmod 644 /usr/share/keyrings/armbian.gpg</code><br><code>wget https://apt.armbian.com/armbian.key -O - | gpg --dearmor &gt;/usr/share/keyrings/armbian.gpg</code></p>
 <h1 id="修改apt源"><a href="#修改apt源" class="headerlink" title="修改apt源"></a>修改apt源</h1><p>&#x2F;etc&#x2F;apt&#x2F;sources.list，&#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;armbian.list，&#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;docker.list，把bullseye替换成bookworm</p>
 <h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><p><code>apt update</code><br><code>apt upgrade --no-new-pkgs</code><br><code>apt full-upgrade</code><br><code>apt dist-upgrade</code></p>
 <p>更新过程中的选择全选默认，完成之后重启。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

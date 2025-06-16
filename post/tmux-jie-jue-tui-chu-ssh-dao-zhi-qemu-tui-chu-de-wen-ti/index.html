@@ -126,29 +126,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-08T06:27:54.000Z" itemprop="datePublished">2025-01-08</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>tmux是一个终端复用器，可以解决退出ssh导致运行中的qemu退出的问题。</p>
+    <div class="content" itemprop="articleBody">
+      <p>tmux是一个终端复用器，可以解决退出ssh导致运行中的qemu退出的问题。</p>
 <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>pkg install tmux</code></p>
 <h1 id="运行tmux"><a href="#运行tmux" class="headerlink" title="运行tmux"></a>运行<code>tmux</code></h1><p>会打开一个终端一样的窗口，在里面运行启动qemu的脚本，按ctrl+b，d退出，qemu会在后台继续运行，而不会直接退出。</p>
@@ -159,10 +159,57 @@
 </blockquote>
 <p>tmux更多用法参见：<br><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html"><em>Tmux 使用教程</em></a></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

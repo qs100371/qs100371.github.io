@@ -127,39 +127,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-26T12:13:41.000Z" itemprop="datePublished">2024-11-26</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/onecloud/" rel="tag">onecloud</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p>
+    <div class="content" itemprop="articleBody">
+      <p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p>
 <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -<span class="keyword">p</span> /data/<span class="keyword">sun</span>-panel</span><br><span class="line">docker pull hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br><span class="line">docker run -d --restart=always -<span class="keyword">p</span> <span class="number">8000</span>:<span class="number">3002</span> \</span><br><span class="line">-v /data/<span class="keyword">sun</span>-panel/<span class="keyword">conf</span>:/app/<span class="keyword">conf</span> \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name <span class="keyword">sun</span>-panel \</span><br><span class="line">hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br></pre></td></tr></table></figure>
 <h1 id="从ip-8000访问"><a href="#从ip-8000访问" class="headerlink" title="从ip:8000访问"></a>从ip:8000访问</h1><p>默认账号密码<br>账号：<a href="mailto:&#x61;&#100;&#109;&#x69;&#x6e;&#x40;&#115;&#117;&#110;&#46;&#x63;&#99;">&#x61;&#100;&#109;&#x69;&#x6e;&#x40;&#115;&#117;&#110;&#46;&#x63;&#99;</a><br>密码：12345678</p>
 <p><img src="https://qs100371.vip/post-images/1732624370260.webp"><br><img src="https://qs100371.vip/post-images/1732623522998.webp"></p>
 <h1 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h1><p><code>docker exec -it sun-panel bash</code><br><code>./sun-panel -password-reset</code><br>输出<br>The password has been successfully reset. Here is the account information<br>Username  <a href="mailto:&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#115;&#117;&#110;&#46;&#99;&#99;">&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#115;&#117;&#110;&#46;&#99;&#99;</a><br>Password  12345678</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

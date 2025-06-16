@@ -127,29 +127,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-05-08T13:00:15.000Z" itemprop="datePublished">2025-05-08</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>Gravatar（Globally Recognized Avatar）是一项用于提供在全球范围内使用的头像服务。本文记录了注册和使用方法。</p>
+    <div class="content" itemprop="articleBody">
+      <p>Gravatar（Globally Recognized Avatar）是一项用于提供在全球范围内使用的头像服务。本文记录了注册和使用方法。</p>
 <span id="more"></span>
 <h1 id="注册方法"><a href="#注册方法" class="headerlink" title="注册方法"></a>注册方法</h1><p>在Gravatar上，可以用电子邮件注册一个帐号，并且上传一个与之绑定的头像。许多流行的博客程序都支持Gravatar，包括Wordpress和Typecho等著名博客程序，当用户发布一个评论并填写了他的电子邮件地址时，博客程序会自动查找在Gravatar上是否有与之绑定的头像。如果有，则这个头像将会与评论一起显示出来。</p>
 <p>一个Gravatar头像可以使用高达512像素的图片（JPEG、PNG、GIF，大小上限：5MB，建议尺寸：1280 x 288），并且默认地以80*80的尺寸显示出来。如果上传的头像不是这个尺寸，Gravatar会对头像进行缩放。用户可以按照MPAA分级制度确定自己的头像级别，这样网站管理员可以在他们的站点上显示合适的头像。</p>
@@ -158,10 +158,57 @@
 <h1 id="头像的使用"><a href="#头像的使用" class="headerlink" title="头像的使用"></a>头像的使用</h1><p>gravatar依赖邮箱生成的哈希值作为图片地址的一部分，所以需要把邮箱地址哈希化。<br>简单的说，就是把邮箱地址的md5值放到地址上。网络上有很多在线工具可计算md5。<br>如：<br><a href="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5">https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5</a><br><img src="https://www.gravatar.com/avatar/1e144c201ee6a2b16ba866dc10110db5" alt="Gravatar"><br><a href="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://www.gravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580" alt="Gravatar"><br>第一个是没有注册的，会显示缺省头像。第二个是注册过的，显示的是自定义头像。<br>地址里的www也可写成cn。使用www的时候可能需要梯子，cn就不用。</p>
 <h1 id="使用cdn"><a href="#使用cdn" class="headerlink" title="使用cdn"></a>使用cdn</h1><p>使用cravatar.com可以不用梯子。<br>地址为：<a href="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580">https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580</a><br><img src="https://cn.cravatar.com/avatar/3c55fc5e5a70e677a45076f6fa375580"><br>Cravatar支持在用户未设置Cravatar头像及Gravatar头像时匹配QQ头像（仅限于QQ数字邮箱的用户）。<br>如果没有给邮箱添加过头像，但是不想要默认的图片G，可以添加参数d&#x3D;identicon，则可以随机生成头像，但是生成之后就不会再变。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

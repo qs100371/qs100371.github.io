@@ -123,29 +123,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-05-08T12:46:46.000Z" itemprop="datePublished">2025-05-08</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>随着linux系统的升级，磁盘空间越来越紧张，本文记录了删除多余的内核，找回可用空间的方法。</p>
+    <div class="content" itemprop="articleBody">
+      <p>随着linux系统的升级，磁盘空间越来越紧张，本文记录了删除多余的内核，找回可用空间的方法。</p>
 <span id="more"></span>
 <h1 id="列出已安装内核"><a href="#列出已安装内核" class="headerlink" title="列出已安装内核"></a>列出已安装内核</h1><ul>
 <li>sudo apt list –installed | grep linux-image<br>输出：<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">WARNING</span>: apt does not have a stable CLI interface. Use with caution in scripts.</span><br><span class="line"></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">25</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">106</span>-<span class="number">3</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">27</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">115</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">30</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">124</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">32</span>-amd64/stable,now <span class="number">6</span>.<span class="number">1</span>.<span class="number">129</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，自动]</span></span><br><span class="line"><span class="attribute">linux</span>-image-amd64/stable,now <span class="number">6</span>.<span class="number">1</span>.<span class="number">129</span>-<span class="number">1</span> amd64<span class="meta"> [已安装]</span></span><br></pre></td></tr></table></figure></li>
@@ -159,10 +159,57 @@
 统计一下，删除一个内核能减少880M空间占用(debian12)。</li>
 </ul>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

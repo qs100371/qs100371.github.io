@@ -124,29 +124,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-04-11T12:17:15.000Z" itemprop="datePublished">2025-04-11</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>前文生成了python代码爬取豆瓣电影信息，得到静态页面，可以创建一个 GitHub Actions 工作流，自动运行 Python 脚本抓取数据，并生成 HTML 页面，然后将其部署到 GitHub Pages 上。</p>
+    <div class="content" itemprop="articleBody">
+      <p>前文生成了python代码爬取豆瓣电影信息，得到静态页面，可以创建一个 GitHub Actions 工作流，自动运行 Python 脚本抓取数据，并生成 HTML 页面，然后将其部署到 GitHub Pages 上。</p>
 <span id="more"></span>
 <h1 id="准备GitHub仓库"><a href="#准备GitHub仓库" class="headerlink" title="准备GitHub仓库"></a>准备GitHub仓库</h1><ul>
 <li>创建一个新的 GitHub 仓库（如 douban-movies-nowplaying）。</li>
@@ -172,10 +172,57 @@
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from datetime import datetime</span><br><span class="line">def <span class="built_in">get_beijing_time</span>():</span><br><span class="line">    tz = pytz.<span class="built_in">timezone</span>(<span class="string">&#x27;Asia/Shanghai&#x27;</span>)</span><br><span class="line">    return datetime.<span class="built_in">now</span>(tz).<span class="built_in">strftime</span>(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)</span><br><span class="line"></span><br><span class="line"># 在生成HTML时使用</span><br><span class="line">update_time = <span class="built_in">get_beijing_time</span>()</span><br></pre></td></tr></table></figure>
 <p>详细代码：<a href="https://github.com/qs100371/douban-movies-nowplaying">qs100371&#x2F;douban-movies-nowplaying</a></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

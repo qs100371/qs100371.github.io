@@ -123,29 +123,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-04-19T11:42:14.000Z" itemprop="datePublished">2025-04-19</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/docker/" rel="tag">docker</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。</p>
+    <div class="content" itemprop="articleBody">
+      <p>由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。</p>
 <span id="more"></span>
 <h1 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h1><p>不会写，从github上fork了<a href="https://github.com/cnrtv/phpserver">cnrtv&#x2F;phpserver</a>。<br>Dockerfile内容：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> php:<span class="number">7.3</span>-fpm-alpine3.<span class="number">11</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> repositories /etc/apk/repositories</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> default.conf /</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> index.php /</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> run.sh /</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> php.ini /usr/local/etc/php/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk update &amp;&amp; apk add nginx &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apk add m4 autoconf make gcc g++ linux-headers &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    docker-php-ext-install pdo_mysql opcache mysqli &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">	pecl install -o -f redis \</span></span><br><span class="line"><span class="language-bash">&amp;&amp;  <span class="built_in">rm</span> -rf /tmp/pear \</span></span><br><span class="line"><span class="language-bash">&amp;&amp;  docker-php-ext-enable redis &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mkdir</span> /run/nginx &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mv</span> /default.conf /etc/nginx/conf.d &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mv</span> /index.php /var/www/html &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">touch</span> /run/nginx/nginx.pid &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">chmod</span> 755 /run.sh &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apk del m4 autoconf make gcc g++ linux-headers</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">9000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;/run.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
@@ -154,10 +154,57 @@
 <h1 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h1><p><code>docker run -d --name php -p 80:80 user/phpserver:v1</code><br>得到一个开放端口为80的php运行环境，可从ip:80访问。<br>有要测试的php文件，可用docker cp命令复制到容器的<code>/var/www/html/</code>路径下使用。</p>
 <p>本身自带的index.php可以上传文件，只是上传完了看不见文件名列表，不方便，不如docker cp和docker exec -it简单粗暴。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

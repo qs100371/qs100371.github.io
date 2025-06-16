@@ -126,29 +126,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-04-26T14:32:53.000Z" itemprop="datePublished">2025-04-26</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>BitPlay 是使用 Go 构建的 Web 应用程序，可直接从浏览器中的种子流式传输视频内容。具有干净的 Web UI，支持 SOCKS5 代理，并与 Prowlarr 和 Jackett 集成以实现无缝的 torrent 搜索。</p>
+    <div class="content" itemprop="articleBody">
+      <p>BitPlay 是使用 Go 构建的 Web 应用程序，可直接从浏览器中的种子流式传输视频内容。具有干净的 Web UI，支持 SOCKS5 代理，并与 Prowlarr 和 Jackett 集成以实现无缝的 torrent 搜索。</p>
 <span id="more"></span>
 <p>项目地址：<a href="https://github.com/aculix/bitplay">aculix&#x2F;bitplay</a><br><img src="https://qs100371.vip/post-images/1745678318789.webp"></p>
 <h1 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h1><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">services:</span></span><br><span class="line">  <span class="params">bitplay:</span></span><br><span class="line">    <span class="params">image:</span> ghcr.io<span class="operator">/</span>aculix<span class="operator">/</span>bitplay:main</span><br><span class="line">    <span class="params">container_name:</span> bitplay</span><br><span class="line">    <span class="params">ports:</span></span><br><span class="line">      <span class="operator">-</span> <span class="number">3347</span>:<span class="number">3347</span> <span class="comment"># Expose the web UI port</span></span><br><span class="line">    <span class="params">volumes:</span></span><br><span class="line">      <span class="comment"># Mount the config directory for persistent settings (Optional)</span></span><br><span class="line">      <span class="operator">-</span> <span class="operator">/</span>data<span class="operator">/</span>bitplay:<span class="symbol">/app/config</span> </span><br><span class="line">    <span class="params">restart:</span> unless-stopped</span><br></pre></td></tr></table></figure>
@@ -162,10 +162,57 @@
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">2025</span><span class="punctuation">-</span><span class="number">04</span><span class="punctuation">-</span><span class="number">27</span> <span class="number">08</span><span class="punctuation">:</span><span class="number">04</span><span class="punctuation">:</span><span class="number">17</span> <span class="punctuation">+</span><span class="number">0000</span> WRN github.com/anacrolix/torrent/storage piece<span class="punctuation">-</span>completion.go<span class="punctuation">:</span><span class="number">28</span>]</span><br><span class="line">  couldn&#x27;t open piece completion db in &quot;./torrent-data&quot;: timeout</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:17 Creating torrent client without proxy...</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:17 Torrent added: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Successfully got torrent info for 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Creating new session with ID: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Successfully stored session: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Torrent handler called with path: /api/v1/torrent/333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Path parts: [ api v1 torrent 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d] (length: 5)</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Looking for session with ID: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Available sessions: [333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d]</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Found session with ID: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Torrent handler called with path: /api/v1/torrent/333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d/stream/0</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Path parts: [ api v1 torrent 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d stream 0] (length: 7)</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Looking for session with ID: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Available sessions: [333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d]</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Found session with ID: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:19 Streaming file: s秘b士.S02E03.<span class="number">2025</span>.HD<span class="number">1080</span>p.mp4 (type: .mp4)</span><br><span class="line">Serving content*****************************************</span><br><span class="line">Closed reader***************************************</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:22 Torrent handler called with path: /api/v1/torrent/333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d/stream/0</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:22 Path parts: [ api v1 torrent 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d stream 0] (length: 7)</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:22 Looking for session with ID: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:22 Available sessions: [333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d]</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:22 Found session with ID: 333d8d78aa9c1d6b44eb3b<span class="number">377157</span>bba<span class="number">8032</span>fd67d</span><br><span class="line"><span class="number">2025/04/27</span> 08:04:22 Streaming file: s秘b士.S02E03.<span class="number">2025</span>.HD<span class="number">1080</span>p.mp4 (type: .mp4)</span><br><span class="line">Serving content*****************************************</span><br></pre></td></tr></table></figure>
 <p><img src="https://qs100371.vip/post-images/1745741491767.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

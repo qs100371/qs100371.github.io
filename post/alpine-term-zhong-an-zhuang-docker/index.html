@@ -129,29 +129,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-06T14:04:43.000Z" itemprop="datePublished">2025-01-06</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/termux/" rel="tag">termux</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>termux-qemu-alpine，一步一步安装，才是真正的linux。有人把Termux+Qemu+Alpine整合好了，名为alpine-term，开箱即用，安装一个apk打开就是配置完全的alpine linux。</p>
+    <div class="content" itemprop="articleBody">
+      <p>termux-qemu-alpine，一步一步安装，才是真正的linux。有人把Termux+Qemu+Alpine整合好了，名为alpine-term，开箱即用，安装一个apk打开就是配置完全的alpine linux。</p>
 <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>官网<a href="https://github.com/FakeRajbhx/alpine-term/">https://github.com/FakeRajbhx/alpine-term/</a><br>下载alpine-term apk<br>下载安装和安装后初始化开机都需要等一会儿，大约一分钟。<br><img src="https://qs100371.vip/post-images/1736207088388.webp"></p>
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>开机后，登录系统，用户 alpine 密码: alpine<br>然后切换到root账户，输入sudo -s 密码：alpine<br>系统默认禁止ssh密码登录<br><code>sed -i &#39;s/PasswordAuthentication no/PasswordAuthentication yes/g&#39; /etc/ssh/sshd_config</code><br>需要开机root用户登录<br><code>sed -i &#39;s/PermitRootLogin no/PermitRootLogin yes/g&#39; /etc/ssh/sshd_config</code><br>重启启动sshd服务<br><code>service sshd restart</code><br>添加开机启动 <code>rc-update add sshd</code></p>
@@ -165,10 +165,57 @@
 <p><code>setup-timezone</code><br>Asia&#x2F;Shanghai</p>
 <p>接下来就是更新系统，安装docker。<br><img src="https://qs100371.vip/post-images/1736207147194.webp"><br><img src="https://qs100371.vip/post-images/1736207155004.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

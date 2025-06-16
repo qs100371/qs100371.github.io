@@ -128,29 +128,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-28T01:17:44.000Z" itemprop="datePublished">2025-01-28</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>github能存放静态资源，但国内访问不畅，需要使用cdn加速，jsDelivr能提供免费的cdn加速（也是cloudflare家的）。本文使用picgo软件上传图片至github仓库，输出多种cdn加速的图片访问方式。</p>
+    <div class="content" itemprop="articleBody">
+      <p>github能存放静态资源，但国内访问不畅，需要使用cdn加速，jsDelivr能提供免费的cdn加速（也是cloudflare家的）。本文使用picgo软件上传图片至github仓库，输出多种cdn加速的图片访问方式。</p>
 <span id="more"></span>
 <h1 id="建立github仓库"><a href="#建立github仓库" class="headerlink" title="建立github仓库"></a>建立github仓库</h1><p>登录github（没有的话先注册），建立一个名为img的仓库。<br>地址为：<a href="https://github.com/uesrname/img%E3%80%82">https://github.com/uesrname/img。</a><br>生成 Access token，选中repo权限。</p>
 <h1 id="下载picgo"><a href="#下载picgo" class="headerlink" title="下载picgo"></a>下载picgo</h1><p>picgo网站：<a href="https://picgo.github.io/PicGo-Doc/zh/">https://picgo.github.io/PicGo-Doc/zh/</a><br>下载：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a><br>这里用的是x64的win版本。<br>安装后设置github仓库信息。<br><img src="https://qs100371.vip/post-images/1738027864579.webp"><br><img src="https://qs100371.vip/post-images/1738027869617.webp"><br>自定义域名为cdn加速地址<a href="https://cdn.jsdelivr.net/gh/username/img@main%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%BB%A5%E5%90%8E%E5%9B%BE%E7%89%87%E7%9A%84%E8%AE%BF%E9%97%AE%E5%9C%B0%E5%9D%80%E5%89%8D%E7%BC%80%E3%80%82">https://cdn.jsdelivr.net/gh/username/img@main，就是以后图片的访问地址前缀。</a><br><img src="https://qs100371.vip/post-images/1738028039928.webp"><br>点击图片下方的小图标复制图片地址。把这个地址粘贴到浏览器地址栏就可以打开这个图片。<br><img src="https://qs100371.vip/post-images/1738028215996.webp"><br>点击url处，可更改图片引用格式，有markdown，html，url，ubb方式。<br>这是一个可直接访问的地址：<br><a href="https://cdn.jsdelivr.net/gh/qs100371/img@main/20250127213917429.webp">https://cdn.jsdelivr.net/gh/qs100371/img@main/20250127213917429.webp</a></p>
@@ -158,10 +158,57 @@
 <p>上传并不顺利，可能需要加一个本地代理（梯子）。</p>
 </blockquote>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

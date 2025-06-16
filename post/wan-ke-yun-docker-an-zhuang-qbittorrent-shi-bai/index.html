@@ -124,39 +124,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-22T02:33:58.000Z" itemprop="datePublished">2024-11-22</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/docker/" rel="tag">docker</a>, <a class="tag-link-link" href="/tags/onecloud/" rel="tag">onecloud</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>qBittorrent 是一款开源免费的种子和磁力链接下载工具，支持 Windows、Mac 和 Linux。</p>
+    <div class="content" itemprop="articleBody">
+      <p>qBittorrent 是一款开源免费的种子和磁力链接下载工具，支持 Windows、Mac 和 Linux。</p>
 <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> run -d <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>--network host  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>--name=qbittorrent <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e PUID=<span class="number">1000</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e PGID=<span class="number">1000</span>  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e TZ=Asia/Shanghai  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-e WEBUI PORT=<span class="number">8080</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-p <span class="number">8080</span>:<span class="number">8080</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-p <span class="number">6881</span>:<span class="number">6881</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-p <span class="number">6881</span>:<span class="number">6881</span>/udp <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v /data/qbittorrent:/config  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v /data/downloads:/downloads <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>--restart unless-stopped  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>lscr.io/linuxserver/qbittorrent:latest</span><br></pre></td></tr></table></figure>
 <p>Unable to find image ‘lscr.io&#x2F;linuxserver&#x2F;qbittorrent:latest’ locally<br>latest: Pulling from linuxserver&#x2F;qbittorrent<br>docker: no matching manifest for linux&#x2F;arm&#x2F;v7 in the manifest list entries.<br>See ‘docker run –help’.</p>
 <hr>
 <p> 没装上，不过可以直接apt安装，下载磁力链接速度还能接受，不过速度比直接用手机差很多。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

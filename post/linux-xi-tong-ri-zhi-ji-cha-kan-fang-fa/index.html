@@ -123,29 +123,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-04-25T07:40:20.000Z" itemprop="datePublished">2025-04-25</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>linux作为服务器运行时，会产生大量的日志以记录系统运行状况。</p>
+    <div class="content" itemprop="articleBody">
+      <p>linux作为服务器运行时，会产生大量的日志以记录系统运行状况。</p>
 <span id="more"></span>
 <h1 id="日志文件的位置"><a href="#日志文件的位置" class="headerlink" title="日志文件的位置"></a>日志文件的位置</h1><p>Linux系统本身和大部分服务器程序的日志文件默认放在&#x2F;var&#x2F;log&#x2F;下。 部分程序共用一个日志文件，一部分程序使用单个日志文件。 而有些大型服务器程序日志由于日志文件不止一个，所以会在&#x2F;var&#x2F;log&#x2F;目录中建立相应的子目录来存放日志文件，这样既保证了日志文件目录的结构清晰，又可以快速定位日志文件。有一部分日志文件只有root用户才有权限读取，这保证了相关日志信息的安全性。</p>
 <p>#常见的日志文件</p>
@@ -208,10 +208,57 @@
 <p>cat：<br>​ tac是倒序查看，是cat单词反写：<br>​ <code>cat -n test.log |grep &quot;debug&quot;</code> 查询关键字的日志(常用！~)</p>
 <p>tail -f<br><code>tail -f file</code> 查看正在滚动的日志文件。这个命令可以查看大文件。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

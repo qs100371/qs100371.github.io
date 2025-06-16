@@ -124,39 +124,86 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-19T14:39:00.000Z" itemprop="datePublished">2024-11-19</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/armbian/" rel="tag">armbian</a>, <a class="tag-link-link" href="/tags/docker/" rel="tag">docker</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p><code>docker network</code><br>输出<br>Usage:  docker network COMMAND<br>Manage networks<br>Commands:<br>  connect     Connect a container to a network<br>  create      Create a network<br>  disconnect  Disconnect a container from a network<br>  inspect     Display detailed information on one or more networks<br>  ls          List networks<br>  prune       Remove all unused networks<br>  rm          Remove one or more networks<br>Run ‘docker network COMMAND –help’ for more information on a command.</p>
+    <div class="content" itemprop="articleBody">
+      <p><code>docker network</code><br>输出<br>Usage:  docker network COMMAND<br>Manage networks<br>Commands:<br>  connect     Connect a container to a network<br>  create      Create a network<br>  disconnect  Disconnect a container from a network<br>  inspect     Display detailed information on one or more networks<br>  ls          List networks<br>  prune       Remove all unused networks<br>  rm          Remove one or more networks<br>Run ‘docker network COMMAND –help’ for more information on a command.</p>
 <span id="more"></span>
 <h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p><code>docker network ls</code><br>输出<br>NETWORK ID     NAME                        DRIVER    SCOPE<br>570aa00b4993   1panel-network              bridge    local<br>96c43c65055c   bridge                      bridge    local<br>d79eb8059fa6   facefusion-docker_default   bridge    local<br>dec4c4dcc288   host                        host      local<br>ef13ce84ff20   navidrome_default           bridge    local<br>8f584c65131f   none                        null      local<br>21e45a60fd2a   openwrt                     macvlan   local</p>
 <h1 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h1><p><code>docker network inspect 96c43c65055c </code><br>输出</p>
 <p>[<br>    {<br>        “Name”: “bridge”,<br>        “Id”: “96c43c65055ccbc04b7130aa1e430758a0d1e83b0b5088f6f4689753ac019fba”,<br>        “Created”: “2024-11-19T22:04:32.919431129+08:00”,<br>        “Scope”: “local”,<br>        “Driver”: “bridge”,<br>        “EnableIPv6”: false,<br>        “IPAM”: {<br>            “Driver”: “default”,<br>            “Options”: null,<br>            “Config”: [<br>                {<br>                    “Subnet”: “172.17.0.0&#x2F;16”,<br>                    “Gateway”: “172.17.0.1”<br>                }<br>            ]<br>        },<br>        “Internal”: false,<br>        “Attachable”: false,<br>        “Ingress”: false,<br>        “ConfigFrom”: {<br>            “Network”: “”<br>        },<br>        “ConfigOnly”: false,<br>        “Containers”: {<br>            “73b570230b169dcf763832950b0cb18761d60a090409eaa5771b588922fe45ae”: {<br>                “Name”: “freshrss1”,<br>                “EndpointID”: “3200f57026d38d0660d5595e36623422a5c3fb832c7438c06fd276ee1da44e6f”,<br>                “MacAddress”: “02:42:ac:11:00:03”,<br>                “IPv4Address”: “172.17.0.3&#x2F;16”,<br>                “IPv6Address”: “”<br>            },<br>            “c61273c4fa0109cc5e4ff85c06f2662174f689100af52a5dcb885c21f5ff8699”: {<br>                “Name”: “navidrome”,<br>                “EndpointID”: “23343fea4a3f19c150d9526b83c5bc3d13598a8008efa044712455a7da173931”,<br>                “MacAddress”: “02:42:ac:11:00:02”,<br>                “IPv4Address”: “172.17.0.2&#x2F;16”,<br>                “IPv6Address”: “”<br>            }<br>        },<br>        “Options”: {<br>            “com.docker.network.bridge.default_bridge”: “true”,<br>            “com.docker.network.bridge.enable_icc”: “true”,<br>            “com.docker.network.bridge.enable_ip_masquerade”: “true”,<br>            “com.docker.network.bridge.host_binding_ipv4”: “0.0.0.0”,<br>            “com.docker.network.bridge.name”: “docker0”,<br>            “com.docker.network.driver.mtu”: “1500”<br>        },<br>        “Labels”: {}<br>    }<br>]</p>
 <h1 id="删掉"><a href="#删掉" class="headerlink" title="删掉"></a>删掉</h1><p><code>docker network rm 1panel-network</code><br>输出<br>1panel-network<br><code>docker network prune</code>  #删掉所有没用的<br>输出<br>WARNING! This will remove all custom networks not used by at least one container.<br>Are you sure you want to continue? [y&#x2F;N] y<br>Deleted Networks:<br>navidrome_default<br>慎用，很危险的功能。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

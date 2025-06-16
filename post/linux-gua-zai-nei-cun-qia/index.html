@@ -124,29 +124,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-07T10:16:28.000Z" itemprop="datePublished">2024-11-07</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/armbian/" rel="tag">armbian</a>, <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>linux挂载内存卡的方法。</p>
+    <div class="content" itemprop="articleBody">
+      <p>linux挂载内存卡的方法。</p>
 <span id="more"></span>
 
 <p>玩客云加了一个内存卡</p>
@@ -159,10 +159,57 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">文件系统        容量  已用  可用 已用% 挂载点</span><br><span class="line">udev            456M     0  456M    0% /dev</span><br><span class="line">tmpfs            99M  5.3M   94M    6% /run</span><br><span class="line">/dev/mmcblk1p2  6.9G  3.7G  3.2G   54% /</span><br><span class="line">tmpfs           494M     0  494M    0% /dev/shm</span><br><span class="line">tmpfs           5.0M     0  5.0M    0% /run/lock</span><br><span class="line">tmpfs           494M     0  494M    0% /tmp</span><br><span class="line">/dev/mmcblk1p1  256M   38M  219M   15% /boot</span><br><span class="line">/dev/zram1       49M   15M   31M   33% /var/log</span><br><span class="line">tmpfs            99M  8.0K   99M    1% /run/user/1000</span><br><span class="line">/dev/mmcblk0     15G   24K   14G    1% /disk1</span><br></pre></td></tr></table></figure>
 <p>已挂载到目录&#x2F;disk1</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

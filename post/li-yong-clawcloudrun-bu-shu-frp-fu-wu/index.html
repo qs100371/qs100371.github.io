@@ -140,29 +140,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-04-23T06:36:18.000Z" itemprop="datePublished">2025-04-23</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。</p>
+    <div class="content" itemprop="articleBody">
+      <p>clawcloud网站可用来部署应用，每月有5美元的免费额度。本文记录了部署frp服务端的过程及踩的坑。</p>
 <span id="more"></span>
 <h1 id="clawcloud-run云端设置"><a href="#clawcloud-run云端设置" class="headerlink" title="clawcloud run云端设置"></a>clawcloud run云端设置</h1><p>官方网站：<a href="https://run.claw.cloud/">https://run.claw.cloud/</a><br>使用 AI 构建、云部署，CLAWCLOUD Run 降低了技术堆栈的复杂性。从编码到生产，只需点击几下。</p>
 <p><img src="https://qs100371.vip/post-images/1745398371131.webp"><br>用github帐号登入，<br>免费额度：<br><img src="https://qs100371.vip/post-images/1745413244326.webp"><br><img src="https://qs100371.vip/post-images/1745398494645.webp"><br>App Store里面有很多应用，可直接添加，如alist，frp等。<br><img src="https://qs100371.vip/post-images/1745398556468.webp"><br>添加frp，这是打开一个docker容器，frp是运行在容器中，<br><img src="https://qs100371.vip/post-images/1745398605624.webp"><br><img src="https://qs100371.vip/post-images/1745398616217.webp"><br><img src="https://qs100371.vip/post-images/1745398622450.webp"><br>这里标红的地方是容器内7000端口穿透出来的端口，后面客户端从外界连接需要使用。<br>打开应用，<br><img src="https://qs100371.vip/post-images/1745398779154.webp"><br><img src="https://qs100371.vip/post-images/1745398785946.webp"><br>点击Manage Network，进去之后是容器内部端口的访问地址，可以给80端口设定自定义域名。<br><img src="https://qs100371.vip/post-images/1745399417298.webp"><br>在自己的域名商处建立CNAME指向系统给的地址，注意cloudflare域名要取消代理，选仅DNS。<br>这里有坑，本来自动生成的地址是https的，自定义后就变成了http，不知道是不是故意的。<br>往下拉，是frps设置，<br><img src="https://qs100371.vip/post-images/1745399040763.webp"><br>点进去，编辑frps.toml内容：<br><img src="https://qs100371.vip/post-images/1745399353693.webp"><br>修改内容见下面的例子。完成后确认。</p>
@@ -206,10 +206,57 @@
 </ul>
 <h1 id="外部访问"><a href="#外部访问" class="headerlink" title="外部访问"></a>外部访问</h1><p>由系统生成对应端口的访问地址，7500对应的是面板地址，其他端口是穿透后从外部访问的地址，直接使用就可以，还是https连接。自定义域名会变成http连接。<br><a href="https://frp-ekssprzl.ap-northeast-1.clawcloudrun.com/">https://frp-ekssprzl.ap-northeast-1.clawcloudrun.com</a> 类似这样的，有点长，暂时国内可以直接访问，无需自定义域名。<br>8181<br><a href="https://yflkngrorbsa.ap-northeast-1.clawcloudrun.com/">https://yflkngrorbsa.ap-northeast-1.clawcloudrun.com</a><br>5230<br><a href="https://dtlfgygpbbue.ap-northeast-1.clawcloudrun.com/">https://dtlfgygpbbue.ap-northeast-1.clawcloudrun.com</a><br>5244<br><a href="https://keojrxujkccp.ap-northeast-1.clawcloudrun.com/">https://keojrxujkccp.ap-northeast-1.clawcloudrun.com</a><br>8124<br><a href="https://juzfkhyjvapr.ap-northeast-1.clawcloudrun.com/">https://juzfkhyjvapr.ap-northeast-1.clawcloudrun.com</a></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

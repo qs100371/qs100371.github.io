@@ -123,38 +123,85 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-24T03:30:21.000Z" itemprop="datePublished">2025-01-24</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>正确的时区设置对于确保准确的时间和日期非常重要，本文介绍两种常用的方法来修改Ubuntu系统的时区设置：使用timedatectl命令和直接编辑&#x2F;etc&#x2F;timezone文件。</p>
+    <div class="content" itemprop="articleBody">
+      <p>正确的时区设置对于确保准确的时间和日期非常重要，本文介绍两种常用的方法来修改Ubuntu系统的时区设置：使用timedatectl命令和直接编辑&#x2F;etc&#x2F;timezone文件。</p>
 <span id="more"></span>
 <h1 id="使用timedatectl命令"><a href="#使用timedatectl命令" class="headerlink" title="使用timedatectl命令"></a>使用timedatectl命令</h1><p><code>sudo timedatectl set-timezone Asia/Shanghai</code><br>验证更改：<br><code>timedatectl</code></p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">               <span class="attribute">Local</span> time: Fri <span class="number">2025</span>-<span class="number">01</span>-<span class="number">24</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">06</span> CST</span><br><span class="line">           <span class="attribute">Universal</span> time: Fri <span class="number">2025</span>-<span class="number">01</span>-<span class="number">24</span> <span class="number">03</span>:<span class="number">42</span>:<span class="number">06</span> UTC</span><br><span class="line">                 <span class="attribute">RTC</span> time: Fri <span class="number">2025</span>-<span class="number">01</span>-<span class="number">24</span> <span class="number">03</span>:<span class="number">42</span>:<span class="number">07</span></span><br><span class="line">                <span class="attribute">Time</span> zone: Asia/Shanghai (CST, +<span class="number">0800</span>)</span><br><span class="line"><span class="attribute">System</span> clock synchronized: no</span><br><span class="line">              <span class="attribute">NTP</span> service: active</span><br><span class="line">          <span class="attribute">RTC</span> in local TZ: no</span><br></pre></td></tr></table></figure>
 <h1 id="修改-etc-timezone文件"><a href="#修改-etc-timezone文件" class="headerlink" title="修改&#x2F;etc&#x2F;timezone文件"></a>修改&#x2F;etc&#x2F;timezone文件</h1><p>在文件中写入“Asia&#x2F;Shanghai”<br>更新系统时间：重启或<br><code>sudo systemctl restart systemd-timesyncd</code></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

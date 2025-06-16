@@ -123,29 +123,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-10-14T13:17:20.000Z" itemprop="datePublished">2024-10-14</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>安装vsftpd：<br>sudo apt install vsftpd<br>检测是否安装：<br>vsftpd -version</p>
+    <div class="content" itemprop="articleBody">
+      <p>安装vsftpd：<br>sudo apt install vsftpd<br>检测是否安装：<br>vsftpd -version</p>
 <span id="more"></span>
 
 <h1 id="匿名用户模式"><a href="#匿名用户模式" class="headerlink" title="匿名用户模式"></a>匿名用户模式</h1><p>在vsftpd.conf文件中添加匿名用户相关配置：</p>
@@ -153,10 +153,57 @@
 <h1 id="在-srv-ftp目录下创建upload目录并完成赋权操作："><a href="#在-srv-ftp目录下创建upload目录并完成赋权操作：" class="headerlink" title="在&#x2F;srv&#x2F;ftp目录下创建upload目录并完成赋权操作："></a>在&#x2F;srv&#x2F;ftp目录下创建upload目录并完成赋权操作：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> /srv/ftp/upload</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R :ftp /srv/ftp/upload</span><br></pre></td></tr></table></figure>
 <h1 id="设置upload目录的权限为775"><a href="#设置upload目录的权限为775" class="headerlink" title="设置upload目录的权限为775"></a>设置upload目录的权限为775</h1><p>sudo chmod 775 &#x2F;srv&#x2F;ftp&#x2F;upload<br>重启服务<br>sudo systemctl restart vsftpd<br>查看服务状态<br>sudo systemctl  status  vsftpd</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

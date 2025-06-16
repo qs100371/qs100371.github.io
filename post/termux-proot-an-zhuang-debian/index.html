@@ -124,29 +124,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-07T13:56:20.000Z" itemprop="datePublished">2025-01-07</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/termux/" rel="tag">termux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>PRoot 是 chroot、mount –bind 和 binfmt_misc 的用户空间实现用户不需要任何权限或设置即可通过 QEMU 用户模式透明地执行为另一个 CPU 架构构建的程序等操作。这里用来安装debian。</p>
+    <div class="content" itemprop="articleBody">
+      <p>PRoot 是 chroot、mount –bind 和 binfmt_misc 的用户空间实现用户不需要任何权限或设置即可通过 QEMU 用户模式透明地执行为另一个 CPU 架构构建的程序等操作。这里用来安装debian。</p>
 <span id="more"></span>
 
 <h1 id="安装-PRoot"><a href="#安装-PRoot" class="headerlink" title="安装 PRoot"></a>安装 PRoot</h1><p><code>pkg install proot proot-distro</code><br>目前支持alpine，arch，debian，fedora，ubuntu等</p>
@@ -158,10 +158,57 @@
 <h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">apt <span class="keyword">update</span></span><br><span class="line">apt install docker.io</span><br><span class="line"></span><br><span class="line">root@localhost:~# ifconfig</span><br><span class="line">Warning: cannot <span class="keyword">open</span> /<span class="keyword">proc</span>/net/dev (Permission<span class="title"> denied).</span> Limited<span class="title"> output.</span></span><br><span class="line">lo:<span class="title"> flags=73&lt;UP,LOOPBACK,RUNNING&gt;</span> <span class="title"> mtu</span> 65536<span class="title"></span></span><br><span class="line"><span class="title">        inet</span> 127.0.0.1<span class="title">  netmask</span> 255.0.0.0<span class="title"></span></span><br><span class="line"><span class="title">        unspec</span> 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00<span class="title">  txqueuelen</span> 1  (UNSPEC)<span class="title"></span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">wlan0:</span> flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<span class="title">  mtu</span> 1500<span class="title"></span></span><br><span class="line"><span class="title">        inet</span> 192.168.1.100<span class="title">  netmask</span> 255.255.255.0<span class="title">  broadcast</span> 192.168.1.255<span class="title"></span></span><br><span class="line"><span class="title">        unspec</span> 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00<span class="title">  txqueuelen</span> 3000  (UNSPEC)</span><br><span class="line">查看docker信息</span><br><span class="line">`root@localhost:~#<span class="title"> docker</span> info`<span class="title"></span></span><br><span class="line"><span class="title">Client:</span></span><br><span class="line"><span class="title"> Context:</span> <span class="title">   default</span></span><br><span class="line"><span class="title"> Debug</span> Mode:<span class="title"> false</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">Server:</span></span><br><span class="line">ERROR:<span class="title"> Cannot</span> connect<span class="title"> to</span> the<span class="title"> Docker</span> daemon<span class="title"> at</span> unix:///var/run/docker.sock.<span class="title"> Is</span> the<span class="title"> docker</span> daemon<span class="title"> running?</span></span><br><span class="line">errors<span class="title"> pretty</span> printing<span class="title"> info</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">root@localhost:~#</span> systemctl<span class="title"> enable</span> docker<span class="title"></span></span><br><span class="line"><span class="title">Synchronizing</span> state<span class="title"> of</span> docker.service<span class="title"> with</span> SysV<span class="title"> service</span> script<span class="title"> with</span> /lib/systemd/systemd-sysv-install.<span class="title"></span></span><br><span class="line"><span class="title">Executing:</span> /lib/systemd/systemd-sysv-install<span class="title"> enable</span> docker<span class="title"></span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">root@localhost:~#</span> systemctl<span class="title"> start</span> docker<span class="title"></span></span><br><span class="line"><span class="title">System</span> has<span class="title"> not</span> been<span class="title"> booted</span> with<span class="title"> systemd</span> as<span class="title"> init</span> system (PID 1).<span class="title"> Can&#x27;t</span> operate.<span class="title"></span></span><br><span class="line"><span class="title">Failed</span> to<span class="title"> connect</span> to<span class="title"> bus:</span> Host<span class="title"> is</span> down</span><br></pre></td></tr></table></figure>
 <p>由于没有systemd，无法运行服务，也无法使用docker。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

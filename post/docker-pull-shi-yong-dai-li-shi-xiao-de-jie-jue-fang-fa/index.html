@@ -128,29 +128,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-12-26T03:33:35.000Z" itemprop="datePublished">2024-12-26</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/onecloud/" rel="tag">onecloud</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>docker在拉取镜像的时候需要用到梯子，在使用lucky的stun穿透之后，原先在systemd上给docker服务加上代理的方式不行了，一直是重试然后失败。<br>原来根源在于dmz。</p>
+    <div class="content" itemprop="articleBody">
+      <p>docker在拉取镜像的时候需要用到梯子，在使用lucky的stun穿透之后，原先在systemd上给docker服务加上代理的方式不行了，一直是重试然后失败。<br>原来根源在于dmz。</p>
 <span id="more"></span>
 <h1 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h1><p>本地环境为玩客云（arm32设备）上运行lucky，docker，docker上运行openwrt。openwrt主要运行passwall2和微力同步。玩客云（IP:192.168.0.2）由于不能和openwrt（IP:192.168.0.20）使用同一网络，不能使用openwrt的梯子，所以用手机另外给玩客云提供代理服务。<br>lucky所在玩客云主机需要设置dmz，之后同一主机在需要梯子pull镜像时，一直提示连接超时。于是找到用github action来拉取arm32镜像，再下载到本地，上传到主机load导入的方法（github上的DockerTarBuilder项目）。github上的文件无法直接在主机上用wget或cul命令行下载（命令行参数有问题？搞不懂）。今天才发现是dmz设置导致这一问题。查看了lucky的说明书，进行stun穿透时需要有个监听端口，如果设置为0，每次会随机一个端口，所以需要把lucky主机设成dmz以实现nat1。</p>
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>因此，玩客云上的docker pull要能正常使用代理有两个方法：</p>
@@ -164,10 +164,57 @@
 <hr>
 <p> 经测试，使用代理拉取镜像正常。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

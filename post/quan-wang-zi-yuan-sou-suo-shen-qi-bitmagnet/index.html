@@ -127,29 +127,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-03-06T09:01:37.000Z" itemprop="datePublished">2025-03-06</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>bitmagnet是一个自托管的 BitTorrent 索引器、DHT 爬虫、内容分类器和 Torrent 搜索引擎，具有 Web UI。</p>
+    <div class="content" itemprop="articleBody">
+      <p>bitmagnet是一个自托管的 BitTorrent 索引器、DHT 爬虫、内容分类器和 Torrent 搜索引擎，具有 Web UI。</p>
 <span id="more"></span>
 <p>项目地址：<a href="https://bitmagnet.io/">https://bitmagnet.io/</a><br>github：<a href="https://github.com/bitmagnet-io/bitmagnet">bitmagnet-io&#x2F;bitmagnet</a></p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>通过DHT哈希表，找到网络上所有的网络节点（节点包括运行了transsminss，qbittorrent等工具的设备），然后通过P2P技术连接这些节点，然后基于特定的协议交换双方资源以实现资源的共享和搜索，这同样这也组成了BT网络。</p>
@@ -162,10 +162,57 @@
 </blockquote>
 <p>• docker使用host网络模式运行<br>• 开启ipv6<br>• 开启nat1<br>• 开启upnp<br>• 开启3334端口的端口映射</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

@@ -123,37 +123,84 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-02-24T07:54:09.000Z" itemprop="datePublished">2025-02-24</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>需要把md文件里的图片由.jpg或.png替换成.webp。由deepseek生成了一段脚本。</p>
+    <div class="content" itemprop="articleBody">
+      <p>需要把md文件里的图片由.jpg或.png替换成.webp。由deepseek生成了一段脚本。</p>
 <span id="more"></span>
 <h1 id="主代码"><a href="#主代码" class="headerlink" title="主代码"></a>主代码</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置目录路径</span></span><br><span class="line">directory=<span class="string">&quot;/data/downloads/posts/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置要替换的字符串</span></span><br><span class="line">search=<span class="string">&quot;.png&quot;</span></span><br><span class="line">replace=<span class="string">&quot;.webp&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转义特殊字符（将 / 替换为 \/）</span></span><br><span class="line">escaped_search=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$search</span>&quot;</span> | sed <span class="string">&#x27;s/\//\\\//g&#x27;</span>)</span><br><span class="line">escaped_replace=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$replace</span>&quot;</span> | sed <span class="string">&#x27;s/\//\\\//g&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历目录中的所有 .md 文件</span></span><br><span class="line">find <span class="string">&quot;<span class="variable">$directory</span>&quot;</span> -<span class="built_in">type</span> f -name <span class="string">&quot;*.md&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> -r file; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Processing <span class="variable">$file</span>&quot;</span></span><br><span class="line">    <span class="comment"># 使用 sed 替换文件中的字符串</span></span><br><span class="line">    sed -i <span class="string">&quot;s/<span class="variable">$escaped_search</span>/<span class="variable">$escaped_replace</span>/g&quot;</span> <span class="string">&quot;<span class="variable">$file</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Replacement complete.&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>起初生成了windows下的批处理文件，但是处理完之后发现文件里出现了乱码。这段bash脚本就没有问题。应该是utf8和gbk编码的问题。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

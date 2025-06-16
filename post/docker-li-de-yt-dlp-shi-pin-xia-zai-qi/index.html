@@ -128,38 +128,85 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-03-05T11:28:59.000Z" itemprop="datePublished">2025-03-05</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>yt-dlp-web 是一个自托管的应用程序，提供了 yt-dlp 的 Web 界面。用户可以通过这个界面观看或下载存储在远程服务器上的视频。</p>
+    <div class="content" itemprop="articleBody">
+      <p>yt-dlp-web 是一个自托管的应用程序，提供了 yt-dlp 的 Web 界面。用户可以通过这个界面观看或下载存储在远程服务器上的视频。</p>
 <span id="more"></span>
 <p>项目地址：<a href="https://github.com/sooros5132/yt-dlp-web">sooros5132&#x2F;yt-dlp-web</a><br>yt-dlp 是一个功能丰富的命令行音频&#x2F;视频下载工具，支持从数千个网站下载内容。它是 youtube-dl 的一个分支，基于已不再活跃的 youtube-dlc 开发。yt-dlp 提供了许多高级功能和选项，使用户能够控制下载过程，并支持多种输出格式和后处理选项。该工具适合需要批量下载或处理在线媒体的用户。<br>yt-dlp-web是 yt-dlp 的 Web 界面。</p>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> run -d <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>    --name yt-dlp-web <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>    --user <span class="number">1000</span>:<span class="number">1000</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>    --restart unless-stopped <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>    -p <span class="number">3981</span>:<span class="number">3000</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>    -v /data/ytdlp/downloads:/downloads <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>    -v /data/ytdlp/cache:/cache <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>sooros5132/yt-dlp-web</span><br></pre></td></tr></table></figure>
 <p>从IP:3981访问。<br><img src="https://qs100371.vip/post-images/1741175322949.webp"><br><img src="https://qs100371.vip/post-images/1741175329336.webp"><br><img src="https://qs100371.vip/post-images/1741175334215.webp"><br><img src="https://qs100371.vip/post-images/1741175338712.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

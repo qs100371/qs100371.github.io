@@ -131,29 +131,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-03-02T11:55:56.000Z" itemprop="datePublished">2025-03-02</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>部署deepseek需要先安装ollama，运行之后再安装大模型deepseek或其他模型，配合浏览器插件page assist就可以在浏览器上和大模型对话了。</p>
+    <div class="content" itemprop="articleBody">
+      <p>部署deepseek需要先安装ollama，运行之后再安装大模型deepseek或其他模型，配合浏览器插件page assist就可以在浏览器上和大模型对话了。</p>
 <span id="more"></span>
 <h1 id="安装ollama"><a href="#安装ollama" class="headerlink" title="安装ollama"></a>安装ollama</h1><p><img src="https://qs100371.vip/post-images/1740917647768.webp"><br><code>curl -fsSL https://ollama.com/install.sh | sh</code></p>
 <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Installing ollama to /usr/local</span><br><span class="line">&gt;&gt;&gt; Downloading Linux amd64 bundle</span><br><span class="line">######################################################################## <span class="number">100.0</span>%</span><br><span class="line">&gt;&gt;&gt; Creating ollama user...</span><br><span class="line">&gt;&gt;&gt; Adding ollama user to render group...</span><br><span class="line">&gt;&gt;&gt; Adding ollama user to video group...</span><br><span class="line">&gt;&gt;&gt; Adding current user to ollama group...</span><br><span class="line">&gt;&gt;&gt; Creating ollama systemd service...</span><br><span class="line">&gt;&gt;&gt; Enabling and starting ollama service...</span><br><span class="line">Created symlink /etc/systemd/<span class="keyword">system</span>/default.target.wants/ollama.service → /etc/systemd/<span class="keyword">system</span>/ollama.service.</span><br><span class="line">&gt;&gt;&gt; The Ollama API is now available at <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">11434.</span></span><br><span class="line">&gt;&gt;&gt; Install complete. Run <span class="string">&quot;ollama&quot;</span> <span class="keyword">from</span> the command line.</span><br><span class="line">WARNING: No NVIDIA/AMD GPU detected. Ollama will run <span class="keyword">in</span> CPU-only mode.</span><br></pre></td></tr></table></figure>
@@ -166,10 +166,57 @@
 <p>ollama和deepseek安装到i3m380的主机上，CPU占用率直接100%，安装到日用电脑上，在和模型对话时，ollama进程的CPU占用率也到了70%+。</p>
 </blockquote>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

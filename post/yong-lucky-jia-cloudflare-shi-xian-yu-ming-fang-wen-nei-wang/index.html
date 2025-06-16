@@ -131,29 +131,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-12-11T12:23:15.000Z" itemprop="datePublished">2024-12-11</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb&#x2F;s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
+    <div class="content" itemprop="articleBody">
+      <p>用cploar实现内网穿透，用起来很方便，但是免费的服务只有1M带宽（130kb&#x2F;s），4个隧道，随机域名，随机端口，远程访问一下内网的小主机，开个ssh什么的，都很方便，也没有大流量。这里有个新方法，流量不限，只是方法很复杂。</p>
 <span id="more"></span>
 <h1 id="主机上安装lucky"><a href="#主机上安装lucky" class="headerlink" title="主机上安装lucky"></a>主机上安装lucky</h1><p>参见上一篇。</p>
 <p>通过IP:16601访问，从左侧导航打开stun内网穿透，添加穿透规则，规则名ssh，目标地址：192.168.0.2，目标端口：22，点确定，会看到穿透详情里有蓝色标出的IP:随机端口。<br><img src="https://qs100371.vip/post-images/1733923179558.webp"></p>
@@ -173,10 +173,57 @@
 <hr>
 <p>这种方法适用于二级域名指向内网服务，相当于内网穿透加反向代理。但象ssh，xrdp，ftp这些需要带端口访问的服务则不行，但也可以从微信推送得知穿透的IP和端口。</p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

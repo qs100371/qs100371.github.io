@@ -127,29 +127,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-02-12T10:33:57.000Z" itemprop="datePublished">2025-02-12</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>Gotify 是一个可以自己搭建的用于发送和接受通知的服务。可以用客户端或命令行等方式发送消息。</p>
+    <div class="content" itemprop="articleBody">
+      <p>Gotify 是一个可以自己搭建的用于发送和接受通知的服务。可以用客户端或命令行等方式发送消息。</p>
 <span id="more"></span>
 <h1 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h1><p><code>docker run -d --name gotify --restart unless-stopped -p 81:80 -v /data/gotify:/app/data ghcr.io/gotify/server</code><br>从IP:81访问。缺省帐号密码是admin:admin。<br><img src="https://qs100371.vip/post-images/1739356693021.webp"><br><img src="https://qs100371.vip/post-images/1739356731662.webp"></p>
 <h1 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h1><p><img src="https://qs100371.vip/post-images/1739356738655.webp"><br>应用像是一个分类的功能，拿聊天软件类比的话，有点儿像频道。创建一个应用就会生成一个单独的 Token，可以用Token 作为凭证来发送消息。</p>
@@ -161,10 +161,57 @@
 <li>gotify cli<br><a href="https://github.com/gotify/cli/releases">gotify&#x2F;cli</a></li>
 </ul>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

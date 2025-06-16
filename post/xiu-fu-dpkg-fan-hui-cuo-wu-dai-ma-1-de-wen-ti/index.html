@@ -123,29 +123,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-15T14:31:56.000Z" itemprop="datePublished">2024-11-15</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>apt安装中断后出现<code>Sub-process /usr/bin/dpkg returned an error code (1) </code><br>之后无论用apt install -f 或apt autoremove 都不行。<br><code>sudo dpkg --configure -a</code><br><code>sudo apt install -f</code><br><code>sudo apt remove --purge package_name</code><br><code>sudo apt autoremove</code></p>
+    <div class="content" itemprop="articleBody">
+      <p>apt安装中断后出现<code>Sub-process /usr/bin/dpkg returned an error code (1) </code><br>之后无论用apt install -f 或apt autoremove 都不行。<br><code>sudo dpkg --configure -a</code><br><code>sudo apt install -f</code><br><code>sudo apt remove --purge package_name</code><br><code>sudo apt autoremove</code></p>
 <span id="more"></span>
 <p>不行再继续往下看</p>
 <h1 id="删除-post-file"><a href="#删除-post-file" class="headerlink" title="删除 post file"></a>删除 post file</h1><p><code>sudo ls –l /var/lib/dpkg/info | grep –i package_name</code><br><code>sudo rm /var/lib/dpkg/info/package_name.*</code></p>
@@ -153,10 +153,57 @@
 <h1 id="其他方法："><a href="#其他方法：" class="headerlink" title="其他方法："></a>其他方法：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> /var/lib/apt/lists/lock</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> /var/cache/apt/archives/lock</span><br><span class="line"><span class="built_in">cd</span> /var/lib/dpkg/updates</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> *</span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure>
 <p>参考：<a href="https://blog.csdn.net/u013832707/article/details/113104006">https://blog.csdn.net/u013832707/article/details/113104006</a><br>          <a href="https://cn.linux-console.net/?p=15195">https://cn.linux-console.net/?p=15195</a></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

@@ -125,29 +125,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2024-11-25T14:21:40.000Z" itemprop="datePublished">2024-11-25</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/onecloud/" rel="tag">onecloud</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p> Trilium，是一个基于 electron、跨平台的分层级笔记应用，主要使用场景是建立个人知识库。</p>
+    <div class="content" itemprop="articleBody">
+      <p> Trilium，是一个基于 electron、跨平台的分层级笔记应用，主要使用场景是建立个人知识库。</p>
  <span id="more"></span>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p /<span class="class"><span class="keyword">data</span>/trilium/<span class="keyword">data</span></span></span><br><span class="line"><span class="title">docker</span> run -d \</span><br><span class="line">  <span class="comment">--name trilium \</span></span><br><span class="line">  <span class="comment">--restart=always \</span></span><br><span class="line">  <span class="comment">--log-opt max-size=1m \</span></span><br><span class="line">  -v /<span class="class"><span class="keyword">data</span>/trilium/<span class="keyword">data</span>:/root/trilium-<span class="keyword">data</span> \</span></span><br><span class="line">  -e <span class="type">TRILIUM_DATA_DIR</span>=/root/trilium-<span class="class"><span class="keyword">data</span> \</span></span><br><span class="line">  -p <span class="number">8181</span>:<span class="number">8080</span> \</span><br><span class="line">  nriver/trilium-cn:latest</span><br></pre></td></tr></table></figure>
 <p>Unable to find image ‘nriver&#x2F;trilium-cn:latest’ locally<br>latest: Pulling from nriver&#x2F;trilium-cn<br>2387a44129d2: Pull complete<br>2b1da8e2f7c5: Pull complete<br>fe7e21d092c6: Pull complete<br>6de239c967be: Pull complete<br>289f2b695bb4: Pull complete<br>4f4fb700ef54: Pull complete<br>2f7f70415fef: Pull complete<br>Digest: sha256:ca85b660b0c50b9b7d5b74a16599a5a2851c976b369f2b22c82d756f11b07e2a<br>Status: Downloaded newer image for nriver&#x2F;trilium-cn:latest<br>ee28c8df9999bf55d046c2ebf20ead93d7b9e6aedc0acbf563cd7eda0b7ed7be</p>
@@ -155,10 +155,57 @@
 <h1 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a><code>docker ps</code></h1><p>CONTAINER ID   IMAGE                      COMMAND                   CREATED          STATUS                PORTS                                         NAMES<br>ee28c8df9999   nriver&#x2F;trilium-cn:latest   “docker-entrypoint.s…”   22 seconds ago   Up 10 seconds         0.0.0.0:8181-&gt;8080&#x2F;tcp, [::]:8181-&gt;8080&#x2F;tcp   trilium</p>
 <h1 id="从IP-8181访问"><a href="#从IP-8181访问" class="headerlink" title="从IP:8181访问"></a>从IP:8181访问</h1><p><img src="https://qs100371.vip/post-images/1732544781796.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

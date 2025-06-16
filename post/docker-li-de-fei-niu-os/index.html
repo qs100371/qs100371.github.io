@@ -130,29 +130,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-02-16T08:26:47.000Z" itemprop="datePublished">2025-02-16</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>docker下运行飞牛os，这个容器不调用kvm，只支持x86，所以是个x86机器都可以运行。</p>
+    <div class="content" itemprop="articleBody">
+      <p>docker下运行飞牛os，这个容器不调用kvm，只支持x86，所以是个x86机器都可以运行。</p>
 <span id="more"></span>
 <h1 id="cli部署"><a href="#cli部署" class="headerlink" title="cli部署"></a>cli部署</h1><p><code>docker run --name=fnos --privileged -p 8088:8000 -d -t makedie/fnos:0.8.20_test</code></p>
 <blockquote>
@@ -160,10 +160,57 @@
 </blockquote>
 <p>从ip:8088访问。<br><img src="https://qs100371.vip/post-images/1739694695813.webp"><br><img src="https://qs100371.vip/post-images/1739694700741.webp"><br><img src="https://qs100371.vip/post-images/1739694705684.webp"><br><img src="https://qs100371.vip/post-images/1739694710332.webp"><br><img src="https://qs100371.vip/post-images/1739694715106.webp"></p>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">

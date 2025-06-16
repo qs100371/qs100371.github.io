@@ -127,29 +127,29 @@
 
 
 
-    <div class="meta">
-      <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <div class="meta">
+        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">qs100371</span>
       </span>-->
-      
+        
     <div class="postdate">
         <time datetime="2025-01-04T14:39:15.000Z" itemprop="datePublished">2025-01-04</time>
     </div>
 
 
-      
+          
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/web/" rel="tag">web</a>
     </div>
 
 
-    </div>
+      </div>
   </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>clean主题简洁明了，唯独缺少搜索功能，于是从pure主题里搬了过来，这是一个全文搜索。</p>
+    <div class="content" itemprop="articleBody">
+      <p>clean主题简洁明了，唯独缺少搜索功能，于是从pure主题里搬了过来，这是一个全文搜索。</p>
 <span id="more"></span>
 <h1 id="文件搬运："><a href="#文件搬运：" class="headerlink" title="文件搬运："></a>文件搬运：</h1><p>templates&#x2F;search.ejs<br>templates&#x2F;api-content.ejs<br>templates&#x2F;api-info.ejs<br>assets&#x2F;media&#x2F;gridea-search&#x2F;gridea-search.js<br>assets&#x2F;media&#x2F;gridea-search&#x2F;result-template.ejs<br>assets&#x2F;media&#x2F;scripts&#x2F;ejs.min.js<br>assets&#x2F;media&#x2F;scripts&#x2F;fuse.min.js</p>
 <h1 id="修改search-ejs"><a href="#修改search-ejs" class="headerlink" title="修改search.ejs"></a>修改search.ejs</h1><p><img src="https://qs100371.vip/post-images/1736002074083.webp"></p>
@@ -163,10 +163,57 @@
 <p>next主题里的搜索思路则不同，把atom.xml加到网页内容的最后，直接搜索atom部分。在网站数据增加的时候，这个搜索会导致网站的数据大大增加，因为每个网页上都带有一个索引，至少250k。</p>
 </blockquote>
 
-  </div>
+    </div>
 </article>
 <!--
 -->
+<script src="/js/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+    avatar: 'mm',
+    notify: true,
+    visitor: 'true',
+    highlight: 'true',
+    pageSize: 10,
+    placeholder: '来都来了，不妨评论一下',
+    avatar_cdn: 'https://cravatar.cn/avatar/'
+  });
+</script>
     </div>
     
       <div id="footer-post-container">
