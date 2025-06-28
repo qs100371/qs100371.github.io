@@ -215,32 +215,16 @@
         <h3 class="widget-title">公告板</h3>
         <div class="widget">
             
+    <div class="notice" style="margin-top:5px">
+        <i class="fa "></i>
+        <div class="notice-content">
+            持续更新中...
+        </div>
+    </div>
+    
         
                 
                         
-                            <div class="notice" style="margin-top:5px">
-                                <i class="fa "></i>
-                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
-
-                                <script>
-                                    
-                                    function loadRandomContent() {
-                                        fetch('https://img.qs100371.vip/songci.php')
-                                            .then(response => response.text())
-                                            .then(text => {
-                                                document.getElementById('poem-container').innerText = text;
-                                            })
-                                            .catch(error => {
-                                                console.error('加载失败:', error);
-                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
-                                            });
-                                    }
-
-                                    // 页面加载时自动获取一次
-                                    loadRandomContent();
-                                </script>
-                            </div>
-                            
                                 <style>
                                     .notice {
                                         padding: 5px;
