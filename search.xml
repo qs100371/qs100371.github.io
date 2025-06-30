@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>hexo lanscape搜索功能的改进</title>
+      <link href="/post/hexo-lanscape-sou-suo-gong-neng-de-gai-jin/"/>
+      <url>/post/hexo-lanscape-sou-suo-gong-neng-de-gai-jin/</url>
+      
+        <content type="html"><![CDATA[<p>hexo lanscape主题自带的搜索是google对本站的搜索，但没有梯子是用不了的。本文记录了改成本地搜索的过程。</p><span id="more"></span><h1 id="安装hexo-generator-search插件"><a href="#安装hexo-generator-search插件" class="headerlink" title="安装hexo-generator-search插件"></a>安装hexo-generator-search插件</h1><p>插件用于生成搜索索引文件，其中包含文章的所有必要数据，可以使用这些数据编写本地搜索引擎。支持 XML 和 JSON 格式输出。<br><code>$ npm install hexo-generator-search --save</code><br>会在网站根目录下生成一个名为search.xml的索引文件。</p><h1 id="搜索脚本"><a href="#搜索脚本" class="headerlink" title="搜索脚本"></a>搜索脚本</h1><p>不用自己写，从hexo next主题里直接搬过来，search.js，放到主题landscape目录下的source&#x2F;js&#x2F;下。</p><h1 id="搜索入口"><a href="#搜索入口" class="headerlink" title="搜索入口"></a>搜索入口</h1><p>修改layout_partial\header.ejs：<br>原有的google搜索改成下面的代码。</p><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id<span class="operator">=</span><span class="string">&quot;search-form-wrap&quot;</span>&gt;</span><br><span class="line">      &lt;input type<span class="operator">=</span><span class="string">&quot;text&quot;</span> id<span class="operator">=</span><span class="string">&quot;local-search-input&quot;</span> name<span class="operator">=</span><span class="string">&quot;q&quot;</span> results<span class="operator">=</span><span class="string">&quot;0&quot;</span> placeholder<span class="operator">=</span><span class="string">&quot;&lt;%= __(&#x27;搜索&#x27;) %&gt;&quot;</span></span><br><span class="line">        class<span class="operator">=</span><span class="string">&quot;st-search-input st-default-search-input form-control&quot;</span> /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div id<span class="operator">=</span><span class="string">&quot;local-search-result&quot;</span></span><br><span class="line">      style<span class="operator">=</span><span class="string">&quot;opacity: 0.85; background-color: lightyellow; position: absolute; top: 50px; border-radius: 5px;&quot;</span>&gt;</span><br><span class="line">    &lt;/div&gt;</span><br></pre></td></tr></table></figure><p>代码位置参见下图，<br><img src="https://qs100371.vip/post-images/1751288010803.png"></p><h1 id="修改footer-ejs"><a href="#修改footer-ejs" class="headerlink" title="修改footer.ejs"></a>修改footer.ejs</h1><p>增加：</p><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">%-</span> js(<span class="string">&#x27;js/jquery.min.js&#x27;</span>) %&gt;</span><br><span class="line">  &lt;<span class="meta">%-</span> js(<span class="string">&#x27;js/search.js&#x27;</span>) %&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="title function_">searchFunc</span>(<span class="string">&quot;/search.xml&quot;</span>, <span class="string">&quot;local-search-input&quot;</span>, <span class="string">&quot;local-search-result&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure><p><del>jquery.min.js文件也要放在source&#x2F;js&#x2F;下。</del><br>after-footer.ejs文件里引用的jquery-3.6.4这一行删掉。主题自带的jquery-3.6.4.min.js改名为jquery.min.js。</p><h1 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h1><p>pc端：<br><img src="https://qs100371.vip/post-images/1751288023993.png"><br>手机端：<br><img src="https://qs100371.vip/post-images/1751288029859.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>lucky ddns, 自动证书和反向代理一站式搞定</title>
       <link href="/post/lucky-ddns-zi-dong-zheng-shu-he-fan-xiang-dai-li-yi-zhan-shi-gao-ding/"/>
       <url>/post/lucky-ddns-zi-dong-zheng-shu-he-fan-xiang-dai-li-yi-zhan-shi-gao-ding/</url>
