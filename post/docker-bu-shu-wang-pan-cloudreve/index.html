@@ -124,6 +124,9 @@
         </h1>
         <hr>
         
+          <img src="https://img.shields.io/badge/字数统计-312-blue"><img
+            src="https://img.shields.io/badge/阅读时间-4分-green">
+          
             
               
         </header>
@@ -150,7 +153,7 @@
 
 <p><img src="https://qs100371.vip/post-images/1734093955170.webp"></p>
 <blockquote>
-<p>初始管理员帐号是<a href="mailto:&#97;&#x64;&#109;&#105;&#x6e;&#64;&#99;&#108;&#111;&#x75;&#100;&#114;&#x65;&#x76;&#x65;&#x2e;&#x6f;&#x72;&#103;">&#97;&#x64;&#109;&#105;&#x6e;&#64;&#99;&#108;&#111;&#x75;&#100;&#114;&#x65;&#x76;&#x65;&#x2e;&#x6f;&#x72;&#103;</a>（<del>初始密码：admin</del>），密码在图片里。可以再申请一个帐号，再用初始管理帐号提权到admin组，用自己好用的名字当管理员帐号。</p>
+<p>初始管理员帐号是<a href="mailto:&#97;&#x64;&#109;&#x69;&#110;&#64;&#99;&#x6c;&#x6f;&#x75;&#100;&#x72;&#101;&#118;&#101;&#46;&#111;&#x72;&#x67;">&#97;&#x64;&#109;&#x69;&#110;&#64;&#99;&#x6c;&#x6f;&#x75;&#100;&#x72;&#101;&#118;&#101;&#46;&#111;&#x72;&#x67;</a>（<del>初始密码：admin</del>），密码在图片里。可以再申请一个帐号，再用初始管理帐号提权到admin组，用自己好用的名字当管理员帐号。</p>
 </blockquote>
 <p><img src="https://qs100371.vip/post-images/1734094273211.webp"><br><img src="https://qs100371.vip/post-images/1734094279270.webp"><br>初始空间为1G，可自行调整大小。</p>
 
@@ -159,7 +162,7 @@
 
           <footer class="article-footer">
 
-            <a data-url="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/" data-id="cmcgw43ni0032actz5nevbm3t" data-title="docker部署网盘cloudreve"
+            <a data-url="https://qs100371.vip/post/docker-bu-shu-wang-pan-cloudreve/" data-id="cmcj4jq7g0031hotzhe7i9ie6" data-title="docker部署网盘cloudreve"
               class="article-share-link"><span class="fa fa-share">
                 分享
               </span></a>
@@ -355,17 +358,35 @@
       </div>
       <footer id="footer">
   
-        
-          <div class="outer">
-            <div id="footer-info" class="inner">
-              
-                All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
-                  
-                    &copy; 2025
-                      qs100371<br>
-                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-            </div>
+
+        <div class="outer">
+          <div id="footer-info" class="inner">
+            <span class="post-count"><img id="site-days-badge" src=""><img
+                src="https://img.shields.io/badge/建站-Github-red?logo=github&logoColor=red"><img
+                src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
+                <img src="https://img.shields.io/badge/共- 74.2k 字-green">
+              <img id="load-time-badge" src="">
+            </span><br>
+            
+              All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
+                
+                  &copy; 2025
+                    qs100371<br>
+                      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
           </div>
+        </div>
+        <script>
+          // 1. 计算建站天数
+          const startDate = new Date('2024-10-02 00:00:00'); // 建站日期
+          const today = new Date();
+          const timeDiff = today.getTime() - startDate.getTime();
+          const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+          // 2. 动态生成 Shields.io 徽章
+          const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
+          document.getElementById('site-days-badge').src = badgeUrl;
+
+        </script>
 </footer>
 <style>
   /* 返回顶部按钮 - 基础样式 */
@@ -454,13 +475,60 @@
   });
 </script>
 
+
 <script src="/js/jquery.min.js"></script>
 
-
+  
 <script src="/js/search.js"></script>
 
     <script type="text/javascript">
       searchFunc("/search.xml", "local-search-input", "local-search-result");
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // 性能数据兼容性处理
+        const perf = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+        const timing = perf.timing;
+
+        // 计算加载时间
+        let loadTime;
+        if (timing && timing.loadEventEnd && timing.navigationStart) {
+          loadTime = timing.loadEventEnd - timing.navigationStart;
+        } else {
+          // 回退方案：使用 performance.now() 或 Date.now()
+          loadTime = perf.now ? perf.now() : (Date.now() - (perf.timing?.navigationStart || Date.now()));
+        }
+
+        // 处理异常值
+        let displayTime;
+        if (loadTime <= 0 || loadTime > 60000) { // 超过1分钟视为异常
+          displayTime = 'N/A';
+        } else if (loadTime < 1000) {
+          displayTime = `${Math.round(loadTime)}ms`; // 毫秒
+        } else {
+          displayTime = `${(loadTime / 1000).toFixed(2)}s`; // 秒（保留2位小数）
+        }
+
+        // 根据加载时间确定颜色
+        function getColor(ms) {
+          if (ms === 'N/A') return 'lightgrey';
+          const time = typeof ms === 'number' ? ms : parseFloat(ms) * 1000;
+          if (time < 800) return 'brightgreen';
+          if (time < 1500) return 'green';
+          if (time < 3000) return 'yellowgreen';
+          if (time < 5000) return 'orange';
+          return 'red';
+        }
+
+        const color = getColor(loadTime);
+
+        // 生成 shields.io 徽章 URL
+        const badgeUrl = `https://img.shields.io/badge/加载时间-${encodeURIComponent(displayTime)}-${color}`;
+
+        // 插入徽章到容器
+        document.getElementById('load-time-badge').src = badgeUrl;
+
+      });
     </script>
     </div>
     <nav id="mobile-nav">
@@ -475,8 +543,6 @@
   
 </nav>
     
-<script src="/js/jquery-3.6.4.min.js"></script>
-
 
   
 <script src="/fancybox/jquery.fancybox.min.js"></script>
