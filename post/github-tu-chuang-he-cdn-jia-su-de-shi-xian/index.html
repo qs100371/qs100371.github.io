@@ -54,39 +54,54 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">qs blog</a>
+        <a href="/" id="logo">
+          qs blog
+        </a>
       </h1>
-      
+
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
         
-          <a class="main-nav-link" href="/">首页</a>
-        
-          <a class="main-nav-link" href="/archives">归档</a>
-        
-          <a class="main-nav-link" href="/appscenter/">应用</a>
-        
-          <a class="main-nav-link" href="/about/">关于</a>
-        
+          <a class="main-nav-link" href="/">
+            首页
+          </a>
+          
+          <a class="main-nav-link" href="/archives">
+            归档
+          </a>
+          
+          <a class="main-nav-link" href="/appscenter/">
+            应用
+          </a>
+          
+          <a class="main-nav-link" href="/about/">
+            关于
+          </a>
+          
       </nav>
       <nav id="sub-nav">
         
           
             <a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a>
-          
-        
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+            
+              
+                
+                    <a class="nav-icon nav-search-btn" title="搜索"><span
+                        class="fa fa-search"></span></a>
+
       </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qs100371.vip"></form>
-      </div>
+    </div>
+    <div id="search-form-wrap">
+      <input type="text" id="local-search-input" name="q" results="0" placeholder="local search"
+        class="st-search-input st-default-search-input form-control" />
+    </div>
+    <div id="local-search-result"
+      style="opacity: 0.85; background-color: lightyellow; position: absolute; top: 50px; border-radius: 5px;">
     </div>
   </div>
 </header>
-
       <div class="outer">
         <section id="main"><article id="post-github-tu-chuang-he-cdn-jia-su-de-shi-xian" class="h-entry article article-type-post"
   itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -430,6 +445,14 @@
   });
 </script>
 
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/search.js"></script>
+
+    <script type="text/javascript">
+      searchFunc("/search.xml", "local-search-input", "local-search-result");
+    </script>
     </div>
     <nav id="mobile-nav">
   
