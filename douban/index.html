@@ -5,24 +5,20 @@
   <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
 
   
-  <title>apache2开启地址重写功能 | qs blog</title>
+  <title>我的豆瓣 | qs blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="typecho缺省网页地址是&#x2F;index.php&#x2F;archives&#x2F;&#123;slug&#125;.html的形式，在设置-永久链接设置里，启用地址重写功能，就能变成&#x2F;archives&#x2F;&#123;cid&#125;&#x2F;或&#x2F;archives&#x2F;&#123;slug&#125;.html，让链接看上去完全是静态地址。这需要服务器打开rewrite功能。本文记录了打开过程。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="apache2开启地址重写功能">
-<meta property="og:url" content="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/index.html">
+  <meta name="description" content="&#x2F;&#x2F; 初始化配置         document.addEventListener(&#39;DOMContentLoaded&#39;, function() {             idouban.init({                 selector: &#39;#douban&#39;,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="我的豆瓣">
+<meta property="og:url" content="https://qs100371.vip/douban/index.html">
 <meta property="og:site_name" content="qs blog">
-<meta property="og:description" content="typecho缺省网页地址是&#x2F;index.php&#x2F;archives&#x2F;&#123;slug&#125;.html的形式，在设置-永久链接设置里，启用地址重写功能，就能变成&#x2F;archives&#x2F;&#123;cid&#125;&#x2F;或&#x2F;archives&#x2F;&#123;slug&#125;.html，让链接看上去完全是静态地址。这需要服务器打开rewrite功能。本文记录了打开过程。">
+<meta property="og:description" content="&#x2F;&#x2F; 初始化配置         document.addEventListener(&#39;DOMContentLoaded&#39;, function() {             idouban.init({                 selector: &#39;#douban&#39;,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://qs100371.vip/post-images/1737022002475.webp">
-<meta property="og:image" content="https://qs100371.vip/post-images/1737022172314.webp">
-<meta property="article:published_time" content="2025-01-16T09:46:01.000Z">
-<meta property="article:modified_time" content="2025-05-03T05:02:22.445Z">
+<meta property="article:published_time" content="2025-07-03T07:44:19.000Z">
+<meta property="article:modified_time" content="2025-07-03T07:45:39.582Z">
 <meta property="article:author" content="qs100371">
-<meta property="article:tag" content="web">
-<meta property="article:tag" content="linux">
+<meta property="article:tag" content="linux onecloud armbian docker 学习笔记 个人博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qs100371.vip/post-images/1737022002475.webp">
   
     <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
   
@@ -105,11 +101,11 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-typecho-kai-qi-di-zhi-chong-xie-gong-neng" class="h-entry article article-type-post"
+        <section id="main"><article id="page-" class="h-entry article article-type-page"
   itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" class="article-date">
-  <time class="dt-published" datetime="2025-01-16T09:46:01.000Z" itemprop="datePublished">2025-01-16</time>
+    <a href="/douban/index.html" class="article-date">
+  <time class="dt-published" datetime="2025-07-03T07:44:19.000Z" itemprop="datePublished">2025-07-03</time>
 </a>
       
   </div>
@@ -120,13 +116,10 @@
           
     
         <h1 class="p-name article-title" itemprop="headline name">
-          apache2开启地址重写功能
+          我的豆瓣
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-315-blue"><img
-            src="https://img.shields.io/badge/阅读时间-4分-green">
-          
             
               
         </header>
@@ -136,71 +129,61 @@
             
 
                       
-                        <div id="toc" class="toc-article">
-                          <strong class="toc-title">目录</strong>
-                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">方法</span></a></li></ol>
-                        </div>
-                        
                           <!-- Table of Contents -->
-                          <p>typecho缺省网页地址是<code>/index.php/archives/&#123;slug&#125;.html</code>的形式，在设置-永久链接设置里，启用地址重写功能，就能变成<code>/archives/&#123;cid&#125;/</code>或<code>/archives/&#123;slug&#125;.html</code>，让链接看上去完全是静态地址。这需要服务器打开rewrite功能。本文记录了打开过程。</p>
-<span id="more"></span>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>由于typecho位于docker中，先进入docker容器。<br><code>docker exec -it typecho bash</code></p>
-<p><code>root@6318031c522f:/app# ls</code><br>admin  config.inc.php  index.php  install  install.php	usr  var<br><code>root@6318031c522f:/app# cd /etc/</code><br><code>root@6318031c522f:/etc# ls</code><br> apache2<br> 服务器使用的是apache2。<br><code>root@6318031c522f:/etc# cd apache2/</code><br><code>root@6318031c522f:/etc/apache2# ls</code><br>apache2.conf  conf-available  conf-enabled  envvars  magic  mods-available  mods-enabled  ports.conf  sites-available  sites-enabled<br><code>root@6318031c522f:/etc/apache2# nano apache2.conf </code></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;Directory /&gt;</span></span><br><span class="line">        <span class="attribute">Options</span> FollowSymLinks</span><br><span class="line">        <span class="attribute">AllowOverride</span> <span class="literal">All</span></span><br><span class="line">        <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line"><span class="section">&lt;/Directory&gt;</span></span><br></pre></td></tr></table></figure>
-<p>修改后的样子。原来是None，改成All。<br>再到网站根目录<code>/app</code>下建立.htaccess文件，内容如下：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;IfModule mod_rewrite.c&gt;</span></span><br><span class="line"><span class="attribute">RewriteEngine</span> <span class="literal">On</span></span><br><span class="line"><span class="attribute">RewriteBase</span> /</span><br><span class="line"><span class="attribute">RewriteRule</span> ^index\.php$ -<span class="meta"> [L]</span></span><br><span class="line"><span class="attribute">RewriteCond</span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-f</span><br><span class="line"><span class="attribute">RewriteCond</span> <span class="variable">%&#123;REQUEST_FILENAME&#125;</span> !-d</span><br><span class="line"><span class="attribute">RewriteRule</span> . /index.php<span class="meta"> [L]</span></span><br><span class="line"><span class="section">&lt;/IfModule&gt;</span></span><br></pre></td></tr></table></figure>
-<p>重启apache2，<code>service apache2 restart</code>。<br>再到网站的设置里打开功能<br><img src="https://qs100371.vip/post-images/1737022002475.webp"><br>可能会这样，选中仍然开启。<br>打开网站中的二级链接，如果显示“服务器错误，404-找不到文件或目录。”就是没有成功。<br><img src="https://qs100371.vip/post-images/1737022172314.webp"><br>成功了地址就会没有了index.php部分。</p>
+                          
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/idouban/dist/index.css">
+    
+<div id="douban-container">
+        
+        <div id="douban"></div>
+    </div>
 
+    <!-- 引入 iDouban JS -->
+    <script src="https://cdn.jsdelivr.net/npm/idouban/dist/index.js"></script>
+    <script>
+        // 初始化配置
+        document.addEventListener('DOMContentLoaded', function() {
+            idouban.init({
+                selector: '#douban',
+                lang: 'zh',
+                douban_id: '288237448',  // 替换为你的豆瓣ID
+                type: 'movie',           // 可选：book/movie/music
+                
+                actions: ['collect', 'do', 'wish'], // 在读/想读/已读
+                page_size: 10,
+                max_line: 3,
+                // 高级配置
+                proxy: 'https://your-proxy.com', // 如果需要代理
+                show_cover: true,      // 显示封面
+                show_rating: true,      // 显示评分
+                show_comment: true     // 不显示评论
+            });
+        });
+    </script>
+    
                             
           </div>
 
           <footer class="article-footer">
 
-            <a data-url="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" data-id="cmcl6x1wp0086vstza01k0tb5" data-title="apache2开启地址重写功能"
+            <a data-url="https://qs100371.vip/douban/index.html" data-id="cmcn3027l0000gwtz52nz4qu1" data-title="我的豆瓣"
               class="article-share-link"><span class="fa fa-share">
                 分享
               </span></a>
 
 
-            <a href="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/#comments" class="article-comment-link">
-              <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/"
+            <a href="/douban/index.html#comments" class="article-comment-link">
+              <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/douban/index.html"
                 itemprop="commentCount"></span>
               留言
             </a>
 
             
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
               
-                <i class="fa fa-eye"></i>
-                <span id="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" class="leancloud_visitors" data-flag-title="apache2开启地址重写功能">
-                  <span class="leancloud-visitors-count">
-                  </span>
-                </span>
-                
           </footer>
   </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/post/linux-yun-wei-ming-ling/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          Linux 运维命令
-        
-      </div>
-    </a>
-  
-  
-    <a href="/post/docker-bu-shu-photoprismshi-bai/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">docker部署photoprism: 失败</div>
-    </a>
-  
-</nav>
-
       
 </article>
 
