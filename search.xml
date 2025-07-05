@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>vmware里的macos</title>
+      <link href="/post/vmware-li-de-macos/"/>
+      <url>/post/vmware-li-de-macos/</url>
+      
+        <content type="html"><![CDATA[<p>以前只是在docker里体验了macos，能正常启动安装，但安装过程很久也完成来了。本文记录了vmare安装过程。</p><span id="more"></span><h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><p>点<a href="https://www.123pan.com/s/ArpbVv-8rdxh.html">在这里</a>下载。可能要花5毛钱下载，速度还可以。</p><h1 id="安装vmware-workstation-pro"><a href="#安装vmware-workstation-pro" class="headerlink" title="安装vmware workstation pro"></a>安装vmware workstation pro</h1><p>现在可以免费安装了，不用系列号。</p><h1 id="解锁vmare"><a href="#解锁vmare" class="headerlink" title="解锁vmare"></a>解锁vmare</h1><p>vmware默认不支持安装macos，需要破解。<br>关闭vmare，解压unlocker.zip，运行&#x2F;windows&#x2F;unlocker.exe。</p><h1 id="建立虚拟机"><a href="#建立虚拟机" class="headerlink" title="建立虚拟机"></a>建立虚拟机</h1><p>选择：典型-安装光盘(刚下载的cdr文件)-Apple Mac OS X-随意-40G-自定义硬件(内存4G)</p><p>在虚拟机目录下*.vmx文件中增加：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">smc.version</span> = <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="attr">cpuid.1.eax</span> = <span class="string">&quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</span></span><br></pre></td></tr></table></figure><h1 id="安装macos"><a href="#安装macos" class="headerlink" title="安装macos"></a>安装macos</h1><p>选择：中文-磁盘工具-抹除vmware virtual sata hard drive media-关闭-安装<br>漫长等待安装完成。</p><h1 id="图图在这里"><a href="#图图在这里" class="headerlink" title="图图在这里"></a>图图在这里</h1><p><img src="https://qs100371.vip/post-images/1751686009117.png"><br><img src="https://qs100371.vip/post-images/1751686015153.png"><br><img src="https://qs100371.vip/post-images/1751686021927.png"></p><hr><p>失败了多次的原因是下载的安装镜像有问题，又没有百度网盘vip，下载大文件很麻烦，123云盘还挺快，虽然花了5毛钱，比百度有良心，次卡也要好几块。<br>macos装上了也不卡，版本有点老。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> macos </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>cloudflare tunnel ssh/tcp 连接方式</title>
       <link href="/post/cloudflare-tunnel-sshtcp-lian-jie-fang-shi/"/>
       <url>/post/cloudflare-tunnel-sshtcp-lian-jie-fang-shi/</url>
