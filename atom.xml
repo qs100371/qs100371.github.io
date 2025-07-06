@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-07-05T03:45:39.713Z</updated>
+  <updated>2025-07-06T09:03:56.228Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -17,16 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>飞牛os重启后smb中外置存储丢失问题的修复</title>
+    <link href="https://qs100371.vip/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/"/>
+    <id>https://qs100371.vip/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/</id>
+    <published>2025-07-06T08:09:26.000Z</published>
+    <updated>2025-07-06T09:03:56.228Z</updated>
+    
+    <content type="html"><![CDATA[<p>研究docker中的飞牛os有几天了，又发现fnos中docker也可以直接用cli方式建立，这样安装应用不用局限于应用商店了，于是把ubuntu server 22小主机给格了，安装了fnos。今天发现小主机重启之后smb中的项目丢失了部分。本文记录了修复处理过程。</p><span id="more"></span><h1 id="飞牛的存储"><a href="#飞牛的存储" class="headerlink" title="飞牛的存储"></a>飞牛的存储</h1><p>飞牛里的存储分几部分：</p><ul><li><p>系统盘<br>这是安装飞牛系统的空间，大约11G左右。多余的部分给升级系统用的。</p></li><li><p>存储空间<br>这是存放飞牛系统应用的数据所在，建立存储空间需要格式化硬盘。</p></li><li><p>外置存储<br>因为硬盘原来有数据，不想格式化硬盘，所以没有建立存储的方式管理，飞牛os把这些硬盘当成外置存储处理，类似于usb，挂载在了&#x2F;vol00&#x2F;‘HP SSD S700 500GB’。</p></li></ul><p>因为这个名字太不规则，我用fstab的方式挂在了&#x2F;disk1上。<br>方法：<br><code>lsblk</code><br>得到硬盘的标识是sdb，<br><code>sudo blkid /dev/sdb</code><br>得到硬盘的UUID：<br>&#x2F;dev&#x2F;sdb: UUID&#x3D;”2a8fa6ee-217e-4bde-88fe-5a62e9333310” BLOCK_SIZE&#x3D;”4096” TYPE&#x3D;”ext4”<br>&#x2F;etc&#x2F;fstab中增加<br><code>UUID=&quot;63748d32-15e5-42a3-9de7-f826dc1a32ab&quot; /disk1 ext4 defaults 0 0</code><br>建立目录&#x2F;disk1，重启，硬盘就挂在了&#x2F;disk1下。</p><h1 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h1><p>今天发现smb在系统重启后丢失了外置存储项，到飞牛官方论坛上找解决方法，有个官方人员说系统因为重启外置存储的标识发生变化导致了这个问题，待后续解决。有人提出用fstab把外置存储手动挂在&#x2F;vol00目录下。看着和挂在&#x2F;disk1下的方式是一样的，一时没仔细看，就照搬方法，把fstab修改，&#x2F;disk1替换成&#x2F;vol00&#x2F;HP SSD S700 500GB，重启系统。<em>当时没发现路径上有空格。</em><br>结果系统启动失败，接上显示器才发现是硬盘挂载出问题了，启动到紧急模式，一直询问root密码，飞牛安装完成后建立的用户的密码也不管用，之前sudo都能用的，之前也没设置root用户密码。<br>上网一搜，要重置系统root密码。</p><h1 id="重置系统root密码"><a href="#重置系统root密码" class="headerlink" title="重置系统root密码"></a>重置系统root密码</h1><p>出现蓝色界面按e键，进入编辑模式，找到LINUX开头的语句，用光标选到该语句最后一个字符，然后输入<br>       rw init&#x3D;&#x2F;bin&#x2F;bash，按住Ctrl+X键，启动系统，检查并修复文件系统，进入系统，输入passwd root，设置root用户密码，修改fstab，把外置存储路径改成&#x2F;vol00&#x2F;disk1，保存后执行exit，reboot重启系统。</p><h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>重启后，成功进入系统。由于外置存储路径改变，飞牛影视和迅雷的数据路径受到影响，需要重新设置。<br>经验证，再重启系统，smb就不会丢失关联的外置存储项目，问题解决。</p><hr><p>飞牛在处理存储方面的方式导致了这次的问题，作为自部署的nas系统，经常会有带有数据的硬盘的加入(不想格式化硬盘)，这样的问题就不可避免。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;研究docker中的飞牛os有几天了，又发现fnos中docker也可以直接用cli方式建立，这样安装应用不用局限于应用商店了，于是把ubuntu server 22小主机给格了，安装了fnos。今天发现小主机重启之后smb中的项目丢失了部分。本文记录了修复处理过程。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="linux" scheme="https://qs100371.vip/tags/linux/"/>
+    
+    <category term="nas" scheme="https://qs100371.vip/tags/nas/"/>
+    
+  </entry>
+  
+  <entry>
     <title>vmware里的macos</title>
     <link href="https://qs100371.vip/post/vmware-li-de-macos/"/>
     <id>https://qs100371.vip/post/vmware-li-de-macos/</id>
     <published>2025-07-05T03:10:56.000Z</published>
-    <updated>2025-07-05T03:45:39.713Z</updated>
+    <updated>2025-07-06T08:09:17.507Z</updated>
     
-    <content type="html"><![CDATA[<p>以前只是在docker里体验了macos，能正常启动安装，但安装过程很久也完成不了。本文记录了vmare安装过程。</p><span id="more"></span><h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><p>点<a href="https://www.123pan.com/s/ArpbVv-8rdxh.html">在这里</a>下载。可能要花5毛钱下载，速度还可以。</p><h1 id="安装vmware-workstation-pro"><a href="#安装vmware-workstation-pro" class="headerlink" title="安装vmware workstation pro"></a>安装vmware workstation pro</h1><p>现在可以免费安装了，不用系列号。</p><h1 id="解锁vmare"><a href="#解锁vmare" class="headerlink" title="解锁vmare"></a>解锁vmare</h1><p>vmware默认不支持安装macos，需要破解。<br>关闭vmare，解压unlocker.zip，运行&#x2F;windows&#x2F;unlocker.exe。</p><h1 id="建立虚拟机"><a href="#建立虚拟机" class="headerlink" title="建立虚拟机"></a>建立虚拟机</h1><p>选择：典型-安装光盘(刚下载的cdr文件)-Apple Mac OS X-随意-40G-自定义硬件(内存4G)</p><p>在虚拟机目录下*.vmx文件中增加：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">smc.version</span> = <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="attr">cpuid.1.eax</span> = <span class="string">&quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</span></span><br></pre></td></tr></table></figure><h1 id="安装macos"><a href="#安装macos" class="headerlink" title="安装macos"></a>安装macos</h1><p>选择：中文-磁盘工具-抹除vmware virtual sata hard drive media-关闭-安装<br>漫长等待安装完成。</p><h1 id="图图在这里"><a href="#图图在这里" class="headerlink" title="图图在这里"></a>图图在这里</h1><p><img src="https://qs100371.vip/post-images/1751686009117.png"><br><img src="https://qs100371.vip/post-images/1751686015153.png"><br><img src="https://qs100371.vip/post-images/1751686021927.png"></p><hr><p>失败了多次的原因是下载的安装镜像有问题，又没有百度网盘vip，下载大文件很麻烦，123云盘还挺快，虽然花了5毛钱，比百度有良心，次卡也要好几块。<br>macos装上了也不卡，版本有点老。</p><p>参考：<br><em><a href="https://www.cnblogs.com/dingshaohua/p/17493045.html">保姆级vmware安装MacOS</a></em></p>]]></content>
+    <content type="html"><![CDATA[<p>以前只是在docker里体验了macos，能正常启动安装，但安装过程很久也完成不了。本文记录了vmware中安装macos 10的过程。</p><span id="more"></span><h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><p>点<a href="https://www.123pan.com/s/ArpbVv-8rdxh.html">在这里</a>下载。可能要花5毛钱下载，速度还可以。</p><h1 id="安装vmware-workstation-pro"><a href="#安装vmware-workstation-pro" class="headerlink" title="安装vmware workstation pro"></a>安装vmware workstation pro</h1><p>现在可以免费安装了，不用系列号。</p><h1 id="解锁vmware"><a href="#解锁vmware" class="headerlink" title="解锁vmware"></a>解锁vmware</h1><p>vmware默认不支持安装macos，需要破解。<br>关闭vmware，解压unlocker.zip，运行&#x2F;windows&#x2F;unlocker.exe。</p><h1 id="建立虚拟机"><a href="#建立虚拟机" class="headerlink" title="建立虚拟机"></a>建立虚拟机</h1><p>选择：典型-安装光盘(刚下载的cdr文件)-Apple Mac OS X-随意-40G-自定义硬件(内存4G)</p><p>在虚拟机目录下*.vmx文件中增加：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">smc.version</span> = <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="attr">cpuid.1.eax</span> = <span class="string">&quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</span></span><br></pre></td></tr></table></figure><h1 id="安装macos"><a href="#安装macos" class="headerlink" title="安装macos"></a>安装macos</h1><p>选择：中文-磁盘工具-抹除vmware virtual sata hard drive media-关闭-安装<br>漫长等待安装完成。</p><h1 id="图图在这里"><a href="#图图在这里" class="headerlink" title="图图在这里"></a>图图在这里</h1><p><img src="https://qs100371.vip/post-images/1751686009117.png"><br><img src="https://qs100371.vip/post-images/1751686015153.png"><br><img src="https://qs100371.vip/post-images/1751686021927.png"></p><hr><p>失败了多次的原因是下载的安装镜像有问题，又没有百度网盘vip，下载大文件很麻烦，123云盘还挺快，虽然花了5毛钱，比百度有良心，次卡也要好几块。<br>macos装上了也不卡，版本有点老。</p><p>参考：<br><em><a href="https://www.cnblogs.com/dingshaohua/p/17493045.html">保姆级vmware安装MacOS</a></em></p>]]></content>
     
     
-    <summary type="html">&lt;p&gt;以前只是在docker里体验了macos，能正常启动安装，但安装过程很久也完成不了。本文记录了vmare安装过程。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;以前只是在docker里体验了macos，能正常启动安装，但安装过程很久也完成不了。本文记录了vmware中安装macos 10的过程。&lt;/p&gt;</summary>
     
     
     
@@ -378,25 +399,6 @@
     
     
     <category term="python" scheme="https://qs100371.vip/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用 Tauri (轻量级替代方案)打包编辑器</title>
-    <link href="https://qs100371.vip/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/"/>
-    <id>https://qs100371.vip/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/</id>
-    <published>2025-05-02T13:20:06.000Z</published>
-    <updated>2025-05-02T13:50:54.273Z</updated>
-    
-    <content type="html"><![CDATA[<p>electron实在是太笨重了，本文使用tauri方案重新打包。</p><span id="more"></span><h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul><li><p>安装 Rust (Tauri 依赖)<br>windows下安装 Rust，下载安装器，运行，按提示，需要安装 Microsoft C++ 生成工具。最后安装了visualstudio 2022社区版。<br><img src="https://qs100371.vip/post-images/1746192195321.webp"></p></li><li><p>安装 Node.js (&gt;&#x3D;16)<br>已安装，略。</p></li></ul><h1 id="创建-Tauri-项目"><a href="#创建-Tauri-项目" class="headerlink" title="创建 Tauri 项目"></a>创建 Tauri 项目</h1><ol><li>新建项目目录</li><li>复制您的 index.html 到项目</li><li>初始化前端项目 (纯 HTML 模式)<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> init -y</span><br><span class="line"><span class="built_in">npm</span> install --save-dev @tauri-apps/cli</span><br></pre></td></tr></table></figure></li><li>初始化 Tauri<br><code>npx tauri init</code><br>按提示选择：文件路径：..&#x2F;index.html，其它直接回车。</li><li>添加应用图标<br>src-tauri&#x2F;<br>└── icons&#x2F;<br> ├── 32x32.png<br> ├── 128x128.png<br> └── icon.ico  # Windows 专用图标<br>删掉init时icons生成的默认图标，把自定义的图标复制过来。</li></ol><h1 id="构建单一可执行文件"><a href="#构建单一可执行文件" class="headerlink" title="构建单一可执行文件"></a>构建单一可执行文件</h1><ol><li>修改src-tauri&#x2F;tauri.conf.json<br>“identifier”: “com.qs100371.markdown”,</li></ol><p>“bundle”: {<br>    “active”: false,<br>    “targets”: “all”,<br>    “icon”: [<br>      “icons&#x2F;32x32.png”,<br>      “icons&#x2F;128x128.png”,<br>      “icons&#x2F;icon.ico”<br>    ]<br>  }<br>2. 安装依赖<br><code>npm install</code></p><ol start="3"><li>构建 Release 版本<br><code>npm run tauri build -- --target x86_64-pc-windows-msvc</code><br>在src-tauri\target\x86_64-pc-windows-msvc\release目录下得到app.exe，大小8.54M。<br><img src="https://qs100371.vip/post-images/1746192926744.webp"></li></ol><p>预览：<a href="https://img.qs100371.vip/downloads/mdeditor-app.exe">tausi方案markdowneditor</a></p><hr><p>与ds反复交流才能把目标达成。今天生成两个app，并且打包成exe。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;electron实在是太笨重了，本文使用tauri方案重新打包。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
     
   </entry>
   

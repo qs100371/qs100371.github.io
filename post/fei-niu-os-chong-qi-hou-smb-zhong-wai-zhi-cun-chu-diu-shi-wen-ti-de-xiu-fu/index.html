@@ -5,19 +5,20 @@
   <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
 
   
-  <title>nginx反向代理设置 | qs blog</title>
+  <title>飞牛os重启后smb中外置存储丢失问题的修复 | qs blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default内容如下：">
+  <meta name="description" content="研究docker中的飞牛os有几天了，又发现fnos中docker也可以直接用cli方式建立，这样安装应用不用局限于应用商店了，于是把ubuntu server 22小主机给格了，安装了fnos。今天发现小主机重启之后smb中的项目丢失了部分。本文记录了修复处理过程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx反向代理设置">
-<meta property="og:url" content="https://qs100371.vip/post/nginx-fan-xiang-dai-li-she-zhi/index.html">
+<meta property="og:title" content="飞牛os重启后smb中外置存储丢失问题的修复">
+<meta property="og:url" content="https://qs100371.vip/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/index.html">
 <meta property="og:site_name" content="qs blog">
-<meta property="og:description" content="&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default内容如下：">
+<meta property="og:description" content="研究docker中的飞牛os有几天了，又发现fnos中docker也可以直接用cli方式建立，这样安装应用不用局限于应用商店了，于是把ubuntu server 22小主机给格了，安装了fnos。今天发现小主机重启之后smb中的项目丢失了部分。本文记录了修复处理过程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-02T03:33:12.000Z">
-<meta property="article:modified_time" content="2025-05-03T04:20:17.858Z">
+<meta property="article:published_time" content="2025-07-06T08:09:26.000Z">
+<meta property="article:modified_time" content="2025-07-06T09:03:56.228Z">
 <meta property="article:author" content="qs100371">
-<meta property="article:tag" content="web">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="nas">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
@@ -101,11 +102,11 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-nginx-fan-xiang-dai-li-she-zhi" class="h-entry article article-type-post"
+        <section id="main"><article id="post-fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu" class="h-entry article article-type-post"
   itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/post/nginx-fan-xiang-dai-li-she-zhi/" class="article-date">
-  <time class="dt-published" datetime="2024-11-02T03:33:12.000Z" itemprop="datePublished">2024-11-02</time>
+    <a href="/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/" class="article-date">
+  <time class="dt-published" datetime="2025-07-06T08:09:26.000Z" itemprop="datePublished">2025-07-06</time>
 </a>
       
   </div>
@@ -116,12 +117,12 @@
           
     
         <h1 class="p-name article-title" itemprop="headline name">
-          nginx反向代理设置
+          飞牛os重启后smb中外置存储丢失问题的修复
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-67-blue"><img
-            src="https://img.shields.io/badge/阅读时间-1分-green">
+          <img src="https://img.shields.io/badge/字数统计-810-blue"><img
+            src="https://img.shields.io/badge/阅读时间-9分-green">
           
             
               
@@ -134,14 +135,27 @@
                       
                         <div id="toc" class="toc-article">
                           <strong class="toc-title">目录</strong>
-                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9"><span class="toc-number">1.</span> <span class="toc-text">修改</span></a></li></ol>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A3%9E%E7%89%9B%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">1.</span> <span class="toc-text">飞牛的存储</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">发现问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E7%BD%AE%E7%B3%BB%E7%BB%9Froot%E5%AF%86%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">重置系统root密码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-number">4.</span> <span class="toc-text">问题解决</span></a></li></ol>
                         </div>
                         
                           <!-- Table of Contents -->
-                          <p>&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default内容如下：</p>
+                          <p>研究docker中的飞牛os有几天了，又发现fnos中docker也可以直接用cli方式建立，这样安装应用不用局限于应用商店了，于是把ubuntu server 22小主机给格了，安装了fnos。今天发现小主机重启之后smb中的项目丢失了部分。本文记录了修复处理过程。</p>
 <span id="more"></span>
-<h1 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h1><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server ipv6only=<span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">root</span> /var/www/html;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">proxy_pass</span>        http://127.0.0.1:9000;</span><br><span class="line">            <span class="attribute">proxy_set_header</span>   Host             <span class="variable">$host</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span>   X-Real-IP        <span class="variable">$remote_addr</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span>   X-Forwarded-For  <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">   <span class="attribute">error_page</span> <span class="number">400</span> <span class="number">403</span> <span class="number">404</span> <span class="number">497</span> https://<span class="variable">$host</span><span class="variable">$uri</span><span class="variable">$args</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+<h1 id="飞牛的存储"><a href="#飞牛的存储" class="headerlink" title="飞牛的存储"></a>飞牛的存储</h1><p>飞牛里的存储分几部分：</p>
+<ul>
+<li><p>系统盘<br>这是安装飞牛系统的空间，大约11G左右。多余的部分给升级系统用的。</p>
+</li>
+<li><p>存储空间<br>这是存放飞牛系统应用的数据所在，建立存储空间需要格式化硬盘。</p>
+</li>
+<li><p>外置存储<br>因为硬盘原来有数据，不想格式化硬盘，所以没有建立存储的方式管理，飞牛os把这些硬盘当成外置存储处理，类似于usb，挂载在了&#x2F;vol00&#x2F;‘HP SSD S700 500GB’。</p>
+</li>
+</ul>
+<p>因为这个名字太不规则，我用fstab的方式挂在了&#x2F;disk1上。<br>方法：<br><code>lsblk</code><br>得到硬盘的标识是sdb，<br><code>sudo blkid /dev/sdb</code><br>得到硬盘的UUID：<br>&#x2F;dev&#x2F;sdb: UUID&#x3D;”2a8fa6ee-217e-4bde-88fe-5a62e9333310” BLOCK_SIZE&#x3D;”4096” TYPE&#x3D;”ext4”<br>&#x2F;etc&#x2F;fstab中增加<br><code>UUID=&quot;63748d32-15e5-42a3-9de7-f826dc1a32ab&quot; /disk1 ext4 defaults 0 0</code><br>建立目录&#x2F;disk1，重启，硬盘就挂在了&#x2F;disk1下。</p>
+<h1 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h1><p>今天发现smb在系统重启后丢失了外置存储项，到飞牛官方论坛上找解决方法，有个官方人员说系统因为重启外置存储的标识发生变化导致了这个问题，待后续解决。有人提出用fstab把外置存储手动挂在&#x2F;vol00目录下。看着和挂在&#x2F;disk1下的方式是一样的，一时没仔细看，就照搬方法，把fstab修改，&#x2F;disk1替换成&#x2F;vol00&#x2F;HP SSD S700 500GB，重启系统。<em>当时没发现路径上有空格。</em><br>结果系统启动失败，接上显示器才发现是硬盘挂载出问题了，启动到紧急模式，一直询问root密码，飞牛安装完成后建立的用户的密码也不管用，之前sudo都能用的，之前也没设置root用户密码。<br>上网一搜，要重置系统root密码。</p>
+<h1 id="重置系统root密码"><a href="#重置系统root密码" class="headerlink" title="重置系统root密码"></a>重置系统root密码</h1><p>出现蓝色界面按e键，进入编辑模式，找到LINUX开头的语句，用光标选到该语句最后一个字符，然后输入<br>       rw init&#x3D;&#x2F;bin&#x2F;bash，按住Ctrl+X键，启动系统，检查并修复文件系统，进入系统，输入passwd root，设置root用户密码，修改fstab，把外置存储路径改成&#x2F;vol00&#x2F;disk1，保存后执行exit，reboot重启系统。</p>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>重启后，成功进入系统。由于外置存储路径改变，飞牛影视和迅雷的数据路径受到影响，需要重新设置。<br>经验证，再重启系统，smb就不会丢失关联的外置存储项目，问题解决。</p>
+<hr>
+<p>飞牛在处理存储方面的方式导致了这次的问题，作为自部署的nas系统，经常会有带有数据的硬盘的加入(不想格式化硬盘)，这样的问题就不可避免。</p>
 
                             
           </div>
@@ -149,24 +163,24 @@
           <footer class="article-footer">
 
             
-              <a data-url="https://qs100371.vip/post/nginx-fan-xiang-dai-li-she-zhi/" data-id="cmcre16xc006mpwtz23ah3hiv" data-title="nginx反向代理设置"
+              <a data-url="https://qs100371.vip/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/" data-id="cmcrfsftk0000zwtz418jhur4" data-title="飞牛os重启后smb中外置存储丢失问题的修复"
                 class="article-share-link"><span class="fa fa-share">
                   分享
                 </span></a>
 
 
-              <a href="/post/nginx-fan-xiang-dai-li-she-zhi/#comments" class="article-comment-link">
+              <a href="/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/#comments" class="article-comment-link">
                 <span class="post-comments-count valine-comment-count fa fa-comment"
-                  data-xid="/post/nginx-fan-xiang-dai-li-she-zhi/" itemprop="commentCount"></span>
+                  data-xid="/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/" itemprop="commentCount"></span>
                 留言
               </a>
 
               
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nas/" rel="tag">nas</a></li></ul>
 
 
                 <i class="fa fa-eye"></i>
-                <span id="/post/nginx-fan-xiang-dai-li-she-zhi/" class="leancloud_visitors" data-flag-title="nginx反向代理设置">
+                <span id="/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/" class="leancloud_visitors" data-flag-title="飞牛os重启后smb中外置存储丢失问题的修复">
                   <span class="leancloud-visitors-count">
                   </span>
                 </span>
@@ -178,19 +192,10 @@
     
 <nav id="article-nav">
   
-    <a href="/post/xiao-pi-mian-ban/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          小皮面板
-        
-      </div>
-    </a>
   
-  
-    <a href="/post/an-zhuang-nextcloud/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/post/vmware-li-de-macos/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">安装nextcloud</div>
+      <div class="article-nav-title">vmware里的macos</div>
     </a>
   
 </nav>
