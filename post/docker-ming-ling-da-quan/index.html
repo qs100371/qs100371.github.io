@@ -15,7 +15,7 @@
 <meta property="og:description" content="分类展示docker命令列表。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-02T13:08:39.000Z">
-<meta property="article:modified_time" content="2025-02-23T02:54:48.375Z">
+<meta property="article:modified_time" content="2025-07-07T01:39:52.754Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -111,7 +111,7 @@
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-853-blue"><img
+          <img src="https://img.shields.io/badge/字数统计-851-blue"><img
             src="https://img.shields.io/badge/阅读时间-10分-green">
           
             
@@ -125,52 +125,22 @@
                       
                         <div id="toc" class="toc-article">
                           <strong class="toc-title">目录</strong>
-                          
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">容器生命周期管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">容器操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84root%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88rootfs%EF%BC%89%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">容器的root文件系统（rootfs）命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">镜像仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">本地镜像管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#info-version"><span class="toc-number">6.</span> <span class="toc-text">info|version</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-Compose"><span class="toc-number">7.</span> <span class="toc-text">Docker Compose</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">8.</span> <span class="toc-text">网络命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B7%E5%91%BD%E4%BB%A4"><span class="toc-number">9.</span> <span class="toc-text">卷命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%85%E7%90%86%E4%B8%8E%E7%BB%B4%E6%8A%A4"><span class="toc-number">10.</span> <span class="toc-text">清理与维护</span></a></li></ol>
                         </div>
                         
                           <!-- Table of Contents -->
                           <p>分类展示docker命令列表。</p>
 <span id="more"></span>
-<blockquote>
-<p>容器生命周期管理</p>
-</blockquote>
-<p>run - 创建并启动一个新的容器。<br>start&#x2F;stop&#x2F;restart - 这些命令主要用于启动、停止和重启容器。<br>kill - 立即终止一个或多个正在运行的容器<br>rm - 删除一个或多个已经停止的容器。<br>pause&#x2F;unpause - 暂停和恢复容器中的所有进程。<br>create - 创建一个新的容器，但不会启动它。<br>exec - 在运行中的容器内执行一个新的命令。<br>rename - 重命名容器。</p>
-<blockquote>
-<p>容器操作</p>
-</blockquote>
-<p>ps - 列出 Docker 容器<br>inspect - 获取 Docker 对象（容器、镜像、卷、网络等）的详细信息。<br>top - 显示指定容器中的正在运行的进程。<br>attach - 允许用户附加到正在运行的容器并与其交互。<br>events - 获取 Docker 守护进程生成的事件。<br>logs - 获取和查看容器的日志输出。<br>wait - 允许用户等待容器停止并获取其退出代码。<br>export - 将容器的文件系统导出为 tar 归档文件。<br>port - 显示容器的端口映射信息。<br>stats - 实时显示 Docker 容器的资源使用情况。</p>
-<blockquote>
-<p>容器的root文件系统（rootfs）命令</p>
-</blockquote>
-<p>commit - 允许用户将容器的当前状态保存为新的 Docker 镜像。<br>cp - 用于在容器和宿主机之间复制文件或目录。<br>diff - 显示 Docker 容器文件系统的变更。</p>
-<blockquote>
-<p>镜像仓库</p>
-</blockquote>
-<p>login&#x2F;logout - 管理 Docker 客户端与 Docker 注册表的身份验证。<br>pull - 从 Docker 注册表（例如 Docker Hub）中拉取（下载）镜像到本地。<br>push - 将本地构建的 Docker 镜像推送（上传）到 Docker 注册表（如 Docker Hub 或私有注册表）。<br>search - 用于在 Docker Hub 或其他注册表中搜索镜像。</p>
-<blockquote>
-<p>本地镜像管理</p>
-</blockquote>
-<p>images - 列出本地的 Docker 镜像。<br>rmi - 删除不再需要的镜像。<br>tag - 创建本地镜像的别名（tag）。<br>build - 从 Dockerfile 构建 Docker 镜像。<br>history - 查看指定镜像的历史层信息。<br>save - 将一个或多个 Docker 镜像保存到一个 tar 归档文件中。<br>load - 从由 docker save 命令生成的 tar 文件中加载 Docker 镜像。<br>import - 从一个 tar 文件或 URL 导入容器快照，从而创建一个新的 Docker 镜像。</p>
-<blockquote>
-<p>info|version</p>
-</blockquote>
-<p>info - 显示 Docker 的系统级信息，包括当前的镜像和容器数量。<br>version - 显示 Docker 客户端和服务端的版本信息。</p>
-<blockquote>
-<p>Docker Compose</p>
-</blockquote>
-<p>docker compose run - 启动一个新容器并运行一个特定的应用程序。<br>docker compose rm - 启动一个新容器并删除一个特定的应用程序。<br>docker compose ps - 从 docker compose 检查 docker 容器状态。<br>docker compose build - 构建 docker compose 文件。<br>docker compose up - 运行 docker compose 文件。<br>docker compose ls - 列出 docker compose 服务。<br>docker compose start - 启动 docker compose 文件创建的容器。<br>docker compose restart - 重启 docker compose 文件创建的容器。</p>
-<blockquote>
-<p>网络命令</p>
-</blockquote>
-<p>docker network ls: 列出所有网络。<br>docker network create <network>: 创建一个新的网络。<br>docker network rm <network>: 删除指定的网络。<br>docker network connect <network> <container>: 连接容器到网络。<br>docker network disconnect <network> <container>: 断开容器与网络的连接。</p>
-<blockquote>
-<p>卷命令</p>
-</blockquote>
-<p>docker volume ls: 列出所有卷。<br>docker volume create <volume>: 创建一个新的卷。<br>docker volume rm <volume>: 删除指定的卷。<br>docker volume inspect <volume>: 显示卷的详细信息。</p>
-<blockquote>
-<p>清理与维护</p>
-</blockquote>
-<p>docker system prune：清理未使用的容器、网络、镜像等资源。<br>docker image prune：专门清理悬空的镜像。</p>
+<h1 id="容器生命周期管理"><a href="#容器生命周期管理" class="headerlink" title="容器生命周期管理"></a>容器生命周期管理</h1><p>run - 创建并启动一个新的容器。<br>start&#x2F;stop&#x2F;restart - 这些命令主要用于启动、停止和重启容器。<br>kill - 立即终止一个或多个正在运行的容器<br>rm - 删除一个或多个已经停止的容器。<br>pause&#x2F;unpause - 暂停和恢复容器中的所有进程。<br>create - 创建一个新的容器，但不会启动它。<br>exec - 在运行中的容器内执行一个新的命令。<br>rename - 重命名容器。</p>
+<h1 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h1><p>ps - 列出 Docker 容器<br>inspect - 获取 Docker 对象（容器、镜像、卷、网络等）的详细信息。<br>top - 显示指定容器中的正在运行的进程。<br>attach - 允许用户附加到正在运行的容器并与其交互。<br>events - 获取 Docker 守护进程生成的事件。<br>logs - 获取和查看容器的日志输出。<br>wait - 允许用户等待容器停止并获取其退出代码。<br>export - 将容器的文件系统导出为 tar 归档文件。<br>port - 显示容器的端口映射信息。<br>stats - 实时显示 Docker 容器的资源使用情况。</p>
+<h1 id="容器的root文件系统（rootfs）命令"><a href="#容器的root文件系统（rootfs）命令" class="headerlink" title="容器的root文件系统（rootfs）命令"></a>容器的root文件系统（rootfs）命令</h1><p>commit - 允许用户将容器的当前状态保存为新的 Docker 镜像。<br>cp - 用于在容器和宿主机之间复制文件或目录。<br>diff - 显示 Docker 容器文件系统的变更。</p>
+<h1 id="镜像仓库"><a href="#镜像仓库" class="headerlink" title="镜像仓库"></a>镜像仓库</h1><p>login&#x2F;logout - 管理 Docker 客户端与 Docker 注册表的身份验证。<br>pull - 从 Docker 注册表（例如 Docker Hub）中拉取（下载）镜像到本地。<br>push - 将本地构建的 Docker 镜像推送（上传）到 Docker 注册表（如 Docker Hub 或私有注册表）。<br>search - 用于在 Docker Hub 或其他注册表中搜索镜像。</p>
+<h1 id="本地镜像管理"><a href="#本地镜像管理" class="headerlink" title="本地镜像管理"></a>本地镜像管理</h1><p>images - 列出本地的 Docker 镜像。<br>rmi - 删除不再需要的镜像。<br>tag - 创建本地镜像的别名（tag）。<br>build - 从 Dockerfile 构建 Docker 镜像。<br>history - 查看指定镜像的历史层信息。<br>save - 将一个或多个 Docker 镜像保存到一个 tar 归档文件中。<br>load - 从由 docker save 命令生成的 tar 文件中加载 Docker 镜像。<br>import - 从一个 tar 文件或 URL 导入容器快照，从而创建一个新的 Docker 镜像。</p>
+<h1 id="info-version"><a href="#info-version" class="headerlink" title="info|version"></a>info|version</h1><p>info - 显示 Docker 的系统级信息，包括当前的镜像和容器数量。<br>version - 显示 Docker 客户端和服务端的版本信息。</p>
+<h1 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h1><p>docker compose run - 启动一个新容器并运行一个特定的应用程序。<br>docker compose rm - 启动一个新容器并删除一个特定的应用程序。<br>docker compose ps - 从 docker compose 检查 docker 容器状态。<br>docker compose build - 构建 docker compose 文件。<br>docker compose up - 运行 docker compose 文件。<br>docker compose ls - 列出 docker compose 服务。<br>docker compose start - 启动 docker compose 文件创建的容器。<br>docker compose restart - 重启 docker compose 文件创建的容器。</p>
+<h1 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h1><p>docker network ls: 列出所有网络。<br>docker network create <network>: 创建一个新的网络。<br>docker network rm <network>: 删除指定的网络。<br>docker network connect <network> <container>: 连接容器到网络。<br>docker network disconnect <network> <container>: 断开容器与网络的连接。</p>
+<h1 id="卷命令"><a href="#卷命令" class="headerlink" title="卷命令"></a>卷命令</h1><p>docker volume ls: 列出所有卷。<br>docker volume create <volume>: 创建一个新的卷。<br>docker volume rm <volume>: 删除指定的卷。<br>docker volume inspect <volume>: 显示卷的详细信息。</p>
+<h1 id="清理与维护"><a href="#清理与维护" class="headerlink" title="清理与维护"></a>清理与维护</h1><p>docker system prune：清理未使用的容器、网络、镜像等资源。<br>docker image prune：专门清理悬空的镜像。</p>
 
                             
           </div>
