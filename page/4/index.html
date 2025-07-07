@@ -97,6 +97,27 @@
     style="opacity: 0.85; background-color: lightyellow; position: relative; top: 50px; border-radius: 5px;">
 </div>
 
+<div class="article-entry"><span id="poem-container">正在加载....</span></div>
+<script>
+    function loadRandomContent() {
+        fetch('https://img.qs100371.vip/songci.php')
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('poem-container').innerText = text;
+            })
+            .catch(error => {
+                console.error('加载失败:', error);
+                document.getElementById('poem-container').innerText = '加载失败，请重试';
+            });
+    }
+
+    // 页面加载时自动获取一次
+    loadRandomContent();
+</script>
+
+
+
+
   
     <article id="post-hexo-landscape-zhu-ti-tian-jia-gong-gao-ban" class="h-entry article article-type-post"
   itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
