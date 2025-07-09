@@ -286,9 +286,15 @@ book，movie，game，song中不要的可删掉。<br>do，wish，collect顺序�
 
           <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
               class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a> <a href="/"><i class="fa fa-home fa-lg"
-              aria-hidden="true"></i> Home</a>, <span id="busuanzi_value_site_pv"></span>
-          <span class="post-meta-divider">, </span>
-          <span id="busuanzi_value_site_uv"></span>
+              aria-hidden="true"></i> Home</a>, <div class="status"><span id="busuanzi_value_site_pv"></span>, <span
+              id="busuanzi_value_site_uv"></span>, <span id="busuanzi_value_page_pv"></span></div>
+          <style>
+            .status {
+              font-size: 12px;
+              color: #ff9800; 
+              font-style: italic;
+            }
+          </style>
           <script>
             const startDate = new Date('2024-10-02 00:00:00');
             const today = new Date();
