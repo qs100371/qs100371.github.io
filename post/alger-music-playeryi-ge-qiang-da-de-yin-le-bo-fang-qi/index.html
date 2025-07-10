@@ -5,23 +5,30 @@
   <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
 
   
-  <title>nginx+php安装和配置 | qs blog</title>
+  <title>Alger Music Player:一个强大的音乐播放器 | qs blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="在docker里部署了很多网络服务，有些就自带有php支持，例如typecho，easyimage等，这里在主机上直接安装。">
+  <meta name="description" content="Alger Music Player是一个基于 electron typescript vue3 的桌面音乐播放器，适配 web端、桌面端、web移动端。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx+php安装和配置">
-<meta property="og:url" content="https://qs100371.vip/post/nginxphp-an-zhuang-he-pei-zhi/index.html">
+<meta property="og:title" content="Alger Music Player:一个强大的音乐播放器">
+<meta property="og:url" content="https://qs100371.vip/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/index.html">
 <meta property="og:site_name" content="qs blog">
-<meta property="og:description" content="在docker里部署了很多网络服务，有些就自带有php支持，例如typecho，easyimage等，这里在主机上直接安装。">
+<meta property="og:description" content="Alger Music Player是一个基于 electron typescript vue3 的桌面音乐播放器，适配 web端、桌面端、web移动端。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://qs100371.vip/post-images/1738029187812.webp">
-<meta property="article:published_time" content="2025-01-28T01:40:51.000Z">
-<meta property="article:modified_time" content="2025-02-23T02:54:47.545Z">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140584180.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140589850.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140593947.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140601578.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140606078.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140627075.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140631894.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140635787.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1752140639816.png">
+<meta property="article:published_time" content="2025-07-10T09:35:02.000Z">
+<meta property="article:modified_time" content="2025-07-10T10:03:37.864Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="web">
-<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qs100371.vip/post-images/1738029187812.webp">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1752140584180.png">
   
     <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
   
@@ -154,11 +161,11 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-nginxphp-an-zhuang-he-pei-zhi" class="h-entry article article-type-post"
+        <section id="main"><article id="post-alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi" class="h-entry article article-type-post"
   itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/post/nginxphp-an-zhuang-he-pei-zhi/" class="article-date">
-  <time class="dt-published" datetime="2025-01-28T01:40:51.000Z" itemprop="datePublished">2025-01-28</time>
+    <a href="/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/" class="article-date">
+  <time class="dt-published" datetime="2025-07-10T09:35:02.000Z" itemprop="datePublished">2025-07-10</time>
 </a>
       
   </div>
@@ -169,11 +176,11 @@
           
     
         <h1 class="p-name article-title" itemprop="headline name">
-          nginx+php安装和配置
+          Alger Music Player:一个强大的音乐播放器
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-192-blue"><img
+          <img src="https://img.shields.io/badge/字数统计-217-blue"><img
             src="https://img.shields.io/badge/阅读时间-2分-green">
           
             
@@ -187,18 +194,30 @@
                       
                         <div id="toc" class="toc-article">
                           <strong class="toc-title">目录</strong>
-                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nginx"><span class="toc-number">1.</span> <span class="toc-text">安装nginx</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85php"><span class="toc-number">2.</span> <span class="toc-text">安装php</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9nginx%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">修改nginx设置</span></a></li></ol>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">1.</span> <span class="toc-text">主要功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%93%E9%AA%8C"><span class="toc-number">2.</span> <span class="toc-text">体验</span></a></li></ol>
                         </div>
                         
                           <!-- Table of Contents -->
-                          <p>在docker里部署了很多网络服务，有些就自带有php支持，例如typecho，easyimage等，这里在主机上直接安装。</p>
+                          <p>Alger Music Player是一个基于 electron typescript vue3 的桌面音乐播放器，适配 web端、桌面端、web移动端。</p>
 <span id="more"></span>
-<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><p><code>apt install nginx</code><br>nginx缺省网络地址是&#x2F;var&#x2F;www&#x2F;html。</p>
-<h1 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h1><p><code>apt install php-fpm</code><br>安装的时候会发现安装的是php8.2。<br>复制php文件到&#x2F;var&#x2F;www&#x2F;html。</p>
-<h1 id="修改nginx设置"><a href="#修改nginx设置" class="headerlink" title="修改nginx设置"></a>修改nginx设置</h1><p>编辑&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default文件，开启php支持。<br><code>nano -c /etc/nginx/sites-enabled/default</code><br>在缺省文件处添加index.php，在随后删掉php支持语句前面的注释符号#。<br><img src="https://qs100371.vip/post-images/1738029187812.webp"><br>见图中加红框处。<br><code>nginx -t</code>    #测试配置是否正确，出错会有提示。<br><code>systemctl restart nginx</code>  #重启nginx服务。</p>
-<blockquote>
-<p>其实这是LNMP服务的一部分，在前文<a href="https://qs100371.vip/post/an-zhuang-wordpress/">安装wordpress</a>有记录。</p>
-</blockquote>
+<p>项目地址：<a href="https://github.com/algerkong/AlgerMusicPlayer">algerkong&#x2F;AlgerMusicPlayer</a><br>一个第三方音乐播放器、本地服务、桌面歌词、音乐下载、最高音质。</p>
+<h1 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h1><ul>
+<li>音乐推荐</li>
+<li>歌单 MV 排行榜 每日推荐</li>
+<li>沉浸式歌词显示</li>
+<li>网易云账号登录与同步</li>
+<li>本地化服务，无需依赖在线API (基于 netease-cloud-music-api)</li>
+<li>全平台适配（Desktop &amp; Web &amp; Mobile Web &amp; Android&lt;测试&gt; &amp; ios&lt;后续&gt;）</li>
+</ul>
+<h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>发布了linux，windows，mac各种版本。</p>
+<ul>
+<li><p>windows版体验<br><img src="https://qs100371.vip/post-images/1752140584180.png"><br><img src="https://qs100371.vip/post-images/1752140589850.png"><br><img src="https://qs100371.vip/post-images/1752140593947.png"><br><img src="https://qs100371.vip/post-images/1752140601578.png"><br><img src="https://qs100371.vip/post-images/1752140606078.png"></p>
+</li>
+<li><p>andriod版体验<br><img src="https://qs100371.vip/post-images/1752140627075.png"><br><img src="https://qs100371.vip/post-images/1752140631894.png"><br><img src="https://qs100371.vip/post-images/1752140635787.png"><br><img src="https://qs100371.vip/post-images/1752140639816.png"></p>
+</li>
+</ul>
+<hr>
+<p>安装完了眼前一亮，之前用QQ音乐，经常是30秒体验版歌曲，同人歌曲，后来用navidrome(都忘了这个词怎么拼的)，Aplayer，音流，Alger则更胜一筹，全功能还没广告。</p>
 
                             
           </div>
@@ -206,20 +225,20 @@
           <footer class="article-footer">
 
             
-              <!--<a data-url="https://qs100371.vip/post/nginxphp-an-zhuang-he-pei-zhi/" data-id="cmcx7w5f4006yq4tzfm0y4us9" data-title="nginx+php安装和配置"
+              <!--<a data-url="https://qs100371.vip/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/" data-id="cmcx7w5dt0001q4tz7rky1x0d" data-title="Alger Music Player:一个强大的音乐播放器"
                 class="article-share-link"><span class="fa fa-share">
                   分享
                 </span></a>-->
               
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
 
 
-                <a href="/post/nginxphp-an-zhuang-he-pei-zhi/#comments" class="article-comment-link">
+                <a href="/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/#comments" class="article-comment-link">
                   <span class="post-comments-count valine-comment-count fa fa-comment"
-                    data-xid="/post/nginxphp-an-zhuang-he-pei-zhi/" itemprop="commentCount"></span>
+                    data-xid="/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/" itemprop="commentCount"></span>
                   留言
                 </a>
-                <!--<span id="/post/nginxphp-an-zhuang-he-pei-zhi/" class="leancloud_visitors" data-flag-title="nginx+php安装和配置">
+                <!--<span id="/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/" class="leancloud_visitors" data-flag-title="Alger Music Player:一个强大的音乐播放器">
                   <span class="leancloud-visitors-count  fa fa-eye">
                   </span>
                 </span>-->
@@ -232,19 +251,10 @@
     
 <nav id="article-nav">
   
-    <a href="/post/docker-bu-shu-yun-shou-ji-redroid/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          docker部署云手机：redroid
-        
-      </div>
-    </a>
   
-  
-    <a href="/post/github-tu-chuang-he-cdn-jia-su-de-shi-xian/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/post/frp-nei-wang-chuan-tou-de-shi-yong-fang-fa/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">github图床和cdn加速的实现</div>
+      <div class="article-nav-title">frp内网穿透的使用方法</div>
     </a>
   
 </nav>
