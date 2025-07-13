@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://qs100371.vip/post-images/1751358242414.png">
 <meta property="og:image" content="https://qs100371.vip/post-images/1751358288712.png">
 <meta property="article:published_time" content="2025-06-28T13:28:24.000Z">
-<meta property="article:modified_time" content="2025-07-01T08:25:00.559Z">
+<meta property="article:modified_time" content="2025-07-13T12:32:23.339Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
                           <p>偶然发现家里的宽带ipv6地址是公网地址，于是就开始折腾ddns，https。这里记录了整个过程。</p>
 <span id="more"></span>
 <h1 id="支持ipv6的路由器"><a href="#支持ipv6的路由器" class="headerlink" title="支持ipv6的路由器"></a>支持ipv6的路由器</h1><p>首先要有ipv6的路由器，把光猫设成桥接模式，用路由器拨号，关闭防火墙。</p>
-<h1 id="安装lucky"><a href="#安装lucky" class="headerlink" title="安装lucky"></a>安装lucky</h1><p>……前文已有记录。</p>
+<h1 id="安装lucky"><a href="#安装lucky" class="headerlink" title="安装lucky"></a>安装lucky</h1><p>前文已有记录。</p>
 <h1 id="设置ddns"><a href="#设置ddns" class="headerlink" title="设置ddns"></a>设置ddns</h1><p>进入lucky设置，打开左侧“动态域名”，点“添加任务”，任务名称随便填，操作模式：简易模式，托管服务商：cloudflare（我是用的这个），token到cloudflare网站上创建，复制过来。打开{ipv6Addr}后的开关，点添加同步记录，记录名填完整域名，记录类型选AAAA，记录内容{ipv6Addr}，再点最下面的”添加任务“，成功的话就会把ipv6地址关联到域名上。<br><img src="https://qs100371.vip/post-images/1751118406835.png"><br><img src="https://qs100371.vip/post-images/1751118418503.png"><br><img src="https://qs100371.vip/post-images/1751118423250.png"><br><img src="https://qs100371.vip/post-images/1751118428303.png"></p>
 <h1 id="申请SSL证书"><a href="#申请SSL证书" class="headerlink" title="申请SSL证书"></a>申请SSL证书</h1><p>打开左侧”SSL&#x2F;TLS证书“菜单，点添加证书，证书备注随便填，添加方式ACME，证书机构Let’sEncrypt，验证方式cloudflare，Token还是上面的token，域名列表填上面的域名，点最下面的添加，等几分钟就会生成证书。<br><img src="https://qs100371.vip/post-images/1751118915308.png"></p>
 <p><img src="https://qs100371.vip/post-images/1751118960306.png"></p>
