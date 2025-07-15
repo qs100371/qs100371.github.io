@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://qs100371.vip/post-images/1742384774082.webp">
 <meta property="og:image" content="https://qs100371.vip/post-images/1742381228395.webp">
 <meta property="article:published_time" content="2025-03-19T09:46:54.000Z">
-<meta property="article:modified_time" content="2025-06-27T11:18:58.633Z">
+<meta property="article:modified_time" content="2025-07-15T10:49:11.223Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="nas">
@@ -181,7 +181,7 @@
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-372-blue"><img
+          <img src="https://img.shields.io/badge/字数统计-377-blue"><img
             src="https://img.shields.io/badge/阅读时间-5分-green">
           
             
@@ -203,30 +203,13 @@
 <span id="more"></span>
 <p>Jellyfin可以将所有的电影、电视剧、动漫、漫画、书籍、音乐等放进去，然后在所有的平台上免费观看，进度是同步的。还可以设置「刮削器」，把影片信息从网上下载整理好放到旁边，整个过程是自动的。如果在通勤的路上想要看电影，Jellyfin也可以硬件加速转码，帮助提高视频流畅度，同时节省流量。</p>
 <h1 id="脚本安装"><a href="#脚本安装" class="headerlink" title="脚本安装"></a>脚本安装</h1><p><code>curl -s https://repo.jellyfin.org/install-debuntu.sh | bash</code></p>
-<blockquote>
-<p>Determining optimal repository settings.</p>
-</blockquote>
-<p>Found the following details from ‘&#x2F;etc&#x2F;os-release’:<br> Real OS:            debian<br> Repository OS:      debian<br> Repository Release: bookworm<br> CPU Architecture:   armhf<br>If this looks correct, press <Enter> now to continue installing Jellyfin.</p>
-<blockquote>
-<p>Fetching repository signing key.</p>
-</blockquote>
-<blockquote>
-<p>Installing Jellyfin repository into APT.</p>
-</blockquote>
-<p>Types: deb<br>URIs: <a href="https://repo.jellyfin.org/debian">https://repo.jellyfin.org/debian</a><br>Suites: bookworm<br>Components: main<br>Architectures: armhf<br>Signed-By: &#x2F;etc&#x2F;apt&#x2F;keyrings&#x2F;jellyfin.gpg<br> .<br> .<br> .</p>
-<p>You should see the service as ‘active (running)’ above. If not, use <a href="https://jellyfin.org/contact">https://jellyfin.org/contact</a> to find us for troubleshooting.</p>
-<p>You can access your new instance now at <a href="http://192.168.0.2:8096/">http://192.168.0.2:8096</a> in your web browser to finish setting up Jellyfin.</p>
-<p>Thank you for installing Jellyfin, and happy watching!</p>
-<blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt; Determining optimal repository settings.</span><br><span class="line"></span><br><span class="line"><span class="built_in">Found</span> the <span class="keyword">following</span> details <span class="keyword">from</span> <span class="string">&#x27;/etc/os-release&#x27;</span>:</span><br><span class="line"> <span class="type">Real</span> OS:            debian</span><br><span class="line"> Repository OS:      debian</span><br><span class="line"> Repository <span class="keyword">Release</span>: bookworm</span><br><span class="line"> CPU Architecture:   armhf</span><br><span class="line"><span class="keyword">If</span> this looks correct, press &lt;Enter&gt; now <span class="keyword">to</span> <span class="keyword">continue</span> installing Jellyfin.</span><br><span class="line"></span><br><span class="line">&gt; Fetching repository signing key.</span><br><span class="line"></span><br><span class="line">&gt; Installing Jellyfin repository <span class="keyword">into</span> APT.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Types</span>: deb</span><br><span class="line">URIs: https://repo.jellyfin.org/debian</span><br><span class="line">Suites: bookworm</span><br><span class="line">Components: main</span><br><span class="line">Architectures: armhf</span><br><span class="line">Signed-<span class="keyword">By</span>: /etc/apt/keyrings/jellyfin.gpg</span><br><span class="line"> .</span><br><span class="line"> .</span><br><span class="line"> .</span><br><span class="line"></span><br><span class="line">You should see the service <span class="keyword">as</span> <span class="string">&#x27;active (running)&#x27;</span> above. <span class="keyword">If</span> <span class="keyword">not</span>, use https://jellyfin.org/contact <span class="keyword">to</span> find us <span class="keyword">for</span> troubleshooting.</span><br><span class="line"></span><br><span class="line">You can <span class="keyword">access</span> your <span class="built_in">new</span> instance now at http://<span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span>:<span class="number">8096</span> <span class="keyword">in</span> your web browser <span class="keyword">to</span> finish setting up Jellyfin.</span><br><span class="line"></span><br><span class="line">Thank you <span class="keyword">for</span> installing Jellyfin, <span class="keyword">and</span> happy watching!</span><br></pre></td></tr></table></figure>
 <p>从ip:8096 访问</p>
-</blockquote>
 <p><img src="https://qs100371.vip/post-images/1733404168656.webp"><br><img src="https://qs100371.vip/post-images/1733404175190.webp"><br><img src="https://qs100371.vip/post-images/1733404181813.webp"></p>
 <p>电视源就是之前在本地建立的。</p>
 <h1 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker pull jellyfin/jellyfin:latest  <span class="comment"># or docker pull ghcr.io/jellyfin/jellyfin:latest</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /data/jellyfin/&#123;config,cache&#125;</span><br><span class="line"><span class="built_in">mkdir</span> /data/media</span><br><span class="line">docker run -d -v /data/jellyfin/config:/config \</span><br><span class="line">-v /data/jellyfin/cache:/cache -v /data/media:/media \</span><br><span class="line">--net=host jellyfin/jellyfin:latest </span><br></pre></td></tr></table></figure>
 <p>同样是从8096端口访问。<br><img src="https://qs100371.vip/post-images/1733405630235.webp"><br><img src="https://qs100371.vip/post-images/1742381208773.webp"><br><img src="https://qs100371.vip/post-images/1742381213949.webp"><br><img src="https://qs100371.vip/post-images/1742384767860.webp"><br><img src="https://qs100371.vip/post-images/1742384774082.webp"><br><img src="https://qs100371.vip/post-images/1742381228395.webp"></p>
-<blockquote>
-<p>jellyfin在windows、linux、armbian上都可以安装。</p>
-</blockquote>
+<p> jellyfin在windows、linux、armbian上都可以安装。</p>
 
                             
           </div>

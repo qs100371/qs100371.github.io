@@ -1,3 +1,5 @@
+https://qs100371.vip/post/gei-ubuntu-server-da-ge-ti-zi/
+https://qs100371.vip/post/an-zhuang-jellyfin/
 https://qs100371.vip/about/index.html
 https://qs100371.vip/post/docker-da-bao-yi-ge-php-huan-jing/
 https://qs100371.vip/post/an-zhuang-homeassistant/
@@ -20,7 +22,6 @@ https://qs100371.vip/post/cloudflare-tunnel-sshtcp-lian-jie-fang-shi/
 https://qs100371.vip/post/hexo-lanscape-sou-suo-gong-neng-de-gai-jin/
 https://qs100371.vip/post/immich-zi-tuo-guan-xiang-ce-fu-wu/
 https://qs100371.vip/post/ying-yin-bo-fang-xi-tong-emby/
-https://qs100371.vip/post/an-zhuang-jellyfin/
 https://qs100371.vip/post/docker-li-an-zhuang-zhen-zheng-neng-yong-de-fnos/
 https://qs100371.vip/post/docker-li-de-fei-niu-os/
 https://qs100371.vip/post/godoosnei-wang-ban-gong-cao-zuo-xi-tong/
@@ -183,7 +184,6 @@ https://qs100371.vip/post/mysqldump-de-shi-yong/
 https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/
 https://qs100371.vip/post/ru-he-gei-wang-zhan-tian-jia-zhong-ying-wen-qie-huan/
 https://qs100371.vip/post/crontab-ming-ling/
-https://qs100371.vip/post/gei-ubuntu-server-da-ge-ti-zi/
 https://qs100371.vip/post/yong-cloudflare-da-jian-jing-xiang-zhan/
 https://qs100371.vip/post/termux-proot-an-zhuang-ubuntu/
 https://qs100371.vip/post/cloudflare-tunnels-he-lucky-stun-chuan-tou-de-bi-jiao/
