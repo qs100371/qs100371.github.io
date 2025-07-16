@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B</title>
+      <link href="/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/"/>
+      <url>/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/</url>
+      
+        <content type="html"><![CDATA[<p>手上有小主机和移动盒子，一个是x86，一个是arm64，对比一下综合性能。</p><span id="more"></span><h1 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h1><table><thead><tr><th>项目</th><th>Intel Core i3-380M（2010年）</th><th>Amlogic S905L3B（电视盒子）</th><th>胜出方</th></tr></thead><tbody><tr><td>架构</td><td>Westmere（32nm，2核4线程）</td><td>Cortex-A55（12nm，4核4线程）</td><td>S905L3B</td></tr><tr><td>CPU单核性能</td><td>~400（Geekbench 5）</td><td>~150-200（预估）</td><td>i3-380M</td></tr><tr><td>CPU多核性能</td><td>~900（Geekbench 5）</td><td>~500-600（预估）</td><td>i3-380M</td></tr><tr><td>GPU性能</td><td>Intel HD（老旧，≈G31 MP2水平）</td><td>Mali-G31 MP2（稍优）</td><td>S905L3B</td></tr><tr><td>内存支持</td><td>DDR3（最大8GB）</td><td>DDR4&#x2F;LPDDR4（通常2GB）</td><td>i3-380M</td></tr><tr><td>存储</td><td>SATA HDD&#x2F;SSD</td><td>eMMC 5.1（较慢）</td><td>i3-380M</td></tr><tr><td>能效比</td><td>35W TDP（耗电高）</td><td>~5W（低功耗）</td><td>S905L3B</td></tr><tr><td>适用场景</td><td>老旧笔记本（Win7&#x2F;轻度办公）</td><td>4K视频播放&#x2F;安卓TV系统</td><td>不同用途</td></tr></tbody></table><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ul><li><p>CPU性能（日常任务、多线程）<br>i3-380M 胜出，单核和多核性能均领先（得益于x86架构和超线程）。<br>但S905L3B的能效比更高，适合低负载场景（如电视盒子）。</p></li><li><p>GPU性能（图形处理）<br>S905L3B 稍强（Mali-G31 MP2优化更好，支持4K HDR解码）。<br>i3-380M的核显仅适合基础显示输出，无法流畅解码4K。</p></li><li><p>实际体验<br>i3-380M：适合老旧Windows电脑（办公、网页），但已无法流畅运行现代软件（如Win11、Chrome多标签）。<br>S905L3B：专为电视盒子优化，4K视频播放流畅，但安卓系统限制，无法运行x86应用（如Photoshop、Steam游戏）。</p></li></ul><h1 id="最终选择建议"><a href="#最终选择建议" class="headerlink" title="最终选择建议"></a>最终选择建议</h1><p>需要轻度办公&#x2F;老旧Windows应用？ → 选i3-380M（但建议升级设备）。<br>主要用来看视频&#x2F;安卓应用？ → 选S905L3B（更省电、解码能力强）。<br>如果是想找“性能更强的设备”，两者都已过时，建议考虑现代处理器（如Intel N100、AMD Ryzen 3 7320U等）。</p><hr><p>本来想着arm64能跑docker迅雷，能用来作下载机，谁知道一下载系统就过载800%，省电倒是省电，也就是比玩客云(arm32)强一点。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nas </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Alger Music Player:一个强大的音乐播放器</title>
       <link href="/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/"/>
       <url>/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/</url>

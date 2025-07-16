@@ -5,17 +5,19 @@
   <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
 
   
-  <title>归档: 2025/1 | qs blog</title>
+  <title>综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B | qs blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="It&#39;s just a note, not a guide.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="qs blog">
-<meta property="og:url" content="https://qs100371.vip/archives/2025/01/page/2/index.html">
+  <meta name="description" content="手上有小主机和移动盒子，一个是x86，一个是arm64，对比一下综合性能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B">
+<meta property="og:url" content="https://qs100371.vip/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/index.html">
 <meta property="og:site_name" content="qs blog">
-<meta property="og:description" content="It&#39;s just a note, not a guide.">
+<meta property="og:description" content="手上有小主机和移动盒子，一个是x86，一个是arm64，对比一下综合性能。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-16T09:39:47.000Z">
+<meta property="article:modified_time" content="2025-07-16T09:51:12.065Z">
 <meta property="article:author" content="qs100371">
-<meta property="article:tag" content="linux onecloud armbian docker 学习笔记 个人博客">
+<meta property="article:tag" content="nas">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
@@ -149,252 +151,162 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-  
-    
+        <section id="main"><article id="post-zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/" class="article-date">
+  <time class="dt-published" datetime="2025-07-16T09:39:47.000Z" itemprop="datePublished">2025-07-16</time>
+</a>
+      
+  </div>
+  <div class="article-inner">
     
       
-      
-      <section class="archives-wrap">
+        <header class="article-header">
+          
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B
+        </h1>
+        <hr>
         
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-24T12:23:40.000Z" itemprop="datePublished">1月 24</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/">
-          ubuntu server上qemu搭建arm64平台
-        </a>
-      </h1>
-      
+          <img src="https://img.shields.io/badge/字数统计-481-blue"><img
+            src="https://img.shields.io/badge/阅读时间-5分-green">
+          
+            
               
-    </header>
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+
+                      
+                        <div id="toc" class="toc-article">
+                          <strong class="toc-title">目录</strong>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94"><span class="toc-number">1.</span> <span class="toc-text">性能对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E9%80%89%E6%8B%A9%E5%BB%BA%E8%AE%AE"><span class="toc-number">3.</span> <span class="toc-text">最终选择建议</span></a></li></ol>
+                        </div>
+                        
+                          <!-- Table of Contents -->
+                          <p>手上有小主机和移动盒子，一个是x86，一个是arm64，对比一下综合性能。</p>
+<span id="more"></span>
+<h1 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h1><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>Intel Core i3-380M（2010年）</th>
+<th>Amlogic S905L3B（电视盒子）</th>
+<th>胜出方</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>架构</td>
+<td>Westmere（32nm，2核4线程）</td>
+<td>Cortex-A55（12nm，4核4线程）</td>
+<td>S905L3B</td>
+</tr>
+<tr>
+<td>CPU单核性能</td>
+<td>~400（Geekbench 5）</td>
+<td>~150-200（预估）</td>
+<td>i3-380M</td>
+</tr>
+<tr>
+<td>CPU多核性能</td>
+<td>~900（Geekbench 5）</td>
+<td>~500-600（预估）</td>
+<td>i3-380M</td>
+</tr>
+<tr>
+<td>GPU性能</td>
+<td>Intel HD（老旧，≈G31 MP2水平）</td>
+<td>Mali-G31 MP2（稍优）</td>
+<td>S905L3B</td>
+</tr>
+<tr>
+<td>内存支持</td>
+<td>DDR3（最大8GB）</td>
+<td>DDR4&#x2F;LPDDR4（通常2GB）</td>
+<td>i3-380M</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>SATA HDD&#x2F;SSD</td>
+<td>eMMC 5.1（较慢）</td>
+<td>i3-380M</td>
+</tr>
+<tr>
+<td>能效比</td>
+<td>35W TDP（耗电高）</td>
+<td>~5W（低功耗）</td>
+<td>S905L3B</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>老旧笔记本（Win7&#x2F;轻度办公）</td>
+<td>4K视频播放&#x2F;安卓TV系统</td>
+<td>不同用途</td>
+</tr>
+</tbody></table>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ul>
+<li><p>CPU性能（日常任务、多线程）<br>i3-380M 胜出，单核和多核性能均领先（得益于x86架构和超线程）。<br>但S905L3B的能效比更高，适合低负载场景（如电视盒子）。</p>
+</li>
+<li><p>GPU性能（图形处理）<br>S905L3B 稍强（Mali-G31 MP2优化更好，支持4K HDR解码）。<br>i3-380M的核显仅适合基础显示输出，无法流畅解码4K。</p>
+</li>
+<li><p>实际体验<br>i3-380M：适合老旧Windows电脑（办公、网页），但已无法流畅运行现代软件（如Win11、Chrome多标签）。<br>S905L3B：专为电视盒子优化，4K视频播放流畅，但安卓系统限制，无法运行x86应用（如Photoshop、Steam游戏）。</p>
+</li>
+</ul>
+<h1 id="最终选择建议"><a href="#最终选择建议" class="headerlink" title="最终选择建议"></a>最终选择建议</h1><p>需要轻度办公&#x2F;老旧Windows应用？ → 选i3-380M（但建议升级设备）。<br>主要用来看视频&#x2F;安卓应用？ → 选S905L3B（更省电、解码能力强）。<br>如果是想找“性能更强的设备”，两者都已过时，建议考虑现代处理器（如Intel N100、AMD Ryzen 3 7320U等）。</p>
+<hr>
+<p>本来想着arm64能跑docker迅雷，能用来作下载机，谁知道一下载系统就过载800%，省电倒是省电，也就是比玩客云(arm32)强一点。</p>
+
+                            
+          </div>
+
+          <footer class="article-footer">
+
+            
+              <!--<a data-url="https://qs100371.vip/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/" data-id="cmd5s7ini0000kwtz1bhz44yn" data-title="综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B"
+                class="article-share-link"><span class="fa fa-share">
+                  分享
+                </span></a>-->
+              
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nas/" rel="tag">nas</a></li></ul>
+
+
+                <a href="/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/#comments" class="article-comment-link">
+                  <span class="post-comments-count valine-comment-count fa fa-comment"
+                    data-xid="/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/" itemprop="commentCount"></span>
+                  留言
+                </a>
+                <!--<span id="/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/" class="leancloud_visitors" data-flag-title="综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B">
+                  <span class="leancloud-visitors-count  fa fa-eye">
+                  </span>
+                </span>-->
+
+                
+
+          </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/post/alger-music-playeryi-ge-qiang-da-de-yin-le-bo-fang-qi/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Alger Music Player:一个强大的音乐播放器</div>
+    </a>
+  
+</nav>
+
+      
 </article>
 
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-24T12:12:37.000Z" itemprop="datePublished">1月 24</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/yi-ge-fang-wei-xin-peng-you-quan-de-xiang-mu-moments/">
-          一个仿微信朋友圈的项目moments
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
+  <section id="comments" class="vcomment">
 
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-24T03:30:21.000Z" itemprop="datePublished">1月 24</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/ubuntu-shang-xiu-gai-xi-tong-shi-qu-de-fang-fa/">
-          Ubuntu上修改系统时区的方法
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/linux-yun-wei-ming-ling/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-20T01:14:49.000Z" itemprop="datePublished">1月 20</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/linux-yun-wei-ming-ling/">
-          Linux 运维命令
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-16T09:46:01.000Z" itemprop="datePublished">1月 16</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/">
-          apache2开启地址重写功能
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/docker-bu-shu-photoprismshi-bai/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-13T11:00:35.000Z" itemprop="datePublished">1月 13</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/docker-bu-shu-photoprismshi-bai/">
-          docker部署photoprism: 失败
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/docker-bu-shu-wordpress/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-12T07:42:34.000Z" itemprop="datePublished">1月 12</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/docker-bu-shu-wordpress/">
-          docker部署wordpress
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/termux-xia-de-nginx/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-10T14:24:55.000Z" itemprop="datePublished">1月 10</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/termux-xia-de-nginx/">
-          termux下的nginx
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/docker-bu-shu-typecho/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-10T02:12:44.000Z" itemprop="datePublished">1月 10</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/docker-bu-shu-typecho/">
-          docker部署typecho
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/post/termux-zhong-yong-qemu-an-zhuang-debian/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-01-08T07:53:04.000Z" itemprop="datePublished">1月 8</time>
-</a>
-      
-    
-      <h1 itemprop="name">
-        <a class="archive-article-title" href="/post/termux-zhong-yong-qemu-an-zhuang-debian/">
-          termux中用qemu安装debian
-        </a>
-      </h1>
-      
-              
-    </header>
-  </div>
-</article>
-
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/2025/01/">&laquo; 上一页</a><a class="page-number" href="/archives/2025/01/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2025/01/page/3/">3</a><a class="page-number" href="/archives/2025/01/page/4/">4</a><a class="extend next" rel="next" href="/archives/2025/01/page/3/">下一页 &raquo;</a>
-  </nav>
-
-
-
-</section>
+  </section>
+  </section>
         
       </div>
       <footer id="footer">
