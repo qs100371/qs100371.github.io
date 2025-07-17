@@ -96,23 +96,6 @@
 <div id="local-search-result"
     style="opacity: 0.85; background-color: lightyellow; position: relative; top: 50px; border-radius: 5px;">
 </div>
-
-<div class="article-entry"><span id="poem-container">正在加载....</span></div>
-<script>
-    function loadRandomContent() {
-        fetch('https://qmgrkifk.ap-northeast-1.clawcloudrun.com/songci.php')
-            .then(response => response.text())
-            .then(text => {
-                document.getElementById('poem-container').innerText = text;
-            })
-            .catch(error => {
-                document.getElementById('poem-container').innerText = '404';
-            });
-    }
-
-    // 页面加载时自动获取一次
-    loadRandomContent();
-</script>
 <style>
     /* CDN字体引入 */
     @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css');
@@ -172,6 +155,23 @@
         color: #999;
     }
 </style>
+<div class="article-entry"><span id="poem-container">正在加载....</span></div>
+<script>
+    function loadRandomContent() {
+        fetch('https://qmgrkifk.ap-northeast-1.clawcloudrun.com/songci.php')
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('poem-container').innerText = text;
+            })
+            .catch(error => {
+                document.getElementById('poem-container').innerText = '404';
+            });
+    }
+
+    // 页面加载时自动获取一次
+    loadRandomContent();
+</script>
+
 
 
 
