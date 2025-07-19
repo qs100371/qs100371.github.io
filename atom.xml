@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-07-19T14:40:20.254Z</updated>
+  <updated>2025-07-19T15:08:33.722Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>onedrive一直登录不上去怎么办?</title>
+    <link href="https://qs100371.vip/post/onedrive-yi-zhi-deng-lu-bu-shang-qu-zen-me-ban/"/>
+    <id>https://qs100371.vip/post/onedrive-yi-zhi-deng-lu-bu-shang-qu-zen-me-ban/</id>
+    <published>2025-07-19T14:59:44.000Z</published>
+    <updated>2025-07-19T15:08:33.722Z</updated>
+    
+    <content type="html"><![CDATA[<p>onedrive同步文件很好用，但也经常抽风，无法登录，这里是官方给出的解决方案。</p><span id="more"></span><h1 id="重置-OneDrive"><a href="#重置-OneDrive" class="headerlink" title="重置 OneDrive"></a>重置 OneDrive</h1><p>在cmd窗口运行：<br><code>%localappdata%\Microsoft\OneDrive\onedrive.exe /reset</code></p><h1 id="手动启动OneDrive"><a href="#手动启动OneDrive" class="headerlink" title="手动启动OneDrive"></a>手动启动OneDrive</h1><p>重新登录帐户，选择原来的文件保存位置，onedrive会显示正在处理xxxx更改。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;onedrive同步文件很好用，但也经常抽风，无法登录，这里是官方给出的解决方案。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>上传镜像到dockerhub</title>
@@ -377,25 +396,6 @@
     
     
     <summary type="html">&lt;p&gt;在HeoMusic里使用了Meting API，研究一下，发现在可以用来在网页上放置音乐播放模块。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在线工具集:it-tools</title>
-    <link href="https://qs100371.vip/post/zai-xian-gong-ju-ji-it-tools/"/>
-    <id>https://qs100371.vip/post/zai-xian-gong-ju-ji-it-tools/</id>
-    <published>2025-05-13T08:00:02.000Z</published>
-    <updated>2025-05-13T08:14:48.484Z</updated>
-    
-    <content type="html"><![CDATA[<p>it-tools是一个为开发人员提供的一组实用的在线工具集合。可以docker部署，方便使用。</p><span id="more"></span><p>项目地址：<a href="https://github.com/CorentinTh/it-tools">CorentinTh&#x2F;it-tools</a></p><h1 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h1><p><code>docker run -d --name it-tools --restart unless-stopped -p 8080:80 ghcr.io/corentinth/it-tools:latest</code><br><img src="https://qs100371.vip/post-images/1747123982168.webp"></p><h1 id="工具列表"><a href="#工具列表" class="headerlink" title="工具列表"></a>工具列表</h1><ul><li>加密<br>Token 生成器<br>Hash 文本<br>加密<br>UUIDs 生成器<br>ULID 生成器<br>加密&#x2F;解密文本<br>BIP39密码生成器<br>Hmac 生成器<br>RSA密钥对生成器<br>密码强度分析仪<br>PDF签名检查器</li><li>转换器<br>日期时间转换器<br>整数基转换器<br>罗马数字转换器<br>Base64 字符串编码&#x2F;解码<br>Base64 文件转换器<br>Color 选择器<br>大小写转换<br>文本转北约字母表<br>文本到 ASCII 二进制<br>文本转 Unicode<br>YAML到JSON转换器<br>YAML 到 TOML<br>JSON到YAML转换器<br>JSON 转 TOML<br>List 转换器<br>TOML 到 JSON<br>TOML 到 YAML<br>XML to JSON<br>JSON to XML<br>Markdown to HTML</li><li>Web<br>编码&#x2F;解码url格式的字符串<br>转义html实体<br>Url分析器<br>设备信息<br>基本身份验证生成器<br>开放式图形元生成器<br>OTP代码生成器<br>mime类型<br>JWT 解析器<br>Keycode 信息<br>打乱字符串<br>HTML所见即所得编辑器<br>用户代理分析器<br>HTTP 状态码<br>JSON 差异比较<br>Outlook Safelink decoder</li><li>图片和视频<br>二维码生成器<br>WiFi 二维码生成器<br>SVG 占位符生成器<br>摄像机记录器</li><li>开发<br>Git 备忘录<br>随机端口生成<br>Crontab 表达式生成<br>JSON美化和格式化<br>JSON 压缩<br>JSON 转 CSV<br>SQL 美化和格式化<br>Chmod 计算器<br>Docker Run 到 docker-compose 转换器<br>XML 格式化<br>YAML美化和格式化<br>Email normalizer<br>Regex Tester<br>Regex cheatsheet</li><li>网络<br>IPv4子网计算器<br>Ipv4地址转换器<br>IPv4范围扩展器<br>MAC地址查找<br>MAC 地址生成器<br>IPv6 ULA生成器</li><li>数学<br>数学计算器<br>ETA 计算器<br>百分比计算器</li><li>测量<br>计时器<br>温度转换器<br>基准生成器</li><li>文本<br>Lorem ipsum生成器<br>文本统计<br>Emoji 选择器<br>字符串混淆器<br>文本比较<br>数字名称生成器<br>ASCII Art Text Generator</li><li>数据<br>电话分析器和格式化程序<br>IBAN验证器和解析器</li></ul><p>Gravatar地址里的md5值就可以用hash工具来计算，url转义和docker cli和docker compose相互转换也很常用。<br><img src="https://qs100371.vip/post-images/1747124011668.webp"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;it-tools是一个为开发人员提供的一组实用的在线工具集合。可以docker部署，方便使用。&lt;/p&gt;</summary>
     
     
     

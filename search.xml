@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>onedrive一直登录不上去怎么办?</title>
+      <link href="/post/onedrive-yi-zhi-deng-lu-bu-shang-qu-zen-me-ban/"/>
+      <url>/post/onedrive-yi-zhi-deng-lu-bu-shang-qu-zen-me-ban/</url>
+      
+        <content type="html"><![CDATA[<p>onedrive同步文件很好用，但也经常抽风，无法登录，这里是官方给出的解决方案。</p><span id="more"></span><h1 id="重置-OneDrive"><a href="#重置-OneDrive" class="headerlink" title="重置 OneDrive"></a>重置 OneDrive</h1><p>在cmd窗口运行：<br><code>%localappdata%\Microsoft\OneDrive\onedrive.exe /reset</code></p><h1 id="手动启动OneDrive"><a href="#手动启动OneDrive" class="headerlink" title="手动启动OneDrive"></a>手动启动OneDrive</h1><p>重新登录帐户，选择原来的文件保存位置，onedrive会显示正在处理xxxx更改。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>上传镜像到dockerhub</title>
       <link href="/post/shang-chuan-jing-xiang-dao-dockerhub/"/>
       <url>/post/shang-chuan-jing-xiang-dao-dockerhub/</url>
