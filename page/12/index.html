@@ -36,6 +36,67 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+ <style>
+    /* CDN字体引入 */
+    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css');
+    @import url('https://cdn.jsdelivr.net/npm/hanzi-writer-fonts@0.2.0/KaiTi/result.css');
+
+    /* 古籍容器样式 */
+    #poem-container {
+        font-family: "LXGW WenKai", "汉仪楷体", serif;
+        background: #f8f4e6 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03"><rect width="100" height="100" fill="none" stroke="black" stroke-width="1"/></svg>');
+        padding: 1rem 1rem;
+        font-size: 1rem;
+        line-height: 2;
+        letter-spacing: 0.3em;
+        text-align: left;
+        color: #333;
+        border-radius: 2px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* 传统装饰元素 */
+    #poem-container::before {
+        content: "";
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        height: 1px;
+        background: linear-gradient(to right, transparent 10%, #c9a782 50%, transparent 90%);
+    }
+
+    #poem-container::after {
+        content: "❦";
+        position: absolute;
+        bottom: 0.5rem;
+        right: 1.5rem;
+        color: #a67c52;
+        font-size: 1.2em;
+    }
+
+    /* 加载状态优化 */
+    #poem-container:empty::before,
+    #poem-container:empty::after {
+        display: none;
+    }
+
+    #poem-container:empty {
+        background-image: none;
+        justify-content: flex-start;
+        font-family: system-ui;
+        color: #999;
+    }
+</style>
+
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -96,69 +157,10 @@
 <div id="local-search-result"
     style="opacity: 0.85; background-color: lightyellow; position: relative; top: 50px; border-radius: 5px;">
 </div>
-<style>
-    /* CDN字体引入 */
-    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css');
-    @import url('https://cdn.jsdelivr.net/npm/hanzi-writer-fonts@0.2.0/KaiTi/result.css');
-
-    /* 古籍容器样式 */
-    #poem-container {
-        font-family: "LXGW WenKai", "汉仪楷体", serif;
-        background: #f8f4e6 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03"><rect width="100" height="100" fill="none" stroke="black" stroke-width="1"/></svg>');
-        padding: 1rem 1rem;
-        font-size: 1rem;
-        line-height: 2;
-        letter-spacing: 0.3em;
-        text-align: left;
-        color: #333;
-        border-radius: 2px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-        max-width: 600px;
-        margin: 0 auto;
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    /* 传统装饰元素 */
-    #poem-container::before {
-        content: "";
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        right: 1rem;
-        height: 1px;
-        background: linear-gradient(to right, transparent 10%, #c9a782 50%, transparent 90%);
-    }
-
-    #poem-container::after {
-        content: "❦";
-        position: absolute;
-        bottom: 0.5rem;
-        right: 1.5rem;
-        color: #a67c52;
-        font-size: 1.2em;
-    }
-
-    /* 加载状态优化 */
-    #poem-container:empty::before,
-    #poem-container:empty::after {
-        display: none;
-    }
-
-    #poem-container:empty {
-        background-image: none;
-        justify-content: flex-start;
-        font-family: system-ui;
-        color: #999;
-    }
-</style>
 <div class="article-entry"><span id="poem-container">正在加载....</span></div>
 <script>
     function loadRandomContent() {
-        fetch('https://qmgrkifk.ap-northeast-1.clawcloudrun.com/songci.php')
+        fetch('https://api.qs100371.vip/songci.php')
             .then(response => response.text())
             .then(text => {
                 document.getElementById('poem-container').innerText = text;
@@ -174,6 +176,66 @@
 
 
 
+
+  
+    <article id="post-typecho-kai-qi-di-zhi-chong-xie-gong-neng" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" class="article-date">
+  <time class="dt-published" datetime="2025-01-16T09:46:01.000Z" itemprop="datePublished">2025-01-16</time>
+</a>
+      
+  </div>
+  <div class="article-inner">
+    
+      
+        <header class="article-header">
+          
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/">
+          apache2开启地址重写功能
+        </a>
+      </h1>
+      
+              
+        </header>
+        
+
+          <div class="e-content article-entry" itemprop="articleBody">
+            
+              <p>typecho缺省网页地址是<code>/index.php/archives/&#123;slug&#125;.html</code>的形式，在设置-永久链接设置里，启用地址重写功能，就能变成<code>/archives/&#123;cid&#125;/</code>或<code>/archives/&#123;slug&#125;.html</code>，让链接看上去完全是静态地址。这需要服务器打开rewrite功能。本文记录了打开过程。</p>
+                
+                    
+          </div>
+
+          <footer class="article-footer">
+
+            
+              <!--<a data-url="https://qs100371.vip/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" data-id="cmd7jbwmt008fw4tz5j870lqy" data-title="apache2开启地址重写功能"
+                class="article-share-link"><span class="fa fa-share">
+                  分享
+                </span></a>-->
+              
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+
+                <a href="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/#comments" class="article-comment-link">
+                  <span class="post-comments-count valine-comment-count fa fa-comment"
+                    data-xid="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" itemprop="commentCount"></span>
+                  留言
+                </a>
+                <!--<span id="/post/typecho-kai-qi-di-zhi-chong-xie-gong-neng/" class="leancloud_visitors" data-flag-title="apache2开启地址重写功能">
+                  <span class="leancloud-visitors-count  fa fa-eye">
+                  </span>
+                </span>-->
+
+                
+
+          </footer>
+  </div>
+  
+</article>
 
   
     <article id="post-docker-bu-shu-photoprismshi-bai" class="h-entry article article-type-post"
@@ -716,66 +778,6 @@
 </article>
 
   
-    <article id="post-alpine-term-zhong-an-zhuang-docker" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/alpine-term-zhong-an-zhuang-docker/" class="article-date">
-  <time class="dt-published" datetime="2025-01-06T14:04:43.000Z" itemprop="datePublished">2025-01-06</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/alpine-term-zhong-an-zhuang-docker/">
-          alpine term中安装docker
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>termux-qemu-alpine，一步一步安装，才是真正的linux。有人把Termux+Qemu+Alpine整合好了，名为alpine-term，开箱即用，安装一个apk打开就是配置完全的alpine linux。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <!--<a data-url="https://qs100371.vip/post/alpine-term-zhong-an-zhuang-docker/" data-id="cmd7jbwlf0008w4tz1cc72xky" data-title="alpine term中安装docker"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>-->
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-
-                <a href="/post/alpine-term-zhong-an-zhuang-docker/#comments" class="article-comment-link">
-                  <span class="post-comments-count valine-comment-count fa fa-comment"
-                    data-xid="/post/alpine-term-zhong-an-zhuang-docker/" itemprop="commentCount"></span>
-                  留言
-                </a>
-                <!--<span id="/post/alpine-term-zhong-an-zhuang-docker/" class="leancloud_visitors" data-flag-title="alpine term中安装docker">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                
-
-          </footer>
-  </div>
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -794,7 +796,7 @@
           <div id="footer-info" class="inner">
             <span class="post-count"><img id="site-days-badge" src=""><img
                 src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-              <img src="https://img.shields.io/badge/共- 82.5k 字-green">
+              <img src="https://img.shields.io/badge/共- 83.6k 字-green">
               <img id="load-time-badge" src=""><br>
               <i class="fa fa-cc-by" aria-hidden="true"></i>
                 All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>

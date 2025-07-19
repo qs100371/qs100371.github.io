@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>试用阿里云ecs</title>
+      <link href="/post/shi-yong-a-li-yun-ecs/"/>
+      <url>/post/shi-yong-a-li-yun-ecs/</url>
+      
+        <content type="html"><![CDATA[<p>华为云和阿里云很早就注册了，看着手续复杂，就只停留在登录进去，没有使用。前几天以为现在的域名快到期了（以为十月到期，其实去年十二月才注册的域名，之前一直用的github.io），花一元注册了一个阿里云的域名，看见有个试用ecs3个月，就试了试，这里记录了踩坑的过程。</p><span id="more"></span><h1 id="未备案的问题"><a href="#未备案的问题" class="headerlink" title="未备案的问题"></a>未备案的问题</h1><p>试用的ecs是2vCPU和2G内存，服务器可选国内和香港。一开始选了个北京的服务器，系统分配了一个公网的ipv4地址，没有v6地址，绑定到阿里云注册的域名，开通了80端口，一访问，直接不合规，要求备案。于是删掉了，重新选择了一个香港的服务器，ubuntu2204，免费公网流量20GB&#x2F;月，非内地流量200GB&#x2F;月，宝塔面板，100M带宽。进入到管理界面，重置密码，设定ssh登录密码，就可以ssh用ip地址登录，进行接下来的设置工作了。</p><h1 id="宝塔面板"><a href="#宝塔面板" class="headerlink" title="宝塔面板"></a>宝塔面板</h1><p>用ssh登录，试着用docker安装脚本，发现连不上github，无法直接安装docker-ce。从ip:8888进入到宝塔界面，安装docker，很顺利完成，可能用了自设的国内代理。宝塔访问的地址栏上是https，但是上面有一个删除线，原来是ssl没有设定。之前ssl证书是从lucky上申请的，这里也一样，从宝塔上安装lucky，结果用ip:16601访问，提示无法从外网访问，需要更改设置，在宝塔上安装lucky时，分明是选中开启外网访问的。平常的局域网上使用，直接内网地址，很容易就改了的。这里用cpolar，已经有帐号了，登录cpolar，打开连接提示，下载linux端软件，用sftp传到服务器上，ssh运行cpolar建立隧道，再从cpolar网站上分配的随机域名进入lucky设置，打开外网访问开关，保存设置。进入lucky，申请ssl证书并下载证书，得到一个名为域名.zip的文件，解压得到4个文件，其中.key是私钥，.pem是证书，都可以用记事本打开。<br>宝塔访问有用户名和密码，可以ssh进入服务器，运行bt 14查看默认信息。<br><img src="https://qs100371.vip/post-images/1752893189053.png"><br><img src="https://qs100371.vip/post-images/1752893195485.png"><br>直接运行bt，会显示菜单，能设置面板的各种信息。面板密码只会显示一次，第一次登录后必须修改，忘记了就直接bt 5重置并修改密码，用户名要从web界面修改。还有安全入口，设成一个好记的长度最少为6的字符串。之后访问地址为ip:8888&#x2F;字符串。这里把域名的a记录设成了ecs的公网地址，这样可以从域名访问面板，宝塔里打开从域名访问开关。如果出问题，可以从ssh重置宝塔设置。<br><img src="https://qs100371.vip/post-images/1752893458647.png"></p><h1 id="ssl设置"><a href="#ssl设置" class="headerlink" title="ssl设置"></a>ssl设置</h1><p>现在的网站，没有ssl证书是不行的。先打开宝塔面板，进入设置，面板ssl设置，把前面下载的ssl证书中的.key和.pem内容粘贴到相应的位置，保存。再用域名访问面板，浏览器地址栏上就有带锁的标志，https生效了。<br><img src="https://qs100371.vip/post-images/1752893487853.png"><br>打开宝塔面板，网站，添加站点，打开设置，ssl，let’s encrypt，申请证书，生效后就可以用https访问网站了。这里的证书就是前面设置的证书。<br><img src="https://qs100371.vip/post-images/1752893494163.png"><br><img src="https://qs100371.vip/post-images/1752893500585.png"></p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>家庭内网采用的lucky ssl方案，是在lucky里申请证书，再设置web服务，监听端口，设置转发到指定端口，进行反向代理，就变成https，无需操作证书文件。<br>阿里云控制面板里也有ssl证书申请，步骤不一样。宝塔面板里也有证书申请。<br>由于选用的香港服务器，域名没有使用阿里云管理的域名，没有备案的限制。<br>阿里云ecs是一个ubuntu服务器再加上阿里云管理系统，在阿里云控制面板设置开放端口时，有时还不生效，似乎要先关闭ubuntu的访火墙，<code>ufw disable</code>，至于安全问题，不是现在要考虑的。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B</title>
       <link href="/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/"/>
       <url>/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/</url>

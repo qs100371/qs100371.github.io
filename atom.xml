@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-07-16T09:51:12.065Z</updated>
+  <updated>2025-07-19T02:57:49.541Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>试用阿里云ecs</title>
+    <link href="https://qs100371.vip/post/shi-yong-a-li-yun-ecs/"/>
+    <id>https://qs100371.vip/post/shi-yong-a-li-yun-ecs/</id>
+    <published>2025-07-19T01:51:11.000Z</published>
+    <updated>2025-07-19T02:57:49.541Z</updated>
+    
+    <content type="html"><![CDATA[<p>华为云和阿里云很早就注册了，看着手续复杂，就只停留在登录进去，没有使用。前几天以为现在的域名快到期了（以为十月到期，其实去年十二月才注册的域名，之前一直用的github.io），花一元注册了一个阿里云的域名，看见有个试用ecs3个月，就试了试，这里记录了踩坑的过程。</p><span id="more"></span><h1 id="未备案的问题"><a href="#未备案的问题" class="headerlink" title="未备案的问题"></a>未备案的问题</h1><p>试用的ecs是2vCPU和2G内存，服务器可选国内和香港。一开始选了个北京的服务器，系统分配了一个公网的ipv4地址，没有v6地址，绑定到阿里云注册的域名，开通了80端口，一访问，直接不合规，要求备案。于是删掉了，重新选择了一个香港的服务器，ubuntu2204，免费公网流量20GB&#x2F;月，非内地流量200GB&#x2F;月，宝塔面板，100M带宽。进入到管理界面，重置密码，设定ssh登录密码，就可以ssh用ip地址登录，进行接下来的设置工作了。</p><h1 id="宝塔面板"><a href="#宝塔面板" class="headerlink" title="宝塔面板"></a>宝塔面板</h1><p>用ssh登录，试着用docker安装脚本，发现连不上github，无法直接安装docker-ce。从ip:8888进入到宝塔界面，安装docker，很顺利完成，可能用了自设的国内代理。宝塔访问的地址栏上是https，但是上面有一个删除线，原来是ssl没有设定。之前ssl证书是从lucky上申请的，这里也一样，从宝塔上安装lucky，结果用ip:16601访问，提示无法从外网访问，需要更改设置，在宝塔上安装lucky时，分明是选中开启外网访问的。平常的局域网上使用，直接内网地址，很容易就改了的。这里用cpolar，已经有帐号了，登录cpolar，打开连接提示，下载linux端软件，用sftp传到服务器上，ssh运行cpolar建立隧道，再从cpolar网站上分配的随机域名进入lucky设置，打开外网访问开关，保存设置。进入lucky，申请ssl证书并下载证书，得到一个名为域名.zip的文件，解压得到4个文件，其中.key是私钥，.pem是证书，都可以用记事本打开。<br>宝塔访问有用户名和密码，可以ssh进入服务器，运行bt 14查看默认信息。<br><img src="https://qs100371.vip/post-images/1752893189053.png"><br><img src="https://qs100371.vip/post-images/1752893195485.png"><br>直接运行bt，会显示菜单，能设置面板的各种信息。面板密码只会显示一次，第一次登录后必须修改，忘记了就直接bt 5重置并修改密码，用户名要从web界面修改。还有安全入口，设成一个好记的长度最少为6的字符串。之后访问地址为ip:8888&#x2F;字符串。这里把域名的a记录设成了ecs的公网地址，这样可以从域名访问面板，宝塔里打开从域名访问开关。如果出问题，可以从ssh重置宝塔设置。<br><img src="https://qs100371.vip/post-images/1752893458647.png"></p><h1 id="ssl设置"><a href="#ssl设置" class="headerlink" title="ssl设置"></a>ssl设置</h1><p>现在的网站，没有ssl证书是不行的。先打开宝塔面板，进入设置，面板ssl设置，把前面下载的ssl证书中的.key和.pem内容粘贴到相应的位置，保存。再用域名访问面板，浏览器地址栏上就有带锁的标志，https生效了。<br><img src="https://qs100371.vip/post-images/1752893487853.png"><br>打开宝塔面板，网站，添加站点，打开设置，ssl，let’s encrypt，申请证书，生效后就可以用https访问网站了。这里的证书就是前面设置的证书。<br><img src="https://qs100371.vip/post-images/1752893494163.png"><br><img src="https://qs100371.vip/post-images/1752893500585.png"></p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>家庭内网采用的lucky ssl方案，是在lucky里申请证书，再设置web服务，监听端口，设置转发到指定端口，进行反向代理，就变成https，无需操作证书文件。<br>阿里云控制面板里也有ssl证书申请，步骤不一样。宝塔面板里也有证书申请。<br>由于选用的香港服务器，域名没有使用阿里云管理的域名，没有备案的限制。<br>阿里云ecs是一个ubuntu服务器再加上阿里云管理系统，在阿里云控制面板设置开放端口时，有时还不生效，似乎要先关闭ubuntu的访火墙，<code>ufw disable</code>，至于安全问题，不是现在要考虑的。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;华为云和阿里云很早就注册了，看着手续复杂，就只停留在登录进去，没有使用。前几天以为现在的域名快到期了（以为十月到期，其实去年十二月才注册的域名，之前一直用的github.io），花一元注册了一个阿里云的域名，看见有个试用ecs3个月，就试了试，这里记录了踩坑的过程。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
+    
+    <category term="linux" scheme="https://qs100371.vip/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B</title>
@@ -380,25 +401,6 @@
     
     
     <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>清除linux多余的内核</title>
-    <link href="https://qs100371.vip/post/qing-chu-linux-duo-yu-de-nei-he/"/>
-    <id>https://qs100371.vip/post/qing-chu-linux-duo-yu-de-nei-he/</id>
-    <published>2025-05-08T12:46:46.000Z</published>
-    <updated>2025-05-08T13:35:19.085Z</updated>
-    
-    <content type="html"><![CDATA[<p>随着linux系统的升级，磁盘空间越来越紧张，本文记录了删除多余的内核，找回可用空间的方法。</p><span id="more"></span><h1 id="列出已安装内核"><a href="#列出已安装内核" class="headerlink" title="列出已安装内核"></a>列出已安装内核</h1><ul><li>sudo apt list –installed | grep linux-image<br>输出：<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">WARNING</span>: apt does not have a stable CLI interface. Use with caution in scripts.</span><br><span class="line"></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">25</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">106</span>-<span class="number">3</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">27</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">115</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">30</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">124</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">32</span>-amd64/stable,now <span class="number">6</span>.<span class="number">1</span>.<span class="number">129</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，自动]</span></span><br><span class="line"><span class="attribute">linux</span>-image-amd64/stable,now <span class="number">6</span>.<span class="number">1</span>.<span class="number">129</span>-<span class="number">1</span> amd64<span class="meta"> [已安装]</span></span><br></pre></td></tr></table></figure></li><li>sudo dpkg –get-selections | grep linux-image<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">25</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">27</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">30</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">32</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-amd64install</span><br></pre></td></tr></table></figure></li></ul><h1 id="查看当前所用内核版本"><a href="#查看当前所用内核版本" class="headerlink" title="查看当前所用内核版本"></a>查看当前所用内核版本</h1><p><code>uname -a</code></p><h1 id="删除多余内核"><a href="#删除多余内核" class="headerlink" title="删除多余内核"></a>删除多余内核</h1><p>先重启以启动最新版内核，确认没问题就可以开始清除多余的内核。</p><ul><li>sudo apt remove linux-image-6.1.0-25*<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 完成</span><br><span class="line">正在分析软件包的依赖关系树... 完成</span><br><span class="line">正在读取状态信息... 完成                 </span><br><span class="line">注意，根据Glob &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>*&#x27; 选中了 &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64-unsigned&#x27;</span><br><span class="line">注意，根据Glob &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>*&#x27; 选中了 &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64&#x27;</span><br><span class="line">软件包 linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64-unsigned 未安装，所以不会被卸载</span><br><span class="line">下列软件包是自动安装的并且现在不需要了：</span><br><span class="line">  linux-compiler-gcc<span class="string">-12</span>-x86 linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64</span><br><span class="line">  linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-common linux-image<span class="string">-6</span>.1.0<span class="string">-27</span>-amd64 linux-kbuild<span class="string">-6</span>.1</span><br><span class="line">使用&#x27;sudo apt autoremove&#x27;来卸载它(它们)。</span><br><span class="line">下列软件包将被【卸载】：</span><br><span class="line">  linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64*</span><br><span class="line">升级了 0 个软件包，新安装了 0 个软件包，要卸载 1 个软件包，有 0 个软件包未被升级。</span><br><span class="line">有 1 个软件包没有被完全安装或卸载。</span><br><span class="line">需要下载 0 B/454 kB 的归档。</span><br><span class="line">解压缩后将会空出 408 MB 的空间。</span><br><span class="line">您希望继续执行吗？ [Y/n] </span><br></pre></td></tr></table></figure></li><li>sudo apt autoremove<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 完成</span><br><span class="line">正在分析软件包的依赖关系树... 完成</span><br><span class="line">正在读取状态信息... 完成                 </span><br><span class="line">下列软件包将被【卸载】：</span><br><span class="line">  linux-compiler-gcc<span class="string">-12</span>-x86 linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64</span><br><span class="line">  linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-common linux-image<span class="string">-6</span>.1.0<span class="string">-27</span>-amd64 linux-kbuild<span class="string">-6</span>.1</span><br><span class="line">升级了 0 个软件包，新安装了 0 个软件包，要卸载 5 个软件包，有 0 个软件包未被升级。</span><br><span class="line">有 1 个软件包没有被完全安装或卸载。</span><br><span class="line">需要下载 0 B/454 kB 的归档。</span><br><span class="line">解压缩后将会空出 473 MB 的空间。</span><br><span class="line">您希望继续执行吗？ [Y/n] y</span><br></pre></td></tr></table></figure>统计一下，删除一个内核能减少880M空间占用(debian12)。</li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;随着linux系统的升级，磁盘空间越来越紧张，本文记录了删除多余的内核，找回可用空间的方法。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="linux" scheme="https://qs100371.vip/tags/linux/"/>
     
   </entry>
   
