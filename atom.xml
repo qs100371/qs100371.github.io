@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-07-21T02:13:16.497Z</updated>
+  <updated>2025-07-21T14:28:28.771Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ssh免密登录设置</title>
+    <link href="https://qs100371.vip/post/ssh-mian-mi-deng-lu-she-zhi/"/>
+    <id>https://qs100371.vip/post/ssh-mian-mi-deng-lu-she-zhi/</id>
+    <published>2025-07-21T14:15:49.000Z</published>
+    <updated>2025-07-21T14:28:28.771Z</updated>
+    
+    <content type="html"><![CDATA[<p>为了保证一台Linux主机的安全，主机登录的时候一般都设置账号密码登录。但是很多时候为了操作方便，通过设置SSH免密码登录。</p><span id="more"></span><h1 id="本地生成公私钥对"><a href="#本地生成公私钥对" class="headerlink" title="本地生成公私钥对"></a>本地生成公私钥对</h1><p><code>ssh-keygen -t rsa</code><br>会输出：</p><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root<span class="meta">@armbian:~#</span> ssh-keygen -t rsa</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): </span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /root/.ssh/id_rsa</span><br><span class="line">Your public key has been saved in /root/.ssh/id_rsa.pub</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:lanDF6885d+oUIbwD6tQnmd2l+zqh408faEq0LaQJiw root<span class="meta">@armbian</span></span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 3072]----+</span><br><span class="line">|<span class="string">                 </span>|</span><br><span class="line">|<span class="string">           o     </span>|</span><br><span class="line">|<span class="string">        . =      </span>|</span><br><span class="line">|<span class="string">       . = +     </span>|</span><br><span class="line">|<span class="string">    .   S = =    </span>|</span><br><span class="line">|<span class="string">   E o B B X . o </span>|</span><br><span class="line">|<span class="string">    . + * @.+== .</span>|</span><br><span class="line">|<span class="string">       . B +==+o.</span>|</span><br><span class="line">|<span class="string">        . .o==+..</span>|</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure><p>在~&#x2F;.ssh目录下会生成两个文件：id_rsa.pub和id_rsa。</p><h1 id="上传公钥到目标机器"><a href="#上传公钥到目标机器" class="headerlink" title="上传公钥到目标机器"></a>上传公钥到目标机器</h1><p><code>ssh-copy-id admin@192.168.0.3</code><br>输出：</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ssh-<span class="keyword">copy</span>-<span class="built_in">id</span>: INFO: Source <span class="keyword">of</span> key(s) <span class="keyword">to</span> be installed: <span class="string">&quot;/root/.ssh/id_rsa.pub&quot;</span></span><br><span class="line">/usr/bin/ssh-<span class="keyword">copy</span>-<span class="built_in">id</span>: INFO: attempting <span class="keyword">to</span> <span class="built_in">log</span> <span class="keyword">in</span> <span class="keyword">with</span> <span class="keyword">the</span> new key(s), <span class="keyword">to</span> filter out any <span class="keyword">that</span> are already installed</span><br><span class="line">/usr/bin/ssh-<span class="keyword">copy</span>-<span class="built_in">id</span>: INFO: <span class="number">1</span> key(s) remain <span class="keyword">to</span> be installed <span class="comment">-- if you are prompted now it is to install the new keys</span></span><br><span class="line">admin@<span class="number">192.168</span><span class="number">.0</span><span class="number">.3</span>&#x27;s password: </span><br><span class="line"></span><br><span class="line">Number <span class="keyword">of</span> key(s) added: <span class="number">1</span></span><br><span class="line"></span><br><span class="line">Now <span class="keyword">try</span> logging <span class="keyword">into</span> <span class="keyword">the</span> machine, <span class="keyword">with</span>:   <span class="string">&quot;ssh &#x27;admin@192.168.0.3&#x27;&quot;</span></span><br><span class="line"><span class="keyword">and</span> check <span class="keyword">to</span> make sure <span class="keyword">that</span> only <span class="keyword">the</span> key(s) you wanted were added.</span><br></pre></td></tr></table></figure><p>在目标机器~&#x2F;.ssh目录下会生成authorized_keys。</p><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p><code>ssh admin@192.168.0.3</code><br>此时已不需要输入密码。<br><code>exit</code> 退出登录。</p><hr><p>免密登录在使用ssh传输文件的脚本时很方便。<br>免密码登录的处理是用户对用户的，切换其他用户后，仍然需要输入密码。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;为了保证一台Linux主机的安全，主机登录的时候一般都设置账号密码登录。但是很多时候为了操作方便，通过设置SSH免密码登录。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="linux" scheme="https://qs100371.vip/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>github actions生成支持多种机器架构的镜像</title>
@@ -382,25 +401,6 @@
     
     
     <category term="game" scheme="https://qs100371.vip/tags/game/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GodoOS:内网办公操作系统</title>
-    <link href="https://qs100371.vip/post/godoosnei-wang-ban-gong-cao-zuo-xi-tong/"/>
-    <id>https://qs100371.vip/post/godoosnei-wang-ban-gong-cao-zuo-xi-tong/</id>
-    <published>2025-06-16T05:30:02.000Z</published>
-    <updated>2025-06-19T11:18:03.926Z</updated>
-    
-    <content type="html"><![CDATA[<p>GodoOS是一款高效的内网办公操作系统，内含word&#x2F;excel&#x2F;ppt&#x2F;pdf&#x2F;内网聊天&#x2F;白板&#x2F;思维导图等多个办公系统工具，支持原生文件存储。平台界面精仿windows风格，操作简便，同时保持低资源消耗和高性能运行。无需注册即可自动连接内网用户，实现即时通讯和文件共享。灵活高配置的应用商店，可无限扩展。</p><span id="more"></span><p>官方网站：<a href="https://www.godoos.com/home/os/">https://www.godoos.com/home/os/</a><br>项目地址：<a href="https://github.com/phpk/godoos">phpk&#x2F;godoos</a></p><h1 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h1><ul><li>无需联网使用，全开源</li><li>零配置，无需注册，下载即用</li><li>零污染，无插件依赖</li><li>精小，打包后仅70M，却包含了所有的办公套件</li><li>可无限扩展，支持自定义应用</li><li>golang开发后端，低资源消耗和高性能</li><li>支持多平台，Windows、Linux、MacOS</li></ul><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>Linux (AMD64) Web版下载：<a href="https://godoos.com/upload/godoos/1.0.5/web/godoos_web_linux_amd64">https://godoos.com/upload/godoos/1.0.5/web/godoos_web_linux_amd64</a><br>运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x godoos_web_linux_amd64</span><br><span class="line">./godoos_web_linux_amd64</span><br></pre></td></tr></table></figure><p>官方提供了docker安装方式，可能出问题了，安装完成后打开桌面是空白。</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> pull godoos/godoos:latest </span><br><span class="line"><span class="attribute">docker</span> run -d -p <span class="number">56780</span>:<span class="number">56780</span> -p <span class="number">8185</span>:<span class="number">80</span> --name godoos godoos/godoos:latest</span><br></pre></td></tr></table></figure><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>从ip:56780访问。首次打开要在开始菜单里恢复出厂设置，这样桌面上才有应用图标。<br><img src="https://qs100371.vip/post-images/1750052204223.webp"><br><img src="https://qs100371.vip/post-images/1750052210301.webp"><br><img src="https://qs100371.vip/post-images/1750052216031.webp"><br><img src="https://qs100371.vip/post-images/1750052221921.webp"><br><img src="https://qs100371.vip/post-images/1750052230115.webp"><br><img src="https://qs100371.vip/post-images/1750052236054.webp"><br><img src="https://qs100371.vip/post-images/1750052241861.webp"><br><img src="https://qs100371.vip/post-images/1750052247172.webp"><br><img src="https://qs100371.vip/post-images/1750052252754.webp"><br><img src="https://qs100371.vip/post-images/1750052261621.webp"><br>文件可以直接导出到本地。</p><hr><p>似乎不能连接外网。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;GodoOS是一款高效的内网办公操作系统，内含word&amp;#x2F;excel&amp;#x2F;ppt&amp;#x2F;pdf&amp;#x2F;内网聊天&amp;#x2F;白板&amp;#x2F;思维导图等多个办公系统工具，支持原生文件存储。平台界面精仿windows风格，操作简便，同时保持低资源消耗和高性能运行。无需注册即可自动连接内网用户，实现即时通讯和文件共享。灵活高配置的应用商店，可无限扩展。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
     
   </entry>
   
