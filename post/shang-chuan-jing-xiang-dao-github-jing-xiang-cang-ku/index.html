@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://qs100371.vip/post-images/1752972396920.png">
 <meta property="og:image" content="https://qs100371.vip/post-images/1752972356184.png">
 <meta property="article:published_time" content="2025-07-20T00:36:54.000Z">
-<meta property="article:modified_time" content="2025-07-20T00:49:21.016Z">
+<meta property="article:modified_time" content="2025-07-20T13:28:06.130Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-232-blue"><img
+          <img src="https://img.shields.io/badge/字数统计-237-blue"><img
             src="https://img.shields.io/badge/阅读时间-3分-green">
           
             
@@ -195,7 +195,7 @@
                           <!-- Table of Contents -->
                           <p>GitHub以托管代码仓库为切入点，提供Github Container Registry服务，使用方法和dockerhub类似。</p>
 <span id="more"></span>
-<h1 id="登录ghcr-io"><a href="#登录ghcr-io" class="headerlink" title="登录ghcr.io"></a>登录ghcr.io</h1><p>ghcr.io登录不使用帐号密码，需要使用 <a href="https://github.com/settings/tokens/">https://github.com/settings/tokens/</a>页面创建的 Token 作为密码才可以推送镜像。<br>打开上面的链接，勾选 write:packages 和 read:packages ，repo 会自动选中，创建 Token。<br>token只显示一次，注意保存。<br><code>docker login ghcr.io -u qs100371</code><br>密码就是上面的token。<br>认证成功就可以push镜像。</p>
+<h1 id="登录ghcr-io"><a href="#登录ghcr-io" class="headerlink" title="登录ghcr.io"></a>登录ghcr.io</h1><p>ghcr.io登录不使用帐号密码，需要使用 <a href="https://github.com/settings/tokens/">https://github.com/settings/tokens/</a>页面创建的 Token 作为密码才可以推送镜像。<br>打开上面的链接，token(classic)，generate new token，勾选 write:packages 和 read:packages ，repo 会自动选中，创建 Token。<br>token只显示一次，注意保存。<br><code>docker login ghcr.io -u qs100371</code><br>密码就是上面的token。<br>认证成功就可以push镜像。</p>
 <h1 id="push镜像"><a href="#push镜像" class="headerlink" title="push镜像"></a>push镜像</h1><p>push之前修改镜像tag为ghcr.io&#x2F;qs100371&#x2F;phpserver，之后和dockerhub一样推送。<br><code>docker push ghcr.io/qs100371/phpserver</code></p>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@armbian:~<span class="comment"># docker tag qs100371/phpserver ghcr.io/qs100371/phpserver</span></span><br><span class="line">root@armbian:~<span class="comment"># docker push ghcr.io/qs100371/phpserver</span></span><br><span class="line">Using default <span class="params">tag:</span> latest</span><br><span class="line">The push refers to repository [ghcr.io<span class="operator">/</span>qs100371<span class="operator">/</span>phpserver]</span><br><span class="line"><span class="number">7</span><span class="params">c2c9299fc3f:</span> Pushed </span><br><span class="line"><span class="number">7</span><span class="params">ca457e7c1dd:</span> Pushed </span><br><span class="line"><span class="number">4</span><span class="params">b74ddfda19e:</span> Pushed </span><br><span class="line"><span class="number">2221087</span><span class="params">bbb25:</span> Pushed </span><br><span class="line"><span class="number">70926</span><span class="params">ed51c84:</span> Pushed </span><br><span class="line"><span class="params">f521dad3cd4e:</span> Pushed </span><br><span class="line"><span class="number">4530</span><span class="params">fb17527f:</span> Pushed </span><br><span class="line"><span class="params">b9bd58eed14a:</span> Pushed </span><br><span class="line"><span class="params">fef9d3931c24:</span> Pushed </span><br><span class="line"><span class="number">0</span><span class="params">a9193454ae1:</span> Pushed </span><br><span class="line"><span class="params">ea2456e60fad:</span> Pushed </span><br><span class="line"><span class="params">b71408fda661:</span> Pushed </span><br><span class="line"><span class="params">cd3c8c08d739:</span> Pushed </span><br><span class="line"><span class="number">2</span><span class="params">b313be3e8c7:</span> Pushed </span><br><span class="line"><span class="params">ba1f1fddfa56:</span> Pushed </span><br><span class="line"><span class="number">4</span><span class="params">d0185f84bef:</span> Pushed </span><br><span class="line"><span class="params">latest:</span> <span class="params">digest:</span> sha256:<span class="number">54</span>d9723a00f9b5110d4b8566495773f2368fa6fe621a61e9ee5e5eade6068c39 <span class="params">size:</span> <span class="number">3660</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://qs100371.vip/post-images/1752972396920.png"><br><img src="https://qs100371.vip/post-images/1752972356184.png"><br>默认镜像是private，在packages settings里可修改成public。</p>
@@ -231,6 +231,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/post/shi-yong-github-actions-zi-dong-hua-docker-bing-shang-chuan/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          使用GitHub Actions自动化docker并上传 
+        
+      </div>
+    </a>
   
   
     <a href="/post/onedrive-yi-zhi-deng-lu-bu-shang-qu-zen-me-ban/" id="article-nav-older" class="article-nav-link-wrap">
@@ -321,7 +330,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/game/" rel="tag">game</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">51</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/" rel="tag">macos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nas/" rel="tag">nas</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">121</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/game/" rel="tag">game</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">51</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/" rel="tag">macos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nas/" rel="tag">nas</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">121</span></li></ul>
     </div>
   </div>
 
@@ -341,7 +350,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -352,6 +361,14 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/post/github-actions-sheng-cheng-zhi-chi-duo-chong-ji-qi-jia-gou-de-jing-xiang/">github actions生成支持多种机器架构的镜像</a>
+          </li>
+        
+          <li>
+            <a href="/post/shi-yong-github-actions-zi-dong-hua-docker-bing-shang-chuan/">使用GitHub Actions自动化docker并上传 </a>
+          </li>
         
           <li>
             <a href="/post/shang-chuan-jing-xiang-dao-github-jing-xiang-cang-ku/">上传镜像到github镜像仓库</a>
@@ -385,14 +402,6 @@
             <a href="/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/">飞牛os重启后smb中外置存储丢失问题的修复</a>
           </li>
         
-          <li>
-            <a href="/post/vmware-li-de-macos/">vmware里的macos</a>
-          </li>
-        
-          <li>
-            <a href="/post/cloudflare-tunnel-sshtcp-lian-jie-fang-shi/">cloudflare tunnel ssh/tcp 连接方式</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -409,7 +418,7 @@
           <div id="footer-info" class="inner">
             <span class="post-count"><img id="site-days-badge" src=""><img
                 src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-              <img src="https://img.shields.io/badge/共- 84.9k 字-green">
+              <img src="https://img.shields.io/badge/共- 85.7k 字-green">
               <img id="load-time-badge" src=""><br>
               <i class="fa fa-cc-by" aria-hidden="true"></i>
                 All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
