@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-07-21T14:28:28.771Z</updated>
+  <updated>2025-07-22T11:09:31.585Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nascab:跨平台NAS软件,远程管理照片,影音和文件</title>
+    <link href="https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian-yuan-cheng-guan-li-zhao-pian-ying-yin-he-wen-jian/"/>
+    <id>https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian-yuan-cheng-guan-li-zhao-pian-ying-yin-he-wen-jian/</id>
+    <published>2025-07-22T10:51:33.000Z</published>
+    <updated>2025-07-22T11:09:31.585Z</updated>
+    
+    <content type="html"><![CDATA[<p>NasCab是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。</p><span id="more"></span><p>官网：<a href="https://www.nascab.cn/">https://www.nascab.cn/</a><br>NasCab现在可以通过Docker部署，仅支持X86-64和arm64架构的Cpu。<br>windows，macos，android有相应的服务端和客户端软件。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">nascab</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">ypptec/nascab</span></span><br><span class="line">        <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">            <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">                <span class="attribute">max-file</span><span class="punctuation">:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line">                <span class="attribute">max-size</span><span class="punctuation">:</span> <span class="string">10m</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;5555:90&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8888:80&#x27;</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/nascab:/root/.local/share/nascab&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/files:/myData&#x27;</span></span><br></pre></td></tr></table></figure><p>docker cli：<br><code>docker run -v /data/files:/myData -v /data/nascab:/root/.local/share/nascab -p 8888:80 -p 5555:90 -d --log-opt max-size=10m --log-opt max-file=3 ypptec/nascab</code><br>需要管理的文件在&#x2F;data&#x2F;files。</p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>有点象nas，但影视刮削不好，没有内容简介和演员相关，只有音视频码率。</p><p><img src="https://qs100371.vip/post-images/1753181954754.png"><br><img src="https://qs100371.vip/post-images/1753181959909.png"><br><img src="https://qs100371.vip/post-images/1753181967978.png"><br><img src="https://qs100371.vip/post-images/1753181973623.png"></p><hr><p>jellyfin管理视频很好，只是刮削需要架梯子。<br>nascab看来只有个架子，内容做得不到位。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;NasCab是跨平台支持Windows&amp;#x2F;Mac&amp;#x2F;Linux&amp;#x2F;Docker的nas软件。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="nas" scheme="https://qs100371.vip/tags/nas/"/>
+    
+  </entry>
   
   <entry>
     <title>ssh免密登录设置</title>
@@ -382,25 +401,6 @@
     
     
     <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>魔方快速还原</title>
-    <link href="https://qs100371.vip/post/mo-fang-kuai-su-huan-yuan/"/>
-    <id>https://qs100371.vip/post/mo-fang-kuai-su-huan-yuan/</id>
-    <published>2025-06-16T13:35:08.000Z</published>
-    <updated>2025-07-07T23:05:50.299Z</updated>
-    
-    <content type="html"><![CDATA[<p>魔方是3x3x3的三阶魔方，英文名 Rubik’s cube 。是一个正6面体，有6种颜色，由26块组成，有8个角块；12个棱块；6个中心块(和中心轴支架相连)。本文记录公式法还原。</p><span id="more"></span><p>学习魔方首先就要搞清它的以上结构，知道角块只能和角块换位，棱块只能和棱块换位，中心块不能移动。<br>魔方的标准色：<br>上黄－下白，前蓝－后绿，左橙－右红。<br><img src="https://qs100371.vip/post-images/1750081150968.webp"></p><h1 id="认识公式"><a href="#认识公式" class="headerlink" title="认识公式"></a>认识公式</h1><ul><li>Front-Back-Left-Right-Up-Down<br><img src="https://qs100371.vip/post-images/1750081159449.webp"></li><li>大写字母，单层旋转<br><img src="https://qs100371.vip/post-images/1750081178097.webp"></li><li>小写字母，双层旋转<br><img src="https://qs100371.vip/post-images/1750082220254.webp"></li><li>x，y，z 绕x，y，z轴旋转<br><img src="https://qs100371.vip/post-images/1750082227959.webp"></li><li>x，y，z轴中间层旋转<br><img src="https://qs100371.vip/post-images/1750081185927.webp"></li></ul><h1 id="完成一层"><a href="#完成一层" class="headerlink" title="完成一层"></a>完成一层</h1><p><img src="https://qs100371.vip/post-images/1750144358869.webp"></p><h1 id="第二层"><a href="#第二层" class="headerlink" title="第二层"></a>第二层</h1><p><img src="https://qs100371.vip/post-images/1750144369026.webp"></p><h1 id="OLL"><a href="#OLL" class="headerlink" title="OLL"></a>OLL</h1><p><img src="https://qs100371.vip/post-images/1750144377959.webp"><br><img src="https://qs100371.vip/post-images/1750144383541.webp"></p><h1 id="PLL"><a href="#PLL" class="headerlink" title="PLL"></a>PLL</h1><p><img src="https://qs100371.vip/post-images/1750144391699.webp"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;魔方是3x3x3的三阶魔方，英文名 Rubik’s cube 。是一个正6面体，有6种颜色，由26块组成，有8个角块；12个棱块；6个中心块(和中心轴支架相连)。本文记录公式法还原。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="game" scheme="https://qs100371.vip/tags/game/"/>
     
   </entry>
   
