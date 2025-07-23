@@ -23,6 +23,25 @@
     
     
     <entry>
+      <title>nascab:跨平台NAS软件</title>
+      <link href="/post/nascabkua-ping-tai-nas-ruan-jian/"/>
+      <url>/post/nascabkua-ping-tai-nas-ruan-jian/</url>
+      
+        <content type="html"><![CDATA[<p>NasCab可远程管理照片，影音和文件，是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。</p><span id="more"></span><p>官网：<a href="https://www.nascab.cn/">https://www.nascab.cn/</a><br>NasCab现在可以通过Docker部署，仅支持X86-64和arm64架构的Cpu。<br>windows，macos，android有相应的服务端和客户端软件。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">nascab</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">ypptec/nascab</span></span><br><span class="line">        <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">            <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">                <span class="attribute">max-file</span><span class="punctuation">:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line">                <span class="attribute">max-size</span><span class="punctuation">:</span> <span class="string">10m</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;5555:90&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8888:80&#x27;</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/nascab:/root/.local/share/nascab&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/files:/myData&#x27;</span></span><br></pre></td></tr></table></figure><p>docker cli：<br><code>docker run -v /data/files:/myData -v /data/nascab:/root/.local/share/nascab -p 8888:80 -p 5555:90 -d --log-opt max-size=10m --log-opt max-file=3 ypptec/nascab</code><br>需要管理的文件在&#x2F;data&#x2F;files。</p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>有点象nas，但影视刮削不好，没有内容简介和演员相关，只有音视频码率。</p><p><img src="https://qs100371.vip/post-images/1753181954754.png"><br><img src="https://qs100371.vip/post-images/1753181959909.png"><br><img src="https://qs100371.vip/post-images/1753181967978.png"><br><img src="https://qs100371.vip/post-images/1753181973623.png"></p><hr><p>jellyfin管理视频很好，只是刮削需要架梯子。<br>nascab看来只有个架子，内容做得不到位。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nas </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ssh免密登录设置</title>
       <link href="/post/ssh-mian-mi-deng-lu-she-zhi/"/>
       <url>/post/ssh-mian-mi-deng-lu-she-zhi/</url>

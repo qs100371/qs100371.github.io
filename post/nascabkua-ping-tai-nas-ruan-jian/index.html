@@ -5,20 +5,25 @@
   <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
 
   
-  <title>docker更换存储位置 | qs blog</title>
+  <title>nascab:跨平台NAS软件 | qs blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="玩客云本身只有8G空间，有了docker之后不够用了。需要把docker转移到别的地方。">
+  <meta name="description" content="NasCab可远程管理照片，影音和文件，是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker更换存储位置">
-<meta property="og:url" content="https://qs100371.vip/post/docker-geng-huan-cun-chu-wei-zhi/index.html">
+<meta property="og:title" content="nascab:跨平台NAS软件">
+<meta property="og:url" content="https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian/index.html">
 <meta property="og:site_name" content="qs blog">
-<meta property="og:description" content="玩客云本身只有8G空间，有了docker之后不够用了。需要把docker转移到别的地方。">
+<meta property="og:description" content="NasCab可远程管理照片，影音和文件，是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-11T11:19:46.000Z">
-<meta property="article:modified_time" content="2025-05-03T04:25:15.509Z">
+<meta property="og:image" content="https://qs100371.vip/post-images/1753181954754.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1753181959909.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1753181967978.png">
+<meta property="og:image" content="https://qs100371.vip/post-images/1753181973623.png">
+<meta property="article:published_time" content="2025-07-22T10:51:33.000Z">
+<meta property="article:modified_time" content="2025-07-23T01:23:32.855Z">
 <meta property="article:author" content="qs100371">
-<meta property="article:tag" content="docker">
+<meta property="article:tag" content="nas">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/post-images/1753181954754.png">
   
     <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
   
@@ -153,11 +158,11 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-docker-geng-huan-cun-chu-wei-zhi" class="h-entry article article-type-post"
+        <section id="main"><article id="post-nascabkua-ping-tai-nas-ruan-jian" class="h-entry article article-type-post"
   itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/post/docker-geng-huan-cun-chu-wei-zhi/" class="article-date">
-  <time class="dt-published" datetime="2024-11-11T11:19:46.000Z" itemprop="datePublished">2024-11-11</time>
+    <a href="/post/nascabkua-ping-tai-nas-ruan-jian/" class="article-date">
+  <time class="dt-published" datetime="2025-07-22T10:51:33.000Z" itemprop="datePublished">2025-07-22</time>
 </a>
       
   </div>
@@ -168,12 +173,12 @@
           
     
         <h1 class="p-name article-title" itemprop="headline name">
-          docker更换存储位置
+          nascab:跨平台NAS软件
         </h1>
         <hr>
         
-          <img src="https://img.shields.io/badge/字数统计-68-blue"><img
-            src="https://img.shields.io/badge/阅读时间-1分-green">
+          <img src="https://img.shields.io/badge/字数统计-220-blue"><img
+            src="https://img.shields.io/badge/阅读时间-3分-green">
           
             
               
@@ -186,13 +191,20 @@
                       
                         <div id="toc" class="toc-article">
                           <strong class="toc-title">目录</strong>
-                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">操作步骤</span></a></li></ol>
+                          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%93%E9%AA%8C"><span class="toc-number">2.</span> <span class="toc-text">体验</span></a></li></ol>
                         </div>
                         
                           <!-- Table of Contents -->
-                          <p>玩客云本身只有8G空间，有了docker之后不够用了。需要把docker转移到别的地方。</p>
+                          <p>NasCab可远程管理照片，影音和文件，是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。</p>
 <span id="more"></span>
-<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><p><code>docker info | grep &quot;Docker Root Dir&quot;</code><br>默认在&#x2F;var&#x2F;lib&#x2F;docker<br><code>systemctl stop docker</code><br><code>mv /var/lib/docker /data/docker</code><br><code>ln -sf /data/docker /var/lib/docker</code><br>重启docker<br><code>systemctl start docker</code></p>
+<p>官网：<a href="https://www.nascab.cn/">https://www.nascab.cn/</a><br>NasCab现在可以通过Docker部署，仅支持X86-64和arm64架构的Cpu。<br>windows，macos，android有相应的服务端和客户端软件。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">nascab</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">ypptec/nascab</span></span><br><span class="line">        <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">            <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">                <span class="attribute">max-file</span><span class="punctuation">:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line">                <span class="attribute">max-size</span><span class="punctuation">:</span> <span class="string">10m</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;5555:90&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8888:80&#x27;</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/nascab:/root/.local/share/nascab&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/files:/myData&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>docker cli：<br><code>docker run -v /data/files:/myData -v /data/nascab:/root/.local/share/nascab -p 8888:80 -p 5555:90 -d --log-opt max-size=10m --log-opt max-file=3 ypptec/nascab</code><br>需要管理的文件在&#x2F;data&#x2F;files。</p>
+<h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>有点象nas，但影视刮削不好，没有内容简介和演员相关，只有音视频码率。</p>
+<p><img src="https://qs100371.vip/post-images/1753181954754.png"><br><img src="https://qs100371.vip/post-images/1753181959909.png"><br><img src="https://qs100371.vip/post-images/1753181967978.png"><br><img src="https://qs100371.vip/post-images/1753181973623.png"></p>
+<hr>
+<p>jellyfin管理视频很好，只是刮削需要架梯子。<br>nascab看来只有个架子，内容做得不到位。</p>
 
                             
           </div>
@@ -200,15 +212,15 @@
           <footer class="article-footer">
 
             
-              <a data-url="https://qs100371.vip/post/docker-geng-huan-cun-chu-wei-zhi/" data-id="cmdae13tf003ic0tz1mltc4wx" data-title="docker更换存储位置"
+              <a data-url="https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian/" data-id="cmdfa64470000z4tzh4dg4zb4" data-title="nascab:跨平台NAS软件"
                 class="article-share-link"><span class="fa fa-share">
                   分享
                 </span></a>
               
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nas/" rel="tag">nas</a></li></ul>
 
                 
-                    <!--<span id="/post/docker-geng-huan-cun-chu-wei-zhi/" class="leancloud_visitors" data-flag-title="docker更换存储位置">
+                    <!--<span id="/post/nascabkua-ping-tai-nas-ruan-jian/" class="leancloud_visitors" data-flag-title="nascab:跨平台NAS软件">
                   <span class="leancloud-visitors-count  fa fa-eye">
                   </span>
                 </span>-->
@@ -221,19 +233,19 @@
     
 <nav id="article-nav">
   
-    <a href="/post/docker-ce-an-zhuang/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/post/nascabkua-ping-tai-nas-ruan-jian-yuan-cheng-guan-li-zhao-pian-ying-yin-he-wen-jian/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          docker-ce安装
+          nascab:跨平台NAS软件,远程管理照片,影音和文件
         
       </div>
     </a>
   
   
-    <a href="/post/armbian-cong-bullseye-sheng-dao-bookworm/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/post/ssh-mian-mi-deng-lu-she-zhi/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">armbian从bullseye升到bookworm</div>
+      <div class="article-nav-title">ssh免密登录设置</div>
     </a>
   
 </nav>
