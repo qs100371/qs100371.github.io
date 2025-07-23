@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-07-22T11:09:31.585Z</updated>
+  <updated>2025-07-23T01:23:32.855Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,25 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>nascab:跨平台NAS软件,远程管理照片,影音和文件</title>
-    <link href="https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian-yuan-cheng-guan-li-zhao-pian-ying-yin-he-wen-jian/"/>
-    <id>https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian-yuan-cheng-guan-li-zhao-pian-ying-yin-he-wen-jian/</id>
-    <published>2025-07-22T10:51:33.000Z</published>
-    <updated>2025-07-22T11:09:31.585Z</updated>
-    
-    <content type="html"><![CDATA[<p>NasCab是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。</p><span id="more"></span><p>官网：<a href="https://www.nascab.cn/">https://www.nascab.cn/</a><br>NasCab现在可以通过Docker部署，仅支持X86-64和arm64架构的Cpu。<br>windows，macos，android有相应的服务端和客户端软件。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">nascab</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">ypptec/nascab</span></span><br><span class="line">        <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">            <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">                <span class="attribute">max-file</span><span class="punctuation">:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line">                <span class="attribute">max-size</span><span class="punctuation">:</span> <span class="string">10m</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;5555:90&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8888:80&#x27;</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/nascab:/root/.local/share/nascab&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/files:/myData&#x27;</span></span><br></pre></td></tr></table></figure><p>docker cli：<br><code>docker run -v /data/files:/myData -v /data/nascab:/root/.local/share/nascab -p 8888:80 -p 5555:90 -d --log-opt max-size=10m --log-opt max-file=3 ypptec/nascab</code><br>需要管理的文件在&#x2F;data&#x2F;files。</p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>有点象nas，但影视刮削不好，没有内容简介和演员相关，只有音视频码率。</p><p><img src="https://qs100371.vip/post-images/1753181954754.png"><br><img src="https://qs100371.vip/post-images/1753181959909.png"><br><img src="https://qs100371.vip/post-images/1753181967978.png"><br><img src="https://qs100371.vip/post-images/1753181973623.png"></p><hr><p>jellyfin管理视频很好，只是刮削需要架梯子。<br>nascab看来只有个架子，内容做得不到位。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;NasCab是跨平台支持Windows&amp;#x2F;Mac&amp;#x2F;Linux&amp;#x2F;Docker的nas软件。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="nas" scheme="https://qs100371.vip/tags/nas/"/>
-    
-  </entry>
   
   <entry>
     <title>nascab:跨平台NAS软件</title>
@@ -396,6 +377,25 @@
     
     
     <summary type="html">&lt;p&gt;LibreTranslate，免费开源机器翻译 API，完全自托管。不依赖 Google等专有提供商来执行翻译，它的翻译引擎由开源的 Argos Translate 库提供支持。本文提供搭建自已的翻译服务器的方法。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>阅后即焚:cryptgeon</title>
+    <link href="https://qs100371.vip/post/yue-hou-ji-fen-cryptgeon/"/>
+    <id>https://qs100371.vip/post/yue-hou-ji-fen-cryptgeon/</id>
+    <published>2025-06-17T10:33:15.000Z</published>
+    <updated>2025-06-17T11:01:13.144Z</updated>
+    
+    <content type="html"><![CDATA[<p>加密鸽cryptgeon是一个受 PrivNote项目启发的安全、开源共享密信和文件共享服务器。</p><span id="more"></span><p>项目地址：<a href="https://github.com/cupcakearmy/cryptgeon">cupcakearmy&#x2F;cryptgeon</a><br><img src="https://qs100371.vip/post-images/1750156711827.webp"></p><h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ul><li>服务端无法解密和查看客户端加密的内容</li><li>查看次数或时间限制，阅后即焚</li><li>数据将存放于内存中，不会写入到磁盘中</li><li>黑暗模式支持<br><img src="https://qs100371.vip/post-images/1750156716166.webp"></li></ul><h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p>加密鸽会为每条笔记都生成一个独立的 id (256bit) 和 key 256(bit)。<br>其中id用于保存和提取密信， 在这之后这封密信将会被客户端使用 AES 算法的 GCM 模式和key进行加密然后发送至服务器，数据将会保存在服务器的内存中且永远不会被持久化到硬盘上，服务端永远不会得到密钥并且无法解读密信的内容。</p><h1 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h1><p>docker-compose.yml</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">redis</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">redis:7-alpine</span></span><br><span class="line">    <span class="comment"># This is required to stay in RAM only.</span></span><br><span class="line">    <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">redis-server --save &quot;&quot; --appendonly no</span></span><br><span class="line">    <span class="comment"># Set a size limit. See link below on how to customise.</span></span><br><span class="line">    <span class="comment"># https://redis.io/docs/latest/operate/rs/databases/memory-performance/eviction-policy/</span></span><br><span class="line">    <span class="comment"># --maxmemory 1gb --maxmemory-policy allkeys-lrulpine</span></span><br><span class="line">    <span class="comment"># This prevents the creation of an anonymous volume.</span></span><br><span class="line">    <span class="attribute">tmpfs</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data</span></span><br><span class="line"></span><br><span class="line">  <span class="attribute">app</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">cupcakearmy/cryptgeon:latest</span></span><br><span class="line">    <span class="attribute">depends_on</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="attribute">SIZE_LIMIT</span><span class="punctuation">:</span> <span class="string">4 MiB</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">8000:8000</span></span><br></pre></td></tr></table></figure><p>只支持arm64和amd64。<br>从ip:8000访问。<br> <img src="https://qs100371.vip/post-images/1750156886040.webp"></p><p>必须使用https，否则浏览器不支持加密鸽的加密算法。 </p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;加密鸽cryptgeon是一个受 PrivNote项目启发的安全、开源共享密信和文件共享服务器。&lt;/p&gt;</summary>
     
     
     
