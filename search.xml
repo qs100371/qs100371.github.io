@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>找回neofetch</title>
+      <link href="/post/zhao-hui-neofetch/"/>
+      <url>/post/zhao-hui-neofetch/</url>
+      
+        <content type="html"><![CDATA[<p>cm311盒子上刷的ubuntu armbian，neofetch是一个显示主机基本信息的小程序，这里却没有。</p><span id="more"></span><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>玩客云上的armbian是基于debian，neofetch直接用apt install就可以安装。cm311盒子的armbian是基于ubuntu，安装neofetch出了问题。安装正常，执行的时候提示找不到fastfetch。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>找网上的neofetch安装包，安装了还是出现同样的问题。<br>找fastfetch安装包安装，再安装<code>apt install neofetch</code>，正常显示信息了。<br><img src="https://qs100371.vip/post-images/1753696078217.png"><br><img src="https://qs100371.vip/post-images/1753696085342.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>移动并重命名剧集文件脚本</title>
       <link href="/post/yi-dong-bing-chong-ming-ming-ju-ji-wen-jian-jiao-ben/"/>
       <url>/post/yi-dong-bing-chong-ming-ming-ju-ji-wen-jian-jiao-ben/</url>
