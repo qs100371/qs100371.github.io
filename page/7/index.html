@@ -1,1121 +1,231 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
-
-  
-  <title>qs blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="It&#39;s just a note, not a guide.">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>qs blog - 生命不止，折腾不止。</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="It&#39;s just a note, not a guide.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="qs blog">
 <meta property="og:url" content="https://qs100371.vip/page/7/index.html">
 <meta property="og:site_name" content="qs blog">
 <meta property="og:description" content="It&#39;s just a note, not a guide.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/images/avatar.png">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="linux onecloud armbian docker 学习笔记 个人博客">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/images/avatar.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
- 
-<!--
- <style>
-    /* CDN字体引入 */
-    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css');
-    @import url('https://cdn.jsdelivr.net/npm/hanzi-writer-fonts@0.2.0/KaiTi/result.css');
-
-    /* 古籍容器样式 */
-    #poem-container {
-        font-family: "LXGW WenKai", "汉仪楷体", serif;
-        background: #f8f4e6 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03"><rect width="100" height="100" fill="none" stroke="black" stroke-width="1"/></svg>');
-        padding: 1rem 1rem;
-        font-size: 1rem;
-        line-height: 2;
-        letter-spacing: 0.3em;
-        text-align: left;
-        color: #333;
-        border-radius: 2px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-        max-width: 600px;
-        margin: 0 auto;
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    /* 传统装饰元素 */
-    #poem-container::before {
-        content: "";
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        right: 1rem;
-        height: 1px;
-        background: linear-gradient(to right, transparent 10%, #c9a782 50%, transparent 90%);
-    }
-
-    #poem-container::after {
-        content: "❦";
-        position: absolute;
-        bottom: 0.5rem;
-        right: 1.5rem;
-        color: #a67c52;
-        font-size: 1.2em;
-    }
-
-    /* 加载状态优化 */
-    #poem-container:empty::before,
-    #poem-container:empty::after {
-        display: none;
-    }
-
-    #poem-container:empty {
-        background-image: none;
-        justify-content: flex-start;
-        font-family: system-ui;
-        color: #999;
-    }
-</style>
--->
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <!--<h1 id="logo-wrap">
-        <a href="/" id="logo">
-          qs blog
-        </a>
-      </h1>-->
-
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">
-            首页
-          </a>
-          
-          <a class="main-nav-link" href="/archives">
-            归档
-          </a>
-          
-          <a class="main-nav-link" href="/appscenter/">
-            应用
-          </a>
-          
-          <a class="main-nav-link" href="/about/">
-            关于
-          </a>
-          
-      </nav>
-      <nav id="sub-nav">
-        
-          
-            <a class="nav-icon" href="/random.html"><span class="fa fa-random"></span></a>
-            
-              
-                
-                  <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span
-                      class="fa fa-rss"></span></a>
-                  
-      </nav>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><div><input type="text" id="local-search-input" name="q" results="0" placeholder="全站搜索"
-        class="st-search-input st-default-search-input form-control" /> <a href="/"><i class="fa fa-undo"
-            aria-hidden="true"></i></a></div>
-<div id="local-search-result"
-    style="opacity: 0.85; background-color: lightyellow; position: relative; top: 50px; border-radius: 5px;">
-</div>
-<!--
-<div class="article-entry"><span id="poem-container">正在加载....</span></div>
-<script>
-    function loadRandomContent() {
-        fetch('https://api.qs100371.vip/songci.php')
-            .then(response => response.text())
-            .then(text => {
-                document.getElementById('poem-container').innerText = text;
-            })
-            .catch(error => {
-                document.getElementById('poem-container').innerText = '404';
-            });
-    }
-
-    // 页面加载时自动获取一次
-    loadRandomContent();
-</script>
--->
-
-
-
-  
-    <article id="post-wang-pan-ju-he-sou-suo-xiang-mu-aipan" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/" class="article-date">
-  <time class="dt-published" datetime="2025-04-09T07:38:37.000Z" itemprop="datePublished">2025-04-09</time>
-</a>
+<meta name="twitter:image" content="https://qs100371.vip/images/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://qs100371.vip/page/7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
       
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">
-          网盘聚合搜索项目Aipan
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>Aipan是一个基于 Vue 和 Nuxt.js 技术构建的开源网盘搜索项目。其主要目标是为用户提供一个能够自主拥有和管理的网盘搜索网站。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/" data-id="cmdae13uf009gc0tzcqvy17qy" data-title="网盘聚合搜索项目Aipan"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-                
-                    <!--<span id="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/" class="leancloud_visitors" data-flag-title="网盘聚合搜索项目Aipan">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-an-zhuang-adguard-home" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/an-zhuang-adguard-home/" class="article-date">
-  <time class="dt-published" datetime="2025-04-08T08:58:42.000Z" itemprop="datePublished">2025-04-08</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/an-zhuang-adguard-home/">
-          安装AdGuard Home
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>AdGuard Home 是免费且开源，强大的全网广告和跟踪器阻止 DNS 服务器。本文详细记录了安装方法。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/an-zhuang-adguard-home/" data-id="cmdae13sw000cc0tze7j178tf" data-title="安装AdGuard Home"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-                
-                    <!--<span id="/post/an-zhuang-adguard-home/" class="leancloud_visitors" data-flag-title="安装AdGuard Home">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/" class="article-date">
-  <time class="dt-published" datetime="2025-03-31T10:52:12.000Z" itemprop="datePublished">2025-03-31</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/">
-          网易爆米花:观影好助手
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>网易爆米花是一款聚合型视频播放器，自动归类影片，聚合电视剧季和集。无需下载视频，即可在线播放4K超清视频，支持超200种音视频字幕编码，几乎可以播放所有主流格式的视频。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/" data-id="cmdae13uf009kc0tz6bo3edp1" data-title="网易爆米花:观影好助手"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-                
-                    <!--<span id="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/" class="leancloud_visitors" data-flag-title="网易爆米花:观影好助手">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/" class="article-date">
-  <time class="dt-published" datetime="2025-03-31T10:16:18.000Z" itemprop="datePublished">2025-03-31</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/">
-          Homeassistant接入国家电网用电数据
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>本文记录了将电网数据接入HA的方法。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/" data-id="cmdae13tt005ic0tz9o59fqso" data-title="Homeassistant接入国家电网用电数据"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-                
-                    <!--<span id="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/" class="leancloud_visitors" data-flag-title="Homeassistant接入国家电网用电数据">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-gei-valine-tian-jia-you-jian-ti-xing-gong-neng" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/" class="article-date">
-  <time class="dt-published" datetime="2025-03-25T07:05:15.000Z" itemprop="datePublished">2025-03-25</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/">
-          给Valine添加邮件提醒功能
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>Valine是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。本文记录了使用第三方邮件提醒：<br>valine-admin的过程。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/" data-id="cmdae13tr004yc0tz9sswgzix" data-title="给Valine添加邮件提醒功能"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-                
-                    <!--<span id="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/" class="leancloud_visitors" data-flag-title="给Valine添加邮件提醒功能">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-an-zhuang-homeassistant" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/an-zhuang-homeassistant/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T03:51:52.000Z" itemprop="datePublished">2025-03-22</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/an-zhuang-homeassistant/">
-          安装homeassistant
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>Home Assistant把家中的智能家居设备整合到HA中，它能够接入的设备非常的多比如大名鼎鼎的小米、博联、易微联、飞利浦、特斯拉…，也可以接入软件，然后让各个品牌之间的设备可以联网。本文记录了docker安装方式。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/an-zhuang-homeassistant/" data-id="cmdae13sx000gc0tzdkj45cjo" data-title="安装homeassistant"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-                
-                    <!--<span id="/post/an-zhuang-homeassistant/" class="leancloud_visitors" data-flag-title="安装homeassistant">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/" class="article-date">
-  <time class="dt-published" datetime="2025-03-21T10:25:57.000Z" itemprop="datePublished">2025-03-21</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/">
-          windows和linux双系统时间同步方案
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>在双系统下，主机的时间经常会发生混乱，windows以硬件时间为当前时区时间，而linux通常以硬件时间为utc时间，对于+8时区，两者相差8小时。如果以windows为主系统，可以在linux下做以下设置。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/" data-id="cmdae13ug009oc0tz7n20da61" data-title="windows和linux双系统时间同步方案"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-                
-                    <!--<span id="/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/" class="leancloud_visitors" data-flag-title="windows和linux双系统时间同步方案">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" class="article-date">
-  <time class="dt-published" datetime="2025-03-21T07:40:01.000Z" itemprop="datePublished">2025-03-21</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/">
-          找到并杀掉 Linux 系统中的僵尸进程
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" data-id="cmdae13ut00b8c0tzcwatedyx" data-title="找到并杀掉 Linux 系统中的僵尸进程"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-                
-                    <!--<span id="/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" class="leancloud_visitors" data-flag-title="找到并杀掉 Linux 系统中的僵尸进程">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" class="article-date">
-  <time class="dt-published" datetime="2025-03-21T07:19:33.000Z" itemprop="datePublished">2025-03-21</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/">
-          scp和rsync基本用法与断点续传
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>在远程服务器和本地之间传输文件，可以使用scp命令，也可以使用rsync。本文记录了两个命令的用法。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" data-id="cmdae13u5007lc0tzg9wdh1ra" data-title="scp和rsync基本用法与断点续传"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-                
-                    <!--<span id="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" class="leancloud_visitors" data-flag-title="scp和rsync基本用法与断点续传">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-an-zhuang-jellyfin" class="h-entry article article-type-post"
-  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/an-zhuang-jellyfin/" class="article-date">
-  <time class="dt-published" datetime="2025-03-19T09:46:54.000Z" itemprop="datePublished">2025-03-19</time>
-</a>
-      
-  </div>
-  <div class="article-inner">
-    
-      
-        <header class="article-header">
-          
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/post/an-zhuang-jellyfin/">
-          安装Jellyfin
-        </a>
-      </h1>
-      
-              
-        </header>
-        
-
-          <div class="e-content article-entry" itemprop="articleBody">
-            
-              <p>Jellyfin是一个开源的媒体系统，是Emby 和 Plex的替代方案，后两者功能类似但都要收费。本文记录了deb和docker两种安装方式。</p>
-                
-                    
-          </div>
-
-          <footer class="article-footer">
-
-            
-              <a data-url="https://qs100371.vip/post/an-zhuang-jellyfin/" data-id="cmdae13sx000jc0tz1y04dotr" data-title="安装Jellyfin"
-                class="article-share-link"><span class="fa fa-share">
-                  分享
-                </span></a>
-              
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nas/" rel="tag">nas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-                
-                    <!--<span id="/post/an-zhuang-jellyfin/" class="leancloud_visitors" data-flag-title="安装Jellyfin">
-                  <span class="leancloud-visitors-count  fa fa-eye">
-                  </span>
-                </span>-->
-
-                    
-
-          </footer>
-  </div>
-  
-</article>
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
-  </nav>
-
-
-</section>
-        
-          
-<aside id="sidebar" >
-  
-    
-    <div class="widget-wrap">
-        <h3 class="widget-title">公告板</h3>
-        <div class="widget">
-            
-        
-                
-                        
-                            <div class="notice" style="margin-top:5px">
-                                <i class="fa "></i>
-                                <div class="notice-content"><span id="poem-container">正在加载....</span></div>
-
-                                <script>
-                                    
-                                    function loadRandomContent() {
-                                        fetch('https://api.qs100371.vip/songci.php')
-                                            .then(response => response.text())
-                                            .then(text => {
-                                                document.getElementById('poem-container').innerText = text;
-                                            })
-                                            .catch(error => {
-                                                console.error('加载失败:', error);
-                                                document.getElementById('poem-container').innerText = '加载失败，请重试';
-                                            });
-                                    }
-
-                                    // 页面加载时自动获取一次
-                                    loadRandomContent();
-                                </script>
-                            </div>
-                            
-                               <style>
-                                    .notice {
-                                        padding: 5px;
-                                        border: 1px dashed #e6e6e6;
-                                        color: red;
-                                        position: relative;
-                                        display: inline-block;
-                                        width: 96%;
-                                        background: #fbfbfb50;
-                                        border-radius: 10px;
-                                    }
-
-                                    .notice i {
-                                        float: left;
-                                        color: #999;
-                                        font-size: 18px;
-                                        padding-right: 0px;
-                                        vertical-align: middle;
-                                        margin-top: 3px;
-                                    }
-
-                                    .notice-content {
-                                        display: initial;
-                                        vertical-align: middle;
-                                    }
-                                </style>
-        </div>
-        
-      </div>
-    
-    
-  
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/game/" rel="tag">game</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">54</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/" rel="tag">macos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nas/" rel="tag">nas</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onecloud/" rel="tag">onecloud</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">121</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/armbian/" style="font-size: 14.29px;">armbian</a> <a href="/tags/docker/" style="font-size: 17.14px;">docker</a> <a href="/tags/game/" style="font-size: 10px;">game</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/nas/" style="font-size: 14.29px;">nas</a> <a href="/tags/onecloud/" style="font-size: 15.71px;">onecloud</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/termux/" style="font-size: 12.86px;">termux</a> <a href="/tags/web/" style="font-size: 20px;">web</a>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">12</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/post/zhao-hui-neofetch/">找回neofetch</a>
-          </li>
-        
-          <li>
-            <a href="/post/yi-dong-bing-chong-ming-ming-ju-ji-wen-jian-jiao-ben/">移动并重命名剧集文件脚本</a>
-          </li>
-        
-          <li>
-            <a href="/post/nascabkua-ping-tai-nas-ruan-jian/">nascab:跨平台NAS软件</a>
-          </li>
-        
-          <li>
-            <a href="/post/ssh-mian-mi-deng-lu-she-zhi/">ssh免密登录设置</a>
-          </li>
-        
-          <li>
-            <a href="/post/github-actions-sheng-cheng-zhi-chi-duo-chong-ji-qi-jia-gou-de-jing-xiang/">github actions生成支持多种机器架构的镜像</a>
-          </li>
-        
-          <li>
-            <a href="/post/shi-yong-github-actions-zi-dong-hua-docker-bing-shang-chuan/">使用GitHub Actions自动化docker并上传 </a>
-          </li>
-        
-          <li>
-            <a href="/post/shang-chuan-jing-xiang-dao-github-jing-xiang-cang-ku/">上传镜像到github镜像仓库</a>
-          </li>
-        
-          <li>
-            <a href="/post/onedrive-yi-zhi-deng-lu-bu-shang-qu-zen-me-ban/">onedrive一直登录不上去怎么办?</a>
-          </li>
-        
-          <li>
-            <a href="/post/shang-chuan-jing-xiang-dao-dockerhub/">上传镜像到dockerhub</a>
-          </li>
-        
-          <li>
-            <a href="/post/shi-yong-a-li-yun-ecs/">试用阿里云ecs</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-
-        
-      </div>
-      <footer id="footer">
-  
-
-        <div class="outer">
-          <div id="footer-info" class="inner">
-            <span class="post-count"><img id="site-days-badge" src=""><img
-                src="https://img.shields.io/badge/部署-Vercel-yellow?logo=vercel&logoColor=yellow">
-              <img src="https://img.shields.io/badge/共- 88.1k 字-green">
-              <img id="load-time-badge" src=""><br>
-              <i class="fa fa-cc-by" aria-hidden="true"></i>
-                All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" target="_blank">CC BY 4.0</a><br>
-                  
-                    &copy; 2025
-                      qs100371<br>
-                        Powered by Hexo
-          </div>
-
-          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
-              class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>, <a href="/"> Home</a>
-          
-          <script>
-            const startDate = new Date('2024-10-02 00:00:00');
-            const today = new Date();
-            const timeDiff = today.getTime() - startDate.getTime();
-            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const badgeUrl = `https://img.shields.io/badge/本站已运行- ${daysDiff}天-blue`;
-            document.getElementById('site-days-badge').src = badgeUrl;
-          </script>
-</footer>
-
-<script src="/js/jquery.min.js"></script>
-
-  
-<script src="/js/search.js"></script>
-
-    <script type="text/javascript">
-      searchFunc("/search.xml", "local-search-input", "local-search-result");
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const perf = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
-        const timing = perf.timing;
-        let loadTime;
-        if (timing && timing.loadEventEnd && timing.navigationStart) {
-          loadTime = timing.loadEventEnd - timing.navigationStart;
-        } else {
-          loadTime = perf.now ? perf.now() : (Date.now() - (perf.timing?.navigationStart || Date.now()));
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
         }
-        let displayTime;
-        if (loadTime <= 0 || loadTime > 60000) { // 超过1分钟视为异常
-          displayTime = 'N/A';
-        } else if (loadTime < 1000) {
-          displayTime = `${Math.round(loadTime)}ms`; // 毫秒
-        } else {
-          displayTime = `${(loadTime / 1000).toFixed(2)}s`; // 秒（保留2位小数）
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
         }
-
-        function getColor(ms) {
-          if (ms === 'N/A') return 'lightgrey';
-          const time = typeof ms === 'number' ? ms : parseFloat(ms) * 1000;
-          if (time < 800) return 'brightgreen';
-          if (time < 1500) return 'green';
-          if (time < 3000) return 'yellowgreen';
-          if (time < 5000) return 'orange';
-          return 'red';
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
         }
-
-        const color = getColor(loadTime);
-        const badgeUrl = `https://img.shields.io/badge/加载时间-${encodeURIComponent(displayTime)}-${color}`;
-        document.getElementById('load-time-badge').src = badgeUrl;
-      });
-    </script>
-    </div>
-    <nav id="mobile-nav">
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-    <a href="/appscenter/" class="mobile-nav-link">应用</a>
-  
-    <a href="/about/" class="mobile-nav-link">关于</a>
-  
-</nav>
-    
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-    
-
       
-<script src="/js/script.js"></script>
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
-              <style>
-                .highlight {
-                  position: relative;
-                  padding-top: 32px;
-                  /* 为按钮预留空间 */
-                }
-
-                .highlight-copy-btn {
-                  position: absolute;
-                  top: 8px;
-                  right: 8px;
-                  z-index: 3;
-                  padding: 4px 10px;
-                  font-size: 12px;
-                  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                  color: #6e6e73;
-                  background-color: #f5f5f7;
-                  border: 1px solid #d2d2d7;
-                  border-radius: 12px;
-                  cursor: pointer;
-                  display: flex;
-                  align-items: center;
-                  gap: 4px;
-                  opacity: 0.5;
-                  /* 始终显示 */
-                  transition: all 0.2s ease;
-                }
-
-                .highlight-copy-btn:hover {
-                  background-color: #e5e5ea;
-                  border-color: #a2a2a7;
-                }
-
-                .highlight-copy-btn.copied {
-                  color: #34c759;
-                  background-color: #f0fdf4;
-                  border-color: #86efac;
-                }
-
-                .highlight-copy-btn svg {
-                  width: 14px;
-                  height: 14px;
-                }
-              </style>
-              <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                  // 为所有代码块添加复制按钮
-                  document.querySelectorAll('.highlight, figure.highlight, .code-block').forEach(function (highlight) {
-                    // 创建按钮
-                    const button = document.createElement('button');
-                    button.className = 'highlight-copy-btn';
-                    button.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="8" y="8" width="12" height="12" rx="2"></rect>
-        <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
-      </svg>
-      <span>复制</span>
-    `;
-
-                    highlight.appendChild(button);
-
-                    button.addEventListener('click', async function () {
-                      try {
-                        // 获取正确的代码内容
-                        let codeElement = highlight.querySelector('pre code') ||
-                          highlight.querySelector('td.code pre') ||
-                          highlight.querySelector('code') ||
-                          highlight.querySelector('pre');
-
-                        if (!codeElement) {
-                          console.error('找不到代码元素');
-                          return;
-                        }
-
-                        // 获取文本并清理行号
-                        let code = codeElement.innerText;
-                        code = code.replace(/^\s*\d+\s/gm, '').trim();
-
-                        // 使用现代API尝试复制
-                        try {
-                          await navigator.clipboard.writeText(code);
-                        } catch (err) {
-                          // 降级方案：使用textarea方法
-                          const textarea = document.createElement('textarea');
-                          textarea.value = code;
-                          textarea.style.position = 'fixed';
-                          document.body.appendChild(textarea);
-                          textarea.select();
-                          document.execCommand('copy');
-                          document.body.removeChild(textarea);
-                        }
-
-                        // 更新按钮状态
-                        button.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 6L9 17l-5-5"></path>
-          </svg>
-          <span>已复制</span>
-        `;
-                        button.classList.add('copied');
-
-                        // 2秒后恢复
-                        setTimeout(() => {
-                          button.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="8" y="8" width="12" height="12" rx="2"></rect>
-              <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
-            </svg>
-            <span>复制</span>
-          `;
-                          button.classList.remove('copied');
-                        }, 2000);
-
-                      } catch (error) {
-                        console.error('复制失败:', error);
-                        button.textContent = '复制失败';
-                        setTimeout(() => {
-                          button.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="8" y="8" width="12" height="12" rx="2"></rect>
-              <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
-            </svg>
-            <span>复制</span>
-          `;
-                        }, 2000);
-                      }
-                    });
-                  });
-                });
-              </script>
-  </div>
-</body>
-</html>
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":"yes"},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'qs blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="qs blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">205</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-music"></i><span> Apps</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-video"></i><span> About</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">qs blog</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-music"></i><span> Apps</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-video"></i><span> About</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">qs blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/" title="网盘聚合搜索项目Aipan">网盘聚合搜索项目Aipan</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-04-09T07:38:37.000Z" title="发表于 2025-04-09 15:38:37">2025-04-09</time></span></div><div class="content">Aipan是一个基于 Vue 和 Nuxt.js 技术构建的开源网盘搜索项目。其主要目标是为用户提供一个能够自主拥有和管理的网盘搜索网站。  项目地址：unilei&#x2F;aipan-netdisk-searchAipan 是一个用户友好的工具，致力于提升网盘资源的可访问性和管理效率。 主要功能豆瓣热映：展示当前的豆瓣热门影视榜单；影视资源搜索：抓取其它的网站的内容，实现网盘资源聚合搜索；音乐搜索：基于开源项目的酷我音乐搜索下载。 快速部署curl -fsSL https://r2cf.aipan.me/deploy/quick-install.sh | sudo bash   一键部署脚本  一键部署不能使用的，可用wget下载文件，再执行。  12wget https://r2cf.aipan.me/deploy/quick-install.shsudo bash ./quick-install.sh  从ip:3000访问。豆瓣热映热门电视国产剧综艺美剧日剧韩剧纪录片  搜索结果中有百度网盘，夸克网盘和迅雷云盘内容，由于都没有会员，只能保存到迅雷云盘中，用166k的低速...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/an-zhuang-adguard-home/" title="安装AdGuard Home">安装AdGuard Home</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-04-08T08:58:42.000Z" title="发表于 2025-04-08 16:58:42">2025-04-08</time></span></div><div class="content">AdGuard Home 是免费且开源，强大的全网广告和跟踪器阻止 DNS 服务器。本文详细记录了安装方法。   项目地址：AdguardTeam&#x2F;AdGuardHomeAdGuard Home 作为 DNS 服务器运行，将跟踪域重新路由到“黑洞”，从而防止设备连接到这些服务器。 自动安装curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v docker安装12345678docker pull adguard/adguardhomemkdir /etc/AdGuard_Homedocker run --name AdGuard_Home \      -v /etc/AdGuard_Home/:/opt/adguardhome/work \       -v /etc/AdGuard_Home/:/opt/adguardhome/conf \       -p 53:53/tcp -p 53:53/u...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/wang-yi-bao-mi-hua-guan-ying-hao-zhu-shou/" title="网易爆米花:观影好助手">网易爆米花:观影好助手</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-31T10:52:12.000Z" title="发表于 2025-03-31 18:52:12">2025-03-31</time></span></div><div class="content">网易爆米花是一款聚合型视频播放器，自动归类影片，聚合电视剧季和集。无需下载视频，即可在线播放4K超清视频，支持超200种音视频字幕编码，几乎可以播放所有主流格式的视频。  项目地址：https://bmh.163.com/ 电视版效果 手机版效果  很好用，刮削视频信息无需梯子（jellyfin哭了），手机和安卓电视都可以用。缺点也有，没有服务器端，本地视频源无法远程播放。原来的极光盒子2代（全志h6)已经不能播放本地视频，新换成极光6代（全志h618)就都可以了，开机也流畅了，有线连接终究比无线好。  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/homeassistant-jie-ru-guo-jia-dian-wang-yong-dian-shu-ju/" title="Homeassistant接入国家电网用电数据">Homeassistant接入国家电网用电数据</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-31T10:16:18.000Z" title="发表于 2025-03-31 18:16:18">2025-03-31</time></span></div><div class="content">本文记录了将电网数据接入HA的方法。  项目地址：HomeAssistant 国家电网电费查询：ARC-MX&#x2F;sgcc_electricity_new 可以帮助将国网的电费、用电量数据接入homeassistant，实现实时追踪家庭用电量情况；并且可以将每日用电量保存到数据库，历史有迹可循。在homeassistant以实体显示：    实体entity_id 说明    sensor.last_electricity_usage_xxxx 最近一天用电量，单位KWH、度。   sensor.electricity_charge_balance_xxxx 预付费显示电费余额，反之显示上月应交电费，单位元。   sensor.yearly_electricity_usage_xxxx 今年总用电量，单位KWH、度。   sensor.yearly_electricity_charge_xxxx 今年总用电费，单位元。   sensor.month_electricity_usage_xxxx 最近一个月用电量，单位KWH、度。   sensor.month_electri...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/" title="给Valine添加邮件提醒功能">给Valine添加邮件提醒功能</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-25T07:05:15.000Z" title="发表于 2025-03-25 15:05:15">2025-03-25</time></span></div><div class="content">Valine是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。本文记录了使用第三方邮件提醒：valine-admin的过程。  项目地址：wiidede&#x2F;Valine-Admin 此项目是一个对 Valine 评论系统的拓展应用，可增强 Valine 的邮件通知功能。基于 Leancloud 的云引擎与云函数。可以提供邮件 通知站长 和 @ 通知 的功能，而且还支持自定义邮件通知模板。  Valine官方支持上写的Valine-Admin (by @zhaojun1998)，经试验并不能成功部署。方法是七年前更新的，现在已经不能用了。  确保Valine 的基础功能正常参考 Valine Docs 进入 Leancloud 对应的 Valine 应用点击云引擎-管理部署-创建分组，分组名称“valine”，选中“免费版”，创建。点git部署，地址：https://github.com/wiidede/Valine-Admin，分支填master，点部署。 配置项设置云引擎的环境变量以提供必要的信息。    变量 示例 说明    SITE_NAME xxx...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/an-zhuang-homeassistant/" title="安装homeassistant">安装homeassistant</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-22T03:51:52.000Z" title="发表于 2025-03-22 11:51:52">2025-03-22</time></span></div><div class="content">Home Assistant把家中的智能家居设备整合到HA中，它能够接入的设备非常的多比如大名鼎鼎的小米、博联、易微联、飞利浦、特斯拉…，也可以接入软件，然后让各个品牌之间的设备可以联网。本文记录了docker安装方式。  一个设备，在没接入HA之前，它是个单一设备，只能在自己的生态里面联动，一旦接入到HA上，它就活了，它可以在所有接入的平台里面自己联动，实现各种各样的自动化。 安装有虚拟机方式和docker方式。  docker cli123456789docker run -d \  --name homeassistant \  --privileged \  --restart=unless-stopped \  -e TZ=Asia/Shanghai \  -v /data/homeassistant:/config \  -v /run/dbus:/run/dbus:ro \  --network=host \  ghcr.io/home-assistant/home-assistant:stable docker-compose.yml1234567891011se...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/windows-he-linux-shuang-xi-tong-shi-jian-tong-bu-fang-an/" title="windows和linux双系统时间同步方案">windows和linux双系统时间同步方案</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-21T10:25:57.000Z" title="发表于 2025-03-21 18:25:57">2025-03-21</time></span></div><div class="content">在双系统下，主机的时间经常会发生混乱，windows以硬件时间为当前时区时间，而linux通常以硬件时间为utc时间，对于+8时区，两者相差8小时。如果以windows为主系统，可以在linux下做以下设置。  windows系统时间设置不做改动。 linux系统下设置sudo timedatectl set-local-rtc 1 --adjust-system-clock 查看系统时间：timedatectl 系统显示： 123456789101112               Local time: 五 2025-03-21 18:07:50 CST           Universal time: 五 2025-03-21 10:07:50 UTC                 RTC time: 五 2025-03-21 10:07:50                Time zone: Asia/Shanghai (CST, +0800)System clock synchronized: yes              NTP service: activ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/zhao-dao-bing-sha-diao-linux-xi-tong-zhong-de-jiang-shi-jin-cheng/" title="找到并杀掉 Linux 系统中的僵尸进程">找到并杀掉 Linux 系统中的僵尸进程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-21T07:40:01.000Z" title="发表于 2025-03-21 15:40:01">2025-03-21</time></span></div><div class="content">大部分 Linux 系统进程最大 PID 设置为 32768，如果过多僵尸进程导致其他重要任务没有 PID 可用，系统会发生崩溃。需要找到并杀死僵尸进程。  1234567891011121314151617181920212223Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-134-generic x86_64) System information as of Fri Mar 21 10:38:43 AM CST 2025  System load:             0.02  Usage of /:              44.3% of 79.95GB  Memory usage:            17%  Swap usage:              1%  Processes:               180  Users logged in:         0  IPv4 address for ens133: 192.168.0.5  IPv6 address for ens133: 2...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/scp-he-rsync-ji-ben-yong-fa-yu-duan-dian-xu-chuan/" title="scp和rsync基本用法与断点续传">scp和rsync基本用法与断点续传</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-21T07:19:33.000Z" title="发表于 2025-03-21 15:19:33">2025-03-21</time></span></div><div class="content">在远程服务器和本地之间传输文件，可以使用scp命令，也可以使用rsync。本文记录了两个命令的用法。  scp和rsync对比：scp节约资源，系统负荷小，但断点续传是个问题；rsync速度更快，断点续传方便，但系统负荷大，尤其是传输很多文件的时候，硬盘I&#x2F;O非常高。 scpscp [OPTION] SRC DEST常用参数：-r：递归拷贝目录-q：不显示进度-l：限制传输带宽，单位是kbits&#x2F;sscp -r -l 200 /home/user/exampledir user@192.168.XXX.XXX:/home/user/系统会要求输入user在192.168.XXX.XXX的登录密码，密码正确后就开始复制，scp默认显示复制进度。如果经常在两个服务器之间拷贝文件，就需要一个非常有用的技术：scp免密码拷贝文件。 rsyncrsync [OPTION] SRC DEST常用参数：–progress： 显示拷贝进度。–partial：保留不完整文件，实现断点续传。–partial-dir&#x3D;DIR：指定不完整文件的存储目录，而不是默认存储到目的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/an-zhuang-jellyfin/" title="安装Jellyfin">安装Jellyfin</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-19T09:46:54.000Z" title="发表于 2025-03-19 17:46:54">2025-03-19</time></span></div><div class="content">Jellyfin是一个开源的媒体系统，是Emby 和 Plex的替代方案，后两者功能类似但都要收费。本文记录了deb和docker两种安装方式。  Jellyfin可以将所有的电影、电视剧、动漫、漫画、书籍、音乐等放进去，然后在所有的平台上免费观看，进度是同步的。还可以设置「刮削器」，把影片信息从网上下载整理好放到旁边，整个过程是自动的。如果在通勤的路上想要看电影，Jellyfin也可以硬件加速转码，帮助提高视频流畅度，同时节省流量。 脚本安装curl -s https://repo.jellyfin.org/install-debuntu.sh | bash 12345678910111213141516171819202122232425262728&gt; Determining optimal repository settings.Found the following details from &#x27;/etc/os-release&#x27;: Real OS:            debian Repository OS:      debian Repos...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#content-inner">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/#content-inner">21</a><a class="extend next" rel="next" href="/page/8/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qs100371</div><div class="author-info-description">It's just a note, not a guide.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">205</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/zhao-hui-neofetch/" title="找回neofetch">找回neofetch</a><time datetime="2025-07-28T09:42:07.000Z" title="发表于 2025-07-28 17:42:07">2025-07-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/yi-dong-bing-chong-ming-ming-ju-ji-wen-jian-jiao-ben/" title="移动并重命名剧集文件脚本">移动并重命名剧集文件脚本</a><time datetime="2025-07-24T14:41:09.000Z" title="发表于 2025-07-24 22:41:09">2025-07-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/nascabkua-ping-tai-nas-ruan-jian/" title="nascab:跨平台NAS软件">nascab:跨平台NAS软件</a><time datetime="2025-07-22T10:51:33.000Z" title="发表于 2025-07-22 18:51:33">2025-07-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/ssh-mian-mi-deng-lu-she-zhi/" title="ssh免密登录设置">ssh免密登录设置</a><time datetime="2025-07-21T14:15:49.000Z" title="发表于 2025-07-21 22:15:49">2025-07-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/github-actions-sheng-cheng-zhi-chi-duo-chong-ji-qi-jia-gou-de-jing-xiang/" title="github actions生成支持多种机器架构的镜像">github actions生成支持多种机器架构的镜像</a><time datetime="2025-07-21T02:02:26.000Z" title="发表于 2025-07-21 10:02:26">2025-07-21</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/web/" style="font-size: 1.5em; color: #99a9bf">web</a> <a href="/tags/armbian/" style="font-size: 1.27em; color: #99a0a9">armbian</a> <a href="/tags/nas/" style="font-size: 1.27em; color: #99a0a9">nas</a> <a href="/tags/python/" style="font-size: 1.16em; color: #999b9e">python</a> <a href="/tags/macos/" style="font-size: 1.1em; color: #999">macos</a> <a href="/tags/game/" style="font-size: 1.1em; color: #999">game</a> <a href="/tags/docker/" style="font-size: 1.39em; color: #99a4b4">docker</a> <a href="/tags/termux/" style="font-size: 1.21em; color: #999ea4">termux</a> <a href="/tags/onecloud/" style="font-size: 1.33em; color: #99a2af">onecloud</a> <a href="/tags/linux/" style="font-size: 1.44em; color: #99a7ba">linux</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              七月 2025
+            </span>
+            <span class="card-archive-list-count">16</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              六月 2025
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              五月 2025
+            </span>
+            <span class="card-archive-list-count">12</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">25</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              三月 2025
+            </span>
+            <span class="card-archive-list-count">19</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/02/">
+            <span class="card-archive-list-date">
+              二月 2025
+            </span>
+            <span class="card-archive-list-count">24</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/01/">
+            <span class="card-archive-list-date">
+              一月 2025
+            </span>
+            <span class="card-archive-list-count">31</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              十二月 2024
+            </span>
+            <span class="card-archive-list-count">20</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">205</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">88.1k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-07-28T13:55:46.976Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By qs100371</span><span class="framework-info"><span>框架 </span><a href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
