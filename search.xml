@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>docker里的中文dos游戏</title>
+      <link href="/post/docker-li-de-zhong-wen-dos-you-xi/"/>
+      <url>/post/docker-li-de-zhong-wen-dos-you-xi/</url>
+      
+        <content type="html"><![CDATA[<p>重温一下儿时的游戏。docker里中文 DOS 游戏合集，目前共有 1898 款游戏。</p><span id="more"></span><p>项目地址：<a href="https://github.com/rwv/chinese-dos-games">rwv&#x2F;chinese-dos-games</a></p><p>本Docker项目由oD精简制作，只保留了部分经典游戏。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">dosgame-web-docker</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">dosgame</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8090:262&#x27;  #8090可以改成其他服务器没被占用的端口</span></span><br><span class="line"><span class="comment">#         volumes:</span></span><br><span class="line"><span class="comment">#             - &#x27;/root/data/docker_data/games/chinese-dos-games:/app/static/games&#x27;</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">&#x27;oldiy/dosgame-web-docker:latest</span></span><br></pre></td></tr></table></figure><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>从ip:8090访问。</p><p><img src="https://qs100371.vip/post-images/1753961920863.png"><br><img src="https://qs100371.vip/post-images/1753961926708.png"><br><img src="https://qs100371.vip/post-images/1753961932837.png"></p><p><img src="https://qs100371.vip/post-images/1753962121029.png"><br><img src="https://qs100371.vip/post-images/1753962343293.png"><br>实质是在dosbox里运行dos游戏。<br>适合于收藏，玩的话，已经不太适应了，需要全键盘操作。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+            <tag> game </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>找回neofetch</title>
       <link href="/post/zhao-hui-neofetch/"/>
       <url>/post/zhao-hui-neofetch/</url>
