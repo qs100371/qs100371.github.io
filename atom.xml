@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-08-13T06:51:46.452Z</updated>
+  <updated>2025-08-16T14:31:38.772Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -17,13 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>统信uos来了</title>
+    <link href="https://qs100371.vip/post/tong-xin-uos-lai-liao/"/>
+    <id>https://qs100371.vip/post/tong-xin-uos-lai-liao/</id>
+    <published>2025-08-16T14:18:54.000Z</published>
+    <updated>2025-08-16T14:31:38.772Z</updated>
+    
+    <content type="html"><![CDATA[<p>单位现在开始推广统信uos了，这是一个来源于深度linux的商业版os。</p><span id="more"></span><p>官网：<a href="https://www.uniontech.com/">https://www.uniontech.com/</a></p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>界面基本上和deepin linux一模一样。<br><img src="https://qs100371.vip/post-images/1755354285866.png"><br><img src="https://qs100371.vip/post-images/1755354236007.png"><br><img src="https://qs100371.vip/post-images/1755354240816.png"><br><img src="https://qs100371.vip/post-images/1755354244759.png"></p><h1 id="槽点"><a href="#槽点" class="headerlink" title="槽点"></a>槽点</h1><ul><li>系统需要收费激活</li><li>root权限需要登录并打开开发者模式</li></ul><p><img src="https://qs100371.vip/post-images/1755354386701.png"><br><img src="https://qs100371.vip/post-images/1755354392408.png"><br><img src="https://qs100371.vip/post-images/1755354398422.png"><br><img src="https://qs100371.vip/post-images/1755354408229.png"><br><img src="https://qs100371.vip/post-images/1755354414148.png"></p><hr><p>学校使用，只用word和ppt的话，问题不大，wps就可以搞定。字体是一个大问题，现在国家也没有发布免费字体供操作系统使用，以统一各类公文的字体样式。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;单位现在开始推广统信uos了，这是一个来源于深度linux的商业版os。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>影视聚合播放器:MoonTV</title>
     <link href="https://qs100371.vip/post/ying-shi-ju-he-bo-fang-qi-moontv/"/>
     <id>https://qs100371.vip/post/ying-shi-ju-he-bo-fang-qi-moontv/</id>
     <published>2025-08-12T07:38:12.000Z</published>
-    <updated>2025-08-13T06:51:46.452Z</updated>
+    <updated>2025-08-16T14:30:21.692Z</updated>
     
-    <content type="html"><![CDATA[<p>MoonTV 是一个开箱即用的、跨平台的影视聚合播放器。它基于 Next.js 14 + Tailwind CSS + TypeScript 构建，支持多资源搜索、在线播放、收藏同步、播放记录、本地&#x2F;云端存储，可以随时随地畅享海量免费影视内容。</p><span id="more"></span><p>项目地址：<a href="https://github.com/LunaTechLab/MoonTV">LunaTechLab&#x2F;MoonTV</a></p><p>libreTV的衍生应用，功能特性：</p><ul><li>多源聚合搜索：内置数十个免费资源站点，一次搜索立刻返回全源结果。</li><li>丰富详情页：支持剧集列表、演员、年份、简介等完整信息展示。</li><li>流畅在线播放：集成 HLS.js &amp; ArtPlayer。</li><li>收藏 + 继续观看：支持 Redis&#x2F;D1&#x2F;Upstash 存储，多端同步进度。</li><li>PWA：离线缓存、安装到桌面&#x2F;主屏，移动端原生体验。</li><li>响应式布局：桌面侧边栏 + 移动底部导航，自适应各种屏幕尺寸。</li><li>极简部署：一条 Docker 命令即可将完整服务跑起来，或免费部署到 Vercel、Netlify 和 Cloudflare。</li><li>智能去广告：自动跳过视频中的切片广告（实验性）</li></ul><h1 id="Vercel-部署"><a href="#Vercel-部署" class="headerlink" title="Vercel 部署"></a>Vercel 部署</h1><p>Fork 仓库到自己的 GitHub 账户。<br>登陆 Vercel，点击 Add New → Project，选择 Fork 后的仓库。<br>设置 PASSWORD 环境变量。<br>保持默认设置完成首次部署。<br>部署完成后即可通过分配的域名访问，也可以绑定自定义域名。</p><h1 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h1><ul><li><p>cli<br><code>docker run -d --name moontv -p 3000:3000 --env PASSWORD=your_password zhc1991/moontv:latest</code></p></li><li><p>docker-compose.yml</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">moontv-core</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">zhc1991/moontv:latest</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">moontv-core</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;3000:3000&#x27;</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PASSWORD=your_password</span></span><br></pre></td></tr></table></figure><p>官方提供的镜像好象有问题不能用。</p></li></ul><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p><img src="https://qs100371.vip/post-images/1754984832383.png"><br><img src="https://qs100371.vip/post-images/1754984840466.png"><br><img src="https://qs100371.vip/post-images/1754984853454.png"><br><img src="https://qs100371.vip/post-images/1754984861210.png"><br><img src="https://qs100371.vip/post-images/1754984867450.png"><br>打开一个片：<br><img src="https://qs100371.vip/post-images/1754984896081.png"><br><img src="https://qs100371.vip/post-images/1754984902420.png"><br><img src="https://qs100371.vip/post-images/1754984910467.png"><br>换一个片源：<br><img src="https://qs100371.vip/post-images/1754984915203.png"></p><h1 id="android-tv使用"><a href="#android-tv使用" class="headerlink" title="android tv使用"></a>android tv使用</h1><p>安装OrionTV（地址：<a href="https://github.com/zimplexing/OrionTV/releases%EF%BC%89">https://github.com/zimplexing/OrionTV/releases）</a><br>把api地址设置成moonTV的地址。<br><img src="https://qs100371.vip/post-images/1754985079584.png"><br><img src="https://qs100371.vip/post-images/1754985086230.png"><br>选择一个片：<br><img src="https://qs100371.vip/post-images/1754985181810.png"><br><img src="https://qs100371.vip/post-images/1754985193722.png"><br><img src="https://qs100371.vip/post-images/1754985216984.png"><br><img src="https://qs100371.vip/post-images/1754985223487.png"></p>]]></content>
+    <content type="html"><![CDATA[<p>MoonTV 是一个开箱即用的、跨平台的影视聚合播放器。它基于 Next.js 14 + Tailwind CSS + TypeScript 构建，支持多资源搜索、在线播放、收藏同步、播放记录、本地&#x2F;云端存储，可以随时随地畅享海量免费影视内容。</p><span id="more"></span><p>项目地址：<a href="https://github.com/LunaTechLab/MoonTV">LunaTechLab&#x2F;MoonTV</a></p><p>libreTV的衍生应用，功能特性：</p><ul><li>多源聚合搜索：内置数十个免费资源站点，一次搜索立刻返回全源结果。</li><li>丰富详情页：支持剧集列表、演员、年份、简介等完整信息展示。</li><li>流畅在线播放：集成 HLS.js &amp; ArtPlayer。</li><li>收藏 + 继续观看：支持 Redis&#x2F;D1&#x2F;Upstash 存储，多端同步进度。</li><li>PWA：离线缓存、安装到桌面&#x2F;主屏，移动端原生体验。</li><li>响应式布局：桌面侧边栏 + 移动底部导航，自适应各种屏幕尺寸。</li><li>极简部署：一条 Docker 命令即可将完整服务跑起来，或免费部署到 Vercel、Netlify 和 Cloudflare。</li><li>智能去广告：自动跳过视频中的切片广告（实验性）</li></ul><h1 id="Vercel-部署"><a href="#Vercel-部署" class="headerlink" title="Vercel 部署"></a>Vercel 部署</h1><p>Fork 仓库到自己的 GitHub 账户。<br>登陆 Vercel，点击 Add New → Project，选择 Fork 后的仓库。<br>设置 PASSWORD 环境变量。<br>保持默认设置完成首次部署。<br>部署完成后即可通过分配的域名访问，也可以绑定自定义域名。</p><h1 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h1><ul><li><p>cli<br><code>docker run -d --name moontv -p 3000:3000 --env PASSWORD=your_password zhc1991/moontv:latest</code></p></li><li><p>docker-compose.yml</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">moontv-core</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">zhc1991/moontv:latest</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">moontv-core</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;3000:3000&#x27;</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PASSWORD=your_password</span></span><br></pre></td></tr></table></figure><p>官方提供的镜像好象有问题不能用。</p></li></ul><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p><img src="https://qs100371.vip/post-images/1754984832383.png"><br><img src="https://qs100371.vip/post-images/1754984840466.png"><br><img src="https://qs100371.vip/post-images/1754984853454.png"><br><img src="https://qs100371.vip/post-images/1754984861210.png"><br><img src="https://qs100371.vip/post-images/1754984867450.png"><br>打开一个影片：<br><img src="https://qs100371.vip/post-images/1754984896081.png"><br><img src="https://qs100371.vip/post-images/1754984902420.png"><br><img src="https://qs100371.vip/post-images/1754984910467.png"><br>换一个片源：<br><img src="https://qs100371.vip/post-images/1754984915203.png"></p><h1 id="android-tv使用"><a href="#android-tv使用" class="headerlink" title="android tv使用"></a>android tv使用</h1><p>安装OrionTV（<a href="https://github.com/zimplexing/OrionTV/releases">点这里下载</a>）<br>把api地址设置成moonTV的地址。<br><img src="https://qs100371.vip/post-images/1754985079584.png"><br><img src="https://qs100371.vip/post-images/1754985086230.png"><br>选择一个影片：<br><img src="https://qs100371.vip/post-images/1754985181810.png"><br><img src="https://qs100371.vip/post-images/1754985193722.png"><br><img src="https://qs100371.vip/post-images/1754985216984.png"><br><img src="https://qs100371.vip/post-images/1754985223487.png"></p>]]></content>
     
     
     <summary type="html">&lt;p&gt;MoonTV 是一个开箱即用的、跨平台的影视聚合播放器。它基于 Next.js 14 + Tailwind CSS + TypeScript 构建，支持多资源搜索、在线播放、收藏同步、播放记录、本地&amp;#x2F;云端存储，可以随时随地畅享海量免费影视内容。&lt;/p&gt;</summary>
@@ -375,25 +392,6 @@
     
     
     <summary type="html">&lt;p&gt;hexo lanscape主题自带的搜索是google对本站的搜索，但没有梯子是用不了的。本文记录了改成本地搜索的过程。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>lucky ddns, 自动证书和反向代理一站式搞定</title>
-    <link href="https://qs100371.vip/post/lucky-ddns-zi-dong-zheng-shu-he-fan-xiang-dai-li-yi-zhan-shi-gao-ding/"/>
-    <id>https://qs100371.vip/post/lucky-ddns-zi-dong-zheng-shu-he-fan-xiang-dai-li-yi-zhan-shi-gao-ding/</id>
-    <published>2025-06-28T13:28:24.000Z</published>
-    <updated>2025-07-13T12:32:23.339Z</updated>
-    
-    <content type="html"><![CDATA[<p>偶然发现家里的宽带ipv6地址是公网地址，于是就开始折腾ddns，https。这里记录了整个过程。</p><span id="more"></span><h1 id="支持ipv6的路由器"><a href="#支持ipv6的路由器" class="headerlink" title="支持ipv6的路由器"></a>支持ipv6的路由器</h1><p>首先要有ipv6的路由器，把光猫设成桥接模式，用路由器拨号，关闭防火墙。</p><h1 id="安装lucky"><a href="#安装lucky" class="headerlink" title="安装lucky"></a>安装lucky</h1><p>前文已有记录。</p><h1 id="设置ddns"><a href="#设置ddns" class="headerlink" title="设置ddns"></a>设置ddns</h1><p>进入lucky设置，打开左侧“动态域名”，点“添加任务”，任务名称随便填，操作模式：简易模式，托管服务商：cloudflare（我是用的这个），token到cloudflare网站上创建，复制过来。打开{ipv6Addr}后的开关，点添加同步记录，记录名填完整域名，记录类型选AAAA，记录内容{ipv6Addr}，再点最下面的”添加任务“，成功的话就会把ipv6地址关联到域名上。<br><img src="https://qs100371.vip/post-images/1751118406835.png"><br><img src="https://qs100371.vip/post-images/1751118418503.png"><br><img src="https://qs100371.vip/post-images/1751118423250.png"><br><img src="https://qs100371.vip/post-images/1751118428303.png"></p><h1 id="申请SSL证书"><a href="#申请SSL证书" class="headerlink" title="申请SSL证书"></a>申请SSL证书</h1><p>打开左侧”SSL&#x2F;TLS证书“菜单，点添加证书，证书备注随便填，添加方式ACME，证书机构Let’sEncrypt，验证方式cloudflare，Token还是上面的token，域名列表填上面的域名，点最下面的添加，等几分钟就会生成证书。<br><img src="https://qs100371.vip/post-images/1751118915308.png"></p><p><img src="https://qs100371.vip/post-images/1751118960306.png"></p><h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><p>打开左侧”web服务菜单“，打开”添加web服务规则“，比如要代理192.168.0.5:8096，选中ipv6，监听端口8096，打开TLS开关，默认规则点开，服务类型关闭连接，点添加子规则，前端地址填域名，后端地址”<a href="http://192.168.0.5:8096"，点最下面的”添加web服务规则“。">http://192.168.0.5:8096&quot;，点最下面的”添加web服务规则“。</a><br><img src="https://qs100371.vip/post-images/1751119490139.png"><br><img src="https://qs100371.vip/post-images/1751119495310.png"><br><img src="https://qs100371.vip/post-images/1751119501458.png"></p><p><img src="https://qs100371.vip/post-images/1751119603913.png"></p><blockquote><p>直接用默认规则，填上默认目标地址，打开万事大吉开关，点添加也可，这更简单，不需要子规则，因为本机只有一个域名。<br><img src="https://qs100371.vip/post-images/1751358242414.png"><br><img src="https://qs100371.vip/post-images/1751358288712.png"></p></blockquote><p>完成所有步骤就可以用https:&#x2F;&#x2F;域名:8096访问jellyfin的服务了。</p><p>参考：<br><em><a href="https://zhuanlan.zhihu.com/p/1919351554286294786">NAS必备！手把手教你部署最新 Lucky ，一站式搞定 DDNS、自动证书与反向代理</a></em></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;偶然发现家里的宽带ipv6地址是公网地址，于是就开始折腾ddns，https。这里记录了整个过程。&lt;/p&gt;</summary>
     
     
     
