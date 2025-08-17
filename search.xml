@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>docker里的推箱子</title>
+      <link href="/post/docker-li-de-tui-xiang-zi/"/>
+      <url>/post/docker-li-de-tui-xiang-zi/</url>
+      
+        <content type="html"><![CDATA[<p>网页版推箱子。</p><span id="more"></span><p>项目地址：<a href="https://github.com/ecyrbe/sokoban">ecyrbe&#x2F;sokoban</a></p><p>用方向键操控工人推动箱子到指定位置，490个关卡越玩越上头，支持无限撤销和快捷重开，堪称浏览器里的摸鱼神器！</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">sokoban</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">wbsu2003/sokoban</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">tuixiangzi</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">7180:80</span></span><br></pre></td></tr></table></figure><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p><img src="https://qs100371.vip/post-images/1755414856881.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+            <tag> game </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>统信uos来了</title>
       <link href="/post/tong-xin-uos-lai-liao/"/>
       <url>/post/tong-xin-uos-lai-liao/</url>
