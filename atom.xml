@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-08-24T11:12:33.914Z</updated>
+  <updated>2025-08-29T13:26:27.080Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网心云oes拆机和刷机指南</title>
+    <link href="https://qs100371.vip/post/wang-xin-yun-oes-chai-ji-he-shua-ji-zhi-nan/"/>
+    <id>https://qs100371.vip/post/wang-xin-yun-oes-chai-ji-he-shua-ji-zhi-nan/</id>
+    <published>2025-08-29T13:06:05.000Z</published>
+    <updated>2025-08-29T13:26:27.080Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时间了，把网心云oes拆开，短接1v8和gnd刷机成armbian。本文是简单的过程记录。</p><span id="more"></span><h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><ul><li>DriverAssitant：瑞芯微 USB 驱动</li><li>RKDevTool：瑞芯微刷机工具</li><li>MiniLoaderAll.bin：BOOT 固件</li><li>Armbian 固件：Flash_Armbian_25.05.0_rockchip_efused-wxy-oec_bookworm_6.1.99_server_2025.03.20（Armbian 系统，内核版本 6.1.99）</li></ul><p>下载：百度云盘：<a href="https://pan.baidu.com/s/16rWWCdfym5a3UgfeekekQg">链接</a>， 提取码：4opm</p><h1 id="拆机"><a href="#拆机" class="headerlink" title="拆机"></a>拆机</h1><p>比较好拆。</p><ul><li>打开盖板<br>底部向上推，打开外壳盖板。</li><li>拆卸螺丝<br>4个螺丝，向上推取下侧面外壳。</li><li>拆卸 SATA 接口<br>3个螺丝，撕下保护排线的黑胶带，小心解锁黑色卡扣，轻轻取出SATA 排线。</li><li>拆卸内壳<br>8 个螺丝，用卡片从左侧空隙撬开，取出内壳。<br>主板图，其中红色圈中是短接点。<br><img src="https://qs100371.vip/post-images/1756473236344.png"></li></ul><h1 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h1><p>下载软件，先安装瑞芯微 USB 驱动，再打开刷机软件。<br>设置如图：<br><img src="https://qs100371.vip/post-images/1756473322210.png"></p><ul><li><p>LoaderToDDR：选择 MiniLoaderAll.bin。</p></li><li><p>System：选择 Armbian 固件（如 Flash_Armbian_25.05.0_rockchip_efused-wxy-oec_bookworm_6.1.99_server_2025.03.20）。</p></li><li><p>进入 MASKROM 模式<br>1 短接焊点：用镊子短接主板正面两个指定焊点，保持接触稳定。<br>2 连接 Type-C：将 Type-C 数据线一端连接电脑，另一端插入 OEC 主板。<br>3 操作时机：插入 Type-C 数据线后 2 秒内，RKDevTool 应提示“发现一个 MASKROM 设备”。此时松开短接。<br>4 执行刷机：在 RKDevTool 中点击“执行”，开始写入固件。</p></li></ul><p><img src="https://qs100371.vip/post-images/1756473845717.png"></p><p>若未检测到设备，拔下 Type-C 数据线后重试，短接时间不宜过长。<br>写入过程约 8 分钟（约 7GB 数据），包括 MiniLoaderAll.bin 和 Armbian 固件。</p><h1 id="验证-Armbian-系统"><a href="#验证-Armbian-系统" class="headerlink" title="验证 Armbian 系统"></a>验证 Armbian 系统</h1><p>ssh连接，默认用户:root，默认密码:1234。<br>首次进入重设密码，可不设普通用户，直接退出。<br>剩下的就是安装docker等等例行步骤。<br><img src="https://qs100371.vip/post-images/1756473862165.png"><br><img src="https://qs100371.vip/post-images/1756473869796.png"><br><img src="https://qs100371.vip/post-images/1756473875056.png"></p><h1 id="再次刷机"><a href="#再次刷机" class="headerlink" title="再次刷机"></a>再次刷机</h1><ul><li>第一次从网心云原系统刷成 Armbian 或者 OpenWrt 系统需要拆机短接进入刷机模式。以后再刷机就不用拆机短接了，可以用顶针按住RESET孔，然后连接数据线进入刷机模式。</li><li>无论是短接刷机，还是捅RESET孔刷机，都不用接电源，因为type-c刷机线可以供电。</li><li>如果之前已经刷过Armbian或OpenWrt系统，再次刷机一般进入的是 Loader 模式，这种情况下不用选择loader文件，只选需要刷入的img镜像文件即可。</li></ul><p>参考文献：<br><em><a href="https://blog.csdn.net/u013172930/article/details/150778777">网心云 OEC-Turbo 刷机 Armbian 系统教程</a></em></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;有时间了，把网心云oes拆开，短接1v8和gnd刷机成armbian。本文是简单的过程记录。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="armbian" scheme="https://qs100371.vip/tags/armbian/"/>
+    
+  </entry>
   
   <entry>
     <title>折腾豆瓣书影音</title>
@@ -382,27 +401,6 @@
     
     
     <category term="web" scheme="https://qs100371.vip/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>飞牛os重启后smb中外置存储丢失问题的修复</title>
-    <link href="https://qs100371.vip/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/"/>
-    <id>https://qs100371.vip/post/fei-niu-os-chong-qi-hou-smb-zhong-wai-zhi-cun-chu-diu-shi-wen-ti-de-xiu-fu/</id>
-    <published>2025-07-06T08:09:26.000Z</published>
-    <updated>2025-07-06T09:39:27.704Z</updated>
-    
-    <content type="html"><![CDATA[<p>研究docker中的飞牛os有几天了，又发现fnos中docker也可以直接用cli方式建立，这样安装应用不用局限于应用商店了，于是把ubuntu server 22小主机给格了，安装了fnos。今天发现小主机重启之后smb中的项目丢失了部分。本文记录了修复处理过程。</p><span id="more"></span><h1 id="飞牛的存储"><a href="#飞牛的存储" class="headerlink" title="飞牛的存储"></a>飞牛的存储</h1><p>飞牛里的存储分几部分：</p><ul><li><p>系统盘<br>这是安装飞牛系统的空间，大约11G左右。多余的部分给升级系统用的。</p></li><li><p>存储空间<br>这是存放飞牛系统应用的数据所在，建立存储空间需要格式化硬盘。</p></li><li><p>外置存储<br>因为硬盘原来有数据，不想格式化硬盘，所以没有建立存储的方式管理，飞牛os把这些硬盘当成外置存储处理，类似于usb，挂载在了&#x2F;vol00&#x2F;‘HP SSD S700 500GB’。</p></li></ul><p>因为这个名字太不规则，我用fstab的方式挂在了&#x2F;disk1上。<br>方法：<br><code>lsblk</code><br>得到硬盘的标识是sdb，<br><code>sudo blkid /dev/sdb</code><br>得到硬盘的UUID：<br>&#x2F;dev&#x2F;sdb: UUID&#x3D;”2a8fa6ee-217e-4bde-88fe-5a62e9333310” BLOCK_SIZE&#x3D;”4096” TYPE&#x3D;”ext4”<br>&#x2F;etc&#x2F;fstab中增加<br><code>UUID=&quot;2a8fa6ee-217e-4bde-88fe-5a62e9333310&quot; /disk1 ext4 defaults 0 0</code><br>建立目录&#x2F;disk1，重启，硬盘就挂在了&#x2F;disk1下。</p><h1 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h1><p>今天发现smb在系统重启后丢失了外置存储项，到飞牛官方论坛上找解决方法，有个官方人员说系统因为重启外置存储的标识发生变化导致了这个问题，待后续解决。有人提出用fstab把外置存储手动挂在&#x2F;vol00目录下。看着和挂在&#x2F;disk1下的方式是一样的，一时没仔细看，就照搬方法，把fstab修改，&#x2F;disk1替换成&#x2F;vol00&#x2F;HP SSD S700 500GB，重启系统。<em>当时没发现路径上有空格。</em><br>结果系统启动失败，接上显示器才发现是硬盘挂载出问题了，启动到紧急模式，一直询问root密码，飞牛安装完成后建立的用户的密码也不管用，之前sudo都能用的，之前也没设置root用户密码。<br>上网一搜，要重置系统root密码。</p><h1 id="重置系统root密码"><a href="#重置系统root密码" class="headerlink" title="重置系统root密码"></a>重置系统root密码</h1><p>出现蓝色界面按e键，进入编辑模式，找到LINUX开头的语句，用光标选到该语句最后一个字符，然后输入<br>       rw init&#x3D;&#x2F;bin&#x2F;bash，按住Ctrl+X键，启动系统，检查并修复文件系统，进入系统，输入passwd root，设置root用户密码，修改fstab，把外置存储路径改成&#x2F;vol00&#x2F;disk1，保存后执行exit，reboot重启系统。</p><h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>重启后，成功进入系统。由于外置存储路径改变，飞牛影视和迅雷的数据路径受到影响，需要重新设置。<br>经验证，再重启系统，smb就不会丢失关联的外置存储项目，问题解决。</p><hr><p>飞牛在处理存储方面的方式导致了这次的问题，作为自部署的nas系统，经常会有带有数据的硬盘的加入(不想格式化硬盘)，这样的问题就不可避免。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;研究docker中的飞牛os有几天了，又发现fnos中docker也可以直接用cli方式建立，这样安装应用不用局限于应用商店了，于是把ubuntu server 22小主机给格了，安装了fnos。今天发现小主机重启之后smb中的项目丢失了部分。本文记录了修复处理过程。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="linux" scheme="https://qs100371.vip/tags/linux/"/>
-    
-    <category term="nas" scheme="https://qs100371.vip/tags/nas/"/>
     
   </entry>
   
