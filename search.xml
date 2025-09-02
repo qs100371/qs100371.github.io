@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>网心云oes刷群晖</title>
+      <link href="/post/wang-xin-yun-oes-shua-qun-hui/"/>
+      <url>/post/wang-xin-yun-oes-shua-qun-hui/</url>
+      
+        <content type="html"><![CDATA[<p>有了拆机刷armbian的经历，oes再刷群晖就不需拆机短接了。本文记录了刷群晖的过程和坑。</p><span id="more"></span><h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><p>下载地址：<a href="https://pan.baidu.com/s/147npRIArwKEBoTldor32Zg?pwd=f7fi">https://pan.baidu.com/s/147npRIArwKEBoTldor32Zg?pwd=f7fi</a></p><h1 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h1><p>刷机软件和上一篇一样。img文件选择上面下载的synology.img。<br>用牙签捅住reset键，插上type-C线。<br><img src="https://qs100371.vip/post-images/1756821390706.png"><br><img src="https://qs100371.vip/post-images/1756821410188.png"><br>软件显示发现设备，松开牙签，点执行。<br><img src="https://qs100371.vip/post-images/1756821451225.png"></p><h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>首先断开路由器和外网连接(很重要！)。<br>oes接电，插上网线，此时内网通，外网断。<br>查看路由器上新接入的SynologyNAS设备的ip，在浏览器上打开，<br><img src="https://qs100371.vip/post-images/1756821617136.png"><br><img src="https://qs100371.vip/post-images/1756821632834.png"><br><img src="https://qs100371.vip/post-images/1756821640626.png"><br><img src="https://qs100371.vip/post-images/1756821647730.png"><br><img src="https://qs100371.vip/post-images/1756821654499.png"><br><img src="https://qs100371.vip/post-images/1756821659385.png"><br><img src="https://qs100371.vip/post-images/1756821666251.png"><br><img src="https://qs100371.vip/post-images/1756821689166.png"><br><img src="https://qs100371.vip/post-images/1756821699262.png"><br><img src="https://qs100371.vip/post-images/1756821713593.png"><br><img src="https://qs100371.vip/post-images/1756821718867.png"><br><img src="https://qs100371.vip/post-images/1756821724731.png"><br><img src="https://qs100371.vip/post-images/1756821730022.png"><br><img src="https://qs100371.vip/post-images/1756821735256.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nas </tag>
+            
+            <tag> oes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>网心云oes拆机和刷机指南</title>
       <link href="/post/wang-xin-yun-oes-chai-ji-he-shua-ji-zhi-nan/"/>
       <url>/post/wang-xin-yun-oes-chai-ji-he-shua-ji-zhi-nan/</url>
@@ -15,6 +36,8 @@
         <tags>
             
             <tag> armbian </tag>
+            
+            <tag> oes </tag>
             
         </tags>
       
@@ -55,6 +78,8 @@
         <tags>
             
             <tag> nas </tag>
+            
+            <tag> oes </tag>
             
         </tags>
       
