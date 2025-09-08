@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>一次hexo deploy失败的修复过程</title>
+      <link href="/post/yi-ci-hexo-deploy-shi-bai-de-xiu-fu-guo-cheng/"/>
+      <url>/post/yi-ci-hexo-deploy-shi-bai-de-xiu-fu-guo-cheng/</url>
+      
+        <content type="html"><![CDATA[<p>今天突然就发现<code>hexo -d</code>执行出错，看输出是ssh认证出问题了。本文记录了修复过程。</p><span id="more"></span><h1 id="出错提示"><a href="#出错提示" class="headerlink" title="出错提示"></a>出错提示</h1><p><img src="https://qs100371.vip/post-images/1757335554963.png"></p><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host github.com port 22: Connection timed out</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL Something&#x27;s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line"><span class="keyword">Error: </span>Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (D:\hexo\blog\node_modules\hexo-deployer-git\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">    at ChildProcess.emit (node:events:518:28)</span><br><span class="line">    at cp.emit (D:\hexo\blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:293:12)</span><br></pre></td></tr></table></figure><p>问题出在ssh认证上。</p><h1 id="修复过程-windows-10平台"><a href="#修复过程-windows-10平台" class="headerlink" title="修复过程(windows 10平台)"></a>修复过程(windows 10平台)</h1><ul><li><p>重新生成ssh key<br>cmd命令行提示下执行：<br><code>ssh-keygen -t rsa -b 4096 -C &quot;email&quot;</code><br>email为github帐号。会在~&#x2F;.ssh&#x2F;目录生成id_rsa，id_rsa.pub文件。</p></li><li><p>ssh key保存到github<br>登录github，点右上角头像，settings，左侧菜单选择 SSH and GPG keys，点击绿色按钮 New SSH key，用文本编辑器打开id_rsa.pub，把内容粘贴到key里面，点击 Add SSH key。<br><img src="https://qs100371.vip/post-images/1757335516454.png"></p></li><li><p>config文件<br>~&#x2F;.ssh&#x2F;目录下建立config文件，内容为：</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  Hostname ssh.github.com</span><br><span class="line">  <span class="keyword">User</span> <span class="title">git</span></span><br><span class="line">  Port <span class="number">443</span></span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure></li></ul><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>cmd命令行提示下执行：<br><code>ssh -T git@github.com</code><br>输出为：</p><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The authenticity <span class="keyword">of</span> host <span class="comment">&#x27;[ssh.github.com]:443 ([20.205.243.160]:443)&#x27; can&#x27;t be established.</span></span><br><span class="line">ECDSA <span class="keyword">key</span> fingerprint <span class="built_in">is</span> SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM.</span><br><span class="line">Are you sure you want <span class="keyword">to</span> <span class="keyword">continue</span> connecting (yes/no/[fingerprint])? yes</span><br><span class="line"><span class="symbol">Warning:</span> Permanently added <span class="comment">&#x27;[ssh.github.com]:443,[20.205.243.160]:443&#x27; (ECDSA) to the list of known hosts.</span></span><br><span class="line">Hi qs100371! You<span class="comment">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure><p>认证成功。<br>再执行<code>hexo -d</code>就没有错误提示了。<br><img src="https://qs100371.vip/post-images/1757335775742.png"></p><hr><p>时间能磨灭一切，之前会的，后面会忘记，记录下来，再出现同样的问题就可以照做了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Web ssh客户端Nexus Terminal</title>
       <link href="/post/web-ssh-ke-hu-duan-nexus-terminal/"/>
       <url>/post/web-ssh-ke-hu-duan-nexus-terminal/</url>
