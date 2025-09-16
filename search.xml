@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>网盘搜索PanHub</title>
+      <link href="/post/wang-pan-sou-suo-panhub/"/>
+      <url>/post/wang-pan-sou-suo-panhub/</url>
+      
+        <content type="html"><![CDATA[<p>PanHub用一个搜索框，搜遍阿里云盘、夸克、百度网盘、115、迅雷等热门网盘资源。即搜即得、聚合去重、免费开源、零广告、轻量部署。</p><span id="more"></span><p>项目地址：<a href="https://github.com/wu529778790/panhub.shenzjd.com">https://github.com/wu529778790/panhub.shenzjd.com</a></p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>可以一键部署到 Vercel，设置好域名就能正常使用。</p><p>Docker 部署：<br><code>docker run --name panhub -p 3000:3000 -d docker.io/wu529778790/panhub.shenzjd.com:latest</code><br>或<br><code>docker run --name panhub -p 3000:3000 -d ghcr.io/wu529778790/panhub.shenzjd.com:latest</code></p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><img src="https://qs100371.vip/post-images/1758020023783.png"><br><img src="https://qs100371.vip/post-images/1758020028624.png"><br><img src="https://qs100371.vip/post-images/1758020033285.png"><br><img src="https://qs100371.vip/post-images/1758020038727.png"><br><img src="https://qs100371.vip/post-images/1758020047420.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一次hexo deploy失败的修复过程</title>
       <link href="/post/yi-ci-hexo-deploy-shi-bai-de-xiu-fu-guo-cheng/"/>
       <url>/post/yi-ci-hexo-deploy-shi-bai-de-xiu-fu-guo-cheng/</url>
@@ -65,7 +84,7 @@
       <link href="/post/wang-xin-yun-oec-shua-qun-hui/"/>
       <url>/post/wang-xin-yun-oec-shua-qun-hui/</url>
       
-        <content type="html"><![CDATA[<p>有了拆机刷armbian的经历，oec再刷群晖就不需拆机短接了。本文记录了刷群晖的过程和坑。</p><span id="more"></span><h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><p>下载地址：<a href="https://pan.baidu.com/s/147npRIArwKEBoTldor32Zg?pwd=f7fi">https://pan.baidu.com/s/147npRIArwKEBoTldor32Zg?pwd=f7fi</a></p><h1 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h1><p>刷机软件和上一篇一样。img文件选择上面下载的synology.img。<br>用牙签捅住reset键，插上type-C线。<br><img src="https://qs100371.vip/post-images/1756821390706.png"><br><img src="https://qs100371.vip/post-images/1756821410188.png"><br>软件显示发现设备，松开牙签，点执行。<br><img src="https://qs100371.vip/post-images/1756821451225.png"></p><h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>首先断开路由器和外网连接(很重要！)。<br>oes接电，插上网线，此时内网通，外网断。<br>查看路由器上新接入的SynologyNAS设备的ip，在浏览器上打开，<br><img src="https://qs100371.vip/post-images/1756821617136.png"><br><img src="https://qs100371.vip/post-images/1756821632834.png"><br><img src="https://qs100371.vip/post-images/1756821640626.png"><br><img src="https://qs100371.vip/post-images/1756821647730.png"><br><img src="https://qs100371.vip/post-images/1756821654499.png"><br><img src="https://qs100371.vip/post-images/1756821659385.png"><br><img src="https://qs100371.vip/post-images/1756821666251.png"><br><img src="https://qs100371.vip/post-images/1756821689166.png"><br><img src="https://qs100371.vip/post-images/1756821699262.png"><br><img src="https://qs100371.vip/post-images/1756821713593.png"><br><img src="https://qs100371.vip/post-images/1756821718867.png"><br><img src="https://qs100371.vip/post-images/1756821724731.png"><br><img src="https://qs100371.vip/post-images/1756821730022.png"><br><img src="https://qs100371.vip/post-images/1756821735256.png"></p>]]></content>
+        <content type="html"><![CDATA[<p>有了拆机刷armbian的经历，oec再刷群晖就不需拆机短接了。本文记录了刷群晖的过程和坑。</p><span id="more"></span><h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><p>下载地址：<a href="https://pan.baidu.com/s/147npRIArwKEBoTldor32Zg?pwd=f7fi">https://pan.baidu.com/s/147npRIArwKEBoTldor32Zg?pwd=f7fi</a></p><h1 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h1><p>刷机软件和上一篇一样。img文件选择上面下载的synology.img。<br>用牙签捅住reset键，插上type-C线。<br><img src="https://qs100371.vip/post-images/1756821390706.png"><br><img src="https://qs100371.vip/post-images/1756821410188.png"><br>软件显示发现设备，松开牙签，点执行。<br><img src="https://qs100371.vip/post-images/1756821451225.png"></p><h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>首先断开路由器和外网连接(很重要！)。<br>oec接电，插上网线，此时内网通，外网断。<br>查看路由器上新接入的SynologyNAS设备的ip，在浏览器上打开，<br><img src="https://qs100371.vip/post-images/1756821617136.png"><br><img src="https://qs100371.vip/post-images/1756821632834.png"><br><img src="https://qs100371.vip/post-images/1756821640626.png"><br><img src="https://qs100371.vip/post-images/1756821647730.png"><br><img src="https://qs100371.vip/post-images/1756821654499.png"><br><img src="https://qs100371.vip/post-images/1756821659385.png"><br><img src="https://qs100371.vip/post-images/1756821666251.png"><br><img src="https://qs100371.vip/post-images/1756821689166.png"><br><img src="https://qs100371.vip/post-images/1756821699262.png"><br><img src="https://qs100371.vip/post-images/1756821713593.png"><br><img src="https://qs100371.vip/post-images/1756821718867.png"><br><img src="https://qs100371.vip/post-images/1756821724731.png"><br><img src="https://qs100371.vip/post-images/1756821730022.png"><br><img src="https://qs100371.vip/post-images/1756821735256.png"></p>]]></content>
       
       
       
@@ -124,7 +143,7 @@
       <link href="/post/wang-xin-yun-oec-he-xi-ying-nas-xi-tong/"/>
       <url>/post/wang-xin-yun-oec-he-xi-ying-nas-xi-tong/</url>
       
-        <content type="html"><![CDATA[<p>2018年入手玩客云（￥420），2020年到2023年跑PCDN回血￥930，后来跑不动就下线了。现在入手白色oec，白色，上下面板是透明有机玻璃，看着挺高大上。</p><span id="more"></span><h1 id="oec"><a href="#oec" class="headerlink" title="oec"></a>oec</h1><p><img src="https://qs100371.vip/post-images/1755702007904.png"><br>配置对比：</p><table><thead><tr><th>玩客云</th><th>第一代</th><th>OEC</th></tr></thead><tbody><tr><td>CPU</td><td>S805</td><td>RK3566</td></tr><tr><td>指令集</td><td>32 位</td><td>64 位</td></tr><tr><td>发布日期</td><td>Q2 2014</td><td>Q2 2020</td></tr><tr><td>工艺</td><td>28 nm</td><td>22 nm</td></tr><tr><td>TDP</td><td>5 W</td><td>3 W</td></tr><tr><td>Geekbench 4 单核</td><td>525</td><td>764</td></tr><tr><td>Geekbench 4 多核</td><td>1423</td><td>2069</td></tr></tbody></table><p>第一代玩客云虽然也有千兆网口，但是没有 USB3.0，读写速度受限于 USB2.0，自带的内存也只有 1G，只能搞点对读写速度没啥要求的应用，比如 HomeAssistant。而 OEC 不仅有 USB3.0，内置的 2.5 寸 SSD 位置还能避免再挂个 USB，速写速度更快！看起来还更加美观。</p><p>目前 OEC 不仅能刷 armbian，官方还支持直接使用手机 App 将网心云固件更新为昔映轻 NAS 系统，整机带一块 2.5 寸 SSD 的功耗仅有 2～3w，做一个备份服务器，跑一些 docker，搞一个简单的影音服务器都没问题。<br><img src="https://qs100371.vip/post-images/1755701908285.png"></p><h1 id="昔映"><a href="#昔映" class="headerlink" title="昔映"></a>昔映</h1><p><img src="https://qs100371.vip/post-images/1755702146242.png"><br><img src="https://qs100371.vip/post-images/1755702171270.png"><br><img src="https://qs100371.vip/post-images/1755702199413.png"><br><img src="https://qs100371.vip/post-images/1755702205656.png"></p><p><img src="https://qs100371.vip/post-images/1755702215454.png"><br><img src="https://qs100371.vip/post-images/1755702228329.png"><br><img src="https://qs100371.vip/post-images/1755702236800.png"></p><hr><p>现在也不想仔细体验昔映，有机会再去刷机。</p>]]></content>
+        <content type="html"><![CDATA[<p>2018年入手玩客云（￥420），2020年到2023年跑PCDN回血￥930，后来跑不动就下线了。现在入手白色oec，白色，上下面板是透明有机玻璃，看着挺高大上。</p><span id="more"></span><h1 id="oec"><a href="#oec" class="headerlink" title="oec"></a>oec</h1><p><img src="https://qs100371.vip/post-images/1755702007904.png"><br>配置对比：</p><table><thead><tr><th>玩客云</th><th>第一代</th><th>OEC</th></tr></thead><tbody><tr><td>CPU</td><td>S805</td><td>RK3566</td></tr><tr><td>指令集</td><td>32 位</td><td>64 位</td></tr><tr><td>发布日期</td><td>Q2 2014</td><td>Q2 2020</td></tr><tr><td>工艺</td><td>28 nm</td><td>22 nm</td></tr><tr><td>TDP</td><td>5 W</td><td>3 W</td></tr><tr><td>Geekbench 4 单核</td><td>525</td><td>764</td></tr><tr><td>Geekbench 4 多核</td><td>1423</td><td>2069</td></tr></tbody></table><p>第一代玩客云虽然也有千兆网口，但是没有 USB3.0，读写速度受限于 USB2.0，自带的内存也只有 1G，只能搞点对读写速度没啥要求的应用，比如 HomeAssistant。而 OEC 不仅有 USB3.0，内置的 2.5 寸 SSD 位置还能避免再挂个 USB，速写速度更快！看起来还更加美观。</p><p>目前 OEC 不仅能刷 armbian，官方还支持直接使用手机 App 将网心云固件更新为昔映轻 NAS 系统，整机带一块 2.5 寸 SSD 的功耗仅有 2～3w，做一个备份服务器，跑一些 docker，搞一个简单的影音服务器都没问题。<br><img src="https://qs100371.vip/post-images/1755701908285.png"></p><h1 id="昔映"><a href="#昔映" class="headerlink" title="昔映"></a>昔映</h1><p><img src="https://qs100371.vip/post-images/1755702146242.png"><br><img src="https://qs100371.vip/post-images/1755702171270.png"><br><img src="https://qs100371.vip/post-images/1755702199413.png"><br><img src="https://qs100371.vip/post-images/1755702205656.png"></p><p><img src="https://qs100371.vip/post-images/1755702215454.png"><br><img src="https://qs100371.vip/post-images/1755702228329.png"><br><img src="https://qs100371.vip/post-images/1755702236800.png"></p>]]></content>
       
       
       
