@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-10-21T13:45:05.793Z</updated>
+  <updated>2025-10-27T13:13:56.190Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>打造本地直播信号源:IPTV-API</title>
+    <link href="https://qs100371.vip/post/da-zao-ben-di-zhi-bo-xin-hao-yuan-iptv-api/"/>
+    <id>https://qs100371.vip/post/da-zao-ben-di-zhi-bo-xin-hao-yuan-iptv-api/</id>
+    <published>2025-10-27T12:53:11.000Z</published>
+    <updated>2025-10-27T13:13:56.190Z</updated>
+    
+    <content type="html"><![CDATA[<p>影视仓的直播源不好找，就算有也会很快失效，可以自己打造一个。</p><span id="more"></span><p>项目地址：<a href="https://github.com/Guovin/iptv-api/">https://github.com/Guovin/iptv-api/</a><br>📺IPTV直播源自动更新平台，『✨全自动化采集、筛选、测速流程🚀』，支持丰富的个性化配置，生成结果输入播放器即可观看。</p><h1 id="docker部署"><a href="#docker部署" class="headerlink" title="docker部署"></a>docker部署</h1><p>docker-compose.yml</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">iptv-api</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">guovern/iptv-api</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">iptv-api</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;7000:8000&quot;</span></span><br><span class="line">    <span class="attribute">networks</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">iptv-network</span></span><br><span class="line">    <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/iptv-api/config</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./output:/iptv-api/output</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line"><span class="attribute">networks</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">iptv-network</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">driver</span><span class="punctuation">:</span> <span class="string">bridge</span></span><br></pre></td></tr></table></figure><p>构建之后需要等待更新数据。</p><hr><table><thead><tr><th>接口</th><th>描述</th></tr></thead><tbody><tr><td>&#x2F;</td><td>默认接口</td></tr><tr><td>&#x2F;m3u</td><td>m3u 格式接口</td></tr><tr><td>&#x2F;txt</td><td>txt 格式接口</td></tr><tr><td>&#x2F;ipv4</td><td>ipv4 默认接口</td></tr><tr><td>&#x2F;ipv6</td><td>ipv6 默认接口</td></tr></tbody></table><h1 id="体验直播接口"><a href="#体验直播接口" class="headerlink" title="体验直播接口"></a>体验直播接口</h1><h2 id="在影视仓等直播软件中填入直播地址：http-192-168-0-4-7000-m3u-即可使用。似乎不太高清，有时也很卡，只能是凑合着用。"><a href="#在影视仓等直播软件中填入直播地址：http-192-168-0-4-7000-m3u-即可使用。似乎不太高清，有时也很卡，只能是凑合着用。" class="headerlink" title="在影视仓等直播软件中填入直播地址：http://192.168.0.4:7000/m3u 即可使用。似乎不太高清，有时也很卡，只能是凑合着用。"></a>在影视仓等直播软件中填入直播地址：<a href="http://192.168.0.4:7000/m3u">http://192.168.0.4:7000/m3u</a> 即可使用。<br><img src="https://qs100371.vip/post-images/1761570657474.png"><br><img src="https://qs100371.vip/post-images/1761570664912.png"><br><img src="https://qs100371.vip/post-images/1761570676020.png"><br>似乎不太高清，有时也很卡，只能是凑合着用。</h2><p>现在电视直播app都不太好用，推荐一个app：直播电视，项目地址：<a href="https://izbds.com/">https://izbds.com/</a>，适用于安卓。<br><img src="https://qs100371.vip/post-images/1761570671354.png"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;影视仓的直播源不好找，就算有也会很快失效，可以自己打造一个。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="https://qs100371.vip/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>一个在线阅读器reader</title>
@@ -375,25 +394,6 @@
     
     
     <summary type="html">&lt;p&gt;使用 GitHub Actions 自动化 Docker 工作流程，只需几个简单的步骤即可启动并运行。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="docker" scheme="https://qs100371.vip/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>上传镜像到github镜像仓库</title>
-    <link href="https://qs100371.vip/post/shang-chuan-jing-xiang-dao-github-jing-xiang-cang-ku/"/>
-    <id>https://qs100371.vip/post/shang-chuan-jing-xiang-dao-github-jing-xiang-cang-ku/</id>
-    <published>2025-07-20T00:36:54.000Z</published>
-    <updated>2025-07-20T13:28:06.130Z</updated>
-    
-    <content type="html"><![CDATA[<p>GitHub以托管代码仓库为切入点，提供Github Container Registry服务，使用方法和dockerhub类似。</p><span id="more"></span><h1 id="登录ghcr-io"><a href="#登录ghcr-io" class="headerlink" title="登录ghcr.io"></a>登录ghcr.io</h1><p>ghcr.io登录不使用帐号密码，需要使用 <a href="https://github.com/settings/tokens/">https://github.com/settings/tokens/</a>页面创建的 Token 作为密码才可以推送镜像。<br>打开上面的链接，token(classic)，generate new token，勾选 write:packages 和 read:packages ，repo 会自动选中，创建 Token。<br>token只显示一次，注意保存。<br><code>docker login ghcr.io -u qs100371</code><br>密码就是上面的token。<br>认证成功就可以push镜像。</p><h1 id="push镜像"><a href="#push镜像" class="headerlink" title="push镜像"></a>push镜像</h1><p>push之前修改镜像tag为ghcr.io&#x2F;qs100371&#x2F;phpserver，之后和dockerhub一样推送。<br><code>docker push ghcr.io/qs100371/phpserver</code></p><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@armbian:~<span class="comment"># docker tag qs100371/phpserver ghcr.io/qs100371/phpserver</span></span><br><span class="line">root@armbian:~<span class="comment"># docker push ghcr.io/qs100371/phpserver</span></span><br><span class="line">Using default <span class="params">tag:</span> latest</span><br><span class="line">The push refers to repository [ghcr.io<span class="operator">/</span>qs100371<span class="operator">/</span>phpserver]</span><br><span class="line"><span class="number">7</span><span class="params">c2c9299fc3f:</span> Pushed </span><br><span class="line"><span class="number">7</span><span class="params">ca457e7c1dd:</span> Pushed </span><br><span class="line"><span class="number">4</span><span class="params">b74ddfda19e:</span> Pushed </span><br><span class="line"><span class="number">2221087</span><span class="params">bbb25:</span> Pushed </span><br><span class="line"><span class="number">70926</span><span class="params">ed51c84:</span> Pushed </span><br><span class="line"><span class="params">f521dad3cd4e:</span> Pushed </span><br><span class="line"><span class="number">4530</span><span class="params">fb17527f:</span> Pushed </span><br><span class="line"><span class="params">b9bd58eed14a:</span> Pushed </span><br><span class="line"><span class="params">fef9d3931c24:</span> Pushed </span><br><span class="line"><span class="number">0</span><span class="params">a9193454ae1:</span> Pushed </span><br><span class="line"><span class="params">ea2456e60fad:</span> Pushed </span><br><span class="line"><span class="params">b71408fda661:</span> Pushed </span><br><span class="line"><span class="params">cd3c8c08d739:</span> Pushed </span><br><span class="line"><span class="number">2</span><span class="params">b313be3e8c7:</span> Pushed </span><br><span class="line"><span class="params">ba1f1fddfa56:</span> Pushed </span><br><span class="line"><span class="number">4</span><span class="params">d0185f84bef:</span> Pushed </span><br><span class="line"><span class="params">latest:</span> <span class="params">digest:</span> sha256:<span class="number">54</span>d9723a00f9b5110d4b8566495773f2368fa6fe621a61e9ee5e5eade6068c39 <span class="params">size:</span> <span class="number">3660</span></span><br></pre></td></tr></table></figure><p><img src="https://qs100371.vip/post-images/1752972396920.png"><br><img src="https://qs100371.vip/post-images/1752972356184.png"><br>默认镜像是private，在packages settings里可修改成public。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;GitHub以托管代码仓库为切入点，提供Github Container Registry服务，使用方法和dockerhub类似。&lt;/p&gt;</summary>
     
     
     
