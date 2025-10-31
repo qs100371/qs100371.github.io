@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qs100371.vip/appscenter/index.html</loc>
+    
+    <lastmod>2025-10-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qs100371.vip/post/ds-mo-shui-ping-feng-ge-tu-pian-chu-li-gong-ju/</loc>
+    
+    <lastmod>2025-10-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://qs100371.vip/post/frpgei-nei-wang-web-fu-wu-tian-jia-https-zhi-chi/</loc>
     
     <lastmod>2025-10-29</lastmod>
@@ -14,15 +32,6 @@
     <loc>https://qs100371.vip/post/frp-nei-wang-chuan-tou-de-shi-yong-fang-fa/</loc>
     
     <lastmod>2025-10-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qs100371.vip/appscenter/index.html</loc>
-    
-    <lastmod>2025-10-27</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -2029,7 +2038,7 @@
 
   <url>
     <loc>https://qs100371.vip/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -2037,77 +2046,84 @@
   
   <url>
     <loc>https://qs100371.vip/tags/web/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/python/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/docker/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/termux/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/linux/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/nas/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/armbian/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/onecloud/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/game/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/diy/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://qs100371.vip/tags/macos/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://qs100371.vip/tags/deepseek/</loc>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
