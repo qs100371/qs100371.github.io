@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>docker可视化管理工具Portainer | 折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Portainer 是一个轻量级的图形工具。使用 Portainer 可以轻松管理不同的 Docker 环境。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker可视化管理工具Portainer">
+<meta property="og:url" content="https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/index.html">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:description" content="Portainer 是一个轻量级的图形工具。使用 Portainer 可以轻松管理不同的 Docker 环境。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/images/avatar.png">
+<meta property="article:published_time" content="2025-02-08T14:02:48.000Z">
+<meta property="article:modified_time" content="2025-02-23T02:54:48.005Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/images/avatar.png"><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "docker可视化管理工具Portainer",
+  "url": "https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/",
+  "image": "https://qs100371.vip/images/avatar.png",
+  "datePublished": "2025-02-08T14:02:48.000Z",
+  "dateModified": "2025-02-23T02:54:48.005Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qs100371",
+      "url": "mailto:qs@qs100371.vip"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/avatar.png"><link rel="canonical" href="https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'docker可视化管理工具Portainer',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">221</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://one.qs100371.vip:5231/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://one.qs100371.vip/api2.php);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a><a class="nav-page-title" href="/"><span class="site-name">docker可视化管理工具Portainer</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://one.qs100371.vip:5231/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">docker可视化管理工具Portainer</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-08T14:02:48.000Z" title="发表于 2025-02-08 22:02:48">2025-02-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-23T02:54:48.005Z" title="更新于 2025-02-23 10:54:48">2025-02-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">445</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/" data-flag-title="docker可视化管理工具Portainer"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:120,&quot;messagePrev&quot;:&quot;自上次更新以来已经过去了&quot;,&quot;messageNext&quot;:&quot;天，文章的内容可能已经过时。&quot;,&quot;postUpdate&quot;:&quot;2025-02-23 10:54:48&quot;}" hidden></div><p>Portainer 是一个轻量级的图形工具。使用 Portainer 可以轻松管理不同的 Docker 环境。</p>
+<span id="more"></span>
+
+<p>Portainer 的部署和使用都非常简单，它由一个可以运行在任何 Docker 引擎上的容器组成。Portainer 可以管理 Docker 的镜像、容器、数据卷和网络等。</p>
+<h1 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h1><ul>
+<li>既可以管理单机环境，也可以管理 Swarm 集群</li>
+<li>提供了用户的登录界面</li>
+<li>可以为用户分配某个容器</li>
+</ul>
+<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><p><code>docker pull portainer/portainer-ce:latest</code></p>
+<h1 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h1><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  portainer:</span></span><br><span class="line"><span class="symbol">    image:</span> portainer/portainer-ce:latest</span><br><span class="line"><span class="symbol">    container_name:</span> portainer</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">    - <span class="string">&quot;9000:9000&quot;</span></span><br><span class="line"><span class="symbol">    restart:</span>unless-stopped</span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">    - <span class="keyword">/data/</span>portainer:/data</span><br><span class="line">    - <span class="keyword">/var/</span>run/docker.sock:<span class="keyword">/var/</span>run/docker.sock</span><br></pre></td></tr></table></figure>
+<h1 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h1><p><code>docker-compose up -d</code><br>从IP:9000访问。<br><img src="https://qs100371.vip/post-images/1739023973549.webp"><br><img src="https://qs100371.vip/post-images/1739023978977.webp"><br><img src="https://qs100371.vip/post-images/1739023982978.webp"><br><img src="https://qs100371.vip/post-images/1739023987106.webp"><br><img src="https://qs100371.vip/post-images/1739023993646.webp"><br><img src="https://qs100371.vip/post-images/1739023998882.webp"></p>
+<blockquote>
+<p>本机上的容器和镜像一目了然。</p>
+</blockquote>
+<h1 id="添加远程服务器"><a href="#添加远程服务器" class="headerlink" title="添加远程服务器"></a>添加远程服务器</h1><p>左侧Settings-Environments-Add environment-Docker Standalone-start wizard<br><img src="https://qs100371.vip/post-images/1739024935531.webp"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> run -d <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>  -p <span class="number">9001</span>:<span class="number">9001</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>  --name portainer_agent <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>  --restart=always <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>  -v /var/run/docker.sock:/var/run/docker.sock <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>  -v /var/lib/docker/volumes:/var/lib/docker/volumes <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>  -v /:/host <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>  portainer/agent:<span class="number">2</span>.<span class="number">21</span>.<span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>ssh进入ubuntu-server，运行上面的docker run，建立容器并运行。<br>在上面的界面上填上远程服务器名（随意）,Environment address：远程服务器IP:9001，点connect，成功连接上去后，在 Home 下就多了一个 Docker 管理项。<br><img src="https://qs100371.vip/post-images/1739025151367.webp"></p>
+<h1 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h1><p>停止Portainer容器</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down</span><br><span class="line">docker <span class="keyword">run</span><span class="language-bash"> --<span class="built_in">rm</span> -v /data/portainer:/data portainer/helper-reset-password</span></span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\&#123;&quot;level&quot;:&quot;info&quot;,&quot;filename&quot;:&quot;portainer.db&quot;,&quot;time&quot;:&quot;2025-02-09T03:04:35Z&quot;,&quot;message&quot;:&quot;loading PortainerDB&quot;&#125;</span><br><span class="line"><span class="number">2025</span>/<span class="number">02</span>/<span class="number">09</span> <span class="number">03</span>:<span class="number">04</span>:<span class="number">36</span> <span class="keyword">Password</span> successfully updated <span class="keyword">for</span> <span class="keyword">user</span>: <span class="keyword">admin</span></span><br><span class="line"><span class="number">2025</span>/<span class="number">02</span>/<span class="number">09</span> <span class="number">03</span>:<span class="number">04</span>:<span class="number">36</span> Use the <span class="keyword">following</span> <span class="keyword">password</span> <span class="keyword">to</span> <span class="keyword">login</span>: <span class="number">5</span>)\V3om78a%HQ[<span class="number">10</span>R9r&gt;-q&lt;tNJ&amp;<span class="number">6</span>IpuZ</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>选择我们要的 Docker 环境就可以进行远程管理了。这样的话，无需每台主机都安装 Portainer，只需要一台服务器安装后，就可以管理多台远程主机。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="mailto:qs@qs100371.vip">qs100371</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/">https://qs100371.vip/post/docker-ke-shi-hua-guan-li-gong-ju-portainer/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://qs100371.vip" target="_blank">折腾日记</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/docker/">docker</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/" title="dkTurbo, docker 镜像加速器自动切换"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">dkTurbo, docker 镜像加速器自动切换</div></div><div class="info-2"><div class="info-item-1">dkTurbo，一个傻瓜式的可以帮你自动换源，从而使用更快的镜像加速下载的项目。  docker-compose.yml1234567891011121314services:  dkturbo:    image: registry.cn-shenzhen.aliyuncs.com/cp0204/dkturbo:main    container_name: dkturbo    volumes:      - /etc/docker:/etc/docker      - /opt:/opt    environment:      - MODE=registry      - REG...</div></div></div></a><a class="pagination-related" href="/post/mysqldump-de-shi-yong/" title="mysqldump的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">mysqldump的使用</div></div><div class="info-2"><div class="info-item-1">mysqldump 是 MySQL 自带的逻辑备份工具。它的备份原理是通过协议连接到 MySQL 数据库，将需要备份的数据查询出来，将查询出的数据转换成对应的insert 语句，当我们需要还原这些数据时，只要执行这些 insert 语句，即可将对应的数据还原。  备份 备份所有数据库：mysqldump -uroot -p --host=127.0.0.1 --port=3306 --all-databases &gt; /backup/mysqldump/all.db 备份指定数据库：mysqldump -uroot -p test &gt; /backup/mysqldump/tes...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">生命不休，折腾不止。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-compose-yml"><span class="toc-number">3.</span> <span class="toc-text">docker-compose.yml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">启动容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">添加远程服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81"><span class="toc-number">6.</span> <span class="toc-text">重置密码</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/ds-mo-shui-ping-feng-ge-tu-pian-chu-li-gong-ju/" title="ds: 墨水屏风格图片处理工具">ds: 墨水屏风格图片处理工具</a><time datetime="2025-10-31T08:00:04.000Z" title="发表于 2025-10-31 16:00:04">2025-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/frpgei-nei-wang-web-fu-wu-tian-jia-https-zhi-chi/" title="frp: 给内网web服务添加https支持">frp: 给内网web服务添加https支持</a><time datetime="2025-10-29T12:26:20.000Z" title="发表于 2025-10-29 20:26:20">2025-10-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/da-zao-ben-di-zhi-bo-xin-hao-yuan-iptv-api/" title="打造本地直播信号源:IPTV-API">打造本地直播信号源:IPTV-API</a><time datetime="2025-10-27T12:53:11.000Z" title="发表于 2025-10-27 20:53:11">2025-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/yi-ge-zai-xian-yue-du-qi-reader/" title="一个在线阅读器reader">一个在线阅读器reader</a><time datetime="2025-10-10T14:45:52.000Z" title="发表于 2025-10-10 22:45:52">2025-10-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/wang-pan-sou-suo-panhub/" title="网盘搜索PanHub">网盘搜索PanHub</a><time datetime="2025-09-16T10:43:44.000Z" title="发表于 2025-09-16 18:43:44">2025-09-16</time></div></div></div></div></div></div></main><footer id="footer"><script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+<a href="https://www.busuanzi.cc/count.php?search=qs100371.vip" title="不蒜子统计" target="_blank">
+<img style="width:85px;height:25px;" src="https://www.busuanzi.cc/static/images/bsz-tongji.png"></a><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2025 By qs100371</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+      appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

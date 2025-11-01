@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>docker里的macos | 折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="dockur&#x2F;macos是OSX (macOS) 容器，支持kvm加速和web ui。实测主机跑不动这个容器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker里的macos">
+<meta property="og:url" content="https://qs100371.vip/post/docker-li-de-macos/index.html">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:description" content="dockur&#x2F;macos是OSX (macOS) 容器，支持kvm加速和web ui。实测主机跑不动这个容器。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.vip/images/avatar.png">
+<meta property="article:published_time" content="2025-02-19T09:27:04.000Z">
+<meta property="article:modified_time" content="2025-03-20T13:00:45.200Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.vip/images/avatar.png"><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "docker里的macos",
+  "url": "https://qs100371.vip/post/docker-li-de-macos/",
+  "image": "https://qs100371.vip/images/avatar.png",
+  "datePublished": "2025-02-19T09:27:04.000Z",
+  "dateModified": "2025-03-20T13:00:45.200Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qs100371",
+      "url": "mailto:qs@qs100371.vip"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/avatar.png"><link rel="canonical" href="https://qs100371.vip/post/docker-li-de-macos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'docker里的macos',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">221</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://one.qs100371.vip:5231/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://one.qs100371.vip/api2.php);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a><a class="nav-page-title" href="/"><span class="site-name">docker里的macos</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://one.qs100371.vip:5231/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">docker里的macos</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-19T09:27:04.000Z" title="发表于 2025-02-19 17:27:04">2025-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-20T13:00:45.200Z" title="更新于 2025-03-20 21:00:45">2025-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">244</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/post/docker-li-de-macos/" data-flag-title="docker里的macos"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/post/docker-li-de-macos/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/post/docker-li-de-macos/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:120,&quot;messagePrev&quot;:&quot;自上次更新以来已经过去了&quot;,&quot;messageNext&quot;:&quot;天，文章的内容可能已经过时。&quot;,&quot;postUpdate&quot;:&quot;2025-03-20 21:00:45&quot;}" hidden></div><p>dockur&#x2F;macos是OSX (macOS) 容器，支持kvm加速和web ui。实测主机跑不动这个容器。</p>
+<span id="more"></span>
+<p>项目地址：<a href="https://github.com/dockur/macos">dockur&#x2F;macos</a></p>
+<h1 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h1><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">services:</span></span><br><span class="line">  <span class="params">macos:</span></span><br><span class="line">    <span class="params">image:</span> dockurr<span class="symbol">/macos</span></span><br><span class="line">    <span class="params">container_name:</span> macos</span><br><span class="line">    <span class="params">environment:</span></span><br><span class="line">      <span class="params">VERSION:</span> <span class="string">&quot;13&quot;</span></span><br><span class="line">      <span class="params">RAM_SIZE:</span> <span class="string">&quot;4G&quot;</span></span><br><span class="line">      <span class="params">CPU_CORES:</span> <span class="string">&quot;2&quot;</span></span><br><span class="line">      <span class="params">DISK_SIZE:</span> <span class="string">&quot;64G&quot;</span></span><br><span class="line">    <span class="params">devices:</span></span><br><span class="line">      <span class="operator">-</span> <span class="symbol">/dev/kvm</span></span><br><span class="line">      <span class="operator">-</span> <span class="symbol">/dev/net/tun</span></span><br><span class="line">    <span class="params">cap_add:</span></span><br><span class="line">      <span class="operator">-</span> NET_ADMIN</span><br><span class="line">    <span class="params">ports:</span></span><br><span class="line">      <span class="operator">-</span> <span class="number">8006</span>:<span class="number">8006</span></span><br><span class="line">      <span class="operator">-</span> <span class="number">5900</span>:<span class="number">5900</span><span class="symbol">/tcp</span></span><br><span class="line">      <span class="operator">-</span> <span class="number">5900</span>:<span class="number">5900</span><span class="symbol">/udp</span></span><br><span class="line">    <span class="params">restart:</span> always</span><br><span class="line">    <span class="params">stop_grace_period:</span> <span class="number">2</span>m</span><br></pre></td></tr></table></figure>
+<p>VERSION代表版本。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>版本号</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>15</td>
+<td>macOS 15</td>
+<td>Sequoia</td>
+</tr>
+<tr>
+<td>14</td>
+<td>macOS 14</td>
+<td>Sonoma</td>
+</tr>
+<tr>
+<td>13</td>
+<td>macOS 13</td>
+<td>Ventura</td>
+</tr>
+<tr>
+<td>12</td>
+<td>macOS 12</td>
+<td>Monterey</td>
+</tr>
+<tr>
+<td>11</td>
+<td>macOS 11</td>
+<td>Big Sur</td>
+</tr>
+</tbody></table>
+<p> environment里的值可以根据需要来改变。</p>
+<h1 id="开启容器"><a href="#开启容器" class="headerlink" title="开启容器"></a>开启容器</h1><p><code>docker-compose up</code>  # 这样可以看到容器启动过程，便于发现问题。</p>
+<blockquote>
+<p>主机是i3 m380，RAM只能设成2G，CPU也是2，最后也没有启动成功，只显示一个黑苹果图。<br>这个容器和前文的virtaul DSM一样，启动过程也是从qemu里启动一个操作系统，再用noVNC从浏览器访问。</p>
+</blockquote>
+<p><img src="https://qs100371.vip/post-images/1739957742380.webp"><br>environment:<br>      VERSION: “11”<br>      RAM_SIZE: “2G”<br>      CPU_CORES: “2”<br>      DISK_SIZE: “64G”<br>启动了macOS11的安装过程，时间太久没安装完。<br><img src="https://qs100371.vip/post-images/1740038538080.webp"><br><img src="https://qs100371.vip/post-images/1740038543469.webp"><br><img src="https://qs100371.vip/post-images/1740038548577.webp"><br><img src="https://qs100371.vip/post-images/1740038553753.webp"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="mailto:qs@qs100371.vip">qs100371</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://qs100371.vip/post/docker-li-de-macos/">https://qs100371.vip/post/docker-li-de-macos/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://qs100371.vip" target="_blank">折腾日记</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web/">web</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/docker-li-de-windows/" title="docker里的windows"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">docker里的windows</div></div><div class="info-2"><div class="info-item-1">dockur&#x2F;windows是一个windows容器，自动下载iso，kvm加速，web ui。和前文的macOS一样，对硬件要求要低一些，可以跑起来。  项目地址：dockur&#x2F;windows docker-compose.yml12345678910111213141516171819services:  windows:    image: dockurr/windows    container_name: windows    environment:      VERSION: &quot;8e&quot;      RAM_SIZE: &quot;2G&...</div></div></div></a><a class="pagination-related" href="/post/docker-li-de-fei-niu-os/" title="docker里的飞牛os"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">docker里的飞牛os</div></div><div class="info-2"><div class="info-item-1">docker下运行飞牛os，这个容器不调用kvm，只支持x86，所以是个x86机器都可以运行。  cli部署docker run --name=fnos --privileged -p 8088:8000 -d -t makedie/fnos:0.8.20_test  不能使用latest。这个飞牛只能看看，不能管理存储。  从ip:8088访问。 </div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">生命不休，折腾不止。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-compose-yml"><span class="toc-number">1.</span> <span class="toc-text">docker-compose.yml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E5%AE%B9%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">开启容器</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/ds-mo-shui-ping-feng-ge-tu-pian-chu-li-gong-ju/" title="ds: 墨水屏风格图片处理工具">ds: 墨水屏风格图片处理工具</a><time datetime="2025-10-31T08:00:04.000Z" title="发表于 2025-10-31 16:00:04">2025-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/frpgei-nei-wang-web-fu-wu-tian-jia-https-zhi-chi/" title="frp: 给内网web服务添加https支持">frp: 给内网web服务添加https支持</a><time datetime="2025-10-29T12:26:20.000Z" title="发表于 2025-10-29 20:26:20">2025-10-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/da-zao-ben-di-zhi-bo-xin-hao-yuan-iptv-api/" title="打造本地直播信号源:IPTV-API">打造本地直播信号源:IPTV-API</a><time datetime="2025-10-27T12:53:11.000Z" title="发表于 2025-10-27 20:53:11">2025-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/yi-ge-zai-xian-yue-du-qi-reader/" title="一个在线阅读器reader">一个在线阅读器reader</a><time datetime="2025-10-10T14:45:52.000Z" title="发表于 2025-10-10 22:45:52">2025-10-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/wang-pan-sou-suo-panhub/" title="网盘搜索PanHub">网盘搜索PanHub</a><time datetime="2025-09-16T10:43:44.000Z" title="发表于 2025-09-16 18:43:44">2025-09-16</time></div></div></div></div></div></div></main><footer id="footer"><script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+<a href="https://www.busuanzi.cc/count.php?search=qs100371.vip" title="不蒜子统计" target="_blank">
+<img style="width:85px;height:25px;" src="https://www.busuanzi.cc/static/images/bsz-tongji.png"></a><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2025 By qs100371</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+      appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
