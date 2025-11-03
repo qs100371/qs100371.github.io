@@ -6,7 +6,7 @@
   <link href="https://qs100371.vip/atom.xml" rel="self"/>
   
   <link href="https://qs100371.vip/"/>
-  <updated>2025-11-01T14:41:19.752Z</updated>
+  <updated>2025-11-03T12:44:54.838Z</updated>
   <id>https://qs100371.vip/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>飞牛系统盘扩容方法</title>
+    <link href="https://qs100371.vip/post/fei-niu-xi-tong-pan-kuo-rong-fang-fa/"/>
+    <id>https://qs100371.vip/post/fei-niu-xi-tong-pan-kuo-rong-fang-fa/</id>
+    <published>2025-11-03T12:17:04.000Z</published>
+    <updated>2025-11-03T12:44:54.838Z</updated>
+    
+    <content type="html"><![CDATA[<p>有一个飞牛空下来了，安装了cinnamon桌面，却发现原来分的16G系统空间不够用了，想扩容但又不想重新安装。本文记录了扩容方法。</p><span id="more"></span><p>本文适用磁盘上除飞牛系统分区之外是飞牛存储空间且数据已备份或转移。</p><h1 id="飞牛界面操作"><a href="#飞牛界面操作" class="headerlink" title="飞牛界面操作"></a>飞牛界面操作</h1><p>关闭docker<br>系统设置-存储空间管理-…-卸载</p><h1 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h1><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt <span class="keyword">install</span> -y parted s2fsprogs</span><br></pre></td></tr></table></figure><h1 id="parted操作"><a href="#parted操作" class="headerlink" title="parted操作"></a>parted操作</h1><p><code>parted /dev/sda</code></p><p>下面是在parted内执行：<br><code>print</code><br>列出所有分区<br><code>rm 3</code><br>删除第3个分区<br><code>resizepart 2 30%</code><br>给分区2扩容，分区2是飞牛系统所在分区<br><code>quit</code><br>退出parted<br><img src="https://qs100371.vip/post-images/1762173497779.png"><br>系统重启之后执行：<br><code>resize2fs /dev/sda2</code><br><code>df -h</code><br><img src="https://qs100371.vip/post-images/1762173668951.png"><br>查看飞牛系统所在分区容量已增加。</p><p>参考：<br><a href="https://club.fnnas.com/forum.php?mod=viewthread&tid=32431"><em>FnOS 系统盘在线扩容教程（纯小白版）</em></a></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;有一个飞牛空下来了，安装了cinnamon桌面，却发现原来分的16G系统空间不够用了，想扩容但又不想重新安装。本文记录了扩容方法。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="nas" scheme="https://qs100371.vip/tags/nas/"/>
+    
+  </entry>
   
   <entry>
     <title>FetchV 视频下载扩展</title>
@@ -384,25 +403,6 @@
     <category term="linux" scheme="https://qs100371.vip/tags/linux/"/>
     
     <category term="deepseek" scheme="https://qs100371.vip/tags/deepseek/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nascab:跨平台NAS软件</title>
-    <link href="https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian/"/>
-    <id>https://qs100371.vip/post/nascabkua-ping-tai-nas-ruan-jian/</id>
-    <published>2025-07-22T10:51:33.000Z</published>
-    <updated>2025-08-07T15:21:49.078Z</updated>
-    
-    <content type="html"><![CDATA[<p>NasCab可远程管理照片，影音和文件，是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。</p><span id="more"></span><p>官网：<a href="https://www.nascab.cn/">https://www.nascab.cn/</a><br>NasCab现在可以通过Docker部署，仅支持X86-64和arm64架构的Cpu。<br>windows，macos，android有相应的服务端和客户端软件。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">nascab</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">ypptec/nascab</span></span><br><span class="line">        <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">            <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">                <span class="attribute">max-file</span><span class="punctuation">:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line">                <span class="attribute">max-size</span><span class="punctuation">:</span> <span class="string">10m</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;5555:90&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8888:80&#x27;</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/nascab:/root/.local/share/nascab&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/files:/myData&#x27;</span></span><br></pre></td></tr></table></figure><p>docker cli：<br><code>docker run -v /data/files:/myData -v /data/nascab:/root/.local/share/nascab -p 8888:80 -p 5555:90 -d --log-opt max-size=10m --log-opt max-file=3 ypptec/nascab</code><br>需要管理的文件在&#x2F;data&#x2F;files。</p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>有点象nas，但影视刮削不好，没有内容简介和演员相关，只有音视频码率。</p><p><img src="https://qs100371.vip/post-images/1753181954754.png"><br><img src="https://qs100371.vip/post-images/1753181959909.png"><br><img src="https://qs100371.vip/post-images/1753181967978.png"><br><img src="https://qs100371.vip/post-images/1753181973623.png"></p><hr><p>jellyfin管理视频很好，只是刮削需要架梯子。<br>nascab看来只有个架子，内容做得不到位。在电信盒子上运行居然还崩了。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;NasCab可远程管理照片，影音和文件，是跨平台支持Windows&amp;#x2F;Mac&amp;#x2F;Linux&amp;#x2F;Docker的nas软件。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="nas" scheme="https://qs100371.vip/tags/nas/"/>
     
   </entry>
   
