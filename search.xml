@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>CoreMark：给nas跑个分</title>
+      <link href="/post/coremarkgei-nas-pao-ge-fen/"/>
+      <url>/post/coremarkgei-nas-pao-ge-fen/</url>
+      
+        <content type="html"><![CDATA[<p>CoreMark是一款专门用于测量嵌入式处理器性能的小型基准测试软件；CoreMark得分越高说明处理器越强。</p><span id="more"></span><p>项目地址：<a href="https://github.com/huladabang/coremark-goufan">https://github.com/huladabang/coremark-goufan</a></p><p>基于 CoreMark 标准测试，可以一键测试 NAS&#x2F;软路由&#x2F;路由器&#x2F;迷你主机&#x2F;电视盒子等低功耗设备 CPU 性能。<br>多平台支持 - x86_64, ARM64, ARMv7</p><h1 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h1><p><code>curl -fsSL https://gou.fan/coremark/run-mirror.sh | sh</code></p><h1 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h1><p>腾讯云<br><img src="https://qs100371.vip/post-images/1764246915305.png"><br>阿里云<br><img src="https://qs100371.vip/post-images/1764246930735.png"><br>aws<br><img src="https://qs100371.vip/post-images/1764246939572.png"><br>s905l3b<br><img src="https://qs100371.vip/post-images/1764246965482.png"><br>j1900<br><img src="https://qs100371.vip/post-images/1764246981189.png"><br>i380m<br><img src="https://qs100371.vip/post-images/1764246995118.png"></p><p>x86平台的测试得分比arm要高得多。<br><a href="https://gou.fan/">https://gou.fan/</a> 网站上有很多跑分结果，可以大致看出各cpu的性能强弱。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> nas </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>NAS 本地部署咪咕视频直播服务</title>
       <link href="/post/nas-ben-di-bu-shu-mi-gu-shi-pin-zhi-bo-fu-wu/"/>
       <url>/post/nas-ben-di-bu-shu-mi-gu-shi-pin-zhi-bo-fu-wu/</url>

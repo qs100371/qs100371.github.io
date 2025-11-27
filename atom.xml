@@ -6,7 +6,7 @@
   <link href="https://qs100371.top/atom.xml" rel="self"/>
   
   <link href="https://qs100371.top/"/>
-  <updated>2025-11-25T13:26:14.680Z</updated>
+  <updated>2025-11-27T12:39:34.464Z</updated>
   <id>https://qs100371.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CoreMark：给nas跑个分</title>
+    <link href="https://qs100371.top/post/coremarkgei-nas-pao-ge-fen/"/>
+    <id>https://qs100371.top/post/coremarkgei-nas-pao-ge-fen/</id>
+    <published>2025-11-27T12:30:24.000Z</published>
+    <updated>2025-11-27T12:39:34.464Z</updated>
+    
+    <content type="html"><![CDATA[<p>CoreMark是一款专门用于测量嵌入式处理器性能的小型基准测试软件；CoreMark得分越高说明处理器越强。</p><span id="more"></span><p>项目地址：<a href="https://github.com/huladabang/coremark-goufan">https://github.com/huladabang/coremark-goufan</a></p><p>基于 CoreMark 标准测试，可以一键测试 NAS&#x2F;软路由&#x2F;路由器&#x2F;迷你主机&#x2F;电视盒子等低功耗设备 CPU 性能。<br>多平台支持 - x86_64, ARM64, ARMv7</p><h1 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h1><p><code>curl -fsSL https://gou.fan/coremark/run-mirror.sh | sh</code></p><h1 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h1><p>腾讯云<br><img src="https://qs100371.vip/post-images/1764246915305.png"><br>阿里云<br><img src="https://qs100371.vip/post-images/1764246930735.png"><br>aws<br><img src="https://qs100371.vip/post-images/1764246939572.png"><br>s905l3b<br><img src="https://qs100371.vip/post-images/1764246965482.png"><br>j1900<br><img src="https://qs100371.vip/post-images/1764246981189.png"><br>i380m<br><img src="https://qs100371.vip/post-images/1764246995118.png"></p><p>x86平台的测试得分比arm要高得多。<br><a href="https://gou.fan/">https://gou.fan/</a> 网站上有很多跑分结果，可以大致看出各cpu的性能强弱。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;CoreMark是一款专门用于测量嵌入式处理器性能的小型基准测试软件；CoreMark得分越高说明处理器越强。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="linux" scheme="https://qs100371.top/tags/linux/"/>
+    
+    <category term="nas" scheme="https://qs100371.top/tags/nas/"/>
+    
+  </entry>
   
   <entry>
     <title>NAS 本地部署咪咕视频直播服务</title>
@@ -382,27 +403,6 @@
     
     
     <category term="docker" scheme="https://qs100371.top/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker里的中文dos游戏</title>
-    <link href="https://qs100371.top/post/docker-li-de-zhong-wen-dos-you-xi/"/>
-    <id>https://qs100371.top/post/docker-li-de-zhong-wen-dos-you-xi/</id>
-    <published>2025-07-31T11:28:00.000Z</published>
-    <updated>2025-11-05T10:49:42.987Z</updated>
-    
-    <content type="html"><![CDATA[<p>重温一下儿时的游戏。docker里中文 DOS 游戏合集，目前共有 1898 款游戏。</p><span id="more"></span><p>项目地址：<a href="https://github.com/rwv/chinese-dos-games">rwv&#x2F;chinese-dos-games</a></p><p>本Docker项目由oD精简制作，只保留了部分经典游戏。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">dosgame-web-docker</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">dosgame</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8090:262&#x27;  #8090可以改成其他服务器没被占用的端口</span></span><br><span class="line"><span class="comment">#         volumes:</span></span><br><span class="line"><span class="comment">#             - &#x27;/root/data/docker_data/games/chinese-dos-games:/app/static/games&#x27;</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">&#x27;oldiy/dosgame-web-docker:latest</span></span><br></pre></td></tr></table></figure><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>从ip:8090访问。</p><p><img src="https://qs100371.top/post-images/1753961920863.png"><br><img src="https://qs100371.top/post-images/1753961926708.png"><br><img src="https://qs100371.top/post-images/1753961932837.png"></p><p><img src="https://qs100371.top/post-images/1753962121029.png"><br><img src="https://qs100371.top/post-images/1753962343293.png"><br>实质是在dosbox里运行dos游戏。<br>适合于收藏，玩的话，已经不太适应了，需要全键盘操作。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;重温一下儿时的游戏。docker里中文 DOS 游戏合集，目前共有 1898 款游戏。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="docker" scheme="https://qs100371.top/tags/docker/"/>
-    
-    <category term="game" scheme="https://qs100371.top/tags/game/"/>
     
   </entry>
   
