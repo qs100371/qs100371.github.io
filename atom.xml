@@ -6,7 +6,7 @@
   <link href="https://qs100371.top/atom.xml" rel="self"/>
   
   <link href="https://qs100371.top/"/>
-  <updated>2025-11-27T12:39:34.464Z</updated>
+  <updated>2025-11-29T09:58:24.357Z</updated>
   <id>https://qs100371.top/</id>
   
   <author>
@@ -17,11 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>CoreMark：给nas跑个分</title>
+    <title>剑网三单机部署方法</title>
+    <link href="https://qs100371.top/post/jian-wang-san-dan-ji-bu-shu-fang-fa/"/>
+    <id>https://qs100371.top/post/jian-wang-san-dan-ji-bu-shu-fang-fa/</id>
+    <published>2025-11-29T09:24:00.000Z</published>
+    <updated>2025-11-29T09:58:24.357Z</updated>
+    
+    <content type="html"><![CDATA[<p>自部署的传奇三玩几天没什么意思了，又在网络上搜罗了剑网三单机版的部署方法。本文记录了部署过程。</p><span id="more"></span><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>网络上搜索“剑网三单机版”，搜出的几个网站均需要付费。突然灵机一动，打开之前部署的<a href="https://pubhub.qs100371.top/">pubhub</a>，用关键字一搜，对应夸克盘的第一个链接<a href="https://pan.quark.cn/s/92bf9ac94f9e">https://pan.quark.cn/s/92bf9ac94f9e</a> 就是，其中有两个版本，第3版有28.2G。<br>下载夸克电脑端，能以700多k的速度下载。<br>如果用前文篡改猴脚本下载，能有2M的速度。<br>下载完9个rar分卷压缩包，解压备用。</p><h1 id="安装vmware"><a href="#安装vmware" class="headerlink" title="安装vmware"></a>安装vmware</h1><p>现在vmware免费使用，很方便安装上vmware17pro。<br>打开vmare，选择打开虚拟机，选择jx3服务端目录里的CentOS 7 64 位.vmx，打开。<br>修改虚拟机的网络为桥接。启动虚拟机，完成后用帐号root，密码123456登入，输入ifconfig查看获得的地址。此时服务端已部署完成。<br><img src="https://qs100371.vip/post-images/1764409478946.png"></p><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>打开”80客户端\JX3\bin\zhcn\mod”下的svrlist.ini，更改IP为服务端的ip。<br>打开”80客户端\JX3\bin\zhcn\JX3Client.exe”，用任意帐号和密码都可登录进入，创建角色。<br>进入游戏后，在聊天框输入“&#x2F;gm”，打开命令GM后台。可以刷装备和等级。<br><img src="https://qs100371.vip/post-images/1764410013646.png"><br><img src="https://qs100371.vip/post-images/1764410021258.png"><br><img src="https://qs100371.vip/post-images/1764410028575.png"><br><img src="https://qs100371.vip/post-images/1764410033155.png"><br><img src="https://qs100371.vip/post-images/1764410037521.png"><br><img src="https://qs100371.vip/post-images/1764410041906.png"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;自部署的传奇三玩几天没什么意思了，又在网络上搜罗了剑网三单机版的部署方法。本文记录了部署过程。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>网盘高速直链下载方法</title>
+    <link href="https://qs100371.top/post/wang-pan-gao-su-zhi-lian-xia-zai-fang-fa/"/>
+    <id>https://qs100371.top/post/wang-pan-gao-su-zhi-lian-xia-zai-fang-fa/</id>
+    <published>2025-11-29T09:03:12.000Z</published>
+    <updated>2025-11-29T09:21:35.275Z</updated>
+    
+    <content type="html"><![CDATA[<p>各大网盘又要安装网盘又是限制下载速度，没有vip很难下载大文件。本文记录了解析网盘下载地址并通过motrix下载的方法。</p><span id="more"></span><h1 id="安装motrix"><a href="#安装motrix" class="headerlink" title="安装motrix"></a>安装motrix</h1><p>下载<a href="https://motrix.app/download">https://motrix.app/download</a>并安装。支持win，mac，linux（带桌面）。<br><img src="https://qs100371.vip/post-images/1764408037743.png"></p><h1 id="edge安装篡改猴beta版"><a href="#edge安装篡改猴beta版" class="headerlink" title="edge安装篡改猴beta版"></a>edge安装篡改猴beta版</h1><p>在<a href="https://microsoftedge.microsoft.com/addons/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4%E6%B5%8B%E8%AF%95%E7%89%88/fcmfnpggmnlmfebfghbfnillijihnkoh">扩展商店</a>里安装篡改猴。<br>或在crxsoso.com搜索安装。<br><font color="red">在扩展管理里打开开发者模式。</font></p><h1 id="脚本安装"><a href="#脚本安装" class="headerlink" title="脚本安装"></a>脚本安装</h1><p>greasyfork找<a href="https://greasyfork.org/zh-CN/scripts/512125-%E7%BD%91%E7%9B%98%E7%9B%B4%E9%93%BE%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B-%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E6%9A%97%E5%8F%B7">网盘直链下载插件</a><br>打开此地址需梯子。<br>点击安装脚本，然后在浏览器的扩展的控制面板中启用该脚本。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>刷新网盘页面（以夸克网盘为例），文件的左上角出现了下载助手的按钮代表脚本成功生效。<br>勾选要下载的文件，选择RPC下载，点击发送全部连接即可开始高速下载。夸克网盘能有2M多的速度，还算可以。<br><img src="https://qs100371.vip/post-images/1764408006822.png"><br><img src="https://qs100371.vip/post-images/1764408016459.png"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;各大网盘又要安装网盘又是限制下载速度，没有vip很难下载大文件。本文记录了解析网盘下载地址并通过motrix下载的方法。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="https://qs100371.top/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CoreMark: 给nas跑个分</title>
     <link href="https://qs100371.top/post/coremarkgei-nas-pao-ge-fen/"/>
     <id>https://qs100371.top/post/coremarkgei-nas-pao-ge-fen/</id>
     <published>2025-11-27T12:30:24.000Z</published>
-    <updated>2025-11-27T12:39:34.464Z</updated>
+    <updated>2025-11-29T09:03:03.209Z</updated>
     
     <content type="html"><![CDATA[<p>CoreMark是一款专门用于测量嵌入式处理器性能的小型基准测试软件；CoreMark得分越高说明处理器越强。</p><span id="more"></span><p>项目地址：<a href="https://github.com/huladabang/coremark-goufan">https://github.com/huladabang/coremark-goufan</a></p><p>基于 CoreMark 标准测试，可以一键测试 NAS&#x2F;软路由&#x2F;路由器&#x2F;迷你主机&#x2F;电视盒子等低功耗设备 CPU 性能。<br>多平台支持 - x86_64, ARM64, ARMv7</p><h1 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h1><p><code>curl -fsSL https://gou.fan/coremark/run-mirror.sh | sh</code></p><h1 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h1><p>腾讯云<br><img src="https://qs100371.vip/post-images/1764246915305.png"><br>阿里云<br><img src="https://qs100371.vip/post-images/1764246930735.png"><br>aws<br><img src="https://qs100371.vip/post-images/1764246939572.png"><br>s905l3b<br><img src="https://qs100371.vip/post-images/1764246965482.png"><br>j1900<br><img src="https://qs100371.vip/post-images/1764246981189.png"><br>i380m<br><img src="https://qs100371.vip/post-images/1764246995118.png"></p><p>x86平台的测试得分比arm要高得多。<br><a href="https://gou.fan/">https://gou.fan/</a> 网站上有很多跑分结果，可以大致看出各cpu的性能强弱。</p>]]></content>
     
@@ -97,13 +133,13 @@
   </entry>
   
   <entry>
-    <title>FetchV 视频下载扩展</title>
+    <title>FetchV视频下载扩展</title>
     <link href="https://qs100371.top/post/fetchv-shi-pin-xia-zai-kuo-zhan/"/>
     <id>https://qs100371.top/post/fetchv-shi-pin-xia-zai-kuo-zhan/</id>
     <published>2025-11-01T14:12:04.000Z</published>
-    <updated>2025-11-05T10:49:43.587Z</updated>
+    <updated>2025-11-29T09:22:10.342Z</updated>
     
-    <content type="html"><![CDATA[<p>这几天使用maxthon的视频浮动工具栏下载视频，发现需要充值订阅，果断放弃。经查找，发现一个好工具FetchV。</p><span id="more"></span><p>官网：<a href="https://fetchv.net/zh-cn">https://fetchv.net/zh-cn</a><br>FetchV 是一款专业通用的浏览器视频下载扩展。兼容于 Chrome、Edge 和其他基于 Chromium 的浏览器。使用 FetchV，可以下载各种类型的在线视频，包括 HLS 流媒体视频（m3u8）、mp4、webm、flv 等。</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>应用商店直接安装。maxthon，edge都能用。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>打开在线播放网页，工具栏上的fetchV上会显示数字，这是能下载的数目，点击图标，点击hls条目后面的“下载”打开下载页面，下载完成时，点击保存按钮。<br><img src="https://qs100371.top/post-images/1762006885525.png"><br><img src="https://qs100371.top/post-images/1762006916830.png"><br><img src="https://qs100371.top/post-images/1762008072144.png"><br>在支持chrome扩展的手机浏览器上也是可用的。</p>]]></content>
+    <content type="html"><![CDATA[<p>这几天使用maxthon的视频浮动工具栏下载视频，发现需要充值订阅，果断放弃。经查找，发现一个好工具FetchV。</p><span id="more"></span><p>官网：<a href="https://fetchv.net/zh-cn">https://fetchv.net/zh-cn</a><br>FetchV 是一款专业通用的浏览器视频下载扩展。兼容于 Chrome、Edge 和其他基于 Chromium 的浏览器。使用 FetchV，可以下载各种类型的在线视频，包括 HLS 流媒体视频（m3u8）、mp4、webm、flv 等。</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>应用商店直接安装。maxthon，edge都能用。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>打开在线播放网页，工具栏上的fetchV上会显示数字，这是能下载的数目，点击图标，点击hls条目后面的“下载”打开下载页面，下载完成时，点击保存按钮。<br><img src="https://qs100371.vip/post-images/1762006885525.png"><br><img src="https://qs100371.vip/post-images/1762006916830.png"><br><img src="https://qs100371.vip/post-images/1762008072144.png"><br>在支持chrome扩展的手机浏览器上也是可用的。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;这几天使用maxthon的视频浮动工具栏下载视频，发现需要充值订阅，果断放弃。经查找，发现一个好工具FetchV。&lt;/p&gt;</summary>
@@ -365,44 +401,6 @@
     <category term="docker" scheme="https://qs100371.top/tags/docker/"/>
     
     <category term="game" scheme="https://qs100371.top/tags/game/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>统信uos来了</title>
-    <link href="https://qs100371.top/post/tong-xin-uos-lai-liao/"/>
-    <id>https://qs100371.top/post/tong-xin-uos-lai-liao/</id>
-    <published>2025-08-16T14:18:54.000Z</published>
-    <updated>2025-11-05T10:49:42.787Z</updated>
-    
-    <content type="html"><![CDATA[<p>单位现在开始推广统信uos了，这是一个来源于深度linux的商业版os。</p><span id="more"></span><p>官网：<a href="https://www.uniontech.com/">https://www.uniontech.com/</a></p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul><li>virtualbox安装<br>4G内存3核心，安装后很流畅。</li><li>docker安装<br>docker-compose.yml<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  uos:</span></span><br><span class="line"><span class="symbol">    image:</span> ghcr.io<span class="keyword">/qemus/</span>qemu:<span class="number">7.12</span></span><br><span class="line"><span class="symbol">    container_name:</span> uos</span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line"><span class="symbol">      RAM_SIZE:</span> <span class="string">&quot;1G&quot;</span></span><br><span class="line"><span class="symbol">      CPU_CORES:</span> <span class="string">&quot;4&quot;</span></span><br><span class="line"><span class="symbol">      DISK_SIZE:</span> <span class="string">&quot;80G&quot;</span></span><br><span class="line"><span class="symbol">    devices:</span></span><br><span class="line">      - <span class="keyword">/dev/</span>kvm</span><br><span class="line">      - <span class="keyword">/dev/</span>net/tun</span><br><span class="line"><span class="symbol">    cap_add:</span></span><br><span class="line">      - NET_ADMIN</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="number">8006</span>:<span class="number">8006</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="keyword">/vol2/</span><span class="number">1000</span><span class="keyword">/films/</span>uos.iso:/boot.iso</span><br><span class="line">      - <span class="keyword">/vol2/</span><span class="number">1000</span>/uos:/storage</span><br><span class="line"><span class="symbol">    restart:</span> unless-stopped</span><br><span class="line"><span class="symbol">    stop_grace_period:</span> <span class="number">2</span>m</span><br></pre></td></tr></table></figure>安装正常，有点卡。小主机配置比笔记本差太多。</li></ul><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>界面基本上和deepin linux一模一样。<br><img src="https://qs100371.top/post-images/1755354285866.png"><br><img src="https://qs100371.top/post-images/1755354236007.png"><br><img src="https://qs100371.top/post-images/1755354240816.png"><br><img src="https://qs100371.top/post-images/1755354244759.png"></p><h1 id="槽点"><a href="#槽点" class="headerlink" title="槽点"></a>槽点</h1><ul><li>系统需要收费激活</li><li>root权限需要登录并打开开发者模式</li></ul><p><img src="https://qs100371.top/post-images/1755354386701.png"><br><img src="https://qs100371.top/post-images/1755354392408.png"><br><img src="https://qs100371.top/post-images/1755354398422.png"><br><img src="https://qs100371.top/post-images/1755354408229.png"><br><img src="https://qs100371.top/post-images/1755354414148.png"></p><hr><p>学校使用，只用word和ppt的话，问题不大，wps就可以搞定。字体是一个大问题，现在国家也没有发布免费字体供操作系统使用，以统一各类公文的字体样式。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;单位现在开始推广统信uos了，这是一个来源于深度linux的商业版os。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="linux" scheme="https://qs100371.top/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>影视聚合播放器:MoonTV</title>
-    <link href="https://qs100371.top/post/ying-shi-ju-he-bo-fang-qi-moontv/"/>
-    <id>https://qs100371.top/post/ying-shi-ju-he-bo-fang-qi-moontv/</id>
-    <published>2025-08-12T07:38:12.000Z</published>
-    <updated>2025-11-05T10:49:44.043Z</updated>
-    
-    <content type="html"><![CDATA[<p>MoonTV 是一个开箱即用的、跨平台的影视聚合播放器。它基于 Next.js 14 + Tailwind CSS + TypeScript 构建，支持多资源搜索、在线播放、收藏同步、播放记录、本地&#x2F;云端存储，可以随时随地畅享海量免费影视内容。</p><span id="more"></span><p>项目地址：<a href="https://github.com/LunaTechLab/MoonTV">LunaTechLab&#x2F;MoonTV</a></p><p>libreTV的衍生应用，功能特性：</p><ul><li>多源聚合搜索：内置数十个免费资源站点，一次搜索立刻返回全源结果。</li><li>丰富详情页：支持剧集列表、演员、年份、简介等完整信息展示。</li><li>流畅在线播放：集成 HLS.js &amp; ArtPlayer。</li><li>收藏 + 继续观看：支持 Redis&#x2F;D1&#x2F;Upstash 存储，多端同步进度。</li><li>PWA：离线缓存、安装到桌面&#x2F;主屏，移动端原生体验。</li><li>响应式布局：桌面侧边栏 + 移动底部导航，自适应各种屏幕尺寸。</li><li>极简部署：一条 Docker 命令即可将完整服务跑起来，或免费部署到 Vercel、Netlify 和 Cloudflare。</li><li>智能去广告：自动跳过视频中的切片广告（实验性）</li></ul><h1 id="Vercel-部署"><a href="#Vercel-部署" class="headerlink" title="Vercel 部署"></a>Vercel 部署</h1><p>Fork 仓库到自己的 GitHub 账户。<br>登陆 Vercel，点击 Add New → Project，选择 Fork 后的仓库。<br>设置 PASSWORD 环境变量。<br>保持默认设置完成首次部署。<br>部署完成后即可通过分配的域名访问，也可以绑定自定义域名。</p><h1 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h1><ul><li><p>cli<br><code>docker run -d --name moontv -p 3000:3000 --env PASSWORD=your_password zhc1991/moontv:latest</code></p></li><li><p>docker-compose.yml</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">moontv-core</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">zhc1991/moontv:latest</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">moontv-core</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;3000:3000&#x27;</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PASSWORD=your_password</span></span><br></pre></td></tr></table></figure><p>官方提供的镜像好象有问题不能用。</p></li></ul><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p><img src="https://qs100371.top/post-images/1754984832383.png"><br><img src="https://qs100371.top/post-images/1754984840466.png"><br><img src="https://qs100371.top/post-images/1754984853454.png"><br><img src="https://qs100371.top/post-images/1754984861210.png"><br><img src="https://qs100371.top/post-images/1754984867450.png"><br>打开一个影片：<br><img src="https://qs100371.top/post-images/1754984896081.png"><br><img src="https://qs100371.top/post-images/1754984902420.png"><br><img src="https://qs100371.top/post-images/1754984910467.png"><br>换一个片源：<br><img src="https://qs100371.top/post-images/1754984915203.png"></p><h1 id="android-tv使用"><a href="#android-tv使用" class="headerlink" title="android tv使用"></a>android tv使用</h1><p>安装OrionTV（<a href="https://github.com/zimplexing/OrionTV/releases">点这里下载</a>）<br>把api地址设置成moonTV的地址。<br><img src="https://qs100371.top/post-images/1754985079584.png"><br><img src="https://qs100371.top/post-images/1754985086230.png"><br>选择一个影片：<br><img src="https://qs100371.top/post-images/1754985181810.png"><br><img src="https://qs100371.top/post-images/1754985193722.png"><br><img src="https://qs100371.top/post-images/1754985216984.png"><br><img src="https://qs100371.top/post-images/1754985223487.png"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;MoonTV 是一个开箱即用的、跨平台的影视聚合播放器。它基于 Next.js 14 + Tailwind CSS + TypeScript 构建，支持多资源搜索、在线播放、收藏同步、播放记录、本地&amp;#x2F;云端存储，可以随时随地畅享海量免费影视内容。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="docker" scheme="https://qs100371.top/tags/docker/"/>
     
   </entry>
   

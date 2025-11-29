@@ -4,7 +4,39 @@
   
     
     <entry>
-      <title>CoreMark：给nas跑个分</title>
+      <title>剑网三单机部署方法</title>
+      <link href="/post/jian-wang-san-dan-ji-bu-shu-fang-fa/"/>
+      <url>/post/jian-wang-san-dan-ji-bu-shu-fang-fa/</url>
+      
+        <content type="html"><![CDATA[<p>自部署的传奇三玩几天没什么意思了，又在网络上搜罗了剑网三单机版的部署方法。本文记录了部署过程。</p><span id="more"></span><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>网络上搜索“剑网三单机版”，搜出的几个网站均需要付费。突然灵机一动，打开之前部署的<a href="https://pubhub.qs100371.top/">pubhub</a>，用关键字一搜，对应夸克盘的第一个链接<a href="https://pan.quark.cn/s/92bf9ac94f9e">https://pan.quark.cn/s/92bf9ac94f9e</a> 就是，其中有两个版本，第3版有28.2G。<br>下载夸克电脑端，能以700多k的速度下载。<br>如果用前文篡改猴脚本下载，能有2M的速度。<br>下载完9个rar分卷压缩包，解压备用。</p><h1 id="安装vmware"><a href="#安装vmware" class="headerlink" title="安装vmware"></a>安装vmware</h1><p>现在vmware免费使用，很方便安装上vmware17pro。<br>打开vmare，选择打开虚拟机，选择jx3服务端目录里的CentOS 7 64 位.vmx，打开。<br>修改虚拟机的网络为桥接。启动虚拟机，完成后用帐号root，密码123456登入，输入ifconfig查看获得的地址。此时服务端已部署完成。<br><img src="https://qs100371.vip/post-images/1764409478946.png"></p><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>打开”80客户端\JX3\bin\zhcn\mod”下的svrlist.ini，更改IP为服务端的ip。<br>打开”80客户端\JX3\bin\zhcn\JX3Client.exe”，用任意帐号和密码都可登录进入，创建角色。<br>进入游戏后，在聊天框输入“&#x2F;gm”，打开命令GM后台。可以刷装备和等级。<br><img src="https://qs100371.vip/post-images/1764410013646.png"><br><img src="https://qs100371.vip/post-images/1764410021258.png"><br><img src="https://qs100371.vip/post-images/1764410028575.png"><br><img src="https://qs100371.vip/post-images/1764410033155.png"><br><img src="https://qs100371.vip/post-images/1764410037521.png"><br><img src="https://qs100371.vip/post-images/1764410041906.png"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>网盘高速直链下载方法</title>
+      <link href="/post/wang-pan-gao-su-zhi-lian-xia-zai-fang-fa/"/>
+      <url>/post/wang-pan-gao-su-zhi-lian-xia-zai-fang-fa/</url>
+      
+        <content type="html"><![CDATA[<p>各大网盘又要安装网盘又是限制下载速度，没有vip很难下载大文件。本文记录了解析网盘下载地址并通过motrix下载的方法。</p><span id="more"></span><h1 id="安装motrix"><a href="#安装motrix" class="headerlink" title="安装motrix"></a>安装motrix</h1><p>下载<a href="https://motrix.app/download">https://motrix.app/download</a>并安装。支持win，mac，linux（带桌面）。<br><img src="https://qs100371.vip/post-images/1764408037743.png"></p><h1 id="edge安装篡改猴beta版"><a href="#edge安装篡改猴beta版" class="headerlink" title="edge安装篡改猴beta版"></a>edge安装篡改猴beta版</h1><p>在<a href="https://microsoftedge.microsoft.com/addons/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4%E6%B5%8B%E8%AF%95%E7%89%88/fcmfnpggmnlmfebfghbfnillijihnkoh">扩展商店</a>里安装篡改猴。<br>或在crxsoso.com搜索安装。<br><font color="red">在扩展管理里打开开发者模式。</font></p><h1 id="脚本安装"><a href="#脚本安装" class="headerlink" title="脚本安装"></a>脚本安装</h1><p>greasyfork找<a href="https://greasyfork.org/zh-CN/scripts/512125-%E7%BD%91%E7%9B%98%E7%9B%B4%E9%93%BE%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B-%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E6%9A%97%E5%8F%B7">网盘直链下载插件</a><br>打开此地址需梯子。<br>点击安装脚本，然后在浏览器的扩展的控制面板中启用该脚本。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>刷新网盘页面（以夸克网盘为例），文件的左上角出现了下载助手的按钮代表脚本成功生效。<br>勾选要下载的文件，选择RPC下载，点击发送全部连接即可开始高速下载。夸克网盘能有2M多的速度，还算可以。<br><img src="https://qs100371.vip/post-images/1764408006822.png"><br><img src="https://qs100371.vip/post-images/1764408016459.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CoreMark: 给nas跑个分</title>
       <link href="/post/coremarkgei-nas-pao-ge-fen/"/>
       <url>/post/coremarkgei-nas-pao-ge-fen/</url>
       
@@ -84,11 +116,11 @@
     
     
     <entry>
-      <title>FetchV 视频下载扩展</title>
+      <title>FetchV视频下载扩展</title>
       <link href="/post/fetchv-shi-pin-xia-zai-kuo-zhan/"/>
       <url>/post/fetchv-shi-pin-xia-zai-kuo-zhan/</url>
       
-        <content type="html"><![CDATA[<p>这几天使用maxthon的视频浮动工具栏下载视频，发现需要充值订阅，果断放弃。经查找，发现一个好工具FetchV。</p><span id="more"></span><p>官网：<a href="https://fetchv.net/zh-cn">https://fetchv.net/zh-cn</a><br>FetchV 是一款专业通用的浏览器视频下载扩展。兼容于 Chrome、Edge 和其他基于 Chromium 的浏览器。使用 FetchV，可以下载各种类型的在线视频，包括 HLS 流媒体视频（m3u8）、mp4、webm、flv 等。</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>应用商店直接安装。maxthon，edge都能用。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>打开在线播放网页，工具栏上的fetchV上会显示数字，这是能下载的数目，点击图标，点击hls条目后面的“下载”打开下载页面，下载完成时，点击保存按钮。<br><img src="https://qs100371.top/post-images/1762006885525.png"><br><img src="https://qs100371.top/post-images/1762006916830.png"><br><img src="https://qs100371.top/post-images/1762008072144.png"><br>在支持chrome扩展的手机浏览器上也是可用的。</p>]]></content>
+        <content type="html"><![CDATA[<p>这几天使用maxthon的视频浮动工具栏下载视频，发现需要充值订阅，果断放弃。经查找，发现一个好工具FetchV。</p><span id="more"></span><p>官网：<a href="https://fetchv.net/zh-cn">https://fetchv.net/zh-cn</a><br>FetchV 是一款专业通用的浏览器视频下载扩展。兼容于 Chrome、Edge 和其他基于 Chromium 的浏览器。使用 FetchV，可以下载各种类型的在线视频，包括 HLS 流媒体视频（m3u8）、mp4、webm、flv 等。</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>应用商店直接安装。maxthon，edge都能用。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>打开在线播放网页，工具栏上的fetchV上会显示数字，这是能下载的数目，点击图标，点击hls条目后面的“下载”打开下载页面，下载完成时，点击保存按钮。<br><img src="https://qs100371.vip/post-images/1762006885525.png"><br><img src="https://qs100371.vip/post-images/1762006916830.png"><br><img src="https://qs100371.vip/post-images/1762008072144.png"><br>在支持chrome扩展的手机浏览器上也是可用的。</p>]]></content>
       
       
       
