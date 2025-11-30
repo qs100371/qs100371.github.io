@@ -1,153 +1,146 @@
-<!DOCTYPE html>
-<html lang=zh>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script>
-    
-    
-    <meta name="description" content="由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>docker打包一个php环境 | 折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker打包一个php环境">
 <meta property="og:url" content="https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/index.html">
 <meta property="og:site_name" content="折腾日记">
 <meta property="og:description" content="由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.top/images/avatar.png">
 <meta property="article:published_time" content="2025-04-19T11:42:14.000Z">
-<meta property="article:modified_time" content="2025-07-15T08:50:24.809Z">
+<meta property="article:modified_time" content="2025-11-05T10:49:43.351Z">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="/images/favicon.ico">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
-    
-    <!-- title -->
-    <title>docker打包一个php环境</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="https://qs100371.top/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "docker打包一个php环境",
+  "url": "https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/",
+  "image": "https://qs100371.top/images/avatar.png",
+  "datePublished": "2025-04-19T11:42:14.000Z",
+  "dateModified": "2025-11-05T10:49:43.351Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qs100371",
+      "url": "mailto:qs@qs100371.top"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/avatar.png"><link rel="canonical" href="https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-    <!-- rss -->
-    
-    
-      <link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml" />
-    
-<meta name="generator" content="Hexo 8.1.1"></head>
-
-<body>
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Archives</a></li>
-         
-          <li><a href="/appscenter/">Projects</a></li>
-         
-          <li><a href="/random.html">Random</a></li>
-         
-          <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
-        
-        
-        <li><a class="icon" href="/post/mian-fei-zai-xian-shi-pin-sou-suo-yu-guan-kan-ping-tai-libretv/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
-        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&text=docker打包一个php环境"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&is_video=false&description=docker打包一个php环境"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=docker打包一个php环境&body=Check out this article: https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&name=docker打包一个php环境&description=&lt;p&gt;由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.</span> <span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">建立镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">运行容器</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index width mx-auto px2 my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        docker打包一个php环境
-    </h1>
-
-
-
-      <div class="meta">
-        <!--<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">qs100371</span>
-      </span>-->
-        
-    <div class="postdate">
-        <time datetime="2025-04-19T11:42:14.000Z" itemprop="datePublished">2025-04-19</time>
-    </div>
-
-
-          
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/docker/" rel="tag">docker</a>
-    </div>
-
-
-      </div>
-  </header>
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
-
-    <div class="content" itemprop="articleBody">
-      <p>由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。</p>
+      
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'docker打包一个php环境',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">228</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://one.qs100371.top:5231/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://one.qs100371.top/api2.php);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a><a class="nav-page-title" href="/"><span class="site-name">docker打包一个php环境</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://one.qs100371.top:5231/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">docker打包一个php环境</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-19T11:42:14.000Z" title="发表于 2025-04-19 19:42:14">2025-04-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-05T10:49:43.351Z" title="更新于 2025-11-05 18:49:43">2025-11-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">383</span></span><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/post/docker-da-bao-yi-ge-php-huan-jing/" data-flag-title="docker打包一个php环境"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/post/docker-da-bao-yi-ge-php-huan-jing/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/post/docker-da-bao-yi-ge-php-huan-jing/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:120,&quot;messagePrev&quot;:&quot;自上次更新以来已经过去了&quot;,&quot;messageNext&quot;:&quot;天，文章的内容可能已经过时。&quot;,&quot;postUpdate&quot;:&quot;2025-11-05 18:49:43&quot;}" hidden></div><p>由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。</p>
 <span id="more"></span>
 <h1 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h1><p>不会写，从github上fork了<a href="https://github.com/cnrtv/phpserver">cnrtv&#x2F;phpserver</a>。<br>Dockerfile内容：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> php:<span class="number">7.3</span>-fpm-alpine3.<span class="number">11</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> repositories /etc/apk/repositories</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> default.conf /</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> index.php /</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> run.sh /</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> php.ini /usr/local/etc/php/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk update &amp;&amp; apk add nginx &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apk add m4 autoconf make gcc g++ linux-headers &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    docker-php-ext-install pdo_mysql opcache mysqli &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">	pecl install -o -f redis \</span></span><br><span class="line"><span class="language-bash">&amp;&amp;  <span class="built_in">rm</span> -rf /tmp/pear \</span></span><br><span class="line"><span class="language-bash">&amp;&amp;  docker-php-ext-enable redis &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mkdir</span> /run/nginx &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mv</span> /default.conf /etc/nginx/conf.d &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mv</span> /index.php /var/www/html &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">touch</span> /run/nginx/nginx.pid &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">chmod</span> 755 /run.sh &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apk del m4 autoconf make gcc g++ linux-headers</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">9000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;/run.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
@@ -155,180 +148,55 @@
 <h1 id="建立镜像"><a href="#建立镜像" class="headerlink" title="建立镜像"></a>建立镜像</h1><p>克隆仓库到本地后，运行：<br><code>docker build -t user/phpserver:v1 .</code><br>user是用户名，phpserver是镜像名，v1是tag，注意最后有一个”.”。<br>完成后用<code>docker images</code>查看，已得到一个名为<code>user/phpserver</code>，tag为v1的镜像。</p>
 <h1 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h1><p><code>docker run -d --name php -p 80:80 user/phpserver:v1</code><br>得到一个开放端口为80的php运行环境，可从ip:80访问。<br>有要测试的php文件，可用docker cp命令复制到容器的<code>/var/www/html/</code>路径下使用。</p>
 <p>本身自带的index.php可以上传文件，只是上传完了看不见文件名列表，不方便，不如docker cp和docker exec -it简单粗暴。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="mailto:qs@qs100371.top">qs100371</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/">https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://qs100371.top" target="_blank">折腾日记</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/docker/">docker</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/bu-tong-ji-chu-jing-xiang-docker-gou-jian-ji-dui-bi/" title="不同基础镜像docker构建及对比"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">不同基础镜像docker构建及对比</div></div><div class="info-2"><div class="info-item-1">前文构建了一个镜像，发现dockerfile里有些用不到的数据库和php扩展，本文试着用不同方式构建镜像。  以alpine为基础镜像Dockerfile： 12345678910111213141516171819202122232425262728FROM php:7.3-fpm-alpine3.11# 1. 使用国内镜像源加速（可选）RUN echo &quot;https://mirrors.aliyun.com/alpine/v3.11/main&quot; &gt; /etc/apk/repositories &amp;&amp; \    echo &quot;https:...</div></div></div></a><a class="pagination-related" href="/post/mian-fei-zai-xian-shi-pin-sou-suo-yu-guan-kan-ping-tai-libretv/" title="免费在线视频搜索与观看平台LibreTV"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">免费在线视频搜索与观看平台LibreTV</div></div><div class="info-2"><div class="info-item-1">LibreTV是一个轻量级、免费的在线视频搜索与观看平台，提供来自多个视频源的内容搜索与播放服务。无需注册，即开即用，支持多种设备访问。项目结合了前端技术和后端代理功能，可部署在支持服务端功能的各类网站托管服务上。  项目地址：LibreSpark&#x2F;LibreTV 功能：  多源视频搜索功能，覆盖电影、电视剧等内容； 聚合多个视频源，自动提取播放链接； 内置广告过滤功能，提供更干净的观影体验。  Vercel部署点击项目说明页上的Deploy按键，连接仓库并部署即可，无需特殊配置。由于vercel.app的地址不能直接访问，需要设置二级域名，才能在国内正常访问。 docker部...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><font color=red>从2025/11/5起域名切换为.top。</font></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.</span> <span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">建立镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">运行容器</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/jian-wang-san-dan-ji-bu-shu-fang-fa/" title="剑网三单机版部署方法">剑网三单机版部署方法</a><time datetime="2025-11-29T09:24:00.000Z" title="发表于 2025-11-29 17:24:00">2025-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/wang-pan-gao-su-zhi-lian-xia-zai-fang-fa/" title="网盘高速直链下载方法">网盘高速直链下载方法</a><time datetime="2025-11-29T09:03:12.000Z" title="发表于 2025-11-29 17:03:12">2025-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/coremarkgei-nas-pao-ge-fen/" title="CoreMark: 给nas跑个分">CoreMark: 给nas跑个分</a><time datetime="2025-11-27T12:30:24.000Z" title="发表于 2025-11-27 20:30:24">2025-11-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/nas-ben-di-bu-shu-mi-gu-shi-pin-zhi-bo-fu-wu/" title="NAS 本地部署咪咕视频直播服务">NAS 本地部署咪咕视频直播服务</a><time datetime="2025-11-24T13:32:32.000Z" title="发表于 2025-11-24 21:32:32">2025-11-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/docker-bu-shu-hao-shi-chuan-qi-san/" title="docker部署皓石传奇三">docker部署皓石传奇三</a><time datetime="2025-11-22T02:53:21.000Z" title="发表于 2025-11-22 10:53:21">2025-11-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2025 By qs100371</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
 
-    </div>
-</article>
-<!--
--->
-<script src="/js/Valine.min.js"></script>
-<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
 
-<style>
-  .v .veditor {
-    min-height: 10rem;
-    background-image: ;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right;
-    background-color: rgba(255, 255, 255, 0);
-    resize: none;
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+      appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
   }
 
-  .v .vwrap {
-    border: 1px solid #000 !important;
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
   }
 
-  .v .vbtn {
-    padding: .4rem 1.2rem !important;
-    border-color: #fff !important;
-    background-color: #49b1f5 !important;
-    color: #fff !important;
-    font-size: .7rem !important;
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
   }
 
-  .v .vcards .vcard .vh .vmeta .vat {
-    padding: 0 .8rem !important;
-    border: 1px solid #00c4b6 !important;
-    border-radius: 5px !important;
-    color: #00c4b6 !important;
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
   }
-</style>
-<script>
-  new Valine({
-    el: '#vcomments',
-    appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
-    appKey: 'MJ6IotbRMRrEumBy45DTigT6',
-    avatar: 'mm',
-    notify: true,
-    visitor: 'true',
-    highlight: 'true',
-    pageSize: 10,
-    placeholder: '来都来了，不妨评论一下',
-    avatar_cdn: 'https://cravatar.cn/avatar/'
-  });
-</script>
-    </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Archives</a></li>
-         
-          <li><a href="/appscenter/">Projects</a></li>
-         
-          <li><a href="/random.html">Random</a></li>
-         
-          <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.</span> <span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">建立镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">运行容器</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&text=docker打包一个php环境"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&is_video=false&description=docker打包一个php环境"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=docker打包一个php环境&body=Check out this article: https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&title=docker打包一个php环境"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://qs100371.top/post/docker-da-bao-yi-ge-php-huan-jing/&name=docker打包一个php环境&description=&lt;p&gt;由于数据api需要使用php，之前是借用easyimage容器，本文用docker建立镜像，并生成一个简单的php环境容器。&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-      <ul>
-        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
-        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
-        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
-        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
-      </ul>
-    </div>
-
-  </div>
-</div>
-
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2025
-      qs100371
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        
-          <li><a href="/">
-              Home
-            </a></li>
-          
-          <li><a href="/archives/">
-              Archives
-            </a></li>
-          
-          <li><a href="/appscenter/">
-              Projects
-            </a></li>
-          
-          <li><a href="/random.html">
-              Random
-            </a></li>
-          
-          <li><a href="/about/">
-              About
-            </a></li>
-          
-      </ul>
-    </nav>
-  </div>
-</footer>
-
-<script src="/js/jquery.min.js"></script>
-
-  
-<script src="/js/search.js"></script>
-
-    <script type="text/javascript">
-      searchFunc("/search.xml", "local-search-input", "local-search-result");
-    </script>
-</body>
-</html>
-<!-- styles -->
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-
-<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
-
-
-<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
-
-
-
-<!-- jquery -->
-
-<script src="/lib/jquery/jquery.min.js"></script>
-
-
-<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/js/main.js"></script>
-
-<!-- Google Analytics -->
-
-<!-- Disqus Comments -->
-
-
+})()</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
