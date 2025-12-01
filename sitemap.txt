@@ -233,11 +233,11 @@ https://qs100371.top/douban/index.html
 https://qs100371.top/categories/index.html
 https://qs100371.top/tags/index.html
 https://qs100371.top/
-https://qs100371.top/tags/docker/
-https://qs100371.top/tags/web/
 https://qs100371.top/tags/python/
+https://qs100371.top/tags/web/
 https://qs100371.top/tags/termux/
 https://qs100371.top/tags/linux/
+https://qs100371.top/tags/docker/
 https://qs100371.top/tags/nas/
 https://qs100371.top/tags/armbian/
 https://qs100371.top/tags/onecloud/
