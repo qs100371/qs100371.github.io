@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qs100371.top/post/windows-xi-tong-fu-wu-ming-ling-hang-guan-li-fang-fa/</loc>
+    
+    <lastmod>2025-12-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qs100371.top/post/curl-shi-yong-shi-li/</loc>
+    
+    <lastmod>2025-12-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://qs100371.top/post/docker-bu-shu-hao-shi-chuan-qi-san/</loc>
     
     <lastmod>2025-12-01</lastmod>
@@ -408,15 +426,6 @@
   
   <url>
     <loc>https://qs100371.top/post/hexo-lanscape-sou-suo-gong-neng-de-gai-jin/</loc>
-    
-    <lastmod>2025-11-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qs100371.top/post/curl-shi-yong-shi-li/</loc>
     
     <lastmod>2025-11-05</lastmod>
     
@@ -2195,6 +2204,13 @@
   
   <url>
     <loc>https://qs100371.top/tags/macos/</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://qs100371.top/tags/windows/</loc>
     <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

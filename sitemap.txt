@@ -1,3 +1,5 @@
+https://qs100371.top/post/windows-xi-tong-fu-wu-ming-ling-hang-guan-li-fang-fa/
+https://qs100371.top/post/curl-shi-yong-shi-li/
 https://qs100371.top/post/docker-bu-shu-hao-shi-chuan-qi-san/
 https://qs100371.top/post/jian-wang-san-dan-ji-bu-shu-fang-fa/
 https://qs100371.top/post/yi-ge-zai-xian-yue-du-qi-reader/
@@ -44,7 +46,6 @@ https://qs100371.top/post/dkturbodocker-jing-xiang-jia-su-qi-zi-dong-qie-huan/
 https://qs100371.top/post/wang-pan-sou-suo-panhub/
 https://qs100371.top/post/alpine-an-zhuang-python/
 https://qs100371.top/post/hexo-lanscape-sou-suo-gong-neng-de-gai-jin/
-https://qs100371.top/post/curl-shi-yong-shi-li/
 https://qs100371.top/post/qing-liang-ji-bi-ji-fu-wu-memos/
 https://qs100371.top/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/
 https://qs100371.top/post/docker-ce-an-zhuang/
@@ -245,3 +246,4 @@ https://qs100371.top/tags/game/
 https://qs100371.top/tags/deepseek/
 https://qs100371.top/tags/diy/
 https://qs100371.top/tags/macos/
+https://qs100371.top/tags/windows/
