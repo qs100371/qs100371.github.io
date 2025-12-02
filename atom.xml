@@ -6,7 +6,7 @@
   <link href="https://qs100371.top/atom.xml" rel="self"/>
   
   <link href="https://qs100371.top/"/>
-  <updated>2025-12-01T13:40:58.645Z</updated>
+  <updated>2025-12-02T09:54:48.897Z</updated>
   <id>https://qs100371.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>docker部署奇迹mu</title>
+    <link href="https://qs100371.top/post/docker-bu-shu-qi-ji-mu/"/>
+    <id>https://qs100371.top/post/docker-bu-shu-qi-ji-mu/</id>
+    <published>2025-12-02T09:19:20.000Z</published>
+    <updated>2025-12-02T09:54:48.897Z</updated>
+    
+    <content type="html"><![CDATA[<p>OpenMU是一个开源mu，基于第六季第三集版本。</p><span id="more"></span><p>项目地址：<a href="https://github.com/MUnique/OpenMU">https://github.com/MUnique/OpenMU</a></p><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p><a href="https://pan.quark.cn/s/be8934e9d491">https://pan.quark.cn/s/be8934e9d491</a><br>下载mus6e3.exe，这是客户端。<br><img src="https://qs100371.top/post-images/1764668887468.webp"><br>下载<a href="https://github.com/MUnique/OpenMU/archive/refs/heads/master.zip">https://github.com/MUnique/OpenMU/archive/refs/heads/master.zip</a> ，解压，在飞牛上建立openmu文件夹，把deploy&#x2F;all-in-one文件夹下的内容复制进去。<br>下载<a href="https://github.com/MUnique/OpenMU/releases/download/v0.8.17/MUnique.OpenMU.ClientLauncher_0.8.17.zip">https://github.com/MUnique/OpenMU/releases/download/v0.8.17/MUnique.OpenMU.ClientLauncher_0.8.17.zip</a> </p><h1 id="构建服务端"><a href="#构建服务端" class="headerlink" title="构建服务端"></a>构建服务端</h1><p>浏览器打开飞牛，登录。打开docker，Compose，新增项目，<br>项目名称：openmu，路径是刚才的openmu文件夹，提示已有compose.yml，点确定，把compose中的端口改成没使用的端口，比如8080，确定之后点构建。等一段时间，点左侧的容器，发现已启动三个服务，nginx-80，openmu-startup，database。<br><img src="https://qs100371.top/post-images/1764668901948.webp"><br><img src="https://qs100371.top/post-images/1764668907895.webp"><br><img src="https://qs100371.top/post-images/1764668912646.webp"><br>点openmu-startup后面快捷访问中，对应8080端口的链接，打开后台，这里是<a href="http://192.168.0.4:32771/">http://192.168.0.4:32771/</a><br>帐号admin，密码openmu。<br>打开accounts，建立游戏帐号。<br>打开game configuration-system，把ip修改成飞牛对应ip，这里是192.168.0.4，点save。<br><img src="https://qs100371.top/post-images/1764668942464.webp"><br><img src="https://qs100371.top/post-images/1764668948148.webp"><br><img src="https://qs100371.top/post-images/1764668960039.webp"></p><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>解压客户端，安装windowsdesktop-runtime-9.0.5-win-x64.exe，再打开MUnique.OpenMU.ClientLauncher.exe，设置服务器ip为192.168.0.4，点Launcher Client，进入游戏。<br>由于自带的MUnique.OpenMU.ClientLauncher.exe打不开，用MUnique.OpenMU.ClientLauncher_0.8.17.zip中的文件替代。<br><img src="https://qs100371.top/post-images/1764669012702.webp"><br><img src="https://qs100371.top/post-images/1764669017373.webp"><br><img src="https://qs100371.top/post-images/1764669021184.webp"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;OpenMU是一个开源mu，基于第六季第三集版本。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="docker" scheme="https://qs100371.top/tags/docker/"/>
+    
+    <category term="game" scheme="https://qs100371.top/tags/game/"/>
+    
+  </entry>
   
   <entry>
     <title>windows系统服务命令行管理方法</title>
@@ -40,9 +61,9 @@
     <link href="https://qs100371.top/post/jian-wang-san-dan-ji-bu-shu-fang-fa/"/>
     <id>https://qs100371.top/post/jian-wang-san-dan-ji-bu-shu-fang-fa/</id>
     <published>2025-11-29T09:24:00.000Z</published>
-    <updated>2025-12-01T09:07:08.474Z</updated>
+    <updated>2025-12-02T09:55:43.876Z</updated>
     
-    <content type="html"><![CDATA[<p>自部署的传奇三玩几天没什么意思了，又在网络上搜罗了剑网三单机版的部署方法。本文记录了部署过程。</p><span id="more"></span><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>网络上搜索“剑网三单机版”，搜出的几个网站均需要付费。突然灵机一动，打开之前部署的<a href="https://panhub.qs100371.top/">panhub</a>，用关键字一搜，对应夸克盘的第一个链接<a href="https://pan.quark.cn/s/92bf9ac94f9e">https://pan.quark.cn/s/92bf9ac94f9e</a> 就是，其中有两个版本，第3版有28.2G。<br>下载夸克电脑端，能以700多k的速度下载。<br>如果用前文篡改猴脚本下载，能有2M的速度。<br>下载完9个rar分卷压缩包，解压备用。<br>整理后的文件分享链接 <a href="https://pan.quark.cn/s/70b9bc0e1db9">https://pan.quark.cn/s/70b9bc0e1db9</a> ，11G。</p><h1 id="安装vmware"><a href="#安装vmware" class="headerlink" title="安装vmware"></a>安装vmware</h1><p>现在vmware免费使用，很方便安装上vmware17pro。<br>打开vmare，选择打开虚拟机，选择jx3服务端目录里的CentOS 7 64 位.vmx，打开。<br>修改虚拟机的网络为”自定义wmnet8(nat)”。启动虚拟机，完成后可用帐号root，密码123456登入。此时服务端已部署完成，服务器地址为192.168.200.128:5004。<br><img src="https://qs100371.top/post-images/1764563996006.png"><br><img src="https://qs100371.top/post-images/1764409478946.png"></p><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>打开”80客户端\JX3\bin\zhcn\mod”下的svrlist.ini，更改IP为192.168.200.128，端口号5004。<br>打开”80客户端\JX3\bin\zhcn\JX3Client.exe”，用任意帐号和密码都可登录进入，创建角色。<br>进入游戏后，在聊天框输入“&#x2F;gm”，打开命令GM后台。可以刷装备和等级。<br><img src="https://qs100371.top/post-images/1764410013646.png"><br><img src="https://qs100371.top/post-images/1764410021258.webp"><br><img src="https://qs100371.top/post-images/1764410028575.webp"><br><img src="https://qs100371.top/post-images/1764410033155.webp"><br><img src="https://qs100371.top/post-images/1764410037521.webp"><br><img src="https://qs100371.top/post-images/1764410041906.webp"></p><p><font color=red><del>若将192.168.200.128:5004反向代理到公网，则可以从外网用域名连接。</del></font><br>反代到公网的地址无法进入角色，客户端只会从192.168.200.1连接到192.168.200.128，只能在本地使用。</p>]]></content>
+    <content type="html"><![CDATA[<p>自部署的传奇三玩几天没什么意思了，又在网络上搜罗了剑网三单机版的部署方法。本文记录了部署过程。</p><span id="more"></span><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>网络上搜索“剑网三单机版”，搜出的几个网站均需要付费。突然灵机一动，打开之前部署的<a href="https://panhub.qs100371.top/">panhub</a>，用关键字一搜，对应夸克盘的第一个链接<a href="https://pan.quark.cn/s/92bf9ac94f9e">https://pan.quark.cn/s/92bf9ac94f9e</a> 就是，其中有两个版本，第3版有28.2G。<br>下载夸克电脑端，能以700多k的速度下载。<br>如果用前文篡改猴脚本下载，能有2M的速度。<br>下载完9个rar分卷压缩包，解压备用。<br>整理后的文件分享链接 <a href="https://pan.quark.cn/s/70b9bc0e1db9">https://pan.quark.cn/s/70b9bc0e1db9</a> ，11G。</p><h1 id="安装vmware"><a href="#安装vmware" class="headerlink" title="安装vmware"></a>安装vmware</h1><p>现在vmware免费使用，很方便安装上vmware17pro。<br>打开vmare，选择打开虚拟机，选择jx3服务端目录里的CentOS 7 64 位.vmx，打开。<br>修改虚拟机的网络为”自定义vmnet8(nat)”。启动虚拟机，完成后可用帐号root，密码123456登入。此时服务端已部署完成，服务器地址为192.168.200.128:5004。<br><img src="https://qs100371.top/post-images/1764563996006.png"><br><img src="https://qs100371.top/post-images/1764409478946.png"></p><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>打开”80客户端\JX3\bin\zhcn\mod”下的svrlist.ini，更改IP为192.168.200.128，端口号5004。<br>打开”80客户端\JX3\bin\zhcn\JX3Client.exe”，用任意帐号和密码都可登录进入，创建角色。<br>进入游戏后，在聊天框输入“&#x2F;gm”，打开命令GM后台。可以刷装备和等级。<br><img src="https://qs100371.top/post-images/1764410013646.png"><br><img src="https://qs100371.top/post-images/1764410021258.webp"><br><img src="https://qs100371.top/post-images/1764410028575.webp"><br><img src="https://qs100371.top/post-images/1764410033155.webp"><br><img src="https://qs100371.top/post-images/1764410037521.webp"><br><img src="https://qs100371.top/post-images/1764410041906.webp"></p><p><font color=red><del>若将192.168.200.128:5004反向代理到公网，则可以从外网用域名连接。</del></font><br>反代到公网的地址无法进入角色，客户端只会从192.168.200.1连接到192.168.200.128，只能在本地使用。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;自部署的传奇三玩几天没什么意思了，又在网络上搜罗了剑网三单机版的部署方法。本文记录了部署过程。&lt;/p&gt;</summary>
@@ -382,25 +403,6 @@
     <category term="docker" scheme="https://qs100371.top/tags/docker/"/>
     
     <category term="web" scheme="https://qs100371.top/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网心云oec和昔映nas系统</title>
-    <link href="https://qs100371.top/post/wang-xin-yun-oec-he-xi-ying-nas-xi-tong/"/>
-    <id>https://qs100371.top/post/wang-xin-yun-oec-he-xi-ying-nas-xi-tong/</id>
-    <published>2025-08-20T14:48:45.000Z</published>
-    <updated>2025-11-05T10:49:43.131Z</updated>
-    
-    <content type="html"><![CDATA[<p>2018年入手玩客云（￥420），2020年到2023年跑PCDN回血￥930，后来跑不动就下线了。现在入手白色oec，白色，上下面板是透明有机玻璃，看着挺高大上。</p><span id="more"></span><h1 id="oec"><a href="#oec" class="headerlink" title="oec"></a>oec</h1><p><img src="https://qs100371.top/post-images/1755702007904.png"><br>配置对比：</p><table><thead><tr><th>玩客云</th><th>第一代</th><th>OEC</th></tr></thead><tbody><tr><td>CPU</td><td>S805</td><td>RK3566</td></tr><tr><td>指令集</td><td>32 位</td><td>64 位</td></tr><tr><td>发布日期</td><td>Q2 2014</td><td>Q2 2020</td></tr><tr><td>工艺</td><td>28 nm</td><td>22 nm</td></tr><tr><td>TDP</td><td>5 W</td><td>3 W</td></tr><tr><td>Geekbench 4 单核</td><td>525</td><td>764</td></tr><tr><td>Geekbench 4 多核</td><td>1423</td><td>2069</td></tr></tbody></table><p>第一代玩客云虽然也有千兆网口，但是没有 USB3.0，读写速度受限于 USB2.0，自带的内存也只有 1G，只能搞点对读写速度没啥要求的应用，比如 HomeAssistant。而 OEC 不仅有 USB3.0，内置的 2.5 寸 SSD 位置还能避免再挂个 USB，速写速度更快！看起来还更加美观。</p><p>目前 OEC 不仅能刷 armbian，官方还支持直接使用手机 App 将网心云固件更新为昔映轻 NAS 系统，整机带一块 2.5 寸 SSD 的功耗仅有 2～3w，做一个备份服务器，跑一些 docker，搞一个简单的影音服务器都没问题。<br><img src="https://qs100371.top/post-images/1755701908285.png"></p><h1 id="昔映"><a href="#昔映" class="headerlink" title="昔映"></a>昔映</h1><p><img src="https://qs100371.top/post-images/1755702146242.png"><br><img src="https://qs100371.top/post-images/1755702171270.png"><br><img src="https://qs100371.top/post-images/1755702199413.png"><br><img src="https://qs100371.top/post-images/1755702205656.png"></p><p><img src="https://qs100371.top/post-images/1755702215454.png"><br><img src="https://qs100371.top/post-images/1755702228329.png"><br><img src="https://qs100371.top/post-images/1755702236800.png"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;2018年入手玩客云（￥420），2020年到2023年跑PCDN回血￥930，后来跑不动就下线了。现在入手白色oec，白色，上下面板是透明有机玻璃，看着挺高大上。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="nas" scheme="https://qs100371.top/tags/nas/"/>
     
   </entry>
   
