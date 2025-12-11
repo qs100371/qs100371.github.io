@@ -23,27 +23,6 @@
     
     
     <entry>
-      <title>docker部署奇迹mu</title>
-      <link href="/post/docker-bu-shu-qi-ji-mu/"/>
-      <url>/post/docker-bu-shu-qi-ji-mu/</url>
-      
-        <content type="html"><![CDATA[<p>OpenMU是一个开源mu，基于第六季第三集版本。</p><span id="more"></span><p>项目地址：<a href="https://github.com/MUnique/OpenMU">https://github.com/MUnique/OpenMU</a></p><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p><a href="https://pan.quark.cn/s/be8934e9d491">https://pan.quark.cn/s/be8934e9d491</a><br>下载MUS6E3.exe，这是英文原版客户端。<br><a href="https://pan.quark.cn/s/e1b7be923f6f">https://pan.quark.cn/s/e1b7be923f6f</a><br>中文版客户端。<br>下载<a href="https://github.com/MUnique/OpenMU/archive/refs/heads/master.zip">https://github.com/MUnique/OpenMU/archive/refs/heads/master.zip</a> ，解压，在飞牛上建立openmu文件夹，把deploy&#x2F;all-in-one文件夹下的内容复制进去。<br><img src="https://qs100371.top/post-images/1764668887468.webp"></p><p>下载<a href="https://github.com/MUnique/OpenMU/releases/download/v0.8.17/MUnique.OpenMU.ClientLauncher_0.8.17.zip">https://github.com/MUnique/OpenMU/releases/download/v0.8.17/MUnique.OpenMU.ClientLauncher_0.8.17.zip</a> </p><h1 id="构建服务端"><a href="#构建服务端" class="headerlink" title="构建服务端"></a>构建服务端</h1><p>浏览器打开飞牛，登录。打开docker，Compose，新增项目，<br>项目名称：openmu，路径是刚才的openmu文件夹，提示已有compose.yml，点确定，把compose中的端口改成没使用的端口，比如8080，确定之后点构建。等一段时间，点左侧的容器，发现已启动三个服务，nginx-80，openmu-startup，database。<br><img src="https://qs100371.top/post-images/1764668901948.webp"><br><img src="https://qs100371.top/post-images/1764668907895.webp"><br><img src="https://qs100371.top/post-images/1764668912646.webp"><br>点openmu-startup后面快捷访问中，对应8080端口的链接，打开后台，这里是<a href="http://192.168.0.4:32771/">http://192.168.0.4:32771/</a><br>帐号admin，密码openmu。<br>打开accounts，建立游戏帐号。<br>打开game configuration-system，把ip修改成飞牛对应ip，这里是192.168.0.4，点save。<br><img src="https://qs100371.top/post-images/1764668942464.webp"><br><img src="https://qs100371.top/post-images/1764668948148.webp"><br><img src="https://qs100371.top/post-images/1764668960039.webp"></p><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>解压客户端，安装windowsdesktop-runtime-9.0.5-win-x64.exe，再打开MUnique.OpenMU.ClientLauncher.exe，设置服务器ip为192.168.0.4，点Launcher Client，进入游戏。<br>由于自带的MUnique.OpenMU.ClientLauncher.exe打不开，用MUnique.OpenMU.ClientLauncher_0.8.17.zip中的文件替代。<br>也可直接修改launcher.config内容为</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LauncherSettings</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="attr">xmlns:xsd</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MainExePath</span>&gt;</span>main.exe<span class="tag">&lt;/<span class="name">MainExePath</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Hosts</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ServerHostSettings</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Description</span>&gt;</span>fnos<span class="tag">&lt;/<span class="name">Description</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Address</span>&gt;</span>192.168.0.4<span class="tag">&lt;/<span class="name">Address</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Port</span>&gt;</span>44405<span class="tag">&lt;/<span class="name">Port</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ServerHostSettings</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Hosts</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LauncherSettings</span>&gt;</span></span><br></pre></td></tr></table></figure><p><img src="https://qs100371.top/post-images/1764669012702.webp"><br><img src="https://qs100371.top/post-images/1764669017373.webp"><br><img src="https://qs100371.top/post-images/1764669021184.webp"></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> docker </tag>
-            
-            <tag> game </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>windows系统服务命令行管理方法</title>
       <link href="/post/windows-xi-tong-fu-wu-ming-ling-hang-guan-li-fang-fa/"/>
       <url>/post/windows-xi-tong-fu-wu-ming-ling-hang-guan-li-fang-fa/</url>
@@ -55,25 +34,6 @@
         <tags>
             
             <tag> windows </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>剑网三单机版部署方法</title>
-      <link href="/post/jian-wang-san-dan-ji-bu-shu-fang-fa/"/>
-      <url>/post/jian-wang-san-dan-ji-bu-shu-fang-fa/</url>
-      
-        <content type="html"><![CDATA[<p>自部署的传奇三玩几天没什么意思了，又在网络上搜罗了剑网三单机版的部署方法。本文记录了部署过程。</p><span id="more"></span><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>网络上搜索“剑网三单机版”，搜出的几个网站均需要付费。突然灵机一动，打开之前部署的<a href="https://panhub.qs100371.top/">panhub</a>，用关键字一搜，对应夸克盘的第一个链接<a href="https://pan.quark.cn/s/92bf9ac94f9e">https://pan.quark.cn/s/92bf9ac94f9e</a> 就是，其中有两个版本，第3版有28.2G。<br>下载夸克电脑端，能以700多k的速度下载。<br>如果用前文篡改猴脚本下载，能有2M的速度。<br>下载完9个rar分卷压缩包，解压备用。<br><del>整理后的文件分享链接 <a href="https://pan.quark.cn/s/70b9bc0e1db9">https://pan.quark.cn/s/70b9bc0e1db9</a> ，11G。</del></p><h1 id="安装vmware"><a href="#安装vmware" class="headerlink" title="安装vmware"></a>安装vmware</h1><p>现在vmware免费使用，很方便安装上vmware17pro。<br>打开vmare，选择打开虚拟机，选择jx3服务端目录里的CentOS 7 64 位.vmx，打开。<br>修改虚拟机的网络为”自定义vmnet8(nat)”。启动虚拟机，完成后可用帐号root，密码123456登入。此时服务端已部署完成，服务器地址为192.168.200.128:5004。<br><img src="https://qs100371.top/post-images/1764563996006.png"><br><img src="https://qs100371.top/post-images/1764409478946.png"></p><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>打开”80客户端\JX3\bin\zhcn\mod”下的svrlist.ini，更改IP为192.168.200.128，端口号5004。<br>打开”80客户端\JX3\bin\zhcn\JX3Client.exe”，用任意帐号和密码都可登录进入，创建角色。<br>进入游戏后，在聊天框输入“&#x2F;gm”，打开命令GM后台。可以刷装备和等级。<br><img src="https://qs100371.top/post-images/1764410013646.png"><br><img src="https://qs100371.top/post-images/1764410021258.webp"><br><img src="https://qs100371.top/post-images/1764410028575.webp"><br><img src="https://qs100371.top/post-images/1764410033155.webp"><br><img src="https://qs100371.top/post-images/1764410037521.webp"><br><img src="https://qs100371.top/post-images/1764410041906.webp"></p><p><font color=red><del>若将192.168.200.128:5004反向代理到公网，则可以从外网用域名连接。</del></font><br>反代到公网的地址无法进入角色，客户端只会从192.168.200.1连接到192.168.200.128，只能在本地使用。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> game </tag>
             
         </tags>
       
@@ -133,27 +93,6 @@
         <tags>
             
             <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>docker部署皓石传奇三</title>
-      <link href="/post/docker-bu-shu-hao-shi-chuan-qi-san/"/>
-      <url>/post/docker-bu-shu-hao-shi-chuan-qi-san/</url>
-      
-        <content type="html"><![CDATA[<p>Zircon皓石传奇三，支持 windows、linux、docker 部署。本文记录了docker部署方式。</p><span id="more"></span><p>项目地址：<a href="https://gitee.com/raphaelcheung/zircon-legend-server">https://gitee.com/raphaelcheung/zircon-legend-server</a></p><p>服务端支持在 Linux、Windows、Docker 平台上部署。</p><h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>包含了地图数据比较大，压缩之后仍然有近 800Mb。<br>下载：<a href="https://pan.baidu.com/s/1dKrpu6G4p4klMVOIMuhOdA?pwd=j1rm">https://pan.baidu.com/s/1dKrpu6G4p4klMVOIMuhOdA?pwd=j1rm</a><br>服务端文件解压到datas文件夹，客户端解压到client文件夹。<br>下载最新客户端文件<a href="https://gitee.com/raphaelcheung/zircon-legend-client/releases/download/v1.13.0/Client-v1.13.0-win-x86.zip">https://gitee.com/raphaelcheung/zircon-legend-client/releases/download/v1.13.0/Client-v1.13.0-win-x86.zip</a>，解压到client文件夹。</p><h1 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h1><p>建立文件夹zircon，复制服务端文件夹datas，并建立docker-compose.yml文件：</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  zircon:</span></span><br><span class="line"><span class="symbol">    container_name:</span> zircon</span><br><span class="line"><span class="symbol">    image:</span> raphzhang/zirconlegend:latest</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">&quot;17000:7000&quot;</span>  </span><br><span class="line"><span class="symbol">    restart:</span> unless-stopped</span><br><span class="line"><span class="symbol">    user:</span> <span class="string">&quot;0:0&quot;</span>  </span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - ./datas:<span class="keyword">/zircon/</span>datas</span><br><span class="line">      - <span class="keyword">/etc/</span>localtime:<span class="keyword">/etc/</span>localtime:ro</span><br><span class="line">      - <span class="keyword">/etc/</span>timezone:<span class="keyword">/etc/</span>timezone:ro</span><br></pre></td></tr></table></figure><p><code>docker compose up -d</code><br><code>docker logs zircon</code></p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">皓石传奇三 v1.13.0.36433</span><br><span class="line">免费开源的传奇三，开源技术交流进QQ群 915941142</span><br><span class="line">客户端更新路径：</span><br><span class="line">地图文件路径：./datas/Map/</span><br><span class="line">最大连接数量限制：200</span><br><span class="line">[<span class="symbol">2025-11-21 22:00:17</span>]: <span class="link">网络已启动.</span></span><br><span class="line">[<span class="symbol">2025-11-21 22:00:17</span>]: <span class="link">Web 服务已启动.</span></span><br><span class="line">[<span class="symbol">2025-11-21 22:00:17</span>]: <span class="link">幽灵船通向地图：神舰入口</span></span><br><span class="line">[<span class="symbol">2025-11-21 22:00:17</span>]: <span class="link">地狱之门通向地图：赤龙城入口</span></span><br><span class="line">[<span class="symbol">2025-11-21 22:00:17</span>]: <span class="link">加载耗时: 18 秒</span></span><br><span class="line">[<span class="symbol">2025-11-21 22:00:17</span>]: <span class="link">共清理 0 条数据</span></span><br><span class="line">[<span class="symbol">2025-11-21 22:00:26</span>]: <span class="link">自动清理用户垃圾数据：共清理 0 条</span></span><br></pre></td></tr></table></figure><p>服务端运行在ip:17000。可用内网地址直接连接或反代到公网访问。</p><h1 id="客户端准备"><a href="#客户端准备" class="headerlink" title="客户端准备"></a>客户端准备</h1><p>修改client文件夹下的Legend.ini文件中的IPAddress和Port为上文的ip和端口，也可用域名和相应端口访问。<br><img src="https://qs100371.top/post-images/1763781403739.png"><br>打开Legend.exe登录，新注册帐号<a href="mailto:&#114;&#97;&#x70;&#104;&#x61;&#x65;&#x6c;&#64;&#103;&#x6d;&#x2e;&#103;&#109;">&#114;&#97;&#x70;&#104;&#x61;&#x65;&#x6c;&#64;&#103;&#x6d;&#x2e;&#103;&#109;</a>，密码123456，用此帐号可登录并具备管理员权限。<font color=red>用管理员帐号登录，在聊天栏输入@仅限管理员登录 false，开启非管理员登录。</font><br>GM权限使用说明：<a href="https://gitee.com/raphaelcheung/zircon-legend-server/blob/main/GM%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.md">https://gitee.com/raphaelcheung/zircon-legend-server/blob/main/GM命令使用指南.md</a><br><img src="https://qs100371.top/post-images/1763815953839.png"><br><img src="https://qs100371.top/post-images/1763870525381.png"><br>gm的感觉来了。</p><h1 id="部署自动更新客户端"><a href="#部署自动更新客户端" class="headerlink" title="部署自动更新客户端"></a>部署自动更新客户端</h1><p>服务器端Server.ini里，</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[System]</span></span><br><span class="line"><span class="attr">ClientPath</span>=./datas/Client</span><br></pre></td></tr></table></figure><p>把客户端所有文件放在Client目录下。<br>重启docker。<br>下载<a href="https://gitee.com/raphaelcheung/zircon-legend-laucher/releases/download/v1.0.4/Laucher-v1.0.4-win-x86.zip">launcher</a><br>解压，填上服务器地址和端口号，比如192.168.0.4，17000<br>点连接，就自动在当前目录下载客户端。<br><img src="https://qs100371.top/post-images/1763912647889.png"><br>客户端7.68G，公网下载会很费劲。</p><p>Server.ini里最后一部分可以修改经验倍率和掉落倍率。</p><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Rates]</span><br><span class="line"><span class="attribute">ExperienceRate</span><span class="operator">=</span><span class="number">10000</span></span><br><span class="line"><span class="attribute">DropRate</span><span class="operator">=</span><span class="number">1000</span></span><br><span class="line"><span class="attribute">GoldRate</span><span class="operator">=</span><span class="number">400</span></span><br><span class="line"><span class="attribute">SkillRate</span><span class="operator">=</span><span class="number">1</span></span><br><span class="line"><span class="attribute">CompanionRate</span><span class="operator">=</span><span class="number">100</span></span><br><span class="line">Boss掉落倍率<span class="operator">=</span><span class="number">100</span></span><br></pre></td></tr></table></figure><p>自动吃药设置：<br><img src="https://qs100371.top/post-images/1764581659386.png"></p><h1 id="添加后台管理界面的版本"><a href="#添加后台管理界面的版本" class="headerlink" title="添加后台管理界面的版本"></a>添加后台管理界面的版本</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">services:</span></span><br><span class="line">  <span class="symbol">zircon:</span></span><br><span class="line">    <span class="symbol">container_name:</span> zircon2</span><br><span class="line">    <span class="symbol">image:</span> livse/<span class="symbol">zirconlegend:</span>latest</span><br><span class="line">    <span class="symbol">ports:</span></span><br><span class="line">      - <span class="string">&quot;17000:7000&quot;</span>  <span class="comment"># Added quotes for compatibility</span></span><br><span class="line">      - <span class="string">&quot;17080:7080&quot;</span></span><br><span class="line">    <span class="symbol">restart:</span> <span class="keyword">unless</span>-stopped</span><br><span class="line">    <span class="symbol">user:</span> <span class="string">&quot;0:0&quot;</span>  <span class="comment"># Running as root - consider if necessary</span></span><br><span class="line">    <span class="symbol">volumes:</span></span><br><span class="line">      - ./<span class="symbol">datas:</span>/zircon/datas</span><br><span class="line">      - <span class="regexp">/etc/localtime</span><span class="symbol">:/etc/localtime</span><span class="symbol">:ro</span></span><br><span class="line">      - <span class="regexp">/etc/timezone</span><span class="symbol">:/etc/timezone</span><span class="symbol">:ro</span></span><br></pre></td></tr></table></figure><p>构建之后，服务器地址不变，在ip:17080可打开后台管理界面。<br><img src="https://qs100371.top/post-images/1764678601434.webp"><br><img src="https://qs100371.top/post-images/1764678606443.webp"><br><img src="https://qs100371.top/post-images/1764678610990.webp"></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> docker </tag>
-            
-            <tag> game </tag>
             
         </tags>
       
@@ -402,9 +341,9 @@
       
         <tags>
             
-            <tag> docker </tag>
-            
             <tag> web </tag>
+            
+            <tag> docker </tag>
             
         </tags>
       
@@ -512,25 +451,6 @@
     
     
     <entry>
-      <title>找回neofetch</title>
-      <link href="/post/zhao-hui-neofetch/"/>
-      <url>/post/zhao-hui-neofetch/</url>
-      
-        <content type="html"><![CDATA[<p>cm311盒子上刷的ubuntu armbian，neofetch是一个显示主机基本信息的小程序，这里却没有。</p><span id="more"></span><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>玩客云上的armbian是基于debian，neofetch直接用apt install就可以安装。cm311盒子的armbian是基于ubuntu，安装neofetch出了问题。安装正常，执行的时候提示找不到fastfetch。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>找网上的neofetch安装包，安装了还是出现同样的问题。<br>找fastfetch安装包安装，再安装<code>apt install neofetch</code>，正常显示信息了。<br><img src="https://qs100371.top/post-images/1753696078217.png"><br><img src="https://qs100371.top/post-images/1753696085342.png"></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>移动并重命名剧集文件脚本</title>
       <link href="/post/yi-dong-bing-chong-ming-ming-ju-ji-wen-jian-jiao-ben/"/>
       <url>/post/yi-dong-bing-chong-ming-ming-ju-ji-wen-jian-jiao-ben/</url>
@@ -544,25 +464,6 @@
             <tag> linux </tag>
             
             <tag> deepseek </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>nascab:跨平台NAS软件</title>
-      <link href="/post/nascabkua-ping-tai-nas-ruan-jian/"/>
-      <url>/post/nascabkua-ping-tai-nas-ruan-jian/</url>
-      
-        <content type="html"><![CDATA[<p>NasCab可远程管理照片，影音和文件，是跨平台支持Windows&#x2F;Mac&#x2F;Linux&#x2F;Docker的nas软件。</p><span id="more"></span><p>官网：<a href="https://www.nascab.cn/">https://www.nascab.cn/</a><br>NasCab现在可以通过Docker部署，仅支持X86-64和arm64架构的Cpu。<br>windows，macos，android有相应的服务端和客户端软件。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>docker-compose.yml：</p><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">nascab</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">ypptec/nascab</span></span><br><span class="line">        <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">            <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">                <span class="attribute">max-file</span><span class="punctuation">:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line">                <span class="attribute">max-size</span><span class="punctuation">:</span> <span class="string">10m</span></span><br><span class="line">        <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;5555:90&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;8888:80&#x27;</span></span><br><span class="line">        <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/nascab:/root/.local/share/nascab&#x27;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&#x27;/data/files:/myData&#x27;</span></span><br></pre></td></tr></table></figure><p>docker cli：<br><code>docker run -v /data/files:/myData -v /data/nascab:/root/.local/share/nascab -p 8888:80 -p 5555:90 -d --log-opt max-size=10m --log-opt max-file=3 ypptec/nascab</code><br>需要管理的文件在&#x2F;data&#x2F;files。</p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>有点象nas，但影视刮削不好，没有内容简介和演员相关，只有音视频码率。</p><p><img src="https://qs100371.top/post-images/1753181954754.png"><br><img src="https://qs100371.top/post-images/1753181959909.png"><br><img src="https://qs100371.top/post-images/1753181967978.png"><br><img src="https://qs100371.top/post-images/1753181973623.png"></p><hr><p>jellyfin管理视频很好，只是刮削需要架梯子。<br>nascab看来只有个架子，内容做得不到位。在电信盒子上运行居然还崩了。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> nas </tag>
             
         </tags>
       
@@ -698,25 +599,6 @@
             <tag> web </tag>
             
             <tag> linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>综合性能对比:Intel Core i3-380M vs. Amlogic S905L3B</title>
-      <link href="/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/"/>
-      <url>/post/zong-he-xing-neng-dui-bi-intel-core-i3-380m-vs-amlogic-s905l3b/</url>
-      
-        <content type="html"><![CDATA[<p>手上有小主机和移动盒子，一个是x86，一个是arm64，对比一下综合性能。</p><span id="more"></span><h1 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h1><table><thead><tr><th>项目</th><th>Intel Core i3-380M（2010年）</th><th>Amlogic S905L3B（电视盒子）</th><th>胜出方</th></tr></thead><tbody><tr><td>架构</td><td>Westmere（32nm，2核4线程）</td><td>Cortex-A55（12nm，4核4线程）</td><td>S905L3B</td></tr><tr><td>CPU单核性能</td><td>~400（Geekbench 5）</td><td>~150-200（预估）</td><td>i3-380M</td></tr><tr><td>CPU多核性能</td><td>~900（Geekbench 5）</td><td>~500-600（预估）</td><td>i3-380M</td></tr><tr><td>GPU性能</td><td>Intel HD（老旧，≈G31 MP2水平）</td><td>Mali-G31 MP2（稍优）</td><td>S905L3B</td></tr><tr><td>内存支持</td><td>DDR3（最大8GB）</td><td>DDR4&#x2F;LPDDR4（通常2GB）</td><td>i3-380M</td></tr><tr><td>存储</td><td>SATA HDD&#x2F;SSD</td><td>eMMC 5.1（较慢）</td><td>i3-380M</td></tr><tr><td>能效比</td><td>35W TDP（耗电高）</td><td>~5W（低功耗）</td><td>S905L3B</td></tr><tr><td>适用场景</td><td>老旧笔记本（Win7&#x2F;轻度办公）</td><td>4K视频播放&#x2F;安卓TV系统</td><td>不同用途</td></tr></tbody></table><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ul><li><p>CPU性能（日常任务、多线程）<br>i3-380M 胜出，单核和多核性能均领先（得益于x86架构和超线程）。<br>但S905L3B的能效比更高，适合低负载场景（如电视盒子）。</p></li><li><p>GPU性能（图形处理）<br>S905L3B 稍强（Mali-G31 MP2优化更好，支持4K HDR解码）。<br>i3-380M的核显仅适合基础显示输出，无法流畅解码4K。</p></li><li><p>实际体验<br>i3-380M：适合老旧Windows电脑（办公、网页），但已无法流畅运行现代软件（如Win11、Chrome多标签）。<br>S905L3B：专为电视盒子优化，4K视频播放流畅，但安卓系统限制，无法运行x86应用（如Photoshop、Steam游戏）。</p></li></ul><h1 id="最终选择建议"><a href="#最终选择建议" class="headerlink" title="最终选择建议"></a>最终选择建议</h1><p>需要轻度办公&#x2F;老旧Windows应用？ → 选i3-380M（但建议升级设备）。<br>主要用来看视频&#x2F;安卓应用？ → 选S905L3B（更省电、解码能力强）。<br>如果是想找“性能更强的设备”，两者都已过时，建议考虑现代处理器（如Intel N100、AMD Ryzen 3 7320U等）。</p><hr><p>本来想着arm64能跑docker迅雷，能用来作下载机，谁知道一下载系统就过载800%，省电倒是省电，也就是比玩客云(arm32)强一点。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> nas </tag>
             
         </tags>
       
@@ -978,44 +860,6 @@
     
     
     <entry>
-      <title>程序员做饭指南:how to cook</title>
-      <link href="/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/"/>
-      <url>/post/cheng-xu-yuan-zuo-fan-zhi-nan-how-to-cook/</url>
-      
-        <content type="html"><![CDATA[<p>程序员做饭指南是一个开源项目，一个菜谱 Web 服务。</p><span id="more"></span><p>项目地址：<a href="https://github.com/Anduin2017/HowToCook">Anduin2017&#x2F;HowToCook</a><br>官方网站：<a href="https://cook.aiursoft.cn/">https://cook.aiursoft.cn/</a></p><h1 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull ghcr.io/anduin2017/how-to-cook:latest</span><br><span class="line">docker run -d -p 5000:80 ghcr.io/anduin2017/how-to-cook:latest</span><br></pre></td></tr></table></figure><p><img src="https://qs100371.top/post-images/1749637189204.webp"></p><p><img src="https://qs100371.top/post-images/1749637196203.webp"></p><p><img src="https://qs100371.top/post-images/1749637201804.webp"></p><hr><p>简直就是生存指南。要是加上收藏功能就好了，毕竟能学会几个能做的就很不错了。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> docker </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>docker更新方法</title>
-      <link href="/post/docker-geng-xin-fang-fa/"/>
-      <url>/post/docker-geng-xin-fang-fa/</url>
-      
-        <content type="html"><![CDATA[<p>docker镜像升级了，容器也需要更新。有两种方法可以实现。</p><span id="more"></span><h1 id="cli方法"><a href="#cli方法" class="headerlink" title="cli方法"></a>cli方法</h1><p>用命令行方法先拉取最新镜像，再停止容器，删除容器，重新建立容器。<br>这需要记住建立容器的完整命令行。</p><h1 id="docker-compose方法"><a href="#docker-compose方法" class="headerlink" title="docker-compose方法"></a>docker-compose方法</h1><p>修改docker-compose.yml文件，再<br><code>docker-compose up -d</code></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> docker </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Meting API:音乐播放服务接口</title>
       <link href="/post/meting-apiyin-le-bo-fang-fu-wu-jie-kou/"/>
       <url>/post/meting-apiyin-le-bo-fang-fu-wu-jie-kou/</url>
@@ -1065,25 +909,6 @@
         <tags>
             
             <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>清除linux多余的内核</title>
-      <link href="/post/qing-chu-linux-duo-yu-de-nei-he/"/>
-      <url>/post/qing-chu-linux-duo-yu-de-nei-he/</url>
-      
-        <content type="html"><![CDATA[<p>随着linux系统的升级，磁盘空间越来越紧张，本文记录了删除多余的内核，找回可用空间的方法。</p><span id="more"></span><h1 id="列出已安装内核"><a href="#列出已安装内核" class="headerlink" title="列出已安装内核"></a>列出已安装内核</h1><ul><li>sudo apt list –installed | grep linux-image<br>输出：<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">WARNING</span>: apt does not have a stable CLI interface. Use with caution in scripts.</span><br><span class="line"></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">25</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">106</span>-<span class="number">3</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">27</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">115</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">30</span>-amd64/now <span class="number">6</span>.<span class="number">1</span>.<span class="number">124</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，本地]</span></span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">32</span>-amd64/stable,now <span class="number">6</span>.<span class="number">1</span>.<span class="number">129</span>-<span class="number">1</span> amd64<span class="meta"> [已安装，自动]</span></span><br><span class="line"><span class="attribute">linux</span>-image-amd64/stable,now <span class="number">6</span>.<span class="number">1</span>.<span class="number">129</span>-<span class="number">1</span> amd64<span class="meta"> [已安装]</span></span><br></pre></td></tr></table></figure></li><li>sudo dpkg –get-selections | grep linux-image<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">25</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">27</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">30</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-<span class="number">6</span>.<span class="number">1</span>.<span class="number">0</span>-<span class="number">32</span>-amd64install</span><br><span class="line"><span class="attribute">linux</span>-image-amd64install</span><br></pre></td></tr></table></figure></li></ul><h1 id="查看当前所用内核版本"><a href="#查看当前所用内核版本" class="headerlink" title="查看当前所用内核版本"></a>查看当前所用内核版本</h1><p><code>uname -a</code></p><h1 id="删除多余内核"><a href="#删除多余内核" class="headerlink" title="删除多余内核"></a>删除多余内核</h1><p>先重启以启动最新版内核，确认没问题就可以开始清除多余的内核。</p><ul><li>sudo apt remove linux-image-6.1.0-25*<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 完成</span><br><span class="line">正在分析软件包的依赖关系树... 完成</span><br><span class="line">正在读取状态信息... 完成                 </span><br><span class="line">注意，根据Glob &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>*&#x27; 选中了 &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64-unsigned&#x27;</span><br><span class="line">注意，根据Glob &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>*&#x27; 选中了 &#x27;linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64&#x27;</span><br><span class="line">软件包 linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64-unsigned 未安装，所以不会被卸载</span><br><span class="line">下列软件包是自动安装的并且现在不需要了：</span><br><span class="line">  linux-compiler-gcc<span class="string">-12</span>-x86 linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64</span><br><span class="line">  linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-common linux-image<span class="string">-6</span>.1.0<span class="string">-27</span>-amd64 linux-kbuild<span class="string">-6</span>.1</span><br><span class="line">使用&#x27;sudo apt autoremove&#x27;来卸载它(它们)。</span><br><span class="line">下列软件包将被【卸载】：</span><br><span class="line">  linux-image<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64*</span><br><span class="line">升级了 0 个软件包，新安装了 0 个软件包，要卸载 1 个软件包，有 0 个软件包未被升级。</span><br><span class="line">有 1 个软件包没有被完全安装或卸载。</span><br><span class="line">需要下载 0 B/454 kB 的归档。</span><br><span class="line">解压缩后将会空出 408 MB 的空间。</span><br><span class="line">您希望继续执行吗？ [Y/n] </span><br></pre></td></tr></table></figure></li><li>sudo apt autoremove<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 完成</span><br><span class="line">正在分析软件包的依赖关系树... 完成</span><br><span class="line">正在读取状态信息... 完成                 </span><br><span class="line">下列软件包将被【卸载】：</span><br><span class="line">  linux-compiler-gcc<span class="string">-12</span>-x86 linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-amd64</span><br><span class="line">  linux-headers<span class="string">-6</span>.1.0<span class="string">-25</span>-common linux-image<span class="string">-6</span>.1.0<span class="string">-27</span>-amd64 linux-kbuild<span class="string">-6</span>.1</span><br><span class="line">升级了 0 个软件包，新安装了 0 个软件包，要卸载 5 个软件包，有 0 个软件包未被升级。</span><br><span class="line">有 1 个软件包没有被完全安装或卸载。</span><br><span class="line">需要下载 0 B/454 kB 的归档。</span><br><span class="line">解压缩后将会空出 473 MB 的空间。</span><br><span class="line">您希望继续执行吗？ [Y/n] y</span><br></pre></td></tr></table></figure>统计一下，删除一个内核能减少880M空间占用(debian12)。</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
             
         </tags>
       
@@ -1260,28 +1085,9 @@
       
         <tags>
             
+            <tag> web </tag>
+            
             <tag> docker </tag>
-            
-            <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>GitGuardian找上门了</title>
-      <link href="/post/gitguardian-zhao-shang-men-liao/"/>
-      <url>/post/gitguardian-zhao-shang-men-liao/</url>
-      
-        <content type="html"><![CDATA[<p>收到一封来自<a href="mailto:&#x73;&#101;&#99;&#x75;&#114;&#105;&#x74;&#x79;&#64;&#x67;&#101;&#x74;&#103;&#105;&#x74;&#103;&#117;&#x61;&#x72;&#x64;&#x69;&#x61;&#x6e;&#46;&#99;&#111;&#x6d;">&#x73;&#101;&#99;&#x75;&#114;&#105;&#x74;&#x79;&#64;&#x67;&#101;&#x74;&#103;&#105;&#x74;&#103;&#117;&#x61;&#x72;&#x64;&#x69;&#x61;&#x6e;&#46;&#99;&#111;&#x6d;</a>的信，提醒我把openweather的api-key保存到github上了。</p><span id="more"></span><h1 id="GitGuardian"><a href="#GitGuardian" class="headerlink" title="GitGuardian"></a>GitGuardian</h1><p>查了一下，才知道GitGuardian是GitHub 敏感信息泄露自动提示平台。<br><img src="https://qs100371.top/post-images/1745845516578.webp"><br><img src="https://qs100371.top/post-images/1745845522334.webp"><br>GitGuardian 是首个实时，自动扫描开源项目代码的平台。当发布敏感资料到 Github 开源项目时，它就会自动提醒我们，比如说发送电子邮件。它也提供很多 API 来提示用户问题，不过免费版本就只会发送电子邮件。</p><h1 id="应对方法"><a href="#应对方法" class="headerlink" title="应对方法"></a>应对方法</h1><p>吓得我赶紧把github.io变成了私有，把api-key也删了。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> web </tag>
             
         </tags>
       
@@ -1415,25 +1221,6 @@
         <tags>
             
             <tag> docker </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>IP段192.168.1.0/24和192.168.0.0/16的意义</title>
-      <link href="/post/ip-duan-1921681024-he-1921680016-de-yi-yi/"/>
-      <url>/post/ip-duan-1921681024-he-1921680016-de-yi-yi/</url>
-      
-        <content type="html"><![CDATA[<p>192.168.1.0&#x2F;24 包含哪些IP？</p><span id="more"></span><h1 id="IP地址格式"><a href="#IP地址格式" class="headerlink" title="IP地址格式"></a>IP地址格式</h1><p>IP地址格式采用“斜线记法”，即：IP地址&#x2F;网络前缀。<br>例如 192.168.1.0&#x2F;24 表示32位的二进制地址中（任何IP的二进制地址都是32位），前24位为网络前缀，后8位代表主机号。</p><h1 id="换算"><a href="#换算" class="headerlink" title="换算"></a>换算</h1><p>在换算中，192.168.1.0&#x2F;24 对应的二进制为：<br>1100 0000，1010 1000，0000 0001，0000 0000<br>其中最后为主机号，总共有8位。当这8位全为0时，取最小地址192.168.1.0，当这8位全为1时，取最大地址192.168.1.255。在实际中，主机号全为0或者全为1的地址一般不使用，作为预留地址另有作用。<br>所以第一个地址为：<br>1100 0000，1010 1000，0000 0001，0000 0001<br>即 192.168.1.1 最后一个地址为：<br>1100 0000，1010 1000，0000 0001，1111 1110<br>即 192.168.1.254。</p><p>因此，192.168.1.0&#x2F;24 代表的IP段就是 192.168.1.1 ~ 192.168.1.254。</p><p>192.168.0.0&#x2F;16 包含哪些IP？<br>方法同上。192.168.0.0&#x2F;16 表示32位的二进制地址中，前16位为网络前缀，后16位代表主机号。</p><p>在换算中，192.168.0.0&#x2F;16 对应的二进制为：<br>1100 0000，1010 1000，0000 0000，0000 0000<br>其中后两段为主机号，总共有16位。当这16位全为0时，取最小地址192.168.0.0，当这16位全为1时，取最大地址192.168.255.255。<br>第一个地址为：<br>1100 0000，1010 1000，0000 0000，0000 0001<br>即 192.168.0.1<br>最后一个地址为：<br>1100 0000，1010 1000，1111 1111，1111 1110<br>即 192.168.255.254。</p><p>因此，192.168.0.0&#x2F;16 代表的IP段就是 192.168.0.1 ~ 192.168.255.254。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> web </tag>
             
         </tags>
       
@@ -1754,7 +1541,7 @@
       <link href="/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/"/>
       <url>/post/gei-valine-tian-jia-you-jian-ti-xing-gong-neng/</url>
       
-        <content type="html"><![CDATA[<p>Valine是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。本文记录了使用第三方邮件提醒：<br>valine-admin的过程。</p><span id="more"></span><p>项目地址：<a href="https://github.com/wiidede/Valine-Admin">wiidede&#x2F;Valine-Admin</a></p><p>此项目是一个对 Valine 评论系统的拓展应用，可增强 Valine 的邮件通知功能。基于 Leancloud 的云引擎与云函数。可以提供邮件 通知站长 和 @ 通知 的功能，而且还支持自定义邮件通知模板。</p><blockquote><p>Valine官方支持上写的Valine-Admin (by @zhaojun1998)，经试验并不能成功部署。方法是七年前更新的，现在已经不能用了。</p></blockquote><h1 id="确保Valine-的基础功能正常"><a href="#确保Valine-的基础功能正常" class="headerlink" title="确保Valine 的基础功能正常"></a>确保Valine 的基础功能正常</h1><p>参考 <a href="https://valine.js.org/">Valine Docs</a></p><h1 id="进入-Leancloud-对应的-Valine-应用"><a href="#进入-Leancloud-对应的-Valine-应用" class="headerlink" title="进入 Leancloud 对应的 Valine 应用"></a>进入 Leancloud 对应的 Valine 应用</h1><p>点击云引擎-管理部署-创建分组，分组名称“valine”，选中“免费版”，创建。<br>点git部署，地址：<a href="https://github.com/wiidede/Valine-Admin%EF%BC%8C%E5%88%86%E6%94%AF%E5%A1%ABmaster%EF%BC%8C%E7%82%B9%E9%83%A8%E7%BD%B2%E3%80%82">https://github.com/wiidede/Valine-Admin，分支填master，点部署。</a><br><img src="https://qs100371.top/post-images/1742888646207.webp"><br><img src="https://qs100371.top/post-images/1742888654992.webp"><br><img src="https://qs100371.top/post-images/1742888687914.webp"><br><img src="https://qs100371.top/post-images/1742888758425.webp"></p><h1 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h1><p>设置云引擎的环境变量以提供必要的信息。</p><table><thead><tr><th>变量</th><th>示例</th><th>说明</th></tr></thead><tbody><tr><td>SITE_NAME</td><td>xxxxxx</td><td>[必填]博客名称</td></tr><tr><td>SITE_URL</td><td><a href="https://xxxxxx.com/">https://xxxxxx.com</a></td><td>[必填]首页地址</td></tr><tr><td>SMTP_SERVICE</td><td>163</td><td>[新版支持]邮件服务提供商，支持 QQ、163、126、Gmail</td></tr><tr><td>SMTP_USER</td><td><a href="mailto:&#x78;&#120;&#x78;&#120;&#120;&#120;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#111;&#109;">&#x78;&#120;&#x78;&#120;&#120;&#120;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#111;&#109;</a></td><td>[必填]SMTP登录用户</td></tr><tr><td>SMTP_PASS</td><td>ccxxxxxxxxch</td><td>[必填]SMTP登录密码或授权码（163邮箱需要获取授权码）</td></tr><tr><td>SENDER_NAME</td><td>xxxxxx</td><td>[必填]发件人</td></tr><tr><td>TEMPLATE_NAME</td><td>rainbow</td><td>邮件模板，分别为默认主题和 rainbow 彩虹主题</td></tr></tbody></table><p>保存之后，重启云引擎。<br><img src="https://qs100371.top/post-images/1742888794426.webp"></p><h1 id="试验"><a href="#试验" class="headerlink" title="试验"></a>试验</h1><p>在Valine里留言并留下邮箱，再查看邮箱，果然有提醒。<br>邮件样式：<br><img src="https://qs100371.top/post-images/1742888842618.webp"><br>查看日志：<br><img src="https://qs100371.top/post-images/1742888803910.webp"><br><img src="https://qs100371.top/post-images/1742888829505.webp"></p>]]></content>
+        <content type="html"><![CDATA[<p>Valine是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。本文记录了使用第三方邮件提醒：<br>valine-admin的过程。</p><span id="more"></span><p>项目地址：<a href="https://github.com/wiidede/Valine-Admin">wiidede&#x2F;Valine-Admin</a></p><p>此项目是一个对 Valine 评论系统的拓展应用，可增强 Valine 的邮件通知功能。基于 Leancloud 的云引擎与云函数。可以提供邮件 通知站长 和 @ 通知 的功能，而且还支持自定义邮件通知模板。</p><blockquote><p>Valine官方支持上写的Valine-Admin (by @zhaojun1998)，经试验并不能成功部署。方法是七年前更新的，现在已经不能用了。</p></blockquote><h1 id="确保Valine-的基础功能正常"><a href="#确保Valine-的基础功能正常" class="headerlink" title="确保Valine 的基础功能正常"></a>确保Valine 的基础功能正常</h1><p>参考 <a href="https://valine.js.org/">Valine Docs</a></p><h1 id="进入-Leancloud-对应的-Valine-应用"><a href="#进入-Leancloud-对应的-Valine-应用" class="headerlink" title="进入 Leancloud 对应的 Valine 应用"></a>进入 Leancloud 对应的 Valine 应用</h1><p>点击云引擎-管理部署-创建分组，分组名称“valine”，选中“免费版”，创建。<br>点git部署，地址：<a href="https://github.com/wiidede/Valine-Admin%EF%BC%8C%E5%88%86%E6%94%AF%E5%A1%ABmaster%EF%BC%8C%E7%82%B9%E9%83%A8%E7%BD%B2%E3%80%82">https://github.com/wiidede/Valine-Admin，分支填master，点部署。</a><br><img src="https://qs100371.top/post-images/1742888646207.webp"><br><img src="https://qs100371.top/post-images/1742888654992.webp"><br><img src="https://qs100371.top/post-images/1742888687914.webp"><br><img src="https://qs100371.top/post-images/1742888758425.webp"></p><h1 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h1><p>设置云引擎的环境变量以提供必要的信息。</p><table><thead><tr><th>变量</th><th>示例</th><th>说明</th></tr></thead><tbody><tr><td>SITE_NAME</td><td>xxxxxx</td><td>[必填]博客名称</td></tr><tr><td>SITE_URL</td><td><a href="https://xxxxxx.com/">https://xxxxxx.com</a></td><td>[必填]首页地址</td></tr><tr><td>SMTP_SERVICE</td><td>163</td><td>[新版支持]邮件服务提供商，支持 QQ、163、126、Gmail</td></tr><tr><td>SMTP_USER</td><td><a href="mailto:&#120;&#x78;&#x78;&#x78;&#120;&#120;&#64;&#x31;&#54;&#51;&#x2e;&#x63;&#111;&#x6d;">&#120;&#x78;&#x78;&#x78;&#120;&#120;&#64;&#x31;&#54;&#51;&#x2e;&#x63;&#111;&#x6d;</a></td><td>[必填]SMTP登录用户</td></tr><tr><td>SMTP_PASS</td><td>ccxxxxxxxxch</td><td>[必填]SMTP登录密码或授权码（163邮箱需要获取授权码）</td></tr><tr><td>SENDER_NAME</td><td>xxxxxx</td><td>[必填]发件人</td></tr><tr><td>TEMPLATE_NAME</td><td>rainbow</td><td>邮件模板，分别为默认主题和 rainbow 彩虹主题</td></tr></tbody></table><p>保存之后，重启云引擎。<br><img src="https://qs100371.top/post-images/1742888794426.webp"></p><h1 id="试验"><a href="#试验" class="headerlink" title="试验"></a>试验</h1><p>在Valine里留言并留下邮箱，再查看邮箱，果然有提醒。<br>邮件样式：<br><img src="https://qs100371.top/post-images/1742888842618.webp"><br>查看日志：<br><img src="https://qs100371.top/post-images/1742888803910.webp"><br><img src="https://qs100371.top/post-images/1742888829505.webp"></p>]]></content>
       
       
       
@@ -2332,7 +2119,7 @@
       <link href="/post/armbian-fa-song-you-jian-s-nail/"/>
       <url>/post/armbian-fa-song-you-jian-s-nail/</url>
       
-        <content type="html"><![CDATA[<p>实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。</p><span id="more"></span><h1 id="安装s-nail"><a href="#安装s-nail" class="headerlink" title="安装s-nail"></a>安装s-nail</h1><p><code>apt install s-nail</code></p><h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp</span>=smtps://smtp.163.com:465    </span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-user</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-password</span>=此处不是邮箱密码，而是smtp服务提供的授权码！！！</span><br></pre></td></tr></table></figure><h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#x78;&#120;&#x78;&#120;&#x78;&#120;&#120;&#120;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#x6d;">&#x78;&#120;&#x78;&#120;&#x78;&#120;&#120;&#120;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#x6d;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root<span class="keyword">@onecloud</span>:/etc# echo <span class="string">&quot;Successful&quot;</span> | s-nail -s <span class="string">&quot;hello?&quot;</span> ease_lee<span class="keyword">@qq</span>.com</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-user</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-password</span><br><span class="line"><span class="attribute">s-nail</span>: The empty (default) command is ignored here, but has <span class="attribute">arguments</span>: <span class="number">1</span></span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: please do <span class="keyword">not</span> use *smtp*, instead assign a <span class="attribute">smtp</span>:// URL to *mta*!</span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: Use of old-style credentials, which will vanish in v15!</span><br><span class="line"><span class="attribute">s-nail</span>:   Please read the manual section <span class="string">&quot;On URL syntax and credential lookup&quot;</span></span><br></pre></td></tr></table></figure><p>添加附件<br><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p><blockquote><p>虽然有警告，邮件还是发送出去了。</p></blockquote><h1 id="新设置"><a href="#新设置" class="headerlink" title="新设置"></a>新设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=<span class="string">&quot;昵称 &lt;user@163.com&gt;&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">mta</span>=smtps://user:password@smtp.163.com:465   #smtp服务器端口是465</span><br><span class="line"><span class="built_in">set</span> v15-compat  #必须要</span><br></pre></td></tr></table></figure><p><del>输出：<br>s-nail: The empty (default) command is ignored here, but has arguments: 1</del></p><p>邮件正常发送。附件较大的邮件只能发送到163邮箱，发到QQ邮箱会被退信。163邮箱和QQ邮箱做为smtp服务器都需要授权码。<br>在WebServerAutoBackup的备份脚本中第294行加上以下代码就可以把每天的备份包以附件的形式发送到163邮箱（附件较大，只能发到这里）：</p><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)] Backup Successful&quot;</span> | s-nail -s <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)]服务器备份文件&quot;</span> -a $&#123;SAVE_DIR&#125;/backup.$NOW.zip user@163.com</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>实现命令行发邮件，使用163邮箱的SMTP。本文记录了部署过程。</p><span id="more"></span><h1 id="安装s-nail"><a href="#安装s-nail" class="headerlink" title="安装s-nail"></a>安装s-nail</h1><p><code>apt install s-nail</code></p><h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp</span>=smtps://smtp.163.com:465    </span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-user</span>=user@163.com</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth-password</span>=此处不是邮箱密码，而是smtp服务提供的授权码！！！</span><br></pre></td></tr></table></figure><h1 id="发送测试邮件"><a href="#发送测试邮件" class="headerlink" title="发送测试邮件"></a>发送测试邮件</h1><p><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; xxxxxxxx@qq.com</code><br>往<a href="mailto:&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#120;&#x78;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;">&#x78;&#x78;&#120;&#x78;&#120;&#x78;&#120;&#x78;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;</a>发送一个标题为hello?，正文是Successful。<br>输出：</p><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root<span class="keyword">@onecloud</span>:/etc# echo <span class="string">&quot;Successful&quot;</span> | s-nail -s <span class="string">&quot;hello?&quot;</span> ease_lee<span class="keyword">@qq</span>.com</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-user</span><br><span class="line"><span class="attribute">s-nail</span>: <span class="attribute">Warning</span>: variable superseded <span class="keyword">or</span> <span class="attribute">obsoleted</span>: smtp-auth-password</span><br><span class="line"><span class="attribute">s-nail</span>: The empty (default) command is ignored here, but has <span class="attribute">arguments</span>: <span class="number">1</span></span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: please do <span class="keyword">not</span> use *smtp*, instead assign a <span class="attribute">smtp</span>:// URL to *mta*!</span><br><span class="line"><span class="attribute">s-nail</span>: Obsoletion <span class="attribute">warning</span>: Use of old-style credentials, which will vanish in v15!</span><br><span class="line"><span class="attribute">s-nail</span>:   Please read the manual section <span class="string">&quot;On URL syntax and credential lookup&quot;</span></span><br></pre></td></tr></table></figure><p>添加附件<br><code>echo &quot;Successful&quot; | s-nail -s &quot;hello?&quot; -a joke.txt xxxxxxxx@qq.com</code></p><blockquote><p>虽然有警告，邮件还是发送出去了。</p></blockquote><h1 id="新设置"><a href="#新设置" class="headerlink" title="新设置"></a>新设置</h1><p><code>nano /etc/s-nail.rc</code><br>在文件最后加上：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">from</span>=<span class="string">&quot;昵称 &lt;user@163.com&gt;&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="attribute">smtp-auth</span>=login</span><br><span class="line"><span class="built_in">set</span> <span class="attribute">mta</span>=smtps://user:password@smtp.163.com:465   #smtp服务器端口是465</span><br><span class="line"><span class="built_in">set</span> v15-compat  #必须要</span><br></pre></td></tr></table></figure><p><del>输出：<br>s-nail: The empty (default) command is ignored here, but has arguments: 1</del></p><p>邮件正常发送。附件较大的邮件只能发送到163邮箱，发到QQ邮箱会被退信。163邮箱和QQ邮箱做为smtp服务器都需要授权码。<br>在WebServerAutoBackup的备份脚本中第294行加上以下代码就可以把每天的备份包以附件的形式发送到163邮箱（附件较大，只能发到这里）：</p><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)] Backup Successful&quot;</span> | s-nail -s <span class="string">&quot;[$(date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="string">&quot;)]服务器备份文件&quot;</span> -a $&#123;SAVE_DIR&#125;/backup.$NOW.zip user@163.com</span><br></pre></td></tr></table></figure>]]></content>
       
       
       
@@ -2497,27 +2284,6 @@
         <tags>
             
             <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>给ubuntu server搭个梯子</title>
-      <link href="/post/gei-ubuntu-server-da-ge-ti-zi/"/>
-      <url>/post/gei-ubuntu-server-da-ge-ti-zi/</url>
-      
-        <content type="html"><![CDATA[<p>ubuntu server上安装了docker，众所周知，拉取镜像是个技术活，小的镜像用cloudflare搭的桥可以慢慢下，太大的要用github actions下载，再转到主机上。直接给服务器架个梯子是必然的选择。</p><span id="more"></span><h1 id="安装v2ray"><a href="#安装v2ray" class="headerlink" title="安装v2ray"></a>安装v2ray</h1><p><code>sudo apt install v2ray</code></p><h1 id="安装v2raya"><a href="#安装v2raya" class="headerlink" title="安装v2raya"></a>安装v2raya</h1><p>在项目<a href="https://github.com/v2rayA/v2rayA">https://github.com/v2rayA/v2rayA</a> 下载debian安装包installer_debian_x64_2.2.6.3.deb，传到主机上安装。<br><code>sudo apt install ./installer_debian_x64_2.2.6.3.deb</code><br><code>sudo systemctl start v2raya v2ray</code><br>从IP:2017访问。<br><img src="https://qs100371.top/post-images/1738492106893.webp"><br><img src="https://qs100371.top/post-images/1738492112290.webp"><br>会出现提示，v2ray core版本不是v5，要么回退v2ray到v1.5，要么升级v2ray core。</p><h1 id="升级v2ray-core"><a href="#升级v2ray-core" class="headerlink" title="升级v2ray core"></a>升级v2ray core</h1><p>在项目<a href="https://github.com/v2fly/v2ray-core">https://github.com/v2fly/v2ray-core</a>下载release文件v2ray-linux-64.zip<br>解压得到config.json、geoip.dat、geoip-only-cn-private.dat、geosite.dat、systemd、v2ray、vpoint_socks_vmess.json、vpoint_vmess_freedom.json。<br>把config.json、geoip.dat、geoip-only-cn-private.dat、geosite.dat复制到&#x2F;etc&#x2F;v2ray，把v2ray复制到&#x2F;usr&#x2F;bin，把vpoint_socks_vmess.json、vpoint_vmess_freedom.json复制到&#x2F;usr&#x2F;share&#x2F;v2ray，把systemd&#x2F;system&#x2F;里面的文件复制到&#x2F;etc&#x2F;systemd&#x2F;system目录，重启v2ray。<br><code>sudo systemctl restart v2ray</code></p><h1 id="重启v2raya服务"><a href="#重启v2raya服务" class="headerlink" title="重启v2raya服务"></a>重启v2raya服务</h1><p><code>sudo systemctl restart v2raya</code><br>再回到ip:2017，输入订阅链接，更新，选定一个服务器就可以开启透明代理服务。</p><blockquote><p>2月5日续：主机加上梯子，每次开启梯子或关闭梯子，都会导致docker服务重启，还有一个严重后果，用lucky设置的stun内网穿透失效了，但cf tunnel没失效。所以这个梯子还是不用为好。</p></blockquote>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> web </tag>
-            
-            <tag> linux </tag>
             
         </tags>
       
@@ -2731,25 +2497,6 @@
         <tags>
             
             <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>ubuntu server上qemu搭建arm64平台</title>
-      <link href="/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/"/>
-      <url>/post/ubuntu-server-shang-qemu-da-jian-arm64-ping-tai/</url>
-      
-        <content type="html"><![CDATA[<p>玩客云只支持armv7，在ubuntu server上可以用qemu建立arm64虚拟机。</p><span id="more"></span><h1 id="安装ubuntu-server"><a href="#安装ubuntu-server" class="headerlink" title="安装ubuntu server"></a>安装ubuntu server</h1><p>平常安装的都是桌面版，这次安装server版，安装界面都是文本模式，安装起来比gui方式费劲多了，由于ubuntu安全服务器连不上，安装时设置了一个本地http代理，安装完成后却找不到这个代理设置在什么地方，最后在&#x2F;etc&#x2F;apt&#x2F;apt.conf.d下找到一个名字里有proxy的文件里找到了，删除之后网络正常，不需时时挂上代理。<br>&#x2F;etc&#x2F;apt&#x2F;apt.conf.d&#x2F;90curtin-aptproxy<br>文件内容：<br>Acquire::http::Proxy “<a href="http://192.168.0.4:10809/">http://192.168.0.4:10809</a>“;<br>Acquire::https::Proxy “<a href="http://192.168.0.4:10809/">http://192.168.0.4:10809</a>“;</p><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul><li>安装qemu-system-aarch64<br><code>apt install qemu-system-aarch64</code></li><li>uefi固件下载：<br><code>wget https://releases.linaro.org/components/kernel/uefi-linaro/16.02/release/qemu64/QEMU_EFI.fd</code></li><li>ubuntu arm64安装镜像下载：<br><code>wget https://old-releases.ubuntu.com/releases/16.04.3/ubuntu-16.04.3-server-arm64.iso</code><br>搭梯子下载比较快，用sftp传到主机上。</li><li>创建虚拟硬盘：<br><code>qemu-img create ubuntu16.04-arm64.img 16G</code></li></ul><h1 id="虚拟机安装"><a href="#虚拟机安装" class="headerlink" title="虚拟机安装"></a>虚拟机安装</h1><p><code>qemu-system-aarch64 -m 2048 -cpu cortex-a57 -smp 2 -M virt -bios QEMU_EFI.fd -nographic -drive if=none,file=ubuntu-16.04.3-server-arm64.iso,id=cdrom,media=cdrom -device virtio-scsi-device -device scsi-cd,drive=cdrom -drive if=none,file=ubuntu16.04-arm64.img,id=hd0 -device virtio-blk-device,drive=hd0</code><br>安装成功后，再启动<br><code>qemu-system-aarch64 -m 2048 -cpu cortex-a57 -smp 2 -M virt -bios QEMU_EFI.fd -nographic -drive if=none,file=ubuntu16.04-arm64.img,id=hd0 -device virtio-blk-device,drive=hd0</code></p><blockquote><p>安装了很久，显示成功了，但是去掉安装镜像，就启动不起来，停止在efi启动界面，进不到操作系统，不知道是不是efi文件的问题。dc7900性能太差了，跑一个ubuntu很费劲，server要稍微好一点，里面再跑一个qemu不行了，和pixel3上跑termux-qemu-debian速度差不多。</p></blockquote><p><img src="https://qs100371.top/post-images/1737723270449.webp"><br><img src="https://qs100371.top/post-images/1737723285096.webp"><br><img src="https://qs100371.top/post-images/1737723297524.webp"><br><img src="https://qs100371.top/post-images/1737723303227.webp"><br><img src="https://qs100371.top/post-images/1737723312605.webp"><br><img src="https://qs100371.top/post-images/1737723319704.webp"></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
             
         </tags>
       
@@ -3297,7 +3044,7 @@
       <link href="/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/"/>
       <url>/post/shi-yong-cloudflare-shi-xian-zi-ding-yi-yu-ming-you-xiang/</url>
       
-        <content type="html"><![CDATA[<p>Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。</p><span id="more"></span><ul><li>Cloudflare注册并迁入域名</li><li>启用电子邮件路由功能</li></ul><h1 id="Cloudflare注册并迁入域名"><a href="#Cloudflare注册并迁入域名" class="headerlink" title="Cloudflare注册并迁入域名"></a>Cloudflare注册并迁入域名</h1><p>域名托管到cloudflare。</p><h1 id="启用电子邮件路由"><a href="#启用电子邮件路由" class="headerlink" title="启用电子邮件路由"></a>启用电子邮件路由</h1><p>打开网站，域名，在左侧打开“电子邮件”-“电子邮件路由”<br>添加自定义地址（比如<a href="mailto:&#97;&#100;&#x6d;&#105;&#x6e;&#64;&#x64;&#x6f;&#109;&#x61;&#x69;&#x6e;&#x2e;&#99;&#x6f;&#x6d;">&#97;&#100;&#x6d;&#105;&#x6e;&#64;&#x64;&#x6f;&#109;&#x61;&#x69;&#x6e;&#x2e;&#99;&#x6f;&#x6d;</a>），目标地址（常用邮箱），到邮箱中验证，再回来。<br>系统自动添加mx记录。<br>这样，发往自定义域名邮箱的邮件会被转发到目标邮箱，并且系统有记录。</p><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://qs100371.top/post-images/1734443747560.webp"><br><img src="https://qs100371.top/post-images/1734444076292.webp"><br><img src="https://qs100371.top/post-images/1734444039726.webp"><br><img src="https://qs100371.top/post-images/1734444016319.webp"><br><img src="https://qs100371.top/post-images/1734444022488.webp"><br><img src="https://qs100371.top/post-images/1734444031714.webp"></h2><p>CloudFlare的电子邮件路由是单向的，只是把特定域名邮箱地址收到的邮件转发到指定的信箱，不能发件。因此也就不提供 IMAP&#x2F;SMTP服务。</p>]]></content>
+        <content type="html"><![CDATA[<p>Cloudflare域名邮箱配置方法简单，零成本，对隐私保护起到了一定作用。</p><span id="more"></span><ul><li>Cloudflare注册并迁入域名</li><li>启用电子邮件路由功能</li></ul><h1 id="Cloudflare注册并迁入域名"><a href="#Cloudflare注册并迁入域名" class="headerlink" title="Cloudflare注册并迁入域名"></a>Cloudflare注册并迁入域名</h1><p>域名托管到cloudflare。</p><h1 id="启用电子邮件路由"><a href="#启用电子邮件路由" class="headerlink" title="启用电子邮件路由"></a>启用电子邮件路由</h1><p>打开网站，域名，在左侧打开“电子邮件”-“电子邮件路由”<br>添加自定义地址（比如<a href="mailto:&#97;&#100;&#109;&#x69;&#x6e;&#64;&#x64;&#x6f;&#109;&#x61;&#x69;&#110;&#46;&#99;&#x6f;&#109;">&#97;&#100;&#109;&#x69;&#x6e;&#64;&#x64;&#x6f;&#109;&#x61;&#x69;&#110;&#46;&#99;&#x6f;&#109;</a>），目标地址（常用邮箱），到邮箱中验证，再回来。<br>系统自动添加mx记录。<br>这样，发往自定义域名邮箱的邮件会被转发到目标邮箱，并且系统有记录。</p><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://qs100371.top/post-images/1734443747560.webp"><br><img src="https://qs100371.top/post-images/1734444076292.webp"><br><img src="https://qs100371.top/post-images/1734444039726.webp"><br><img src="https://qs100371.top/post-images/1734444016319.webp"><br><img src="https://qs100371.top/post-images/1734444022488.webp"><br><img src="https://qs100371.top/post-images/1734444031714.webp"></h2><p>CloudFlare的电子邮件路由是单向的，只是把特定域名邮箱地址收到的邮件转发到指定的信箱，不能发件。因此也就不提供 IMAP&#x2F;SMTP服务。</p>]]></content>
       
       
       
@@ -3335,7 +3082,7 @@
       <link href="/post/docker-bu-shu-wang-pan-cloudreve/"/>
       <url>/post/docker-bu-shu-wang-pan-cloudreve/</url>
       
-        <content type="html"><![CDATA[<p>cloudreve是一个轻便的网盘系统，可以用docker部署。</p><span id="more"></span><h1 id="建立相关文件及路径"><a href="#建立相关文件及路径" class="headerlink" title="建立相关文件及路径"></a>建立相关文件及路径</h1><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -vp /<span class="class"><span class="keyword">data</span>/cloudreve/&#123;<span class="title">uploads</span>,<span class="title">avatar</span>&#125; \</span></span><br><span class="line">&amp;&amp; touch /<span class="class"><span class="keyword">data</span>/cloudreve/conf.ini \</span></span><br><span class="line">&amp;&amp; touch /<span class="class"><span class="keyword">data</span>/cloudreve/cloudreve.db</span></span><br></pre></td></tr></table></figure><h1 id="运行-docker-container："><a href="#运行-docker-container：" class="headerlink" title="运行 docker container："></a>运行 docker container：</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -d --name cloudreve \</span></span><br><span class="line"><span class="language-bash">-p 5212:5212 --restart unless-stopped \</span></span><br><span class="line"><span class="language-bash">--mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/data/cloudreve/conf.ini,target=/cloudreve/conf.ini \</span></span><br><span class="line"><span class="language-bash">--mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/data/cloudreve/cloudreve.db,target=/cloudreve/cloudreve.db \</span></span><br><span class="line"><span class="language-bash">-v /data/cloudreve/uploads&gt;:/cloudreve/uploads \</span></span><br><span class="line"><span class="language-bash">-v /data/cloudreve/avatar&gt;:/cloudreve/avatar \</span></span><br><span class="line"><span class="language-bash">cloudreve/cloudreve:latest</span></span><br></pre></td></tr></table></figure><h1 id="访问IP-5212进入-Cloudreve。"><a href="#访问IP-5212进入-Cloudreve。" class="headerlink" title="访问IP:5212进入 Cloudreve。"></a>访问IP:5212进入 Cloudreve。</h1><blockquote><p>Cloudreve 在首次启动时，会创建初始管理员账号，此密码只会在首次启动时出现。如果忘记初始管理员密码，需要删除同级目录下的cloudreve.db，重新启动主程序以初始化新的管理员账户。<br>还有一个方法：进入容器用命令行初始化管理员密码。用docker部署看不到初始密码。</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it cloudreve sh</span><br><span class="line">/cloudreve <span class="comment">#./cloudreve --database-script ResetAdminPassword</span></span><br></pre></td></tr></table></figure><p><img src="https://qs100371.top/post-images/1734093955170.webp"></p><blockquote><p>初始管理员帐号是<a href="mailto:&#x61;&#100;&#x6d;&#x69;&#110;&#64;&#99;&#x6c;&#x6f;&#x75;&#100;&#x72;&#x65;&#x76;&#101;&#46;&#111;&#114;&#x67;">&#x61;&#100;&#x6d;&#x69;&#110;&#64;&#99;&#x6c;&#x6f;&#x75;&#100;&#x72;&#x65;&#x76;&#101;&#46;&#111;&#114;&#x67;</a>（<del>初始密码：admin</del>），密码在图片里。可以再申请一个帐号，再用初始管理帐号提权到admin组，用自己好用的名字当管理员帐号。</p></blockquote><p><img src="https://qs100371.top/post-images/1734094273211.webp"><br><img src="https://qs100371.top/post-images/1734094279270.webp"><br>初始空间为1G，可自行调整大小。</p>]]></content>
+        <content type="html"><![CDATA[<p>cloudreve是一个轻便的网盘系统，可以用docker部署。</p><span id="more"></span><h1 id="建立相关文件及路径"><a href="#建立相关文件及路径" class="headerlink" title="建立相关文件及路径"></a>建立相关文件及路径</h1><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -vp /<span class="class"><span class="keyword">data</span>/cloudreve/&#123;<span class="title">uploads</span>,<span class="title">avatar</span>&#125; \</span></span><br><span class="line">&amp;&amp; touch /<span class="class"><span class="keyword">data</span>/cloudreve/conf.ini \</span></span><br><span class="line">&amp;&amp; touch /<span class="class"><span class="keyword">data</span>/cloudreve/cloudreve.db</span></span><br></pre></td></tr></table></figure><h1 id="运行-docker-container："><a href="#运行-docker-container：" class="headerlink" title="运行 docker container："></a>运行 docker container：</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -d --name cloudreve \</span></span><br><span class="line"><span class="language-bash">-p 5212:5212 --restart unless-stopped \</span></span><br><span class="line"><span class="language-bash">--mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/data/cloudreve/conf.ini,target=/cloudreve/conf.ini \</span></span><br><span class="line"><span class="language-bash">--mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/data/cloudreve/cloudreve.db,target=/cloudreve/cloudreve.db \</span></span><br><span class="line"><span class="language-bash">-v /data/cloudreve/uploads&gt;:/cloudreve/uploads \</span></span><br><span class="line"><span class="language-bash">-v /data/cloudreve/avatar&gt;:/cloudreve/avatar \</span></span><br><span class="line"><span class="language-bash">cloudreve/cloudreve:latest</span></span><br></pre></td></tr></table></figure><h1 id="访问IP-5212进入-Cloudreve。"><a href="#访问IP-5212进入-Cloudreve。" class="headerlink" title="访问IP:5212进入 Cloudreve。"></a>访问IP:5212进入 Cloudreve。</h1><blockquote><p>Cloudreve 在首次启动时，会创建初始管理员账号，此密码只会在首次启动时出现。如果忘记初始管理员密码，需要删除同级目录下的cloudreve.db，重新启动主程序以初始化新的管理员账户。<br>还有一个方法：进入容器用命令行初始化管理员密码。用docker部署看不到初始密码。</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it cloudreve sh</span><br><span class="line">/cloudreve <span class="comment">#./cloudreve --database-script ResetAdminPassword</span></span><br></pre></td></tr></table></figure><p><img src="https://qs100371.top/post-images/1734093955170.webp"></p><blockquote><p>初始管理员帐号是<a href="mailto:&#x61;&#100;&#109;&#x69;&#x6e;&#x40;&#99;&#108;&#111;&#x75;&#100;&#x72;&#x65;&#118;&#101;&#x2e;&#x6f;&#x72;&#103;">&#x61;&#100;&#109;&#x69;&#x6e;&#x40;&#99;&#108;&#111;&#x75;&#100;&#x72;&#x65;&#118;&#101;&#x2e;&#x6f;&#x72;&#103;</a>（<del>初始密码：admin</del>），密码在图片里。可以再申请一个帐号，再用初始管理帐号提权到admin组，用自己好用的名字当管理员帐号。</p></blockquote><p><img src="https://qs100371.top/post-images/1734094273211.webp"><br><img src="https://qs100371.top/post-images/1734094279270.webp"><br>初始空间为1G，可自行调整大小。</p>]]></content>
       
       
       
@@ -3459,9 +3206,9 @@
       
         <tags>
             
-            <tag> docker </tag>
-            
             <tag> web </tag>
+            
+            <tag> docker </tag>
             
         </tags>
       
@@ -3481,25 +3228,6 @@
         <tags>
             
             <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Docker 命令大全</title>
-      <link href="/post/docker-ming-ling-da-quan/"/>
-      <url>/post/docker-ming-ling-da-quan/</url>
-      
-        <content type="html"><![CDATA[<p>分类展示docker命令列表。</p><span id="more"></span><h1 id="容器生命周期管理"><a href="#容器生命周期管理" class="headerlink" title="容器生命周期管理"></a>容器生命周期管理</h1><p>run - 创建并启动一个新的容器。<br>start&#x2F;stop&#x2F;restart - 这些命令主要用于启动、停止和重启容器。<br>kill - 立即终止一个或多个正在运行的容器<br>rm - 删除一个或多个已经停止的容器。<br>pause&#x2F;unpause - 暂停和恢复容器中的所有进程。<br>create - 创建一个新的容器，但不会启动它。<br>exec - 在运行中的容器内执行一个新的命令。<br>rename - 重命名容器。</p><h1 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h1><p>ps - 列出 Docker 容器<br>inspect - 获取 Docker 对象（容器、镜像、卷、网络等）的详细信息。<br>top - 显示指定容器中的正在运行的进程。<br>attach - 允许用户附加到正在运行的容器并与其交互。<br>events - 获取 Docker 守护进程生成的事件。<br>logs - 获取和查看容器的日志输出。<br>wait - 允许用户等待容器停止并获取其退出代码。<br>export - 将容器的文件系统导出为 tar 归档文件。<br>port - 显示容器的端口映射信息。<br>stats - 实时显示 Docker 容器的资源使用情况。</p><h1 id="容器的root文件系统（rootfs）命令"><a href="#容器的root文件系统（rootfs）命令" class="headerlink" title="容器的root文件系统（rootfs）命令"></a>容器的root文件系统（rootfs）命令</h1><p>commit - 允许用户将容器的当前状态保存为新的 Docker 镜像。<br>cp - 用于在容器和宿主机之间复制文件或目录。<br>diff - 显示 Docker 容器文件系统的变更。</p><h1 id="镜像仓库"><a href="#镜像仓库" class="headerlink" title="镜像仓库"></a>镜像仓库</h1><p>login&#x2F;logout - 管理 Docker 客户端与 Docker 注册表的身份验证。<br>pull - 从 Docker 注册表（例如 Docker Hub）中拉取（下载）镜像到本地。<br>push - 将本地构建的 Docker 镜像推送（上传）到 Docker 注册表（如 Docker Hub 或私有注册表）。<br>search - 用于在 Docker Hub 或其他注册表中搜索镜像。</p><h1 id="本地镜像管理"><a href="#本地镜像管理" class="headerlink" title="本地镜像管理"></a>本地镜像管理</h1><p>images - 列出本地的 Docker 镜像。<br>rmi - 删除不再需要的镜像。<br>tag - 创建本地镜像的别名（tag）。<br>build - 从 Dockerfile 构建 Docker 镜像。<br>history - 查看指定镜像的历史层信息。<br>save - 将一个或多个 Docker 镜像保存到一个 tar 归档文件中。<br>load - 从由 docker save 命令生成的 tar 文件中加载 Docker 镜像。<br>import - 从一个 tar 文件或 URL 导入容器快照，从而创建一个新的 Docker 镜像。</p><h1 id="info-version"><a href="#info-version" class="headerlink" title="info|version"></a>info|version</h1><p>info - 显示 Docker 的系统级信息，包括当前的镜像和容器数量。<br>version - 显示 Docker 客户端和服务端的版本信息。</p><h1 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h1><p>docker compose run - 启动一个新容器并运行一个特定的应用程序。<br>docker compose rm - 启动一个新容器并删除一个特定的应用程序。<br>docker compose ps - 从 docker compose 检查 docker 容器状态。<br>docker compose build - 构建 docker compose 文件。<br>docker compose up - 运行 docker compose 文件。<br>docker compose ls - 列出 docker compose 服务。<br>docker compose start - 启动 docker compose 文件创建的容器。<br>docker compose restart - 重启 docker compose 文件创建的容器。</p><h1 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h1><p>docker network ls: 列出所有网络。<br>docker network create <network>: 创建一个新的网络。<br>docker network rm <network>: 删除指定的网络。<br>docker network connect <network> <container>: 连接容器到网络。<br>docker network disconnect <network> <container>: 断开容器与网络的连接。</p><h1 id="卷命令"><a href="#卷命令" class="headerlink" title="卷命令"></a>卷命令</h1><p>docker volume ls: 列出所有卷。<br>docker volume create <volume>: 创建一个新的卷。<br>docker volume rm <volume>: 删除指定的卷。<br>docker volume inspect <volume>: 显示卷的详细信息。</p><h1 id="清理与维护"><a href="#清理与维护" class="headerlink" title="清理与维护"></a>清理与维护</h1><p>docker system prune：清理未使用的容器、网络、镜像等资源。<br>docker image prune：专门清理悬空的镜像。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> docker </tag>
             
         </tags>
       
@@ -3615,7 +3343,7 @@
       <link href="/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/"/>
       <url>/post/wan-ke-yun-docker-da-jian-wei-zhi-bi-ji-wiznote/</url>
       
-        <content type="html"><![CDATA[<p>为知笔记定位于高效率工作笔记，主打工作笔记的移动应用，是国内一款“工作笔记”的云笔记类产品。</p><span id="more"></span><h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><p><code>docker pull wiznote/wizserver</code><br>Using default tag: latest<br>latest: Pulling from wiznote&#x2F;wizserver<br>03ca5b55b2bd: Pull complete<br>54ceac5bc6bf: Pull complete<br>91ee8f4f23c6: Pull complete<br>f6b746826172: Pull complete<br>8f4c62907409: Pull complete<br>17b1b64e30bd: Pull complete<br>Digest: sha256:f30fba6818bfead0b781430dcdc3558066cd8a8813ebaa4a2058c3b9d70db2a1<br>Status: Downloaded newer image for wiznote&#x2F;wizserver:latest<br>docker.io&#x2F;wiznote&#x2F;wizserver:latest</p><h1 id="创建运行-WizNote-容器"><a href="#创建运行-WizNote-容器" class="headerlink" title="创建运行 WizNote 容器"></a>创建运行 WizNote 容器</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mkdir</span> -p /data/wiznote/data</span><br><span class="line"><span class="attribute">docker</span> run --name wiznote --restart=always -it -d <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v  /data/wiznote/data:/wiz/storage <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> -v  /etc/localtime:/etc/localtime <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> -p <span class="number">8383</span>:<span class="number">80</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> -p <span class="number">9269</span>:<span class="number">9269</span>/udp  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> wiznote/wizserver</span><br></pre></td></tr></table></figure><p><code>docker images</code><br>wiznote&#x2F;wizserver   latest    322c4d3daf9b   2 years ago    1.39GB</p><blockquote><p>安装成功之后通过 ip:8383 访问网页版</p></blockquote><p>默认管理员账号：<a href="mailto:&#97;&#100;&#x6d;&#x69;&#x6e;&#64;&#119;&#105;&#x7a;&#x2e;&#x63;&#110;">&#97;&#100;&#x6d;&#x69;&#x6e;&#64;&#119;&#105;&#x7a;&#x2e;&#x63;&#110;</a><br>密码：123456<br><img src="https://qs100371.top/post-images/1732942414217.webp"></p>]]></content>
+        <content type="html"><![CDATA[<p>为知笔记定位于高效率工作笔记，主打工作笔记的移动应用，是国内一款“工作笔记”的云笔记类产品。</p><span id="more"></span><h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><p><code>docker pull wiznote/wizserver</code><br>Using default tag: latest<br>latest: Pulling from wiznote&#x2F;wizserver<br>03ca5b55b2bd: Pull complete<br>54ceac5bc6bf: Pull complete<br>91ee8f4f23c6: Pull complete<br>f6b746826172: Pull complete<br>8f4c62907409: Pull complete<br>17b1b64e30bd: Pull complete<br>Digest: sha256:f30fba6818bfead0b781430dcdc3558066cd8a8813ebaa4a2058c3b9d70db2a1<br>Status: Downloaded newer image for wiznote&#x2F;wizserver:latest<br>docker.io&#x2F;wiznote&#x2F;wizserver:latest</p><h1 id="创建运行-WizNote-容器"><a href="#创建运行-WizNote-容器" class="headerlink" title="创建运行 WizNote 容器"></a>创建运行 WizNote 容器</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mkdir</span> -p /data/wiznote/data</span><br><span class="line"><span class="attribute">docker</span> run --name wiznote --restart=always -it -d <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span>-v  /data/wiznote/data:/wiz/storage <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> -v  /etc/localtime:/etc/localtime <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> -p <span class="number">8383</span>:<span class="number">80</span> <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> -p <span class="number">9269</span>:<span class="number">9269</span>/udp  <span class="punctuation">\</span></span><br><span class="line"><span class="punctuation"></span> wiznote/wizserver</span><br></pre></td></tr></table></figure><p><code>docker images</code><br>wiznote&#x2F;wizserver   latest    322c4d3daf9b   2 years ago    1.39GB</p><blockquote><p>安装成功之后通过 ip:8383 访问网页版</p></blockquote><p>默认管理员账号：<a href="mailto:&#97;&#x64;&#109;&#x69;&#110;&#x40;&#x77;&#105;&#x7a;&#x2e;&#99;&#110;">&#97;&#x64;&#109;&#x69;&#110;&#x40;&#x77;&#105;&#x7a;&#x2e;&#99;&#110;</a><br>密码：123456<br><img src="https://qs100371.top/post-images/1732942414217.webp"></p>]]></content>
       
       
       
@@ -3630,30 +3358,11 @@
     
     
     <entry>
-      <title>ffmpeg合并多个MP4视频</title>
-      <link href="/post/ffmpeg-he-bing-duo-ge-mp4-shi-pin/"/>
-      <url>/post/ffmpeg-he-bing-duo-ge-mp4-shi-pin/</url>
-      
-        <content type="html"><![CDATA[<p>FFmpeg 是一个强大的多媒体框架，可以处理音频和视频文件。</p><span id="more"></span><h1 id="直接将多个MP4直接拼接成一个MP4"><a href="#直接将多个MP4直接拼接成一个MP4" class="headerlink" title="直接将多个MP4直接拼接成一个MP4"></a>直接将多个MP4直接拼接成一个MP4</h1><ul><li><p>将合并的文件夹都放在同一个文件夹下，例如：test.mp4，test2.mp4</p></li><li><p>新建一个video.txt文件，文件的内容是需要合并的视频名称，内容格式为<br>file ‘test.mp4’<br>file ‘test2.mp4’</p></li><li><p>执行ffmpeg<br><code>ffmpeg -f concat -i video.txt -c copy concat.mp4</code><br> 执行完就可以看到合并起来的视频concat.mp4。</p></li></ul><p>ffmpeg下载：<a href="https://ffmpeg.org/">https://ffmpeg.org</a></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>玩客云docker安装导航面板sun-panel</title>
       <link href="/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/"/>
       <url>/post/wan-ke-yun-docker-an-zhuang-dao-hang-mian-ban-sun-panel/</url>
       
-        <content type="html"><![CDATA[<p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p><span id="more"></span><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -<span class="keyword">p</span> /data/<span class="keyword">sun</span>-panel</span><br><span class="line">docker pull hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br><span class="line">docker run -d --restart=always -<span class="keyword">p</span> <span class="number">8000</span>:<span class="number">3002</span> \</span><br><span class="line">-v /data/<span class="keyword">sun</span>-panel/<span class="keyword">conf</span>:/app/<span class="keyword">conf</span> \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name <span class="keyword">sun</span>-panel \</span><br><span class="line">hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br></pre></td></tr></table></figure><h1 id="从ip-8000访问"><a href="#从ip-8000访问" class="headerlink" title="从ip:8000访问"></a>从ip:8000访问</h1><p>默认账号密码<br>账号：<a href="mailto:&#97;&#100;&#109;&#105;&#110;&#64;&#115;&#x75;&#x6e;&#46;&#x63;&#x63;">&#97;&#100;&#109;&#105;&#110;&#64;&#115;&#x75;&#x6e;&#46;&#x63;&#x63;</a><br>密码：12345678</p><p><img src="https://qs100371.top/post-images/1732624370260.webp"><br><img src="https://qs100371.top/post-images/1732623522998.webp"></p><h1 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h1><p><code>docker exec -it sun-panel bash</code><br><code>./sun-panel -password-reset</code><br>输出<br>The password has been successfully reset. Here is the account information<br>Username  <a href="mailto:&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#x73;&#x75;&#x6e;&#46;&#99;&#99;">&#x61;&#x64;&#109;&#105;&#x6e;&#x40;&#x73;&#x75;&#x6e;&#46;&#99;&#99;</a><br>Password  12345678</p>]]></content>
+        <content type="html"><![CDATA[<p>onecloud上部署的服务多了，有的端口就记不太清了，用Sun-Panel做一个导航面板</p><span id="more"></span><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -<span class="keyword">p</span> /data/<span class="keyword">sun</span>-panel</span><br><span class="line">docker pull hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br><span class="line">docker run -d --restart=always -<span class="keyword">p</span> <span class="number">8000</span>:<span class="number">3002</span> \</span><br><span class="line">-v /data/<span class="keyword">sun</span>-panel/<span class="keyword">conf</span>:/app/<span class="keyword">conf</span> \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name <span class="keyword">sun</span>-panel \</span><br><span class="line">hslr/<span class="keyword">sun</span>-pane<span class="variable">l:latest</span></span><br></pre></td></tr></table></figure><h1 id="从ip-8000访问"><a href="#从ip-8000访问" class="headerlink" title="从ip:8000访问"></a>从ip:8000访问</h1><p>默认账号密码<br>账号：<a href="mailto:&#x61;&#100;&#109;&#x69;&#110;&#x40;&#x73;&#117;&#110;&#46;&#99;&#x63;">&#x61;&#100;&#109;&#x69;&#110;&#x40;&#x73;&#117;&#110;&#46;&#99;&#x63;</a><br>密码：12345678</p><p><img src="https://qs100371.top/post-images/1732624370260.webp"><br><img src="https://qs100371.top/post-images/1732623522998.webp"></p><h1 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h1><p><code>docker exec -it sun-panel bash</code><br><code>./sun-panel -password-reset</code><br>输出<br>The password has been successfully reset. Here is the account information<br>Username  <a href="mailto:&#97;&#100;&#x6d;&#x69;&#110;&#x40;&#115;&#x75;&#110;&#46;&#99;&#99;">&#97;&#100;&#x6d;&#x69;&#110;&#x40;&#115;&#x75;&#110;&#46;&#99;&#99;</a><br>Password  12345678</p>]]></content>
       
       
       
@@ -3742,27 +3451,6 @@
         <tags>
             
             <tag> docker </tag>
-            
-            <tag> onecloud </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>玩客云2024-11-20记录</title>
-      <link href="/post/wan-ke-yun-2024-11-20-ji-lu/"/>
-      <url>/post/wan-ke-yun-2024-11-20-ji-lu/</url>
-      
-        <content type="html"><![CDATA[<p>v24.8.4 for OneCloud running Armbian Linux 6.10.11-edge-meson<br> Packages:     Debian stable (bookworm)<br> IP addresses: (LAN) 172.17.0.1 192.168.0.2 (WAN) 183.197.217.187<br> Performance:<br> Load:         8%           Up time:       2 days 10:37<br> Memory usage: 25% of 987M   Zram usage:    16% of 493M   <br> CPU temp:     50°C           Usage of &#x2F;:    45% of 6.9G   <br> RX today:     1 GiB        </p><span id="more"></span><h1 id="docker-info"><a href="#docker-info" class="headerlink" title="docker info"></a><code>docker info</code></h1><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">Client:</span> Docker Engine <span class="operator">-</span> Community</span><br><span class="line"> <span class="params">Version:</span>    <span class="number">27.3</span>.<span class="number">1</span></span><br><span class="line"> <span class="params">Context:</span>    default</span><br><span class="line"> Debug <span class="params">Mode:</span> <span class="literal">false</span></span><br><span class="line"> <span class="params">Plugins:</span></span><br><span class="line">  <span class="params">buildx:</span> Docker Buildx (Docker Inc.)</span><br><span class="line">    <span class="params">Version:</span>  v0.<span class="number">17.1</span></span><br><span class="line">    <span class="params">Path:</span>     <span class="symbol">/usr/libexec/docker/cli-plugins/docker-buildx</span></span><br><span class="line">  <span class="params">compose:</span> Docker Compose (Docker Inc.)</span><br><span class="line">    <span class="params">Version:</span>  v2.<span class="number">29.7</span></span><br><span class="line">    <span class="params">Path:</span>     <span class="symbol">/usr/libexec/docker/cli-plugins/docker-compose</span></span><br><span class="line"></span><br><span class="line"><span class="params">Server:</span></span><br><span class="line"> <span class="params">Containers:</span> <span class="number">3</span></span><br><span class="line">  <span class="params">Running:</span> <span class="number">3</span></span><br><span class="line">  <span class="params">Paused:</span> <span class="number">0</span></span><br><span class="line">  <span class="params">Stopped:</span> <span class="number">0</span></span><br><span class="line"> <span class="params">Images:</span> <span class="number">3</span></span><br><span class="line"> Server <span class="params">Version:</span> <span class="number">27.3</span>.<span class="number">1</span></span><br><span class="line"> Storage <span class="params">Driver:</span> overlay2</span><br><span class="line">  Backing <span class="params">Filesystem:</span> extfs</span><br><span class="line">  Supports <span class="params">d_type:</span> <span class="literal">true</span></span><br><span class="line">  Using <span class="params">metacopy:</span> <span class="literal">false</span></span><br><span class="line">  Native Overlay <span class="params">Diff:</span> <span class="literal">true</span></span><br><span class="line">  <span class="params">userxattr:</span> <span class="literal">false</span></span><br><span class="line"> Logging <span class="params">Driver:</span> json-file</span><br><span class="line"> Cgroup <span class="params">Driver:</span> systemd</span><br><span class="line"> Cgroup <span class="params">Version:</span> <span class="number">2</span></span><br><span class="line"> <span class="params">Plugins:</span></span><br><span class="line">  <span class="params">Volume:</span> local</span><br><span class="line">  <span class="params">Network:</span> bridge host ipvlan macvlan <span class="literal">null</span> overlay</span><br><span class="line">  <span class="params">Log:</span> awslogs fluentd gcplogs gelf journald json-file local splunk syslog</span><br><span class="line"> <span class="params">Swarm:</span> inactive</span><br><span class="line"> <span class="params">Runtimes:</span> io.containerd.runc.v2 runc</span><br><span class="line"> Default <span class="params">Runtime:</span> runc</span><br><span class="line"> Init <span class="params">Binary:</span> docker-init</span><br><span class="line"> containerd <span class="params">version:</span> <span class="number">57</span>f17b0a6295a39009d861b89e3b3b87b005ca27</span><br><span class="line"> runc <span class="params">version:</span> v1.<span class="number">1.1</span>4-<span class="number">0</span><span class="operator">-</span>g2c9f560</span><br><span class="line"> init <span class="params">version:</span> de40ad0</span><br><span class="line"> Security <span class="params">Options:</span></span><br><span class="line">  seccomp</span><br><span class="line">   <span class="params">Profile:</span> builtin</span><br><span class="line">  cgroupns</span><br><span class="line"> Kernel <span class="params">Version:</span> <span class="number">6.10</span>.<span class="number">1</span>1-edge-meson</span><br><span class="line"> Operating <span class="params">System:</span> Armbian <span class="number">24.8</span>.<span class="number">4</span> bookworm</span><br><span class="line"> <span class="params">OSType:</span> linux</span><br><span class="line"> <span class="params">Architecture:</span> armv7l</span><br><span class="line"> <span class="params">CPUs:</span> <span class="number">4</span></span><br><span class="line"> Total <span class="params">Memory:</span> <span class="number">987.4</span>MiB</span><br><span class="line"> <span class="params">Name:</span> onecloud</span><br><span class="line"> <span class="params">ID:</span> c626a715-<span class="number">91</span>ab-<span class="number">499</span>b-<span class="number">94</span>bc-<span class="number">2</span>fa2d5ef7947</span><br><span class="line"> Docker Root <span class="params">Dir:</span> <span class="symbol">/data/docker</span></span><br><span class="line"> Debug <span class="params">Mode:</span> <span class="literal">false</span></span><br><span class="line"> <span class="params">Experimental:</span> <span class="literal">false</span></span><br><span class="line"> Insecure <span class="params">Registries:</span></span><br><span class="line">  <span class="number">127.0</span>.<span class="number">0.0</span><span class="symbol">/8</span></span><br><span class="line"> Registry <span class="params">Mirrors:</span></span><br><span class="line">  https:<span class="operator">//</span>hub.docker.com<span class="symbol">/</span></span><br><span class="line">  https:<span class="operator">//</span>docker.<span class="number">1</span>panel.dev<span class="symbol">/</span></span><br><span class="line">  https:<span class="operator">//</span>docker.fxxk.dedyn.io<span class="symbol">/</span></span><br><span class="line">  https:<span class="operator">//</span>docker.xn--<span class="number">6</span>oq72ry9d5zx.cn<span class="symbol">/</span></span><br><span class="line">  https:<span class="operator">//</span>docker.m.daocloud.io<span class="symbol">/</span></span><br><span class="line">  https:<span class="operator">//</span>a.ussh.net<span class="symbol">/</span></span><br><span class="line">  https:<span class="operator">//</span>docker.zhai.cm<span class="symbol">/</span></span><br><span class="line"> Live Restore <span class="params">Enabled:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="params">WARNING:</span> bridge-nf-call-iptables is disabled</span><br><span class="line"><span class="params">WARNING:</span> bridge-nf-call-ip6tables is disabled</span><br></pre></td></tr></table></figure><h1 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a><code>docker ps</code></h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">CONTAINER</span> ID   IMAGE                     COMMAND                   CREATED       STATUS                 PORTS                                       NAMES</span><br><span class="line"><span class="attribute">c61273c4fa01</span>   deluan/navidrome:latest   <span class="string">&quot;/app/navidrome&quot;</span>          <span class="number">2</span> days ago    Up <span class="number">8</span> hours (healthy)   <span class="number">0.0.0.0:4533</span>-&gt;<span class="number">4533</span>/tcp, :::<span class="number">4533</span>-&gt;<span class="number">4533</span>/tcp   navidrome</span><br><span class="line"><span class="attribute">73b570230b16</span>   freshrss/freshrss         <span class="string">&quot;./Docker/entrypoint…&quot;</span>   <span class="number">4</span> days ago    Up <span class="number">8</span> hours             <span class="number">0.0.0.0:8282</span>-&gt;<span class="number">80</span>/tcp,<span class="meta"> [::]:8282-&gt;80/tcp     freshrss1</span></span><br><span class="line"><span class="meta">26a093b1ab24   onecloud/openwrt          &quot;/sbin/init&quot;              12 days ago   Up 8 hours                                                         openwrt</span></span><br></pre></td></tr></table></figure><h1 id="玩客云上运行的docker和软件："><a href="#玩客云上运行的docker和软件：" class="headerlink" title="玩客云上运行的docker和软件："></a>玩客云上运行的docker和软件：</h1><ul><li><p>openwrt   192.168.0.20</p></li><li><p>freshrss    localhost:8282</p></li><li><p>navidrome   localhost:4533</p></li><li><p>qbittorrent  localhost:8080</p></li><li><p>cpolar localhost:9200</p></li></ul><p>facefusion死活装不上，只能放在工作机上。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> armbian </tag>
             
             <tag> onecloud </tag>
             
@@ -3889,25 +3577,6 @@
     
     
     <entry>
-      <title>Script defer async 区别</title>
-      <link href="/post/script-defer-async-qu-bie/"/>
-      <url>/post/script-defer-async-qu-bie/</url>
-      
-        <content type="html"><![CDATA[<p>script defer async的区别：<br>当script中有defer属性时，脚本的加载过程和文档加载是异步发生的，等到文档解析完(DOMContentLoaded事件发生)脚本才开始执行。<br>当script有async属性时，脚本的加载过程和文档加载也是异步发生的。但脚本下载完成后会停止HTML解析，执行脚本，脚本解析完继续HTML解析。</p><span id="more"></span><p>当script同时有async和defer属性时，执行效果和async一致。</p><h1 id="async属性"><a href="#async属性" class="headerlink" title="async属性"></a>async属性</h1><p>表示应该立即开始下载脚本，但不能阻止其他页面动作，只对外部脚本文件有效。defer属性表示脚本可以延迟到文档完全被解析和显示之后再执行。</p><h1 id="defer属性"><a href="#defer属性" class="headerlink" title="defer属性"></a>defer属性</h1><p>规定当页面已完成加载后，才会执行脚本。</p><p>async属性一旦脚本可用，则会异步执行。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> web </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>修复dpkg返回错误代码1的问题</title>
       <link href="/post/xiu-fu-dpkg-fan-hui-cuo-wu-dai-ma-1-de-wen-ti/"/>
       <url>/post/xiu-fu-dpkg-fan-hui-cuo-wu-dai-ma-1-de-wen-ti/</url>
@@ -3932,25 +3601,6 @@
       <url>/post/grub2-xiu-gai-qi-dong-xiang/</url>
       
         <content type="html"><![CDATA[<p>要修改GRUB2的默认启动项，可以编辑<code>/etc/default/grub</code>文件</p><span id="more"></span><h1 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h1><p><code>GRUB_DEFAULT</code>        修改默认项<br><code>GRUB_TIMEOUT</code>       修改等待时间<br>修改GRUB2启动项的背景和主题，可以将背景图片复制到<code>/boot/grub</code>目录下，并替换原有的背景图片。可以通过编辑<code>/etc/default/grub</code>文件来设置背景图片的路径<br><code>GRUB_BACKGROUND</code></p><h1 id="添加自定义的启动项"><a href="#添加自定义的启动项" class="headerlink" title="添加自定义的启动项"></a>添加自定义的启动项</h1><p>可以通过编辑<code>/etc/grub.d/40_custom</code>文件来实现，添加新的<code>menuentry</code>条目。</p><h1 id="启动界面中文乱码"><a href="#启动界面中文乱码" class="headerlink" title="启动界面中文乱码"></a>启动界面中文乱码</h1><p>修改<code>/etc/default/grub.d/60_mint-theme.cfg</code><br><code>GRUB_FONT =&quot;/boot/grub/fonts/unicode.pf2&quot;</code> &#x2F;&#x2F;原来是UbuntuMono16.pf2</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>arch一日体验</title>
-      <link href="/post/arch-yi-ri-ti-yan/"/>
-      <url>/post/arch-yi-ri-ti-yan/</url>
-      
-        <content type="html"><![CDATA[<p>下载了iso，虚拟机一启动，直接就是命令行界面<br>自带安装脚本archinstall<br>运行之后，先选中文源，(不能选中文语言，否则是乱码，没有中文字体)，<br>分区，建立用户，声卡不能选，下一步安装，顺利的话，最后chroot到新系统</p><span id="more"></span><h1 id="安装GUI界面"><a href="#安装GUI界面" class="headerlink" title="安装GUI界面"></a>安装GUI界面</h1><p>安装xorg，xorg-server，sddm，plasma-desktop，kde-applications(很大一个包，费了很长时间，一共下载1.7G)，<br>一个一个文件下载，很慢很慢。<br><code>pacman -S xorg xorg-server sddm plasma-desktop </code></p><h1 id="安装中文字体"><a href="#安装中文字体" class="headerlink" title="安装中文字体"></a>安装中文字体</h1><p><code>pacman -Ss  wqy  </code><br><code>pacman -S wqy-microhei wqy-zenhei wqy-microhei-lite wqy-bitmapfont</code><br><code>systemctl enable sddm</code><br>exit退出chroot，退出ISO</p><p>重启，进入sddm</p><p>在系统设置里选定中文语言(现在可以正常显示中文)，退出登录重进，系统已经是中文。<br>kde-applications里带了很多软件(太多，实际只需konsole，dolphin，firefox等常用的)，<br>还需要安装中文输入法…<br>还试用了一下manjaro，也是出自arch一系，同样用的pacman管理软件，kde界面很漂亮。</p><hr><p>这样看来，还是用ubuntu，linuxmint，deepin之类的发行版，下一个大大的iso，启动安装一气呵成，省了很多事。</p><p>附：<br>         pacman -Syu 升级系统<br>         pacman -Ss   查询软件<br>         pacman -R    删除软件<br>         pacman -Qs  查询已安装软件</p>]]></content>
       
       
       
@@ -4056,27 +3706,6 @@
             <tag> web </tag>
             
             <tag> linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>openwrt passwall2</title>
-      <link href="/post/openwrt-passwall2/"/>
-      <url>/post/openwrt-passwall2/</url>
-      
-        <content type="html"><![CDATA[<p>成功搭了个梯子。</p><span id="more"></span><p><img src="https://qs100371.top/post-images/1732512364144.webp"></p><h1 id="透明代理，只要设成网关就可以。"><a href="#透明代理，只要设成网关就可以。" class="headerlink" title="透明代理，只要设成网关就可以。"></a>透明代理，只要设成网关就可以。</h1><p><img src="https://qs100371.top/post-images/1732512193862.webp"></p><h1 id="常规代理，填IP和端口的代理。"><a href="#常规代理，填IP和端口的代理。" class="headerlink" title="常规代理，填IP和端口的代理。"></a>常规代理，填IP和端口的代理。</h1><p><img src="https://qs100371.top/post-images/1732512264164.webp"></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> web </tag>
-            
-            <tag> onecloud </tag>
             
         </tags>
       
@@ -4304,25 +3933,6 @@
     
     
     <entry>
-      <title>vi编辑器用法</title>
-      <link href="/post/vi-bian-ji-qi-yong-fa/"/>
-      <url>/post/vi-bian-ji-qi-yong-fa/</url>
-      
-        <content type="html"><![CDATA[<p>vi编辑器是Linux和Unix系统中广泛使用的文本编辑器，它具有三种模式：命令模式、插入模式和末行模式。‌ 在命令模式下，用户可以执行各种编辑命令，如移动光标、删除文本等；在插入模式下，用户可以输入文本；末行模式则用于保存文件、退出编辑器等操作。‌</p><span id="more"></span><h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><p>光标移动：使用h、j、k、l键可以分别向左、下、上、右移动光标；使用Ctrl+f和Ctrl+b可以向前和向后翻页；使用0可以移动到行首，使用$可以移动到行尾。<br>删除命令：使用x键删除当前光标处的字符，使用dd删除当前行。<br>复制和粘贴：使用yy复制当前行，使用p粘贴文本。<br>查找命令：使用&#x2F;word查找文本中的“word”字符串，使用?word在光标之前查找“word”字符串。<br>替换命令：使用:s&#x2F;旧文本&#x2F;新文本&#x2F;g进行全局替换。</p><h1 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h1><p>进入插入模式：使用i键在光标位置前插入文本，使用a键在光标位置后插入文本，使用o键在光标下方插入新行。<br>退出插入模式：按Esc键返回命令模式。</p><h1 id="末行模式"><a href="#末行模式" class="headerlink" title="末行模式"></a>末行模式</h1><p>保存文件：使用:w命令保存文件。<br>退出编辑器：使用:q命令退出vi，使用:wq或:x保存并退出。<br>强制退出：使用:q!命令强制退出，不保存修改。<br>全局替换：使用:%s&#x2F;旧文本&#x2F;新文本&#x2F;g进行全局替换，并可以使用:%s&#x2F;旧文本&#x2F;新文本&#x2F;gc进行确认替换。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>安装wordpress</title>
       <link href="/post/an-zhuang-wordpress/"/>
       <url>/post/an-zhuang-wordpress/</url>
@@ -4442,25 +4052,6 @@
       <url>/post/grub4dos-qi-dong-fang-shi-de-menulst/</url>
       
         <content type="html"><![CDATA[<p>grub4dos启动linux系统、win和PE的menu.lst内容。</p><span id="more"></span><h1 id="menu-lst"><a href="#menu-lst" class="headerlink" title="menu.lst"></a>menu.lst</h1><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">timeout <span class="number">10</span></span><br><span class="line">title ubuntu</span><br><span class="line">find --<span class="keyword">set</span>-root <span class="comment">--ignore-floppies --ignore-cd</span> /boot/<span class="comment">grub</span>/i386-pc/<span class="comment">core.img</span></span><br><span class="line">kernel /boot/<span class="comment">grub</span>/i386-pc/<span class="comment">core.img</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">title <span class="comment">deepin</span></span><br><span class="line">kernel <span class="comment">(hd0,6)</span>/boot/<span class="comment">grub</span>/i386-pc/<span class="comment">core.img</span></span><br><span class="line"></span><br><span class="line">#title <span class="comment">winxp</span></span><br><span class="line">#chainloader <span class="comment">(hd0,0)</span>/ntldr</span><br><span class="line"></span><br><span class="line">title find <span class="keyword">and</span> boot.ISO</span><br><span class="line">find --set-root /<span class="comment">boot64.iso</span></span><br><span class="line">map /boot64.iso (<span class="number">0xff</span>) || map --mem /<span class="comment">boot64.iso (0xff)</span></span><br><span class="line">map <span class="comment">--hook</span></span><br><span class="line">chainloader <span class="comment">(0xff)</span></span><br><span class="line"></span><br><span class="line">title <span class="comment">install ubuntu</span></span><br><span class="line">find <span class="comment">--set-root</span> /ubuntu.iso</span><br><span class="line">kernel /<span class="comment">vmlinuz boot=casper iso-scan</span>/filename=/<span class="comment">ubuntu.iso locale=zh_CN.UTF-8</span></span><br><span class="line">initrd /initrd</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>linux常用命令</title>
-      <link href="/post/linux-chang-yong-ming-ling/"/>
-      <url>/post/linux-chang-yong-ming-ling/</url>
-      
-        <content type="html"><![CDATA[<p>linux常用命令存档。</p>  <span id="more"></span><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>   fastfetch 或 neofetch 系统信息<br>   df -h     磁盘占用空间<br>   du -sh   目录占用空间<br>   ifconfig  设置网络</p><ul><li>pwd 显示当前目录路径</li><li>ls -al  显示目录文件</li><li>cp -r  复制目录</li><li>head  查看文件头十行内容<br>tail</li><li>zip -r 1.zip a 压缩a目录<br>unzip -d 1.zip a 解压到a目录</li><li>tar -zcvf 1.tar.gz  a  打包并压缩<br>tar -zxvf 1.tar.gz  解包</li></ul><h1 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h1><p>pwd-查看当前工作目录<br>cd-更改当前工作目录<br>touch-创建文件<br>mkdir-创建目录<br>cp-复制文件<br>mv-移动文件<br>rm-删除文件<br>tar-打包和压缩 </p><h1 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h1><p>tree-查看目录结构及其子分支<br>vi-修改文件内容<br>find-查找文件<br>locate-文件查找<br>ln-软链接</p><h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><p>id-显示用户信息<br>useradd-创建用户<br>passwd-设置或更改用户密码<br>userdel-删除用户<br>修改登录SHELL<br>su-切换用户</p><h1 id="用户组管理"><a href="#用户组管理" class="headerlink" title="用户组管理"></a>用户组管理</h1><p>groupadd-创建组<br>groupdel-删除组<br>usermod-添加用户到组<br>gpasswd-添加用户到组</p><h1 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h1><p>chmod-设置权限：<br>chgrp-修改属组:</p><h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><p>ps-静态查看进程<br>top-动态查看进程<br>kill-杀死进程<br>nice-进程优先级<br>jobs-作业控制 </p><p>网络管理<br>nmtui-简易图形配置网络连接<br>ss-端口查看<br>netstat-端口查看</p><p>其他常用命令<br>which-命令查找<br>whereis-命令查找</p>]]></content>
       
       
       
