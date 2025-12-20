@@ -311,6 +311,8 @@
                     
                     <div class="source-presets">
                         <button class="preset-btn" data-url="http://f1.qs100371.top:7002">测试源1</button>
+                        <button class="preset-btn" data-url="https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u">示例源</button>
+                        <button class="preset-btn" data-url="http://example.com/playlist.m3u">备用源</button>
                     </div>
                     
                     <button id="load-playlist">加载播放列表</button>
@@ -387,7 +389,7 @@
             searchChannelInput.addEventListener('input', filterChannels);
             
             // 设置默认源
-            playlistUrlInput.value = "http://f1.qs100371.top:7002";
+            playlistUrlInput.value = "http://f.qs100371.top:7002";
             
             function loadPlaylistFromUrl() {
                 const url = playlistUrlInput.value.trim();
@@ -401,7 +403,7 @@
                 loadPlaylistBtn.textContent = '加载中...';
                 
                 // 使用CORS代理绕过限制
-                const proxyUrl = 'https://cros.qs100371.top/api/proxy?url=' + encodeURIComponent(url);
+                const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
                 
                 fetch(proxyUrl)
                     .then(response => {
