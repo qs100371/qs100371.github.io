@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><script defer src="https://cloud.umami.is/script.js" data-website-id="6e0a4c7e-ee80-4e33-aca1-db6b188445b7"></script><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>fnnas: arm设备fnos解决方案大全 | 折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="去年12月飞牛开启了arm fnos内测，其中对oec(t)系列为代表的rockchip支持最广，其中也有s905d的N1盒子。现在有大神把amlogic，Allwinner，Rockchip都包含进来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fnnas: arm设备fnos解决方案大全">
+<meta property="og:url" content="https://qs100371.top/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/index.html">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:description" content="去年12月飞牛开启了arm fnos内测，其中对oec(t)系列为代表的rockchip支持最广，其中也有s905d的N1盒子。现在有大神把amlogic，Allwinner，Rockchip都包含进来。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.top/images/avatar.png">
+<meta property="article:published_time" content="2026-01-11T01:16:38.000Z">
+<meta property="article:modified_time" content="2026-01-11T01:43:17.942Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="armbian">
+<meta property="article:tag" content="nas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.top/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "fnnas: arm设备fnos解决方案大全",
+  "url": "https://qs100371.top/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/",
+  "image": "https://qs100371.top/images/avatar.png",
+  "datePublished": "2026-01-11T01:16:38.000Z",
+  "dateModified": "2026-01-11T01:43:17.942Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qs100371",
+      "url": "mailto:qs@qs100371.top"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/avatar.png"><link rel="canonical" href="https://qs100371.top/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="//cdn.imsun.org/lxgw-wenkai-screen-webfont/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'fnnas: arm设备fnos解决方案大全',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">218</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://m.qs100371.top/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://api.qs100371.top/api2.php);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a><a class="nav-page-title" href="/"><span class="site-name">fnnas: arm设备fnos解决方案大全</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></li><li><a class="site-page child" href="https://m.qs100371.top/"><i class="fa-fw fas fa-coffee"></i><span> 牢骚</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 黑洞</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">fnnas: arm设备fnos解决方案大全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-11T01:16:38.000Z" title="发表于 2026-01-11 09:16:38">2026-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-11T01:43:17.942Z" title="更新于 2026-01-11 09:43:17">2026-01-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">439</span></span><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/" data-flag-title="fnnas: arm设备fnos解决方案大全"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:120,&quot;messagePrev&quot;:&quot;自上次更新以来已经过去了&quot;,&quot;messageNext&quot;:&quot;天，文章的内容可能已经过时。&quot;,&quot;postUpdate&quot;:&quot;2026-01-11 09:43:17&quot;}" hidden></div><p>去年12月飞牛开启了arm fnos内测，其中对oec(t)系列为代表的rockchip支持最广，其中也有s905d的N1盒子。现在有大神把amlogic，Allwinner，Rockchip都包含进来。</p>
+<span id="more"></span>
+<p>项目地址：<a href="https://github.com/ophub/fnnas">ophub&#x2F;fnnas</a><br><img src="https://qs100371.top/post-images/1768094616262.webp"></p>
+<p>FnNAS 是一款基于最新 Linux 内核（Debian 发行版）深度定制的操作系统。它拥有强大的硬件兼容性，完美支持主流 x86 及 Arm64 设备，允许用户自由组装 NAS 并灵活扩展外部存储。现在可以轻松将电视盒子的 Android TV 系统替换为 FnNAS，将其变身为一台功能强大的私有数据存储服务器。</p>
+<p>ophub原先做的是这一系列芯片的armbian解决方案，现在又加上了fnos方案。</p>
+<p>手头有一个s905l3b的电视盒子（30元包邮），已刷armbian。<br>目前 s905 的盒子只能在 TF&#x2F;SD&#x2F;USB 中使用，其他型号的盒子支持写入 eMMC 中使用。</p>
+<h1 id="下载飞牛系统"><a href="#下载飞牛系统" class="headerlink" title="下载飞牛系统"></a>下载飞牛系统</h1><p>s905l3b最新固件<a href="https://github.com/ophub/fnnas/releases/download/fnnas_v300/fnnas_amlogic_s905l3b_k6.12.41_2026.01.10.img.gz">https://github.com/ophub/fnnas/releases/download/fnnas_v300&#x2F;fnnas_amlogic_s905l3b_k6.12.41_2026.01.10.img.gz</a></p>
+<h1 id="安装-启动飞牛"><a href="#安装-启动飞牛" class="headerlink" title="安装 启动飞牛"></a><del>安装</del> 启动飞牛</h1><p><font color="red">下载后解压成.img文件（很重要！）</font>，用 Rufus（ 或者 balenaEtcher）写入U盘，把写好系统的 USB 插入盒子。启动完成后，到路由器后端查看新接入的名为armbian的设备的ip，通过浏览器打开ip:5666进入飞牛设置。由于不能写入emmc，后面安装到emmc的步骤就没用了。<br><img src="https://qs100371.top/post-images/1768095349849.png"></p>
+<h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p><img src="https://qs100371.top/post-images/1768095361588.webp"><br><img src="https://qs100371.top/post-images/1768095366646.webp"><br><img src="https://qs100371.top/post-images/1768095370635.webp"><br>由于arm fnos还在内测中，应用商店目前需要审核接入，所以是空白的。<br><img src="https://qs100371.top/post-images/1768095374690.webp"><br><img src="https://qs100371.top/post-images/1768095380850.webp"></p>
+<hr>
+<p>总体来说，这些盒子只能外接usb设备，使用起来不如oec(t)自带一个sata仓那么方便（更像nas），存储和网络速度都相差比较大。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="mailto:qs@qs100371.top">qs100371</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://qs100371.top/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/">https://qs100371.top/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://qs100371.top" target="_blank">折腾日记</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/nas/">nas</a><a class="post-meta__tags" href="/tags/armbian/">armbian</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/post/winboat-zai-linux-shang-wu-feng-yun-xing-windows-ying-yong/" title="winboat: 在linux上无缝运行windows应用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">winboat: 在linux上无缝运行windows应用</div></div><div class="info-2"><div class="info-item-1">WinBoat作为一款专为Linux用户设计的跨系统应用工具，通过容器化技术实现了Windows应用的无缝集成。本文记录了在debian13下的安装过程及简单使用。  项目地址：TibixDev&#x2F;winboat 系统需求 至少4GB内存，2个CPU线程，32GB空间 虚拟化在 BIOS&#x2F;UEFI 中启用 KVM Docker安装docker之后还需要添加用户到docker组，实现以普通权限运行docker。 sudo groupadd docker sudo usermod -aG docker $USER 重新登录， newgrp docker 检验无sudo运行d...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><font color=red>静待春节到来！</font></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E9%A3%9E%E7%89%9B%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">下载飞牛系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-%E5%90%AF%E5%8A%A8%E9%A3%9E%E7%89%9B"><span class="toc-number">2.</span> <span class="toc-text">安装 启动飞牛</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%93%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">体验</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/fnnas-arm-she-bei-fnos-jie-jue-fang-an-da-quan/" title="fnnas: arm设备fnos解决方案大全">fnnas: arm设备fnos解决方案大全</a><time datetime="2026-01-11T01:16:38.000Z" title="发表于 2026-01-11 09:16:38">2026-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/winboat-zai-linux-shang-wu-feng-yun-xing-windows-ying-yong/" title="winboat: 在linux上无缝运行windows应用">winboat: 在linux上无缝运行windows应用</a><time datetime="2026-01-09T03:09:00.000Z" title="发表于 2026-01-09 11:09:00">2026-01-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/2026-nian-di-yi-tian/" title="2026年第一天">2026年第一天</a><time datetime="2026-01-01T02:54:21.000Z" title="发表于 2026-01-01 10:54:21">2026-01-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/qiang-zhi-shi-yong-https-he-qu-xiao-qiang-zhi-https/" title="强制使用https和取消强制https">强制使用https和取消强制https</a><time datetime="2025-12-27T13:16:07.000Z" title="发表于 2025-12-27 21:16:07">2025-12-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/wechat-selkies-docker-li-de-wei-xin-he-qq/" title="WeChat-Selkies: docker里的微信和QQ">WeChat-Selkies: docker里的微信和QQ</a><time datetime="2025-12-17T09:31:15.000Z" title="发表于 2025-12-17 17:31:15">2025-12-17</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026    qs100371</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank"> <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br> <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener"> <img src="https://www.travellings.cn/assets/w.png" width="90"></a> <script async src="https://npm.onmicrosoft.cn/penndu@16.0.0/bsz.js"></script><span style="font-size: 9px;color: red"> <span id="busuanzi_site_pv" ></span> ,<span id="busuanzi_site_uv"></span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'shrivAmDul1K9RSnayhd7foS-gzGzoHsz',
+      appKey: 'MJ6IotbRMRrEumBy45DTigT6',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
