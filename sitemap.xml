@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qs100371.top/post/incus-tu-xing-jie-mian-de-an-zhuang-he-kai-qi/</loc>
+    
+    <lastmod>2026-04-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://qs100371.top/post/incus-de-an-zhuang-he-shi-yong/</loc>
     
     <lastmod>2026-04-27</lastmod>
@@ -2257,6 +2266,13 @@
   
   <url>
     <loc>https://qs100371.top/tags/lxc/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://qs100371.top/tags/incus/</loc>
     <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
