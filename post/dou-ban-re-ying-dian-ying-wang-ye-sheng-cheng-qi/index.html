@@ -1,0 +1,774 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>豆瓣热映电影网页生成器 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="爱盼项目上显示了豆瓣热映和电视剧等信息，自己也想要一个这样的页面，不会写怎么办，呼叫deepseek生成一个。">
+<link rel="canonical" href="https://qs100371.github.io/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"豆瓣热映电影网页生成器","url":"https://qs100371.github.io/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/","description":"爱盼项目上显示了豆瓣热映和电视剧等信息，自己也想要一个这样的页面，不会写怎么办，呼叫deepseek生成一个。","datePublished":"2025-04-11T20:00:17+08:00","dateModified":"2026-05-01T11:05:31+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/","name":"豆瓣热映电影网页生成器","position":2}]}</script>
+<meta property="og:title" content="豆瓣热映电影网页生成器">
+<meta property="og:description" content="爱盼项目上显示了豆瓣热映和电视剧等信息，自己也想要一个这样的页面，不会写怎么办，呼叫deepseek生成一个。">
+<meta property="og:url" content="https://qs100371.github.io/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/dou-ban-re-ying-dian-ying-wang-ye-sheng-cheng-qi/">
+<meta name="twitter:title" content="豆瓣热映电影网页生成器">
+<meta name="twitter:description" content="爱盼项目上显示了豆瓣热映和电视剧等信息，自己也想要一个这样的页面，不会写怎么办，呼叫deepseek生成一个。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        豆瓣热映电影网页生成器
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2025-04-11">
+                        2025-04-11
+                    </time> • 14 分钟阅读 •
+                        
+                            <a href="/tag/python/">
+                                python
+                            </a>
+                             · 
+                                    
+                            <a href="/tag/web/">
+                                web
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>爱盼项目上显示了豆瓣热映和电视剧等信息，自己也想要一个这样的页面，不会写怎么办，呼叫deepseek生成一个。</p>
+<!-- more -->
+<h1 id="heading">生成的代码</h1>
+<pre><code>import os
+import requests
+from bs4 import BeautifulSoup
+import json
+
+def get_douban_hot_movies():
+    &quot;&quot;&quot;
+    从豆瓣获取当前热映电影信息
+    &quot;&quot;&quot;
+    url = &quot;https://movie.douban.com/cinema/nowplaying/&quot;
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+    }
+    
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # 豆瓣热映电影信息通常在一个id为&quot;nowplaying&quot;的div中
+        nowplaying_div = soup.find('div', id='nowplaying')
+        if not nowplaying_div:
+            return []
+            
+        movies = []
+        for li in nowplaying_div.find_all('li', class_='list-item'):
+            movie = {}
+            movie['id'] = li.get('id', '').strip()
+            movie['title'] = li.get('data-title', '').strip()
+            movie['score'] = li.get('data-score', '').strip()
+            movie['duration'] = li.get('data-duration', '').strip()
+            movie['region'] = li.get('data-region', '').strip()
+            movie['director'] = li.get('data-director', '').strip()
+            movie['actors'] = li.get('data-actors', '').strip()
+            movie['poster'] = li.find('img').get('src') if li.find('img') else ''
+            
+            # 获取星级评分（如果有）
+            star_rating = li.find('span', class_='subject-rate')
+            if star_rating:
+                movie['star_rating'] = star_rating.get_text().strip()
+            else:
+                movie['star_rating'] = '暂无评分'
+                
+            movies.append(movie)
+            
+        return movies
+        
+    except Exception as e:
+        print(f&quot;获取豆瓣热映电影失败: {e}&quot;)
+        return []
+
+def generate_html(movies):
+    &quot;&quot;&quot;
+    生成展示热映电影的HTML页面
+    &quot;&quot;&quot;
+    html_template = &quot;&quot;&quot;
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang=&quot;zh-CN&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        &lt;title&gt;豆瓣热映电影&lt;/title&gt;
+        &lt;style&gt;
+            body {{
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }}
+            h1 {{
+                text-align: center;
+                color: #007722;
+                margin-bottom: 30px;
+            }}
+            .movie-container {{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                gap: 20px;
+            }}
+            .movie-card {{
+                width: 220px;
+                background: white;
+                border-radius: 5px;
+                overflow: hidden;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s;
+            }}
+            .movie-card:hover {{
+                transform: translateY(-5px);
+            }}
+            .movie-poster {{
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+            }}
+            .movie-info {{
+                padding: 15px;
+            }}
+            .movie-title {{
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }}
+            .movie-meta {{
+                font-size: 13px;
+                color: #666;
+                margin-bottom: 3px;
+            }}
+            .movie-rating {{
+                color: #e09015;
+                font-weight: bold;
+            }}
+            .footer {{
+                text-align: center;
+                margin-top: 40px;
+                color: #999;
+                font-size: 14px;
+            }}
+            @media (max-width: 768px) {{
+                .movie-card {{
+                    width: 45%;
+                }}
+            }}
+            @media (max-width: 480px) {{
+                .movie-card {{
+                    width: 100%;
+                }}
+            }}
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;🎬 豆瓣热映电影&lt;/h1&gt;
+        &lt;div class=&quot;movie-container&quot;&gt;
+            {movies_html}
+        &lt;/div&gt;
+        &lt;div class=&quot;footer&quot;&gt;
+            数据来源: 豆瓣电影 | 更新时间: {update_time}
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    &quot;&quot;&quot;
+    
+    from datetime import datetime
+    update_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    movies_html = &quot;&quot;
+    for movie in movies:
+        movie_html = f&quot;&quot;&quot;
+        &lt;div class=&quot;movie-card&quot;&gt;
+            &lt;img class=&quot;movie-poster&quot; src=&quot;{movie.get('poster', '')}&quot; alt=&quot;{movie.get('title', '')}&quot;&gt;
+            &lt;div class=&quot;movie-info&quot;&gt;
+                &lt;div class=&quot;movie-title&quot;&gt;{movie.get('title', '')}&lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;导演: {movie.get('director', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;主演: {movie.get('actors', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;地区: {movie.get('region', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;片长: {movie.get('duration', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-rating&quot;&gt;评分: {movie.get('score', movie.get('star_rating', '暂无评分'))}&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &quot;&quot;&quot;
+        movies_html += movie_html
+    
+    full_html = html_template.format(movies_html=movies_html, update_time=update_time)
+    return full_html
+
+def save_html(html_content, filename=&quot;docs/douban_movies.html&quot;):
+    os.makedirs(&quot;docs&quot;, exist_ok=True)
+    with open(filename, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+        f.write(html_content)
+
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;正在获取豆瓣热映电影信息...&quot;)
+    movies = get_douban_hot_movies()
+    
+    if movies:
+        print(f&quot;获取到 {len(movies)} 部热映电影&quot;)
+        html_content = generate_html(movies)
+        save_html(html_content)
+    else:
+        print(&quot;未能获取热映电影信息&quot;)
+
+</code></pre>
+<h1 id="python">脚本需要的Python库</h1>
+<ul>
+<li>requests</li>
+<li>beautifulsoup4<br />
+<code>pip install requests beautifulsoup4</code></li>
+</ul>
+<h1 id="heading-1">运行脚本</h1>
+<p>它会：</p>
+<ul>
+<li>从豆瓣电影获取当前热映电影信息；</li>
+<li>解析电影标题、评分、导演、演员、海报等信息；</li>
+<li>生成一个美观的HTML页面展示这些电影；</li>
+<li>将HTML保存为&quot;douban_movies.html&quot;文件。</li>
+</ul>
+<h1 id="heading-2">添加豆瓣链接和评分星级</h1>
+<ul>
+<li>
+<p>在 generate_html() 函数前添加 generate_star_rating() 辅助函数：<br />
+放在 generate_html() 函数定义之前，作为独立的辅助函数。</p>
+</li>
+<li>
+<p>修改 generate_html() 函数中的电影卡片HTML模板：<br />
+替换原来的 movie_html 部分。<br />
+修改部分完整代码：</p>
+</li>
+</ul>
+<pre><code>def generate_star_rating(score):
+    &quot;&quot;&quot;生成星级评分&quot;&quot;&quot;
+    try:
+        score = float(score)
+        full_stars = int(score // 2)
+        half_star = 1 if score % 2 &gt;= 1 else 0
+        empty_stars = 5 - full_stars - half_star
+        return '⭐' * full_stars + '½' * half_star + '☆' * empty_stars
+    except:
+        return ''
+
+def generate_html(movies):
+    &quot;&quot;&quot;
+    生成展示热映电影的HTML页面
+    &quot;&quot;&quot;
+    html_template = &quot;&quot;&quot;
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang=&quot;zh-CN&quot;&gt;
+    &lt;!-- 之前的HTML模板保持不变 --&gt;
+    &lt;/html&gt;
+    &quot;&quot;&quot;
+    
+    from datetime import datetime
+    update_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    movies_html = &quot;&quot;
+    for movie in movies:
+        movie_html = f&quot;&quot;&quot;
+        &lt;div class=&quot;movie-card&quot;&gt;
+            &lt;a href=&quot;https://movie.douban.com/subject/{movie.get('id', '')}/&quot; target=&quot;_blank&quot;&gt;
+                &lt;img class=&quot;movie-poster&quot; src=&quot;{movie.get('poster', '')}&quot; alt=&quot;{movie.get('title', '')}&quot;&gt;
+            &lt;/a&gt;
+            &lt;div class=&quot;movie-info&quot;&gt;
+                &lt;div class=&quot;movie-title&quot;&gt;
+                    &lt;a href=&quot;https://movie.douban.com/subject/{movie.get('id', '')}/&quot; target=&quot;_blank&quot;&gt;
+                        {movie.get('title', '')}
+                    &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;导演: {movie.get('director', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;主演: {movie.get('actors', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;地区: {movie.get('region', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-meta&quot;&gt;片长: {movie.get('duration', '未知')}&lt;/div&gt;
+                &lt;div class=&quot;movie-rating&quot;&gt;
+                    评分: {movie.get('score', movie.get('star_rating', '暂无评分'))}
+                    {generate_star_rating(movie.get('score', 0))}
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &quot;&quot;&quot;
+        movies_html += movie_html
+    
+    full_html = html_template.format(movies_html=movies_html, update_time=update_time)
+    return full_html
+</code></pre>
+<h1 id="heading-3">注意事项</h1>
+<ul>
+<li>豆瓣可能有反爬虫机制，图片会显示不了，可以尝试更换User-Agent或添加延迟<br />
+添加Referrer Policy（简单方案）<br />
+在HTML的<head>中添加：<br />
+<code>&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;</code></li>
+<li>电影信息的HTML结构可能会变化，如果解析失败可能需要调整代码；</li>
+<li>生成的HTML页面是静态的，不会自动更新。</li>
+</ul>
+<p><img src="https://qs100371.top/post-images/1744373638976.webp" alt="" /></p>
+<blockquote>
+<p>生成代码很容易，但也要一步一步改进才能得到想要的结果，比自己抠代码要简单多了。</p>
+</blockquote>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/python/">python</a>, 
+     
+        <a href="/tag/web/">web</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/github-actions-yun-xing-dai-ma-bing-fa-bu-dao-pages/">Github Actions运行代码并发布到Pages上</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/wang-pan-ju-he-sou-suo-xiang-mu-aipan/">网盘聚合搜索项目Aipan</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

@@ -1,0 +1,717 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>折腾豆瓣书影音 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="大约半年前开始对豆瓣书影音有了兴趣，注册并开始使用，把看过的电影都记录下来，并且用idouban把书影音引入到hexo，几天前idouban出问题了，书影音不能正常显示，就开始研究了一下。">
+<link rel="canonical" href="https://qs100371.github.io/post/zhe-teng-dou-ban-shu-ying-yin/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"折腾豆瓣书影音","url":"https://qs100371.github.io/post/zhe-teng-dou-ban-shu-ying-yin/","description":"大约半年前开始对豆瓣书影音有了兴趣，注册并开始使用，把看过的电影都记录下来，并且用idouban把书影音引入到hexo，几天前idouban出问题了，书影音不能正常显示，就开始研究了一下。","datePublished":"2025-08-23T20:15:02+08:00","dateModified":"2026-05-01T11:05:30+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/zhe-teng-dou-ban-shu-ying-yin/","name":"折腾豆瓣书影音","position":2}]}</script>
+<meta property="og:title" content="折腾豆瓣书影音">
+<meta property="og:description" content="大约半年前开始对豆瓣书影音有了兴趣，注册并开始使用，把看过的电影都记录下来，并且用idouban把书影音引入到hexo，几天前idouban出问题了，书影音不能正常显示，就开始研究了一下。">
+<meta property="og:url" content="https://qs100371.github.io/post/zhe-teng-dou-ban-shu-ying-yin/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/zhe-teng-dou-ban-shu-ying-yin/">
+<meta name="twitter:title" content="折腾豆瓣书影音">
+<meta name="twitter:description" content="大约半年前开始对豆瓣书影音有了兴趣，注册并开始使用，把看过的电影都记录下来，并且用idouban把书影音引入到hexo，几天前idouban出问题了，书影音不能正常显示，就开始研究了一下。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        折腾豆瓣书影音
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2025-08-23">
+                        2025-08-23
+                    </time> • 11 分钟阅读 •
+                        
+                            <a href="/tag/web/">
+                                web
+                            </a>
+                             · 
+                                    
+                            <a href="/tag/docker/">
+                                docker
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>大约半年前开始对豆瓣书影音有了兴趣，注册并开始使用，把看过的电影都记录下来，并且用idouban把书影音引入到hexo，几天前idouban出问题了，书影音不能正常显示，就开始研究了一下。</p>
+<!-- more -->
+<h1 id="idouban">idouban</h1>
+<p>项目地址：<a href="https://github.com/mythsman/idouban">mythsman/idouban</a><br />
+引用方式：</p>
+<pre><code>&lt;body&gt;
+  &lt;div id=&quot;douban&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;link
+  rel=&quot;stylesheet&quot;
+  href=&quot;https://cdn.jsdelivr.net/npm/idouban/dist/index.css&quot;
+/&gt;
+&lt;script
+  src=&quot;https://cdn.jsdelivr.net/npm/idouban/dist/index.js&quot;
+  onload=&quot;idouban.init({
+      selector:'#douban',
+      lang: 'zh',
+      douban_id: '162448367',
+      type: 'book',
+      quote: 'This is my books',
+      actions: ['do','wish','collect'],
+      page_size: 10,
+      max_line: 4
+          })&quot;
+&gt;&lt;/script&gt;
+</code></pre>
+<p>原理：<br />
+插件内部会请求一个豆瓣数据缓存服务 mouban，获取响应后直接直接以列表的形式渲染出来。类似功能的插件还有 hexo-douban。<br />
+首次访问时会触发 mouban 的初始化收录。这个过程可能比较久，没有排队的情况下需要等待的时间至少为 条目数/15*5秒 。如果一不小心排队了，则可能需要等待半天。<br />
+首次初始化好之后，后续会随着页面的不断访问定时进行增量更新，期间均可正常使用。</p>
+<p>出问题的是豆瓣数据缓存服务 mouban，服务器无法连接。</p>
+<h1 id="mouban">mouban</h1>
+<p>项目地址：<a href="https://github.com/mythsman/mouban">mythsman/mouban</a><br />
+作为 idouban 项目的后台数据获取服务，用于根据用户的豆瓣ID，获取用户在豆瓣的书、影、音、游中的标注信息，方便用户快速提取。</p>
+<p>简要的处理流程如下：<br />
+用户输入个人豆瓣ID。<br />
+访问读书首页获取用户头像、域名等信息。<br />
+访问个人 rss 页面获得用户最新更新时间用于去重。<br />
+访问用户书、影、音、游的首页获取总数等信息。<br />
+滚动访问用户书、影、音、游的评论页获取评论信息、条目概览。<br />
+访问条目详情页获取详细信息，并自动发现其他推荐的用户和条目。<br />
+每天定时更新书、影、音、游的首页，获取最新条目。</p>
+<p>作者提供了docker镜像以自部署服务。<br />
+docker-compose.yml</p>
+<pre><code>services:
+ mouban:
+     image: mythsman/mouban
+     container_name: mouban
+     restart: always
+#      ports:
+#        - &quot;8080:8080&quot;
+     network_mode: host
+     environment:
+       - GIN_MODE=release
+       - agent__enable=true
+       - agent__flow__discover=false
+       - agent__discover__level=1
+       - agent__item__concurrency=5
+       - agent__item__max=10000
+       - http__timeout=30000
+       - http__retry_max=20
+       - http__interval__user=5000
+       - http__interval__item=2000
+       - http__auth=288237448:6pQ2AP6aTeo,
+       - server__cors=https://domain.com
+       - server__limit=30m
+       - datasource__host=localhost
+       - datasource__username=root
+       - datasource__password=123456
+</code></pre>
+<p>格式经deepseek修正。<br />
+此处还需有mysql服务，可用docker部署。<br />
+docker-compose.yml</p>
+<pre><code>services:
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        restart: always
+        privileged: true
+        ports:
+            - '3306:3306'
+        environment:
+            - 'MYSQL_ROOT_PASSWORD=123456'
+</code></pre>
+<p>mysql部署成功后，<code>docker exec -it mysql sh</code>进入，建立数据库mouban。<br />
+mysql和mouban部署成功后，设置反向代理内网地址到域名。</p>
+<p>用户录入/更新：<br />
+<code>https://one.qs100371.top:8888/guest/check_user?id=288237448</code><br />
+输出：</p>
+<pre><code>&quot;result&quot;: {
+    &quot;id&quot;: 288237448,
+    &quot;domain&quot;: &quot;&quot;,
+    &quot;name&quot;: &quot;qqsss&quot;,
+    &quot;thumbnail&quot;: &quot;https://minio.mythsman.com/douban/d40b863d867af65343c4c36d19c49fdb.png&quot;,
+    &quot;book_wish&quot;: 0,
+    &quot;book_do&quot;: 0,
+    &quot;book_collect&quot;: 0,
+    &quot;game_wish&quot;: 0,
+    &quot;game_do&quot;: 0,
+    &quot;game_collect&quot;: 0,
+    &quot;movie_wish&quot;: 0,
+    &quot;movie_do&quot;: 0,
+    &quot;movie_collect&quot;: 57,
+    &quot;song_wish&quot;: 0,
+    &quot;song_do&quot;: 0,
+    &quot;song_collect&quot;: 0,
+    &quot;publish_at&quot;: 0,
+    &quot;sync_at&quot;: 0,
+    &quot;check_at&quot;: 0
+  },
+  &quot;success&quot;: true
+}
+</code></pre>
+<p>查看已观看的电影列表：<br />
+<code>https://one.qs100371.top:8888/guest/user_movie?id=288237448&amp;action=collect</code><br />
+输出：</p>
+<pre><code>{
+  &quot;msg&quot;: &quot;服务内部错误，请联系开发者处理&quot;,
+  &quot;success&quot;: false
+}
+</code></pre>
+<p>爬取信息出错，进入容器内部，发现只有一个命令main，并且镜像已经有7个月没有更新了。<br />
+作者指出最重要的是 http__auth 参数，用于配置登陆态的用户信息和走的http代理，格式为 <code>&lt;dbcl2&gt;,http://&lt;user&gt;:&lt;password&gt;@&lt;proxyIp&gt;:&lt;proxyPort&gt;;</code> ，可以配置多个。豆瓣对于未登录的账号有概率会投毒，所以采用登陆态账号来处理。<br />
+自部署只用了一个帐号，很容易就被封控了，提示 <code>有异常请求从你的 IP 发出，请登录使用豆瓣</code>。<br />
+这里正确地抓取了已观影的数目，其他的不能得到正常结果。</p>
+<h1 id="heading">作者部署的服务</h1>
+<p><a href="https://mouban.mythsman.com/">https://mouban.mythsman.com/</a><br />
+今天服务正常了，重新用上面的命令。<br />
+<code>https://mouban.mythsman.com/guest/check_user?id=288237448</code></p>
+<pre><code>{
+  &quot;result&quot;: {
+    &quot;id&quot;: 288237448,
+    &quot;domain&quot;: &quot;&quot;,
+    &quot;name&quot;: &quot;qqsss&quot;,
+    &quot;thumbnail&quot;: &quot;https://minio.mythsman.com/douban/d40b863d867af65343c4c36d19c49fdb.png&quot;,
+    &quot;book_wish&quot;: 0,
+    &quot;book_do&quot;: 0,
+    &quot;book_collect&quot;: 0,
+    &quot;game_wish&quot;: 0,
+    &quot;game_do&quot;: 0,
+    &quot;game_collect&quot;: 0,
+    &quot;movie_wish&quot;: 4,
+    &quot;movie_do&quot;: 1,
+    &quot;movie_collect&quot;: 57,
+    &quot;song_wish&quot;: 0,
+    &quot;song_do&quot;: 0,
+    &quot;song_collect&quot;: 0,
+    &quot;publish_at&quot;: 1755792477,
+    &quot;sync_at&quot;: 1755936544,
+    &quot;check_at&quot;: 1755940034
+  },
+  &quot;success&quot;: true
+}
+</code></pre>
+<p><code>https://mouban.mythsman.com/guest/user_movie?id=288237448&amp;action=collect</code></p>
+<pre><code>{
+  &quot;result&quot;: {
+    &quot;comment&quot;: [
+      {
+        &quot;item&quot;: {
+          &quot;douban_id&quot;: 36188176,
+          &quot;title&quot;: &quot;超人：遗产 Superman: Legacy&quot;,
+          &quot;style&quot;: &quot;动作 / 科幻 / 冒险&quot;,
+          &quot;director&quot;: &quot;詹姆斯·古恩&quot;,
+          &quot;writer&quot;: &quot;詹姆斯·古恩&quot;,
+          &quot;actor&quot;: &quot;&quot;,
+          &quot;publish_date&quot;: &quot;2025-07-11(美国)&quot;,
+          &quot;alias&quot;: &quot;超人：传承&quot;,
+          &quot;thumbnail&quot;: &quot;https://minio.mythsman.com/douban/78a4ade526d4d71cc5c5dda5962affe9.jpg&quot;
+        },
+        &quot;rate&quot;: 2,
+        &quot;label&quot;: &quot;&quot;,
+        &quot;comment&quot;: &quot;&quot;,
+        &quot;action&quot;: 2,
+        &quot;mark_date&quot;: &quot;2025-08-22&quot;
+      },
+      {
+        &quot;item&quot;: {
+          &quot;douban_id&quot;: 25828589,
+          &quot;title&quot;: &quot;黑寡妇 Black Widow&quot;,
+          &quot;style&quot;: &quot;动作 / 科幻 / 冒险&quot;,
+          &quot;director&quot;: &quot;雅克·舍费尔 / 内德·本森 / 埃里克·皮尔森 / 斯坦·李 / 唐·赫克 / 唐·里科&quot;,
+          &quot;writer&quot;: &quot;雅克·舍费尔 / 内德·本森 / 埃里克·皮尔森 / 斯坦·李 / 唐·赫克 / 唐·里科&quot;,
+          &quot;actor&quot;: &quot;斯嘉丽·约翰逊 / 弗洛伦丝·皮尤 / 蕾切尔·薇兹 / 大卫·哈伯 / 艾尔·安德森 / 维奥莱特·麦格劳 / 欧嘉·柯瑞兰寇 / O·T·法格本 / 威廉·赫特 / 雷·温斯顿 / 赖恩·基拉·阿姆斯特朗 / 米歇尔·李 / 拉娜·布隆代尔 / Claudia Heinz / 露西·詹·穆雷 / 乔治亚·柯蒂斯 / 约恩·巴特勒 / 库尔特·岳 / 奥利维尔·里希特斯 / 安得烈·拜伦 / 卡利·内勒 / 罗伯特·普拉尔戈 / 贾辛特·布兰肯希普 / 乔希·亨利 / 阿里娅·布鲁克斯 / 泰·赫尔利 / 马里安·洛伦西克 / 茱莉亚·路易斯-德瑞弗斯 / 亚当·普里克特 / 史蒂芬·萨姆森 / 乔基姆·斯卡利 / 利亚尼·塞缪尔 / 西蒙娜·齐夫科夫斯卡 / 刘易斯·扬&quot;,
+          &quot;publish_date&quot;: &quot;2021-07-07(中国香港) / 2021-07-09(美国/美国网络)&quot;,
+          &quot;alias&quot;: &quot;The Black Widow&quot;,
+          &quot;thumbnail&quot;: &quot;https://minio.mythsman.com/douban/052369cdf5766b0434784a3d69372ffd.jpg&quot;
+        },
+        &quot;rate&quot;: 3,
+        &quot;label&quot;: &quot;&quot;,
+        &quot;comment&quot;: &quot;&quot;,
+        &quot;action&quot;: 2,
+        &quot;mark_date&quot;: &quot;2025-08-21&quot;
+      },
+      ...
+
+],
+    &quot;user&quot;: {
+      &quot;id&quot;: 288237448,
+      &quot;domain&quot;: &quot;&quot;,
+      &quot;name&quot;: &quot;qqsss&quot;,
+      &quot;thumbnail&quot;: &quot;https://minio.mythsman.com/douban/d40b863d867af65343c4c36d19c49fdb.png&quot;,
+      &quot;book_wish&quot;: 0,
+      &quot;book_do&quot;: 0,
+      &quot;book_collect&quot;: 0,
+      &quot;game_wish&quot;: 0,
+      &quot;game_do&quot;: 0,
+      &quot;game_collect&quot;: 0,
+      &quot;movie_wish&quot;: 4,
+      &quot;movie_do&quot;: 1,
+      &quot;movie_collect&quot;: 57,
+      &quot;song_wish&quot;: 0,
+      &quot;song_do&quot;: 0,
+      &quot;song_collect&quot;: 0,
+      &quot;publish_at&quot;: 1755792477,
+      &quot;sync_at&quot;: 1755936544,
+      &quot;check_at&quot;: 1755940034
+    }
+  },
+  &quot;success&quot;: true
+}
+</code></pre>
+<p>这里都得到了正确结果。<br />
+有一个意外的收获，原来的豆瓣影音记录有修改，但idouban得到的记录只增不减，所以显示数目不对。<br />
+通过以下命令刷新之后记录数目正常。<br />
+<code>https://mouban.mythsman.com/admin/refresh_user?id=288237448</code><br />
+用作者提供的idouban得到的书影音记录：<br />
+<a href="https://qs100371.top/douban/">https://qs100371.top/douban/</a><br />
+<img src="https://qs100371.top/post-images/1755953435965.png" alt="" /></p>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/web/">web</a>, 
+     
+        <a href="/tag/docker/">docker</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/wang-xin-yun-oec-chai-ji-he-shua-ji-zhi-nan/">网心云oec拆机和刷机指南</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/wang-xin-yun-oec-he-xi-ying-nas-xi-tong/">网心云oec和昔映nas系统</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

@@ -1,0 +1,844 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>incus 的安装和使用 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="Incus 是一个新的容器（LXC）/虚拟机管理器，它的目标是取代 LXD。由于 LXD 实际上已成为 Canonical 公司（Ubuntu 的开发公司）完全掌控的项目，LXC 创始人分叉出了 Incus，并将其纳入为 LXC 社区的一部分。">
+<link rel="canonical" href="https://qs100371.github.io/post/incus-de-an-zhuang-he-shi-yong/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"incus 的安装和使用","url":"https://qs100371.github.io/post/incus-de-an-zhuang-he-shi-yong/","description":"Incus 是一个新的容器（LXC）/虚拟机管理器，它的目标是取代 LXD。由于 LXD 实际上已成为 Canonical 公司（Ubuntu 的开发公司）完全掌控的项目，LXC 创始人分叉出了 Incus，并将其纳入为 LXC 社区的一部分。","datePublished":"2026-04-27T15:26:26+08:00","dateModified":"2026-05-01T11:05:29+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/incus-de-an-zhuang-he-shi-yong/","name":"incus 的安装和使用","position":2}]}</script>
+<meta property="og:title" content="incus 的安装和使用">
+<meta property="og:description" content="Incus 是一个新的容器（LXC）/虚拟机管理器，它的目标是取代 LXD。由于 LXD 实际上已成为 Canonical 公司（Ubuntu 的开发公司）完全掌控的项目，LXC 创始人分叉出了 Incus，并将其纳入为 LXC 社区的一部分。">
+<meta property="og:url" content="https://qs100371.github.io/post/incus-de-an-zhuang-he-shi-yong/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/incus-de-an-zhuang-he-shi-yong/">
+<meta name="twitter:title" content="incus 的安装和使用">
+<meta name="twitter:description" content="Incus 是一个新的容器（LXC）/虚拟机管理器，它的目标是取代 LXD。由于 LXD 实际上已成为 Canonical 公司（Ubuntu 的开发公司）完全掌控的项目，LXC 创始人分叉出了 Incus，并将其纳入为 LXC 社区的一部分。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        incus 的安装和使用
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2026-04-27">
+                        2026-04-27
+                    </time> • 23 分钟阅读 •
+                        
+                            <a href="/tag/docker/">
+                                docker
+                            </a>
+                             · 
+                                    
+                            <a href="/tag/incus/">
+                                incus
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>Incus 是一个新的容器（LXC）/虚拟机管理器，它的目标是取代 LXD。由于 LXD 实际上已成为 Canonical 公司（Ubuntu 的开发公司）完全掌控的项目，LXC 创始人分叉出了 Incus，并将其纳入为 LXC 社区的一部分。</p>
+<!-- more -->
+<h1 id="lxcdocker">lxc和docker的区别</h1>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>LXC</th>
+<th>Docker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定位</td>
+<td>轻量级虚拟机</td>
+<td>打包单个应用</td>
+</tr>
+<tr>
+<td>运行方式</td>
+<td>启动完整系统（systemd、ssh等）</td>
+<td>只运行一个进程</td>
+</tr>
+<tr>
+<td>持久化</td>
+<td>默认有状态，像真机一样</td>
+<td>默认无状态，重启即清空</td>
+</tr>
+<tr>
+<td>管理方式</td>
+<td>类似虚拟机，lxc-attach 进入</td>
+<td>命令行 docker exec</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>跑多个“虚拟服务器”</td>
+<td>跑微服务、CI/CD、开发环境</td>
+</tr>
+</tbody>
+</table>
+<p>🐧 LXC：像虚拟机一样用</p>
+<ul>
+<li>
+<p>启动后是一个完整的Linux系统，有 init 进程、可以 systemctl 管理服务。</p>
+</li>
+<li>
+<p>可以在里面 apt install nginx，然后 systemctl start nginx。</p>
+</li>
+<li>
+<p>关闭再启动，里面的数据都还在。</p>
+</li>
+</ul>
+<p>适合：把一台物理机拆成多个“小服务器”，每个跑一套完整环境。</p>
+<p>🐳 Docker：像“单进程”一样跑</p>
+<ul>
+<li>
+<p>一个容器只跑一个应用（比如只跑 nginx、只跑 Redis）。</p>
+</li>
+<li>
+<p>容器本身是无状态的，重启后内部改动消失（除非挂载外部存储）。</p>
+</li>
+<li>
+<p>靠 docker-compose 把多个容器串联成服务。</p>
+</li>
+</ul>
+<p>适合：部署微服务、跑一次性任务、开发环境隔离。</p>
+<p>通常将一个 Docker 容器视为一个服务，而不是一个操作系统。但 LXC 容器的存在形式就类似于虚拟机，它提供一个轻量级的操作系统环境，不为任何场合定制和剪裁。默认情况下 LXC 取代不了 Docker，而 LXC 容器的泛用性也是 Docker 不适合替代的。</p>
+<p>简单来说，想快捷启动一个部署起来很麻烦的软件，就用 Docker 容器。需要一个虚拟机体验各种发行版或创建隔离环境，就用 LXC 容器（即 Incus）。</p>
+<h1 id="heading">安装</h1>
+<pre><code class="language-bash">apt update
+apt install incus
+systemctl enable incus
+systemctl start incus
+</code></pre>
+<h1 id="heading-1">初始化</h1>
+<p><code>incus admin init</code><br />
+进入交互式设置：</p>
+<pre><code class="language-bash">Would you like to use clustering? (yes/no) [default=no]:   
+###是否使用集群，一般来说不需要。
+Do you want to configure a new storage pool? (yes/no) [default=yes]:
+###是否配置新的存储池，一般来说需要。
+Name of the new storage pool [default=default]:
+###新存储池的名称，默认即可。
+Name of the storage backend to use (dir, lvm, lvmcluster, zfs, btrfs) [default=zfs]
+###要使用的存储后端名称。
+Create a new ZFS pool? (yes/no) [default=yes]:
+Would you like to use an existing empty block device (e.g. a disk or partition)? (yes/no) [default=no]:
+Size in GiB of the new loop device (1GiB minimum) [default=5GiB]:
+Would you like to create a new local network bridge? (yes/no) [default=yes]:
+###是否创建新的本地网络桥，一般来说需要。
+What should the new bridge be called? [default=incusbr0]:
+###网桥的接口名称，默认即可。
+What IPv4 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]:
+What IPv6 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]:
+###IPv4 和 IPv6 地址，一般来说都需要。如果服务器没有 IPv6，可以将 IPv6 设置为 none。
+Would you like the server to be available over the network? (yes/no) [default=no]:
+###是否允许通过网络访问 Incus 服务，随意。
+Would you like stale cached images to be updated automatically? (yes/no) [default=yes]:
+###是否自动更新缓存的镜像，随意。
+Would you like a YAML &quot;init&quot; preseed to be printed? (yes/no) [default=no]:
+</code></pre>
+<p>后续可直接使用 incus admin init &ndash;minimal 命令自动化基本设置。</p>
+<h1 id="heading-2">容器</h1>
+<p>查看 images 远程镜像列表：<br />
+<code>incus image list images:</code><br />
+输出会很多，可使用grep过滤特定的镜像。<br />
+创建容器：<br />
+<code> incus launch images:debian/14 my-app</code><br />
+下面是系列容器操作：</p>
+<pre><code class="language-bash">root@fn-j1900:~# incus launch images:debian/14 my-app
+Launching my-app
+root@fn-j1900:~# incus list
++--------+---------+----------------------+------------------------------------------------+-----------+-----------+
+|  NAME  |  STATE  |         IPV4         |                      IPV6                      |   TYPE    | SNAPSHOTS |
++--------+---------+----------------------+------------------------------------------------+-----------+-----------+
+| my-app | RUNNING | 10.201.74.116 (eth0) | fd42:3c8d:c3ff:91bb:1266:6aff:fec3:eee4 (eth0) | CONTAINER | 0         |
++--------+---------+----------------------+------------------------------------------------+-----------+-----------+
+root@fn-j1900:~# incus exec my-app bash
+root@my-app:~# ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host proto kernel_lo
+       valid_lft forever preferred_lft forever
+25: eth0@if26: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 10:66:6a:c3:ee:e4 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.201.74.116/24 metric 1024 brd 10.201.74.255 scope global dynamic eth0
+       valid_lft 3576sec preferred_lft 3576sec
+    inet6 fd42:3c8d:c3ff:91bb:1266:6aff:fec3:eee4/64 scope global mngtmpaddr noprefixroute
+       valid_lft forever preferred_lft forever
+    inet6 fe80::1266:6aff:fec3:eee4/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+root@my-app:~# apt update
+Get:1 http://deb.debian.org/debian forky InRelease [148 kB]
+Get:2 http://deb.debian.org/debian forky-updates InRelease [45.1 kB]
+Get:3 http://deb.debian.org/debian-security forky-security InRelease [48.0 kB]
+Get:4 http://deb.debian.org/debian forky/main amd64 Packages.diff/Index [63.6 kB]
+Get:5 http://deb.debian.org/debian forky/main Translation-en.diff/Index [63.6 kB]
+Get:6 http://deb.debian.org/debian forky/main amd64 Packages T-2026-04-26-2001.18-F-2026-04-26-0803.51.pdiff [31.4 kB]
+Get:6 http://deb.debian.org/debian forky/main amd64 Packages T-2026-04-26-2001.18-F-2026-04-26-0803.51.pdiff [31.4 kB]
+Get:7 http://deb.debian.org/debian forky/main Translation-en T-2026-04-26-2001.18-F-2026-04-26-0803.51.pdiff [3306 B]
+Get:7 http://deb.debian.org/debian forky/main Translation-en T-2026-04-26-2001.18-F-2026-04-26-0803.51.pdiff [3306 B]
+Fetched 403 kB in 9s (47.4 kB/s)
+All packages are up to date.
+Notice: Some sources can be modernized. Run 'apt modernize-sources' to do so.
+root@my-app:~# apt install nginx
+Installing:
+  nginx
+
+Installing dependencies:
+  nginx-common
+
+Suggested packages:
+  fcgiwrap  nginx-doc  ssl-cert
+
+Summary:
+  Upgrading: 0, Installing: 2, Removing: 0, Not Upgrading: 0
+  Download size: 754 kB
+  Space needed: 1987 kB / 4380 MB available
+
+Continue? [Y/n] y
+Get:1 http://deb.debian.org/debian forky/main amd64 nginx-common all 1.30.0-2 [108 kB]
+Get:2 http://deb.debian.org/debian forky/main amd64 nginx amd64 1.30.0-2 [646 kB]
+Fetched 754 kB in 1s (856 kB/s)
+Preconfiguring packages ...
+Selecting previously unselected package nginx-common.
+(Reading database ... 13329 files and directories currently installed.)
+Preparing to unpack .../nginx-common_1.30.0-2_all.deb ...
+Unpacking nginx-common (1.30.0-2) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../nginx_1.30.0-2_amd64.deb ...
+Unpacking nginx (1.30.0-2) ...
+Setting up nginx-common (1.30.0-2) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/nginx.service' → '/usr/lib/systemd/system/nginx.service'.
+Setting up nginx (1.30.0-2) ...
+Upgrading binary: nginx.
+root@my-app:~# systemctl start nginx
+root@my-app:~# curl http://127.0.0.1
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy,
+API gateway, load balancer, content cache, or other features.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href=&quot;https://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+To engage with the community please visit
+&lt;a href=&quot;https://community.nginx.org/&quot;&gt;community.nginx.org&lt;/a&gt;.&lt;br/&gt;
+For enterprise grade support, professional services, additional
+security features and capabilities please refer to
+&lt;a href=&quot;https://f5.com/nginx&quot;&gt;f5.com/nginx&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+root@my-app:~# exit
+exit
+</code></pre>
+<p>资源限制：<br />
+以下命令限制了 CPU 为 1 个核心，内存为 256MB：<br />
+<code>incus launch images:debian/14 my-app --config limits.cpu=1 --config limits.memory=256MiB</code><br />
+使用<code>incus config show my-app</code> 查看详细。</p>
+<p>给容器创建代理设备，将容器内服务暴露到外部。<br />
+<code>incus config device add my-app http-proxy proxy listen=tcp:0.0.0.0:8080 connect=tcp:127.0.0.1:80</code><br />
+向容器添加了名为 http-proxy 的类型为 proxy 的设备，将宿主机的 8080 端口的 TCP 流量转发到容器的 80 端口。<br />
+现在，从外部访问宿主机 IP 以及 8080 端口的 HTTP 服务，应该会看到 Nginx 的响应。</p>
+<pre><code class="language-bash">root@fn-j1900:~# incus config device add my-app proxy80 proxy listen=tcp:0.0.0.0:8080 connect=tcp:10.201.74.116:80
+Device proxy80 added to my-app
+root@fn-j1900:~# curl 127.0.0.1:8080
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy,
+API gateway, load balancer, content cache, or other features.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href=&quot;https://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+To engage with the community please visit
+&lt;a href=&quot;https://community.nginx.org/&quot;&gt;community.nginx.org&lt;/a&gt;.&lt;br/&gt;
+For enterprise grade support, professional services, additional
+security features and capabilities please refer to
+&lt;a href=&quot;https://f5.com/nginx&quot;&gt;f5.com/nginx&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+root@fn-j1900:~# incus info my-app
+Name: my-app
+Description:
+Status: RUNNING
+Type: container
+Architecture: x86_64
+PID: 7616
+Created: 2026/04/27 10:43 CST
+Last Used: 2026/04/27 10:43 CST
+Started: 2026/04/27 10:43 CST
+
+Resources:
+  Processes: 21
+  Disk usage:
+    root: 88.44MiB
+  CPU usage:
+    CPU usage (in seconds): 25
+  Memory usage:
+    Memory (current): 113.82MiB
+  Network usage:
+    eth0:
+      Type: broadcast
+      State: UP
+      Host interface: veth13638545
+      MAC address: 10:66:6a:c3:ee:e4
+      MTU: 1500
+      Bytes received: 1.21MB
+      Bytes sent: 38.50kB
+      Packets received: 447
+      Packets sent: 420
+      IP addresses:
+        inet:  10.201.74.116/24 (global)
+        inet6: fd42:3c8d:c3ff:91bb:1266:6aff:fec3:eee4/64 (global)
+        inet6: fe80::1266:6aff:fec3:eee4/64 (link)
+    lo:
+      Type: loopback
+      State: UP
+      MTU: 65536
+      Bytes received: 9.75kB
+      Bytes sent: 9.75kB
+      Packets received: 92
+      Packets sent: 92
+      IP addresses:
+        inet:  127.0.0.1/8 (local)
+        inet6: ::1/128 (local)
+</code></pre>
+<h1 id="heading-3">虚拟机</h1>
+<p><code> incus launch images:debian/14 my-os --vm</code></p>
+<pre><code class="language-bash">root@fn-j1900:~# incus launch images:debian/14 my-os --vm
+Launching my-os
+root@fn-j1900:~# du -hs /var/lib/incus/
+1.6G	/var/lib/incus/
+root@fn-j1900:~# incus list
++--------+---------+---------------------+------------------------------------------------+-----------------+-----------+
+|  NAME  |  STATE  |        IPV4         |                      IPV6                      |      TYPE       | SNAPSHOTS |
++--------+---------+---------------------+------------------------------------------------+-----------------+-----------+
+| my-app | RUNNING | 10.201.74.32 (eth0) | fd42:3c8d:c3ff:91bb:1266:6aff:fec1:e7e4 (eth0) | CONTAINER       | 0         |
++--------+---------+---------------------+------------------------------------------------+-----------------+-----------+
+| my-os  | RUNNING |                     | fd42:3c8d:c3ff:91bb:1266:6aff:fec2:3a79 (eth0) | VIRTUAL-MACHINE | 0         |
++--------+---------+---------------------+------------------------------------------------+-----------------+-----------+
+root@fn-j1900:~# incus exec my-os -- bash
+root@my-os:~# uname -a
+Linux my-os 6.19.13+deb14-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.19.13-1 (2026-04-18) x86_64 GNU/Linux
+root@my-os:~# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda2       9.6G  785M  8.8G   9% /
+devtmpfs        433M     0  433M   0% /dev
+tmpfs           472M     0  472M   0% /dev/shm
+efivarfs        256K   29K  223K  12% /sys/firmware/efi/efivars
+tmpfs           189M  580K  188M   1% /run
+tmpfs           472M     0  472M   0% /tmp
+none            1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+none            1.0M     0  1.0M   0% /run/credentials/systemd-resolved.service
+none            1.0M     0  1.0M   0% /run/credentials/systemd-networkd.service
+tmpfs            50M   14M   37M  27% /run/incus_agent
+/dev/sda1        99M  9.2M   90M  10% /boot/efi
+none            1.0M     0  1.0M   0% /run/credentials/serial-getty@ttyS0.service
+none            1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+root@my-os:~# apt update
+Get:1 http://deb.debian.org/debian forky InRelease [148 kB]
+Get:2 http://deb.debian.org/debian forky-updates InRelease [45.1 kB]
+Get:3 http://deb.debian.org/debian-security forky-security InRelease [48.0 kB]
+Get:4 http://deb.debian.org/debian forky/main amd64 Packages.diff/Index [63.6 kB]
+Get:5 http://deb.debian.org/debian forky/main Translation-en.diff/Index [63.6 kB]
+Get:6 http://deb.debian.org/debian forky/main amd64 Packages T-2026-04-27-0216.44-F-2026-04-26-0803.51.pdiff [138 kB]
+Get:6 http://deb.debian.org/debian forky/main amd64 Packages T-2026-04-27-0216.44-F-2026-04-26-0803.51.pdiff [138 kB]
+Get:7 http://deb.debian.org/debian forky/main Translation-en T-2026-04-27-0216.44-F-2026-04-26-0803.51.pdiff [6800 B]
+Get:7 http://deb.debian.org/debian forky/main Translation-en T-2026-04-27-0216.44-F-2026-04-26-0803.51.pdiff [6800 B]
+Fetched 513 kB in 13s (39.9 kB/s)                                                                                                                                         
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Notice: Some sources can be modernized. Run 'apt modernize-sources' to do so.
+root@my-os:~# ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp5s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 10:66:6a:c2:3a:79 brd ff:ff:ff:ff:ff:ff
+    altname enx10666ac23a79
+    inet 10.201.74.162/24 metric 1024 brd 10.201.74.255 scope global dynamic enp5s0
+       valid_lft 3504sec preferred_lft 3504sec
+    inet6 fd42:3c8d:c3ff:91bb:1266:6aff:fec2:3a79/64 scope global mngtmpaddr noprefixroute 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::1266:6aff:fec2:3a79/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+root@my-os:~# exit
+exit
+</code></pre>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/docker/">docker</a>, 
+     
+        <a href="/tag/incus/">incus</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/incus-tu-xing-jie-mian-de-an-zhuang-he-kai-qi/">incus图形界面的安装和开启</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/zhao-hui-fei-niu-os-xi-tong-pan-de-kong-jian/">找回飞牛os系统盘的空间</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

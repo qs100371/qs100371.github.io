@@ -1,0 +1,886 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>用旧苹果手机当nas监控副屏（一） | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="现在玩nas的人越来越多，nas一般没有屏幕，无法随时监控运行状态，于是就有了图灵智显，这是一个硬件（屏幕+有线连接）+软件的实现方法。这里使用远古时代的iphone5s当屏幕，配合软件实现监控nas状态。">
+<link rel="canonical" href="https://qs100371.github.io/post/yong-jiu-ping-guo-shou-ji-dang-nas-jian-kong-fu-ping/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"用旧苹果手机当nas监控副屏（一）","url":"https://qs100371.github.io/post/yong-jiu-ping-guo-shou-ji-dang-nas-jian-kong-fu-ping/","description":"现在玩nas的人越来越多，nas一般没有屏幕，无法随时监控运行状态，于是就有了图灵智显，这是一个硬件（屏幕+有线连接）+软件的实现方法。这里使用远古时代的iphone5s当屏幕，配合软件实现监控nas状态。","datePublished":"2026-01-28T10:58:29+08:00","dateModified":"2026-05-01T11:05:30+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/yong-jiu-ping-guo-shou-ji-dang-nas-jian-kong-fu-ping/","name":"用旧苹果手机当nas监控副屏（一）","position":2}]}</script>
+<meta property="og:title" content="用旧苹果手机当nas监控副屏（一）">
+<meta property="og:description" content="现在玩nas的人越来越多，nas一般没有屏幕，无法随时监控运行状态，于是就有了图灵智显，这是一个硬件（屏幕+有线连接）+软件的实现方法。这里使用远古时代的iphone5s当屏幕，配合软件实现监控nas状态。">
+<meta property="og:url" content="https://qs100371.github.io/post/yong-jiu-ping-guo-shou-ji-dang-nas-jian-kong-fu-ping/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/yong-jiu-ping-guo-shou-ji-dang-nas-jian-kong-fu-ping/">
+<meta name="twitter:title" content="用旧苹果手机当nas监控副屏（一）">
+<meta name="twitter:description" content="现在玩nas的人越来越多，nas一般没有屏幕，无法随时监控运行状态，于是就有了图灵智显，这是一个硬件（屏幕+有线连接）+软件的实现方法。这里使用远古时代的iphone5s当屏幕，配合软件实现监控nas状态。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        用旧苹果手机当nas监控副屏（一）
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2026-01-28">
+                        2026-01-28
+                    </time> • 20 分钟阅读 •
+                        
+                            <a href="/tag/nas/">
+                                nas
+                            </a>
+                             · 
+                                    
+                            <a href="/tag/deepseek/">
+                                deepseek
+                            </a>
+                             · 
+                                    
+                            <a href="/tag/linux/">
+                                linux
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>现在玩nas的人越来越多，nas一般没有屏幕，无法随时监控运行状态，于是就有了图灵智显，这是一个硬件（屏幕+有线连接）+软件的实现方法。这里使用远古时代的iphone5s当屏幕，配合软件实现监控nas状态。</p>
+<!-- more -->
+<p>iphone5s的浏览器已经不能解析复杂的js文件，本文使用shell脚本采集系统状态数据，再用简单的html文件定时刷新来显示状态信息。</p>
+<h1 id="heading">状态数据采集脚本</h1>
+<p>/usr/local/bin/status.sh：</p>
+<pre><code>#!/bin/bash
+# nas_status_final.sh - 最终简化版
+
+INTERFACE=&quot;enp4s0&quot;
+JSON_FILE=&quot;/var/www/html/status.json&quot;
+NET_FILE=&quot;/tmp/net_cache.txt&quot;
+# 指定要监控的磁盘挂载点（可以根据需要修改）
+MOUNT_POINT=&quot;/vol1/docker/overlay2/bfe25ec30f56cc56436cad793bedce52eaf4b0ce409409a65c64a4742e98bdb5/merged&quot;  # 默认监控根目录，可以改为 &quot;/home&quot;、&quot;/data&quot; 等
+
+# 格式化速度（KB/s和MB/s）
+format_speed_simple() {
+    local bytes_per_sec=$1
+    
+    # 小于1KB/s显示为0
+    if [ -z &quot;$bytes_per_sec&quot; ] || [ $bytes_per_sec -lt 1024 ]; then
+        echo &quot;0 KB/s&quot;
+        return
+    fi
+    
+    # 转换为KB/s（整数部分）
+    local kb_sec=$((bytes_per_sec / 1024))
+    
+    # 如果大于1024KB/s，转换为MB/s
+    if [ $kb_sec -ge 1024 ]; then
+        local mb_sec=$((bytes_per_sec / 1048576))
+        local remainder=$(( (bytes_per_sec % 1048576) * 100 / 1048576 ))
+        echo &quot;${mb_sec}.${remainder} MB/s&quot;
+    else
+        local remainder=$(( (bytes_per_sec % 1024) * 100 / 1024 ))
+        echo &quot;${kb_sec}.${remainder} KB/s&quot;
+    fi
+}
+
+# 将uptime转换为中文
+convert_uptime_to_chinese() {
+    local uptime_str=$(uptime -p | sed 's/up //')
+    
+    # 替换英文单位为中文
+    echo &quot;$uptime_str&quot; | sed \
+        -e 's/ days/天/g' \
+        -e 's/ hours/小时/g' \
+        -e 's/ minutes/分/g' \
+        -e 's/ weeks/周/g' 
+}
+
+# 计算网络
+get_network_stats() {
+    # 当前值
+    read rx_now tx_now &lt;&lt;&lt; $(grep &quot;$INTERFACE:&quot; /proc/net/dev 2&gt;/dev/null | awk '{print $2, $10}' || echo &quot;0 0&quot;)
+    now=$(date +%s)
+    
+    # 上次值
+    if [ -f &quot;$NET_FILE&quot; ]; then
+        read rx_last tx_last time_last &lt; &quot;$NET_FILE&quot;
+    else
+        rx_last=$rx_now
+        tx_last=$tx_now
+        time_last=$now
+    fi
+    
+    # 保存
+    echo &quot;$rx_now $tx_now $now&quot; &gt; &quot;$NET_FILE&quot;
+    
+    # 时间差
+    time_diff=$((now - time_last))
+    [ $time_diff -eq 0 ] &amp;&amp; time_diff=1
+    
+    # 计算速度
+    rx_speed=$(( (rx_now - rx_last) / time_diff ))
+    tx_speed=$(( (tx_now - tx_last) / time_diff ))
+    [ $rx_speed -lt 0 ] &amp;&amp; rx_speed=0
+    [ $tx_speed -lt 0 ] &amp;&amp; tx_speed=0
+    
+    # 格式化
+    download=$(format_speed_simple $rx_speed)
+    upload=$(format_speed_simple $tx_speed)
+    
+    # 总流量（GB，保留2位小数）
+    total_down=$(printf &quot;%.2f&quot; $(echo &quot;$rx_now / 1073741824&quot; | bc -l 2&gt;/dev/null || echo &quot;0&quot;))
+    total_up=$(printf &quot;%.2f&quot; $(echo &quot;$tx_now / 1073741824&quot; | bc -l 2&gt;/dev/null || echo &quot;0&quot;))
+    
+    # 返回
+    echo &quot;$download&quot;
+    echo &quot;$upload&quot;
+    echo &quot;$total_down&quot;
+    echo &quot;$total_up&quot;
+}
+
+# 获取指定挂载点的磁盘信息
+get_disk_info() {
+    local mount_point=$1
+    
+    # 使用df命令获取指定挂载点的信息
+    df_output=$(df -h &quot;$mount_point&quot; 2&gt;/dev/null | tail -1)
+    
+    if [ -n &quot;$df_output&quot; ]; then
+        # 从df输出中提取信息
+        usage=$(echo &quot;$df_output&quot; | awk '{print $5}')
+        total=$(echo &quot;$df_output&quot; | awk '{print $2}')
+        used=$(echo &quot;$df_output&quot; | awk '{print $3}')
+        free=$(echo &quot;$df_output&quot; | awk '{print $4}')
+        
+        # 如果没有可用空间信息（旧版本df），计算它
+        if [ -z &quot;$free&quot; ] || [ &quot;$free&quot; = &quot;-&quot; ]; then
+            total_bytes=$(df -B1 &quot;$mount_point&quot; 2&gt;/dev/null | tail -1 | awk '{print $2}')
+            used_bytes=$(df -B1 &quot;$mount_point&quot; 2&gt;/dev/null | tail -1 | awk '{print $3}')
+            free_bytes=$((total_bytes - used_bytes))
+            
+            # 转换为人类可读格式
+            free=$(echo &quot;$free_bytes&quot; | awk '{
+                if ($1 &gt;= 1099511627776) printf &quot;%.1fT&quot;, $1/1099511627776
+                else if ($1 &gt;= 1073741824) printf &quot;%.1fG&quot;, $1/1073741824
+                else if ($1 &gt;= 1048576) printf &quot;%.1fM&quot;, $1/1048576
+                else printf &quot;%.1fK&quot;, $1/1024
+            }')
+        fi
+    else
+        # 如果指定的挂载点不存在，使用根目录
+        df_output=$(df -h / | tail -1)
+        usage=$(echo &quot;$df_output&quot; | awk '{print $5}')
+        total=$(echo &quot;$df_output&quot; | awk '{print $2}')
+        used=$(echo &quot;$df_output&quot; | awk '{print $3}')
+        free=$(echo &quot;$df_output&quot; | awk '{print $4}')
+    fi
+    
+    echo &quot;$usage&quot;
+    echo &quot;$total&quot;
+    echo &quot;$used&quot;
+    echo &quot;$free&quot;
+}
+
+# 主程序
+{
+    # 获取网络数据
+    net_data=$(get_network_stats)
+    download_speed=$(echo &quot;$net_data&quot; | head -1)
+    upload_speed=$(echo &quot;$net_data&quot; | head -2 | tail -1)
+    total_down=$(echo &quot;$net_data&quot; | head -3 | tail -1)
+    total_up=$(echo &quot;$net_data&quot; | tail -1)
+    
+    # 获取CPU使用率
+    cpu=$(top -bn1 | grep &quot;Cpu(s)&quot; | awk '{printf &quot;%.1f%%&quot;, $2 + $4}')
+    
+    # 获取内存信息
+    read mem_usage mem_used mem_total &lt;&lt;&lt; $(free -m | awk 'NR==2{
+        used_mb=$3; total_mb=$2
+        printf &quot;%.1f%% %d %d&quot;, used_mb*100/total_mb, used_mb, total_mb
+    }')
+    
+    # 获取指定挂载点的磁盘信息
+    disk_data=$(get_disk_info &quot;$MOUNT_POINT&quot;)
+    disk_usage=$(echo &quot;$disk_data&quot; | head -1)
+    disk_total=$(echo &quot;$disk_data&quot; | head -2 | tail -1)
+    disk_used=$(echo &quot;$disk_data&quot; | head -3 | tail -1)
+    disk_free=$(echo &quot;$disk_data&quot; | tail -1)
+    
+    # 获取中文运行时间
+    uptime_chinese=$(convert_uptime_to_chinese)
+    
+    # 获取系统负载（去掉首尾空格）
+    system_load=$(uptime | awk -F'load average:' '{print $2}' | sed 's/^ *//;s/ *$//')
+    
+    # 在JSON中添加监控的挂载点信息
+    cat &gt; &quot;$JSON_FILE&quot; &lt;&lt; EOF
+{
+  &quot;cpu&quot;: &quot;$cpu&quot;,
+  &quot;memory&quot;: {
+    &quot;usage&quot;: &quot;$mem_usage&quot;,
+    &quot;used&quot;: &quot;${mem_used}MB&quot;,
+    &quot;total&quot;: &quot;${mem_total}MB&quot;
+  },
+  &quot;disk&quot;: {
+    &quot;mount_point&quot;: &quot;$MOUNT_POINT&quot;,
+    &quot;usage&quot;: &quot;$disk_usage&quot;,
+    &quot;total&quot;: &quot;$disk_total&quot;,
+    &quot;used&quot;: &quot;$disk_used&quot;,
+    &quot;available&quot;: &quot;$disk_free&quot;
+  },
+  &quot;network&quot;: {
+    &quot;download_speed&quot;: &quot;$download_speed&quot;,
+    &quot;upload_speed&quot;: &quot;$upload_speed&quot;,
+    &quot;total_download&quot;: &quot;${total_down} GB&quot;,
+    &quot;total_upload&quot;: &quot;${total_up} GB&quot;,
+    &quot;interface&quot;: &quot;$INTERFACE&quot;
+  },
+  &quot;system&quot;: {
+    &quot;uptime&quot;: &quot;$uptime_chinese&quot;,
+    &quot;load&quot;: &quot;$system_load&quot;,
+    &quot;time&quot;: &quot;$(date '+%Y-%m-%d %H:%M:%S')&quot;
+  }
+}
+EOF
+}
+
+docker cp /var/www/html/status.json php://var/www/html/
+</code></pre>
+<p>INTERFACE：网卡名，用ifconfig获取。<br />
+MOUNT_POINT：值是&quot;/&ldquo;就是整个磁盘，nas有添加的存贮空间，用<code>df -h</code>获取相应路径。<br />
+最后一句，nas上的web服务在docker里，这里把状态数据复制到docker里。<br />
+<code>chmod +x  /usr/local/bin/status.sh</code><br />
+运行脚本得到的json样式：</p>
+<pre><code>{
+  &quot;cpu&quot;: &quot;29.4%&quot;,
+  &quot;memory&quot;: {
+    &quot;usage&quot;: &quot;57.0%&quot;,
+    &quot;used&quot;: &quot;2179MB&quot;,
+    &quot;total&quot;: &quot;3825MB&quot;
+  },
+  &quot;disk&quot;: {
+    &quot;mount_point&quot;: &quot;/vol1/docker/overlay2/bfe25ec30f56cc56436cad793bedce52eaf4b0ce409409a65c64a4742e98bdb5/merged&quot;,
+    &quot;usage&quot;: &quot;48%&quot;,
+    &quot;total&quot;: &quot;221G&quot;,
+    &quot;used&quot;: &quot;104G&quot;,
+    &quot;available&quot;: &quot;117G&quot;
+  },
+  &quot;network&quot;: {
+    &quot;download_speed&quot;: &quot;1.50 KB/s&quot;,
+    &quot;upload_speed&quot;: &quot;1.83 KB/s&quot;,
+    &quot;total_download&quot;: &quot;7.75GB&quot;,
+    &quot;total_upload&quot;: &quot;6.23GB&quot;,
+    &quot;interface&quot;: &quot;enp4s0&quot;
+  },
+  &quot;system&quot;: {
+    &quot;uptime&quot;: &quot;3天, 11小时, 28分&quot;,
+    &quot;load&quot;: &quot;0.19, 0.23, 0.26&quot;,
+    &quot;time&quot;: &quot;2026-01-28 11:12:41&quot;
+  }
+}
+</code></pre>
+<h1 id="statushtml">status.html</h1>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;NAS状态监控&lt;/title&gt;
+    &lt;meta http-equiv=&quot;refresh&quot; content=&quot;10&quot;&gt;
+    &lt;style&gt;
+        body { font-family: sans-serif; margin: 20px; font-size: 16px; }
+        .section { 
+            border: 1px solid #ccc; 
+            margin: 10px 0; 
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .title { 
+            font-weight: bold; 
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .row { 
+            display: flex; 
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .time { 
+            text-align: center; 
+            color: #666; 
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;section&quot;&gt;
+        &lt;div id=&quot;cpu&quot;&gt;CPU: 加载中...&lt;/div&gt;
+        &lt;div id=&quot;memory&quot;&gt;内存: 加载中...&lt;/div&gt;
+        &lt;div id=&quot;disk&quot;&gt;磁盘: 加载中...&lt;/div&gt;      
+        &lt;div id=&quot;network&quot;&gt;网络: 加载中...&lt;/div&gt;
+         &lt;div id=&quot;system&quot;&gt;系统: 加载中...&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;time&quot; id=&quot;timestamp&quot;&gt;最后更新: 加载中...&lt;/div&gt;
+&lt;script&gt;
+// 兼容老iOS的简单请求
+function loadStatus() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'status.json?' + new Date().getTime(), true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    updateDisplay(data);
+                } catch(e) {
+                    document.getElementById('cpu').innerHTML = '数据解析错误';
+                    console.error('JSON解析错误:', e);
+                }
+            } else {
+                document.getElementById('cpu').innerHTML = '连接失败: ' + xhr.status;
+            }
+        }
+    };
+    xhr.send();
+}
+
+function updateDisplay(data) {
+    // CPU
+    document.getElementById('cpu').innerHTML = 
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;CPU使用率:&lt;/span&gt;&lt;span&gt;' + data.cpu + '&lt;/span&gt;&lt;/div&gt;';
+    
+    // 内存
+    document.getElementById('memory').innerHTML = 
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;内存使用:&lt;/span&gt;&lt;span&gt;' + data.memory.usage + 
+        ' (' + data.memory.used + '/' + data.memory.total + ')&lt;/span&gt;&lt;/div&gt;';
+    
+    // 磁盘
+    document.getElementById('disk').innerHTML = 
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;磁盘使用:&lt;/span&gt;&lt;span&gt;' + data.disk.usage + 
+        ' (' + data.disk.used + '/' + data.disk.total + ')&lt;/span&gt;&lt;/div&gt;' +
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;可用空间:&lt;/span&gt;&lt;span&gt;' + data.disk.available + '&lt;/span&gt;&lt;/div&gt;';
+    
+    // 网络 - 这里特别注意解析
+    var net = data.network;
+    document.getElementById('network').innerHTML = 
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;下载速度:&lt;/span&gt;&lt;span&gt;' + net.download_speed + '&lt;/span&gt;&lt;/div&gt;' +
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;上传速度:&lt;/span&gt;&lt;span&gt;' + net.upload_speed + '&lt;/span&gt;&lt;/div&gt;' +
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;总下载:&lt;/span&gt;&lt;span&gt;' + net.total_download + '&lt;/span&gt;&lt;/div&gt;' +
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;总上传:&lt;/span&gt;&lt;span&gt;' + net.total_upload + ' &lt;/span&gt;&lt;/div&gt;' +
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;接口:&lt;/span&gt;&lt;span&gt;' + net.interface + '&lt;/span&gt;&lt;/div&gt;';
+    
+    // 系统信息
+    document.getElementById('system').innerHTML = 
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;运行时间:&lt;/span&gt;&lt;span&gt;' + data.system.uptime + '&lt;/span&gt;&lt;/div&gt;' +
+        '&lt;div class=&quot;row&quot;&gt;&lt;span&gt;系统负载:&lt;/span&gt;&lt;span&gt;' + data.system.load + '&lt;/span&gt;&lt;/div&gt;';
+    
+    // 更新时间
+    document.getElementById('timestamp').innerHTML = 
+        '最后更新: ' + data.system.time + ' (每10秒自动刷新)';
+    
+    // 调试信息（可选）
+    console.log('网络数据:', data.network);
+}
+
+// 页面加载时运行
+window.onload = function() {
+    loadStatus();
+    // 每10秒自动刷新（配合meta标签）
+    setInterval(loadStatus, 10000);
+};
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>文件和status.json在同一路径，放在web服务目录下。</p>
+<h1 id="heading-1">定时刷新脚本数据</h1>
+<p>在crond里添加定时刷新。<br />
+<code>crontab -e</code>：在最后添加以下语句</p>
+<pre><code>* * * * * /usr/local/bin/status.sh
+* * * * * sleep 10; /usr/local/bin/status.sh
+* * * * * sleep 20; /usr/local/bin/status.sh
+* * * * * sleep 30; /usr/local/bin/status.sh
+* * * * * sleep 40; /usr/local/bin/status.sh
+* * * * * sleep 50; /usr/local/bin/nas_status.sh
+</code></pre>
+<p>每10秒刷新一次。</p>
+<h1 id="heading-2">效果图</h1>
+<iframe   height=460  width=90%  src="https://api.qs100371.top/status.html"  frameborder=0   allowfullscreen> </iframe>
+<p><img src="https://qs100371.top/post-images/1769570511679.png" alt="" /><br />
+屏幕已经发黄，里面因为拆机换后盖和电池进灰，但作为一个监控副屏，还是能吊打单片机+显示屏做的副屏，充分发挥了一个不锈钢脸盆的价值。</p>
+<p>html中的<code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;10&quot;&gt;</code>会造成页面闪烁，删掉就好了。</p>
+<h1 id="heading-3">网页特效</h1>
+<p>由于iphone5s上的ios12.5.8不支持网页背景图，不能做成比较炫酷的效果。style语句只包含新增部分。<br />
+渐变色效果：</p>
+<pre><code>body {
+                background: linear-gradient(135deg, #ffffff 0%, #ff1493 100%);
+        }
+.section {
+            background-color: rgba(255, 255, 255, 0.40);
+        }
+
+</code></pre>
+<p>动态渐变色效果：</p>
+<pre><code>body {
+                background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                background-size: 400% 400%;
+                animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+        }
+</code></pre>
+<p><img src="https://qs100371.top/post-images/1769676750482.PNG" alt="" /><br />
+<img src="https://qs100371.top/post-images/1769676755654.PNG" alt="" /><br />
+以上脚本和网页代码均由deepseek生成，加少量人工修改。</p>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/nas/">nas</a>, 
+     
+        <a href="/tag/deepseek/">deepseek</a>, 
+     
+        <a href="/tag/linux/">linux</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/yong-jiu-ping-guo-shou-ji-dang-nas-jian-kong-fu-ping-er/">用旧苹果手机当nas监控副屏（二）</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/arm-fei-niu-yi-jian-jie-suo-ying-yong-zhong-xin-xxnas-gong-ju-xiang/">arm飞牛一键解锁应用中心: XXNAS工具箱</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

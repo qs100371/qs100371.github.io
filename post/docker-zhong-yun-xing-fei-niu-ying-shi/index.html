@@ -1,0 +1,1005 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>docker中运行飞牛影视 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="飞牛影视是飞牛os的一部分，没有单独提供app。虽然飞牛os有x86和arm版本，能很方便的安装使用，但单独的飞牛影视也是很吸引人的。本文使用了leilee 所提供的Dockerfile，制作docker并应用。">
+<link rel="canonical" href="https://qs100371.github.io/post/docker-zhong-yun-xing-fei-niu-ying-shi/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"docker中运行飞牛影视","url":"https://qs100371.github.io/post/docker-zhong-yun-xing-fei-niu-ying-shi/","description":"飞牛影视是飞牛os的一部分，没有单独提供app。虽然飞牛os有x86和arm版本，能很方便的安装使用，但单独的飞牛影视也是很吸引人的。本文使用了leilee 所提供的Dockerfile，制作docker并应用。","datePublished":"2026-04-08T15:55:56+08:00","dateModified":"2026-05-01T11:05:30+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/docker-zhong-yun-xing-fei-niu-ying-shi/","name":"docker中运行飞牛影视","position":2}]}</script>
+<meta property="og:title" content="docker中运行飞牛影视">
+<meta property="og:description" content="飞牛影视是飞牛os的一部分，没有单独提供app。虽然飞牛os有x86和arm版本，能很方便的安装使用，但单独的飞牛影视也是很吸引人的。本文使用了leilee 所提供的Dockerfile，制作docker并应用。">
+<meta property="og:url" content="https://qs100371.github.io/post/docker-zhong-yun-xing-fei-niu-ying-shi/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/docker-zhong-yun-xing-fei-niu-ying-shi/">
+<meta name="twitter:title" content="docker中运行飞牛影视">
+<meta name="twitter:description" content="飞牛影视是飞牛os的一部分，没有单独提供app。虽然飞牛os有x86和arm版本，能很方便的安装使用，但单独的飞牛影视也是很吸引人的。本文使用了leilee 所提供的Dockerfile，制作docker并应用。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        docker中运行飞牛影视
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2026-04-08">
+                        2026-04-08
+                    </time> • 45 分钟阅读 •
+                        
+                            <a href="/tag/nas/">
+                                nas
+                            </a>
+                             · 
+                                    
+                            <a href="/tag/docker/">
+                                docker
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>飞牛影视是飞牛os的一部分，没有单独提供app。虽然飞牛os有x86和arm版本，能很方便的安装使用，但单独的飞牛影视也是很吸引人的。本文使用了<a href="https://www.nodeseek.com/space/14037">leilee</a> 所提供的Dockerfile，制作docker并应用。</p>
+<!-- more -->
+<h1 id="iso">下载飞牛系统iso</h1>
+<p>保存为fnos.iso备用。</p>
+<h1 id="dockerfile">建立Dockerfile文件</h1>
+<p>内容为：</p>
+<pre><code class="language-dockerfile">FROM debian:12.12 AS builder
+
+COPY ./fnos.iso ./fnos.iso
+
+RUN cat &gt; fakebroker.go &lt;&lt;'EOF'
+package main
+
+import (
+       &quot;bytes&quot;
+       &quot;encoding/binary&quot;
+       &quot;encoding/json&quot;
+       &quot;flag&quot;
+       &quot;fmt&quot;
+       &quot;io&quot;
+       &quot;log&quot;
+       &quot;net&quot;
+       &quot;net/http&quot;
+       &quot;os&quot;
+       &quot;path&quot;
+       &quot;strings&quot;
+)
+
+const (
+       appCenterAddr  = &quot;/run/com.trim.app.center.sock&quot;
+       brokerAddr     = &quot;/run/trim_app_cgi/rpcbroker&quot;
+       defaultToken   = &quot;reserved&quot;
+       magicNumber    = &quot;CPRT&quot; // magic number for rpc protocol
+       headerSize     = 80
+       payloadLenPos  = 18
+       payloadLenSize = 2
+)
+
+type (
+       Service struct {
+               Id    string `json:&quot;id&quot;`
+               Name  string `json:&quot;name&quot;`
+               IP    string `json:&quot;ip&quot;`
+               Uds   string `json:&quot;uds&quot;`
+               Type  int    `json:&quot;type&quot;`
+               Token string `json:&quot;token&quot;`
+       }
+
+       Request struct {
+               Header []byte `json:&quot;-&quot;`
+               Data   struct {
+                       Uid      uint32   `json:&quot;uid&quot;`
+                       Pid      uint32   `json:&quot;pid&quot;`
+                       Req      string   `json:&quot;req&quot;`
+                       ReqId    string   `json:&quot;reqid&quot;`
+                       AppName  string   `json:&quot;appName&quot;`
+                       UserName string   `json:&quot;user&quot;`
+                       Services []string `json:&quot;services,omitempty&quot;`
+               } `json:&quot;data&quot;`
+       }
+
+       BaseResp struct {
+               Data   any    `json:&quot;data,omitempty&quot;`
+               ReqId  string `json:&quot;reqid&quot;`
+               Result string `json:&quot;result&quot;`
+               Rev    string `json:&quot;rev&quot;`
+               Req    string `json:&quot;req,omitempty&quot;`
+       }
+
+       Response struct {
+               Data BaseResp `json:&quot;data&quot;`
+       }
+
+       AppAuthorizedDir struct {
+               Type     int    `json:&quot;storageType&quot;`
+               Path     string `json:&quot;path&quot;`
+               UserName string `json:&quot;uname&quot;`
+       }
+
+       AuthPath struct {
+               Editable bool   `json:&quot;isEditable&quot;`
+               Perm     int    `json:&quot;perm&quot;`
+               Status   int    `json:&quot;status&quot;`
+               Path     string `json:&quot;path&quot;`
+       }
+)
+
+var (
+       logPath           string
+       folders           string
+       authPathResp      []byte
+       appAuthorizedDirs []AppAuthorizedDir
+       marshaledUserId   = json.RawMessage(`{&quot;uid&quot;: 1000}`)
+       marshaledVolsInfo = json.RawMessage(`{&quot;vols&quot;:[{&quot;index&quot;:1,&quot;state&quot;:0,&quot;sysname&quot;:&quot;dm-0&quot;,&quot;uuid&quot;:&quot;trim_00000000_1111_2222_3333_444444444444-0&quot;,&quot;size&quot;:107374182400,&quot;used&quot;:0,&quot;voltype&quot;:61267}],&quot;count&quot;:1}`)
+       services          = []Service{
+               {Id: &quot;com.trim.main&quot;, Name: &quot;TRIM Service&quot;, Uds: brokerAddr, Token: defaultToken, Type: 1},
+               {Id: &quot;com.trim.sysinfo&quot;, Name: &quot;System Info Provider Service&quot;, Uds: brokerAddr, Token: defaultToken},
+               {Id: &quot;com.trim.filestor&quot;, Name: &quot;File Storage Service&quot;, Uds: brokerAddr, Token: defaultToken},
+               {Id: &quot;com.trim.usersrv&quot;, Name: &quot;User Service&quot;, Uds: brokerAddr, Token: defaultToken},
+       }
+)
+
+func init() {
+       flag.StringVar(&amp;logPath, &quot;p&quot;, &quot;/var/log/rpcbroker.log&quot;, &quot;log file path&quot;)
+       flag.StringVar(&amp;folders, &quot;f&quot;, &quot;/vol1/1000/media:&quot;, &quot;media folders&quot;)
+       flag.Parse()
+
+       splited := strings.Split(folders, &quot;:&quot;)
+       appAuthorizedDirs = make([]AppAuthorizedDir, 0, len(splited))
+       authPaths := make([]AuthPath, 0, len(splited))
+       for _, v := range splited {
+               if strings.TrimSpace(v) == &quot;&quot; {
+                       continue
+               }
+               appAuthorizedDirs = append(appAuthorizedDirs, AppAuthorizedDir{Path: v, Type: 3, UserName: &quot;admin&quot;})
+               authPaths = append(authPaths, AuthPath{Path: v, Perm: 6, Editable: true})
+       }
+       authPathResp, _ = json.Marshal(map[string]any{&quot;code&quot;: 0, &quot;msg&quot;: &quot;&quot;, &quot;data&quot;: map[string][]AuthPath{&quot;list&quot;: authPaths}})
+}
+
+func NewResp(req *Request, data any) BaseResp {
+       return BaseResp{ReqId: req.Data.ReqId, Req: req.Data.Req, Data: data, Result: &quot;succ&quot;, Rev: &quot;0.1&quot;}
+}
+
+func NewErrorResp(req *Request) BaseResp {
+       return BaseResp{ReqId: req.Data.ReqId, Req: req.Data.Req, Result: &quot;fail&quot;, Rev: &quot;0.1&quot;}
+}
+
+func readHeader(conn net.Conn) ([]byte, error) {
+       header := make([]byte, headerSize)
+       _, err := io.ReadFull(conn, header)
+       if err != nil {
+               return nil, err
+       }
+
+       if !bytes.Equal(header[:4], []byte(magicNumber)) {
+               return nil, fmt.Errorf(&quot;invalid magic number: %x&quot;, header[:4])
+       }
+
+       return header, nil
+}
+
+func parseRequest(conn net.Conn) (*Request, error) {
+       header, err := readHeader(conn)
+       if err != nil {
+               log.Printf(&quot;read header error from %s: %v\n&quot;, conn.RemoteAddr(), err)
+               return nil, err
+       }
+
+       plLen := getPayloadLength(header)
+       payload, err := readPayload(conn, plLen)
+       if err != nil {
+               log.Println(&quot;header:&quot;, string(header))
+               log.Printf(&quot;read payload error from %s: %v\n&quot;, conn.RemoteAddr(), err)
+               log.Println(&quot;payload:&quot;, string(payload))
+               return nil, err
+       }
+
+       var req Request
+       if err := json.Unmarshal(payload, &amp;req); err != nil {
+               log.Println(string(payload))
+               return nil, fmt.Errorf(&quot;unmarshal payload failed: %w&quot;, err)
+       }
+
+       log.Println(&quot;request:&quot;, string(payload))
+       req.Header = header
+       return &amp;req, nil
+}
+
+func getPayloadLength(header []byte) uint16 {
+       return binary.LittleEndian.Uint16(header[payloadLenPos : payloadLenPos+payloadLenSize])
+}
+
+func readPayload(conn net.Conn, length uint16) ([]byte, error) {
+       if length == 0 {
+               return nil, fmt.Errorf(&quot;payload len is zero&quot;)
+       }
+       payload := make([]byte, length)
+       _, err := io.ReadFull(conn, payload)
+       return payload, err
+}
+
+func writeResponse(conn net.Conn, header []byte, payload []byte) error {
+       length := uint16(len(payload))
+       binary.LittleEndian.PutUint16(header[payloadLenPos:payloadLenPos+payloadLenSize], length)
+       _, err := conn.Write(append(header, payload...))
+       return err
+}
+
+func processRequest(req *Request) BaseResp {
+       switch req.Data.Req {
+       case &quot;com.trim.rpcbroker.apply&quot;:
+               return NewResp(req, services)
+
+       case &quot;com.trim.usersrv.getUserId&quot;, &quot;com.trim.sysinfo.getUserId&quot;:
+               return NewResp(req, marshaledUserId)
+
+       case &quot;com.trim.filestor.getAppAuthorizedDir&quot;:
+               return NewResp(req, appAuthorizedDirs)
+
+       case &quot;com.trim.sysinfo.getAllVolsInfo&quot;:
+               return NewResp(req, marshaledVolsInfo)
+
+       default:
+               log.Println(&quot;unknown req:&quot;, req.Data.Req)
+               return NewErrorResp(req)
+       }
+}
+
+func handleConnection(conn net.Conn) {
+       defer conn.Close()
+       addr := conn.RemoteAddr()
+
+       log.Printf(&quot;client %s connected\n&quot;, addr)
+
+       for {
+               req, err := parseRequest(conn)
+               if err != nil {
+                       log.Printf(&quot;read request error from %s: %v\n&quot;, addr, err)
+                       return
+               }
+
+               resp := processRequest(req)
+
+               data, _ := json.Marshal(Response{Data: resp})
+               log.Println(&quot;response:&quot;, string(data))
+               if err := writeResponse(conn, req.Header, data); err != nil {
+                       log.Printf(&quot;write resp error: %v\n&quot;, err)
+                       return
+               }
+       }
+}
+
+func main() {
+       log.SetFlags(log.LstdFlags | log.Lshortfile)
+       logFile, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+       if err != nil {
+               log.Fatalf(&quot;cannot open log file: %s: %v&quot;, logPath, err)
+       }
+       defer logFile.Close()
+       log.SetOutput(logFile)
+
+       // start auth http server
+       os.RemoveAll(appCenterAddr)
+       al, err := net.Listen(&quot;unix&quot;, appCenterAddr)
+       if err != nil {
+               log.Fatalf(&quot;cannot listen http unix: %v&quot;, err)
+       }
+       defer al.Close()
+
+       http.HandleFunc(&quot;/rpc/v1/sysconfig/app/auth-path&quot;, func(w http.ResponseWriter, r *http.Request) {
+               w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
+               w.Write(authPathResp)
+       })
+
+       go func() {
+               log.Println(&quot;app center serve:&quot;, http.Serve(al, nil))
+       }()
+
+       // start rpc broker
+       os.Remove(brokerAddr)
+       os.MkdirAll(path.Dir(brokerAddr), 0755)
+
+       listener, err := net.Listen(&quot;unix&quot;, brokerAddr)
+       if err != nil {
+               log.Fatalf(&quot;listen rpc broker %s failed: %v&quot;, brokerAddr, err)
+       }
+       defer listener.Close()
+
+       log.Printf(&quot;rpc broker listening on %s\n&quot;, brokerAddr)
+
+       for {
+               conn, err := listener.Accept()
+               if err != nil {
+                       log.Printf(&quot;accept error: %v\n&quot;, err)
+                       continue
+               }
+               go handleConnection(conn)
+       }
+}
+
+EOF
+
+RUN cat &gt; init.sql &lt;&lt;&quot;EOF&quot;
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE `item` (`guid` text,`trim_id` text,`imdb_id` text,`tmdb_id` integer,`pinyin` text,`type` text,`lan` text,`title` text,`sort_title` text,`sort_num` integer DEFAULT 2147483647,`original_title` text,`overview` text,`adult` integer NOT NULL DEFAULT 0,`runtime` integer,`release_date` text,`parent_guid` text,`alternative_titles` text,`backdrops` text,`backdrop_height` integer DEFAULT 0,`backdrop_width` integer DEFAULT 0,`backdrop_height_width_try` integer DEFAULT 0,`logos` text,`posters` text,`poster_height` integer DEFAULT 0,`poster_width` integer DEFAULT 0,`poster_height_width_try` integer DEFAULT 0,`production_countries` text,`external_ids` text,`origin_country` text,`content_ratings` text,`first_air_date` text,`last_air_date` text,`air_date` text,`vote_average` real,`vote_count` integer,`number_of_seasons` integer,`number_of_episodes` integer,`status` text DEFAULT &quot;1&quot;,`season_number` integer,`episode_number` integer,`still_path` text,`keywords` text,`path` text,`fetch_status` integer,`logic_type` integer DEFAULT 0,`dir` text,`filename` text,`episode_imdb_id` text,`create_time` integer,`update_time` integer,PRIMARY KEY (`guid`));
+CREATE TABLE `item_ancestor` (`item_guid` text NOT NULL,`ancestor_guid` text NOT NULL,`create_time` integer,`update_time` integer);
+CREATE TABLE `item_media` (`guid` text,`item_guid` text NOT NULL,`dir` text DEFAULT &quot;&quot;,`path` text NOT NULL,`size` integer,`can_play` integer DEFAULT 1,`type` integer NOT NULL,`mod_time` integer,`file_hash` text,`create_time` integer,`update_time` integer,`file_birth_time` integer,`recognition_status` integer DEFAULT 1,`progress_thumb_hash_dir` text,`progress_thumb_errno` integer,`cloud_storage_type` integer,`mount_path` text,`fid` text,`pick_code` text,`content_hash` text,PRIMARY KEY (`guid`));
+CREATE TABLE `item_person` (`item_guid` text NOT NULL,`person_guid` text NOT NULL,`role` text,`job` text,`order` integer,`department` text);
+CREATE TABLE `item_tag` (`item_guid` text NOT NULL,`tag` text NOT NULL,`type` text);
+CREATE TABLE `item_user` (`user_guid` text NOT NULL,`item_guid` text NOT NULL,`is_admin` integer NOT NULL,`create_time` integer,`update_time` integer);
+CREATE TABLE `item_user_favorite` (`user_guid` text NOT NULL,`item_guid` text NOT NULL,`item_type` text,`create_time` integer,`update_time` integer);
+CREATE TABLE `item_user_play` (`item_guid` text NOT NULL,`user_guid` text NOT NULL,`ts` integer DEFAULT 0,`watched` integer DEFAULT 0,`media_guid` text,`video_guid` text,`audio_guid` text,`subtitle_guid` text,`direct_link_audio_index` integer DEFAULT -1,`resolution` text,`bitrate` integer,`type` text,`visible` integer DEFAULT 1,`create_time` integer,`update_time` integer);
+CREATE TABLE `media_delete` (`ancestor_guid` text NOT NULL,`media_path` text NOT NULL,`dir` text DEFAULT &quot;&quot;,`is_dir` numeric DEFAULT false,`create_time` integer,`update_time` integer);
+CREATE TABLE `media_property` (`media_guid` text NOT NULL,`category` text,`content` text,`update_time` integer,`create_time` integer);
+CREATE TABLE `media_server` (`guid` text NOT NULL,`name` text,`lan` text,`meta_dir` text,`file_monitor` integer,`region` text,`direct_link_enable` integer DEFAULT 1,`direct_link_allowed_level` integer DEFAULT 0,`direct_link_allowed_drives` text,`create_time` integer,`update_time` integer,PRIMARY KEY (`guid`));
+INSERT INTO media_server VALUES('24acb7d71a05482e8f4b6b4097d39373','MediaHub','zh-CN','/vol1/@appmeta/trim.media',1,'CN',1,0,'',1764039737866,1764039737866);
+CREATE TABLE `media_stream` (`guid` text NOT NULL,`title` text,`media_guid` text NOT NULL,`codec_name` text,`codec_type` text,`color_range` text,`profile` text,`index` integer,`width` integer,`height` integer,`coded_width` integer,`coded_height` integer,`display_aspect_ratio` text,`pix_fmt` text,`level` text,`color_space` text,`color_transfer` text,`color_primaries` text,`dv_profile` integer NOT NULL DEFAULT 0,`refs` integer,`rotation` real,`r_frame_rate` text,`avg_frame_rate` text,`time_base` text,`start_pts` integer,`start_time` text,`duration_pts` integer,`duration` integer,`is_default` integer,`forced` integer,`bps` integer,`language` text,`channels` integer,`sample_rate` text,`bits_per_raw_sample` text,`is_external` integer,`channel_layout` text,`create_time` integer,`update_time` integer,`resolution_type` text,`audio_type` text,`color_range_type` text,`bit_depth` integer,`progressive` integer,`origin_filename` text,`filepath` text,`source_id` text,`source` text,`trim_id` text,`release` text,`uploader` text,`status` integer NOT NULL DEFAULT 1,`ext1` integer DEFAULT 0,`container_format` text,`is_bluray` numeric DEFAULT false,`key_frame_interval` integer,PRIMARY KEY (`guid`));
+CREATE TABLE `mediadb_config` (`item_guid` text NOT NULL,`subtitle_lan` text,`auto_scrap_subtitle` integer,`category` text,`create_time` integer,`update_time` integer,`include_adult` numeric DEFAULT false,`view_type` integer DEFAULT 0,`auto_progress_thumb` integer DEFAULT 0,`skip_filesize` integer DEFAULT 0);
+CREATE TABLE `permission` (`permission` text NOT NULL,`create_time` integer,`update_time` integer);
+INSERT INTO permission VALUES('mdb_manager',1764039562954,1764039562954);
+INSERT INTO permission VALUES('user_manager',1764039562954,1764039562954);
+INSERT INTO permission VALUES('metadata_manager',1764039562954,1764039562954);
+INSERT INTO permission VALUES('server_manager',1764039562954,1764039562954);
+INSERT INTO permission VALUES('task_manager',1764039562954,1764039562954);
+CREATE TABLE `person` (`guid` text NOT NULL,`trim_id` text,`imdb_id` text,`tmdb_id` integer,`lan` text NOT NULL,`pinyin` text,`name` text,`original_name` text,`also_know_as` text,`biography` text,`know_for_department` text,`images` text,`profile_path` text,`gender` integer,`create_time` integer,`update_time` integer,PRIMARY KEY (`guid`));
+CREATE TABLE `schedule` (`guid` text NOT NULL,`name` text,`type` text,`interval` integer,`status` integer NOT NULL DEFAULT 1,`create_time` integer,`update_time` integer,PRIMARY KEY (`guid`));
+INSERT INTO schedule VALUES('schedule-item-scrap','scrap-item','TaskItemScrap',86400,1,1764039562954,1764039562954);
+INSERT INTO schedule VALUES('schedule-subtitle-extra','extra-subtitle','TaskSubtitleExtra',86400,1,1764039562954,1764039562954);
+CREATE TABLE `sys_metadata` (`key` text NOT NULL,`value` text,`private` integer,`create_time` integer,`update_time` integer,PRIMARY KEY (`key`));
+INSERT INTO sys_metadata VALUES('db_version','9',0,1764039563,1764039563);
+INSERT INTO sys_metadata VALUES('global_task_switch','1',0,1764039563,1764039563);
+INSERT INTO sys_metadata VALUES('defaultmetadir','/vol1/@appmeta/trim.media',0,1764039564,1764039564);
+INSERT INTO sys_metadata VALUES('sys_secret','568ba6e4e64f38ed08e249538849dea95b7d542c36361eba05bacc1ce696f632c',1,1764039737,1764039737);
+INSERT INTO sys_metadata VALUES('mediasrv_cache_dir','/vol1',0,1764039737,1764039737);
+CREATE TABLE `tag` (`guid` text NOT NULL,`tag` text NOT NULL,`type` text,`trim_id` text,PRIMARY KEY (`guid`));
+CREATE TABLE `user` (`guid` text,`username` text,`passwd` text,`lan` text,`last_login_time` integer,`is_admin` integer,`media_permission` integer,`status` integer,`create_time` integer,`update_time` integer,PRIMARY KEY (`guid`));
+INSERT INTO user VALUES('default-user-template','user-template',NULL,NULL,NULL,0,1,0,1764039562954,1764039562954);
+INSERT INTO user VALUES('62ea6f528af04dd3977bd364c4148c01','admin','dJp5/s0mfAaCA1d1p3YTxQBVDJJmQzJb3K/dNghHRLM=','zh-CN',1764039737,1,2,1,1764039737913,1764039737913);
+CREATE TABLE `user_permission` (`user_guid` text NOT NULL,`permission` text NOT NULL,`status` integer NOT NULL DEFAULT 1,`create_time` integer,`update_time` integer);
+CREATE TABLE `user_source` (`user_guid` text NOT NULL,`source_id` text NOT NULL,`source` text NOT NULL,`source_name` text,`create_time` integer,`update_time` integer);
+INSERT INTO user_source VALUES('62ea6f528af04dd3977bd364c4148c01','1000','Trim-NAS','admin',1764039637294,1764039637294);
+CREATE TABLE `download_task` (`guid` text NOT NULL,`media_guid` text NOT NULL,`user_guid` text NOT NULL,`resolution` text NOT NULL,`media_file` text NOT NULL,`output_file` text NOT NULL,`status` integer NOT NULL DEFAULT 0,`direct_download` integer NOT NULL DEFAULT 0,`create_time` integer,`update_time` integer,PRIMARY KEY (`guid`));
+CREATE TABLE `item_play_config` (`item_guid` text,`user_guid` text,`skip_opening` integer,`skip_ending` integer,PRIMARY KEY (`item_guid`,`user_guid`));
+CREATE INDEX `idx_dir` ON `item`(`dir`);
+CREATE INDEX `idx_path` ON `item`(`path`);
+CREATE INDEX `idx_parent_guid` ON `item`(`parent_guid`);
+CREATE INDEX `idx_tmdb_id` ON `item`(`tmdb_id`);
+CREATE INDEX `idx_imdb_id` ON `item`(`imdb_id`);
+CREATE INDEX `idx_trim_id` ON `item`(`trim_id`);
+CREATE INDEX `idx_ancestor_guid` ON `item_ancestor`(`ancestor_guid`);
+CREATE INDEX `idx_itemancestor_item_guid` ON `item_ancestor`(`item_guid`);
+CREATE INDEX `idx_file_hash` ON `item_media`(`file_hash`);
+CREATE INDEX `idx_itemmedia_path` ON `item_media`(`path`);
+CREATE INDEX `idx_itemmedia_dir` ON `item_media`(`dir`);
+CREATE INDEX `idx_itemmedia_item_guid` ON `item_media`(`item_guid`);
+CREATE INDEX `idx_person_guid` ON `item_person`(`person_guid`);
+CREATE INDEX `idx_itemperson_item_guid` ON `item_person`(`item_guid`);
+CREATE INDEX `idx_itemtag_tag` ON `item_tag`(`tag`);
+CREATE INDEX `idx_item_tag_guid` ON `item_tag`(`item_guid`);
+CREATE UNIQUE INDEX `uk_user_item` ON `item_user`(`user_guid`,`item_guid`);
+CREATE INDEX `idx_itemuserfavorite_item_guid` ON `item_user_favorite`(`item_guid`);
+CREATE INDEX `idx_itemuserfavorite_user_guid` ON `item_user_favorite`(`user_guid`);
+CREATE INDEX `idx_itemuserplay_user_guid` ON `item_user_play`(`user_guid`);
+CREATE UNIQUE INDEX `uk_item_user` ON `item_user_play`(`item_guid`,`user_guid`);
+CREATE INDEX `idx_itemuserplay_item_guid` ON `item_user_play`(`item_guid`);
+CREATE INDEX `idx_mediadelete_dir` ON `media_delete`(`dir`);
+CREATE UNIQUE INDEX `uk_ancestor_path` ON `media_delete`(`ancestor_guid`,`media_path`);
+CREATE INDEX `idx_mediaproperty_media_guid` ON `media_property`(`media_guid`);
+CREATE INDEX `idx_filepath` ON `media_stream`(`filepath`);
+CREATE INDEX `idx_mediastream_media_guid` ON `media_stream`(`media_guid`);
+CREATE INDEX `idx_mediadbconfig_item_guid` ON `mediadb_config`(`item_guid`);
+CREATE INDEX `idx_permission` ON `permission`(`permission`);
+CREATE INDEX `idx_person_tmdb_id` ON `person`(`tmdb_id`);
+CREATE INDEX `idx_person_imdb_id` ON `person`(`imdb_id`);
+CREATE INDEX `idx_person_trim_id` ON `person`(`trim_id`);
+CREATE INDEX `idx_tag_tag` ON `tag`(`tag`);
+CREATE UNIQUE INDEX `uk_username` ON `user`(`username`);
+CREATE UNIQUE INDEX `uk_user_guid_permission` ON `user_permission`(`user_guid`,`permission`);
+CREATE UNIQUE INDEX `uk_user_guid_source` ON `user_source`(`user_guid`,`source_id`,`source`);
+CREATE INDEX `idx_user_guid` ON `download_task`(`user_guid`);
+CREATE INDEX `idx_task_guid` ON `download_task`(`media_guid`);
+CREATE UNIQUE INDEX idx_item_guid_path ON item_media(item_guid, path);
+COMMIT;
+EOF
+
+RUN cat &gt; entrypoint.sh &lt;&lt;'EOF'
+#!/bin/bash
+
+set -euxm
+
+shutdown() {
+   echo &quot;Shutting down...&quot; &gt;&amp;2
+   kill -9 0 2&gt;/dev/null || true
+   exit 0
+}
+
+trap shutdown SIGINT SIGTERM
+
+# start mediasrv
+/usr/trim/bin/mediasrv -o /var/log/mediasrv.log -a /var/run/mediasrv.socket &amp;
+pid1=$!
+
+# start rpcbroker
+/usr/trim/bin/rpcbroker -f ${MEDIA_DIRS} &amp;
+pid2=$!
+
+# init database
+if [ ! -f /vol1/mediadata/database/trimmedia.db ]; then
+ # make sure folder exists
+ mkdir -p /vol1/mediadata/database
+ sqlite3 /vol1/mediadata/database/trimmedia.db &lt; /usr/trim/init.sql
+fi
+
+cd /usr/local/apps/@appcenter/trim.media
+/usr/local/apps/@appcenter/trim.media/trim-media --port=8005 \
+ --static=/usr/local/apps/@appcenter/trim.media \
+ --trim-appname=trim.media \
+ --trim-username=trim-media \
+ --root=/vol1/mediadata \
+ --meta=/vol1/@appmeta/trim.media \
+ --log-dir=/var/log --log-level=${LOG_LEVEL} &amp;
+pid3=$!
+
+tail -vF /var/log/trim-media.log &amp;
+
+wait -n $pid1 $pid2 $pid3
+exit_code=$?
+
+echo &quot;One of the apps exited with code $&quot; &gt;&amp;2
+
+kill -9 0
+
+exit $exit_code
+
+EOF
+
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources &amp;&amp; \
+ apt update &amp;&amp; apt install -y p7zip-full curl &amp;&amp; 7z x fnos.iso -ofniso &amp;&amp; \
+ tar -C /fniso -xvf fniso/trimfs.tgz usr/trim/bin/mediasrv usr/trim/lib/libnebula.so \
+ usr/trim/lib/libppjson.so usr/trim/lib/mediasrv &amp;&amp; mkdir fniso/usr/trim/etc &amp;&amp; \
+ mv entrypoint.sh init.sql fniso/usr/trim/ &amp;&amp; GOPKG=go1.24.10.linux-amd64 &amp;&amp; \
+ curl -O https://dl.google.com/go/${GOPKG}.tar.gz &amp;&amp; tar -C /opt -xvf ${GOPKG}.tar.gz &amp;&amp; \
+ /opt/go/bin/go build -o /fniso/usr/trim/bin/rpcbroker fakebroker.go
+
+# ====== end of builder ======
+
+# ======  final stage   ======
+FROM debian:12.12
+
+ENV LD_LIBRARY_PATH=/usr/trim/lib/mediasrv LOG_LEVEL=info MEDIA_DIRS=/vol1/1000/media
+
+COPY --from=builder /fniso/usr/trim /usr/trim
+ADD ./trim.media.tar.gz /usr/local/apps/@appcenter/
+
+WORKDIR /usr/trim
+
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources &amp;&amp; \
+ apt update &amp;&amp; apt install -y sqlite3 openssl ca-certificates libass9 libbluray2 libmp3lame0 \
+ libopenmpt0 libopus0 libtcmalloc-minimal4 libtheora0 libvorbisenc2 libvpx7 libwebp7 \
+ libwebpmux3 libx264-164 libx265-199 libzvbi0 &amp;&amp; apt clean &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+EXPOSE 8005
+
+ENTRYPOINT [&quot;/bin/bash&quot;]
+
+CMD [&quot;/usr/trim/entrypoint.sh&quot;]
+</code></pre>
+<h1 id="heading">从飞牛系统中拷贝影视应用文件</h1>
+<p>进入目录/usr/local/apps/@appcenter，执行<code>tar czvf trim.media.tar.gz trim.media</code></p>
+<h1 id="docker">制作docker镜像</h1>
+<p>把前面三个文件放在同一目录下，执行<code>docker build -t fnmedia .</code>，本机需安装好docker。<br />
+输出：</p>
+<pre><code class="language-txt">root@qs-dell:/home/qs/Downloads/fnmedia#docker build -t fnmedia .
+[+] Building 133.6s (15/15) FINISHED                             docker:default
+ =&gt; [internal] load build definition from Dockerfile                       0.0s
+ =&gt; =&gt; transferring dockerfile: 22.75kB                                    0.0s
+ =&gt; [internal] load metadata for docker.io/library/debian:12.12            1.5s
+ =&gt; [internal] load .dockerignore                                          0.0s
+ =&gt; =&gt; transferring context: 2B                                            0.0s
+ =&gt; CACHED [builder 1/6] FROM docker.io/library/debian:12.12@sha256:c66c6  0.0s
+ =&gt; =&gt; resolve docker.io/library/debian:12.12@sha256:c66c66fac809bfb56a80  0.0s
+ =&gt; [internal] load build context                                         12.5s
+ =&gt; =&gt; transferring context: 2.74GB                                       12.5s
+ =&gt; CACHED [builder 2/6] COPY ./fnos.iso ./fnos.iso                        0.0s
+ =&gt; CACHED [builder 3/6] RUN cat &gt; fakebroker.go &lt;&lt;'EOF'                   0.0s
+ =&gt; CACHED [builder 4/6] RUN cat &gt; init.sql &lt;&lt;&quot;EOF&quot;                        0.0s
+ =&gt; CACHED [builder 5/6] RUN cat &gt; entrypoint.sh &lt;&lt;'EOF'                   0.0s
+ =&gt; [builder 6/6] RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /e  80.2s
+ =&gt; [stage-1 2/5] COPY --from=builder /fniso/usr/trim /usr/trim            1.6s 
+ =&gt; [stage-1 3/5] ADD ./trim.media.tar.gz /usr/local/apps/@appcenter/      1.0s 
+ =&gt; [stage-1 4/5] WORKDIR /usr/trim                                        0.1s 
+ =&gt; [stage-1 5/5] RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /e  18.7s 
+ =&gt; exporting to image                                                    17.6s 
+ =&gt; =&gt; exporting layers                                                   15.3s 
+ =&gt; =&gt; exporting manifest sha256:f3880c4163366882fa955d4bd61acf88f274b9fe  0.0s 
+ =&gt; =&gt; exporting config sha256:c6ad8bf5e0d145159aea3921a8da581bec29c14096  0.0s 
+ =&gt; =&gt; exporting attestation manifest sha256:b330c3a5253603db2dbbafd41656  0.0s
+ =&gt; =&gt; exporting manifest list sha256:77d32117439ed242f688618e37d4c2d29c4  0.0s
+ =&gt; =&gt; naming to docker.io/library/fnmedia:latest                          0.0s
+ =&gt; =&gt; unpacking to docker.io/library/fnmedia:latest                       2.2s
+root@qs-dell:/home/qs/Downloads/fnmedia# docker images
+                                                           i Info →   U  In Use
+IMAGE            ID             DISK USAGE   CONTENT SIZE   EXTRA
+fnmedia:latest   77d32117439e        755MB          199MB        
+</code></pre>
+<p>这一步是在要单独使用飞牛影视的机子上制作的。</p>
+<h1 id="heading-1">使用</h1>
+<p><code>docker run -d -v /dev/dri/by-path:/dev/dri/by-path --device /dev/dri:/dev/dri -v /home/qs/Public:/vol1/1000/media -p 8005:8005 --name fnmedia fnmedia:latest</code><br />
+或docker-compose.yml</p>
+<pre><code class="language-yml">services:
+    fnmedia:
+        image: 'fnmedia:latest'
+        container_name: fnmedia
+        ports:
+            - '8005:8005'
+        volumes:
+            - '/home/qs/Public:/vol1/1000/media'
+            - '/dev/dri/by-path:/dev/dri/by-path'
+        devices:
+            - '/dev/dri:/dev/dri'
+</code></pre>
+<p>由ip:8005进入，初始帐号是admin，密码123456<br />
+<img src="https://qs100371.top/post-images/1775635808939.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1775635823051.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1775635828151.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1775635834118.png" alt="" /></p>
+<h1 id="heading-2">镜像下载</h1>
+<p>这是amd64版本，从fnos1.1.26提取制做。<br />
+<a href="http://f.qs100371.top:5666/s/23e18a84117945c385">fnmedia.tar下载</a><br />
+<code>docker save -o fnmedia.tar fnmedia:latest</code><br />
+导入镜像：<br />
+<code>docker load -i fnmedia.tar</code></p>
+<p>此镜像可以用<code>docker pull ghcr.io/qs100371/fnmedia:latest</code> 下载（只支持amd64）。</p>
+<p>参考：<br />
+<a href="https://www.nodeseek.com/post-604506-1"><em>飞牛影视独立化Docker镜像</em></a> 需使用梯子。</p>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/nas/">nas</a>, 
+     
+        <a href="/tag/docker/">docker</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/trendradaryi-ge-zhi-neng-xin-wen-re-dian-zhu-shou/">TrendRadar：一个智能新闻热点助手</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/zhuo-yi-yin-qing-linux-xi-tong-shang-yun-xing-de-an-zhuo-zi-xi-tong/">卓奕引擎: linux系统上运行的安卓子系统</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

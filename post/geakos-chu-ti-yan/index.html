@@ -1,0 +1,1182 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>geakos初体验 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="过年期间，伴随着arm fnos的内测，公测，网络上飞牛等nas受攻击的新闻铺天盖地而来。这几天又出现了一个新的nas系统geakos，看公众号上介绍的似乎很成熟了，于是上手看看。">
+<link rel="canonical" href="https://qs100371.github.io/post/geakos-chu-ti-yan/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"geakos初体验","url":"https://qs100371.github.io/post/geakos-chu-ti-yan/","description":"过年期间，伴随着arm fnos的内测，公测，网络上飞牛等nas受攻击的新闻铺天盖地而来。这几天又出现了一个新的nas系统geakos，看公众号上介绍的似乎很成熟了，于是上手看看。","datePublished":"2026-02-27T18:43:15+08:00","dateModified":"2026-05-01T11:05:30+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/geakos-chu-ti-yan/","name":"geakos初体验","position":2}]}</script>
+<meta property="og:title" content="geakos初体验">
+<meta property="og:description" content="过年期间，伴随着arm fnos的内测，公测，网络上飞牛等nas受攻击的新闻铺天盖地而来。这几天又出现了一个新的nas系统geakos，看公众号上介绍的似乎很成熟了，于是上手看看。">
+<meta property="og:url" content="https://qs100371.github.io/post/geakos-chu-ti-yan/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/geakos-chu-ti-yan/">
+<meta name="twitter:title" content="geakos初体验">
+<meta name="twitter:description" content="过年期间，伴随着arm fnos的内测，公测，网络上飞牛等nas受攻击的新闻铺天盖地而来。这几天又出现了一个新的nas系统geakos，看公众号上介绍的似乎很成熟了，于是上手看看。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        geakos初体验
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2026-02-27">
+                        2026-02-27
+                    </time> • 62 分钟阅读 •
+                        
+                            <a href="/tag/nas/">
+                                nas
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>过年期间，伴随着arm fnos的内测，公测，网络上飞牛等nas受攻击的新闻铺天盖地而来。这几天又出现了一个新的nas系统geakos，看公众号上介绍的似乎很成熟了，于是上手看看。</p>
+<!-- more -->
+<p>官方网站：<a href="https://5nas.com">https://5nas.com</a><br />
+<img src="https://qs100371.top/post-images/1772189404552.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190132296.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190138586.png" alt="" /></p>
+<h1 id="heading">飞牛虚拟机安装</h1>
+<p>打开虚拟机图标，点击虚拟机，新建虚拟机，系统镜像选择从官网下载的iso文件，主板类型Q35，主板固件Legacy BIOS，CPU核心2核，内存分配4GB，GPU类型virtio-gpu，磁盘VirtIS SCSI，安装空间有30GB足够，还需再添加一个磁盘做为存储空间，再添加网络，确定后点开机。点VNC访问可以看到安装过程，全程不用管。GPU默认的是vmvga，安装完重启会卡住。宿主机使用的n5095+16G内存。</p>
+<h1 id="web">web体验</h1>
+<p>从ip:9080可进入web界面。第一次进就是设置登录帐号和密码。<br />
+但界面比较空，也没有相册和影视，初见比较失望。<br />
+<img src="https://qs100371.top/post-images/1772190042747.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190082686.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190117651.png" alt="" /></p>
+<h1 id="pc">PC端体验</h1>
+<p><img src="https://qs100371.top/post-images/1772190202417.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190209527.png" alt="" /><br />
+基本上是web端打包，没有多余的功能。</p>
+<h1 id="heading-1">安卓端体验</h1>
+<p><img src="https://qs100371.top/post-images/1772190338431.webp" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190346040.webp" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190350981.webp" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190359977.webp" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190366561.webp" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772190374567.webp" alt="" /></p>
+<h1 id="docker">docker安装</h1>
+<p>docker-compose.yml：</p>
+<pre><code>services:
+ geakos:
+    image: ghcr.io/qemus/qemu:7.12
+    container_name: geakos
+    environment:
+      BOOT_MODE: &quot;legacy&quot;
+      RAM_SIZE: &quot;4G&quot;
+      CPU_CORES: &quot;2&quot;
+      DISK_SIZE: &quot;16G&quot;
+      DISK2_SIZE: &quot;200G&quot;
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 9080:9080
+    volumes:
+      - /vol1/1000/films/geakos-1.0.0-beta-amd64-260225.iso:/boot.iso
+      - ./dir1:/storage
+      - ./dir2:/storage2
+    restart: unless-stopped
+    stop_grace_period: 2m
+</code></pre>
+<p>从主机ip:8006可以看到安装过程。<br />
+此处使用了host网络，可从主机ip:9080进入web界面。<br />
+各参数意义可参见：<br />
+<em><a href="https://qs100371.top/post/docker-li-an-zhuang-zhen-zheng-neng-yong-de-fnos/">docker里安装真正能用的fnos</a></em></p>
+<h1 id="heading-2">评价</h1>
+<p>基本上功能都有了，应用商店也上架了16个docker项目，相册和影视只能在手机app上使用，还有点粗糙。<br />
+设置中没有开放ssh连接，用nas账号和密码也无法从本机登录，也没有本地终端可用。系统是基于debian而来，是可以重设root密码，开启ssh的。</p>
+<p>3月1日更新：<br />
+<img src="https://qs100371.top/post-images/1772330885158.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772330891049.png" alt="" /><br />
+linux端已支持用nas帐号登录，手机app依然只能用ip或geak link id登录。<br />
+另外，geakos更新不需要重启，这也更加说明geakos只是软件层面，没有深度定制debian核心，初始安装包也是超级大。<br />
+最近nas的安全问题基本上都是由于nas暴露在公网上引起的，geakos直接就禁止了公网登录，远程只能用geak link id访问，这样的话带宽就会被官方控制了，除非购买vip（将来会成为盈利点）。</p>
+<p>3月10日更新：</p>
+<h1 id="debian-13-x86">Debian 13 X86架构的一键安装</h1>
+<p><code>curl -fsSL https://os.5nas.com/install.sh| sudo sh</code><br />
+输出：</p>
+<pre><code>root@qs-debian:~/geakos# bash ./install.sh
+Checking system version...
+✓ System check passed: Debian 13 (trixie)
+Detected Debian 13 (trixie), configuring repository...
+✓ Repository configuration completed (trixie + bookworm compatibility)
+Note: PostgreSQL repository will be automatically configured during geakos install
+Updating package list...
+✓ Package list updated
+Detected system architecture: amd64
+Downloading geakos from https://os.5nas.com/geakos-linux-amd64...
+Found existing version, backing up...
+Installing to /usr/local/bin/geakos...
+✓ geakos binary file installed successfully!
+Installation path: /usr/local/bin/geakos
+
+Starting full installation process (will automatically install dependencies)...
+
+Note: Current memory 7947MB, 8GB or more recommended for better experience
+Install log: /var/log/geakos-install-20260310192530.log
+OS: Debian 13 (trixie)
+✓ System check passed: Debian 13 (trixie)
+Configuring PostgreSQL official repository (for installing postgresql-15)...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+wget is already the newest version (1.25.0-2).
+gnupg is already the newest version (2.4.7-21+deb13u1).
+gnupg set to manually installed.
+lsb-release is already the newest version (12.1-1).
+0 upgraded, 0 newly installed, 0 to remove and 319 not upgraded.
+File '/usr/share/keyrings/postgresql-keyring.gpg' exists. Overwrite? (y/N) y
+✓ PostgreSQL official repository configuration completed
+Detected Debian 13 (trixie), configuring main repository and compatibility repository...
+✓ Repository configuration completed (trixie + bookworm compatibility)
+Checking and installing dependency packages...
+Hit:1 https://mirrors.aliyun.com/postgresql/repos/apt trixie-pgdg InRelease
+Get:2 https://mirrors.tuna.tsinghua.edu.cn/debian trixie InRelease [140 kB]
+Get:3 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-updates InRelease [47.3 kB]
+Get:4 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports InRelease [54.0 kB]
+Get:5 https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security InRelease [43.4 kB]
+Get:6 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm InRelease [151 kB]
+Get:7 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates InRelease [55.4 kB]
+Get:8 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports InRelease [59.4 kB]
+Get:9 https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security InRelease [48.0 kB]
+Get:10 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/main amd64 Packages [9,670 kB]
+Get:11 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/main Translation-en [6,484 kB]
+Get:12 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/main amd64 Components [5,175 kB]
+Get:13 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/main Icons (48x48) [3,626 kB]
+Get:14 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/main Icons (64x64) [7,367 kB]
+Get:15 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/contrib amd64 Packages [53.8 kB]
+Get:16 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/contrib Translation-en [49.6 kB]
+Get:17 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/contrib amd64 Components [41.5 kB]
+Get:18 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/contrib Icons (48x48) [60.1 kB]
+Get:19 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/contrib Icons (64x64) [132 kB]
+Get:20 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free amd64 Packages [100 kB]
+Get:21 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free Translation-en [67.1 kB]
+Get:22 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free amd64 Components [3,784 B]
+Get:23 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free Icons (48x48) [578 B]
+Get:24 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free Icons (64x64) [10.4 kB]
+Get:25 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free-firmware amd64 Packages [6,884 B]
+Get:26 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free-firmware Translation-en [4,704 B]
+Get:27 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free-firmware amd64 Components [24.3 kB]
+Get:28 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free-firmware Icons (48x48) [29 B]
+Get:29 https://mirrors.tuna.tsinghua.edu.cn/debian trixie/non-free-firmware Icons (64x64) [29 B]
+Get:30 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-updates/main amd64 Packages [5,412 B]
+Get:31 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-updates/main Translation-en [4,096 B]
+Get:32 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/main amd64 Packages [170 kB]
+Get:33 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/main Translation-en [131 kB]
+Get:34 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/contrib amd64 Packages [6,628 B]
+Get:35 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/contrib Translation-en [6,440 B]
+Get:36 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/non-free amd64 Packages [7,776 B]
+Get:37 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/non-free Translation-en [6,132 B]
+Get:38 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/non-free-firmware amd64 Packages [4,032 B]
+Get:39 https://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports/non-free-firmware Translation-en [3,028 B]
+Get:40 https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security/main amd64 Packages [108 kB]
+Get:41 https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security/main Translation-en [70.0 kB]
+Get:42 https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security/non-free-firmware amd64 Packages [544 B]
+Get:43 https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security/non-free-firmware Translation-en [352 B]
+Get:44 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/main amd64 Packages [8,792 kB]
+Get:45 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/main Translation-en [6,108 kB]
+Get:46 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/main amd64 Components [4,492 kB]
+Get:47 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/main Icons (48x48) [3,595 kB]
+Get:48 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/main Icons (64x64) [7,295 kB]
+Get:49 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/contrib amd64 Packages [53.5 kB]
+Get:50 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/contrib Translation-en [48.4 kB]
+Get:51 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/contrib amd64 Components [16.5 kB]
+Get:52 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/contrib Icons (48x48) [52.7 kB]
+Get:53 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/contrib Icons (64x64) [106 kB]
+Get:54 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/non-free amd64 Packages [102 kB]
+Get:55 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/non-free Translation-en [68.1 kB]
+Get:56 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/non-free amd64 Components [4,428 B]
+Get:57 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/non-free Icons (48x48) [748 B]
+Get:58 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm/non-free Icons (64x64) [27.5 kB]
+Get:59 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates/main amd64 Packages [6,924 B]
+Get:60 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates/main Translation-en [5,448 B]
+Get:61 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports/main amd64 Packages [303 kB]
+Get:62 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports/main Translation-en [256 kB]
+Get:63 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports/contrib amd64 Packages [5,856 B]
+Get:64 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports/contrib Translation-en [5,864 B]
+Get:65 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports/non-free amd64 Packages [13.3 kB]
+Get:66 https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports/non-free Translation-en [8,460 B]
+Get:67 https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security/main amd64 Packages [293 kB]
+Get:68 https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security/main Translation-en [178 kB]
+Get:69 https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security/contrib amd64 Packages [896 B]
+Get:70 https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security/contrib Translation-en [652 B]
+Fetched 65.8 MB in 7s (9,810 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+chrony is already the newest version (4.6.1-3).
+ifenslave is already the newest version (2.14).
+musl is already the newest version (1.2.5-3).
+libheif-examples is already the newest version (1.19.8-1).
+libldap-dev is already the newest version (2.6.10+dfsg-1).
+libldap2-dev is already the newest version (2.6.10+dfsg-1).
+libimage-exiftool-perl is already the newest version (13.25+dfsg-1).
+btrfs-progs is already the newest version (6.14-1).
+xfsprogs is already the newest version (6.13.0-2+b1).
+rclone is already the newest version (1.60.1+dfsg-4).
+davfs2 is already the newest version (1.7.1-1).
+nfs-common is already the newest version (1:2.8.3-1).
+htop is already the newest version (3.4.1-5).
+net-tools is already the newest version (2.10-1.3).
+vim is already the newest version (2:9.1.1230-2).
+wget is already the newest version (1.25.0-2).
+iftop is already the newest version (1.0~pre4-9+b1).
+iotop is already the newest version (0.6-42-ga14256a-0.3+b1).
+parted is already the newest version (3.6-5).
+mdadm is already the newest version (4.4-11).
+sudo is already the newest version (1.9.16p2-3).
+curl is already the newest version (8.14.1-2+deb13u2).
+curl set to manually installed.
+unzip is already the newest version (6.0-29).
+jq is already the newest version (1.7.1-6+deb13u1).
+smartmontools is already the newest version (7.4-3).
+sqlite3 is already the newest version (3.46.1-7).
+avahi-daemon is already the newest version (0.8-16).
+samba is already the newest version (2:4.22.6+dfsg-0+deb13u1).
+attr is already the newest version (1:2.5.2-3).
+ethtool is already the newest version (1:6.14.2-1).
+libfontconfig1 is already the newest version (2.15.0-2.3).
+iptables is already the newest version (1.8.11-2).
+rsyslog is already the newest version (8.2504.0-1).
+cifs-utils is already the newest version (2:7.4-1).
+fail2ban is already the newest version (1.1.0-8).
+socat is already the newest version (1.8.0.3-1).
+inotify-tools is already the newest version (4.23.9.0-2+b1).
+postgresql-15 is already the newest version (15.17-1.pgdg13+1).
+imagemagick is already the newest version (8:7.1.1.43+dfsg1-1+deb13u4).
+imagemagick-6.q16 is already the newest version (8:6.9.11.60+dfsg-1.6+deb12u6).
+wsdd2 is already the newest version (1.8.7+dfsg-1.2).
+ffmpeg is already the newest version (7:7.1.3-0+deb13u1).
+fuse3 is already the newest version (3.17.2-3).
+gocryptfs is already the newest version (2.5.1-2+b1).
+openssh-server is already the newest version (1:10.0p1-7).
+lvm2 is already the newest version (2.03.31-2).
+0 upgraded, 0 newly installed, 0 to remove and 319 not upgraded.
+✓ Dependency packages installation completed
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libpcre3 is already the newest version (2:8.39-15).
+0 upgraded, 0 newly installed, 0 to remove and 319 not upgraded.
+✓ Compatibility repository packages installation completed
+Downloading files...
+[1/34] Downloading module: upgrade
+✓ Module upgrade download completed
+[2/34] Downloading module: yrpc
+✓ Module yrpc download completed
+[3/34] Downloading module: dockerenv
+✓ Module dockerenv download completed
+[4/34] Downloading module: thumbor
+✓ Module thumbor download completed
+[5/34] Downloading module: scheduler
+✓ Module scheduler download completed
+[6/34] Downloading module: setting
+✓ Module setting download completed
+[7/34] Downloading module: film
+✓ Module film download completed
+[8/34] Downloading module: film-web
+✓ Module film-web download completed
+[9/34] Downloading module: tarantool
+✓ Module tarantool download completed
+[10/34] Downloading module: shared
+✓ Module shared download completed
+[11/34] Downloading module: web
+✓ Module web download completed
+[12/34] Downloading module: nas
+✓ Module nas download completed
+[13/34] Downloading module: nsq
+✓ Module nsq download completed
+[14/34] Downloading module: wsq
+✓ Module wsq download completed
+[15/34] Downloading module: download
+✓ Module download download completed
+[16/34] Downloading module: user
+✓ Module user download completed
+[17/34] Downloading module: file
+✓ Module file download completed
+[18/34] Downloading module: media
+✓ Module media download completed
+[19/34] Downloading module: asset
+✓ Module asset download completed
+[20/34] Downloading module: contacts
+✓ Module contacts download completed
+[21/34] Downloading module: toolbox
+✓ Module toolbox download completed
+[22/34] Downloading module: message
+✓ Module message download completed
+[23/34] Downloading module: p2p
+✓ Module p2p download completed
+[24/34] Downloading module: monitor
+✓ Module monitor download completed
+[25/34] Downloading module: gateway
+✓ Module gateway download completed
+[26/34] Downloading module: route
+✓ Module route download completed
+[27/34] Downloading module: geak-ai-venv
+✓ Module geak-ai-venv download completed
+[28/34] Downloading module: apt-archives
+✓ Module apt-archives download completed
+[29/34] Downloading module: facial-clip-model
+✓ Module facial-clip-model download completed
+[30/34] Downloading module: face-ai
+✓ Module face-ai download completed
+[31/34] Downloading module: clip-ai-model
+✓ Module clip-ai-model download completed
+[32/34] Downloading module: clip-ai
+✓ Module clip-ai download completed
+[33/34] Downloading module: geak-ai-model
+✓ Module geak-ai-model download completed
+[34/34] Downloading module: init
+✓ Module init download completed
+
+=== Starting deb package installation (init skipped) ===
+[1/33] Installing: p2p-260305155816-linux-amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../p2p-260305155816-linux-amd64.deb ...
+Unpacking yom-p2p (1.15.32) over (1.15.32) ...
+Setting up yom-p2p (1.15.32) ...
+cat: /etc/yomos-release: No such file or directory
+✓ p2p-260305155816-linux-amd64.deb installation completed
+[2/33] Installing: 001_upgrade_1.15.30-260305102217_amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../001_upgrade_1.15.30-260305102217_amd64.deb ...
+Unpacking yom-upgrade (1.15.30) over (1.15.30) ...
+Setting up yom-upgrade (1.15.30) ...
+✓ 001_upgrade_1.15.30-260305102217_amd64.deb installation completed
+upgrade binary MD5 verify ok: /opt/apps/upgrade/bin/upgrade
+[3/33] Installing: 002_yrpc_1.15.26-260304184915_amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../002_yrpc_1.15.26-260304184915_amd64.deb ...
+Unpacking yom-yrpc (1.15.26) over (1.15.26) ...
+Setting up yom-yrpc (1.15.26) ...
+✓ 002_yrpc_1.15.26-260304184915_amd64.deb installation completed
+[4/33] Installing: 003_dockerenv_1.13.77-260205163442_amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../003_dockerenv_1.13.77-260205163442_amd64.deb ...
+Unpacking yom-dockerenv (1.13.77) over (1.13.77) ...
+Setting up yom-dockerenv (1.13.77) ...
+✓ 003_dockerenv_1.13.77-260205163442_amd64.deb installation completed
+[5/33] Installing: 004_thumbor_1.13.77-260205163442_amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../004_thumbor_1.13.77-260205163442_amd64.deb ...
+Unpacking yom-thumbor (1.13.77) over (1.13.77) ...
+Setting up yom-thumbor (1.13.77) ...
+✓ 004_thumbor_1.13.77-260205163442_amd64.deb installation completed
+[6/33] Installing: 005_scheduler_1.13.77-260205163442_amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../005_scheduler_1.13.77-260205163442_amd64.deb ...
+Unpacking yom-scheduler (1.13.77) over (1.13.77) ...
+Setting up yom-scheduler (1.13.77) ...
+✓ 005_scheduler_1.13.77-260205163442_amd64.deb installation completed
+[7/33] Installing: 006_setting_1.15.09-260228220700_amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../006_setting_1.15.09-260228220700_amd64.deb ...
+Unpacking yom-setting (1.15.09) over (1.15.09) ...
+Setting up yom-setting (1.15.09) ...
+✓ 006_setting_1.15.09-260228220700_amd64.deb installation completed
+[8/33] Installing: 007_film_1.15.39-260305191841_amd64.deb
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../007_film_1.15.39-260305191841_amd64.deb ...
+Unpacking yom-film (1.15.39) over (1.15.39) ...
+Setting up yom-film (1.15.39) ...
+✓ 007_film_1.15.39-260305191841_amd64.deb installation completed
+[9/33] Installing: 008_film-web_1.13.76-260205163327_amd64.deb
+Selecting previously unselected package yom-film-web.
+(Reading database ... 264036 files and directories currently installed.)
+Preparing to unpack .../008_film-web_1.13.76-260205163327_amd64.deb ...
+Unpacking yom-film-web (1.13.76) ...
+Setting up yom-film-web (1.13.76) ...
+✓ 008_film-web_1.13.76-260205163327_amd64.deb installation completed
+[10/33] Installing: 009_tarantool_1.13.76-260205163327_amd64.deb
+Selecting previously unselected package yom-tarantool.
+(Reading database ... 264051 files and directories currently installed.)
+Preparing to unpack .../009_tarantool_1.13.76-260205163327_amd64.deb ...
+Unpacking yom-tarantool (1.13.76) ...
+Setting up yom-tarantool (1.13.76) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-tarantool.service' → '/etc/systemd/system/yom-tarantool.service'.
+✓ 009_tarantool_1.13.76-260205163327_amd64.deb installation completed
+[11/33] Installing: 010_shared_1.13.76-260205163327_amd64.deb
+Selecting previously unselected package yom-shared.
+(Reading database ... 264061 files and directories currently installed.)
+Preparing to unpack .../010_shared_1.13.76-260205163327_amd64.deb ...
+Unpacking yom-shared (1.13.76) ...
+Setting up yom-shared (1.13.76) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-shared.service' → '/etc/systemd/system/yom-shared.service'.
+✓ 010_shared_1.13.76-260205163327_amd64.deb installation completed
+[12/33] Installing: 011_web_1.15.36-260305181001_amd64.deb
+Selecting previously unselected package yom-web.
+(Reading database ... 264065 files and directories currently installed.)
+Preparing to unpack .../011_web_1.15.36-260305181001_amd64.deb ...
+Unpacking yom-web (1.15.36) ...
+Setting up yom-web (1.15.36) ...
+✓ 011_web_1.15.36-260305181001_amd64.deb installation completed
+[13/33] Installing: 012_nas_1.15.29-260304204246_amd64.deb
+Selecting previously unselected package yom-nas.
+(Reading database ... 264112 files and directories currently installed.)
+Preparing to unpack .../012_nas_1.15.29-260304204246_amd64.deb ...
+Unpacking yom-nas (1.15.29) ...
+Setting up yom-nas (1.15.29) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-nas.service' → '/etc/systemd/system/yom-nas.service'.
+✓ 012_nas_1.15.29-260304204246_amd64.deb installation completed
+[14/33] Installing: 013_nsq_1.13.75-260205163232_amd64.deb
+Selecting previously unselected package yom-nsq.
+(Reading database ... 264116 files and directories currently installed.)
+Preparing to unpack .../013_nsq_1.13.75-260205163232_amd64.deb ...
+Unpacking yom-nsq (1.13.75) ...
+Setting up yom-nsq (1.13.75) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-nsqd.service' → '/etc/systemd/system/yom-nsqd.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-nsqlookupd.service' → '/etc/systemd/system/yom-nsqlookupd.service'.
+✓ 013_nsq_1.13.75-260205163232_amd64.deb installation completed
+[15/33] Installing: 014_wsq_1.14.59-260224162117_amd64.deb
+Selecting previously unselected package yom-wsq.
+(Reading database ... 264133 files and directories currently installed.)
+Preparing to unpack .../014_wsq_1.14.59-260224162117_amd64.deb ...
+Unpacking yom-wsq (1.14.59) ...
+Setting up yom-wsq (1.14.59) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-wsq.service' → '/etc/systemd/system/yom-wsq.service'.
+✓ 014_wsq_1.14.59-260224162117_amd64.deb installation completed
+[16/33] Installing: 015_download_1.13.74-260205163157_amd64.deb
+Selecting previously unselected package yom-download.
+(Reading database ... 264137 files and directories currently installed.)
+Preparing to unpack .../015_download_1.13.74-260205163157_amd64.deb ...
+Unpacking yom-download (1.13.74) ...
+Setting up yom-download (1.13.74) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-download.service' → '/etc/systemd/system/yom-download.service'.
+✓ 015_download_1.13.74-260205163157_amd64.deb installation completed
+[17/33] Installing: 016_user_1.15.20-260304161336_amd64.deb
+Selecting previously unselected package yom-user.
+(Reading database ... 264141 files and directories currently installed.)
+Preparing to unpack .../016_user_1.15.20-260304161336_amd64.deb ...
+Unpacking yom-user (1.15.20) ...
+Setting up yom-user (1.15.20) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-user.service' → '/etc/systemd/system/yom-user.service'.
+✓ 016_user_1.15.20-260304161336_amd64.deb installation completed
+[18/33] Installing: 017_file_1.15.24-260304182629_amd64.deb
+Selecting previously unselected package yom-file.
+(Reading database ... 264145 files and directories currently installed.)
+Preparing to unpack .../017_file_1.15.24-260304182629_amd64.deb ...
+Unpacking yom-file (1.15.24) ...
+Setting up yom-file (1.15.24) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-file.service' → '/etc/systemd/system/yom-file.service'.
+✓ 017_file_1.15.24-260304182629_amd64.deb installation completed
+[19/33] Installing: 018_media_1.13.65-260205152044_amd64.deb
+Selecting previously unselected package yom-media.
+(Reading database ... 264149 files and directories currently installed.)
+Preparing to unpack .../018_media_1.13.65-260205152044_amd64.deb ...
+Unpacking yom-media (1.13.65) ...
+Setting up yom-media (1.13.65) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-media.service' → '/etc/systemd/system/yom-media.service'.
+✓ 018_media_1.13.65-260205152044_amd64.deb installation completed
+[20/33] Installing: 019_asset_1.13.65-260205152044_amd64.deb
+Selecting previously unselected package yom-asset.
+(Reading database ... 264153 files and directories currently installed.)
+Preparing to unpack .../019_asset_1.13.65-260205152044_amd64.deb ...
+Unpacking yom-asset (1.13.65) ...
+Setting up yom-asset (1.13.65) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-asset.service' → '/etc/systemd/system/yom-asset.service'.
+✓ 019_asset_1.13.65-260205152044_amd64.deb installation completed
+[21/33] Installing: 020_contacts_1.13.49-260202120242_amd64.deb
+Selecting previously unselected package yom-contacts.
+(Reading database ... 264157 files and directories currently installed.)
+Preparing to unpack .../020_contacts_1.13.49-260202120242_amd64.deb ...
+Unpacking yom-contacts (1.13.49) ...
+Setting up yom-contacts (1.13.49) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-contacts.service' → '/etc/systemd/system/yom-contacts.service'.
+✓ 020_contacts_1.13.49-260202120242_amd64.deb installation completed
+[22/33] Installing: 021_toolbox_1.15.34-260305171437_amd64.deb
+Selecting previously unselected package yom-toolbox.
+(Reading database ... 264161 files and directories currently installed.)
+Preparing to unpack .../021_toolbox_1.15.34-260305171437_amd64.deb ...
+Unpacking yom-toolbox (1.15.34) ...
+Setting up yom-toolbox (1.15.34) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-toolbox.service' → '/etc/systemd/system/yom-toolbox.service'.
+✓ 021_toolbox_1.15.34-260305171437_amd64.deb installation completed
+[23/33] Installing: 022_message_1.13.67-260205162350_amd64.deb
+Selecting previously unselected package yom-message.
+(Reading database ... 264172 files and directories currently installed.)
+Preparing to unpack .../022_message_1.13.67-260205162350_amd64.deb ...
+Unpacking yom-message (1.13.67) ...
+Setting up yom-message (1.13.67) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-message.service' → '/etc/systemd/system/yom-message.service'.
+✓ 022_message_1.13.67-260205162350_amd64.deb installation completed
+[24/33] Installing: 023_monitor_1.13.70-260205162855_amd64.deb
+Selecting previously unselected package yom-monitor.
+(Reading database ... 264176 files and directories currently installed.)
+Preparing to unpack .../023_monitor_1.13.70-260205162855_amd64.deb ...
+Unpacking yom-monitor (1.13.70) ...
+Setting up yom-monitor (1.13.70) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-influxdb.service' → '/etc/systemd/system/yom-influxdb.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-telegraf.service' → '/etc/systemd/system/yom-telegraf.service'.
+✓ 023_monitor_1.13.70-260205162855_amd64.deb installation completed
+[25/33] Installing: 024_gateway_1.13.71-260205162913_amd64.deb
+Selecting previously unselected package yom-gateway.
+(Reading database ... 264297 files and directories currently installed.)
+Preparing to unpack .../024_gateway_1.13.71-260205162913_amd64.deb ...
+Unpacking yom-gateway (1.13.71) ...
+Setting up yom-gateway (1.13.71) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-etcd.service' → '/etc/systemd/system/yom-etcd.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-apisix.service' → '/etc/systemd/system/yom-apisix.service'.
+✓ 024_gateway_1.13.71-260205162913_amd64.deb installation completed
+[26/33] Installing: 025_route_1.15.00-260228103513_amd64.deb
+Selecting previously unselected package yom-route.
+(Reading database ... 273631 files and directories currently installed.)
+Preparing to unpack .../025_route_1.15.00-260228103513_amd64.deb ...
+Unpacking yom-route (1.15.00) ...
+Setting up yom-route (1.15.00) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-route.service' → '/etc/systemd/system/yom-route.service'.
+✓ 025_route_1.15.00-260228103513_amd64.deb installation completed
+[27/33] Installing: 026_geak-ai-venv_1.14.71-260225141244_amd64.deb
+Selecting previously unselected package yom-geak-ai-venv.
+(Reading database ... 273635 files and directories currently installed.)
+Preparing to unpack .../026_geak-ai-venv_1.14.71-260225141244_amd64.deb ...
+Unpacking yom-geak-ai-venv (1.14.71) ...
+Setting up yom-geak-ai-venv (1.14.71) ...
+Changing directory to /opt/thirdparty/
+✓ 026_geak-ai-venv_1.14.71-260225141244_amd64.deb installation completed
+[28/33] Installing: 027_apt-archives_1.13.74-260205163157_amd64.deb
+Selecting previously unselected package yom-apt-archives.
+(Reading database ... 374059 files and directories currently installed.)
+Preparing to unpack .../027_apt-archives_1.13.74-260205163157_amd64.deb ...
+Unpacking yom-apt-archives (1.13.74) ...
+Setting up yom-apt-archives (1.13.74) ...
+Changing directory to /opt/thirdparty/apt-archives
+✓ 027_apt-archives_1.13.74-260205163157_amd64.deb installation completed
+[29/33] Installing: 028_facial-clip-model_1.14.79-260225175252_amd64.deb
+Selecting previously unselected package yom-facial-clip-model.
+(Reading database ... 374188 files and directories currently installed.)
+Preparing to unpack .../028_facial-clip-model_1.14.79-260225175252_amd64.deb ...
+Unpacking yom-facial-clip-model (1.14.79) ...
+Setting up yom-facial-clip-model (1.14.79) ...
+✓ 028_facial-clip-model_1.14.79-260225175252_amd64.deb installation completed
+[30/33] Installing: 029_face-ai_1.14.93-260227184145_amd64.deb
+Selecting previously unselected package yom-face-ai.
+(Reading database ... 374207 files and directories currently installed.)
+Preparing to unpack .../029_face-ai_1.14.93-260227184145_amd64.deb ...
+Unpacking yom-face-ai (1.14.93) ...
+Setting up yom-face-ai (1.14.93) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-face-ai-api.service' → '/etc/systemd/system/yom-face-ai-api.service'.
+拉取镜像开关未启用，跳过镜像拉取（如需拉取，请设置 PULL_IMAGE_ON_INSTALL=1）
+✓ 029_face-ai_1.14.93-260227184145_amd64.deb installation completed
+[31/33] Installing: 030_clip-ai-model_1.13.77-260205163442_amd64.deb
+Selecting previously unselected package yom-clip-ai-model.
+(Reading database ... 374254 files and directories currently installed.)
+Preparing to unpack .../030_clip-ai-model_1.13.77-260205163442_amd64.deb ...
+Unpacking yom-clip-ai-model (1.13.77) ...
+Setting up yom-clip-ai-model (1.13.77) ...
+✓ 030_clip-ai-model_1.13.77-260205163442_amd64.deb installation completed
+[32/33] Installing: 031_clip-ai_1.14.66-260225105602_amd64.deb
+Selecting previously unselected package yom-clip-ai.
+(Reading database ... 374261 files and directories currently installed.)
+Preparing to unpack .../031_clip-ai_1.14.66-260225105602_amd64.deb ...
+Unpacking yom-clip-ai (1.14.66) ...
+Setting up yom-clip-ai (1.14.66) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/yom-clip-ai.target' → '/etc/systemd/system/yom-clip-ai.target'.
+✓ 031_clip-ai_1.14.66-260225105602_amd64.deb installation completed
+[33/33] Installing: 032_geak-ai-model_1.14.77-260225173129_amd64.deb
+Selecting previously unselected package yom-geak-ai-model.
+(Reading database ... 374326 files and directories currently installed.)
+Preparing to unpack .../032_geak-ai-model_1.14.77-260225173129_amd64.deb ...
+Unpacking yom-geak-ai-model (1.14.77) ...
+Setting up yom-geak-ai-model (1.14.77) ...
+✓ 032_geak-ai-model_1.14.77-260225173129_amd64.deb installation completed
+Skipping init package installation (download only): /var/cache/apt/archives/init-260206204805-linux-amd64.deb
+
+=== All installable deb packages installation completed (init skipped) ===
+Executing system initialization...
+Selecting previously unselected package yom-init.
+(Reading database ... 374339 files and directories currently installed.)
+Preparing to unpack init-260206204805-linux-amd64.deb ...
+Unpacking yom-init (1.13.99) ...
+Setting up yom-init (1.13.99) ...
+apt-daily.timer is active. Stopping and disabling it.
+apt-daily-upgrade.timer is active. Stopping and disabling it.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Installing:
+  vectors-pg15
+
+Summary:
+  Upgrading: 0, Installing: 1, Removing: 0, Not Upgrading: 319
+  Download size: 0 B / 35.1 MB
+  Space needed: 0 B / 7,132 MB available
+
+Get:1 /var/cache/apt/archives/vectors-pg15_0.4.0_amd64_vectors.deb vectors-pg15 amd64 0.4.0 [35.1 MB]
+Selecting previously unselected package vectors-pg15.
+(Reading database ... 374372 files and directories currently installed.)
+Preparing to unpack .../vectors-pg15_0.4.0_amd64_vectors.deb ...
+Unpacking vectors-pg15 (0.4.0) ...
+Setting up vectors-pg15 (0.4.0) ...
+Processing triggers for postgresql-common (278) ...
+Building PostgreSQL dictionaries from installed myspell/hunspell packages...
+ERROR: no encoding defined in /usr/share/hunspell/ar.aff, ignoring
+  be_by
+  bg_bg
+  bs_ba
+  ca
+  ca_es-valencia
+  cs_cz
+  da_dk
+  de_at
+  de_ch
+  de_de
+  el_gr
+  en_gb
+  en_us
+  eo
+  es
+  et_ee
+  eu
+  fa_ir
+  fr
+  ga_ie
+  gl_es
+  gu_in
+  he
+  hi_in
+  hr_hr
+  hu_hu
+iconv: illegal input sequence at position 131
+ERROR: Conversion of /usr/share/hunspell/hu_HU.aff failed
+  id_id
+  is_is
+  it_it
+ERROR: no encoding defined in /usr/share/hunspell/kk_KZ.aff, ignoring
+  kmr_latn
+  ko
+  lt_lt
+  lv_lv
+  ml_in
+  nb_no
+  ne_np
+  nl
+  nn_no
+  pl_pl
+ERROR: no encoding defined in /usr/share/hunspell/pt_BR.aff, ignoring
+  pt_pt
+  ro_ro
+  ru_ru
+  si_lk
+  sk_sk
+  sl_si
+  sq_al
+  sr_latn_rs
+  sr_rs
+  sv_fi
+  sv_se
+  te_in
+  th_th
+  uk_ua
+  vi_vn
+Removing obsolete dictionary files:
+(Reading database ... 374393 files and directories currently installed.)
+Preparing to unpack init-260206204805-linux-amd64.deb ...
+Unpacking yom-init (1.13.99) over (1.13.99) ...
+Setting up yom-init (1.13.99) ...
+apt-daily.timer is not active.
+apt-daily-upgrade.timer is not active.
+(Reading database ... 374393 files and directories currently installed.)
+Preparing to unpack p2p-260305155816-linux-amd64.deb ...
+Unpacking yom-p2p (1.15.32) over (1.15.32) ...
+Setting up yom-p2p (1.15.32) ...
+
+============================================================
+Verifying deb package installation...
+  ✓ [2/34] yom-yrpc installed
+  ✓ [3/34] yom-dockerenv installed
+  ✓ [4/34] yom-thumbor installed
+  ✓ [5/34] yom-scheduler installed
+  ✓ [6/34] yom-setting installed
+  ✓ [7/34] yom-film installed
+  ✓ [8/34] yom-film-web installed
+  ✓ [9/34] yom-tarantool installed
+  ✓ [10/34] yom-shared installed
+  ✓ [11/34] yom-web installed
+  ✓ [12/34] yom-nas installed
+  ✓ [13/34] yom-nsq installed
+  ✓ [14/34] yom-wsq installed
+  ✓ [15/34] yom-download installed
+  ✓ [16/34] yom-user installed
+  ✓ [17/34] yom-file installed
+  ✓ [18/34] yom-media installed
+  ✓ [19/34] yom-asset installed
+  ✓ [20/34] yom-contacts installed
+  ✓ [21/34] yom-toolbox installed
+  ✓ [22/34] yom-message installed
+  ✓ [23/34] yom-p2p installed
+  ✓ [24/34] yom-monitor installed
+  ✓ [25/34] yom-gateway installed
+  ✓ [26/34] yom-route installed
+  ✓ [27/34] yom-geak-ai-venv installed
+  ✓ [28/34] yom-apt-archives installed
+  ✓ [29/34] yom-facial-clip-model installed
+  ✓ [30/34] yom-face-ai installed
+  ✓ [31/34] yom-clip-ai-model installed
+  ✓ [32/34] yom-clip-ai installed
+  ✓ [33/34] yom-geak-ai-model installed
+  ✓ [34/34] yom-init installed
+✓ geakos installation completed!
+============================================================
+
+IPv4 for enp4s0: 192.168.0.126
+IPv4 for docker0: 172.17.0.1
+
+GEAKOS Web UI can be directly accessed at: http://192.168.0.126:9080
+Run 'geakos check' to verify service status. Reboot recommended for all services to take effect
+Please manually execute 'reboot' command to restart the system
+</code></pre>
+<p>从安装过程看，geakos包含了34个deb文件，upgrade yrpc  dockerenv thumbor scheduler setting film film-web tarantool shared web nas nsq wsq download user file media asset  contacts  toolbox  message p2p monitor gateway route geak-ai-venv apt-archives facial-clip-model  face-ai clip-ai-model clip-ai  geak-ai-model  init。在debian里安装时由于锁屏，安装中断，最后是修改ssh_config文件允许密码登录后，ssh连接再安装才成功。8G以下内存直接不能安装。</p>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/nas/">nas</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/nas-bu-shu-openclaw-bing-jie-ru-qq-ji-qi-ren/">nas部署OpenClaw并接入QQ机器人</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/wang-zhan-shi-yong-zi-ding-yi-zi-ti-de-fang-fa/">网站使用自定义字体的方法</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

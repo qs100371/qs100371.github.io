@@ -1,0 +1,758 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>从valine迁移到waline及数据导入 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="登录leancloud，突然发现停服公告，valine的数据一直存放在这里，于是把留言系统从valine迁移到waline。本文记录了迁移过程。 waline 项目地址：walinejs/waline 有多种部署方式，这里采用docker本地部署。 飞牛上部署 `mkdir -p /vol1/1&amp;hellip;">
+<link rel="canonical" href="https://qs100371.github.io/post/cong-valine-qian-yi-dao-waline-ji-shu-ju-dao-ru/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"从valine迁移到waline及数据导入","url":"https://qs100371.github.io/post/cong-valine-qian-yi-dao-waline-ji-shu-ju-dao-ru/","description":"登录leancloud，突然发现停服公告，valine的数据一直存放在这里，于是把留言系统从valine迁移到waline。本文记录了迁移过程。 waline 项目地址：walinejs/waline 有多种部署方式，这里采用docker本地部署。 飞牛上部署 `mkdir -p /vol1/1\u0026hellip;","datePublished":"2026-02-11T09:43:40+08:00","dateModified":"2026-05-01T11:05:30+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/cong-valine-qian-yi-dao-waline-ji-shu-ju-dao-ru/","name":"从valine迁移到waline及数据导入","position":2}]}</script>
+<meta property="og:title" content="从valine迁移到waline及数据导入">
+<meta property="og:description" content="登录leancloud，突然发现停服公告，valine的数据一直存放在这里，于是把留言系统从valine迁移到waline。本文记录了迁移过程。 waline 项目地址：walinejs/waline 有多种部署方式，这里采用docker本地部署。 飞牛上部署 `mkdir -p /vol1/1&amp;hellip;">
+<meta property="og:url" content="https://qs100371.github.io/post/cong-valine-qian-yi-dao-waline-ji-shu-ju-dao-ru/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/cong-valine-qian-yi-dao-waline-ji-shu-ju-dao-ru/">
+<meta name="twitter:title" content="从valine迁移到waline及数据导入">
+<meta name="twitter:description" content="登录leancloud，突然发现停服公告，valine的数据一直存放在这里，于是把留言系统从valine迁移到waline。本文记录了迁移过程。 waline 项目地址：walinejs/waline 有多种部署方式，这里采用docker本地部署。 飞牛上部署 `mkdir -p /vol1/1&amp;hellip;">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        从valine迁移到waline及数据导入
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2026-02-11">
+                        2026-02-11
+                    </time> • 15 分钟阅读 •
+                        
+                            <a href="/tag/docker/">
+                                docker
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>登录leancloud，突然发现停服公告，valine的数据一直存放在这里，于是把留言系统从valine迁移到waline。本文记录了迁移过程。</p>
+<h1 id="waline">waline</h1>
+<p>项目地址：<a href="https://github.com/walinejs/waline/">walinejs/waline</a></p>
+<p>有多种部署方式，这里采用docker本地部署。</p>
+<h1 id="heading">飞牛上部署</h1>
+<p><code>mkdir -p /vol1/1000/docker/waline/data</code><br />
+<code>nano /vol1/1000/docker/waline/docker-compose.yml</code></p>
+<pre><code>services:
+  waline:
+    container_name: waline
+    image: lizheming/waline:latest
+    restart: always
+    ports:
+      - 8360:8360
+    volumes:
+      - ./data:/app/data
+    environment:
+      TZ: 'Asia/Shanghai'
+      SQLITE_PATH: '/app/data'
+      JWT_TOKEN: '12345'
+      SITE_NAME: 'xxxx'
+      SITE_URL: 'https://xxx.com'
+      SECURE_DOMAINS: 'xxx.com'
+      AUTHOR_EMAIL: 'a@a.com'
+</code></pre>
+<p>从浏览器进入飞牛，点开Docker，Compose，新增项目，输入waline，定位到刚才的目录，确认，构建项目。下载<a href="https://github.com/walinejs/waline/blob/main/assets/waline.sqlite">https://github.com/walinejs/waline/blob/main/assets/waline.sqlite</a>，保存到/vol1/1000/docker/waline/data，重新构建waline。<br />
+从内网ip:8360可访问。把ip:8360用frp反代到公网。在hexo butterfly的配置文件中启用waline，填入反代的地址。重新构建hexo就启用了waline。</p>
+<h1 id="heading-1">数据库迁移</h1>
+<p>登录leancloud，打开valine应用，左侧点击导入导出，<br />
+<img src="https://qs100371.top/post-images/1770775313164.png" alt="" /><br />
+导出的文件会发送到邮箱，下载到本地，解压得到Comment.0.jsonl。</p>
+<p>打开waline官方提供的<a href="https://waline.js.org/migration/tool.html">数据迁移助手</a>，<br />
+<img src="https://qs100371.top/post-images/1770775469918.png" alt="" /><br />
+打开Comment.0.jsonl，把内容复制到文本框，删除第一行，点转换，得到一个output.csv。</p>
+<p>下载SQLite Expert Professional，安装(可试用40天)，用软件打开waline.sqlite，点击菜单栏Import/Export，Import txt file<br />
+<img src="https://qs100371.top/post-images/1770775866150.png" alt="" /><br />
+点start导入数据，之后关闭数据库，把waline.sqlite文件保存到/vol1/1000/docker/waline/data，重新构建docker。打开网站，可以看到已有的留言已导入。</p>
+<p>csv导入到sqlite数据库的python脚本：</p>
+<pre><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sqlite3
+import csv
+import os
+import argparse
+from pathlib import Path
+
+def detect_delimiter(file_path, sample_size=5):
+    &quot;&quot;&quot;自动检测CSV文件的分隔符&quot;&quot;&quot;
+    with open(file_path, 'r', encoding='utf-8') as f:
+        sample = ''.join([f.readline() for _ in range(sample_size)])
+    
+    delimiters = [',', ';', '\t', '|']
+    delimiter_counts = {d: sample.count(d) for d in delimiters}
+    return max(delimiter_counts, key=delimiter_counts.get)
+
+def detect_encoding(file_path):
+    &quot;&quot;&quot;尝试检测文件编码（简化版）&quot;&quot;&quot;
+    encodings = ['utf-8', 'gbk', 'gb2312', 'utf-16', 'latin-1']
+    for encoding in encodings:
+        try:
+            with open(file_path, 'r', encoding=encoding) as f:
+                f.read()
+            return encoding
+        except UnicodeDecodeError:
+            continue
+    return 'utf-8'
+
+def infer_sqlite_type(value):
+    &quot;&quot;&quot;根据值推断SQLite数据类型&quot;&quot;&quot;
+    if value is None or value == '':
+        return 'TEXT'
+    
+    try:
+        int(value)
+        return 'INTEGER'
+    except ValueError:
+        pass
+    
+    try:
+        float(value)
+        return 'REAL'
+    except ValueError:
+        pass
+    
+    return 'TEXT'
+
+def csv_to_sqlite(csv_file, db_file, table_name=None, 
+                  delimiter=None, encoding=None, 
+                  has_header=True, if_exists='replace'):
+    &quot;&quot;&quot;
+    将CSV文件导入到SQLite数据库
+    
+    参数:
+        csv_file: CSV文件路径
+        db_file: SQLite数据库文件路径
+        table_name: 表名（默认使用CSV文件名）
+        delimiter: 分隔符（None则自动检测）
+        encoding: 编码（None则自动检测）
+        has_header: CSV是否有表头
+        if_exists: 表已存在时的处理方式 ('replace', 'append', 'fail')
+    &quot;&quot;&quot;
+    
+    # 自动检测分隔符
+    if delimiter is None:
+        delimiter = detect_delimiter(csv_file)
+        print(f&quot;检测到分隔符: '{delimiter}'&quot;)
+    
+    # 自动检测编码
+    if encoding is None:
+        encoding = detect_encoding(csv_file)
+        print(f&quot;检测到编码: {encoding}&quot;)
+    
+    # 表名默认使用CSV文件名
+    if table_name is None:
+        table_name = Path(csv_file).stem
+        # 清理表名（SQLite表名不能以数字开头等）
+        table_name = ''.join(c if c.isalnum() else '_' for c in table_name)
+        if table_name[0].isdigit():
+            table_name = '_' + table_name
+    
+    print(f&quot;目标表名: {table_name}&quot;)
+    
+    # 读取CSV文件
+    rows = []
+    with open(csv_file, 'r', encoding=encoding) as f:
+        if has_header:
+            reader = csv.reader(f, delimiter=delimiter)
+            header = next(reader)
+            # 清理列名
+            columns = [col.strip().replace(' ', '_') for col in header]
+            rows = list(reader)
+        else:
+            reader = csv.reader(f, delimiter=delimiter)
+            rows = list(reader)
+            if rows:
+                columns = [f'col_{i}' for i in range(len(rows[0]))]
+            else:
+                columns = []
+    
+    if not rows:
+        print(&quot;CSV文件为空&quot;)
+        return
+    
+    # 连接数据库
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+    
+    # 处理表存在的情况
+    cursor.execute(f&quot;SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'&quot;)
+    table_exists = cursor.fetchone() is not None
+    
+    if table_exists:
+        if if_exists == 'fail':
+            raise ValueError(f&quot;表 {table_name} 已存在，且 if_exists='fail'&quot;)
+        elif if_exists == 'replace':
+            cursor.execute(f&quot;DROP TABLE IF EXISTS {table_name}&quot;)
+            print(f&quot;删除已存在的表: {table_name}&quot;)
+            table_exists = False
+    
+    # 创建表（如果需要）
+    if not table_exists:
+        # 推断列的数据类型
+        column_types = []
+        for col_idx in range(len(columns)):
+            col_values = [row[col_idx] if col_idx &lt; len(row) else '' for row in rows[:100]]
+            non_empty = [v for v in col_values if v.strip()]
+            if non_empty:
+                col_type = infer_sqlite_type(non_empty[0])
+            else:
+                col_type = 'TEXT'
+            column_types.append(col_type)
+        
+        # 创建表的SQL语句
+        columns_sql = ', '.join([f'&quot;{columns[i]}&quot; {column_types[i]}' for i in range(len(columns))])
+        create_sql = f'CREATE TABLE {table_name} ({columns_sql})'
+        cursor.execute(create_sql)
+        print(f&quot;创建表: {table_name}&quot;)
+    
+    # 准备插入语句
+    placeholders = ','.join(['?' for _ in columns])
+    insert_sql = f'INSERT INTO {table_name} VALUES ({placeholders})'
+    
+    # 执行批量插入
+    batch_size = 1000
+    total_rows = len(rows)
+    inserted = 0
+    
+    for i in range(0, total_rows, batch_size):
+        batch = rows[i:i+batch_size]
+        # 确保每行的列数一致
+        batch_data = []
+        for row in batch:
+            # 补齐缺少的列
+            if len(row) &lt; len(columns):
+                row = row + [''] * (len(columns) - len(row))
+            # 截断多余的列
+            elif len(row) &gt; len(columns):
+                row = row[:len(columns)]
+            batch_data.append(row)
+        
+        cursor.executemany(insert_sql, batch_data)
+        conn.commit()
+        inserted += len(batch)
+        print(f&quot;已导入: {inserted}/{total_rows} 行&quot;)
+    
+    # 获取导入后的行数
+    cursor.execute(f&quot;SELECT COUNT(*) FROM {table_name}&quot;)
+    final_count = cursor.fetchone()[0]
+    
+    conn.close()
+    
+    print(f&quot;导入完成！表 '{table_name}' 共有 {final_count} 行记录&quot;)
+    return final_count
+
+def main():
+    parser = argparse.ArgumentParser(description='将CSV文件导入SQLite数据库')
+    parser.add_argument('csv_file', help='CSV文件路径')
+    parser.add_argument('-d', '--db', default='database.sqlite', 
+                       help='SQLite数据库文件路径（默认: database.sqlite）')
+    parser.add_argument('-t', '--table', help='表名（默认使用CSV文件名）')
+    parser.add_argument('--delimiter', help='CSV分隔符（默认自动检测）')
+    parser.add_argument('--encoding', help='文件编码（默认自动检测）')
+    parser.add_argument('--no-header', action='store_false', dest='header',
+                       help='CSV文件没有表头')
+    parser.add_argument('--if-exists', choices=['replace', 'append', 'fail'],
+                       default='replace', help='表已存在时的处理方式（默认: replace）')
+    
+    args = parser.parse_args()
+    
+    try:
+        csv_to_sqlite(
+            csv_file=args.csv_file,
+            db_file=args.db,
+            table_name=args.table,
+            delimiter=args.delimiter,
+            encoding=args.encoding,
+            has_header=args.header,
+            if_exists=args.if_exists
+        )
+    except Exception as e:
+        print(f&quot;错误: {e}&quot;)
+        return 1
+    
+    return 0
+
+if __name__ == '__main__':
+    exit(main())
+</code></pre>
+<p>保存为csv_to_sqlite.py<br />
+执行<code>python csv_to_sqlite.py output.csv -d waline.sqlite -t wl_Comment</code></p>
+<h1 id="heading-2">留言管理</h1>
+<p>官方说明注册的第一个用户是管理员，可管理留言，<del>但目前无法注册，无论docker-compose中如何设置环境变量，始终显示403: Forbidden。</del><br />
+已解决注册问题，docker-compose文件中环境变量SECURE_DOMAINS需加入waline服务器地址，用逗号和网站地址分隔即可。<br />
+<img src="https://qs100371.top/post-images/1770810393330.png" alt="" /></p>
+<h1 id="heading-3">邮件服务</h1>
+<p>增加以下服务器变量：</p>
+<pre><code>SMTP_SERVICE: '163'
+SMTP_USER: 'xxx@163.com'
+SMTP_PASS: '******WABHMSHGIT'
+</code></pre>
+<p>smtp_pass对应邮箱密码或授权码。支持的邮件服务商<a href="https://github.com/nodemailer/nodemailer/blob/master/lib/well-known/services.json">在这里</a><br />
+<img src="https://qs100371.top/post-images/1771244232620.png" alt="" /><br />
+用户注册和评论的邮件通知都会用到邮件服务。配置邮件服务相关变量后，用户注册会增加邮箱验证码确认相关的操作，用来防止恶意的注册。<br />
+改变服务器变量需重新构建waline。<br />
+参考：<br />
+<em><a href="https://waline.js.org/reference/server/env.html">https://waline.js.org/reference/server/env.html</a></em></p>
+<h1 id="heading-4">头像服务</h1>
+<p>服务端中环境变量 GRAVATAR_STR 指定了获取头像的地址。<br />
+<code>GRAVATAR_STR: https://seccdn.libravatar.org/avatar/{{mail\|md5}}</code><br />
+可用替代：<br />
+<a href="https://cravatar.cn/avatar/">https://cravatar.cn/avatar/</a><br />
+<a href="https://cn.cravatar.com/avatar/">https://cn.cravatar.com/avatar/</a><br />
+可加?d=指定头像<br />
+mp，monsterid等。<br />
+参考：<br />
+<em><a href="https://blog.uuanqin.top/p/1d248fa3/">https://blog.uuanqin.top/p/1d248fa3/</a></em></p>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/docker/">docker</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/wang-zhan-shi-yong-zi-ding-yi-zi-ti-de-fang-fa/">网站使用自定义字体的方法</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/yi-ge-jian-dan-de-shu-ying-yin-ji-lu-ying-yong/">一个简单的书影音记录应用</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

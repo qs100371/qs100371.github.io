@@ -1,0 +1,744 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>用tkinter代替pyqt5重新生成image_converter | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="py打包的exe之所以大，是因为pyqt5大，本文用tkinter重新生成。">
+<link rel="canonical" href="https://qs100371.github.io/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"用tkinter代替pyqt5重新生成image_converter","url":"https://qs100371.github.io/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/","description":"py打包的exe之所以大，是因为pyqt5大，本文用tkinter重新生成。","datePublished":"2025-05-03T10:10:06+08:00","dateModified":"2026-05-01T11:05:31+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/","name":"用tkinter代替pyqt5重新生成image_converter","position":2}]}</script>
+<meta property="og:title" content="用tkinter代替pyqt5重新生成image_converter">
+<meta property="og:description" content="py打包的exe之所以大，是因为pyqt5大，本文用tkinter重新生成。">
+<meta property="og:url" content="https://qs100371.github.io/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/yong-tkinter-dai-ti-pyqt5-chong-xin-sheng-cheng-image_converter/">
+<meta name="twitter:title" content="用tkinter代替pyqt5重新生成image_converter">
+<meta name="twitter:description" content="py打包的exe之所以大，是因为pyqt5大，本文用tkinter重新生成。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        用tkinter代替pyqt5重新生成image_converter
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2025-05-03">
+                        2025-05-03
+                    </time> • 15 分钟阅读 •
+                        
+                            <a href="/tag/python/">
+                                python
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>py打包的exe之所以大，是因为pyqt5大，本文用tkinter重新生成。</p>
+<!-- more -->
+<h1 id="heading">主要代码</h1>
+<pre><code>import os
+import tkinter as tk
+from tkinter import filedialog, messagebox, ttk
+from PIL import Image
+import threading
+import sys
+
+class ImageConverterApp:
+    def __init__(self, root):
+        self.root = root
+        
+        # 初始化所有变量
+        self.src_dir = tk.StringVar()
+        self.dest_dir = tk.StringVar()
+        self.output_format = tk.StringVar(value=&quot;webp&quot;)
+        self.running = False
+        
+        # 设置窗口
+        self.setup_window()
+        
+        # 创建控件
+        self.create_widgets()
+
+    def setup_window(self):
+        &quot;&quot;&quot;初始化窗口设置&quot;&quot;&quot;
+        self.root.title(&quot;图片格式转换工具&quot;)
+        
+        # 设置窗口图标
+        try:
+            icon_path = os.path.abspath(&quot;icon.ico&quot;)
+            if os.path.exists(icon_path):
+                self.root.iconbitmap(default=icon_path)
+        except Exception as e:
+            print(f&quot;图标加载失败: {e}&quot;)
+        
+        # Windows系统启用DPI感知
+        if os.name == 'nt':
+            from ctypes import windll
+            windll.shcore.SetProcessDpiAwareness(1)
+        
+        # 设置全局字体
+        self.set_system_font()
+
+    def set_system_font(self):
+        &quot;&quot;&quot;设置系统最佳中文字体&quot;&quot;&quot;
+        system_fonts = {
+            'win32': ('Microsoft YaHei', 12),
+            'darwin': ('PingFang SC', 14),
+            'linux': ('Noto Sans CJK SC', 12)
+        }
+        default_font = system_fonts.get(sys.platform, ('TkDefaultFont', 12))
+        self.root.option_add(&quot;*Font&quot;, default_font)
+        style = ttk.Style()
+        style.configure(&quot;.&quot;, font=default_font)
+
+    def create_widgets(self):
+        &quot;&quot;&quot;创建界面控件&quot;&quot;&quot;
+        main_frame = ttk.Frame(self.root, padding=15)
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # 源目录选择
+        src_frame = ttk.Frame(main_frame)
+        src_frame.pack(fill=tk.X, pady=5)
+         
+        ttk.Label(src_frame, text=&quot;源 目 录 :&quot;).pack(side=tk.LEFT)
+        ttk.Entry(src_frame, textvariable=self.src_dir, width=40).pack(side=tk.LEFT, padx=5, expand=True, fill=tk.X)
+        ttk.Button(src_frame, text=&quot;浏览...&quot;, command=self.browse_src_dir).pack(side=tk.LEFT)
+        
+        # 目标目录选择
+        dest_frame = ttk.Frame(main_frame)
+        dest_frame.pack(fill=tk.X, pady=5)
+        
+        ttk.Label(dest_frame, text=&quot;目标目录:&quot;).pack(side=tk.LEFT)
+        ttk.Entry(dest_frame, textvariable=self.dest_dir, width=40).pack(side=tk.LEFT, padx=5, expand=True, fill=tk.X)
+        ttk.Button(dest_frame, text=&quot;浏览...&quot;, command=self.browse_dest_dir).pack(side=tk.LEFT)
+        
+        # 输出格式选择
+        format_frame = ttk.Frame(main_frame)
+        format_frame.pack(fill=tk.X, pady=5)
+        
+        ttk.Label(format_frame, text=&quot;输出格式:&quot;).pack(side=tk.LEFT)
+        formats = [&quot;webp&quot;, &quot;jpg&quot;, &quot;png&quot;, &quot;bmp&quot;, &quot;gif&quot;, &quot;tiff&quot;]
+        ttk.Combobox(format_frame, textvariable=self.output_format, values=formats, width=8, state=&quot;readonly&quot;).pack(side=tk.LEFT, padx=5)
+        
+        # 进度条
+        self.progress = ttk.Progressbar(main_frame, orient=tk.HORIZONTAL, length=450, mode='determinate')
+        self.progress.pack(pady=15, fill=tk.X)
+        
+        # 操作按钮
+        btn_frame = ttk.Frame(main_frame)
+        btn_frame.pack(pady=10)
+        
+        self.convert_btn = ttk.Button(btn_frame, text=&quot;开始转换&quot;, command=self.start_conversion)
+        self.convert_btn.pack(side=tk.LEFT, padx=5)
+        
+        self.cancel_btn = ttk.Button(btn_frame, text=&quot;取消&quot;, command=self.cancel_conversion, state=tk.DISABLED)
+        self.cancel_btn.pack(side=tk.LEFT, padx=5)
+        
+        # 状态栏
+        self.status_var = tk.StringVar(value=&quot;准备就绪&quot;)
+        ttk.Label(main_frame, textvariable=self.status_var, relief=tk.SUNKEN, anchor=tk.W, padding=(5, 5)).pack(fill=tk.X, pady=(10, 0))
+
+    def browse_src_dir(self):
+        &quot;&quot;&quot;选择源目录&quot;&quot;&quot;
+        dir_path = filedialog.askdirectory()
+        if dir_path:
+            self.src_dir.set(dir_path)
+            if not self.dest_dir.get():
+                self.dest_dir.set(os.path.join(dir_path, &quot;converted&quot;))
+
+    def browse_dest_dir(self):
+        &quot;&quot;&quot;选择目标目录&quot;&quot;&quot;
+        dir_path = filedialog.askdirectory()
+        if dir_path:
+            self.dest_dir.set(dir_path)
+
+    def start_conversion(self):
+        &quot;&quot;&quot;开始转换图片&quot;&quot;&quot;
+        src_dir = self.src_dir.get()
+        dest_dir = self.dest_dir.get()
+        output_format = self.output_format.get().lower()
+        
+        if not src_dir or not dest_dir:
+            messagebox.showwarning(&quot;警告&quot;, &quot;请选择源目录和目标目录！&quot;)
+            return
+        
+        if src_dir == dest_dir:
+            messagebox.showwarning(&quot;警告&quot;, &quot;源目录和目标目录不能相同！&quot;)
+            return
+        
+        self.running = True
+        self.convert_btn.config(state=tk.DISABLED)
+        self.cancel_btn.config(state=tk.NORMAL)
+        self.progress[&quot;value&quot;] = 0
+        self.status_var.set(&quot;正在转换...&quot;)
+        
+        threading.Thread(
+            target=self.convert_images,
+            args=(src_dir, dest_dir, output_format),
+            daemon=True
+        ).start()
+
+    def convert_images(self, src_dir, dest_dir, output_format):
+        &quot;&quot;&quot;执行图片转换&quot;&quot;&quot;
+        try:
+            if not os.path.exists(src_dir):
+                self.show_error(f&quot;源目录不存在: {src_dir}&quot;)
+                return
+            
+            os.makedirs(dest_dir, exist_ok=True)
+            
+            image_files = [
+                f for f in os.listdir(src_dir) 
+                if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tiff', '.webp'))
+            ]
+            
+            total_files = len(image_files)
+            if total_files == 0:
+                self.show_error(&quot;未找到支持的图片文件&quot;)
+                return
+            
+            for i, filename in enumerate(image_files):
+                if not self.running:
+                    break
+                
+                try:
+                    img_path = os.path.join(src_dir, filename)
+                    output_path = os.path.join(
+                        dest_dir, 
+                        f&quot;{os.path.splitext(filename)[0]}.{output_format}&quot;
+                    )
+                    
+                    with Image.open(img_path) as img:
+                        if img.mode in ('RGBA', 'LA') and output_format in ('jpg', 'jpeg'):
+                            background = Image.new('RGB', img.size, (255, 255, 255))
+                            background.paste(img, mask=img.split()[-1])
+                            img = background
+                        
+                        save_params = {}
+                        if output_format == 'webp':
+                            save_params = {'quality': 100, 'method': 6}
+                        elif output_format in ('jpg', 'jpeg'):
+                            save_params = {'quality': 95}
+                        
+                        img.save(output_path, **save_params)
+                    
+                    progress = (i + 1) / total_files * 100
+                    self.update_progress(progress)
+                
+                except Exception as e:
+                    self.show_error(f&quot;处理文件 {filename} 失败: {str(e)}&quot;)
+                    continue
+            
+            if self.running:
+                self.conversion_complete(f&quot;转换完成！共处理 {total_files} 个文件&quot;)
+        
+        except Exception as e:
+            self.show_error(f&quot;转换过程中出错: {str(e)}&quot;)
+
+    def update_progress(self, value):
+        &quot;&quot;&quot;更新进度条&quot;&quot;&quot;
+        self.root.after(0, lambda: self.progress.configure(value=value))
+
+    def conversion_complete(self, message):
+        &quot;&quot;&quot;转换完成处理&quot;&quot;&quot;
+        self.root.after(0, lambda: [
+            self.status_var.set(message),
+            self.convert_btn.config(state=tk.NORMAL),
+            self.cancel_btn.config(state=tk.DISABLED),
+            messagebox.showinfo(&quot;完成&quot;, message)
+        ])
+
+    def show_error(self, error_message):
+        &quot;&quot;&quot;显示错误信息&quot;&quot;&quot;
+        self.root.after(0, lambda: [
+            self.status_var.set(f&quot;错误: {error_message}&quot;),
+            self.convert_btn.config(state=tk.NORMAL),
+            self.cancel_btn.config(state=tk.DISABLED),
+            messagebox.showerror(&quot;错误&quot;, error_message)
+        ])
+
+    def cancel_conversion(self):
+        &quot;&quot;&quot;取消转换&quot;&quot;&quot;
+        self.running = False
+        self.status_var.set(&quot;转换已取消&quot;)
+        self.convert_btn.config(state=tk.NORMAL)
+        self.cancel_btn.config(state=tk.DISABLED)
+
+def main():
+    root = tk.Tk()
+    window_width = 550
+    window_height = 320
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    x = (screen_width - window_width) // 2
+    y = (screen_height - window_height) // 2
+    root.geometry(f&quot;{window_width}x{window_height}+{x}+{y}&quot;)
+    
+    app = ImageConverterApp(root)
+    root.mainloop()
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p>保存为image_converter.py。<br />
+有个小问题，运行的py程序图标无法显示为指定的图标，怎么改都不行，不管了。<br />
+界面字体用tk默认字体会比较模糊，这里指定使用操作系统自带的字体。</p>
+<h1 id="exe">生成exe文件</h1>
+<p><code>pyinstaller --onefile --windowed --icon=icon.ico --add-data &quot;icon.ico;.&quot; image_converter.py</code><br />
+dist目录下生成的exe文件大小为11.4M，比含pyqt5的32M小多了。<br />
+<img src="https://qs100371.top/post-images/1746238592087.webp" alt="" /></p>
+<h1 id="-tkinter-">为什么 Tkinter 版更小</h1>
+<ul>
+<li>无额外依赖<br />
+Tkinter 是 Python 标准库，PyQt5 需要单独安装。</li>
+<li>更简单的运行时<br />
+不需要 Qt 的复杂渲染引擎。</li>
+<li>功能精简<br />
+虽然界面简单，但核心转换功能完全保留。</li>
+</ul>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/python/">python</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/sheng-cheng-ming-ling-xing-ban-ben-image-converter/">生成命令行版本image-converter</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/">使用 Tauri (轻量级替代方案)打包编辑器</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

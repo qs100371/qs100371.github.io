@@ -1,0 +1,703 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>nas部署OpenClaw并接入QQ机器人 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="OpenClaw最近很红火。OpenClaw 是一个轻量级的 AI 代理框架，能打通各种即时通讯软件（比如 QQ、Telegram 等）与各大 AI 大模型（如 ChatGPT、Claude、deepseek、智谱清言等）之间的壁垒。有了它，可以把QQ变成一个拥有超强智力的 AI 助手，不仅能聊天，还能处理各种复杂的任务，甚至直接操作电脑。本文记录了在本地nas上部署并接入QQ的过程。">
+<link rel="canonical" href="https://qs100371.github.io/post/nas-bu-shu-openclaw-bing-jie-ru-qq-ji-qi-ren/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"nas部署OpenClaw并接入QQ机器人","url":"https://qs100371.github.io/post/nas-bu-shu-openclaw-bing-jie-ru-qq-ji-qi-ren/","description":"OpenClaw最近很红火。OpenClaw 是一个轻量级的 AI 代理框架，能打通各种即时通讯软件（比如 QQ、Telegram 等）与各大 AI 大模型（如 ChatGPT、Claude、deepseek、智谱清言等）之间的壁垒。有了它，可以把QQ变成一个拥有超强智力的 AI 助手，不仅能聊天，还能处理各种复杂的任务，甚至直接操作电脑。本文记录了在本地nas上部署并接入QQ的过程。","datePublished":"2026-03-08T10:14:48+08:00","dateModified":"2026-05-01T11:05:30+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/nas-bu-shu-openclaw-bing-jie-ru-qq-ji-qi-ren/","name":"nas部署OpenClaw并接入QQ机器人","position":2}]}</script>
+<meta property="og:title" content="nas部署OpenClaw并接入QQ机器人">
+<meta property="og:description" content="OpenClaw最近很红火。OpenClaw 是一个轻量级的 AI 代理框架，能打通各种即时通讯软件（比如 QQ、Telegram 等）与各大 AI 大模型（如 ChatGPT、Claude、deepseek、智谱清言等）之间的壁垒。有了它，可以把QQ变成一个拥有超强智力的 AI 助手，不仅能聊天，还能处理各种复杂的任务，甚至直接操作电脑。本文记录了在本地nas上部署并接入QQ的过程。">
+<meta property="og:url" content="https://qs100371.github.io/post/nas-bu-shu-openclaw-bing-jie-ru-qq-ji-qi-ren/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/nas-bu-shu-openclaw-bing-jie-ru-qq-ji-qi-ren/">
+<meta name="twitter:title" content="nas部署OpenClaw并接入QQ机器人">
+<meta name="twitter:description" content="OpenClaw最近很红火。OpenClaw 是一个轻量级的 AI 代理框架，能打通各种即时通讯软件（比如 QQ、Telegram 等）与各大 AI 大模型（如 ChatGPT、Claude、deepseek、智谱清言等）之间的壁垒。有了它，可以把QQ变成一个拥有超强智力的 AI 助手，不仅能聊天，还能处理各种复杂的任务，甚至直接操作电脑。本文记录了在本地nas上部署并接入QQ的过程。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        nas部署OpenClaw并接入QQ机器人
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2026-03-08">
+                        2026-03-08
+                    </time> • 34 分钟阅读 •
+                        
+                            <a href="/tag/openclaw/">
+                                openclaw
+                            </a>
+                             · 
+                                    
+                            <a href="/tag/docker/">
+                                docker
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>OpenClaw最近很红火。OpenClaw 是一个轻量级的 AI 代理框架，能打通各种即时通讯软件（比如 QQ、Telegram 等）与各大 AI 大模型（如 ChatGPT、Claude、deepseek、智谱清言等）之间的壁垒。有了它，可以把QQ变成一个拥有超强智力的 AI 助手，不仅能聊天，还能处理各种复杂的任务，甚至直接操作电脑。本文记录了在本地nas上部署并接入QQ的过程。</p>
+<!-- more -->
+<h1 id="nasopenclaw">nas部署OpenClaw</h1>
+<p>OpenClaw能本地直接安装运行，安全起见，这里部署在docker里。<br />
+主机是n5095+16G内存。<br />
+项目地址：<a href="https://github.com/1186258278/OpenClawChineseTranslation">https://github.com/1186258278/OpenClawChineseTranslation</a><br />
+这是中文汉化版。<br />
+docker-compose.yml：</p>
+<pre><code>services:
+  openclaw:
+    image: 1186258278/openclaw-zh:nightly
+    container_name: openclaw
+    ports:
+      - &quot;18789:18789&quot;  # 修正：移除多余空格，确保端口号在引号内
+    volumes:
+      # 数据持久化（注意：容器以 root 用户运行，配置存储在 /root/.openclaw）
+      - openclaw-data:/root/.opanclaw/
+    environment:
+      # 访问令牌（推荐设置，用于 Dashboard 认证）
+      - OPENCLAW_GATEWAY_TOKEN=1234567890
+      # 跳过首次初始化检查（仅高级用户使用）
+      # - OPENCLAW_SKIP_SETUP=1
+    restart: unless-stopped
+    # 默认启动 gateway（首次需要初始化，见下方说明）
+    command: openclaw gateway run --allow-unconfigured
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;wget&quot;, &quot;-q&quot;, &quot;--spider&quot;, &quot;http://localhost:18789/health&quot;, &quot;||&quot;, &quot;exit&quot;, &quot;0&quot;]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+volumes:
+  openclaw-data:
+</code></pre>
+<p>构建完成后，进入docker内部执行下面的命令。<br />
+ssh连接再<code>docker exec -it openclaw bash</code>或web登录fnos，打开Docker图标，点开容器，点击openclaw后面的三个点，选择终端，点击左边的连接/bin/bash进入（不太好用）。<br />
+<code>openclaw onboard --install-daemon</code><br />
+选择yes继续，初始化模式，选择快速开始。<br />
+模型认证提供商，选择千问，选中后回车，再次确认Qwen OAuth，然后就会调出一个网址。<br />
+复制这段网址到浏览器打开，有账号的直接关联，没账号的注册账号（用github帐号可直接关联）。认证成功<br />
+返回命令行界面继续配置，default modle选择第一个。<br />
+<img src="https://qs100371.top/post-images/1772936911694.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772936917447.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772936922677.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772936929249.png" alt="" /><br />
+<code>openclaw --version</code><br />
+2026.3.7</p>
+<h1 id="qqbot">安装qqbot</h1>
+<p><code>npm install @sliverp/qqbot@1.3.7 --save</code><br />
+复制插件到 OpenClaw 扩展目录，<br />
+插件在/.openclaw\node_modules@sliverp\qqbot，扩展目录/.openclaw\node_modules\openclaw\extensions\qqbot<br />
+进入插件目录，<br />
+<code>cp -r qqbot/ ../../extensions/</code><br />
+<code>openclaw plugins enable qqbot</code><br />
+输出：</p>
+<pre><code>root@cf6278f92b5d:~/.openclaw# npm install @sliverp/qqbot@1.3.7 --save
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'moltbot@0.1.0',
+npm warn EBADENGINE   required: { node: '&gt;=24', pnpm: '&gt;=10' },
+npm warn EBADENGINE   current: { node: 'v22.22.1', npm: '10.9.4' }
+npm warn EBADENGINE }
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated gauge@3.0.2: This package is no longer supported.
+npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+npm warn deprecated glob@11.1.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated tar@7.5.4: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+npm warn deprecated gauge@4.0.4: This package is no longer supported.
+npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 737 packages in 2m
+
+136 packages are looking for funding
+  run `npm fund` for details
+root@cf6278f92b5d:~/.openclaw# openclaw plugins list
+01:39:36 [plugins] plugins.allow is empty; discovered non-bundled plugins may auto-load: qqbot (/root/.openclaw/extensions/qqbot/index.ts). Set plugins.allow to explicit trusted ids.
+01:39:36 [plugins] qqbot: loaded without install/load-path provenance; treat as untracked local code and pin trust via plugins.allow or install records (/root/.openclaw/extensions/qqbot/index.ts)
+
+🦞 OpenClaw 中文版 2026.3.7 (bfc36cc) — I can't fix your code taste, but I can fix your build and your backlog.
+
+Plugins (6/39 loaded)
+Source roots:
+  stock: /app/extensions
+  global: /root/.openclaw/extensions
+
+┌──────────────┬──────────┬──────────┬─────────────────────────────────────────────────────────────────────────────────────────────────┬──────────┐
+│ Name         │ ID       │ Status   │ Source                                                                                          │ Version  │
+├──────────────┼──────────┼──────────┼─────────────────────────────────────────────────────────────────────────────────────────────────┼──────────┤
+│ ACPX Runtime │ acpx     │ disabled │ stock:acpx/index.ts                                                                             │ 2026.3.7 │
+│              │          │          │ ACP runtime backend powered by acpx with configurable command path and version policy.          │          │
+│ @openclaw/   │ bluebubb │ disabled │ stock:bluebubbles/index.ts                                                                      │ 2026.3.7 │
+│ bluebubbles  │ les      │          │ OpenClaw BlueBubbles channel plugin                                                             │          │
+│ @openclaw/   │ copilot- │ disabled │ stock:copilot-proxy/index.ts                                                                    │ 2026.3.7 │
+│ copilot-     │ proxy    │          │ OpenClaw Copilot Proxy provider plugin                                                          │          │
+│ proxy        │          │          │                                                                                                 │          │
+│ Device       │ device-  │ loaded   │ stock:device-pair/index.ts                                                                      │          │
+│ Pairing      │ pair     │          │ Generate setup codes and approve device pairing requests.                                       │          │
+│ @openclaw/   │ diagnost │ disabled │ stock:diagnostics-otel/index.ts                                                                 │ 2026.3.7 │
+│ diagnostics- │ ics-otel │          │ OpenClaw diagnostics OpenTelemetry exporter                                                     │          │
+│ otel         │          │          │                                                                                                 │          │
+│ Diffs        │ diffs    │ disabled │ stock:diffs/index.ts                                                                            │ 2026.3.7 │
+│              │          │          │ Read-only diff viewer and file renderer for agents.                                             │          │
+│ @openclaw/   │ discord  │ disabled │ stock:discord/index.ts                                                                          │ 2026.3.7 │
+│ discord      │          │          │ OpenClaw Discord channel plugin                                                                 │          │
+│ @openclaw/   │ feishu   │ disabled │ stock:feishu/index.ts                                                                           │ 2026.3.7 │
+│ feishu       │          │          │ OpenClaw Feishu/Lark channel plugin (community maintained by @m1heng)                           │          │
+│ @openclaw/   │ google-  │ disabled │ stock:google-gemini-cli-auth/index.ts                                                           │ 2026.3.7 │
+│ google-      │ gemini-  │          │ OpenClaw Gemini CLI OAuth provider plugin                                                       │          │
+│ gemini-cli-  │ cli-auth │          │                                                                                                 │          │
+│ auth         │          │          │                                                                                                 │          │
+│ @openclaw/   │ googlech │ disabled │ stock:googlechat/index.ts                                                                       │ 2026.3.7 │
+│ googlechat   │ at       │          │ OpenClaw Google Chat channel plugin                                                             │          │
+│ @openclaw/   │ imessage │ disabled │ stock:imessage/index.ts                                                                         │ 2026.3.7 │
+│ imessage     │          │          │ OpenClaw iMessage channel plugin                                                                │          │
+│ @openclaw/   │ irc      │ disabled │ stock:irc/index.ts                                                                              │ 2026.3.7 │
+│ irc          │          │          │ OpenClaw IRC channel plugin                                                                     │          │
+│ @openclaw/   │ line     │ disabled │ stock:line/index.ts                                                                             │ 2026.3.7 │
+│ line         │          │          │ OpenClaw LINE channel plugin                                                                    │          │
+│ LLM Task     │ llm-task │ disabled │ stock:llm-task/index.ts                                                                         │ 2026.3.7 │
+│              │          │          │ Generic JSON-only LLM tool for structured tasks callable from workflows.                        │          │
+│ Lobster      │ lobster  │ disabled │ stock:lobster/index.ts                                                                          │ 2026.3.7 │
+│              │          │          │ Typed workflow tool with resumable approvals.                                                   │          │
+│ @openclaw/   │ matrix   │ disabled │ stock:matrix/index.ts                                                                           │ 2026.3.7 │
+│ matrix       │          │          │ OpenClaw Matrix channel plugin                                                                  │          │
+│ @openclaw/   │ mattermo │ disabled │ stock:mattermost/index.ts                                                                       │ 2026.3.7 │
+│ mattermost   │ st       │          │ OpenClaw Mattermost channel plugin                                                              │          │
+│ Memory       │ memory-  │ loaded   │ stock:memory-core/index.ts                                                                      │ 2026.3.7 │
+│ (Core)       │ core     │          │ File-backed memory search tools and CLI                                                         │          │
+│ @openclaw/   │ memory-  │ disabled │ stock:memory-lancedb/index.ts                                                                   │ 2026.3.7 │
+│ memory-      │ lancedb  │          │ OpenClaw LanceDB-backed long-term memory plugin with auto-recall/capture                        │          │
+│ lancedb      │          │          │                                                                                                 │          │
+│ @openclaw/   │ minimax- │ disabled │ stock:minimax-portal-auth/index.ts                                                              │ 2026.3.7 │
+│ minimax-     │ portal-  │          │ OpenClaw MiniMax Portal OAuth provider plugin                                                   │          │
+│ portal-auth  │ auth     │          │                                                                                                 │          │
+│ @openclaw/   │ msteams  │ disabled │ stock:msteams/index.ts                                                                          │ 2026.3.7 │
+│ msteams      │          │          │ OpenClaw Microsoft Teams channel plugin                                                         │          │
+│ @openclaw/   │ nextclou │ disabled │ stock:nextcloud-talk/index.ts                                                                   │ 2026.3.7 │
+│ nextcloud-   │ d-talk   │          │ OpenClaw Nextcloud Talk channel plugin                                                          │          │
+│ talk         │          │          │                                                                                                 │          │
+│ @openclaw/   │ nostr    │ disabled │ stock:nostr/index.ts                                                                            │ 2026.3.7 │
+│ nostr        │          │          │ OpenClaw Nostr channel plugin for NIP-04 encrypted DMs                                          │          │
+│ OpenProse    │ open-    │ disabled │ stock:open-prose/index.ts                                                                       │ 2026.3.7 │
+│              │ prose    │          │ OpenProse VM skill pack with a /prose slash command.                                            │          │
+│ Phone        │ phone-   │ loaded   │ stock:phone-control/index.ts                                                                    │          │
+│ Control      │ control  │          │ Arm/disarm high-risk phone node commands (camera/screen/writes) with an optional auto-expiry.   │          │
+│ Qwen OAuth   │ qwen-    │ loaded   │ stock:qwen-portal-auth/index.ts                                                                 │          │
+│              │ portal-  │          │ OAuth flow for Qwen (free-tier) models                                                          │          │
+│              │ auth     │          │                                                                                                 │          │
+│ @openclaw/   │ signal   │ disabled │ stock:signal/index.ts                                                                           │ 2026.3.7 │
+│ signal       │          │          │ OpenClaw Signal channel plugin                                                                  │          │
+│ @openclaw/   │ slack    │ disabled │ stock:slack/index.ts                                                                            │ 2026.3.7 │
+│ slack        │          │          │ OpenClaw Slack channel plugin                                                                   │          │
+│ @openclaw/   │ synology │ disabled │ stock:synology-chat/index.ts                                                                    │ 2026.3.7 │
+│ synology-    │ -chat    │          │ Synology Chat channel plugin for OpenClaw                                                       │          │
+│ chat         │          │          │                                                                                                 │          │
+│ Talk Voice   │ talk-    │ loaded   │ stock:talk-voice/index.ts                                                                       │          │
+│              │ voice    │          │ Manage Talk voice selection (list/set).                                                         │          │
+│ @openclaw/   │ telegram │ disabled │ stock:telegram/index.ts                                                                         │ 2026.3.7 │
+│ telegram     │          │          │ OpenClaw Telegram channel plugin                                                                │          │
+│ Thread       │ thread-  │ disabled │ stock:thread-ownership/index.ts                                                                 │          │
+│ Ownership    │ ownershi │          │ Prevents multiple agents from responding in the same Slack thread. Uses HTTP calls to the       │          │
+│              │ p        │          │ slack-forwarder ownership API.                                                                  │          │
+│ @openclaw/   │ tlon     │ disabled │ stock:tlon/index.ts                                                                             │ 2026.3.7 │
+│ tlon         │          │          │ OpenClaw Tlon/Urbit channel plugin                                                              │          │
+│ @openclaw/   │ twitch   │ disabled │ stock:twitch/index.ts                                                                           │ 2026.3.7 │
+│ twitch       │          │          │ OpenClaw Twitch channel plugin                                                                  │          │
+│ @openclaw/   │ voice-   │ disabled │ stock:voice-call/index.ts                                                                       │ 2026.3.7 │
+│ voice-call   │ call     │          │ OpenClaw voice-call plugin                                                                      │          │
+│ @openclaw/   │ whatsapp │ disabled │ stock:whatsapp/index.ts                                                                         │ 2026.3.7 │
+│ whatsapp     │          │          │ OpenClaw WhatsApp channel plugin                                                                │          │
+│ @openclaw/   │ zalo     │ disabled │ stock:zalo/index.ts                                                                             │ 2026.3.7 │
+│ zalo         │          │          │ OpenClaw Zalo channel plugin                                                                    │          │
+│ @openclaw/   │ zalouser │ disabled │ stock:zalouser/index.ts                                                                         │ 2026.3.7 │
+│ zalouser     │          │          │ OpenClaw Zalo Personal Account plugin via native zca-js integration                             │          │
+│ QQ Bot       │ qqbot    │ loaded   │ global:qqbot/index.ts                                                                           │ 1.3.7    │
+│              │          │          │ QQ Bot channel plugin                                                                           │          │
+└──────────────┴──────────┴──────────┴─────────────────────────────────────────────────────────────────────────────────────────────────┴──────────┘
+</code></pre>
+<p><img src="https://qs100371.top/post-images/1772937878047.png" alt="" /></p>
+<h1 id="qq">注册QQ机器人</h1>
+<p>浏览器打开 <a href="https://bot.q.qq.com/">https://bot.q.qq.com/</a> ，扫码登录，现在QQ提供了快速接入方式，https://q.qq.com/qqbot/openclaw/index.html ，点击创建机器人，命名为openclaw，直接就给出AppID和AppSecret，注意保存。<br />
+<img src="https://qs100371.top/post-images/1772938298569.png" alt="" /></p>
+<p>配置绑定当前QQ机器人，<br />
+<code>openclaw channels add --channel qqbot --token &quot;1903066816:bCh3GQTQG0b*******&quot;</code></p>
+<p>重启本地OpenClaw服务，这里是重启docker容器。</p>
+<h1 id="qq-1">在QQ中对话</h1>
+<p><img src="https://qs100371.top/post-images/1772937924506.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772937934948.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1772937940391.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1773061313908.png" alt="" /><br />
+<img src="https://qs100371.top/post-images/1773061224138.png" alt="" /><br />
+大模型需要验证：<br />
+<img src="https://qs100371.top/post-images/1773061338081.png" alt="" /><br />
+在docker里运行：<br />
+<code>openclaw models auth login --provider qwen-portal </code><br />
+<img src="https://qs100371.top/post-images/1773061568425.png" alt="" /></p>
+<p>在浏览器里打开 <code>https://chat.qwen.ai/authorize?user_code=ODBYLEFI&amp;client=qwen-code</code> 完成验证。网址在docker中运行命令时有提示。<br />
+<img src="https://qs100371.top/post-images/1773061556764.png" alt="" /></p>
+<p><img src="https://qs100371.top/post-images/1773061218163.png" alt="" /><br />
+参考文献：</p>
+<ol>
+<li>
+<p><em><a href="https://mp.weixin.qq.com/s/4U07LLfykYXKMDa9hlm9VQ">飞牛Nas Docker部署中文汉化版OpenClaw，附飞书+QQ机器人配置详解</a></em></p>
+</li>
+<li>
+<p><em><a href="https://juejin.cn/post/7612030775055515700">手把手教你 OpenClaw 接入 QQ 机器人，让本地 AI 在 QQ 里听你指挥</a></em></p>
+</li>
+</ol>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/openclaw/">openclaw</a>, 
+     
+        <a href="/tag/docker/">docker</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/fydeos-ti-yan/">FydeOS体验</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/geakos-chu-ti-yan/">geakos初体验</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>

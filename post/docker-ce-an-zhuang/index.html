@@ -1,0 +1,1240 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+
+    <meta name="generator" content="Gridea Pro 1.1.1">
+    <title>docker-ce安装 | 折腾日记</title>
+
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#292a2d" media="(prefers-color-scheme: dark)">
+
+    
+    <link rel="shortcut icon" href="/media/images/favicon.ico">
+<link rel="stylesheet" href="/styles/main.min.css">
+
+    
+    <style>:root{--accent-color:#28df99;}</style>
+    
+
+    <script>
+    // 自动为所有 target="_blank" 的链接添加 rel="noopener noreferrer"
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(function(link) {
+            var rel = link.getAttribute('rel') || '';
+            if (rel.indexOf('noopener') === -1) {
+                rel += ' noopener';
+            }
+            if (rel.indexOf('noreferrer') === -1) {
+                rel += ' noreferrer';
+            }
+            link.setAttribute('rel', rel.trim());
+        });
+    });
+</script>
+
+
+
+    <script>
+    // declaraction of document.ready() function.
+    (function () {
+        var ie = !!(window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener)
+                return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)
+                (function () {
+                    try {
+                        d.documentElement.doScroll('left');
+                        run();
+                    } catch (err) {
+                        setTimeout(arguments.callee, 0);
+                    }
+                })();
+            else if (wk)
+                var t = setInterval(function () {
+                    if (/^(loaded|complete)$/.test(d.readyState))
+                        clearInterval(t), run();
+                }, 0);
+        };
+    })();
+
+
+    document.ready(
+        function () {
+            var _Blog = window._Blog || {};
+
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+
+            const configDefault = 'light';
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const initialTheme = currentTheme || configDefault || getSystemTheme();
+            const isDark = initialTheme === 'dark';
+
+            const updateButtons = (dark) => {
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (dark) {
+                    if (sunBtn) sunBtn.style.display = 'none';
+                    if (moonBtn) moonBtn.style.display = 'inline-block';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'none';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'inline-block';
+                } else {
+                    if (sunBtn) sunBtn.style.display = 'inline-block';
+                    if (moonBtn) moonBtn.style.display = 'none';
+                    if (mobileSunBtn) mobileSunBtn.style.display = 'inline-block';
+                    if (mobileMoonBtn) mobileMoonBtn.style.display = 'none';
+                }
+            };
+
+            const updateThemeColor = (dark) => {
+                const themeColor = dark ? '#292a2d' : '#ffffff';
+                const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+                if (metaTags.length > 0) {
+                    // 保留第一个，移除其他的，避免重复
+                    for (let i = 1; i < metaTags.length; i++) {
+                        metaTags[i].remove();
+                    }
+                    metaTags[0].setAttribute('content', themeColor);
+                    metaTags[0].removeAttribute('media');
+                } else {
+                    const meta = document.createElement('meta');
+                    meta.name = 'theme-color';
+                    meta.content = themeColor;
+                    document.head.appendChild(meta);
+                }
+            };
+
+            const applyTheme = (dark) => {
+                const body = document.getElementsByTagName('body')[0];
+                if (dark) {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+                updateButtons(dark);
+                updateThemeColor(dark);
+            };
+
+            // Initial application
+            applyTheme(isDark);
+            if (!currentTheme) {
+                window.localStorage && window.localStorage.setItem('theme', initialTheme);
+            }
+
+            _Blog.toggleTheme = function () {
+                const toggleFunc = (e) => {
+                    // Prevent bubbling if needed, though buttons are distinct now
+                    if (e) e.stopPropagation();
+
+                    const body = document.getElementsByTagName('body')[0];
+                    const isCurrentlyDark = body.classList.contains('dark-theme');
+
+                    if (isCurrentlyDark) {
+                        body.classList.remove('dark-theme');
+                        updateButtons(false);
+                        window.localStorage && window.localStorage.setItem('theme', 'light');
+                    } else {
+                        body.classList.add('dark-theme');
+                        updateButtons(true);
+                        window.localStorage && window.localStorage.setItem('theme', 'dark');
+                    }
+                };
+
+                const sunBtn = document.getElementById("theme-toggle-sun");
+                const moonBtn = document.getElementById("theme-toggle-moon");
+                const mobileSunBtn = document.getElementById("mobile-theme-toggle-sun");
+                const mobileMoonBtn = document.getElementById("mobile-theme-toggle-moon");
+
+                if (sunBtn) sunBtn.addEventListener('click', toggleFunc);
+                if (moonBtn) moonBtn.addEventListener('click', toggleFunc);
+                if (mobileSunBtn) mobileSunBtn.addEventListener('click', toggleFunc);
+                if (mobileMoonBtn) mobileMoonBtn.addEventListener('click', toggleFunc);
+            };
+            _Blog.toggleTheme();
+
+            if (window.matchMedia && !configDefault) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(e.matches);
+                    window.localStorage && window.localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+    );
+</script>
+
+<script>
+    // Reading Progress Component
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressValue = document.querySelector('.reading-value');
+        const progressCircle = document.querySelector('.progress-ring__circle');
+        const container = document.querySelector('.reading-progress-container');
+
+        // Exit if elements don't exist (e.g., not on a post page)
+        if (!progressValue || !progressCircle || !container) {
+            return;
+        }
+
+        // SVG Circle setup
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const safePercent = Math.min(100, Math.max(0, percent));
+            progressValue.textContent = `${Math.round(safePercent)}%`;
+            const offset = circumference - (safePercent / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function onScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+            if (scrollHeight <= 0) {
+                setProgress(0);
+                return;
+            }
+
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            setProgress(scrollPercent);
+
+            // Show/Hide logic: Show if scrolled more than 100px
+            if (scrollTop > 100) {
+                container.classList.add('show');
+            } else {
+                container.classList.remove('show');
+            }
+        }
+
+        // Initialize
+        onScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Recalculate on resize
+        window.addEventListener('resize', onScroll);
+    });
+</script>
+
+
+
+
+    
+
+    
+<meta name="description" content="docker-ce是linux装机必备。">
+<link rel="canonical" href="https://qs100371.github.io/post/docker-ce-an-zhuang/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"docker-ce安装","url":"https://qs100371.github.io/post/docker-ce-an-zhuang/","description":"docker-ce是linux装机必备。","datePublished":"2024-11-12T18:18:54+08:00","dateModified":"2026-05-01T11:05:33+08:00","author":{"@type":"Person","name":"折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://qs100371.github.io","name":"折腾日记","position":1},{"@type":"ListItem","item":"https://qs100371.github.io/post/docker-ce-an-zhuang/","name":"docker-ce安装","position":2}]}</script>
+<meta property="og:title" content="docker-ce安装">
+<meta property="og:description" content="docker-ce是linux装机必备。">
+<meta property="og:url" content="https://qs100371.github.io/post/docker-ce-an-zhuang/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://qs100371.github.io/post/docker-ce-an-zhuang/">
+<meta name="twitter:title" content="docker-ce安装">
+<meta name="twitter:description" content="docker-ce是linux装机必备。">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+
+    <body>
+
+        <script>
+    (function () {
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        const configDefault = 'light';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || configDefault || getSystemTheme();
+
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+
+        if (!savedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+    })();
+</script>
+<header class="mod-head">
+    <div class="mod-head__left">
+        <div class="mod-head__logo">
+            <a href="/">
+                
+                
+                    <img class="avatar" alt="avatar" src="/images/avatar.png">
+                
+            </a>
+        </div>
+    </div>
+
+    <div class="mod-head__right">
+        <span>
+            <button id="theme-toggle-sun" class="tiptap-button theme-toggle-sun" aria-label="Switch to dark mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C12.5523 1 13 1.44772 13 2V4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4V2C11 1.44772 11.4477 1 12 1Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" fill="currentColor"></path>
+                    <path d="M13 20C13 19.4477 12.5523 19 12 19C11.4477 19 11 19.4477 11 20V22C11 22.5523 11.4477 23 12 23C12.5523 23 13 22.5523 13 22V20Z" fill="currentColor"></path>
+                    <path d="M4.22282 4.22289C4.61335 3.83236 5.24651 3.83236 5.63704 4.22289L7.04704 5.63289C7.43756 6.02341 7.43756 6.65658 7.04704 7.0471C6.65651 7.43762 6.02335 7.43762 5.63283 7.0471L4.22282 5.6371C3.8323 5.24658 3.8323 4.61341 4.22282 4.22289Z" fill="currentColor"></path>
+                    <path d="M18.367 16.9529C17.9765 16.5623 17.3433 16.5623 16.9528 16.9529C16.5623 17.3434 16.5623 17.9766 16.9528 18.3671L18.3628 19.7771C18.7533 20.1676 19.3865 20.1676 19.777 19.7771C20.1675 19.3866 20.1675 18.7534 19.777 18.3629L18.367 16.9529Z" fill="currentColor"></path>
+                    <path d="M1 12C1 11.4477 1.44772 11 2 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13H2C1.44772 13 1 12.5523 1 12Z" fill="currentColor"></path>
+                    <path d="M20 11C19.4477 11 19 11.4477 19 12C19 12.5523 19.4477 13 20 13H22C22.5523 13 23 12.5523 23 12C23 11.4477 22.5523 11 22 11H20Z" fill="currentColor"></path>
+                    <path d="M7.04704 16.9529C7.43756 17.3434 7.43756 17.9766 7.04704 18.3671L5.63704 19.7771C5.24651 20.1676 4.61335 20.1676 4.22282 19.7771C3.8323 19.3866 3.8323 18.7534 4.22283 18.3629L5.63283 16.9529C6.02335 16.5623 6.65651 16.5623 7.04704 16.9529Z" fill="currentColor"></path>
+                    <path d="M19.777 5.6371C20.1675 5.24657 20.1675 4.61341 19.777 4.22289C19.3865 3.83236 18.7533 3.83236 18.3628 4.22289L16.9528 5.63289C16.5623 6.02341 16.5623 6.65658 16.9528 7.0471C17.3433 7.43762 17.9765 7.43762 18.367 7.0471L19.777 5.6371Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button id="theme-toggle-moon" class="tiptap-button theme-toggle-moon" aria-label="Switch to light mode">
+                <svg width="18" height="18" class="tiptap-button-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 11.5955 21.7564 11.2309 21.3827 11.0761C21.009 10.9213 20.5789 11.0069 20.2929 11.2929C19.287 12.2988 17.9226 12.864 16.5 12.864C15.0774 12.864 13.713 12.2988 12.7071 11.2929C11.7012 10.287 11.136 8.92261 11.136 7.5C11.136 6.07739 11.7012 4.71304 12.7071 3.70711C12.9931 3.42111 13.0787 2.99099 12.9239 2.61732C12.7691 2.24364 12.4045 2 12 2ZM7.55544 5.34824C8.27036 4.87055 9.05353 4.51389 9.87357 4.28778C9.39271 5.27979 9.13604 6.37666 9.13604 7.5C9.13604 9.45304 9.91189 11.3261 11.2929 12.7071C12.6739 14.0881 14.547 14.864 16.5 14.864C17.6233 14.864 18.7202 14.6073 19.7122 14.1264C19.4861 14.9465 19.1295 15.7296 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.21447 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824Z" fill="currentColor"></path>
+                    <path d="M19 2C19.5523 2 20 2.44772 20 3V4H21C21.5523 4 22 4.44772 22 5C22 5.55228 21.5523 6 21 6H20V7C20 7.55228 19.5523 8 19 8C18.4477 8 18 7.55228 18 7V6H17C16.4477 6 16 5.55228 16 5C16 4.44772 16.4477 4 17 4H18V3C18 2.44772 18.4477 2 19 2Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </span>
+    </div>
+</header>
+<!-- <a href="#" id="back-to-top" style="display: inline;"> ^ </a> -->
+
+            <article class="mod-post mod-post__type-post">
+                <header>
+                    <h1 class="mod-post__title">
+                        docker-ce安装
+                    </h1>
+                </header>
+
+                <div class="mod-post__meta">
+                    <time datetime="2024-11-12">
+                        2024-11-12
+                    </time> • 37 分钟阅读 •
+                        
+                            <a href="/tag/docker/">
+                                docker
+                            </a>
+                            
+                                    
+                </div>
+
+
+
+                <div class="mod-post__entry wzulli">
+                    
+                            <p>docker-ce是linux装机必备。</p>
+<!-- more -->
+<h1 id="heading">自动安装</h1>
+<pre><code>curl -fsSL https://get.docker.com -o get-docker.sh
+sh ./get-docker.sh
+</code></pre>
+<p>或<br />
+<code>curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</code></p>
+<p>get-docker.sh内容：</p>
+<pre><code>#!/bin/sh
+set -e
+
+# Source code is available at https://github.com/docker/docker-install/
+#
+# Usage
+# ==============================================================================
+#
+# To install the latest stable versions of Docker CLI, Docker Engine, and their
+# dependencies:
+#
+# 1. download the script
+#
+#   $ curl -fsSL https://get.docker.com -o install-docker.sh
+#
+# 2. verify the script's content
+#
+#   $ cat install-docker.sh
+#
+# 3. run the script with --dry-run to verify the steps it executes
+#
+#   $ sh install-docker.sh --dry-run
+#
+# 4. run the script either as root, or using sudo to perform the installation.
+#
+#   $ sudo sh install-docker.sh
+#
+# Command-line options
+# ==============================================================================
+#
+# --version &lt;VERSION&gt;
+# Use the --version option to install a specific version, for example:
+#
+#   $ sudo sh install-docker.sh --version 23.0
+#
+# --channel &lt;stable|test&gt;
+#
+# Use the --channel option to install from an alternative installation channel.
+# The following example installs the latest versions from the &quot;test&quot; channel,
+# which includes pre-releases (alpha, beta, rc):
+#
+#   $ sudo sh install-docker.sh --channel test
+#
+# Alternatively, use the script at https://test.docker.com, which uses the test
+# channel as default.
+#
+# --mirror &lt;Aliyun|AzureChinaCloud&gt;
+#
+# Use the --mirror option to install from a mirror supported by this script.
+# Available mirrors are &quot;Aliyun&quot; (https://mirrors.aliyun.com/docker-ce), and
+# &quot;AzureChinaCloud&quot; (https://mirror.azure.cn/docker-ce), for example:
+#
+#   $ sudo sh install-docker.sh --mirror AzureChinaCloud
+#
+# ==============================================================================
+
+
+# Git commit from https://github.com/docker/docker-install when
+# the script was uploaded (Should only be modified by upload job):
+SCRIPT_COMMIT_SHA=&quot;4c94a56999e10efcf48c5b8e3f6afea464f9108e&quot;
+
+# strip &quot;v&quot; prefix if present
+VERSION=&quot;${VERSION#v}&quot;
+
+# The channel to install from:
+#   * stable
+#   * test
+DEFAULT_CHANNEL_VALUE=&quot;stable&quot;
+if [ -z &quot;$CHANNEL&quot; ]; then
+	CHANNEL=$DEFAULT_CHANNEL_VALUE
+fi
+
+DEFAULT_DOWNLOAD_URL=&quot;https://download.docker.com&quot;
+if [ -z &quot;$DOWNLOAD_URL&quot; ]; then
+	DOWNLOAD_URL=$DEFAULT_DOWNLOAD_URL
+fi
+
+DEFAULT_REPO_FILE=&quot;docker-ce.repo&quot;
+if [ -z &quot;$REPO_FILE&quot; ]; then
+	REPO_FILE=&quot;$DEFAULT_REPO_FILE&quot;
+fi
+
+mirror=''
+DRY_RUN=${DRY_RUN:-}
+while [ $# -gt 0 ]; do
+	case &quot;$1&quot; in
+		--channel)
+			CHANNEL=&quot;$2&quot;
+			shift
+			;;
+		--dry-run)
+			DRY_RUN=1
+			;;
+		--mirror)
+			mirror=&quot;$2&quot;
+			shift
+			;;
+		--version)
+			VERSION=&quot;${2#v}&quot;
+			shift
+			;;
+		--*)
+			echo &quot;Illegal option $1&quot;
+			;;
+	esac
+	shift $(( $# &gt; 0 ? 1 : 0 ))
+done
+
+case &quot;$mirror&quot; in
+	Aliyun)
+		DOWNLOAD_URL=&quot;https://mirrors.aliyun.com/docker-ce&quot;
+		;;
+	AzureChinaCloud)
+		DOWNLOAD_URL=&quot;https://mirror.azure.cn/docker-ce&quot;
+		;;
+	&quot;&quot;)
+		;;
+	*)
+		&gt;&amp;2 echo &quot;unknown mirror '$mirror': use either 'Aliyun', or 'AzureChinaCloud'.&quot;
+		exit 1
+		;;
+esac
+
+case &quot;$CHANNEL&quot; in
+	stable|test)
+		;;
+	*)
+		&gt;&amp;2 echo &quot;unknown CHANNEL '$CHANNEL': use either stable or test.&quot;
+		exit 1
+		;;
+esac
+
+command_exists() {
+	command -v &quot;$@&quot; &gt; /dev/null 2&gt;&amp;1
+}
+
+# version_gte checks if the version specified in $VERSION is at least the given
+# SemVer (Maj.Minor[.Patch]), or CalVer (YY.MM) version.It returns 0 (success)
+# if $VERSION is either unset (=latest) or newer or equal than the specified
+# version, or returns 1 (fail) otherwise.
+#
+# examples:
+#
+# VERSION=23.0
+# version_gte 23.0  // 0 (success)
+# version_gte 20.10 // 0 (success)
+# version_gte 19.03 // 0 (success)
+# version_gte 26.1  // 1 (fail)
+version_gte() {
+	if [ -z &quot;$VERSION&quot; ]; then
+			return 0
+	fi
+	version_compare &quot;$VERSION&quot; &quot;$1&quot;
+}
+
+# version_compare compares two version strings (either SemVer (Major.Minor.Path),
+# or CalVer (YY.MM) version strings. It returns 0 (success) if version A is newer
+# or equal than version B, or 1 (fail) otherwise. Patch releases and pre-release
+# (-alpha/-beta) are not taken into account
+#
+# examples:
+#
+# version_compare 23.0.0 20.10 // 0 (success)
+# version_compare 23.0 20.10   // 0 (success)
+# version_compare 20.10 19.03  // 0 (success)
+# version_compare 20.10 20.10  // 0 (success)
+# version_compare 19.03 20.10  // 1 (fail)
+version_compare() (
+	set +x
+
+	yy_a=&quot;$(echo &quot;$1&quot; | cut -d'.' -f1)&quot;
+	yy_b=&quot;$(echo &quot;$2&quot; | cut -d'.' -f1)&quot;
+	if [ &quot;$yy_a&quot; -lt &quot;$yy_b&quot; ]; then
+		return 1
+	fi
+	if [ &quot;$yy_a&quot; -gt &quot;$yy_b&quot; ]; then
+		return 0
+	fi
+	mm_a=&quot;$(echo &quot;$1&quot; | cut -d'.' -f2)&quot;
+	mm_b=&quot;$(echo &quot;$2&quot; | cut -d'.' -f2)&quot;
+
+	# trim leading zeros to accommodate CalVer
+	mm_a=&quot;${mm_a#0}&quot;
+	mm_b=&quot;${mm_b#0}&quot;
+
+	if [ &quot;${mm_a:-0}&quot; -lt &quot;${mm_b:-0}&quot; ]; then
+		return 1
+	fi
+
+	return 0
+)
+
+is_dry_run() {
+	if [ -z &quot;$DRY_RUN&quot; ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
+is_wsl() {
+	case &quot;$(uname -r)&quot; in
+	*microsoft* ) true ;; # WSL 2
+	*Microsoft* ) true ;; # WSL 1
+	* ) false;;
+	esac
+}
+
+is_darwin() {
+	case &quot;$(uname -s)&quot; in
+	*darwin* ) true ;;
+	*Darwin* ) true ;;
+	* ) false;;
+	esac
+}
+
+deprecation_notice() {
+	distro=$1
+	distro_version=$2
+	echo
+	printf &quot;\033[91;1mDEPRECATION WARNING\033[0m\n&quot;
+	printf &quot;    This Linux distribution (\033[1m%s %s\033[0m) reached end-of-life and is no longer supported by this script.\n&quot; &quot;$distro&quot; &quot;$distro_version&quot;
+	echo   &quot;    No updates or security fixes will be released for this distribution, and users are recommended&quot;
+	echo   &quot;    to upgrade to a currently maintained version of $distro.&quot;
+	echo
+	printf   &quot;Press \033[1mCtrl+C\033[0m now to abort this script, or wait for the installation to continue.&quot;
+	echo
+	sleep 10
+}
+
+get_distribution() {
+	lsb_dist=&quot;&quot;
+	# Every system that we officially support has /etc/os-release
+	if [ -r /etc/os-release ]; then
+		lsb_dist=&quot;$(. /etc/os-release &amp;&amp; echo &quot;$ID&quot;)&quot;
+	fi
+	# Returning an empty string here should be alright since the
+	# case statements don't act unless you provide an actual value
+	echo &quot;$lsb_dist&quot;
+}
+
+echo_docker_as_nonroot() {
+	if is_dry_run; then
+		return
+	fi
+	if command_exists docker &amp;&amp; [ -e /var/run/docker.sock ]; then
+		(
+			set -x
+			$sh_c 'docker version'
+		) || true
+	fi
+
+	# intentionally mixed spaces and tabs here -- tabs are stripped by &quot;&lt;&lt;-EOF&quot;, spaces are kept in the output
+	echo
+	echo &quot;================================================================================&quot;
+	echo
+	if version_gte &quot;20.10&quot;; then
+		echo &quot;To run Docker as a non-privileged user, consider setting up the&quot;
+		echo &quot;Docker daemon in rootless mode for your user:&quot;
+		echo
+		echo &quot;    dockerd-rootless-setuptool.sh install&quot;
+		echo
+		echo &quot;Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.&quot;
+		echo
+	fi
+	echo
+	echo &quot;To run the Docker daemon as a fully privileged service, but granting non-root&quot;
+	echo &quot;users access, refer to https://docs.docker.com/go/daemon-access/&quot;
+	echo
+	echo &quot;WARNING: Access to the remote API on a privileged Docker daemon is equivalent&quot;
+	echo &quot;         to root access on the host. Refer to the 'Docker daemon attack surface'&quot;
+	echo &quot;         documentation for details: https://docs.docker.com/go/attack-surface/&quot;
+	echo
+	echo &quot;================================================================================&quot;
+	echo
+}
+
+# Check if this is a forked Linux distro
+check_forked() {
+
+	# Check for lsb_release command existence, it usually exists in forked distros
+	if command_exists lsb_release; then
+		# Check if the `-u` option is supported
+		set +e
+		lsb_release -a -u &gt; /dev/null 2&gt;&amp;1
+		lsb_release_exit_code=$?
+		set -e
+
+		# Check if the command has exited successfully, it means we're in a forked distro
+		if [ &quot;$lsb_release_exit_code&quot; = &quot;0&quot; ]; then
+			# Print info about current distro
+			cat &lt;&lt;-EOF
+			You're using '$lsb_dist' version '$dist_version'.
+			EOF
+
+			# Get the upstream release info
+			lsb_dist=$(lsb_release -a -u 2&gt;&amp;1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
+			dist_version=$(lsb_release -a -u 2&gt;&amp;1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
+
+			# Print info about upstream distro
+			cat &lt;&lt;-EOF
+			Upstream release is '$lsb_dist' version '$dist_version'.
+			EOF
+		else
+			if [ -r /etc/debian_version ] &amp;&amp; [ &quot;$lsb_dist&quot; != &quot;ubuntu&quot; ] &amp;&amp; [ &quot;$lsb_dist&quot; != &quot;raspbian&quot; ]; then
+				if [ &quot;$lsb_dist&quot; = &quot;osmc&quot; ]; then
+					# OSMC runs Raspbian
+					lsb_dist=raspbian
+				else
+					# We're Debian and don't even know it!
+					lsb_dist=debian
+				fi
+				dist_version=&quot;$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')&quot;
+				case &quot;$dist_version&quot; in
+					12)
+						dist_version=&quot;bookworm&quot;
+					;;
+					11)
+						dist_version=&quot;bullseye&quot;
+					;;
+					10)
+						dist_version=&quot;buster&quot;
+					;;
+					9)
+						dist_version=&quot;stretch&quot;
+					;;
+					8)
+						dist_version=&quot;jessie&quot;
+					;;
+				esac
+			fi
+		fi
+	fi
+}
+
+do_install() {
+	echo &quot;# Executing docker install script, commit: $SCRIPT_COMMIT_SHA&quot;
+
+	if command_exists docker; then
+		cat &gt;&amp;2 &lt;&lt;-'EOF'
+			Warning: the &quot;docker&quot; command appears to already exist on this system.
+
+			If you already have Docker installed, this script can cause trouble, which is
+			why we're displaying this warning and provide the opportunity to cancel the
+			installation.
+
+			If you installed the current Docker package using this script and are using it
+			again to update Docker, you can ignore this message, but be aware that the
+			script resets any custom changes in the deb and rpm repo configuration
+			files to match the parameters passed to the script.
+
+			You may press Ctrl+C now to abort this script.
+		EOF
+		( set -x; sleep 20 )
+	fi
+
+	user=&quot;$(id -un 2&gt;/dev/null || true)&quot;
+
+	sh_c='sh -c'
+	if [ &quot;$user&quot; != 'root' ]; then
+		if command_exists sudo; then
+			sh_c='sudo -E sh -c'
+		elif command_exists su; then
+			sh_c='su -c'
+		else
+			cat &gt;&amp;2 &lt;&lt;-'EOF'
+			Error: this installer needs the ability to run commands as root.
+			We are unable to find either &quot;sudo&quot; or &quot;su&quot; available to make this happen.
+			EOF
+			exit 1
+		fi
+	fi
+
+	if is_dry_run; then
+		sh_c=&quot;echo&quot;
+	fi
+
+	# perform some very rudimentary platform detection
+	lsb_dist=$( get_distribution )
+	lsb_dist=&quot;$(echo &quot;$lsb_dist&quot; | tr '[:upper:]' '[:lower:]')&quot;
+
+	if is_wsl; then
+		echo
+		echo &quot;WSL DETECTED: We recommend using Docker Desktop for Windows.&quot;
+		echo &quot;Please get Docker Desktop from https://www.docker.com/products/docker-desktop/&quot;
+		echo
+		cat &gt;&amp;2 &lt;&lt;-'EOF'
+
+			You may press Ctrl+C now to abort this script.
+		EOF
+		( set -x; sleep 20 )
+	fi
+
+	case &quot;$lsb_dist&quot; in
+
+		ubuntu)
+			if command_exists lsb_release; then
+				dist_version=&quot;$(lsb_release --codename | cut -f2)&quot;
+			fi
+			if [ -z &quot;$dist_version&quot; ] &amp;&amp; [ -r /etc/lsb-release ]; then
+				dist_version=&quot;$(. /etc/lsb-release &amp;&amp; echo &quot;$DISTRIB_CODENAME&quot;)&quot;
+			fi
+		;;
+
+		debian|raspbian)
+			dist_version=&quot;$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')&quot;
+			case &quot;$dist_version&quot; in
+				12)
+					dist_version=&quot;bookworm&quot;
+				;;
+				11)
+					dist_version=&quot;bullseye&quot;
+				;;
+				10)
+					dist_version=&quot;buster&quot;
+				;;
+				9)
+					dist_version=&quot;stretch&quot;
+				;;
+				8)
+					dist_version=&quot;jessie&quot;
+				;;
+			esac
+		;;
+
+		centos|rhel)
+			if [ -z &quot;$dist_version&quot; ] &amp;&amp; [ -r /etc/os-release ]; then
+				dist_version=&quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_ID&quot;)&quot;
+			fi
+		;;
+
+		*)
+			if command_exists lsb_release; then
+				dist_version=&quot;$(lsb_release --release | cut -f2)&quot;
+			fi
+			if [ -z &quot;$dist_version&quot; ] &amp;&amp; [ -r /etc/os-release ]; then
+				dist_version=&quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_ID&quot;)&quot;
+			fi
+		;;
+
+	esac
+
+	# Check if this is a forked Linux distro
+	check_forked
+
+	# Print deprecation warnings for distro versions that recently reached EOL,
+	# but may still be commonly used (especially LTS versions).
+	case &quot;$lsb_dist.$dist_version&quot; in
+		centos.8|centos.7|rhel.7)
+			deprecation_notice &quot;$lsb_dist&quot; &quot;$dist_version&quot;
+			;;
+		debian.buster|debian.stretch|debian.jessie)
+			deprecation_notice &quot;$lsb_dist&quot; &quot;$dist_version&quot;
+			;;
+		raspbian.buster|raspbian.stretch|raspbian.jessie)
+			deprecation_notice &quot;$lsb_dist&quot; &quot;$dist_version&quot;
+			;;
+		ubuntu.bionic|ubuntu.xenial|ubuntu.trusty)
+			deprecation_notice &quot;$lsb_dist&quot; &quot;$dist_version&quot;
+			;;
+		ubuntu.mantic|ubuntu.lunar|ubuntu.kinetic|ubuntu.impish|ubuntu.hirsute|ubuntu.groovy|ubuntu.eoan|ubuntu.disco|ubuntu.cosmic)
+			deprecation_notice &quot;$lsb_dist&quot; &quot;$dist_version&quot;
+			;;
+		fedora.*)
+			if [ &quot;$dist_version&quot; -lt 40 ]; then
+				deprecation_notice &quot;$lsb_dist&quot; &quot;$dist_version&quot;
+			fi
+			;;
+	esac
+
+	# Run setup for each distro accordingly
+	case &quot;$lsb_dist&quot; in
+		ubuntu|debian|raspbian)
+			pre_reqs=&quot;ca-certificates curl&quot;
+			apt_repo=&quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] $DOWNLOAD_URL/linux/$lsb_dist $dist_version $CHANNEL&quot;
+			(
+				if ! is_dry_run; then
+					set -x
+				fi
+				$sh_c 'apt-get -qq update &gt;/dev/null'
+				$sh_c &quot;DEBIAN_FRONTEND=noninteractive apt-get -y -qq install $pre_reqs &gt;/dev/null&quot;
+				$sh_c 'install -m 0755 -d /etc/apt/keyrings'
+				$sh_c &quot;curl -fsSL \&quot;$DOWNLOAD_URL/linux/$lsb_dist/gpg\&quot; -o /etc/apt/keyrings/docker.asc&quot;
+				$sh_c &quot;chmod a+r /etc/apt/keyrings/docker.asc&quot;
+				$sh_c &quot;echo \&quot;$apt_repo\&quot; &gt; /etc/apt/sources.list.d/docker.list&quot;
+				$sh_c 'apt-get -qq update &gt;/dev/null'
+			)
+			pkg_version=&quot;&quot;
+			if [ -n &quot;$VERSION&quot; ]; then
+				if is_dry_run; then
+					echo &quot;# WARNING: VERSION pinning is not supported in DRY_RUN&quot;
+				else
+					# Will work for incomplete versions IE (17.12), but may not actually grab the &quot;latest&quot; if in the test channel
+					pkg_pattern=&quot;$(echo &quot;$VERSION&quot; | sed 's/-ce-/~ce~.*/g' | sed 's/-/.*/g')&quot;
+					search_command=&quot;apt-cache madison docker-ce | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3&quot;
+					pkg_version=&quot;$($sh_c &quot;$search_command&quot;)&quot;
+					echo &quot;INFO: Searching repository for VERSION '$VERSION'&quot;
+					echo &quot;INFO: $search_command&quot;
+					if [ -z &quot;$pkg_version&quot; ]; then
+						echo
+						echo &quot;ERROR: '$VERSION' not found amongst apt-cache madison results&quot;
+						echo
+						exit 1
+					fi
+					if version_gte &quot;18.09&quot;; then
+							search_command=&quot;apt-cache madison docker-ce-cli | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3&quot;
+							echo &quot;INFO: $search_command&quot;
+							cli_pkg_version=&quot;=$($sh_c &quot;$search_command&quot;)&quot;
+					fi
+					pkg_version=&quot;=$pkg_version&quot;
+				fi
+			fi
+			(
+				pkgs=&quot;docker-ce${pkg_version%=}&quot;
+				if version_gte &quot;18.09&quot;; then
+						# older versions didn't ship the cli and containerd as separate packages
+						pkgs=&quot;$pkgs docker-ce-cli${cli_pkg_version%=} containerd.io&quot;
+				fi
+				if version_gte &quot;20.10&quot;; then
+						pkgs=&quot;$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version&quot;
+				fi
+				if version_gte &quot;23.0&quot;; then
+						pkgs=&quot;$pkgs docker-buildx-plugin&quot;
+				fi
+				if ! is_dry_run; then
+					set -x
+				fi
+				$sh_c &quot;DEBIAN_FRONTEND=noninteractive apt-get -y -qq install $pkgs &gt;/dev/null&quot;
+			)
+			echo_docker_as_nonroot
+			exit 0
+			;;
+		centos|fedora|rhel)
+			repo_file_url=&quot;$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE&quot;
+			(
+				if ! is_dry_run; then
+					set -x
+				fi
+				if command_exists dnf5; then
+					$sh_c &quot;dnf -y -q --setopt=install_weak_deps=False install dnf-plugins-core&quot;
+					$sh_c &quot;dnf5 config-manager addrepo --overwrite --save-filename=docker-ce.repo --from-repofile='$repo_file_url'&quot;
+
+					if [ &quot;$CHANNEL&quot; != &quot;stable&quot; ]; then
+						$sh_c &quot;dnf5 config-manager setopt \&quot;docker-ce-*.enabled=0\&quot;&quot;
+						$sh_c &quot;dnf5 config-manager setopt \&quot;docker-ce-$CHANNEL.enabled=1\&quot;&quot;
+					fi
+					$sh_c &quot;dnf makecache&quot;
+				elif command_exists dnf; then
+					$sh_c &quot;dnf -y -q --setopt=install_weak_deps=False install dnf-plugins-core&quot;
+					$sh_c &quot;rm -f /etc/yum.repos.d/docker-ce.repo  /etc/yum.repos.d/docker-ce-staging.repo&quot;
+					$sh_c &quot;dnf config-manager --add-repo $repo_file_url&quot;
+
+					if [ &quot;$CHANNEL&quot; != &quot;stable&quot; ]; then
+						$sh_c &quot;dnf config-manager --set-disabled \&quot;docker-ce-*\&quot;&quot;
+						$sh_c &quot;dnf config-manager --set-enabled \&quot;docker-ce-$CHANNEL\&quot;&quot;
+					fi
+					$sh_c &quot;dnf makecache&quot;
+				else
+					$sh_c &quot;yum -y -q install yum-utils&quot;
+					$sh_c &quot;rm -f /etc/yum.repos.d/docker-ce.repo  /etc/yum.repos.d/docker-ce-staging.repo&quot;
+					$sh_c &quot;yum-config-manager --add-repo $repo_file_url&quot;
+
+					if [ &quot;$CHANNEL&quot; != &quot;stable&quot; ]; then
+						$sh_c &quot;yum-config-manager --disable \&quot;docker-ce-*\&quot;&quot;
+						$sh_c &quot;yum-config-manager --enable \&quot;docker-ce-$CHANNEL\&quot;&quot;
+					fi
+					$sh_c &quot;yum makecache&quot;
+				fi
+			)
+			pkg_version=&quot;&quot;
+			if command_exists dnf; then
+				pkg_manager=&quot;dnf&quot;
+				pkg_manager_flags=&quot;-y -q --best&quot;
+			else
+				pkg_manager=&quot;yum&quot;
+				pkg_manager_flags=&quot;-y -q&quot;
+			fi
+			if [ -n &quot;$VERSION&quot; ]; then
+				if is_dry_run; then
+					echo &quot;# WARNING: VERSION pinning is not supported in DRY_RUN&quot;
+				else
+					if [ &quot;$lsb_dist&quot; = &quot;fedora&quot; ]; then
+						pkg_suffix=&quot;fc$dist_version&quot;
+					else
+						pkg_suffix=&quot;el&quot;
+					fi
+					pkg_pattern=&quot;$(echo &quot;$VERSION&quot; | sed 's/-ce-/\\\\.ce.*/g' | sed 's/-/.*/g').*$pkg_suffix&quot;
+					search_command=&quot;$pkg_manager list --showduplicates docker-ce | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'&quot;
+					pkg_version=&quot;$($sh_c &quot;$search_command&quot;)&quot;
+					echo &quot;INFO: Searching repository for VERSION '$VERSION'&quot;
+					echo &quot;INFO: $search_command&quot;
+					if [ -z &quot;$pkg_version&quot; ]; then
+						echo
+						echo &quot;ERROR: '$VERSION' not found amongst $pkg_manager list results&quot;
+						echo
+						exit 1
+					fi
+					if version_gte &quot;18.09&quot;; then
+						# older versions don't support a cli package
+						search_command=&quot;$pkg_manager list --showduplicates docker-ce-cli | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'&quot;
+						cli_pkg_version=&quot;$($sh_c &quot;$search_command&quot; | cut -d':' -f 2)&quot;
+					fi
+					# Cut out the epoch and prefix with a '-'
+					pkg_version=&quot;-$(echo &quot;$pkg_version&quot; | cut -d':' -f 2)&quot;
+				fi
+			fi
+			(
+				pkgs=&quot;docker-ce$pkg_version&quot;
+				if version_gte &quot;18.09&quot;; then
+					# older versions didn't ship the cli and containerd as separate packages
+					if [ -n &quot;$cli_pkg_version&quot; ]; then
+						pkgs=&quot;$pkgs docker-ce-cli-$cli_pkg_version containerd.io&quot;
+					else
+						pkgs=&quot;$pkgs docker-ce-cli containerd.io&quot;
+					fi
+				fi
+				if version_gte &quot;20.10&quot;; then
+					pkgs=&quot;$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version&quot;
+				fi
+				if version_gte &quot;23.0&quot;; then
+						pkgs=&quot;$pkgs docker-buildx-plugin&quot;
+				fi
+				if ! is_dry_run; then
+					set -x
+				fi
+				$sh_c &quot;$pkg_manager $pkg_manager_flags install $pkgs&quot;
+			)
+			echo_docker_as_nonroot
+			exit 0
+			;;
+		sles)
+			if [ &quot;$(uname -m)&quot; != &quot;s390x&quot; ]; then
+				echo &quot;Packages for SLES are currently only available for s390x&quot;
+				exit 1
+			fi
+			repo_file_url=&quot;$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE&quot;
+			pre_reqs=&quot;ca-certificates curl libseccomp2 awk&quot;
+			(
+				if ! is_dry_run; then
+					set -x
+				fi
+				$sh_c &quot;zypper install -y $pre_reqs&quot;
+				$sh_c &quot;rm -f /etc/zypp/repos.d/docker-ce-*.repo&quot;
+				$sh_c &quot;zypper addrepo $repo_file_url&quot;
+
+				opensuse_factory_url=&quot;https://download.opensuse.org/repositories/security:/SELinux/openSUSE_Factory/&quot;
+				if ! zypper lr -d | grep -q &quot;${opensuse_factory_url}&quot;; then
+					opensuse_repo=&quot;${opensuse_factory_url}security:SELinux.repo&quot;
+					if ! is_dry_run; then
+						cat &gt;&amp;2 &lt;&lt;- EOF
+							WARNING!!
+							openSUSE repository ($opensuse_repo) will be enabled now.
+							Do you wish to continue?
+							You may press Ctrl+C now to abort this script.
+						EOF
+						( set -x; sleep 20 )
+					fi
+					$sh_c &quot;zypper addrepo $opensuse_repo&quot;
+				fi
+				$sh_c &quot;zypper --gpg-auto-import-keys refresh&quot;
+				$sh_c &quot;zypper lr -d&quot;
+			)
+			pkg_version=&quot;&quot;
+			if [ -n &quot;$VERSION&quot; ]; then
+				if is_dry_run; then
+					echo &quot;# WARNING: VERSION pinning is not supported in DRY_RUN&quot;
+				else
+					pkg_pattern=&quot;$(echo &quot;$VERSION&quot; | sed 's/-ce-/\\\\.ce.*/g' | sed 's/-/.*/g')&quot;
+					search_command=&quot;zypper search -s --match-exact 'docker-ce' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'&quot;
+					pkg_version=&quot;$($sh_c &quot;$search_command&quot;)&quot;
+					echo &quot;INFO: Searching repository for VERSION '$VERSION'&quot;
+					echo &quot;INFO: $search_command&quot;
+					if [ -z &quot;$pkg_version&quot; ]; then
+						echo
+						echo &quot;ERROR: '$VERSION' not found amongst zypper list results&quot;
+						echo
+						exit 1
+					fi
+					search_command=&quot;zypper search -s --match-exact 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'&quot;
+					# It's okay for cli_pkg_version to be blank, since older versions don't support a cli package
+					cli_pkg_version=&quot;$($sh_c &quot;$search_command&quot;)&quot;
+					pkg_version=&quot;-$pkg_version&quot;
+				fi
+			fi
+			(
+				pkgs=&quot;docker-ce$pkg_version&quot;
+				if version_gte &quot;18.09&quot;; then
+					if [ -n &quot;$cli_pkg_version&quot; ]; then
+						# older versions didn't ship the cli and containerd as separate packages
+						pkgs=&quot;$pkgs docker-ce-cli-$cli_pkg_version containerd.io&quot;
+					else
+						pkgs=&quot;$pkgs docker-ce-cli containerd.io&quot;
+					fi
+				fi
+				if version_gte &quot;20.10&quot;; then
+					pkgs=&quot;$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version&quot;
+				fi
+				if version_gte &quot;23.0&quot;; then
+						pkgs=&quot;$pkgs docker-buildx-plugin&quot;
+				fi
+				if ! is_dry_run; then
+					set -x
+				fi
+				$sh_c &quot;zypper -q install -y $pkgs&quot;
+			)
+			echo_docker_as_nonroot
+			exit 0
+			;;
+		*)
+			if [ -z &quot;$lsb_dist&quot; ]; then
+				if is_darwin; then
+					echo
+					echo &quot;ERROR: Unsupported operating system 'macOS'&quot;
+					echo &quot;Please get Docker Desktop from https://www.docker.com/products/docker-desktop&quot;
+					echo
+					exit 1
+				fi
+			fi
+			echo
+			echo &quot;ERROR: Unsupported distribution '$lsb_dist'&quot;
+			echo
+			exit 1
+			;;
+	esac
+	exit 1
+}
+
+# wrapped up in a function so that we have some protection against only getting
+# half the file during &quot;curl | sh&quot;
+do_install
+</code></pre>
+<h1 id="heading-1">手动安装</h1>
+<p>如果过去安装过 docker，先删掉：<br />
+<code>for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done</code></p>
+<p>首先安装依赖：<br />
+<code>apt update</code><br />
+<code>sudo apt install ca-certificates curl gnupg</code><br />
+信任 Docker 的 GPG 公钥并添加仓库：</p>
+<pre><code>install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \
+  &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; stable&quot; | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</code></pre>
+<p>最后安装<br />
+<code>sudo apt update</code><br />
+<code>sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></p>
+<p><em>更新于2025年7月11日</em></p>
+
+                </div>
+
+            </article>
+
+
+            
+                
+	<div class="mod-post__foot">
+	 文章标签: 
+     
+        <a href="/tag/docker/">docker</a>
+     
+     </br>
+	</div>
+
+                    
+
+                        <div class="mod-post__poster">
+                        </div>
+
+                        </div>
+
+                        
+                            
+<br>
+
+<div style="margin-bottom: 10px;">
+    上一篇 : <a href="/post/ai-huan-lian-facefusion/">ai换脸facefusion</a>
+</div>
+
+
+
+<div style="margin-bottom: 40px;">
+    下一篇 : <a href="/post/docker-geng-huan-cun-chu-wei-zhi/">docker更换存储位置</a>
+</div>
+
+
+</div>	
+
+                                
+
+                                    
+    
+        
+    <div id="comments" class="cf">
+        <div class="comments-header">留言</div>
+        <div id="waline"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline.qs100371.top',
+        });
+    </script>
+    
+            
+                                        
+                                        <!-- Reading Progress Component -->
+<div class="reading-progress-container">
+  <span class="reading-label">阅读进度</span>
+  <span class="reading-value">0%</span>
+  <svg class="progress-ring" viewBox="0 0 24 24">
+    <!-- Background Circle -->
+    <circle class="progress-ring__circle-bg" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+    <!-- Progress Circle -->
+    <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="10" cx="12" cy="12" />
+  </svg>
+</div>
+                                            <footer id="footer" class="footer">
+    <nav>
+        
+            
+                    <a class="menu-item" href="/">
+                        首页
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/post">
+                        博客
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/memos">
+                        闪念
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/archives">
+                        归档
+                    </a>
+                    
+             · 
+                    <a class="menu-item" href="/tags">
+                        标签
+                    </a>
+                    
+    </nav>
+
+    <div class="Copyright">Copyright &copy; 2026 <a href="https://qs100371.github.io">
+                折腾日记
+            </a></div>
+
+    <div class="index_footer">
+        Powered by Gridea Pro<br>
+<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank">
+    <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br>
+    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
+    开往</a><span id="counter" style="font-size: 10px;">1000</span>
+    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script> ·
+            <a class="rss" href="/feed.xml" target="_blank" rel="noopener noreferrer">
+                <i class="ri-rss-line"></i> RSS
+            </a>
+    </div>
+</footer>
+
+
+
+
+    <script>console.log("\n%c ✦ Gridea Pro v1.1.1 %c · Theme: amore v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+    </html>
