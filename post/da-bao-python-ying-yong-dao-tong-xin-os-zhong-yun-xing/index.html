@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>打包python应用到统信os中运行 | 折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在win10下写了一个python抽签程序，需要搬到统信os下去运行，但没有root权限，不能安装tkinter或qt5组件，所以要把python应用打包成单一可执行文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打包python应用到统信os中运行">
+<meta property="og:url" content="https://qs100371.top/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/">
+<meta property="og:site_name" content="折腾日记">
+<meta property="og:description" content="在win10下写了一个python抽签程序，需要搬到统信os下去运行，但没有root权限，不能安装tkinter或qt5组件，所以要把python应用打包成单一可执行文件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.top/images/cover/09.webp">
+<meta property="article:published_time" content="2026-05-19T13:52:27.000Z">
+<meta property="article:modified_time" content="2026-05-19T15:24:47.638Z">
+<meta property="article:author" content="qs100371">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qs100371.top/images/cover/09.webp"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "打包python应用到统信os中运行",
+  "url": "https://qs100371.top/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/",
+  "image": "https://qs100371.top/images/cover/09.webp",
+  "datePublished": "2026-05-19T13:52:27.000Z",
+  "dateModified": "2026-05-19T15:24:47.638Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qs100371",
+      "url": "mailto:qs@qs100371.top"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/avatar.png"><link rel="canonical" href="https://qs100371.top/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":1000,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '打包python应用到统信os中运行',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">238</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-coffee"></i><span> 说说</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://qs100371.top/images/cover/09.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a><a class="nav-page-title" href="/"><span class="site-name">打包python应用到统信os中运行</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-coffee"></i><span> 说说</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">打包python应用到统信os中运行</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-19T13:52:27.000Z" title="发表于 2026-05-19 21:52:27">2026-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-19T15:24:47.638Z" title="更新于 2026-05-19 23:24:47">2026-05-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.2k</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="waline-pageview-count" data-path="/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/#post-comment"><span class="waline-comment-count" data-path="/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:120,&quot;messagePrev&quot;:&quot;自上次更新以来已经过去了&quot;,&quot;messageNext&quot;:&quot;天，文章的内容可能已经过时。&quot;,&quot;postUpdate&quot;:&quot;2026-05-19 23:24:47&quot;}" hidden></div><p>在win10下写了一个python抽签程序，需要搬到统信os下去运行，但没有root权限，不能安装tkinter或qt5组件，所以要把python应用打包成单一可执行文件。</p>
+<span id="more"></span>
+<p>python应用打包可用pyinstaller，要打包统信os下能运行，需要在统信os下进行打包。</p>
+<h1 id="vbox安装统信os-v20"><a href="#vbox安装统信os-v20" class="headerlink" title="vbox安装统信os v20"></a>vbox安装统信os v20</h1><p>从统信官网下载统信os v20的iso文件，安装到vbox。<br><img src="https://qs100371.top/post-images/1779200816603.png"><br>打开开发者模式：<br><img src="https://qs100371.top/post-images/1779200925337.png"><br>打开运行任意应用的权限：<br><img src="https://qs100371.top/post-images/1779200921322.png"></p>
+<h1 id="安装python环境和组件"><a href="#安装python环境和组件" class="headerlink" title="安装python环境和组件"></a>安装python环境和组件</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install python3-pip</span><br><span class="line">pip3 install pyinstaller</span><br></pre></td></tr></table></figure>
+
+<p>安装pyinstaller会出错，原因是典型的缺少编译依赖或pip 版本过旧。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install build-essential python3-dev zlib1g-dev libssl-dev</span><br><span class="line"><span class="comment">##升级 pip 和 setuptools</span></span><br><span class="line">python3 -m pip install --upgrade pip setuptools wheel</span><br><span class="line"><span class="comment">##再次安装pyinstaller</span></span><br><span class="line">pip3 install pyinstaller</span><br></pre></td></tr></table></figure>
+
+<p>运行pyinstaller，提示命令没找到，pyinstaller安装在~&#x2F;.local&#x2F;bin，此路径还没有被系统“PATH环境变量”纳入搜索范围的目录里。<br><code>nano ~/.bashrc</code><br>在最后面加上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加用户本地 bin 目录到 PATH</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;<span class="variable">$HOME</span>/.local/bin:<span class="variable">$PATH</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>使配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<h1 id="打包应用"><a href="#打包应用" class="headerlink" title="打包应用"></a>打包应用</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller --onefile lottery.py</span><br></pre></td></tr></table></figure>
+<p>打包过程的输出：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">qs1<span class="meta">@qs1</span><span class="operator">-</span>uos:<span class="operator">~/</span><span class="type">Downloads</span><span class="regexp">/测试/</span>测试$ <span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>bin<span class="operator">/</span>pyinstaller <span class="operator">--</span>onefile lottery.py</span><br><span class="line"><span class="number">79</span> <span class="type">INFO</span>: <span class="type">PyInstaller</span>: <span class="number">5.13</span>.<span class="number">2</span></span><br><span class="line"><span class="number">79</span> <span class="type">INFO</span>: <span class="type">Python</span>: <span class="number">3.7</span>.<span class="number">3</span></span><br><span class="line"><span class="number">79</span> <span class="type">INFO</span>: <span class="type">Platform</span>: <span class="type">Linux</span><span class="operator">-</span><span class="number">6.6</span>.<span class="number">28</span><span class="operator">-</span>amd64<span class="operator">-</span>desktop<span class="operator">-</span>hwe<span class="operator">-</span>x86_64<span class="operator">-</span>with<span class="operator">-</span>uos<span class="operator">-</span><span class="number">20</span><span class="operator">-</span>eagle</span><br><span class="line"><span class="number">80</span> <span class="type">INFO</span>: wrote <span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="regexp">/测试/</span>lottery.spec</span><br><span class="line"><span class="number">82</span> <span class="type">INFO</span>: <span class="type">Extending</span> <span class="type">PYTHONPATH</span> with paths</span><br><span class="line">[&#x27;<span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="operator">/</span>测试&#x27;]</span><br><span class="line"><span class="number">217</span> <span class="type">INFO</span>: checking <span class="type">Analysis</span></span><br><span class="line"><span class="number">217</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">Analysis</span> because <span class="type">Analysis</span><span class="operator">-</span><span class="number">00</span>.toc <span class="keyword">is</span> non existent</span><br><span class="line"><span class="number">217</span> <span class="type">INFO</span>: <span class="type">Initializing</span> module dependency graph<span class="operator">...</span></span><br><span class="line"><span class="number">218</span> <span class="type">INFO</span>: <span class="type">Caching</span> module graph hooks<span class="operator">...</span></span><br><span class="line"><span class="number">226</span> <span class="type">INFO</span>: <span class="type">Analyzing</span> base_library.zip <span class="operator">...</span></span><br><span class="line"><span class="number">589</span> <span class="type">INFO</span>: <span class="type">Loading</span> module hook &#x27;hook<span class="operator">-</span>encodings.py&#x27; from &#x27;<span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>lib<span class="regexp">/python3.7/</span>site<span class="operator">-</span>packages<span class="regexp">/PyInstaller/</span>hooks&#x27;<span class="operator">...</span></span><br><span class="line"><span class="number">812</span> <span class="type">INFO</span>: <span class="type">Loading</span> module hook &#x27;hook<span class="operator">-</span>heapq.py&#x27; from &#x27;<span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>lib<span class="regexp">/python3.7/</span>site<span class="operator">-</span>packages<span class="regexp">/PyInstaller/</span>hooks&#x27;<span class="operator">...</span></span><br><span class="line"><span class="number">1100</span> <span class="type">INFO</span>: <span class="type">Loading</span> module hook &#x27;hook<span class="operator">-</span>pickle.py&#x27; from &#x27;<span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>lib<span class="regexp">/python3.7/</span>site<span class="operator">-</span>packages<span class="regexp">/PyInstaller/</span>hooks&#x27;<span class="operator">...</span></span><br><span class="line"><span class="number">1907</span> <span class="type">INFO</span>: <span class="type">Caching</span> module dependency graph<span class="operator">...</span></span><br><span class="line"><span class="number">1983</span> <span class="type">INFO</span>: running <span class="type">Analysis</span> <span class="type">Analysis</span><span class="operator">-</span><span class="number">00</span>.toc</span><br><span class="line"><span class="number">2002</span> <span class="type">INFO</span>: <span class="type">Analyzing</span> <span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="regexp">/测试/</span>lottery.py</span><br><span class="line"><span class="number">2114</span> <span class="type">INFO</span>: <span class="type">Loading</span> module hook &#x27;hook<span class="operator">-</span>platform.py&#x27; from &#x27;<span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>lib<span class="regexp">/python3.7/</span>site<span class="operator">-</span>packages<span class="regexp">/PyInstaller/</span>hooks&#x27;<span class="operator">...</span></span><br><span class="line"><span class="number">2115</span> <span class="type">INFO</span>: <span class="type">Processing</span> module hooks<span class="operator">...</span></span><br><span class="line"><span class="number">2119</span> <span class="type">INFO</span>: <span class="type">Loading</span> module hook &#x27;hook<span class="operator">-</span>_tkinter.py&#x27; from &#x27;<span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>lib<span class="regexp">/python3.7/</span>site<span class="operator">-</span>packages<span class="regexp">/PyInstaller/</span>hooks&#x27;<span class="operator">...</span></span><br><span class="line"><span class="number">2119</span> <span class="type">INFO</span>: checking <span class="type">Tree</span></span><br><span class="line"><span class="number">2119</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">Tree</span> because <span class="type">Tree</span><span class="operator">-</span><span class="number">00</span>.toc <span class="keyword">is</span> non existent</span><br><span class="line"><span class="number">2119</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">Tree</span> <span class="type">Tree</span><span class="operator">-</span><span class="number">00</span>.toc</span><br><span class="line"><span class="number">2123</span> <span class="type">INFO</span>: checking <span class="type">Tree</span></span><br><span class="line"><span class="number">2123</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">Tree</span> because <span class="type">Tree</span><span class="operator">-</span><span class="number">01</span>.toc <span class="keyword">is</span> non existent</span><br><span class="line"><span class="number">2123</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">Tree</span> <span class="type">Tree</span><span class="operator">-</span><span class="number">01</span>.toc</span><br><span class="line"><span class="number">2124</span> <span class="type">WARNING</span>: <span class="type">Tcl</span> modules directory <span class="regexp">/usr/</span>share<span class="regexp">/tcltk/</span>tcl8.<span class="number">6</span><span class="regexp">/../</span>tcl8 does not exist.</span><br><span class="line"><span class="number">2130</span> <span class="type">INFO</span>: <span class="type">Looking</span> <span class="keyword">for</span> ctypes <span class="type">DLLs</span></span><br><span class="line"><span class="number">2130</span> <span class="type">INFO</span>: <span class="type">Analyzing</span> run<span class="operator">-</span>time hooks <span class="operator">...</span></span><br><span class="line"><span class="number">2131</span> <span class="type">INFO</span>: <span class="type">Including</span> run<span class="operator">-</span>time hook &#x27;<span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>lib<span class="regexp">/python3.7/</span>site<span class="operator">-</span>packages<span class="regexp">/PyInstaller/</span>hooks<span class="regexp">/rthooks/</span>pyi_rth__tkinter.py&#x27;</span><br><span class="line"><span class="number">2139</span> <span class="type">INFO</span>: <span class="type">Looking</span> <span class="keyword">for</span> <span class="keyword">dynamic</span> libraries</span><br><span class="line"><span class="number">2482</span> <span class="type">INFO</span>: <span class="type">Looking</span> <span class="keyword">for</span> eggs</span><br><span class="line"><span class="number">2484</span> <span class="type">INFO</span>: <span class="type">Python</span> library not among binary dependencies. <span class="type">Performing</span> additional search<span class="operator">...</span></span><br><span class="line"><span class="number">2567</span> <span class="type">INFO</span>: <span class="type">Using</span> <span class="type">Python</span> library <span class="regexp">/lib/</span>x86_64<span class="operator">-</span>linux<span class="operator">-</span>gnu<span class="operator">/</span>libpython3.7m.so.<span class="number">1.0</span></span><br><span class="line"><span class="number">2568</span> <span class="type">INFO</span>: <span class="type">Warnings</span> written to <span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="regexp">/测试/</span>build<span class="regexp">/lottery/</span>warn<span class="operator">-</span>lottery.txt</span><br><span class="line"><span class="number">2577</span> <span class="type">INFO</span>: <span class="type">Graph</span> cross<span class="operator">-</span>reference written to <span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="regexp">/测试/</span>build<span class="regexp">/lottery/</span>xref<span class="operator">-</span>lottery.html</span><br><span class="line"><span class="number">2585</span> <span class="type">INFO</span>: checking <span class="type">PYZ</span></span><br><span class="line"><span class="number">2585</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">PYZ</span> because <span class="type">PYZ</span><span class="operator">-</span><span class="number">00</span>.toc <span class="keyword">is</span> non existent</span><br><span class="line"><span class="number">2585</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">PYZ</span> (<span class="type">ZlibArchive</span>) <span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="regexp">/测试/</span>build<span class="regexp">/lottery/</span><span class="type">PYZ</span><span class="operator">-</span><span class="number">00</span>.pyz</span><br><span class="line"><span class="number">2722</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">PYZ</span> (<span class="type">ZlibArchive</span>) <span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="regexp">/测试/</span>build<span class="regexp">/lottery/</span><span class="type">PYZ</span><span class="operator">-</span><span class="number">00</span>.pyz completed successfully.</span><br><span class="line"><span class="number">2726</span> <span class="type">INFO</span>: checking <span class="type">PKG</span></span><br><span class="line"><span class="number">2726</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">PKG</span> because <span class="type">PKG</span><span class="operator">-</span><span class="number">00</span>.toc <span class="keyword">is</span> non existent</span><br><span class="line"><span class="number">2726</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">PKG</span> (<span class="type">CArchive</span>) lottery.pkg</span><br><span class="line"><span class="number">5403</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">PKG</span> (<span class="type">CArchive</span>) lottery.pkg completed successfully.</span><br><span class="line"><span class="number">5406</span> <span class="type">INFO</span>: <span class="type">Bootloader</span> <span class="regexp">/home/</span>qs1<span class="regexp">/.local/</span>lib<span class="regexp">/python3.7/</span>site<span class="operator">-</span>packages<span class="regexp">/PyInstaller/</span>bootloader<span class="regexp">/Linux-64bit-intel/</span>run</span><br><span class="line"><span class="number">5406</span> <span class="type">INFO</span>: checking <span class="type">EXE</span></span><br><span class="line"><span class="number">5406</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">EXE</span> because <span class="type">EXE</span><span class="operator">-</span><span class="number">00</span>.toc <span class="keyword">is</span> non existent</span><br><span class="line"><span class="number">5406</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">EXE</span> from <span class="type">EXE</span><span class="operator">-</span><span class="number">00</span>.toc</span><br><span class="line"><span class="number">5406</span> <span class="type">INFO</span>: <span class="type">Copying</span> bootloader <span class="type">EXE</span> to <span class="regexp">/home/</span>qs1<span class="regexp">/Downloads/</span>测试<span class="regexp">/测试/</span>dist<span class="operator">/</span>lottery</span><br><span class="line"><span class="number">5406</span> <span class="type">INFO</span>: <span class="type">Appending</span> <span class="type">PKG</span> archive to custom <span class="type">ELF</span> section <span class="keyword">in</span> <span class="type">EXE</span></span><br><span class="line"><span class="number">5427</span> <span class="type">INFO</span>: <span class="type">Building</span> <span class="type">EXE</span> from <span class="type">EXE</span><span class="operator">-</span><span class="number">00</span>.toc completed successfully.</span><br></pre></td></tr></table></figure>
+<p>成功后会在当前目录下生成build和dist两个目录，可执行文件在dist目录下。</p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>生成可执行文件在当前统信os里可双击运行。<br>在文件上点右键，选属性，把权限管理下的允许以程序执行勾上。再双击，会出现是否要运行的提示框，选运行。<br><img src="https://qs100371.top/post-images/1779202749342.png"><br><img src="https://qs100371.top/post-images/1779202755215.png"><br><img src="https://qs100371.top/post-images/1779202761748.png"><br>python应用可以打开并正常运行。<br>qt版本也可以顺利打包并执行。<br>这两个可执行文件在debian13和kde neon上都可以正常运行。</p>
+<blockquote>
+<p>打包在统信 UOS 上操作，不要跨系统打包。<br>PyInstaller 不具备交叉编译能力，必须在统信 UOS 系统上运行打包命令。如果是在 Windows 上打包，生成的是 .exe 文件，无法在 Linux 上运行。打包应用是因为没有权限安装tkinter或qt5组件，不使用这两个组件的话，python应用（.py）是可以在uos下用<code>python3 app.py</code>的方式运行的，此时的应用是在无界面的形式下运行，没有窗体，只在终端console中有显示。<br><img src="https://qs100371.top/post-images/1779204241701.png"><br>vb程序的跨系统运行<br>vb做的小型应用单文件，使用方便，要在uos下运行，需要在应用商店里安装”统信windows兼容引擎“，这个应用把wine包装好以兼容更多应用，不需自己手动配置。简单vb程序（没有使用第三方组件）在uos下双击运行，会自动添加vb组件并正确执行。抽签程序原来有vb版本，可以直接搬过来用。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="mailto:qs@qs100371.top">qs100371</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://qs100371.top/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/">https://qs100371.top/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://qs100371.top" target="_blank">折腾日记</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/post/omnibox-yi-ge-hao-yong-de-ying-shi-ju-he-ping-tai/" title="omnibox: 一个好用的影视聚合平台"><img class="cover" src="https://qs100371.top/images/cover/10.webp" onerror="onerror=null;src='/images/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">omnibox: 一个好用的影视聚合平台</div></div><div class="info-2"><div class="info-item-1">omniBox是一个影视聚合平台，支持 Docker 一键部署，可整合阿里云盘等 8 种主流网盘、影视采集站、IPTV 传统频道及 B 站、抖音等多平台直播源，还能联动 PanSou&#x2F;PanHub 盘搜引擎实现资源快速检索。本文记录omnibox1.44版的使用。  一键部署docker-compose.yml： 1234567891011services:  omnibox:    image: lampon/omnibox:v1.4.4    container_name: omnibox    ports:      - &quot;7023:7023&quot;    ...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">坐等端午放假。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vbox%E5%AE%89%E8%A3%85%E7%BB%9F%E4%BF%A1os-v20"><span class="toc-number">1.</span> <span class="toc-text">vbox安装统信os v20</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83%E5%92%8C%E7%BB%84%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">安装python环境和组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">打包应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-number">4.</span> <span class="toc-text">验证</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/" title="打包python应用到统信os中运行"><img src="https://qs100371.top/images/cover/09.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="打包python应用到统信os中运行"/></a><div class="content"><a class="title" href="/post/da-bao-python-ying-yong-dao-tong-xin-os-zhong-yun-xing/" title="打包python应用到统信os中运行">打包python应用到统信os中运行</a><time datetime="2026-05-19T13:52:27.000Z" title="发表于 2026-05-19 21:52:27">2026-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/omnibox-yi-ge-hao-yong-de-ying-shi-ju-he-ping-tai/" title="omnibox: 一个好用的影视聚合平台"><img src="https://qs100371.top/images/cover/10.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="omnibox: 一个好用的影视聚合平台"/></a><div class="content"><a class="title" href="/post/omnibox-yi-ge-hao-yong-de-ying-shi-ju-he-ping-tai/" title="omnibox: 一个好用的影视聚合平台">omnibox: 一个好用的影视聚合平台</a><time datetime="2026-05-13T08:03:42.000Z" title="发表于 2026-05-13 16:03:42">2026-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/zen-yang-yin-cang-zi-yu-ming/" title="怎样隐藏子域名？"><img src="https://qs100371.top/images/cover/11.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="怎样隐藏子域名？"/></a><div class="content"><a class="title" href="/post/zen-yang-yin-cang-zi-yu-ming/" title="怎样隐藏子域名？">怎样隐藏子域名？</a><time datetime="2026-05-11T13:59:54.000Z" title="发表于 2026-05-11 21:59:54">2026-05-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/incus-she-zhi-qiao-jie-wang-luo/" title="incus设置桥接网络"><img src="https://qs100371.top/images/cover/00.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="incus设置桥接网络"/></a><div class="content"><a class="title" href="/post/incus-she-zhi-qiao-jie-wang-luo/" title="incus设置桥接网络">incus设置桥接网络</a><time datetime="2026-05-01T02:24:53.000Z" title="发表于 2026-05-01 10:24:53">2026-05-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/incus-tu-xing-jie-mian-de-an-zhuang-he-kai-qi/" title="incus图形界面的安装和开启"><img src="https://qs100371.top/images/cover/02.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="incus图形界面的安装和开启"/></a><div class="content"><a class="title" href="/post/incus-tu-xing-jie-mian-de-an-zhuang-he-kai-qi/" title="incus图形界面的安装和开启">incus图形界面的安装和开启</a><time datetime="2026-04-27T08:58:02.000Z" title="发表于 2026-04-27 16:58:02">2026-04-27</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026  qs100371</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank"> <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br> <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener"> 开往</a><span id="counter" style="font-size: 10px;">1000</span> <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script></div></div><!--<script src="/js/announcement-fix.js"></script>--></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"lang":"zh-CN","noRss":true,"login":"disable"}
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.qs100371.top',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
