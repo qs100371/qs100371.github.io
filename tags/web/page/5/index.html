@@ -14,46 +14,87 @@
       
     const saveToLocal = {
       set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
       },
       get: key => {
         const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
           localStorage.removeItem(key)
-          return undefined
         }
-        return value
       }
     }
 
+    const scriptCache = new Map()
+    const cssCache = new Map()
     window.btf = {
       saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
         }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
         }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
       addGlobalFn: (key, fn, name = false, parent = window) => {
         if (!false && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
@@ -123,24 +164,38 @@
   isToc: false,
   pageType: 'tag'
 }</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">245</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(https://api.qs100371.top/api2.php);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">web</h1></div></header><main class="layout" id="content-inner"><div id="tag"><div class="article-sort-title">标签 - web</div><div class="article-sort"><div class="article-sort-item year">2025</div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-29T07:12:39.000Z" title="发表于 2025-04-29 15:12:39">2025-04-29</time></div><a class="article-sort-item-title" href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/" title="利用clawcloud部署自托管rustdesk服务器">利用clawcloud部署自托管rustdesk服务器</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-27T14:42:11.000Z" title="发表于 2025-04-27 22:42:11">2025-04-27</time></div><a class="article-sort-item-title" href="/post/chun-qian-duan-xian-shi-tian-qi/" title="纯前端显示天气">纯前端显示天气</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-26T14:32:53.000Z" title="发表于 2025-04-26 22:32:53">2025-04-26</time></div><a class="article-sort-item-title" href="/post/bitplaytorrent-liu-mei-ti-wang-luo-ying-yong-cheng-xu/" title="BitPlay:Torrent流媒体网络应用程序">BitPlay:Torrent流媒体网络应用程序</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-26T13:45:08.000Z" title="发表于 2025-04-26 21:45:08">2025-04-26</time></div><a class="article-sort-item-title" href="/post/hexo-landscape-zhu-ti-tian-jia-gong-gao-ban/" title="hexo landscape主题添加公告板">hexo landscape主题添加公告板</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-26T01:39:54.000Z" title="发表于 2025-04-26 09:39:54">2025-04-26</time></div><a class="article-sort-item-title" href="/post/you-qu-de-shieldsio-hui-zhang-badge/" title="有趣的Shields.io 徽章">有趣的Shields.io 徽章</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-23T06:36:18.000Z" title="发表于 2025-04-23 14:36:18">2025-04-23</time></div><a class="article-sort-item-title" href="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" title="利用clawcloud部署frp服务">利用clawcloud部署frp服务</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-21T07:12:25.000Z" title="发表于 2025-04-21 15:12:25">2025-04-21</time></div><a class="article-sort-item-title" href="/post/jing-tai-yin-le-bo-fang-qi-heomusic/" title="静态音乐播放器HeoMusic">静态音乐播放器HeoMusic</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-18T12:47:04.000Z" title="发表于 2025-04-18 20:47:04">2025-04-18</time></div><a class="article-sort-item-title" href="/post/mian-fei-zai-xian-shi-pin-sou-suo-yu-guan-kan-ping-tai-libretv/" title="免费在线视频搜索与观看平台LibreTV">免费在线视频搜索与观看平台LibreTV</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-17T13:34:14.000Z" title="发表于 2025-04-17 21:34:14">2025-04-17</time></div><a class="article-sort-item-title" href="/post/zhua-qu-dou-ban-shu-ying-yin-xin-xi/" title="抓取豆瓣书影音信息">抓取豆瓣书影音信息</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-14T09:37:34.000Z" title="发表于 2025-04-14 17:37:34">2025-04-14</time></div><a class="article-sort-item-title" href="/post/an-zhuang-alist/" title="安装alist">安装alist</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/tags/web/page/4/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/tags/web/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/web/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/tags/web/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/tags/web/page/14/">14</a><a class="extend next" rel="next" href="/tags/web/page/6/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">坐等端午放假。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/zerotier-wang-luo-zi-jian-moon-fu-wu-qi/" title="ZeroTier网络自建moon服务器"><img src="https://qs100371.top/images/cover/02.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="ZeroTier网络自建moon服务器"/></a><div class="content"><a class="title" href="/post/zerotier-wang-luo-zi-jian-moon-fu-wu-qi/" title="ZeroTier网络自建moon服务器">ZeroTier网络自建moon服务器</a><time datetime="2026-06-11T13:35:00.000Z" title="发表于 2026-06-11 21:35:00">2026-06-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/zerotier-zu-wang-jian-jie/" title="ZeroTier组网简介"><img src="https://qs100371.top/images/cover/03.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="ZeroTier组网简介"/></a><div class="content"><a class="title" href="/post/zerotier-zu-wang-jian-jie/" title="ZeroTier组网简介">ZeroTier组网简介</a><time datetime="2026-06-10T12:43:19.000Z" title="发表于 2026-06-10 20:43:19">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/kaihongos-qemu-ban-shi-yong/" title="KaihongOS QEMU版试用"><img src="https://qs100371.top/images/cover/04.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="KaihongOS QEMU版试用"/></a><div class="content"><a class="title" href="/post/kaihongos-qemu-ban-shi-yong/" title="KaihongOS QEMU版试用">KaihongOS QEMU版试用</a><time datetime="2026-06-06T08:45:36.000Z" title="发表于 2026-06-06 16:45:36">2026-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/easytier-zu-wang-jian-jie/" title="EasyTier组网简介"><img src="https://qs100371.top/images/cover/05.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="EasyTier组网简介"/></a><div class="content"><a class="title" href="/post/easytier-zu-wang-jian-jie/" title="EasyTier组网简介">EasyTier组网简介</a><time datetime="2026-06-02T06:54:13.000Z" title="发表于 2026-06-02 14:54:13">2026-06-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/tailscale-peer-relay-pei-zhi-fang-fa/" title="Tailscale Peer Relay配置方法"><img src="https://qs100371.top/images/cover/06.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="Tailscale Peer Relay配置方法"/></a><div class="content"><a class="title" href="/post/tailscale-peer-relay-pei-zhi-fang-fa/" title="Tailscale Peer Relay配置方法">Tailscale Peer Relay配置方法</a><time datetime="2026-05-28T07:06:51.000Z" title="发表于 2026-05-28 15:06:51">2026-05-28</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>加载中...</span></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/docker/" style="font-size: 1.39em; color: rgb(132, 50, 68);">docker</a><a href="/tags/termux/" style="font-size: 1.24em; color: rgb(150, 61, 186);">termux</a><a href="/tags/web/" style="font-size: 1.45em; color: rgb(85, 194, 50);">web</a><a href="/tags/python/" style="font-size: 1.27em; color: rgb(72, 164, 126);">python</a><a href="/tags/nas/" style="font-size: 1.36em; color: rgb(50, 50, 85);">nas</a><a href="/tags/linux/" style="font-size: 1.42em; color: rgb(168, 168, 50);">linux</a><a href="/tags/armbian/" style="font-size: 1.3em; color: rgb(112, 50, 50);">armbian</a><a href="/tags/onecloud/" style="font-size: 1.33em; color: rgb(50, 108, 62);">onecloud</a><a href="/tags/deepseek/" style="font-size: 1.27em; color: rgb(50, 162, 127);">deepseek</a><a href="/tags/game/" style="font-size: 1.24em; color: rgb(58, 50, 71);">game</a><a href="/tags/chromeos/" style="font-size: 1.15em; color: rgb(94, 173, 140);">chromeos</a><a href="/tags/incus/" style="font-size: 1.21em; color: rgb(114, 50, 50);">incus</a><a href="/tags/kaihongos/" style="font-size: 1.15em; color: rgb(61, 195, 50);">kaihongos</a><a href="/tags/openclaw/" style="font-size: 1.15em; color: rgb(106, 75, 104);">openclaw</a><a href="/tags/diy/" style="font-size: 1.15em; color: rgb(173, 172, 167);">diy</a><a href="/tags/macos/" style="font-size: 1.15em; color: rgb(152, 139, 50);">macos</a><a href="/tags/windows/" style="font-size: 1.18em; color: rgb(103, 50, 50);">windows</a><a href="/tags/android/" style="font-size: 1.15em; color: rgb(155, 120, 102);">android</a></div></div><div class="card-widget card-archives">
-    <div class="item-headline">
-      <i class="fas fa-archive"></i>
-      <span>归档</span>
-      <a class="card-more-btn" href="/archives/"
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">250</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/images/cover/01.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">web</h1></div></header><main class="layout" id="content-inner"><div id="tag"><div class="article-sort-title">标签 - web</div><div class="article-sort"><div class="article-sort-item year">2025</div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-03T07:05:55.000Z" title="发表于 2025-05-03 15:05:55">2025-05-03</time></div><a class="article-sort-item-title" href="/post/yong-pi-chu-li-wen-jian-bei-fen-hexo-bo-ke-dao-ben-di-mu-lu/" title="用批处理文件备份hexo博客到本地目录">用批处理文件备份hexo博客到本地目录</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-02T13:20:06.000Z" title="发表于 2025-05-02 21:20:06">2025-05-02</time></div><a class="article-sort-item-title" href="/post/shi-yong-tauri-qing-liang-ji-ti-dai-fang-an-da-bao-bian-ji-qi/" title="使用 Tauri (轻量级替代方案)打包编辑器">使用 Tauri (轻量级替代方案)打包编辑器</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-02T13:07:04.000Z" title="发表于 2025-05-02 21:07:04">2025-05-02</time></div><a class="article-sort-item-title" href="/post/jiang-htmlcssjs-bian-ji-qi-da-bao-wei-windows-ying-yong-cheng-xu/" title="将 HTML/CSS/JS 编辑器打包为 Windows 应用程序">将 HTML/CSS/JS 编辑器打包为 Windows 应用程序</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-02T12:10:47.000Z" title="发表于 2025-05-02 20:10:47">2025-05-02</time></div><a class="article-sort-item-title" href="/post/yong-ds-sheng-cheng-markdown-bian-ji-qi/" title="用ds生成markdown编辑器">用ds生成markdown编辑器</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-29T07:12:39.000Z" title="发表于 2025-04-29 15:12:39">2025-04-29</time></div><a class="article-sort-item-title" href="/post/li-yong-clawcloud-bu-shu-zi-tuo-guan-rustdesk-fu-wu-qi/" title="利用clawcloud部署自托管rustdesk服务器">利用clawcloud部署自托管rustdesk服务器</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-27T14:42:11.000Z" title="发表于 2025-04-27 22:42:11">2025-04-27</time></div><a class="article-sort-item-title" href="/post/chun-qian-duan-xian-shi-tian-qi/" title="纯前端显示天气">纯前端显示天气</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-26T14:32:53.000Z" title="发表于 2025-04-26 22:32:53">2025-04-26</time></div><a class="article-sort-item-title" href="/post/bitplaytorrent-liu-mei-ti-wang-luo-ying-yong-cheng-xu/" title="BitPlay:Torrent流媒体网络应用程序">BitPlay:Torrent流媒体网络应用程序</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-26T13:45:08.000Z" title="发表于 2025-04-26 21:45:08">2025-04-26</time></div><a class="article-sort-item-title" href="/post/hexo-landscape-zhu-ti-tian-jia-gong-gao-ban/" title="hexo landscape主题添加公告板">hexo landscape主题添加公告板</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-26T01:39:54.000Z" title="发表于 2025-04-26 09:39:54">2025-04-26</time></div><a class="article-sort-item-title" href="/post/you-qu-de-shieldsio-hui-zhang-badge/" title="有趣的Shields.io 徽章">有趣的Shields.io 徽章</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-04-23T06:36:18.000Z" title="发表于 2025-04-23 14:36:18">2025-04-23</time></div><a class="article-sort-item-title" href="/post/li-yong-clawcloudrun-bu-shu-frp-fu-wu/" title="利用clawcloud部署frp服务">利用clawcloud部署frp服务</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/tags/web/page/4/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/tags/web/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/web/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/tags/web/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/tags/web/page/15/">15</a><a class="extend next" rel="next" href="/tags/web/page/6/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">火炉一样的天气。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/acmesh-yi-jian-sheng-cheng-mian-fei-de-zheng-shu/" title="acme.sh: 一键生成免费的ssl证书"><img src="https://qs100371.top/images/cover/08.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="acme.sh: 一键生成免费的ssl证书"/></a><div class="content"><a class="title" href="/post/acmesh-yi-jian-sheng-cheng-mian-fei-de-zheng-shu/" title="acme.sh: 一键生成免费的ssl证书">acme.sh: 一键生成免费的ssl证书</a><time datetime="2026-08-05T02:45:08.000Z" title="发表于 2026-08-05 10:45:08">2026-08-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/hubproxy-yi-ge-zi-bu-shu-de-docker-he-github-jia-su-dai-li-fu-wu-qi/" title="HubProxy: 一个自部署的Docker和GitHub加速代理服务器"><img src="https://qs100371.top/images/cover/09.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="HubProxy: 一个自部署的Docker和GitHub加速代理服务器"/></a><div class="content"><a class="title" href="/post/hubproxy-yi-ge-zi-bu-shu-de-docker-he-github-jia-su-dai-li-fu-wu-qi/" title="HubProxy: 一个自部署的Docker和GitHub加速代理服务器">HubProxy: 一个自部署的Docker和GitHub加速代理服务器</a><time datetime="2026-07-20T01:27:47.000Z" title="发表于 2026-07-20 09:27:47">2026-07-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/litepan-de-bu-shu-he-kua-pan-miao-chuan/" title="LitePan的部署和跨盘秒传"><img src="https://qs100371.top/images/cover/10.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="LitePan的部署和跨盘秒传"/></a><div class="content"><a class="title" href="/post/litepan-de-bu-shu-he-kua-pan-miao-chuan/" title="LitePan的部署和跨盘秒传">LitePan的部署和跨盘秒传</a><time datetime="2026-07-14T06:22:12.000Z" title="发表于 2026-07-14 14:22:12">2026-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/ge-sheng-yun-ying-shang-iptv-zhi-bo-yuan-hui-zong-ji-shi-yong/" title="各省运营商IPTV直播源汇总及使用"><img src="https://qs100371.top/images/cover/11.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="各省运营商IPTV直播源汇总及使用"/></a><div class="content"><a class="title" href="/post/ge-sheng-yun-ying-shang-iptv-zhi-bo-yuan-hui-zong-ji-shi-yong/" title="各省运营商IPTV直播源汇总及使用">各省运营商IPTV直播源汇总及使用</a><time datetime="2026-07-02T11:49:58.000Z" title="发表于 2026-07-02 19:49:58">2026-07-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/fail2ban-an-zhuang-he-shi-yong/" title="fail2ban安装和使用"><img src="https://qs100371.top/images/cover/01.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="fail2ban安装和使用"/></a><div class="content"><a class="title" href="/post/fail2ban-an-zhuang-he-shi-yong/" title="fail2ban安装和使用">fail2ban安装和使用</a><time datetime="2026-06-26T12:49:28.000Z" title="发表于 2026-06-26 20:49:28">2026-06-26</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>加载中...</span></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/web/" style="font-size: 1.45em; color: rgb(179, 184, 80);">web</a><a href="/tags/docker/" style="font-size: 1.39em; color: rgb(154, 155, 50);">docker</a><a href="/tags/python/" style="font-size: 1.27em; color: rgb(171, 164, 75);">python</a><a href="/tags/termux/" style="font-size: 1.24em; color: rgb(50, 97, 50);">termux</a><a href="/tags/linux/" style="font-size: 1.42em; color: rgb(72, 129, 195);">linux</a><a href="/tags/nas/" style="font-size: 1.36em; color: rgb(50, 133, 98);">nas</a><a href="/tags/armbian/" style="font-size: 1.3em; color: rgb(138, 50, 93);">armbian</a><a href="/tags/onecloud/" style="font-size: 1.33em; color: rgb(112, 50, 158);">onecloud</a><a href="/tags/deepseek/" style="font-size: 1.27em; color: rgb(100, 50, 112);">deepseek</a><a href="/tags/game/" style="font-size: 1.24em; color: rgb(87, 119, 91);">game</a><a href="/tags/chromeos/" style="font-size: 1.15em; color: rgb(50, 102, 186);">chromeos</a><a href="/tags/IPTV/" style="font-size: 1.15em; color: rgb(159, 77, 50);">IPTV</a><a href="/tags/incus/" style="font-size: 1.21em; color: rgb(69, 50, 147);">incus</a><a href="/tags/kaihongos/" style="font-size: 1.15em; color: rgb(68, 186, 145);">kaihongos</a><a href="/tags/openclaw/" style="font-size: 1.15em; color: rgb(131, 194, 179);">openclaw</a><a href="/tags/diy/" style="font-size: 1.15em; color: rgb(198, 50, 81);">diy</a><a href="/tags/macos/" style="font-size: 1.15em; color: rgb(118, 105, 103);">macos</a><a href="/tags/windows/" style="font-size: 1.18em; color: rgb(76, 50, 79);">windows</a><a href="/tags/android/" style="font-size: 1.15em; color: rgb(50, 198, 185);">android</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/"
             title="查看更多">
             <i class="fas fa-angle-right"></i>
-          </a>
-    </div>
+          </a></div>
   
     <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/08/">
+            <span class="card-archive-list-date">
+              八月 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/07/">
+            <span class="card-archive-list-date">
+              七月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
       
         <li class="card-archive-list-item">
           <a class="card-archive-list-link" href="/archives/2026/06/">
             <span class="card-archive-list-date">
               六月 2026
             </span>
-            <span class="card-archive-list-count">4</span>
+            <span class="card-archive-list-count">5</span>
           </a>
         </li>
       
@@ -189,26 +244,8 @@
           </a>
         </li>
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/12/">
-            <span class="card-archive-list-date">
-              十二月 2025
-            </span>
-            <span class="card-archive-list-count">5</span>
-          </a>
-        </li>
-      
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/11/">
-            <span class="card-archive-list-date">
-              十一月 2025
-            </span>
-            <span class="card-archive-list-count">7</span>
-          </a>
-        </li>
-      
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">245</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2024-10-01T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">145.8k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-12T14:32:46.657Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026  qs100371</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank"> <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br> <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener"> <img src="/images/w.png" style="vertical-align: middle; height: 20px;"></a><span id="counter" style="font-size: 10px;">1000</span> <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script></div></div><!--<script src="/js/announcement-fix.js"></script>--></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script>window.newestComments = {
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">250</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2024-10-01T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">151.4k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-08-08T00:01:24.209Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By qs100371</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank"> <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br> <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener"> <img src="/images/w.png" style="vertical-align: middle; height: 20px;"></a><span id="counter" style="font-size: 10px;">1000</span> <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script>window.newestComments = {
   changeContent: content => {
     if (content === '') return content
 
@@ -273,7 +310,7 @@
 
   const getComment = async (ele) => {
     try {
-      const res = await fetch('https://waline.qs100371.top/api/comment?type=recent&count=6')
+      const res = await fetch('https://waline1.qs100371.top/api/comment?type=recent&count=6')
       const result = await res.json()
       const walineArray = result.data.map(e => {
         return {

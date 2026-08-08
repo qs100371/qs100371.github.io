@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>折腾日记 | 折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="It&#39;s just a note, not a guide.">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>页面未找到 | 折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="It&#39;s just a note, not a guide.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="折腾日记">
 <meta property="og:url" content="https://qs100371.top/404.html">
@@ -14,46 +14,87 @@
       
     const saveToLocal = {
       set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
       },
       get: key => {
         const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
           localStorage.removeItem(key)
-          return undefined
         }
-        return value
       }
     }
 
+    const scriptCache = new Map()
+    const cssCache = new Map()
     window.btf = {
       saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
         }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
         }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
       addGlobalFn: (key, fn, name = false, parent = window) => {
         if (!false && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
@@ -118,9 +159,9 @@
   },
   autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '折腾日记',
+  title: '页面未找到',
   isHighlightShrink: false,
   isToc: false,
-  pageType: 'page'
+  pageType: '404'
 }</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">245</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div></div></div><div class="page type-404" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">折腾日记</h1></header><main class="layout hide-aside" id="content-inner"><div class="nc" id="page"><div class="error-content"><div class="error-img"><img src="/images/error-page.png" alt="Page not found"></div><div class="error-info"><h1 class="error_title">404</h1><div class="error_subtitle">Page Not Found</div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026  qs100371</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank"> <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br> <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener"> <img src="/images/w.png" style="vertical-align: middle; height: 20px;"></a><span id="counter" style="font-size: 10px;">1000</span> <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script></div></div><!--<script src="/js/announcement-fix.js"></script>--></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">250</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div></div></div><div class="page type-404" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://t.qs100371.top"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">折腾日记</h1></header><main class="layout hide-aside" id="content-inner"><div class="nc" id="page"><div class="error-content"><div class="error-img"><img src="/images/error-page.png" alt="Page not found"></div><div class="error-info"><h1 class="error_title">404</h1><div class="error_subtitle">Page Not Found</div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By qs100371</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2025138483号-1</a><br> <a href="https://beian.mps.gov.cn/#/query/webSearch?code=13030202004011" rel="noreferrer" target="_blank"> <img src="/images/beian.png" width="15">冀公网安备13030202004011号</a><br> <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener"> <img src="/images/w.png" style="vertical-align: middle; height: 20px;"></a><span id="counter" style="font-size: 10px;">1000</span> <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
