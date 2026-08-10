@@ -1,329 +1,334 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-  <title>折腾日记</title>
-  <meta name="description" content="It&#39;s just a note, not a guide.">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>折腾日记</title><meta name="author" content="qs100371"><meta name="copyright" content="qs100371"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({id:"3OlX5GC8lWHWwEYE",ck:"3OlX5GC8lWHWwEYE"})</script><meta name="description" content="It&#39;s just a note, not a guide.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="折腾日记">
 <meta property="og:url" content="https://qs100371.top/page/25/">
 <meta property="og:site_name" content="折腾日记">
 <meta property="og:description" content="It&#39;s just a note, not a guide.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qs100371.top/images/avatar.png">
 <meta property="article:author" content="qs100371">
 <meta property="article:tag" content="linux onecloud armbian docker 学习笔记 个人博客">
 <meta name="twitter:card" content="summary">
-  <link rel="icon" href="/images/logo.svg">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-gb-web@latest/lxgwwenkaigb-regular/result.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-gb-web@latest/lxgwwenkaigb-medium/result.css">
-  <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="https://qs100371.top/images/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/avatar.png"><link rel="canonical" href="https://qs100371.top/page/25/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
 
-<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
-</head>
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
 
-<body>
-  <div class="site-wrapper">
-    <header class="site-header">
-  <div class="header-inner">
-    <a class="site-title" href="/"><img class="site-logo" src="/images/logo.svg" alt="Logo">折腾日记</a>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span class="nav-toggle-icon"></span>
-    </button>
-    <nav class="site-nav">
-      
-        <a class="nav-link" href="/">首页</a>
-      
-        <a class="nav-link" href="/archives">归档</a>
-      
-        <a class="nav-link" href="/tags">标签</a>
-      
-        <a class="nav-link" href="/about">关于</a>
-      
-        <a class="nav-link" href="/appscenter">应用</a>
-      
-        <a class="nav-link" href="https://www.travellings.cn/plain.html">开往</a>
-      
-    </nav>
-  </div>
-</header>
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
 
-    <main class="main-content">
-      
-<div class="post-list">
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/nginx-fan-xiang-dai-li-she-zhi/">nginx反向代理设置</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-11-02T03:33:12.000Z">2024-11-02</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default内容如下：</p>
-    
-  </div>
-  <a class="read-more" href="/post/nginx-fan-xiang-dai-li-she-zhi/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
-      
-        <a href="/tags/web/">#web</a>
-      
-    </div>
-  
-</article>
+        try {
+          const data = JSON.parse(itemStr)
 
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/an-zhuang-nextcloud/">安装nextcloud</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-11-01T01:06:46.000Z">2024-11-01</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>nextcloud是一个功能强大的网盘系统，snap安装。</p>
-    
-  </div>
-  <a class="read-more" href="/post/an-zhuang-nextcloud/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
-      
-        <a href="/tags/web/">#web</a>
-      
-    </div>
-  
-</article>
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
 
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/yun-bi-ji-leanote-da-jian/">云笔记leanote搭建</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-31T12:13:43.000Z">2024-10-31</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>leanote是一个云笔记项目，需要数据库和进程守护。</p>
-    
-  </div>
-  <a class="read-more" href="/post/yun-bi-ji-leanote-da-jian/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
-      
-        <a href="/tags/web/">#web</a>
-      
-    </div>
-  
-</article>
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
 
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/an-zhuang-wordpress/">安装wordpress</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-28T14:00:26.000Z">2024-10-28</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>wordpress需要web服务和数据库。</p>
-    
-  </div>
-  <a class="read-more" href="/post/an-zhuang-wordpress/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
-      
-        <a href="/tags/web/">#web</a>
-      
-    </div>
-  
-</article>
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
 
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/cpolar-nei-wang-chuan-tou/">cpolar内网穿透</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-22T03:19:22.000Z">2024-10-22</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>cpolar是一种收费的内网穿透方法，免费也能勉强一用。</p>
-    
-  </div>
-  <a class="read-more" href="/post/cpolar-nei-wang-chuan-tou/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
-      
-        <a href="/tags/web/">#web</a>
-      
-    </div>
-  
-</article>
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
 
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/">电视直播软件和iptv源</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-20T10:20:02.000Z">2024-10-20</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>软件：<br>Hypnopix<br>yuki-iptv<br>freetuxtv</p>
-    
-  </div>
-  <a class="read-more" href="/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
       
-        <a href="/tags/web/">#web</a>
       
-    </div>
-  
-</article>
-
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/linuxmint-gua-zai-fen-qu-bu-xu-mi-ma/">linuxmint挂载分区不需密码</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-20T10:16:51.000Z">2024-10-20</time>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
     
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>linuxmint挂载分区时，默认会出现提权对话框，用下面的操作可以取消认证，直接进入。</p>
-    
-  </div>
-  <a class="read-more" href="/post/linuxmint-gua-zai-fen-qu-bu-xu-mi-ma/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
       
-        <a href="/tags/linux/">#linux</a>
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":1000,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '折腾日记',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="折腾日记" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">252</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://api.qs100371.top/t/"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/talking/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">折腾日记</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="https://www.travellings.cn/plain.html"><i class="fa-fw fas fa-subway"></i><span> 开往</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/appscenter/"><i class="fa-fw fas fa-server"></i><span> 应用</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-coffee"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://api.qs100371.top/t/"><i class="fa-fw fas fa-server"></i><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/talking/"><i class="fa-fw fas fa-server"></i><span> 说说</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">折腾日记</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/nginx-fan-xiang-dai-li-she-zhi/" title="nginx反向代理设置">nginx反向代理设置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-11-02T03:33:12.000Z" title="发表于 2024-11-02 11:33:12">2024-11-02</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default内容如下：  修改123456789101112131415server &#123;        listen 80 default_server;        listen [::]:80 default_server ipv6only=on;        root /var/www/html;        proxy_set_header X-Forwarded-For $remote_addr;        location / &#123;           ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/an-zhuang-nextcloud/" title="安装nextcloud">安装nextcloud</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-11-01T01:06:46.000Z" title="发表于 2024-11-01 09:06:46">2024-11-01</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">nextcloud是一个功能强大的网盘系统，snap安装。   安装sudo apt install snapdsudo snap install nextcloudsnap changs nextcloudsudo snap start nextcloud 配置设置nextcloud账号密码sudo nextcloud.manual-install 你的用户名 你的密码设置成功后便可在nextcloud主机上使用浏览器通过127.0.0.1 进行访问端口修改sudo snap set nextcloud ports.http=9999设置nextcloud不限制访问方式sudo nex...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/yun-bi-ji-leanote-da-jian/" title="云笔记leanote搭建">云笔记leanote搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-31T12:13:43.000Z" title="发表于 2024-10-31 20:13:43">2024-10-31</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">leanote是一个云笔记项目，需要数据库和进程守护。  依赖    - MongoDB数据库    - supervisor进程守护    - wkhtmltopdf MongoDB安装curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz     下载tar -zxvf mongodb-linux-x86_64-3.0.6.tgz     # 解压mv  mongodb-linux-x86_64-3.0.6/ /usr/local/mongodb MongoDB 的可执行文件位于 bin 目录下检...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/an-zhuang-wordpress/" title="安装wordpress">安装wordpress</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-28T14:00:26.000Z" title="发表于 2024-10-28 22:00:26">2024-10-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">wordpress需要web服务和数据库。  安装 Nginxsudo apt install nginxsudo systemctl enable nginxsudo systemctl start nginxsudo systemctl status nginx 让（Nginx 用户）成为 Web 目录的所有者。默认情况下，其权限归 root 用户所有。sudo chown www-data:www-data &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html -R 安装 MariaDB 数据库服务器sudo apt install mariadb-s...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/cpolar-nei-wang-chuan-tou/" title="cpolar内网穿透">cpolar内网穿透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-22T03:19:22.000Z" title="发表于 2024-10-22 11:19:22">2024-10-22</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">cpolar是一种收费的内网穿透方法，免费也能勉强一用。  安装下载：curl -L https://www.cpolar.com/static/downloads/install-release-cpolar.sh | sudo bash token认证:登录cpolar官网后台，点击左侧的验证，查看自己的认证token，之后将token贴在命令行里cpolar authtoken xxxxxxx 向系统添加服务:sudo systemctl enable cpolarsudo systemctl start cpolar 查看服务状态:sudo systemctl status cp...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/dian-shi-zhi-bo-ruan-jian-he-iptv-yuan/" title="电视直播软件和iptv源">电视直播软件和iptv源</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-20T10:20:02.000Z" title="发表于 2024-10-20 18:20:02">2024-10-20</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">软件：Hypnopixyuki-iptvfreetuxtv   myiptv源~~https://mirror.ghproxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/ipv6.m3u~~ </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/linuxmint-gua-zai-fen-qu-bu-xu-mi-ma/" title="linuxmint挂载分区不需密码">linuxmint挂载分区不需密码</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-20T10:16:51.000Z" title="发表于 2024-10-20 18:16:51">2024-10-20</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/linux/">linux</a></span></div><div class="content">linuxmint挂载分区时，默认会出现提权对话框，用下面的操作可以取消认证，直接进入。  修改设置打开终端，输入:sudo xed /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy 找到：&lt;action id=&quot;org.freedesktop.udisks.filesystem-mount-system&quot;&gt;  auth_admin_keep 替换成： yes 以后想挂载windows下的分区就不会要求输入密码了。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/an-zhuang-ftp-fu-wu/" title="安装ftp服务">安装ftp服务</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-14T13:17:20.000Z" title="发表于 2024-10-14 21:17:20">2024-10-14</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">安装vsftpd：sudo apt install vsftpd检测是否安装：vsftpd -version   匿名用户模式在vsftpd.conf文件中添加匿名用户相关配置： 1234567891011121314151617181920212223242526#监听ipv4，启用独立模式listen=YES#启用匿名用户模式 anonymous_enable=YES#允许写操作write_enable=YES#允许匿名用户上传文件anon_upload_enable=YES#允许匿名用户创建目录anon_mkdir_write_enable=YES#允许匿名用户修改或删除目录ano...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/nginx-chong-ding-xiang/" title="nginx重定向">nginx重定向</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-12T13:52:44.000Z" title="发表于 2024-10-12 21:52:44">2024-10-12</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/web/">web</a></span></div><div class="content">修改&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default  修改文件12345server &#123;       listen 80;       server_name example1.com;       return 301 https://example2.com$request_uri;         &#125;  列出目录下的文件12345server_name _;autoindex on;autoindex_exact_size off;autoindex_format html;autoindex_loc...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/post/grub4dos-qi-dong-fang-shi-de-menulst/" title="grub4dos启动方式的menu.lst">grub4dos启动方式的menu.lst</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-11T11:59:21.000Z" title="发表于 2024-10-11 19:59:21">2024-10-11</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/linux/">linux</a></span></div><div class="content">grub4dos启动linux系统、win和PE的menu.lst内容。  menu.lst1234567891011121314151617181920212223timeout 10title ubuntufind --set-root --ignore-floppies --ignore-cd /boot/grub/i386-pc/core.imgkernel /boot/grub/i386-pc/core.imgtitle deepinkernel (hd0,6)/boot/grub/i386-pc/core.img#title winxp#chainloader (hd0,0)...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/24/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/#content-inner">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/#content-inner">26</a><a class="extend next" rel="next" href="/page/26/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">秋高气爽。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/zhong-xing-w132d-shua-cheng-dang-bei-zhuo-mian/" title="中兴W132D刷成当贝桌面"><img src="https://qs100371.top/images/cover/06.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="中兴W132D刷成当贝桌面"/></a><div class="content"><a class="title" href="/post/zhong-xing-w132d-shua-cheng-dang-bei-zhuo-mian/" title="中兴W132D刷成当贝桌面">中兴W132D刷成当贝桌面</a><time datetime="2026-08-10T10:39:24.000Z" title="发表于 2026-08-10 18:39:24">2026-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/zai-cloudflare-shang-gou-jian-mian-fei-de-wang-zhan-tong-ji/" title="在cloudflare上构建免费的网站统计"><img src="https://qs100371.top/images/cover/07.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="在cloudflare上构建免费的网站统计"/></a><div class="content"><a class="title" href="/post/zai-cloudflare-shang-gou-jian-mian-fei-de-wang-zhan-tong-ji/" title="在cloudflare上构建免费的网站统计">在cloudflare上构建免费的网站统计</a><time datetime="2026-08-09T09:29:19.000Z" title="发表于 2026-08-09 17:29:19">2026-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/acmesh-yi-jian-sheng-cheng-mian-fei-de-zheng-shu/" title="acme.sh: 一键生成免费的ssl证书"><img src="https://qs100371.top/images/cover/08.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="acme.sh: 一键生成免费的ssl证书"/></a><div class="content"><a class="title" href="/post/acmesh-yi-jian-sheng-cheng-mian-fei-de-zheng-shu/" title="acme.sh: 一键生成免费的ssl证书">acme.sh: 一键生成免费的ssl证书</a><time datetime="2026-08-05T02:45:08.000Z" title="发表于 2026-08-05 10:45:08">2026-08-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/hubproxy-yi-ge-zi-bu-shu-de-docker-he-github-jia-su-dai-li-fu-wu-qi/" title="HubProxy: 一个自部署的Docker和GitHub加速代理服务器"><img src="https://qs100371.top/images/cover/09.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="HubProxy: 一个自部署的Docker和GitHub加速代理服务器"/></a><div class="content"><a class="title" href="/post/hubproxy-yi-ge-zi-bu-shu-de-docker-he-github-jia-su-dai-li-fu-wu-qi/" title="HubProxy: 一个自部署的Docker和GitHub加速代理服务器">HubProxy: 一个自部署的Docker和GitHub加速代理服务器</a><time datetime="2026-07-20T01:27:47.000Z" title="发表于 2026-07-20 09:27:47">2026-07-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/litepan-de-bu-shu-he-kua-pan-miao-chuan/" title="LitePan的部署和跨盘秒传"><img src="https://qs100371.top/images/cover/10.webp" onerror="this.onerror=null;this.src='/images/404.jpg'" alt="LitePan的部署和跨盘秒传"/></a><div class="content"><a class="title" href="/post/litepan-de-bu-shu-he-kua-pan-miao-chuan/" title="LitePan的部署和跨盘秒传">LitePan的部署和跨盘秒传</a><time datetime="2026-07-14T06:22:12.000Z" title="发表于 2026-07-14 14:22:12">2026-07-14</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>加载中...</span></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/web/" style="font-size: 1.45em; color: rgb(57, 130, 152);">web</a><a href="/tags/docker/" style="font-size: 1.39em; color: rgb(129, 50, 50);">docker</a><a href="/tags/python/" style="font-size: 1.27em; color: rgb(158, 86, 182);">python</a><a href="/tags/linux/" style="font-size: 1.42em; color: rgb(154, 189, 50);">linux</a><a href="/tags/termux/" style="font-size: 1.24em; color: rgb(64, 198, 54);">termux</a><a href="/tags/nas/" style="font-size: 1.36em; color: rgb(74, 140, 120);">nas</a><a href="/tags/armbian/" style="font-size: 1.3em; color: rgb(136, 132, 50);">armbian</a><a href="/tags/onecloud/" style="font-size: 1.33em; color: rgb(152, 116, 56);">onecloud</a><a href="/tags/deepseek/" style="font-size: 1.27em; color: rgb(62, 50, 80);">deepseek</a><a href="/tags/game/" style="font-size: 1.24em; color: rgb(90, 173, 50);">game</a><a href="/tags/chromeos/" style="font-size: 1.15em; color: rgb(50, 150, 68);">chromeos</a><a href="/tags/IPTV/" style="font-size: 1.15em; color: rgb(159, 197, 145);">IPTV</a><a href="/tags/incus/" style="font-size: 1.21em; color: rgb(98, 151, 191);">incus</a><a href="/tags/kaihongos/" style="font-size: 1.15em; color: rgb(59, 85, 192);">kaihongos</a><a href="/tags/openclaw/" style="font-size: 1.15em; color: rgb(51, 50, 173);">openclaw</a><a href="/tags/diy/" style="font-size: 1.18em; color: rgb(108, 113, 144);">diy</a><a href="/tags/macos/" style="font-size: 1.15em; color: rgb(50, 118, 90);">macos</a><a href="/tags/windows/" style="font-size: 1.18em; color: rgb(75, 118, 168);">windows</a><a href="/tags/android/" style="font-size: 1.15em; color: rgb(143, 50, 50);">android</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a></div>
+  
+    <ul class="card-archive-list">
       
-    </div>
-  
-</article>
-
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/an-zhuang-ftp-fu-wu/">安装ftp服务</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-14T13:17:20.000Z">2024-10-14</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>安装vsftpd：<br>sudo apt install vsftpd<br>检测是否安装：<br>vsftpd -version</p>
-    
-  </div>
-  <a class="read-more" href="/post/an-zhuang-ftp-fu-wu/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/08/">
+            <span class="card-archive-list-date">
+              八月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
       
-        <a href="/tags/web/">#web</a>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/07/">
+            <span class="card-archive-list-date">
+              七月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
       
-    </div>
-  
-</article>
-
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/nginx-chong-ding-xiang/">nginx重定向</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-12T13:52:44.000Z">2024-10-12</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>修改&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default</p>
-    
-  </div>
-  <a class="read-more" href="/post/nginx-chong-ding-xiang/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/06/">
+            <span class="card-archive-list-date">
+              六月 2026
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
       
-        <a href="/tags/web/">#web</a>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              五月 2026
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
       
-    </div>
-  
-</article>
-
-  
-    <article class="post-card">
-  <h2 class="post-card-title">
-    <a href="/post/grub4dos-qi-dong-fang-shi-de-menulst/">grub4dos启动方式的menu.lst</a>
-  </h2>
-  <div class="post-card-meta">
-    <time datetime="2024-10-11T11:59:21.000Z">2024-10-11</time>
-    
-  </div>
-  <div class="post-card-excerpt">
-    
-      <p>grub4dos启动linux系统、win和PE的menu.lst内容。</p>
-    
-  </div>
-  <a class="read-more" href="/post/grub4dos-qi-dong-fang-shi-de-menulst/">Read More &rarr;</a>
-  
-    <div class="post-card-tags">
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              四月 2026
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
       
-        <a href="/tags/linux/">#linux</a>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              三月 2026
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
       
-    </div>
-  
-</article>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              二月 2026
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">252</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2024-10-01T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">152.8k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-08-10T11:14:13.069Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026  qs100371</span></div><div class="footer_custom_text"><a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener"> <img src="/images/w.png" style="vertical-align: middle; height: 20px;"></a><span id="counter" style="font-size: 10px;">1000</span> <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script></div></div><script defer src="https://vs.qs100371.top/tracker.min.js" data-website-id="blog"></script></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script>window.newestComments = {
+  changeContent: content => {
+    if (content === '') return content
 
-  
-</div>
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<code>.*?<\/code>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g, "") // remove html tag
 
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/24/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/26/">Next &raquo;</a>
-  </nav>
+    if (content.length > 150) {
+      content = content.substring(0, 150) + '...'
+    }
+    return content
+  },
 
+  generateHtml: (array, ele) => {
+    let result = ''
 
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class="aside-list-item">'
 
-    </main>
-    <footer class="site-footer">
-  <div class="footer-inner">
-    
-      <p>本博客所有文章除特别声明外，均采用CC BY-NC-SA 4.0许可协议。转载请注明来源！</p>
-    
-    <p>Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &middot; Theme <a href="https://github.com/finch-xu/hexo-theme-warmpaper" target="_blank" rel="noopener">Warmpaper</a>
-    <br>
-    <a href="https://www.travellings.cn/plain.html" target="_blank" rel="noopener">
-    开往</a><span id="counter" style="font-size: 10px;">1000</span>
-    <script>var pageTitle=document.title;var pageUrl=window.location.href;fetch("https://api.qs100371.top/counter/counter.php?action=increment&page="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle)+"&_="+Date.now()).then(r=>r.json()).then(data=>{var total=data.total_pv;var today=data.today_pv;var badgeHTML="<img src=\"https://img.shields.io/badge/总-"+total+"-green\"  style=\"vertical-align: middle;\"><img src=\"https://img.shields.io/badge/今-"+today+"-green\"  style=\"vertical-align: middle; margin-left: 4px;\">";document.getElementById("counter").outerHTML=badgeHTML;});</script>
-</p>
-  </div>
-  <script defer src="https://vs.qs100371.top/tracker.min.js" data-website-id="blog"></script>
-<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"3OlX5GC8lWHWwEYE",ck:"3OlX5GC8lWHWwEYE"})</script>
-</footer>
+        if (true && array[i].avatar) {
+          const imgAttr = 'src'
+          const lazyloadNative = ''
+          result += `<a href="${array[i].url}" class="thumbnail"><img ${imgAttr}="${array[i].avatar}" alt="${array[i].nick}" ${lazyloadNative}></a>`
+        }
 
-  </div>
-  
-<script src="/js/main.js"></script>
+        result += `<div class="content">
+        <a class="comment" href="${array[i].url}" title="${array[i].content}">${array[i].content}</a>
+        <div class="name"><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '暂无评论'
+    }
 
-</body>
-</html>
+    ele.innerHTML = result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh(ele)
+  },
+
+  newestCommentInit: (name, getComment) => {
+    const $dom = document.querySelector('#card-newest-comments .aside-list')
+    if ($dom) {
+      const data = btf.saveToLocal.get(name)
+      if (data) {
+        newestComments.generateHtml(JSON.parse(data), $dom)
+      } else {
+        getComment($dom)
+      }
+    }
+  },
+
+  run: (name, getComment) => {
+    newestComments.newestCommentInit(name, getComment)
+    btf.addGlobalFn('pjaxComplete', () => newestComments.newestCommentInit(name, getComment), name)
+  }
+}</script><script>window.addEventListener('load', () => {
+  const keyName = 'waline-newest-comments'
+  const { changeContent, generateHtml, run } = window.newestComments
+
+  const getComment = async (ele) => {
+    try {
+      const res = await fetch('https://waline1.qs100371.top/api/comment?type=recent&count=6')
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      btf.saveToLocal.set(keyName, JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray, ele)
+    } catch (err) {
+      console.error(err)
+      ele.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  run(keyName, getComment)
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
