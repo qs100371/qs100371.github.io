@@ -6,7 +6,7 @@
   <link href="https://qs100371.top/atom.xml" rel="self"/>
   
   <link href="https://qs100371.top/"/>
-  <updated>2026-08-09T09:29:19.000Z</updated>
+  <updated>2026-08-10T10:39:24.000Z</updated>
   <id>https://qs100371.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中兴W132D刷成当贝桌面</title>
+    <link href="https://qs100371.top/post/zhong-xing-w132d-shua-cheng-dang-bei-zhuo-mian/"/>
+    <id>https://qs100371.top/post/zhong-xing-w132d-shua-cheng-dang-bei-zhuo-mian/</id>
+    <published>2026-08-10T10:39:24.000Z</published>
+    <updated>2026-08-10T10:39:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>中兴W132D是中国移动出的云终端产品，一开机就是云终端登录界面，按主页进入GITV(银行互联网电视)，全是VIP项目，不开通云终端帐号根本就是块砖。本文记录了刷成当贝桌面的安卓9固件的过程。</p><h1 id="固件下载"><a href="#固件下载" class="headerlink" title="固件下载"></a>固件下载</h1><p>地址：<a href="https://pan.baidu.com/s/1E6vmOlHZCAmaEjIYdn0ICg?pwd=67qw">https://pan.baidu.com/s/1E6vmOlHZCAmaEjIYdn0ICg?pwd=67qw</a><br>进入目录：刷机固件ROM大全 - A当贝纯净桌面–固件大全- 中兴盒子B860固件合集 - 中兴盒子W132D - 1039-中国移动中兴云电脑W132D-RK3528-2+32G_安卓9_ADB开启线刷包 -【当贝原包】中国移动中兴云电脑W132D-RK3528-2+32G_安卓9_ADB开启线刷包.zip<br>此地址有可能失效，搜索能找到能用的地址。<br>解压出刷机工具和驱动，先安装驱动。</p><h1 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h1><p>准备双公头USB线，手机卡针。<br>打开刷机工具RKDevTool.exe，点击system项后面的…，导入刷机工具目录里的system.img。<br>用双公头线插入离复位键最近的USB口，然后用卡针顶住复位孔，插电源线，最后刷机工具上会提示发现loader设备，多试几次总能成功。<br>点击“设备分区表”，左侧仅勾选system分区，选择system镜像，点执行。<br><img src="https://qs100371.top/post-images/1786359708835.png"><br>过程很慢，镜像刷入后盒子会自动重启，云电脑开机动画过后若黑屏，按遥控的“主页”按钮即可。<br>进入桌面后，点设置→恢复出厂设置一次即可（移动的密码是10086）。<br><img src="https://qs100371.top/post-images/1786359878516.png"></p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>开机之后是一个当贝卓面的安卓系统，可插入U盘安装应用，自带了云视听极光，电视直播pro。可安装当贝市场，从市场中安装系用。原带的遥控器可用。<br><img src="https://qs100371.top/post-images/1786360095338.webp"><br><img src="https://qs100371.top/post-images/1786360101087.webp"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;中兴W132D是中国移动出的云终端产品，一开机就是云终端登录界面，按主页进入GITV(银行互联网电视)，全是VIP项目，不开通云终端帐号根本就是块砖。本文记录了刷成当贝桌面的安卓9固件的过程。&lt;/p&gt;
+&lt;h1 id=&quot;固件下载&quot;&gt;&lt;a href=&quot;#固件下载&quot; class=</summary>
+      
+    
+    
+    
+    
+    <category term="diy" scheme="https://qs100371.top/tags/diy/"/>
+    
+  </entry>
   
   <entry>
     <title>在cloudflare上构建免费的网站统计</title>
@@ -396,27 +419,6 @@
     <category term="docker" scheme="https://qs100371.top/tags/docker/"/>
     
     <category term="incus" scheme="https://qs100371.top/tags/incus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>找回飞牛os系统盘的空间</title>
-    <link href="https://qs100371.top/post/zhao-hui-fei-niu-os-xi-tong-pan-de-kong-jian/"/>
-    <id>https://qs100371.top/post/zhao-hui-fei-niu-os-xi-tong-pan-de-kong-jian/</id>
-    <published>2026-04-25T02:26:07.000Z</published>
-    <updated>2026-04-25T02:26:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>飞牛os安装时选择的空间较小（16G），刚开始的时候是够用的，随着使用时间剩余空间越来越少，占用达到88%以上。最近在学习lxc容器，在nas上练手，导致系统分区占用100%，在找回空间的过程中，顺便把空间占用减小到60%。</p><span id="more"></span><h1 id="查看磁盘整体使用情况"><a href="#查看磁盘整体使用情况" class="headerlink" title="查看磁盘整体使用情况"></a>查看磁盘整体使用情况</h1><p><code>df -h</code><br>确认哪个分区（比如 &#x2F; 根分区或 &#x2F;var 分区）已经满了或接近满。</p><h1 id="清理系统。"><a href="#清理系统。" class="headerlink" title="清理系统。"></a>清理系统。</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查 apt 缓存（通常能清理几百 MB）</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">du</span> -sh /var/cache/apt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查临时文件</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">du</span> -sh /tmp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查 snap 包（如果装了 snap）</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">du</span> -sh /var/lib/snapd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查下载目录或用户目录</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">du</span> -sh /root</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">du</span> -sh /home/* 2&gt;/dev/null</span><br></pre></td></tr></table></figure><h1 id="找到占用空间最大的目录"><a href="#找到占用空间最大的目录" class="headerlink" title="找到占用空间最大的目录"></a>找到占用空间最大的目录</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">du</span> -sh /* --exclude=/vol1 --exclude=/vol2 --exclude=/vol02 2&gt;/dev/null | <span class="built_in">sort</span> -hr | <span class="built_in">head</span> -15</span><br></pre></td></tr></table></figure><p>排除了挂载的大硬盘 &#x2F;vol1, &#x2F;vol2, &#x2F;vol02，这样看根分区更清楚。需要的时候比较长。<br>docker，lxc之类默认在&#x2F;var&#x2F;lib下面。</p><p>查找大于 100MB 的大文件<br>直接搜索根分区下所有大于 100MB 的文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> find / -<span class="built_in">type</span> f -size +100M -<span class="built_in">exec</span> <span class="built_in">ls</span> -lh &#123;&#125; \; 2&gt;/dev/null | awk <span class="string">&#x27;&#123;print $5, $9&#125;&#x27;</span> | <span class="built_in">sort</span> -hr | <span class="built_in">head</span> -20</span><br></pre></td></tr></table></figure><p>这个命令会直接列出所有大文件的路径和大小，是最快定位问题的方法。</p><p>找到占用空间的主要是这三个：&#x2F;usr，&#x2F;swapfile，&#x2F;var。</p><ul><li>&#x2F;swapfile<br>有 4.1GB —— 是系统 swap（虚拟内存）。nas的物理内存只有 4GB，系统创建了一个 4.1GB 的 swap 文件来辅助内存。这部分是正常的，不建议删除。</li><li>&#x2F;usr<br>7.1GB —— 系统程序，不能动。</li><li>&#x2F;var<br>3.2GB —— 这是可以清理的部分。</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 /var 下面哪些子目录大</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">du</span> -sh /var/* 2&gt;/dev/null | <span class="built_in">sort</span> -hr | <span class="built_in">head</span> -10</span><br><span class="line"><span class="comment"># 清理 apt 包缓存（通常能释放几百 MB）</span></span><br><span class="line"><span class="built_in">sudo</span> apt clean</span><br><span class="line"><span class="built_in">sudo</span> apt autoremove --purge -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理 journal 日志（保留最近 3 天）</span></span><br><span class="line"><span class="built_in">sudo</span> journalctl --vacuum-time=3d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果有 snap 残留</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> -rf /var/lib/snapd/cache/*</span><br></pre></td></tr></table></figure><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>16GB 根分区对于 Debian + fnOS + Docker 来说确实太小了。大硬盘（&#x2F;vol1、&#x2F;vol2）有几百 GB 空间，把 swapfile 迁移到 &#x2F;vol1 或 &#x2F;vol2，可以释放根分区 4.1GB 空间。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭当前 swap</span></span><br><span class="line"><span class="built_in">sudo</span> swapoff /swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在大硬盘上创建新的 swap 文件（例如在 /vol1 上创建 4GB swap）</span></span><br><span class="line"><span class="built_in">sudo</span> fallocate -l 4G /vol1/swapfile</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 600 /vol1/swapfile</span><br><span class="line"><span class="built_in">sudo</span> mkswap /vol1/swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用新 swap</span></span><br><span class="line"><span class="built_in">sudo</span> swapon /vol1/swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除旧的 swapfile</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> /swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 /etc/fstab，把原来的 /swapfile 改成 /vol1/swapfile</span></span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&#x27;s/\/swapfile/\/vol1\/swapfile/g&#x27;</span> /etc/fstab</span><br></pre></td></tr></table></figure><p>这样根分区可以立即释放 4.1GB 空间，使用率从 88% 降到 60% 左右，后续再清理一下 &#x2F;var，就能稳定在 50-60% 的水平。</p><h1 id="验证并查看释放的空间"><a href="#验证并查看释放的空间" class="headerlink" title="验证并查看释放的空间"></a>验证并查看释放的空间</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swapon --show   <span class="comment"># 应该显示 /vol1/swapfile</span></span><br><span class="line"><span class="built_in">df</span> -h /         <span class="comment"># 检查根分区的可用空间，应该会从 1.9G 增加到 6G 左右</span></span><br></pre></td></tr></table></figure><p>完成后：</p><ul><li>根分区 (&#x2F;)：从 88% 使用率降低到 ~60%。</li><li>可用空间：从 1.9GB 增加到 ~6GB。</li><li>性能：将 swap 放在大硬盘上，对日常使用没有任何负面影响。</li></ul><hr><p>nas上系统分区主要用于放置操作系统，数据独立存放，docker之类占用空间大的都放在大容量存储上，lxc也同样需要放在大容器存储上，不然会把系统分区占满。<br>本文由deepseek指导，并实操通过。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;飞牛os安装时选择的空间较小（16G），刚开始的时候是够用的，随着使用时间剩余空间越来越少，占用达到88%以上。最近在学习lxc容器，在nas上练手，导致系统分区占用100%，在找回空间的过程中，顺便把空间占用减小到60%。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="linux" scheme="https://qs100371.top/tags/linux/"/>
-    
-    <category term="nas" scheme="https://qs100371.top/tags/nas/"/>
     
   </entry>
   

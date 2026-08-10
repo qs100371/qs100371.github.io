@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>中兴W132D刷成当贝桌面</title>
+      <link href="/post/zhong-xing-w132d-shua-cheng-dang-bei-zhuo-mian/"/>
+      <url>/post/zhong-xing-w132d-shua-cheng-dang-bei-zhuo-mian/</url>
+      
+        <content type="html"><![CDATA[<p>中兴W132D是中国移动出的云终端产品，一开机就是云终端登录界面，按主页进入GITV(银行互联网电视)，全是VIP项目，不开通云终端帐号根本就是块砖。本文记录了刷成当贝桌面的安卓9固件的过程。</p><h1 id="固件下载"><a href="#固件下载" class="headerlink" title="固件下载"></a>固件下载</h1><p>地址：<a href="https://pan.baidu.com/s/1E6vmOlHZCAmaEjIYdn0ICg?pwd=67qw">https://pan.baidu.com/s/1E6vmOlHZCAmaEjIYdn0ICg?pwd=67qw</a><br>进入目录：刷机固件ROM大全 - A当贝纯净桌面–固件大全- 中兴盒子B860固件合集 - 中兴盒子W132D - 1039-中国移动中兴云电脑W132D-RK3528-2+32G_安卓9_ADB开启线刷包 -【当贝原包】中国移动中兴云电脑W132D-RK3528-2+32G_安卓9_ADB开启线刷包.zip<br>此地址有可能失效，搜索能找到能用的地址。<br>解压出刷机工具和驱动，先安装驱动。</p><h1 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h1><p>准备双公头USB线，手机卡针。<br>打开刷机工具RKDevTool.exe，点击system项后面的…，导入刷机工具目录里的system.img。<br>用双公头线插入离复位键最近的USB口，然后用卡针顶住复位孔，插电源线，最后刷机工具上会提示发现loader设备，多试几次总能成功。<br>点击“设备分区表”，左侧仅勾选system分区，选择system镜像，点执行。<br><img src="https://qs100371.top/post-images/1786359708835.png"><br>过程很慢，镜像刷入后盒子会自动重启，云电脑开机动画过后若黑屏，按遥控的“主页”按钮即可。<br>进入桌面后，点设置→恢复出厂设置一次即可（移动的密码是10086）。<br><img src="https://qs100371.top/post-images/1786359878516.png"></p><h1 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h1><p>开机之后是一个当贝卓面的安卓系统，可插入U盘安装应用，自带了云视听极光，电视直播pro。可安装当贝市场，从市场中安装系用。原带的遥控器可用。<br><img src="https://qs100371.top/post-images/1786360095338.webp"><br><img src="https://qs100371.top/post-images/1786360101087.webp"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> diy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>在cloudflare上构建免费的网站统计</title>
       <link href="/post/zai-cloudflare-shang-gou-jian-mian-fei-de-wang-zhan-tong-ji/"/>
       <url>/post/zai-cloudflare-shang-gou-jian-mian-fei-de-wang-zhan-tong-ji/</url>
