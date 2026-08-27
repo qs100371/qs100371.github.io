@@ -208,7 +208,7 @@
         ele.forEach(i => {
           if (i.parentNode.tagName !== 'A') {
             // 🔽 新增：尺寸判断，小图片跳过
-            if (i.naturalWidth < 300 || i.naturalHeight < 200) return
+          //  if (i.naturalWidth < 300 || i.naturalHeight < 200) return
 
             const dataSrc = i.dataset.lazySrc || i.src
             const dataCaption = i.title || i.alt || ''
