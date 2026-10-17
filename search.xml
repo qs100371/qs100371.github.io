@@ -25,19 +25,6 @@
     
     
     <entry>
-      <title>微雪ESP32-S3-ePaper-3.97开发板的使用</title>
-      <link href="/post/wei-xue-esp32-s3-epaper-397-kai-fa-ban-de-shi-yong/"/>
-      <url>/post/wei-xue-esp32-s3-epaper-397-kai-fa-ban-de-shi-yong/</url>
-      
-        <content type="html"><![CDATA[<p>ESP32-S3-ePaper-3.97是一款微雪 (Waveshare) 设计的高性能、高集成的微控制器开发板。 搭载 ESP32-S3 微控制器，支持 Wi-Fi 与 BLE 双模通信。板载 3.97 英寸电子墨水屏，功耗极低，环境光下可视，适合便携设备及长续航场景。 集成 RTC 实时时钟、SHTC3 温湿度传感器、Micro SD 卡槽、低功耗音频编解码芯片以及电源管理芯片。 为物联网终端、电子标签和便携显示器等应用提供灵活可靠的开发平台。 </p><span id="more"></span><p>文档：<a href="https://docs.waveshare.net/ESP32-S3-ePaper-3.97/">https://docs.waveshare.net/ESP32-S3-ePaper-3.97/</a></p><p><img src="https://qs100371.top/post-images/1792221920048.webp"><br><img src="https://qs100371.top/post-images/1792221926357.webp"><br>加上3d打印机甲外壳<br><img src="https://qs100371.top/post-images/1792221956093.webp"><br>自带的示例程序有文件管理，时钟，日历，闹钟，天气，音频和阅读功能的展示。<br>也有小智AI和crossmux固件。</p><h1 id="小智AI"><a href="#小智AI" class="headerlink" title="小智AI"></a>小智AI</h1><p>固件下载：<a href="https://github.com/78/xiaozhi-esp32/releases/download/v2.5.2/v2.5.2_waveshare-esp32-s3-epaper-3.97.zip">https://github.com/78/xiaozhi-esp32/releases/download/v2.5.2/v2.5.2_waveshare-esp32-s3-epaper-3.97.zip</a><br>解压得到.bin文件，用<a href="https://dl.espressif.com/public/flash_download_tool.zip">flash download tool</a> 刷入，ChipType选esp32s3，其它默认，起始地址0x00，用usb线连接后，COM处可选，点START刷机，完成后按开发板右侧上键重启。<br><img src="https://qs100371.top/post-images/1792224412564.webp"><br>在线烧录地址：<a href="https://espressif.github.io/esp-launchpad/">https://espressif.github.io/esp-launchpad/</a><br><img src="https://qs100371.top/post-images/1792224424375.webp"><br>开发板重启后语音提示6位数字验证码，在小智AI官网 <a href="https://xiaozhi.me/home/zh/">https://xiaozhi.me/home/zh/</a> ，打开控制台，登录后，使用以上6位验证码添加智能体，默认是台湾口音女声。<br><img src="https://qs100371.top/post-images/1792224457149.webp"><br><img src="https://qs100371.top/post-images/1792224463261.webp"><br><img src="https://qs100371.top/post-images/1792224467877.webp"><br><img src="https://qs100371.top/post-images/1792224471875.webp"></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>自制仿win10任务栏日历风格的日程提醒：calendar-app</title>
       <link href="/post/zi-zhi-fang-win10-ren-wu-lan-ri-li-feng-ge-de-ri-cheng-ti-xing-calendar-app/"/>
       <url>/post/zi-zhi-fang-win10-ren-wu-lan-ri-li-feng-ge-de-ri-cheng-ti-xing-calendar-app/</url>
